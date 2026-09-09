@@ -19,20 +19,17 @@ under a frozen, auditable protocol.
 
 ```mermaid
 flowchart LR
-  W1["Week 1\nData + temporal-security baseline\n✓ Complete"] -->
-  W2["Week 2\nA2 protocol + leakage controls\n✓ Complete"] -->
-  W3["Week 3\nF5 Stage-A readiness\n● Current"] -->
-  R["Clean integrity rerun\nAuthorization required"] -->
-  W4["Stage B / Week 4\nNot started"]
+  W1["✓ Week 1\nFoundation"] -->
+  W2["✓ Week 2\nProtocol"] -->
+  W3["● Week 3\nReadiness"] -->
+  N["○ Next\nAuthorized rerun"]
 
   classDef complete fill:#198754,color:#fff,stroke:#146c43;
   classDef current fill:#0d6efd,color:#fff,stroke:#0a58ca;
-  classDef gated fill:#ffc107,color:#111,stroke:#cc9a06;
-  classDef future fill:#6c757d,color:#fff,stroke:#565e64;
+  classDef next fill:#f8f9fa,color:#343a40,stroke:#6c757d;
   class W1,W2 complete;
   class W3 current;
-  class R gated;
-  class W4 future;
+  class N next;
 ```
 
 The current milestone is implementation readiness, **not scientific closure**.
@@ -57,12 +54,9 @@ the frozen protocol and a separately validated active authorization. See
 
 ```mermaid
 flowchart LR
-  A["Licensed source audio\nnot included"] --> B["Manifest + lineage"]
-  B --> C["Controlled temporal manipulation"]
-  C --> D["Feature / speaker / waveform checks"]
-  D --> E["Leakage & ground-truth validation"]
-  E --> F["Frozen metrics + bootstrap"]
-  F --> G["Auditable research claim"]
+  A["Source audio"] --> B["Lineage & validation"]
+  B --> C["Frozen evaluation"]
+  C --> D["Auditable claim"]
 ```
 
 Each scientific claim is gated by provenance, validator, and accounting checks.
