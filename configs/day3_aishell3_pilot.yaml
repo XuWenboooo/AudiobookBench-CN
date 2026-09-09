@@ -1,0 +1,29 @@
+# Deterministic Day 3 real-data gate pilot. This is clean natural speech only.
+dataset_root: 'F:\项目\申请实验室  TTS项目\datasets\AISHELL-3'
+utterances_per_speaker: 40
+selection:
+  method: sorted_utterance_id
+  seed: null
+  speakers:
+    - SSB0005
+    - SSB0009
+    - SSB0011
+    - SSB0073
+    - SSB0139
+split_by_speaker:
+  train:
+    - SSB0005
+    - SSB0009
+    - SSB0011
+  val:
+    - SSB0073
+  test:
+    - SSB0139
+audio_pipeline:
+  target_sample_rate: 16000
+  window_seconds: 5.0
+  min_tail_seconds: 1.0
+  vad_threshold_ratio: 0.25
+outputs:
+  source_catalog: data/manifests/source_audio.csv
+  segment_manifest: data/manifests/week1_manifest.csv

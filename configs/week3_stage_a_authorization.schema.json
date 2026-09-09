@@ -1,0 +1,21 @@
+{
+  "type": "object",
+  "required": ["protocol", "READY_FOR_STAGE_A_EXECUTION", "review_date", "review_evidence", "scope", "source_sha256", "run_id", "invocation_id", "output_root", "rerun_classification", "historical_run_namespace", "historical_run_excluded", "prior_results_observed", "scientific_parameters_changed_after_observation", "independent_review_sha256", "scientific_integrity_adjudication_sha256", "authorization_namespace_verification_sha256"],
+  "properties": {
+    "protocol": {"const": "WEEK3_STAGE_A_F5"},
+    "READY_FOR_STAGE_A_EXECUTION": {"const": true},
+    "scope": {"const": "FORMAL_23_CASE_GENERATION_AND_FROZEN_STAGE_A_EVALUATION"},
+    "source_sha256": {"type": "object"},
+    "run_id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,63}$"},
+    "invocation_id": {"type": "string", "minLength": 1},
+    "output_root": {"type": "string", "minLength": 1},
+    "rerun_classification": {"const": "INTEGRITY_REEXECUTION_OF_FROZEN_PROTOCOL"},
+    "historical_run_namespace": {"type": "string", "minLength": 1},
+    "historical_run_excluded": {"const": true},
+    "prior_results_observed": {"const": true},
+    "scientific_parameters_changed_after_observation": {"const": false},
+    "independent_review_sha256": {"type": "string", "pattern": "^[A-Fa-f0-9]{64}$"},
+    "scientific_integrity_adjudication_sha256": {"type": "string", "pattern": "^[A-Fa-f0-9]{64}$"},
+    "authorization_namespace_verification_sha256": {"type": "string", "pattern": "^[A-Fa-f0-9]{64}$"}
+  }
+}

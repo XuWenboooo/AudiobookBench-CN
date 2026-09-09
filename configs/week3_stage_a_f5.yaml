@@ -1,0 +1,56 @@
+protocol: WEEK3_STAGE_A_F5
+scientific_execution_enabled: false
+output_root: results/week3_stage_a_f5
+planned_manifest: data/manifests/week2a_a2_planned_manifest.csv
+reference_manifest: data/manifests/week2a_reference_manifest.csv
+longform_manifest: data/manifests/day45_longform_manifest.csv
+planned_cases: 23
+generation_seed_base: 20260905
+generation_seed_rule: base_seed_plus_zero_based_sorted_paired_case_index
+bootstrap_seed: 20260905
+bootstrap_seed_semantically_independent: true
+sample_rate: 16000
+crossfade_samples: 400
+crossfade_ms_per_edge: 25
+duration_policy: natural_synthetic_duration
+f5:
+  model: F5TTS_v1_Base
+  repo_commit: 82fc4fe622fe36047d1dff99b550e6018181ea11
+  model_revision: 84e5a410d9cead4de2f847e7c9369a6440bdfaca
+  assets_root: results/week3_engineering_qualification/f5_tts_v1_base/assets
+  ckpt_file: results/week3_engineering_qualification/f5_tts_v1_base/assets/F5TTS_v1_Base/model_1250000.safetensors
+  vocab_file: results/week3_engineering_qualification/f5_tts_v1_base/assets/F5TTS_v1_Base/vocab.txt
+  vocoder_local_path: results/week3_engineering_qualification/f5_tts_v1_base/assets/vocos-mel-24khz
+  vocoder_config_file: results/week3_engineering_qualification/f5_tts_v1_base/assets/vocos-mel-24khz/config.yaml
+  vocoder_model_file: results/week3_engineering_qualification/f5_tts_v1_base/assets/vocos-mel-24khz/pytorch_model.bin
+  checkpoint_sha256: 670900FD14E6C458B95DA6E9ED317CDB20DBAF7A1C02AC06A05475A9D32B6A38
+  vocab_sha256: 2A05F992E00AF9B0BD3800A8D23E78D520DBD705284ED2EEDB5F4BD29398FA3C
+  vocoder_config_sha256: DA9033922F969A47F0C160010226919E59F27761FD5066F3828D46DE6650B0FC
+  vocoder_model_sha256: 97EC976AD1FD67A33AB2682D29C0AC7DF85234FAE875AEFCC5FB215681A91B2A
+  device: cpu
+  python: 3.12.9
+  torch: 2.2.2+cpu
+  ode_method: euler
+  use_ema: true
+  target_rms: 0.1
+  cross_fade_duration: 0.15
+  sway_sampling_coef: -1
+  cfg_strength: 2
+  nfe_step: 32
+  speed: 1.0
+  fix_duration: null
+  remove_silence: false
+  show_info: official_api_logging_callback_recorded
+  progress: official_api_progress_callback_recorded
+  reference_text_path: exact_nonempty_text_argument_no_project_rewrite
+  internal_reference_preprocessing: record_only_no_project_side_mutation
+failure:
+  max_same_case_transient_retry: 1
+  replacement_allowed: false
+  classes: [infrastructure_transient, infrastructure_terminal, model_load_failure, inference_failure, invalid_output, waveform_QA_failure, sidecar_contract_failure, integrity_failure]
+evaluation:
+  detector: B1b
+  scale: S2_1500ms_250ms
+  h1_gt: GT-full
+  bootstrap_replicates: 2000
+  bootstrap_min_finite: 1900

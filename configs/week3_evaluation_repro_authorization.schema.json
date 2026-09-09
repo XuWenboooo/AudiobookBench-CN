@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "protocol", "scope", "run_id", "invocation_id", "output_root",
+    "rerun_classification", "purpose", "prior_clean_results_observed",
+    "scientific_parameters_changed_after_observation", "generation_reexecuted",
+    "detector_reexecuted", "result_selection_or_retuning", "source_generation_run_id",
+    "source_generation_authorization_sha256", "original_score_manifest_sha256",
+    "source_waveform_sha256", "score_commitments", "source_sha256",
+    "detector_identity", "bootstrap_contract", "READY_FOR_EVALUATION_REPAIR"
+  ],
+  "properties": {
+    "protocol": {"const": "WEEK3_EVALUATION_ONLY_REPRODUCIBILITY"},
+    "scope": {"const": "EVALUATION_ONLY_REPRODUCIBILITY_EVIDENCE_RECONSTRUCTION"},
+    "run_id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,63}$"},
+    "invocation_id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,63}$"},
+    "output_root": {"type": "string"},
+    "rerun_classification": {"const": "EVALUATION_ONLY_REPRODUCIBILITY_REEXECUTION"},
+    "purpose": {"const": "REPRODUCIBILITY_EVIDENCE_RECONSTRUCTION"},
+    "prior_clean_results_observed": {"const": true},
+    "scientific_parameters_changed_after_observation": {"const": false},
+    "generation_reexecuted": {"const": false},
+    "detector_reexecuted": {"const": true},
+    "result_selection_or_retuning": {"const": false},
+    "source_generation_run_id": {"const": "clean_rerun_20260907_01"},
+    "source_generation_authorization_sha256": {"type": "string", "pattern": "^[A-Fa-f0-9]{64}$"},
+    "original_score_manifest_sha256": {"type": "string", "pattern": "^[A-Fa-f0-9]{64}$"},
+    "source_waveform_sha256": {
+      "type": "object", "minProperties": 23, "maxProperties": 23,
+      "patternProperties": {"^paircase_[0-9]{4}$": {"type": "string", "pattern": "^[A-Fa-f0-9]{64}$"}},
+      "additionalProperties": false
+    },
+    "score_commitments": {
+      "type": "object", "minProperties": 23, "maxProperties": 23,
+      "patternProperties": {"^paircase_[0-9]{4}$": {"type": "string", "pattern": "^[A-Fa-f0-9]{64}$"}},
+      "additionalProperties": false
+    },
+    "source_sha256": {
+      "type": "object",
+      "required": ["source_authorization", "source_score_manifest", "detector", "backend", "scoring", "metrics", "gt", "bootstrap", "repair_code"],
+      "additionalProperties": false,
+      "properties": {
+        "source_authorization": {"type": "string", "pattern": "^[A-Fa-f0-9]{64}$"},
+        "source_score_manifest": {"type": "string", "pattern": "^[A-Fa-f0-9]{64}$"},
+        "detector": {"type": "string", "pattern": "^[A-Fa-f0-9]{64}$"},
+        "backend": {"type": "string", "pattern": "^[A-Fa-f0-9]{64}$"},
+        "scoring": {"type": "string", "pattern": "^[A-Fa-f0-9]{64}$"},
+        "metrics": {"type": "string", "pattern": "^[A-Fa-f0-9]{64}$"},
+        "gt": {"type": "string", "pattern": "^[A-Fa-f0-9]{64}$"},
+        "bootstrap": {"type": "string", "pattern": "^[A-Fa-f0-9]{64}$"},
+        "repair_code": {"type": "string", "pattern": "^[A-Fa-f0-9]{64}$"}
+      }
+    },
+    "detector_identity": {"type": "object", "additionalProperties": false, "required": ["name", "timeline", "model_asset_sha256"], "properties": {"name": {"const": "B1b"}, "timeline": {"const": "S2_1500ms_250ms"}, "model_asset_sha256": {"type": "string", "pattern": "^[A-Fa-f0-9]{64}$"}}},
+    "bootstrap_contract": {"type": "object", "additionalProperties": false, "required": ["unit", "replicates", "seed", "confidence", "minimum_finite"], "properties": {"unit": {"const": "paired_case_id"}, "replicates": {"const": 2000}, "seed": {"const": 20260905}, "confidence": {"const": 0.95}, "minimum_finite": {"const": 1900}}},
+    "READY_FOR_EVALUATION_REPAIR": {"const": true}
+  }
+}

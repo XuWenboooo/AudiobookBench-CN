@@ -1,0 +1,34 @@
+protocol: week1_freeze_v1
+purpose: verify frozen Week-1 artifacts and reproduce representative scientific links
+repository_paths:
+  day5: results/day5_validation
+  day6a: results/day6a
+  day6b: results/day6b
+  day6c: results/day6c
+  week1: results/week1
+dataset:
+  name: AISHELL-3
+  raw_access: read_only
+  root_environment_variable: AUDIOBOOKBENCH_DATASET_ROOT
+  fallback_config: configs/day45_expanded_paired.yaml
+reproduction:
+  temporary_outputs_only: true
+  day5_record_rule: first_sorted_clean_record
+  day6a_scale: 250ms
+  day6b_scale: S2_1500ms_250ms
+  day6b_backend: speechbrain/spkrec-ecapa-voxceleb
+  day6c_scale: S2_1500ms_250ms
+  day6c_population_slice: {variant: a0, split: test, gt: full}
+frozen_parameters:
+  sample_rate: 16000
+  day5_frame_ms: 25
+  day5_hop_ms: 10
+  b1b_trim_ratio: 0.20
+  speech_active_threshold: 0.5
+  bootstrap_seed: 20260905
+  bootstrap_resamples: 2000
+claims_policy:
+  masked_metrics_label: conditional-on-speech-active
+  day6a_significance_claim: forbidden
+  b3_role: ORACLE_ONLY
+  b4_role: DIAGNOSTIC_ONLY

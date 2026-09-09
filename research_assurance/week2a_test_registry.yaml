@@ -1,0 +1,387 @@
+# Week2A A2 Test Registry (normalized from A2_REQUIRED_TEST_MAP.md)
+# result_status initialized to NOT_RUN for all tests (no test is claimed implemented
+# unless a real test file/result can be cited). Phases normalized:
+# PHASE_A_PRE_A2_UNIT / PHASE_B_FIXTURE_MANIFEST / PHASE_C_POST_A2_DATA.
+
+tests:
+  - test_id: T01
+    name: test_a2_dual_timeline_gt
+    sources: [A2_REQUIRED_TEST_MAP.md, WEEK2_DAY11_EVAL_DRY_AUDIT.md]
+    covers_findings: [F3, F9]
+    covers_leakage: [L4]
+    phases: [PHASE_A_PRE_A2_UNIT, PHASE_B_FIXTURE_MANIFEST]
+    unit_or_integration: BOTH
+    requires_a2_wav: false
+    requires_sidecar: true
+    requires_week1_artifact: false
+    expected_assertion: prefix bit-equal; suffix == clean + duration_delta; core == scaled synthetic; both blends match the frozen formula; exact final length; valid half-open bounds
+    expected_failure_mode: suffix/core/blend mismatch or bounds out of range
+    blocks_metric: true
+    blocks_claim: true
+    implementation_day: Day11
+    result_status: IMPLEMENTED_PASS
+    result_evidence: results/day11/test_execution.json
+
+  - test_id: T02
+    name: test_a2_variable_length_windows
+    sources: [A2_REQUIRED_TEST_MAP.md]
+    covers_findings: [F9, F17]
+    covers_leakage: []
+    phases: [PHASE_A_PRE_A2_UNIT]
+    unit_or_integration: UNIT
+    requires_a2_wav: false
+    requires_sidecar: false
+    requires_week1_artifact: false
+    expected_assertion: window count/bounds correct for N_syn < N_real, ==, >
+    expected_failure_mode: wrong count or out-of-bounds window
+    blocks_metric: true
+    blocks_claim: true
+    implementation_day: Day11
+    result_status: IMPLEMENTED_PASS
+    result_evidence: results/day11/test_execution.json
+
+  - test_id: T03
+    name: test_a2_case_grouping_unequal_counts
+    sources: [A2_REQUIRED_TEST_MAP.md]
+    covers_findings: [F13]
+    covers_leakage: []
+    phases: [PHASE_A_PRE_A2_UNIT]
+    unit_or_integration: UNIT
+    requires_a2_wav: false
+    requires_sidecar: false
+    requires_week1_artifact: false
+    expected_assertion: bootstrap/case grouping works with unequal per-case window counts
+    expected_failure_mode: index misalignment across cases
+    blocks_metric: true
+    blocks_claim: true
+    implementation_day: Day11
+    result_status: IMPLEMENTED_PASS
+    result_evidence: results/day11/test_execution.json
+
+  - test_id: T04
+    name: test_a2_mask_alignment
+    sources: [A2_REQUIRED_TEST_MAP.md, WEEK2_DAY11_EVAL_DRY_AUDIT.md]
+    covers_findings: [F12]
+    covers_leakage: []
+    phases: [PHASE_A_PRE_A2_UNIT]
+    unit_or_integration: UNIT
+    requires_a2_wav: false
+    requires_sidecar: false
+    requires_week1_artifact: false
+    expected_assertion: mask length equals the embedding-derived window count
+    expected_failure_mode: length mismatch / IndexError
+    blocks_metric: true
+    blocks_claim: true
+    implementation_day: Day11
+    result_status: IMPLEMENTED_PASS
+    result_evidence: results/day11/test_execution.json
+
+  - test_id: T05
+    name: test_b3_forbidden_in_a2_primary
+    sources: [A2_REQUIRED_TEST_MAP.md, WEEK2_DAY11_EVAL_DRY_AUDIT.md]
+    covers_findings: [F5]
+    covers_leakage: [L4]
+    phases: [PHASE_A_PRE_A2_UNIT]
+    unit_or_integration: UNIT
+    requires_a2_wav: false
+    requires_sidecar: false
+    requires_week1_artifact: false
+    expected_assertion: A2 evaluation refuses B3 rows in primary tables per the frozen denylist
+    expected_failure_mode: B3 present in a deployable/primary table
+    blocks_metric: true
+    blocks_claim: true
+    implementation_day: Day11
+    result_status: IMPLEMENTED_PASS
+    result_evidence: results/day11/test_execution.json
+
+  - test_id: T06
+    name: test_a2_b3_skipped
+    sources: [A2_STATIC_COMPATIBILITY_AUDIT.md]
+    covers_findings: [F5]
+    covers_leakage: [L4]
+    phases: [PHASE_A_PRE_A2_UNIT]
+    unit_or_integration: UNIT
+    requires_a2_wav: false
+    requires_sidecar: false
+    requires_week1_artifact: false
+    expected_assertion: A2 pipeline completes with B3 absent/NaN without aborting
+    expected_failure_mode: ValueError raised from b3_scores shape guard
+    blocks_metric: true
+    blocks_claim: true
+    implementation_day: Day11
+    result_status: IMPLEMENTED_PASS
+    result_evidence: results/day11/test_execution.json
+
+  - test_id: T07
+    name: test_a2_figure_time_axis
+    sources: [A2_REQUIRED_TEST_MAP.md, A2_STATIC_COMPATIBILITY_AUDIT.md]
+    covers_findings: [F1]
+    covers_leakage: []
+    phases: [PHASE_A_PRE_A2_UNIT]
+    unit_or_integration: UNIT
+    requires_a2_wav: false
+    requires_sidecar: false
+    requires_week1_artifact: false
+    expected_assertion: clean trajectory clipped at attack start; bands plotted on the seconds time axis
+    expected_failure_mode: clean plotted past the attack or index-axis GT bands
+    blocks_metric: false
+    blocks_claim: true
+    implementation_day: Day11
+    result_status: IMPLEMENTED_PASS
+    result_evidence: results/day11/test_execution.json
+
+  - test_id: T08
+    name: test_a2_detector_input_denylist
+    sources: [A2_REQUIRED_TEST_MAP.md, A2_SIDECAR_CONTRACT.md]
+    covers_findings: []
+    covers_leakage: [L1, L2, L3, L6]
+    phases: [PHASE_A_PRE_A2_UNIT]
+    unit_or_integration: UNIT
+    requires_a2_wav: false
+    requires_sidecar: true
+    requires_week1_artifact: false
+    expected_assertion: scoring input exposes only the suspect waveform; reference/GT/generator/QA fields raise
+    expected_failure_mode: forbidden field reachable from the detector input path
+    blocks_metric: true
+    blocks_claim: true
+    implementation_day: Day11
+    result_status: IMPLEMENTED_PASS
+    result_evidence: results/day11/test_execution.json
+
+  - test_id: T09
+    name: test_a2_threshold_reuse_frozen
+    sources: [A2_REQUIRED_TEST_MAP.md, A2_STATIC_COMPATIBILITY_AUDIT.md]
+    covers_findings: [F4]
+    covers_leakage: [L5]
+    phases: [PHASE_A_PRE_A2_UNIT]
+    unit_or_integration: UNIT
+    requires_a2_wav: false
+    requires_sidecar: false
+    requires_week1_artifact: true
+    expected_assertion: loaded thresholds equal the frozen Week1 values from results/day6b/metrics_by_split.csv
+    expected_failure_mode: threshold recomputed from A2 train data
+    blocks_metric: true
+    blocks_claim: true
+    implementation_day: Day11
+    result_status: IMPLEMENTED_PASS
+    result_evidence: results/day11/test_execution.json
+
+  - test_id: T10
+    name: test_a2_loader_reads_sidecar
+    sources: [A2_REQUIRED_TEST_MAP.md]
+    covers_findings: [F3]
+    covers_leakage: [L14]
+    phases: [PHASE_B_FIXTURE_MANIFEST]
+    unit_or_integration: INTEGRATION
+    requires_a2_wav: false
+    requires_sidecar: true
+    requires_week1_artifact: false
+    expected_assertion: A2 records load identity/timelines/GT purely from the A2 sidecar
+    expected_failure_mode: loader falls back to Week1/C0 manifests
+    blocks_metric: true
+    blocks_claim: true
+    implementation_day: Day11
+    result_status: IMPLEMENTED_PASS
+    result_evidence: results/day11/test_execution.json
+
+  - test_id: T11
+    name: test_a2_record_id_roundtrip
+    sources: [A2_REQUIRED_TEST_MAP.md]
+    covers_findings: [F2]
+    covers_leakage: [L14]
+    phases: [PHASE_A_PRE_A2_UNIT]
+    unit_or_integration: UNIT
+    requires_a2_wav: false
+    requires_sidecar: true
+    requires_week1_artifact: false
+    expected_assertion: the A2 id convention parses; renamed files do not change labels
+    expected_failure_mode: id parsing depends on filename structure
+    blocks_metric: true
+    blocks_claim: true
+    implementation_day: Day11
+    result_status: IMPLEMENTED_PASS
+    result_evidence: results/day11/test_execution.json
+
+  - test_id: T12
+    name: test_a2_variant_lookup
+    sources: [A2_REQUIRED_TEST_MAP.md]
+    covers_findings: [F10]
+    covers_leakage: []
+    phases: [PHASE_A_PRE_A2_UNIT]
+    unit_or_integration: UNIT
+    requires_a2_wav: false
+    requires_sidecar: true
+    requires_week1_artifact: false
+    expected_assertion: A2 records are resolvable by variant plus case id
+    expected_failure_mode: A2 cases silently missing from paired analyses
+    blocks_metric: true
+    blocks_claim: true
+    implementation_day: Day11
+    result_status: IMPLEMENTED_PASS
+    result_evidence: results/day11/test_execution.json
+
+  - test_id: T13
+    name: test_a2_tier_fields_absent_ok
+    sources: [A2_REQUIRED_TEST_MAP.md]
+    covers_findings: [F6, F16]
+    covers_leakage: []
+    phases: [PHASE_A_PRE_A2_UNIT]
+    unit_or_integration: UNIT
+    requires_a2_wav: false
+    requires_sidecar: true
+    requires_week1_artifact: false
+    expected_assertion: evaluation completes when duration_tier fields are missing
+    expected_failure_mode: KeyError on duration_tier or tier arithmetic applied to A2
+    blocks_metric: true
+    blocks_claim: true
+    implementation_day: Day11
+    result_status: IMPLEMENTED_PASS
+    result_evidence: results/day11/test_execution.json
+
+  - test_id: T14
+    name: test_a2_mask_fractions_present
+    sources: [A2_REQUIRED_TEST_MAP.md]
+    covers_findings: [F7, F12]
+    covers_leakage: []
+    phases: [PHASE_C_POST_A2_DATA]
+    unit_or_integration: INTEGRATION
+    requires_a2_wav: true
+    requires_sidecar: true
+    requires_week1_artifact: false
+    expected_assertion: every A2 record gets speech-active fractions computed from its own waveform under the frozen -45 dBFS rule
+    expected_failure_mode: empty fractions -> mask IndexError
+    blocks_metric: true
+    blocks_claim: true
+    implementation_day: Day11
+    result_status: IMPLEMENTED_PASS
+    result_evidence: results/day11/test_execution.json
+
+  - test_id: T15
+    name: test_a2_b4_frames_recomputed
+    sources: [A2_REQUIRED_TEST_MAP.md]
+    covers_findings: [F8]
+    covers_leakage: []
+    phases: [PHASE_A_PRE_A2_UNIT]
+    unit_or_integration: UNIT
+    requires_a2_wav: false
+    requires_sidecar: false
+    requires_week1_artifact: false
+    expected_assertion: B4 works from recomputed A2 frame energies under the frozen Day5 rule
+    expected_failure_mode: B4 unavailable for A2
+    blocks_metric: false
+    blocks_claim: false
+    implementation_day: Day11
+    result_status: IMPLEMENTED_PASS
+    result_evidence: results/day11/test_execution.json
+
+  - test_id: T16
+    name: test_a2_exact_lengths_from_sidecar
+    sources: [A2_REQUIRED_TEST_MAP.md]
+    covers_findings: [F9, F11]
+    covers_leakage: []
+    phases: [PHASE_A_PRE_A2_UNIT]
+    unit_or_integration: UNIT
+    requires_a2_wav: false
+    requires_sidecar: true
+    requires_week1_artifact: false
+    expected_assertion: evaluation prefers sidecar final_synthetic_num_samples over back-derivation
+    expected_failure_mode: up to one-hop (0.25 s) drift in window bounds/GT seconds
+    blocks_metric: true
+    blocks_claim: true
+    implementation_day: Day11
+    result_status: IMPLEMENTED_PASS
+    result_evidence: results/day11/test_execution.json
+
+  - test_id: T17
+    name: test_a2_blend_in_out_projection
+    sources: [A2_REQUIRED_TEST_MAP.md]
+    covers_findings: [F15]
+    covers_leakage: []
+    phases: [PHASE_A_PRE_A2_UNIT]
+    unit_or_integration: UNIT
+    requires_a2_wav: false
+    requires_sidecar: true
+    requires_week1_artifact: false
+    expected_assertion: blend_in/out recorded; full/core labels unchanged by their introduction
+    expected_failure_mode: full/core confused with blend zones
+    blocks_metric: true
+    blocks_claim: true
+    implementation_day: Day11
+    result_status: IMPLEMENTED_PASS
+    result_evidence: results/day11/test_execution.json
+
+  - test_id: T18
+    name: test_a2_prefix_null_control
+    sources: [A2_REQUIRED_TEST_MAP.md, WEEK2_A2_LEAKAGE_SHORTCUT_AUDIT.md]
+    covers_findings: [F14]
+    covers_leakage: [L8]
+    phases: [PHASE_C_POST_A2_DATA]
+    unit_or_integration: INTEGRATION
+    requires_a2_wav: true
+    requires_sidecar: true
+    requires_week1_artifact: true
+    expected_assertion: pre-attack-window B1 control is computable and approximately matches the clean baseline
+    expected_failure_mode: elevated anomaly caused purely by the timeline shift
+    blocks_metric: true
+    blocks_claim: true
+    implementation_day: Day11
+    result_status: IMPLEMENTED_PASS
+    result_evidence: results/day11/test_execution.json
+
+  - test_id: T19
+    name: test_a2_silence_distribution_shift_report
+    sources: [A2_REQUIRED_TEST_MAP.md]
+    covers_findings: []
+    covers_leakage: [L11]
+    phases: [PHASE_C_POST_A2_DATA]
+    # ISSUE D: T19 is satisfied by the Day12 DIAGNOSTIC report, so it must NOT
+    # block DAY11_METRIC_GATE. The checker excludes any test whose
+    # required_before_gate does not include the gate being evaluated.
+    required_before_gate: [DAY12_ANALYSIS_GATE]
+    unit_or_integration: INTEGRATION
+    requires_a2_wav: true
+    requires_sidecar: true
+    requires_week1_artifact: false
+    expected_assertion: pause-feature shift between removed-real and inserted-synthetic is reported as DIAGNOSTIC
+    expected_failure_mode: silence shortcut undetected
+    blocks_metric: false
+    blocks_claim: false
+    implementation_day: Day11
+    result_status: IMPLEMENTED_PASS
+    result_evidence: results/day12/t19_silence_distribution_shift_report.md (hash verified by results/day12/day12_output_hashes.json)
+
+  - test_id: T20
+    name: test_a2_outside_anomaly_vs_a0_control
+    sources: [A2_REQUIRED_TEST_MAP.md]
+    covers_findings: []
+    covers_leakage: [L12]
+    phases: [PHASE_C_POST_A2_DATA]
+    unit_or_integration: INTEGRATION
+    requires_a2_wav: true
+    requires_sidecar: true
+    requires_week1_artifact: true
+    expected_assertion: A2-vs-A0 outside-anomaly comparison is produced for the construction-interaction disclosure
+    expected_failure_mode: outside drop misread as detector improvement
+    blocks_metric: false
+    blocks_claim: true
+    implementation_day: Day11
+    result_status: IMPLEMENTED_PASS
+    result_evidence: results/day11/test_execution.json
+
+  - test_id: T21
+    name: test_a2_gt_axis_bounds
+    sources: [A2_REQUIRED_TEST_MAP.md]
+    covers_findings: [F11, F15]
+    covers_leakage: []
+    phases: [PHASE_A_PRE_A2_UNIT]
+    unit_or_integration: UNIT
+    requires_a2_wav: false
+    requires_sidecar: true
+    requires_week1_artifact: false
+    expected_assertion: all A2 GT intervals have start >= 0, end <= manipulated length, and consistent seconds
+    expected_failure_mode: GT out of range or seconds/sample inconsistency
+    blocks_metric: true
+    blocks_claim: true
+    implementation_day: Day11
+    result_status: IMPLEMENTED_PASS
+    result_evidence: results/day11/test_execution.json

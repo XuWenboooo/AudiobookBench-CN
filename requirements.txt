@@ -1,0 +1,8 @@
+numpy
+scipy
+matplotlib
+pytest
+pyyaml
+soundfile
+scikit-learn
+praat-parselmouth

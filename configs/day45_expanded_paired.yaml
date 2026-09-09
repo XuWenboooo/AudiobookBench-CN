@@ -1,0 +1,77 @@
+protocol_version: "4.5"
+dataset_root: 'F:\项目\申请实验室  TTS项目\datasets\AISHELL-3'
+source_type: natural
+longform_type: constructed
+
+expanded_pilot:
+  utterances_per_speaker: 40
+  eligibility:
+    minimum_valid_wav_transcript_metadata_rows: 40
+  selection_rule: preserve_day3_anchor_splits_then_lexicographically_first_eligible_metadata_slot
+  uses_waveform_or_model_outcome: false
+  split_slots:
+    train:
+      - {speaker_id: SSB0005}
+      - {speaker_id: SSB0009}
+      - {speaker_id: SSB0011}
+      - {age_group: C, gender: male, accent: north}
+      - {age_group: D, gender: female, accent: north}
+      - {age_group: A, gender: female, accent: north}
+    val:
+      - {speaker_id: SSB0073}
+      - {age_group: C, gender: female, accent: south}
+      - {age_group: D, gender: male, accent: north}
+    test:
+      - {speaker_id: SSB0139}
+      - {age_group: B, gender: female, accent: others}
+      - {age_group: C, gender: male, accent: south}
+
+constructed_longform:
+  sequence_id_prefix: day45
+  sequences_per_speaker: 2
+  target_duration_seconds:
+    minimum: 20.0
+    preferred: 30.0
+    maximum: 60.0
+  utterances_per_sequence:
+    minimum: 4
+    maximum: 12
+  gap_seconds: 0.3
+  target_sample_rate: 16000
+  channels: mono
+  normalization: none
+
+paired_attacks:
+  cases_per_clean_sequence: 1
+  duration_tiers_seconds: [0.75, 1.5, 2.5]
+  duration_tier_assignment: sorted_clean_sequence_index_modulo_tier_count
+  target_rule: nearest_middle_internal_utterance_with_safe_margin
+  internal_margin_seconds: 0.5
+  sample_index_first: true
+  donor_assignment: deterministic_balanced_round_robin
+  donor_same_split: required
+  donor_different_speaker: required
+  donor_utterance_repeat_cap: 1
+  donor_crop: centered
+  rms_epsilon: 1.0e-8
+  rms_gain_min: 0.25
+  rms_gain_max: 4.0
+  crossfade_seconds: 0.025
+
+outputs:
+  source_catalog: data/manifests/day45_source_audio.csv
+  text_overlap_audit: data/reports/day45_text_overlap_audit.csv
+  clean_audio_directory: data/constructed_longform/day45_expanded
+  longform_manifest: data/manifests/day45_longform_manifest.csv
+  attack_root: data/generated/day45_paired
+  A0_directory: data/generated/day45_paired/A0_cross_speaker_splice
+  A1_directory: data/generated/day45_paired/A1_artifact_controlled
+  metadata_directory: data/generated/day45_paired/metadata
+  attack_manifest: data/manifests/day45_attack_manifest.csv
+  skip_manifest: data/generated/day45_paired/metadata/day45_skips.csv
+  paired_diagnostics: data/generated/day45_paired/metadata/paired_diagnostics.csv
+  waveform_verification: data/generated/day45_paired/metadata/waveform_verification.csv
+
+A2_same_text_tts_replacement:
+  status: PENDING
+  generated: false

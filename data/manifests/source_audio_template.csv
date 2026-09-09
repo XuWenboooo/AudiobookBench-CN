@@ -1,0 +1,3 @@
+audio_path,sample_id,pair_id,source_sample_id,source_type,generator,generator_family,speaker,text_id,is_manipulated,attack_type,attack_start,attack_end,attack_generator,source_generator,replacement_speaker,split
+data/natural_control/REPLACE_WITH_REAL_NATURAL.wav,natural_real_001,natural_pair_001,natural_real_001,natural,human,human,REPLACE_SPEAKER,REPLACE_TEXT,false,,,,,human,,train
+data/raw/REPLACE_WITH_REAL_TTS.wav,tts_real_001,tts_pair_001,tts_real_001,tts,REPLACE_GENERATOR,REPLACE_FAMILY,REPLACE_SPEAKER,REPLACE_TEXT,false,,,,,REPLACE_GENERATOR,,test

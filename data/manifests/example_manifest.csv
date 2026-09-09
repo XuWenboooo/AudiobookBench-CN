@@ -1,0 +1,4 @@
+audio_path,sample_id,pair_id,source_sample_id,source_type,generator,generator_family,speaker,text_id,duration,sample_rate,segment_id,segment_start,segment_end,position,is_manipulated,attack_type,attack_start,attack_end,attack_generator,source_generator,replacement_speaker,split
+data/natural_control/example_natural.wav,natural_demo_001,natural_pair_001,natural_demo_001,natural,human,human,natural_spk_001,text_demo_001,12.0,16000,natural_demo_001_seg000,0.0,4.0,0,false,,,,,human,,train
+data/raw/example_tts.wav,tts_demo_001,tts_pair_001,tts_demo_001,tts,example_tts,unknown_tts,tts_spk_001,text_demo_001,12.0,16000,tts_demo_001_seg000,0.0,4.0,0,false,,,,,example_tts,,test
+data/manipulated/example_attack.wav,attack_demo_001,tts_pair_001,tts_demo_001,tts,example_tts,unknown_tts,tts_spk_001,text_demo_001,12.0,16000,attack_demo_001_seg001,4.0,8.0,1,true,localized_tts_segment_replacement,4.0,8.0,example_tts_B,example_tts,tts_spk_002,test

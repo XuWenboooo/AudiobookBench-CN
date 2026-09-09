@@ -1,0 +1,6 @@
+{
+  "declared_status": "PASS",
+  "fresh_rehash": "NOT_PERFORMED",
+  "detail": "declared=PASS; fresh_rehash=NOT_PERFORMED",
+  "note": "distinguishes HASH_REGISTRY_DECLARED_PASS vs FRESH_696_REHASH_PASS"
+}

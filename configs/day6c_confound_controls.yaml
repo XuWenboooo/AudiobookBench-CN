@@ -1,0 +1,48 @@
+# Day 6C confound-control configuration.
+# INTEGRITY NOTE: this file only RECORDS parameters that were already
+# executed in the Day 6C runs of 2026-09-05 (see
+# DAY6C_INTEGRITY_CORRECTION.md). It freezes them for reproducibility;
+# it introduces no new value, no re-optimization, and no threshold change.
+
+inherits: configs/day6b_speaker_consistency.yaml   # S1/S2 grids, ECAPA backend, trim 0.20, B1-B4 definitions
+
+speech_active_mask:
+  # Label-agnostic; computed from the frozen Day 5 -45 dBFS pause rule
+  # (C0 controls: identical rule on their own waveform). Frozen before any
+  # Day 6C localization result was observed.
+  threshold: 0.5
+  definition: speaker window speech-active fraction >= threshold
+  gt_access: none
+
+bootstrap:
+  unit: paired_case_id          # never window-level
+  resamples: 2000
+  seed: 20260905
+  contrasts:
+    - C0A_minus_A0              # same-speaker minus cross-speaker core anomaly (negative expected if speaker change dominates)
+    - C0B_minus_A1
+
+c0_donor_rule:
+  same_speaker: true
+  same_split: true
+  different_utterance: true     # donor_source_sample_id != target_source_sample_id
+  text: different in all built cases (same_text=false recorded per row)
+  selection: lowest usage count, then lexicographic sample_id; usable = decoded 16 kHz length >= target length
+  reuse_cap: 1                  # actual max reuse = 1
+  target_reuse: exact frozen Day 4.5 target interval, tier and split; no interval modified
+  skip_policy: whole case skipped if no eligible donor (none occurred)
+
+duration_tiers: ["0.75s", "1.5s", "2.5s"]   # frozen Day 4.5 tiers, unchanged
+
+figure_selection:
+  seed_note: selection is deterministic; no cherry-picking
+  figureA: first sorted paired case having a C0A control; shows clean/A0/A1/C0A/C0B B1b + GT bands
+  figureB: same case A0; original vs speech-active masked B1b
+  figureC: first A0 record with duration_tier == 0.75s
+  figureD: first A0 record with duration_tier == 2.5s
+  figureE: clean record with the highest single B1b peak (transition FP audit)
+
+evaluation:
+  gt_label_threshold: 0.5       # majority rule, inherited from Day 6A/6B
+  thresholds: train-only max-F1 per (scale, baseline, gt); never val/test
+  metrics: [auroc, auprc, f1]

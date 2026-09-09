@@ -1,0 +1,283 @@
+# Week2A A2 Findings Registry (normalized from A2_STATIC_COMPATIBILITY_AUDIT.md)
+# NORMALIZED_COUNT = 3 HIGH / 8 MEDIUM / 6 LOW-SAFE / 17 total
+# Normalization note: source summary said "3/7/7"; registry adopts 3/8/6 per the
+# per-finding severity recount (F2 MEDIUM-HIGH -> MEDIUM, F9/F10 LOW-MEDIUM -> MEDIUM,
+# F11/F12/F13/F15/F16/F17 -> LOW/SAFE-with-tests).
+# Marked: DOCUMENTATION_NORMALIZATION_ONLY (no protocol amendment).
+
+findings:
+  - id: F1
+    severity: HIGH
+    priority: P0
+    file: src/audiobookbench/temporal/day6c_pipeline.py
+    function: render_figures (Figure A series loop)
+    line_region: "700 (+ 626-630 for t); same pattern in day6b_pipeline.py _render_case_figure"
+    assumption: clean and manipulated share one time axis; only count truncation handled
+    failure_mode: clean trajectory plotted on manipulated axis beyond the attack, hiding the duration_delta offset (same bug class as the historical index-axis GT bug)
+    required_tests: [test_a2_figure_time_axis]
+    recommended_fix: plot clean only before attack start on the manipulated timeline; add visible timeline-split marker
+    protocol_amendment: false
+    implementation_day: Day11
+    gate_blocked: [DAY11_METRIC_GATE]
+    status: RESOLVED
+    resolution_evidence: tests/test_day11_a2_evaluation.py::test_a2_figure_time_axis
+    canonical_interpretation: reporting helper clips clean series at attack start on the manipulated seconds axis; metrics/GT remain unaffected
+
+  - id: F2
+    severity: MEDIUM
+    priority: P1
+    file: src/audiobookbench/temporal/day6b_pipeline.py, day6c_pipeline.py
+    function: _clean_id_of / inline split("_paircase_")
+    line_region: "day6b_pipeline.py:90-91; day6c_pipeline.py:691"
+    assumption: record ids embed "_paircase_" and the clean id equals the prefix
+    failure_mode: A2 ids parse to a wrong or missing clean id -> KeyError or wrong pairing
+    required_tests: [test_a2_record_id_roundtrip]
+    recommended_fix: resolve clean id from sidecar/manifest field; never from name parsing
+    protocol_amendment: false
+    implementation_day: Day11
+    gate_blocked: [DAY11_METRIC_GATE]
+    status: NOT_FIXED
+    canonical_interpretation: id parsing must be field-driven (also leakage vector L14)
+
+  - id: F3
+    severity: MEDIUM
+    priority: P1
+    file: src/audiobookbench/temporal/day6c_pipeline.py, day6b_embed.py
+    function: load_c0_records / load_records
+    line_region: "day6c_pipeline.py:74; day6b_embed.py:147"
+    assumption: the only record sources are the Week1/C0 manifests
+    failure_mode: A2 records cannot be ingested (implementation gap, not wrong output)
+    required_tests: [test_a2_loader_reads_sidecar]
+    recommended_fix: generalize the loader to accept the A2 sidecar manifest (additive)
+    protocol_amendment: false
+    implementation_day: Day11
+    gate_blocked: [DAY11_METRIC_GATE]
+    status: NOT_FIXED
+    canonical_interpretation: new loader required; Week1 paths untouched
+
+  - id: F4
+    severity: HIGH
+    priority: P0
+    file: src/audiobookbench/temporal/day6c_pipeline.py
+    function: train_threshold + call sites
+    line_region: "303 + evaluation loops; same recompute pattern in day6b_pipeline.py"
+    assumption: recomputing a train-only max-F1 threshold equals the frozen Week1 threshold
+    failure_mode: 'on A2 the recomputation uses A2 train windows, violating the frozen protocol field thresholds=reuse_week1_only (frozen sources results/day6a|day6b/metrics_by_split.csv)'
+
+    required_tests: [test_a2_threshold_reuse_frozen]
+    recommended_fix: load thresholds from metrics_by_split.csv; gate the recompute path behind a non-A2 flag
+    protocol_amendment: false
+    implementation_day: Day11
+    gate_blocked: [DAY11_METRIC_GATE]
+    status: RESOLVED
+    resolution_evidence: tests/test_day11_a2_evaluation.py::test_a2_threshold_reuse_frozen
+    canonical_interpretation: Day11 threshold provenance records only frozen Week1 metrics sources with a2_tuning=False
+
+  - id: F5
+    severity: HIGH
+    priority: P0
+    file: src/audiobookbench/temporal/day6b_scoring.py, day6b_pipeline.py
+    function: b3_scores shape guard + B3_ORACLE call site
+    line_region: "day6b_scoring.py:91; day6b_pipeline.py:341"
+    assumption: paired clean/manipulated embeddings share the grid
+    failure_mode: A2 unequal lengths raise ValueError and abort the whole Week1 pipeline run instead of skipping B3
+    required_tests: [test_b3_forbidden_in_a2_primary, test_a2_b3_skipped]
+    recommended_fix: gate B3 behind the frozen forbidden_baselines denylist before the call; keep the shape guard as second line of defense
+    protocol_amendment: false
+    implementation_day: Day11
+    gate_blocked: [DAY11_METRIC_GATE]
+    status: RESOLVED
+    resolution_evidence: tests/test_day11_a2_evaluation.py::test_b3_forbidden_in_a2_primary, test_a2_b3_skipped
+    canonical_interpretation: B3 is absent from primary outputs and explicitly recorded NOT_RUN; its shape guard remains intact
+
+  - id: F6
+    severity: MEDIUM
+    priority: P1
+    file: src/audiobookbench/temporal/day6c_pipeline.py
+    function: duration stratification + resolution audit
+    line_region: "384, 466, 493, 500"
+    assumption: every manifest row carries a Week1 duration_tier
+    failure_mode: A2 rows lack the tier (forbidden metadata) -> KeyError; tier arithmetic meaningless for A2
+    required_tests: [test_a2_tier_fields_absent_ok]
+    recommended_fix: make tier handling conditional; A2 reports duration-ratio diagnostics (Day12 S3) instead
+    protocol_amendment: false
+    implementation_day: Day11
+    gate_blocked: [DAY11_METRIC_GATE]
+    status: NOT_FIXED
+    canonical_interpretation: tier logic is Week1-only by design
+
+  - id: F7
+    severity: MEDIUM
+    priority: P1
+    file: src/audiobookbench/temporal/day6c_pipeline.py
+    function: speech_active_fractions fallback branch
+    line_region: "159"
+    assumption: records without Day5 frames are exactly the C0 controls
+    failure_mode: A2 records fall outside both branches -> empty fractions -> mask IndexError (same crash class as Day6C development)
+    required_tests: [test_a2_mask_fractions_present]
+    recommended_fix: generalize the fallback to any record without Day5 frames using its own waveform
+    protocol_amendment: false
+    implementation_day: Day11
+    gate_blocked: [DAY11_METRIC_GATE]
+    status: NOT_FIXED
+    canonical_interpretation: mask rule itself is frozen and label-agnostic; only the record source needs generalization
+
+  - id: F8
+    severity: MEDIUM
+    priority: P1
+    file: src/audiobookbench/temporal/day6b_pipeline.py
+    function: load_day5_log_energy + B4 frame spans
+    line_region: "76"
+    assumption: every scored record has frozen Day5 frame features
+    failure_mode: B4_DIAGNOSTIC impossible for A2 without recomputing the 25ms/10ms grid on A2 audio
+    required_tests: [test_a2_b4_frames_recomputed]
+    recommended_fix: compute A2 frames with the frozen Day5 rule
+    protocol_amendment: false
+    implementation_day: Day11
+    gate_blocked: [DAY11_METRIC_GATE]
+    status: NOT_FIXED
+    canonical_interpretation: DIAGNOSTIC only, so no primary-metric impact
+
+  - id: F9
+    severity: MEDIUM
+    priority: P2
+    file: src/audiobookbench/temporal/day6c_pipeline.py
+    function: _num_samples_from_embeddings
+    line_region: helper
+    assumption: sample count is recoverable from embedding count
+    failure_mode: estimate can drift up to one hop (0.25s) vs the true length
+    required_tests: [test_a2_exact_lengths_from_sidecar]
+    recommended_fix: prefer sidecar final_synthetic_num_samples; keep derivation as fallback
+    protocol_amendment: false
+    implementation_day: Day11
+    gate_blocked: [DAY11_METRIC_GATE]
+    status: NOT_FIXED
+    canonical_interpretation: exactness requirement only
+
+  - id: F10
+    severity: MEDIUM
+    priority: P2
+    file: src/audiobookbench/temporal/day6c_pipeline.py, day6b_pipeline.py
+    function: find() / _record_for_case
+    line_region: "day6c_pipeline.py:416, 674"
+    assumption: variant registry is {clean,a0,a1,c0a,c0b}
+    failure_mode: A2 variant unresolvable -> silent drop-out of paired analyses
+    required_tests: [test_a2_variant_lookup]
+    recommended_fix: extend the variant registry; drive ids from the sidecar
+    protocol_amendment: false
+    implementation_day: Day11
+    gate_blocked: [DAY11_METRIC_GATE]
+    status: NOT_FIXED
+    canonical_interpretation: discovery/lookup correctness
+
+  - id: F11
+    severity: LOW
+    priority: P3
+    file: src/audiobookbench/temporal/day6c_pipeline.py
+    function: case metrics core_center / peak error
+    line_region: "526"
+    assumption: windows derive from the manipulated embedding count (already manipulated timeline)
+    failure_mode: SAFE for A2 given F9
+    required_tests: [test_a2_exact_lengths_from_sidecar]
+    recommended_fix: no change beyond F9
+    protocol_amendment: false
+    implementation_day: Day11
+    gate_blocked: []
+    status: SAFE_WITH_TESTS
+    canonical_interpretation: peak-error definition already manipulated-timeline correct
+
+  - id: F12
+    severity: LOW
+    priority: P3
+    file: src/audiobookbench/temporal/day6c_pipeline.py
+    function: mask alignment [:n_windows]
+    line_region: mask block
+    assumption: mask truncated to the embedding-derived window count
+    failure_mode: SAFE for A2 given F7
+    required_tests: [test_a2_mask_alignment, test_a2_mask_fractions_present]
+    recommended_fix: no change beyond F7
+    protocol_amendment: false
+    implementation_day: Day11
+    gate_blocked: []
+    status: SAFE_WITH_TESTS
+    canonical_interpretation: alignment already implemented
+
+  - id: F13
+    severity: LOW
+    priority: P3
+    file: src/audiobookbench/temporal/day6c_pipeline.py
+    function: case_bootstrap_ci concatenation
+    line_region: bootstrap block
+    assumption: grouping concatenates unequal per-case arrays (no equal-count assumption)
+    failure_mode: SAFE for A2
+    required_tests: [test_a2_case_grouping_unequal_counts]
+    recommended_fix: lock with test
+    protocol_amendment: false
+    implementation_day: Day11
+    gate_blocked: []
+    status: SAFE_WITH_TESTS
+    canonical_interpretation: bootstrap unit remains paired_case_id
+
+  - id: F14
+    severity: MEDIUM
+    priority: P2
+    file: (absent - required new control)
+    function: pre-attack prefix null control
+    line_region: "-"
+    assumption: leakage audit item 8 requires B1 on pre-attack A2 windows vs clean baseline
+    failure_mode: required null control not implementable today
+    required_tests: [test_a2_prefix_null_control]
+    recommended_fix: implement as a Day11 evaluation option (analysis code only)
+    protocol_amendment: false
+    implementation_day: Day11
+    gate_blocked: [DAY11_METRIC_GATE]
+    status: NOT_FIXED
+    canonical_interpretation: new analysis code, no protocol change
+
+  - id: F15
+    severity: LOW
+    priority: P3
+    file: src/audiobookbench/temporal/day6b_scoring.py
+    function: project_ground_truth_speaker
+    line_region: projection block
+    assumption: duration-agnostic projection math
+    failure_mode: SAFE; gap is the input source (F3) plus new blend_in/out fields needing an explicit projection decision
+    required_tests: [test_a2_blend_in_out_projection]
+    recommended_fix: record blend_in/out; keep full/core labels unchanged
+    protocol_amendment: false
+    implementation_day: Day11
+    gate_blocked: []
+    status: SAFE_WITH_TESTS
+    canonical_interpretation: full includes blends; strict core excludes them (frozen)
+
+  - id: F16
+    severity: LOW
+    priority: P3
+    file: src/audiobookbench/temporal/day6c_pipeline.py
+    function: tier ratio arithmetic .replace("s","")
+    line_region: "500"
+    assumption: tier strings parse to seconds
+    failure_mode: same as F6; the S2/0.75s core-unmeasurable logic must not run for A2
+    required_tests: [test_a2_tier_fields_absent_ok]
+    recommended_fix: no change beyond F6
+    protocol_amendment: false
+    implementation_day: Day11
+    gate_blocked: []
+    status: SAFE_WITH_TESTS
+    canonical_interpretation: covered by F6
+
+  - id: F17
+    severity: LOW
+    priority: P3
+    file: src/audiobookbench/temporal/day6b_pipeline.py, day6c_pipeline.py
+    function: intra-record zip(windows, gt_rows)
+    line_region: "day6b_pipeline.py:449; day6c_pipeline.py:526"
+    assumption: both iterables are built together per record
+    failure_mode: SAFE (lengths coincide by construction)
+    required_tests: [test_a2_variable_length_windows]
+    recommended_fix: no change
+    protocol_amendment: false
+    implementation_day: Day11
+    gate_blocked: []
+    status: SAFE_WITH_TESTS
+    canonical_interpretation: intra-record zip is not an equal-duration assumption

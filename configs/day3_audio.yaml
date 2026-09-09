@@ -1,0 +1,14 @@
+# Day 3 real-audio ingestion configuration.
+# This config contains no research results and does not point to bundled real audio.
+target_sample_rate: 16000
+window_seconds: 5.0
+min_tail_seconds: 1.0
+vad:
+  backend: simple_energy_sanity_baseline
+  threshold_ratio: 0.25
+input_catalog: data/manifests/source_audio.csv
+output_manifest: data/manifests/week1_manifest.csv
+notes:
+  - source_audio.csv must contain real file-level metadata supplied by the researcher.
+  - simple_energy_sanity_baseline is not a production VAD and must not support formal VAD claims.
+  - Day 3 does not create manipulated audio.

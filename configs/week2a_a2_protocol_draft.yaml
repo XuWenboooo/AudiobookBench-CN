@@ -1,0 +1,573 @@
+# Week 2A design artifact only. No generation is authorized by this file.
+protocol_version: "week2a-a2-v1.1-corrected"
+status: design_frozen_semantically_corrected
+design_gate: PASS
+implementation_readiness: HOLD
+implementation_status: NOT_STARTED
+formal_generation_allowed: false
+correction_record: WEEK2_A2_PREIMPLEMENTATION_CORRECTION.md
+
+scope:
+  week: "2A"
+  attack_schema_name: same_text_tts_replacement
+  pilot_subtype: A2-V
+  forbidden_now:
+    - install_tts
+    - download_checkpoint
+    - generate_synthetic_audio
+    - train_detector
+    - start_week2b
+
+primary_condition:
+  tts_mode: zero_shot_voice_conditioned
+  voice_conditioned: true
+  conditioning_target: target_speaker
+  speaker_match_intent: target_conditioned_not_verified_identity
+  generator_family: CosyVoice
+  generator_candidate: CosyVoice2-0.5B
+  generator_role: pilot_single_tested_generator
+  checkpoint_status: verified_12_of_12_day8_manifest
+  natural_duration: true
+  crossfade_samples_per_edge: 400
+  crossfade_samples: 400  # compatibility name; value is per edge
+  crossfade_duration_ms_per_edge: 25
+
+generator:
+  official_code_url: https://github.com/FunAudioLLM/CosyVoice
+  official_model_url: https://huggingface.co/FunAudioLLM/CosyVoice2-0.5B
+  code_revision: 074ca6dc9e80a2f424f1f74b48bdd7d3fea531cc
+  package_version: local_source_overlay_with_requirements_cosyvoice_win312
+  checkpoint_revision: eec1ae6c79877dbd9379285cf8789c9e0879293d
+  checkpoint_sha256: b144ef55b51ce8cfb79a73c90dbba0bdaba4e451c0ebcfab20f769264f84a608
+  component_hashes: results/day8/checkpoint_hashes.json
+  frontend_name_version: documented_raw_passthrough_text_frontend_false
+  vocoder_name_version: CosyVoice_HiFT_from_frozen_checkpoint
+  reported_license: Apache-2.0
+  complete_license_chain_checked: true
+  mandarin_support_verified_from_official_docs: true
+  zero_shot_support_verified_from_official_docs: true
+  windows_feasibility_verified: true
+  hardware_requirement_verified: true
+  offline_cache_verified: true
+  determinism_verified: true
+  training_data_provenance: unknown
+  possible_aishell3_contamination: unknown
+  fallback_substitution_without_amendment: forbidden
+  later_family_candidate:
+    family: F5-TTS
+    official_model_weight_license: CC-BY-NC-4.0
+    included_in_week2a_pilot: false
+
+source:
+  source_type: natural
+  generator: human
+  generator_family: human
+  source_generator: human
+  source_catalog: data/manifests/day45_source_audio.csv
+  clean_longform_manifest: data/manifests/day45_longform_manifest.csv
+  frozen_attack_manifest: data/manifests/day45_attack_manifest.csv
+  dataset_root: 'F:\项目\申请实验室  TTS项目\datasets\AISHELL-3'
+  dataset_access: strict_read_only
+  longform_type: constructed
+
+pilot_selection:
+  rule: >-
+    Take exactly one A0 row per frozen paired_case_id from the Day 4.5 attack
+    manifest and use its target_source_sample_id, target speaker, split and
+    clean sequence as lineage only. Join target_source_sample_id to the longform
+    manifest and replace that row's complete source utterance. Never copy the
+    Week 1 local target/attack bounds or duration tier.
+  week1_reused_fields:
+    - paired_case_id
+    - target_source_sample_id
+    - target_speaker
+    - split
+    - clean_sequence_id
+  week1_forbidden_interval_fields:
+    - target_start_sample
+    - target_end_sample
+    - attack_start_sample
+    - attack_end_sample
+    - duration_tier
+    - donor_start_sample
+    - donor_end_sample
+  outcome_dependent_selection: forbidden
+  replacement_on_failure: forbidden
+  speakers:
+    total: 12
+    train: 6
+    val: 3
+    test: 3
+  texts:
+    total_unique: 23
+    train: 11
+    val: 6
+    test: 6
+  cases:
+    total_planned: 23
+    train: 11
+    val: 6
+    test: 6
+    generations_per_case: 1
+  excluded_clean_sequences:
+    rule: the_one_sequence_without_a_frozen_week1_paired_target
+    reason: preserve_frozen_pre_outcome_target_selection
+
+target_unit:
+  type: complete_source_utterance
+  lookup_key: target_source_sample_id
+  clean_bounds_source: sequence_start_and_sequence_end_in_day45_longform_manifest
+  sample_bound_materialization:
+    start: round_sequence_start_times_16000
+    end: round_sequence_end_times_16000
+    validate_against_sequence_construction_and_decoded_source_length: required
+    integer_samples_become_authoritative: true
+  source_interval_start: materialized_complete_source_utterance_start_sample
+  source_interval_end: materialized_complete_source_utterance_end_sample
+  source_interval_duration: complete_source_utterance_num_samples
+  reuse_week1_exact_local_attack_interval: false
+  old_duration_tier_applies: false
+  short_attack_resolution: separate_priority_2_not_part_of_a2
+
+same_text:
+  canonical_source_column: transcript_zh
+  source_text_exact_preserved: true
+  validation:
+    unicode_valid: required
+    unicode_form: NFC
+    normalization_action: validate_only_no_rewrite
+    nonempty: required
+    leading_trailing_whitespace: forbidden
+  normalized_for_tts: identical_to_source_text_exact
+  tts_input_text: identical_to_source_text_exact
+  text_normalization: identity_after_nfc_and_edge_whitespace_validation
+  preserve:
+    - chinese_punctuation
+    - full_width_characters
+    - arabic_numerals
+    - english_letters_and_case
+    - internal_whitespace
+    - erhua_and_polyphonic_characters
+  adapter_text_edits: forbidden
+  hash_encoding: UTF-8_without_added_newline
+  same_text_exact_rule: codepoint_equality_and_equal_sha256
+  same_text_semantic_rule: true_when_primary_exact_rule_passes
+  asr_defines_ground_truth: false
+  generator_internal_frontend_must_be_recorded: true
+
+speaker_reference:
+  access_side: attacker_construction_only
+  detector_access: forbidden
+  references_per_speaker: 1
+  reuse_across_same_speaker_cases: true
+  same_speaker: required
+  same_split: required
+  different_source_sample_from_all_targets: required
+  different_text_id_from_all_targets: required
+  absent_from_attacked_clean_sequences: required
+  decoded_duration_seconds:
+    minimum: 3.0
+    maximum: 8.0
+  transcript_exact: required
+  selection_order:
+    - selection_rank_ascending
+    - sample_id_ascending
+  frozen_reference_sample_by_speaker:
+    SSB0005: SSB00050014
+    SSB0009: SSB00090015
+    SSB0011: SSB00110018
+    SSB0073: SSB00730017
+    SSB0139: SSB01390022
+    SSB0197: SSB01970016
+    SSB0261: SSB02610029
+    SSB0309: SSB03090014
+    SSB0342: SSB03420018
+    SSB0393: SSB03930020
+    SSB0434: SSB04340024
+    SSB1100: SSB11000026
+  selection_uses_generation_or_detector_outcome: false
+  no_candidate_policy: fail_all_planned_cases_for_speaker_and_retain_rows
+  denoise: false
+  loudness_normalize: false
+  reference_hash_required: true
+
+generation:
+  base_seed: 20260905
+  seed_rule: base_seed_plus_one_based_sorted_paired_case_index
+  best_of_n: forbidden
+  quality_driven_retry: forbidden
+  infrastructure_retry:
+    maximum: 1
+    only_if_no_valid_model_output: true
+    identical_inputs_config_seed_environment: required
+    log_all_attempts: true
+  record_raw_generator_output: true
+  formal_run_network_access: forbidden_after_cache_freeze
+
+duration_policy:
+  primary: P1_natural_synthetic_duration_shift_suffix
+  source_duration: complete_source_utterance_duration
+  synthetic_duration: natural_posttrim_postresample_duration
+  time_stretch: false
+  crop_to_real_duration: false
+  pad_to_real_duration: false
+  duration_ratio:
+    numerator: posttrim_synthetic_duration
+    denominator: source_real_duration
+    hard_minimum: 0.25
+    hard_maximum: 4.0
+  alternatives_not_in_primary:
+    P2_fixed_interval_crop_pad: separate_future_condition
+    P3_duration_normalized: separate_future_condition
+
+audio_standardization:
+  processing_domain: float
+  channels: mono
+  sample_rate: 16000
+  resampler_algorithm_and_version: torchaudio_resample_runtime_2_3_1
+  final_serialization: mono_16k_pcm_wav_preferred
+  serialization_library_version: soundfile_default_pcm16
+  final_sample_count_source: decode_of_serialized_final_waveform
+
+silence_handling:
+  input: resampled_generator_output
+  method: deterministic_edge_trim
+  frame_length_ms: 25
+  hop_length_ms: 10
+  active_rule: frame_level_dbfs_greater_than_minus_45
+  threshold_dbfs: -45.0
+  retained_margin_ms_each_side: 50
+  no_active_frame: hard_failure_no_speech_detected
+  trim_clean_target: false
+  record:
+    - pretrim_num_samples
+    - pretrim_duration
+    - posttrim_num_samples
+    - posttrim_duration
+    - leading_trim_samples
+    - trailing_trim_samples
+
+dsp:
+  rms_matching: true
+  rms_measurement: speech_active_samples_under_frozen_minus_45_dbfs_rule
+  rms_reference: complete_clean_target_utterance
+  gain_min: 0.25
+  gain_max: 4.0
+  peak_safe_max_abs: 0.999
+  peak_safety: reduce_global_scalar_gain_only
+  crossfade:
+    enabled: true
+    principle: Week1_A1_artifact_control
+    shape: linear
+    samples_per_edge: 400
+    milliseconds_per_edge_at_16k: 25
+    clean_anchor_left: first_400_samples_of_removed_complete_source_utterance
+    clean_anchor_right: last_400_samples_of_removed_complete_source_utterance
+    modifies_samples_outside_full_attack: false
+    minimum_length_rule: 2_times_crossfade_less_than_min_source_and_synthetic_length
+    failure_reason_if_too_short: crossfade_interval_too_short
+    alpha_in: "(i + 1) / (L + 1), i=0..L-1"
+    alpha_out: "(L - i) / (L + 1), i=0..L-1"
+  loudness_lufs_matching: false
+  denoise: false
+  dereverberation: false
+  eq: false
+  compression: false
+  limiter: false
+  lossy_codec: false
+  time_stretch: false
+  pitch_shift: false
+  prosody_instruction: false
+  normalization_other_than_recorded_scalar_gain: false
+
+timeline_and_gt:
+  interval_convention: zero_based_half_open_samples
+  attack_start_sample: complete_source_utterance_clean_start_sample
+  attack_end_sample: attack_start_sample_plus_final_synthetic_num_samples
+  attack_gt: full_changed_replacement_region_including_both_crossfade_zones
+  crossfade_samples_per_edge: 400
+  attack_core_start_sample: attack_start_sample_plus_400
+  attack_core_end_sample: attack_end_sample_minus_400
+  attack_core: strict_synthetic_only_region_excluding_both_blends
+  blend_start_sample: attack_start_sample
+  blend_end_sample: attack_end_sample
+  blend_span_semantics: complete_changed_region_for_week1_compatibility
+  blend_in_start_sample: attack_start_sample
+  blend_in_end_sample: attack_core_start_sample
+  blend_out_start_sample: attack_core_end_sample
+  blend_out_end_sample: attack_end_sample
+  seconds_rule: sample_index_divided_by_16000
+  duration_delta_samples: >-
+    final_synthetic_num_samples_minus_clean_target_num_samples
+  prefix_mapping: unchanged
+  suffix_mapping: clean_sample_plus_duration_delta_samples
+  downstream_lineage_shift: required
+  dual_clean_and_manipulated_timelines: required
+  use_original_real_duration_for_attack_end: forbidden
+  use_week1_short_interval_for_any_a2_gt: forbidden
+  verification:
+    - prefix_bit_equal
+    - suffix_bit_equal_under_exact_delta
+    - strict_core_equals_corresponding_scaled_synthetic_samples
+    - left_blend_matches_frozen_formula_and_clean_anchor
+    - right_blend_matches_frozen_formula_and_clean_anchor
+    - exact_final_length
+    - valid_half_open_bounds
+    - sample_second_consistency
+  b3_same_grid: forbidden
+  interpolation_of_clean_embedding: forbidden
+
+day2_semantics:
+  manifest_schema_file: configs/manifest_schema.yaml
+  modify_frozen_schema_file: false
+  extension_style: additive_sidecar
+  manipulated_row:
+    source_type: natural
+    generator: human
+    generator_family: human
+    source_generator: human
+    is_manipulated: true
+    attack_type: same_text_tts_replacement
+    replacement_speaker: target_speaker_conditioning_intent_only
+
+manifest_extension:
+  status: DESIGNED_VALIDATOR_NOT_IMPLEMENTED
+  required_fields:
+    - protocol_version
+    - paired_case_id
+    - attack_id
+    - sample_id
+    - pair_id
+    - source_sample_id
+    - attack_type
+    - source_type
+    - attack_generator
+    - attack_generator_family
+    - generator_version
+    - generator_code_revision
+    - generator_checkpoint_revision
+    - generator_checkpoint_sha256
+    - generator_config_sha256
+    - generator_frontend
+    - generator_vocoder
+    - generator_training_data_provenance
+    - generator_role
+    - tts_mode
+    - voice_conditioned
+    - speaker_match_intent
+    - target_speaker
+    - replacement_speaker
+    - reference_audio_path
+    - reference_sample_id
+    - reference_speaker
+    - reference_text_exact
+    - reference_audio_sha256
+    - reference_text_sha256
+    - reference_preprocessing
+    - source_text_exact
+    - normalized_for_tts
+    - tts_input_text
+    - text_normalization
+    - same_text_exact
+    - same_text_semantic
+    - source_text_sha256
+    - tts_input_text_sha256
+    - source_real_num_samples
+    - source_real_duration
+    - generator_output_sample_rate
+    - generator_output_num_channels
+    - pretrim_num_samples
+    - pretrim_duration
+    - posttrim_num_samples
+    - posttrim_duration
+    - final_synthetic_num_samples
+    - synthetic_duration
+    - duration_ratio
+    - duration_delta_samples
+    - rms_gain_requested
+    - rms_gain_clamped
+    - rms_gain_peak_safe
+    - rms_gain
+    - crossfade_samples
+    - clean_timeline_start_sample
+    - clean_timeline_end_sample
+    - manipulated_timeline_start_sample
+    - manipulated_timeline_end_sample
+    - attack_start_sample
+    - attack_end_sample
+    - attack_core_start_sample
+    - attack_core_end_sample
+    - blend_start_sample
+    - blend_end_sample
+    - blend_in_start_sample
+    - blend_in_end_sample
+    - blend_out_start_sample
+    - blend_out_end_sample
+    - attack_start
+    - attack_end
+    - generation_seed
+    - generation_attempt_count
+    - generation_status
+    - generation_failure_reason
+    - qa_flags
+    - asr_backend
+    - asr_transcript
+    - asr_cer
+    - reference_synthetic_ecapa_cosine
+    - target_synthetic_ecapa_cosine
+    - split
+  failure_rows_retained: true
+
+generation_qa:
+  executed_before_detector: true
+  detector_output_access: forbidden
+  hard_checks:
+    - unique_valid_lineage
+    - exact_text_and_hash_equality
+    - immutable_generator_provenance
+    - decodable_nonempty_finite_audio
+    - deterministic_supported_channel_rate_conversion
+    - active_speech_exists
+    - duration_ratio_within_hard_bounds
+    - mono_16k_finite_post_dsp
+    - peak_below_0_999_and_no_clipping
+    - serialization_roundtrip_length
+    - prefix_suffix_core_crossfade_and_gt_integrity
+  asr:
+    role: diagnostic_only
+    backend: TO_BE_FROZEN_OR_EXPLICITLY_OMITTED_BEFORE_GENERATION
+    selection_filter: false
+    defines_gt: false
+  speaker_similarity:
+    role: attack_qa_diagnostic_only
+    selection_filter: false
+    detector_input: false
+
+failure_policy:
+  retain_every_planned_manifest_row: true
+  substitute_case: false
+  formal_waveform_for_failed_case: false
+  report_denominators_by_split_and_speaker: true
+  hard_failure_reasons:
+    - generator_crash
+    - unreadable_audio
+    - empty_audio
+    - nonfinite_audio
+    - no_speech_detected
+    - lineage_failure
+    - no_eligible_reference
+    - exact_input_text_failure
+    - unsupported_audio_conversion
+    - duration_ratio_out_of_bounds
+    - post_dsp_clipping_or_nonfinite
+    - serialization_mismatch
+    - waveform_or_gt_verification_failure
+    - crossfade_interval_too_short
+  retained_success_qa_flags:
+    - high_asr_cer
+    - low_speaker_similarity
+    - audible_artifact
+    - unusual_prosody
+    - low_detector_score
+
+detector:
+  input: suspect_waveform_only
+  forbidden_inputs:
+    - reference_audio_or_embedding
+    - target_or_reference_speaker_id
+    - clean_original
+    - transcript_or_text_id
+    - generator_identity_or_metadata
+    - asr_or_generation_qa
+    - attack_interval
+  training: forbidden
+  threshold_tuning_on_a2: forbidden
+  reuse:
+    - Day5_temporal_features
+    - B0
+    - B1a
+    - B1b
+    - B2
+  diagnostics:
+    - B4_boundary_transient
+  forbidden_baselines:
+    - B3_same_grid_clean_pair_oracle
+  frozen_configs:
+    - configs/day6a_localization_baseline.yaml
+    - configs/day6b_speaker_consistency.yaml
+    - configs/day6c_confound_controls.yaml
+  frozen_threshold_sources:
+    - results/day6a/metrics_by_split.csv
+    - results/day6b/metrics_by_split.csv
+  speech_active_conditional:
+    enabled: true
+    threshold: 0.5
+    label_agnostic: true
+    report_alongside_original_population: required
+
+evaluation:
+  splits: [train, val, test]
+  primary_gt: full
+  full_gt: includes_both_400_sample_crossfade_zones
+  core_gt: excludes_both_400_sample_crossfade_zones
+  window_metrics: [auroc, auprc, f1]
+  case_metrics: [auroc, auprc, f1]
+  other_outputs:
+    - b1_core_boundary_outside_anomaly
+    - outside_anomaly
+    - global_peak_localization_error_seconds
+    - speech_active_positive_and_negative_retention
+    - planned_success_failed_denominators
+    - clean_false_positive_diagnostics
+    - descriptive_duration_aware_a2_vs_a0_a1
+  threshold_free_metrics_required: true
+  thresholds: reuse_week1_only
+  bootstrap:
+    unit: paired_case_id
+    resamples: 2000
+    seed: 20260905
+  no_cherry_picking: true
+  pass_requires_auroc_target: false
+
+known_unseen_plan:
+  week2a: one_generator_pipeline_and_interpretability_pilot
+  week2b: separately_registered_multi_generator_known_setting
+  week2c: develop_on_generator_families_A_B_evaluate_family_C_unseen
+  implement_week2b_or_week2c_now: false
+
+claim_boundary:
+  maximum_supported_if_positive: >-
+    Same-text target-speaker-conditioned synthetic replacement under the
+    tested immutable generator checkpoint and constructed protocol exhibits
+    localization signal for the named frozen baseline.
+  unsupported:
+    - general_deepfake_detection
+    - universal_tts_detection
+    - unseen_generator_robustness
+    - generic_voice_cloning_robustness
+    - adaptive_robustness
+    - native_audiobook_robustness
+    - perceptual_realism
+    - deployment_readiness
+    - strict_generator_training_data_independence
+
+readiness:
+  protocol_choices_frozen: true
+  semantic_correction_applied: true
+  implementation_readiness: HOLD
+  generator_license_chain_checked: false
+  exact_checkpoint_hash_recorded: false
+  hardware_runtime_known: false
+  windows_smoke_test_passed: false
+  reference_protocol_frozen: true
+  text_normalization_frozen: true
+  sample_selection_frozen: true
+  failure_policy_frozen: true
+  duration_policy_frozen: true
+  silence_policy_frozen: true
+  dsp_frozen: true
+  manifest_schema_implemented_and_validated: false
+  gt_implementation_validated: false
+  detector_leakage_audit_passed: false
+  week1_artifacts_untouched: true
+  week1_hash_verification_before_implementation: required

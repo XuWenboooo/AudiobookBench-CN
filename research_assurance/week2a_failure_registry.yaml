@@ -1,0 +1,210 @@
+# Week2A A2 Failure Registry (strict transcription of A2_FAILURE_TAXONOMY.md)
+# Written as BLOCK YAML with quoted free text: flow mappings with unquoted commas
+# previously corrupted three triggers into bogus mapping keys (corrective patch).
+# Source taxonomy itself is unchanged and remains authoritative.
+#
+# status_effect vocabulary: HARD_FAILURE | QA_FLAG | DETERMINISM_LIMITATION
+# canonical counts: 15 HARD_FAILURE / 1 QA_FLAG / 1 DETERMINISM_LIMITATION / 17 total
+
+failure_classes:
+  - name: BACKEND_LOAD_FAIL
+    trigger: "generator/runtime fails to import or initialize"
+    severity: CRITICAL
+    retain_row: true
+    retain_waveform: "N/A"
+    retry_allowed: true
+    amendment_required: true
+    blocks_pilot: true
+    blocks_claim: true
+    status_effect: HARD_FAILURE
+    source: "A2_FAILURE_TAXONOMY.md"
+  - name: CHECKPOINT_MISMATCH
+    trigger: "checkpoint or component SHA-256 differs from recorded provenance"
+    severity: CRITICAL
+    retain_row: true
+    retain_waveform: "N/A"
+    retry_allowed: false
+    amendment_required: true
+    blocks_pilot: true
+    blocks_claim: true
+    status_effect: HARD_FAILURE
+    source: "A2_FAILURE_TAXONOMY.md"
+  - name: REFERENCE_INVALID
+    trigger: "reference missing, wrong speaker/split, duration outside 3-8 s, or overlaps any target utterance"
+    severity: CRITICAL
+    retain_row: true
+    retain_waveform: "N/A"
+    retry_allowed: false
+    amendment_required: true
+    blocks_pilot: true
+    blocks_claim: true
+    status_effect: HARD_FAILURE
+    source: "A2_FAILURE_TAXONOMY.md"
+  - name: TEXT_MISMATCH
+    trigger: "transcript absent, non-NFC-fixable, whitespace-invalid, or TTS input hash differs from source text hash"
+    severity: CRITICAL
+    retain_row: true
+    retain_waveform: "N/A"
+    retry_allowed: false
+    amendment_required: true
+    blocks_pilot: true
+    blocks_claim: true
+    status_effect: HARD_FAILURE
+    source: "A2_FAILURE_TAXONOMY.md"
+  - name: EMPTY_OUTPUT
+    trigger: "generator returns zero-length audio"
+    severity: HIGH
+    retain_row: true
+    retain_waveform: "DISCARD"
+    retry_allowed: true
+    amendment_required: false
+    blocks_pilot: false
+    blocks_claim: true
+    status_effect: HARD_FAILURE
+    source: "A2_FAILURE_TAXONOMY.md"
+  - name: NONFINITE_OUTPUT
+    trigger: "NaN/Inf in generator or post-DSP samples"
+    severity: HIGH
+    retain_row: true
+    retain_waveform: "DISCARD"
+    retry_allowed: true
+    amendment_required: false
+    blocks_pilot: false
+    blocks_claim: true
+    status_effect: HARD_FAILURE
+    source: "A2_FAILURE_TAXONOMY.md"
+  - name: NO_ACTIVE_SPEECH
+    trigger: "no frame above -45 dBFS after resample"
+    severity: HIGH
+    retain_row: true
+    retain_waveform: "DISCARD"
+    retry_allowed: true
+    amendment_required: false
+    blocks_pilot: false
+    blocks_claim: true
+    status_effect: HARD_FAILURE
+    source: "A2_FAILURE_TAXONOMY.md"
+  - name: TRIM_COLLAPSE
+    trigger: "edge trim removes more than 90 percent of samples"
+    severity: HIGH
+    retain_row: true
+    retain_waveform: "RETAIN"
+    retry_allowed: false
+    amendment_required: false
+    blocks_pilot: false
+    blocks_claim: true
+    status_effect: HARD_FAILURE
+    source: "A2_FAILURE_TAXONOMY.md"
+  - name: INSUFFICIENT_SYNTHETIC_CORE
+    trigger: "post-trim N_syn <= 800 samples so the strict core would be empty"
+    severity: HIGH
+    retain_row: true
+    retain_waveform: "RETAIN"
+    retry_allowed: false
+    amendment_required: false
+    blocks_pilot: false
+    blocks_claim: true
+    status_effect: HARD_FAILURE
+    source: "A2_FAILURE_TAXONOMY.md"
+  - name: RMS_MATCH_FAIL
+    trigger: "gain clamped at 0.25/4.0 and post-gain speech RMS still more than 6 dB from reference"
+    severity: LOW
+    retain_row: true
+    retain_waveform: "RETAIN"
+    retry_allowed: false
+    amendment_required: false
+    blocks_pilot: false
+    blocks_claim: false
+    status_effect: QA_FLAG
+    source: "A2_FAILURE_TAXONOMY.md"
+  - name: PEAK_SAFE_FAIL
+    trigger: "peak-safety reduction cannot bring abs peak below 0.999"
+    severity: HIGH
+    retain_row: true
+    retain_waveform: "DISCARD"
+    retry_allowed: false
+    amendment_required: false
+    blocks_pilot: false
+    blocks_claim: true
+    status_effect: HARD_FAILURE
+    source: "A2_FAILURE_TAXONOMY.md"
+  - name: SERIALIZATION_MISMATCH
+    trigger: "serialized-decoded length/channels/SR differs from in-memory final"
+    severity: HIGH
+    retain_row: true
+    retain_waveform: "DISCARD"
+    retry_allowed: true
+    amendment_required: true
+    blocks_pilot: true
+    blocks_claim: true
+    status_effect: HARD_FAILURE
+    source: "A2_FAILURE_TAXONOMY.md"
+  - name: OFFLINE_RELOAD_FAIL
+    trigger: "offline reload of the cached generator environment fails after cache freeze"
+    severity: CRITICAL
+    retain_row: true
+    retain_waveform: "N/A"
+    retry_allowed: false
+    amendment_required: true
+    blocks_pilot: true
+    blocks_claim: true
+    status_effect: HARD_FAILURE
+    source: "A2_FAILURE_TAXONOMY.md"
+  - name: DETERMINISM_MISMATCH
+    trigger: "identical inputs and seed produce different outputs in the determinism probe"
+    severity: MEDIUM
+    retain_row: true
+    retain_waveform: "RETAIN"
+    retry_allowed: false
+    amendment_required: false
+    blocks_pilot: false
+    blocks_claim: true
+    status_effect: DETERMINISM_LIMITATION
+    source: "A2_FAILURE_TAXONOMY.md"
+  - name: TIMELINE_INCONSISTENCY
+    trigger: "suffix-shift lineage check fails (post-attack mapping differs from clean plus delta)"
+    severity: CRITICAL
+    retain_row: true
+    retain_waveform: "RETAIN"
+    retry_allowed: false
+    amendment_required: false
+    blocks_pilot: true
+    blocks_claim: true
+    status_effect: HARD_FAILURE
+    source: "A2_FAILURE_TAXONOMY.md"
+  - name: GT_OUT_OF_RANGE
+    trigger: "any GT bound below 0, at or beyond final length, or seconds inconsistent"
+    severity: CRITICAL
+    retain_row: true
+    retain_waveform: "RETAIN"
+    retry_allowed: false
+    amendment_required: false
+    blocks_pilot: true
+    blocks_claim: true
+    status_effect: HARD_FAILURE
+    source: "A2_FAILURE_TAXONOMY.md"
+  - name: SUFFIX_MISMATCH
+    trigger: "downstream suffix not bit-equal to clean plus delta"
+    severity: CRITICAL
+    retain_row: true
+    retain_waveform: "RETAIN"
+    retry_allowed: false
+    amendment_required: false
+    blocks_pilot: true
+    blocks_claim: true
+    status_effect: HARD_FAILURE
+    source: "A2_FAILURE_TAXONOMY.md"
+
+rules:
+  - "RMS_MATCH_FAIL maps to qa_flags only; it never sets generation_status=FAILURE"
+  - "DETERMINISM_MISMATCH does not block the pilot; it requires limitation disclosure in every claim that cites A2 outputs"
+  - "detector or diagnostic scores are never failure criteria"
+
+counts:
+  total: 17
+  HARD_FAILURE: 15
+  QA_FLAG: 1
+  DETERMINISM_LIMITATION: 1
+
+qa_flag_only_classes: [RMS_MATCH_FAIL]
+determinism_limitation_classes: [DETERMINISM_MISMATCH]

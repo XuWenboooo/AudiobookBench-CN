@@ -1,0 +1,56 @@
+protocol_version: "2.0"
+sample_rate: 16000
+source_type: natural
+longform_type: constructed
+
+inputs:
+  clean_longform_manifest: data/manifests/day35_longform_manifest.csv
+  source_catalog: data/manifests/day35_source_audio_portable.csv
+  dataset_root: 'F:\项目\申请实验室  TTS项目\datasets\AISHELL-3'
+
+eligibility:
+  allowed_splits:
+    - train
+  donor_same_split: required
+  donor_different_speaker: required
+  val_test_policy: reject_no_same_split_different_speaker_donor
+
+target_selection:
+  A0: middle_internal_complete_source_utterance
+  A1: nearest_middle_internal_utterance_with_safe_margin
+  A1_internal_margin_seconds: 0.5
+  A1_duration_tiers_seconds:
+    - 0.75
+    - 1.5
+    - 2.5
+  duration_tier_assignment: sorted_eligible_sequence_index_modulo_tier_count
+
+donor_selection:
+  rule: lexicographically_first_by_speaker_then_sample_id_satisfying_constraints
+  duration_matching:
+    A0: prefix_crop
+    A1: center_crop
+  use_vad_or_detector_for_selection: false
+
+artifact_control:
+  A0:
+    rms_matching: false
+    crossfade_seconds: 0.0
+  A1:
+    rms_matching: true
+    rms_epsilon: 1.0e-8
+    rms_gain_min: 0.25
+    rms_gain_max: 4.0
+    crossfade_seconds: 0.025
+
+outputs:
+  root: data/generated/day4_v2
+  A0_directory: data/generated/day4_v2/A0_cross_speaker_splice
+  A1_directory: data/generated/day4_v2/A1_artifact_controlled
+  metadata_directory: data/generated/day4_v2/metadata
+  attack_manifest: data/manifests/day4_attack_manifest.csv
+  skip_manifest: data/generated/day4_v2/metadata/day4_skips.csv
+
+A2_same_text_tts_replacement:
+  status: PENDING
+  generated: false

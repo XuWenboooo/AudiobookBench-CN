@@ -1,0 +1,31 @@
+# Speaker-embedding backend dependencies (verified versions)
+
+# Day 6B/6C verified environment (Windows, Python 3.13, CPU-only inference):
+#   speechbrain==1.1.1
+#   torch==2.14.0+cpu      (CPU wheel; install with:
+#       pip install torch --index-url https://download.pytorch.org/whl/cpu )
+#   torchaudio==2.11.0     (installed transitively by speechbrain)
+# Independent Week-1 audit also reproduced the representative ECAPA output
+# with Python 3.14 / torch 2.13.0+cpu / torchaudio 2.11.0; fresh-vs-frozen
+# embedding cosine similarity was 0.99999988.
+#
+# Model: speechbrain/spkrec-ecapa-voxceleb (VoxCeleb-pretrained, 192-d,
+# 16 kHz input). Day 6B/6C load it offline from a local copy under
+# pretrained/spkrec-ecapa-voxceleb/ with HF_HUB_OFFLINE=1.
+#
+# Notes:
+# - torch is intentionally NOT hard-pinned here (large platform-specific
+#   download); the tested version is recorded above and in
+#   results/day6b/embedding_backend.json / results/day6c/day6b_freeze_record.json.
+# - No part of the formal pipeline depends on agent-private paths; the model
+#   lives inside the repository tree.
+speechbrain==1.1.1
+torch>=2.1
+torchaudio>=2.1
+numpy
+scipy
+soundfile
+pyyaml
+scikit-learn
+matplotlib
+pytest

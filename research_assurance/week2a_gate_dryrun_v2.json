@@ -1,0 +1,260 @@
+{
+  "generated_at": "2026-09-05T22:20:46",
+  "repo_root": "F:\\\u9879\u76ee\\\u7533\u8bf7\u5b9e\u9a8c\u5ba4  TTS\u9879\u76ee\\AudiobookBench-CN",
+  "registry_dir": "F:\\\u9879\u76ee\\\u7533\u8bf7\u5b9e\u9a8c\u5ba4  TTS\u9879\u76ee\\AudiobookBench-CN\\research_assurance",
+  "gates": {
+    "day8": {
+      "status": "HOLD",
+      "rules": [
+        {
+          "rule": "DAY8_PRECHECK_PRESENT",
+          "source": "WEEK2_A2_PREREGISTRATION_REPORT.md / DAY8 owner",
+          "evidence": "missing: DAY8_PRECHECK.md",
+          "status": "HOLD"
+        },
+        {
+          "rule": "DAY8_COMPLETE_LICENSE_CHAIN_CHECKED",
+          "source": "configs/week2a_a2_protocol_draft.yaml",
+          "evidence": "complete_license_chain_checked=false",
+          "status": "HOLD"
+        },
+        {
+          "rule": "DAY8_WINDOWS_FEASIBILITY_VERIFIED",
+          "source": "configs/week2a_a2_protocol_draft.yaml",
+          "evidence": "windows_feasibility_verified=false",
+          "status": "HOLD"
+        },
+        {
+          "rule": "DAY8_HARDWARE_REQUIREMENT_VERIFIED",
+          "source": "configs/week2a_a2_protocol_draft.yaml",
+          "evidence": "hardware_requirement_verified=false",
+          "status": "HOLD"
+        },
+        {
+          "rule": "DAY8_OFFLINE_CACHE_VERIFIED",
+          "source": "configs/week2a_a2_protocol_draft.yaml",
+          "evidence": "offline_cache_verified=false",
+          "status": "HOLD"
+        },
+        {
+          "rule": "DAY8_DETERMINISM_VERIFIED",
+          "source": "configs/week2a_a2_protocol_draft.yaml",
+          "evidence": "determinism_verified=false",
+          "status": "HOLD"
+        },
+        {
+          "rule": "DAY8_PROVENANCE_FIELDS_RESOLVED",
+          "source": "configs/week2a_a2_protocol_draft.yaml",
+          "evidence": "TO_BE_VERIFIED occurrences=10",
+          "status": "HOLD"
+        },
+        {
+          "rule": "DAY8_REGISTRY_DECLARED_STATUS",
+          "source": "research_assurance/week2a_gate_registry.yaml",
+          "evidence": "status=HOLD",
+          "status": "HOLD"
+        }
+      ],
+      "block_reason": null
+    },
+    "day9": {
+      "status": "BLOCKED",
+      "rules": [
+        {
+          "rule": "DAY8_GATE_STATE",
+          "source": "week2a_gate_registry.yaml",
+          "evidence": "DAY8_GATE=HOLD",
+          "status": "BLOCKED"
+        },
+        {
+          "rule": "WEEK1_HASH_REGISTRY_DECLARED",
+          "source": "results/week1/hashes.json",
+          "evidence": "declared_status=PASS",
+          "status": "PASS"
+        },
+        {
+          "rule": "WEEK1_HASH_FRESH_REHASH",
+          "source": "results/week1/rehash_result.json (optional independent rehash)",
+          "evidence": "fresh_rehash=NOT_PERFORMED",
+          "status": "HOLD"
+        },
+        {
+          "rule": "A2_CONFIG_PLACEHOLDERS_RESOLVED",
+          "source": "configs/week2a_a2_protocol_draft.yaml",
+          "evidence": "TO_BE_VERIFIED=10",
+          "status": "HOLD"
+        },
+        {
+          "rule": "A2_SIDECAR_VALIDATOR_AND_SMOKE",
+          "source": "week2a_gate_registry.yaml#DAY9_GATE.evidence_search",
+          "evidence": "A2 sidecar validator + Day9 official smoke resolved 0/3: missing: src/**/a2_sidecar_validator*.py; missing: src/**/a2_waveform_gt_verifier*.py; missing: results/day9/**/*.json",
+          "status": "MISSING_EVIDENCE"
+        }
+      ],
+      "block_reason": "BLOCKED_BY_DAY8"
+    },
+    "day10": {
+      "status": "BLOCKED",
+      "rules": [
+        {
+          "rule": "DAY9_GATE_STATE",
+          "source": "week2a_gate_registry.yaml",
+          "evidence": "DAY9_GATE=BLOCKED_BY_DAY8",
+          "status": "BLOCKED"
+        },
+        {
+          "rule": "A2_PILOT_OUTPUTS_AND_DENOMINATOR",
+          "source": "week2a_gate_registry.yaml#DAY10_GATE.evidence_search",
+          "evidence": "A2 frozen pilot outputs + denominator report resolved 0/3: missing: results/day10/**/*.wav; missing: results/day10/day10_output_hashes.json; missing: data/generated/**/a2_*.json",
+          "status": "MISSING_EVIDENCE"
+        }
+      ],
+      "block_reason": "BLOCKED_BY_DAY9"
+    },
+    "day11": {
+      "status": "BLOCKED",
+      "rules": [
+        {
+          "rule": "DAY10_GATE_STATE",
+          "source": "week2a_gate_registry.yaml",
+          "evidence": "DAY10_GATE=BLOCKED_BY_DAY9",
+          "status": "BLOCKED"
+        },
+        {
+          "rule": "TESTS_PHASE_A_PRE_A2_UNIT",
+          "source": "week2a_test_registry.yaml",
+          "evidence": "16 tests, NOT_RUN=16",
+          "status": "HOLD"
+        },
+        {
+          "rule": "TESTS_PHASE_B_FIXTURE_MANIFEST",
+          "source": "week2a_test_registry.yaml",
+          "evidence": "2 tests, NOT_RUN=2",
+          "status": "HOLD"
+        },
+        {
+          "rule": "TESTS_PHASE_C_POST_A2_DATA",
+          "source": "week2a_test_registry.yaml",
+          "evidence": "4 tests, NOT_RUN=4",
+          "status": "BLOCKED"
+        },
+        {
+          "rule": "P0_FINDINGS_RESOLVED",
+          "source": "week2a_findings_registry.yaml",
+          "evidence": "HIGH findings=['F1', 'F4', 'F5'] unresolved=['F1', 'F4', 'F5']",
+          "status": "HOLD"
+        },
+        {
+          "rule": "FROZEN_THRESHOLD_SOURCE_PRESENT",
+          "source": "results/day6b/metrics_by_split.csv",
+          "evidence": "present: results/day6b/metrics_by_split.csv",
+          "status": "PASS"
+        },
+        {
+          "rule": "TEST_A2_THRESHOLD_REUSE_FROZEN",
+          "source": "week2a_test_registry.yaml",
+          "evidence": "T09 result_status=NOT_RUN",
+          "status": "HOLD"
+        },
+        {
+          "rule": "DETECTOR_DENYLIST_TEST",
+          "source": "week2a_test_registry.yaml",
+          "evidence": "T08 result_status=NOT_RUN",
+          "status": "HOLD"
+        },
+        {
+          "rule": "A2_METRIC_INPUTS_AND_TABLES",
+          "source": "week2a_gate_registry.yaml#DAY11_METRIC_GATE.evidence_search",
+          "evidence": "A2 metric inputs (Day10 pilot + denominator) + Day11 tables resolved 0/3: missing: results/day10/**/*.wav; missing: results/day11/**/*.csv; missing: results/day11/**/*.json",
+          "status": "MISSING_EVIDENCE"
+        }
+      ],
+      "block_reason": "BLOCKED_BY_A2_OUTPUT"
+    },
+    "day12": {
+      "status": "BLOCKED",
+      "rules": [
+        {
+          "rule": "DAY11_METRIC_GATE_STATE",
+          "source": "week2a_gate_registry.yaml",
+          "evidence": "DAY11_METRIC_GATE=BLOCKED_BY_A2_OUTPUT",
+          "status": "BLOCKED"
+        },
+        {
+          "rule": "PREREGISTRATION_DOCUMENT_PRESENT",
+          "source": "research_assurance/",
+          "evidence": "present: research_assurance/WEEK2_DAY12_MECHANISM_PREREG.md",
+          "status": "PASS"
+        },
+        {
+          "rule": "A2_OUTPUT_AVAILABLE",
+          "source": "week2a_gate_registry.yaml#DAY12_ANALYSIS_GATE.evidence_search",
+          "evidence": "A2 outputs/analysis artifacts resolved 0/2: missing: results/day11/**/*.csv; missing: results/day12/**/*.csv",
+          "status": "MISSING_EVIDENCE"
+        }
+      ],
+      "block_reason": "BLOCKED_BY_A2_OUTPUT"
+    },
+    "day13": {
+      "status": "BLOCKED",
+      "rules": [
+        {
+          "rule": "DAY12_ANALYSIS_GATE_STATE",
+          "source": "week2a_gate_registry.yaml",
+          "evidence": "DAY12_ANALYSIS_GATE=BLOCKED_BY_A2_OUTPUT",
+          "status": "BLOCKED"
+        },
+        {
+          "rule": "PREREGISTRATION_DOCUMENT_PRESENT",
+          "source": "research_assurance/",
+          "evidence": "present: research_assurance/WEEK2_DAY13_DECISION_TREE.md",
+          "status": "PASS"
+        },
+        {
+          "rule": "A2_OUTPUT_AVAILABLE",
+          "source": "week2a_gate_registry.yaml#DAY13_DECISION_GATE.evidence_search",
+          "evidence": "A2 outputs/analysis artifacts resolved 0/2: missing: results/day12/**/*.csv; missing: results/day13/**/*.md",
+          "status": "MISSING_EVIDENCE"
+        }
+      ],
+      "block_reason": "BLOCKED_BY_A2_OUTPUT"
+    },
+    "claim": {
+      "status": "MISSING_EVIDENCE",
+      "rules": [
+        {
+          "rule": "CLAIM_REGISTRY_LOADED",
+          "source": "week2a_claim_registry.yaml",
+          "evidence": "terms=16 evidence_classes=6",
+          "status": "PASS"
+        },
+        {
+          "rule": "E6_SECOND_GENERATOR",
+          "source": "week2a_claim_registry.yaml",
+          "evidence": "E6=second-generator replication (NOT AVAILABLE in Week2A; requi",
+          "status": "NOT_APPLICABLE"
+        },
+        {
+          "rule": "A2_E1_E5_PRESENT",
+          "source": "week2a_gate_registry.yaml#WEEK2A_CLAIM_GATE.evidence_search",
+          "evidence": "A2 evidence artifacts E1-E5 resolved 0/4: missing: results/day10/**/*.wav; missing: results/day11/**/*.csv; missing: results/day12/**/*.csv; missing: results/day13/**/*.md",
+          "status": "MISSING_EVIDENCE"
+        }
+      ],
+      "block_reason": "NO_A2_CLAIMS_YET"
+    }
+  },
+  "status_propagation": {
+    "week1": "PASS",
+    "protocol": "PASS",
+    "preregistration": "PASS",
+    "static_compatibility": "PASS",
+    "day8": "HOLD",
+    "day9": "BLOCKED_BY_DAY8",
+    "day10": "BLOCKED_BY_DAY9",
+    "day11": "BLOCKED_BY_A2_OUTPUT",
+    "day12": "BLOCKED_BY_A2_OUTPUT",
+    "day13": "BLOCKED_BY_A2_OUTPUT",
+    "week2a_claims": "NO_A2_CLAIMS_YET"
+  }
+}

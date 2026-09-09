@@ -1,0 +1,102 @@
+protocol_version: "6A"
+purpose: >
+  Day 6A non-trained temporal aggregation + anomaly localization baseline.
+  Day 5 measurement grid (25 ms frame / 10 ms hop @ 16 kHz) stays frozen;
+  this config freezes the aggregation layer, feature set, train-clean-only
+  reference, B0 scoring rule, ground-truth projection, thresholds and
+  ablations BEFORE any evaluation is observed. No learned model is involved.
+
+aggregation:
+  sample_rate: 16000
+  day5_frame:
+    frame_length: 400   # 25 ms, frozen in Day 5
+    hop_length: 160     # 10 ms, frozen in Day 5
+  # Windows are contiguous (hop == window) and aligned to complete Day 5
+  # frames: window_frames = window_ms / hop_ms must be an integer.
+  # Trailing Day 5 frames that cannot fill a full window are not covered.
+  # The same aggregation grid is used for clean/A0/A1 of a paired case
+  # (guaranteed because Day 4.5 waveform verification enforces equal length).
+  scales:
+    - {name: "100ms", window_ms: 100, hop_ms: 100}
+    - {name: "250ms", window_ms: 250, hop_ms: 250}
+    - {name: "500ms", window_ms: 500, hop_ms: 500}
+
+window_features:
+  log_energy_mean: {signal: log_energy, stat: mean}
+  log_energy_std: {signal: log_energy, stat: std}
+  log_energy_min: {signal: log_energy, stat: min}
+  log_energy_max: {signal: log_energy, stat: max}
+  rms_mean: {signal: rms, stat: mean}
+  rms_std: {signal: rms, stat: std}
+  f0_median: {signal: f0_hz, stat: nanmedian}   # voiced frames only, unvoiced stays NaN-free semantics
+  f0_std: {signal: f0_hz, stat: nanstd}         # voiced frames only
+  voiced_fraction: {signal: voiced_ratio, stat: mean}
+  pause_fraction: {signal: pause_ratio, stat: mean}
+  valid_f0_fraction: {signal: f0_hz, stat: finite_fraction}
+
+feature_channels:
+  f0: [f0_median, f0_std]
+  energy: [log_energy_mean, log_energy_std, log_energy_min, log_energy_max]
+  rms: [rms_mean, rms_std]
+  voicing: [voiced_fraction, valid_f0_fraction]
+  pause: [pause_fraction]
+
+ablations:
+  ALL: [f0, energy, rms, voicing, pause]
+  NO_PAUSE: [f0, energy, rms, voicing]
+  NO_ENERGY: [f0, voicing, pause]
+
+reference:
+  source: train_clean_only          # val/test clean and all manipulated are excluded
+  center: median                    # robust center per feature
+  scale: mad                        # median(|x - center|), plus epsilon protection
+  eps: 1.0e-8
+  # Zero-scale protection (AMENDED after the first full run revealed numerical
+  # saturation: pause_fraction had MAD == 0 at the 100 ms scale and epsilon
+  # scaling alone amplified deviations to |z| ~ 1e8. The rule below is
+  # data-independent and standard; the amendment is disclosed in the report):
+  #   - a feature whose train-clean MAD is exactly zero is degenerate: its
+  #     z-scores are always NaN and it is excluded from every combination;
+  #   - z-scores are additionally capped at z_cap to bound near-degenerate
+  #     explosions. The cap does not affect ordinary score ranges.
+  zero_mad_policy: invalid_feature
+  z_cap: 10000
+  invalid_policy: >-
+    A feature whose train-clean values are all NaN also yields NaN z-scores,
+    which are excluded from combinations and counted (n_valid_features).
+
+anomaly:
+  method: b0_robust_zscore          # |x - median| / (MAD + eps), no learning
+  combine: mean_abs_z               # mean over valid features of the ablation set
+  min_valid_features: 1
+
+gt_projection:
+  # Frozen before any result was observed.
+  label_threshold: 0.5              # majority rule for boolean window labels
+  zones:
+    in_core: "core_overlap_ratio >= 0.5"
+    boundary: "(attack_overlap_ratio > 0 or blend_overlap_ratio > 0) and not in_core"
+    outside: "attack_overlap_ratio == 0 and blend_overlap_ratio == 0"
+
+threshold:
+  # Two pre-declared rules; neither ever looks at val/test.
+  fixed_abs_z: 3.5                  # classic robust outlier rule
+  train_f1_rule: >-
+    choose tau maximizing window F1 on TRAIN manipulated windows only, using
+    GT_FULL labels of the same (scale, ablation); apply verbatim to val/test
+    and to both GT_FULL and GT_CORE.
+
+evaluation:
+  unit: window
+  splits: [train, val, test]
+  variants: [a0, a1]
+  gts: [full, core]                 # full = attack/blend region, core = strict core
+  metrics: [auroc, auprc, f1]
+
+figure:
+  n_cases: 5
+  seed: 20260905
+  # Deterministic selection: rank test-split paired cases by paired mean
+  # combined-anomaly delta inside core (A1 - A0, ALL ablation, 250 ms scale);
+  # take the min ("A1 suppressed most"), max, median case, plus the two cases
+  # with lowest A0 core AUROC (failure side). De-duplicated.

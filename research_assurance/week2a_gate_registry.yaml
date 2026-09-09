@@ -1,0 +1,94 @@
+# Week2A Gate Registry
+gates:
+  DAY8_GATE:
+    owner: Day8 Codex session
+    prerequisites: [generator license chain checked, checkpoint/component hashes recorded, windows/hardware feasibility verified, offline cache verified, determinism verified]
+    blocking_conditions: [license chain incomplete, checkpoint hashes missing, environment not reproducible, windows smoke failed]
+    required_tests: []
+    required_artifacts: [DAY8_PRECHECK.md]
+    evidence_search: ["DAY8_PRECHECK.md"]
+    required_hashes: [checkpoint_sha256, component_hashes]
+    required_denominator_reporting: false
+    forbidden_actions: [generate official A2 audio, run A2 metrics, modify Week1 artifacts]
+    pass_meaning: the A2 environment is provenance-complete and reproducible enough for Day9 official smoke
+    pass_does_not_mean: [A2 implemented, A2 successful, any A2 claim]
+    status: HOLD
+
+  DAY9_GATE:
+    prerequisites: [DAY8_GATE=PASS, backend provenance complete, checkpoint/component hashes complete, offline reload PASS, determinism status documented, reference freeze PASS, sidecar contract implementation ready, Week1 verify-only 696/696]
+    blocking_conditions: [Day8 HOLD, any TO_BE_VERIFIED field unresolved, sidecar validator not implemented, official smoke < 3/3 PASS, Week1 hash mismatch]
+    required_tests: [sidecar_validator_tests, waveform_gt_verifier_tests, dummy_array_pipeline_tests]
+    required_artifacts: [generation pipeline code, sidecar validator, 3 official smoke cases (first sorted paired_case_id per split)]
+    evidence_search: ["src/**/a2_sidecar_validator*.py", "src/**/a2_waveform_gt_verifier*.py", "results/day9/**/*.json"]
+    required_hashes: [Week1 696/696, reference audio hashes]
+    required_denominator_reporting: true
+    forbidden_actions: [generating beyond smoke, quality-based retry, ASR/similarity filtering, editing transcripts or intervals, deleting failed rows]
+    pass_meaning: the formal pipeline is implemented and smoke-verified under frozen semantics
+    pass_does_not_mean: [pilot generated, A2 metrics available]
+    status: BLOCKED_BY_DAY8
+    note: Day8 disposable smoke is NOT Day9 official smoke
+
+  DAY10_GATE:
+    prerequisites: [DAY9_GATE=PASS (3/3 official smoke), sidecar validator PASS, waveform/GT verifier PASS, Week1 696/696, formal_generation_allowed explicitly true via the allowed transition]
+    blocking_conditions: [official smoke not 3/3, validator failure, verifier failure, Week1 hash mismatch, formal_generation_allowed still false]
+    required_tests: [test_a2_dual_timeline_gt (fixture portion), test_a2_loader_reads_sidecar]
+    required_artifacts: [23-case pilot outputs, A2 sidecar, day10_output_hashes.json, realized denominator report]
+    evidence_search: ["results/day10/**/*.wav", "results/day10/day10_output_hashes.json", "data/generated/**/a2_*.json"]
+    required_hashes: [A2 output hashes, checkpoint hashes, reference hashes, pipeline snapshot]
+    required_denominator_reporting: true
+    forbidden_actions: [quality-based replacement, score-based filtering, silent reroll, case substitution]
+    pass_meaning: a frozen 23-case A2 pilot exists with full provenance and disclosed denominators
+    pass_does_not_mean: [any A2 performance claim]
+    status: BLOCKED_BY_DAY9
+
+  DAY11_METRIC_GATE:
+    prerequisites: [DAY10_GATE=PASS, all PHASE_A tests PASS, all applicable PHASE_B/PHASE_C tests PASS, F1/F4/F5 resolved, B3 absent from the primary path, frozen Week1 thresholds loaded, A2 sidecar loader used, variable-duration GT correct, case-level grouping correct, mask alignment correct, detector denylist PASS, realized denominator disclosed]
+    blocking_conditions: [any P0 finding unresolved (F1/F4/F5), threshold recomputed from A2 data, B3 in primary tables, denylist failure, missing denominator disclosure]
+    required_tests: [T01, T02, T03, T04, T05, T06, T07, T08, T09, T11, T12, T13, T16, T17, T21, T10, T14, T18, T20]
+    required_artifacts: [A2 metrics tables (original + conditional), zone statistics, case-level metrics, peak-error table]
+    evidence_search: ["results/day10/**/*.wav", "results/day11/**/*.csv", "results/day11/**/*.json"]
+    required_hashes: [A2 outputs match day10 freeze]
+    required_denominator_reporting: true
+    forbidden_actions: [threshold tuning, new baselines, B3 in deployable tables, excluding cases by score]
+    pass_meaning: A2 AUROC/AUPRC/F1 are traceable and quotable within frozen semantics
+    pass_does_not_mean: [A2 succeeded, generalization, deployment]
+    status: BLOCKED_BY_A2_OUTPUT
+
+  DAY12_ANALYSIS_GATE:
+    prerequisites: [DAY11_METRIC_GATE=PASS, pre-registered P1/P2 computed with CIs, S1-S5 reported, D1-D4 as diagnostics]
+    blocking_conditions: [post-hoc metric addition, case filtering by similarity/CER/score, promoting a DIAGNOSTIC variable]
+    required_tests: [test_a2_prefix_null_control, test_a2_outside_anomaly_vs_a0_control]
+    required_artifacts: [P1 association with case bootstrap CI, S1-S5 tables, D1-D4 diagnostics]
+    evidence_search: ["results/day11/**/*.csv", "results/day12/**/*.csv"]
+    required_hashes: []
+    required_denominator_reporting: true
+    forbidden_actions: [new metrics after seeing results, causal wording, protocol changes]
+    pass_meaning: the mechanism question is answered within pre-registered bounds
+    pass_does_not_mean: [causality established]
+    status: BLOCKED_BY_A2_OUTPUT
+
+  DAY13_DECISION_GATE:
+    prerequisites: [DAY12_ANALYSIS_GATE=PASS, scenario A/B/C/D determined under the operative definitions]
+    blocking_conditions: [scenario undefined, mixed outcome reported without the intersection rule]
+    required_tests: []
+    required_artifacts: [scenario determination record with the intersection-of-allowed-claims rule applied]
+    evidence_search: ["results/day12/**/*.csv", "results/day13/**/*.md"]
+    required_hashes: []
+    required_denominator_reporting: true
+    forbidden_actions: [new scenario E, post-hoc reinterpretation]
+    pass_meaning: the branch and its allowed/forbidden interpretations are fixed
+    pass_does_not_mean: [success]
+    status: BLOCKED_BY_A2_OUTPUT
+
+  WEEK2A_CLAIM_GATE:
+    prerequisites: [DAY13_DECISION_GATE=PASS, claim registry evidence classes E1-E5 present (E6 absent)]
+    blocking_conditions: [E6-dependent terms claimed, scenario B or D overrides, deepfake/robust/generalize/deployment language]
+    required_tests: [test_a2_detector_input_denylist]
+    required_artifacts: [claim usage record]
+    evidence_search: ["results/day10/**/*.wav", "results/day11/**/*.csv", "results/day12/**/*.csv", "results/day13/**/*.md"]
+    required_hashes: []
+    required_denominator_reporting: true
+    forbidden_actions: [claiming beyond the term permission table]
+    pass_meaning: only permitted terms are used with their required qualifiers
+    pass_does_not_mean: [paper ready]
+    status: NO_A2_CLAIMS_YET

@@ -1,0 +1,32 @@
+# Week2A Claim Registry (transcribed from WEEK2_PUBLICATION_CLAIM_GATE.md)
+evidence_classes:
+  E1: A2 generation completed with realized denominators and failure taxonomy (Day10)
+  E2: A2 evaluation under frozen Week1 baselines/thresholds, original population (Day11)
+  E3: Conditional-on-speech-active A2 evaluation (Day11)
+  E4: Day12 similarity/mechanism diagnostics (P1 association with CIs)
+  E5: Day13 scenario determination (A/B/C/D)
+  E6: second-generator replication (NOT AVAILABLE in Week2A; requires week2b)
+
+terms:
+  - {term: TTS_replacement, first_permitted_evidence: E1, required_qualifier: name generator, checkpoint hash, constructed protocol, still_forbidden_when: presenting as perceptually validated TTS quality, scenario_requirements: [], notes: stimuli description}
+  - {term: synthetic_speech, first_permitted_evidence: E1, required_qualifier: under the tested immutable checkpoint, still_forbidden_when: synthetic-speech detection results before E2, scenario_requirements: [], notes: stimuli description}
+  - {term: voice_conditioned_replacement, first_permitted_evidence: E1, required_qualifier: conditioning intent; identity not verified, still_forbidden_when: voice-cloning quality claims (no perceptual study), scenario_requirements: [], notes: stimuli description}
+  - {term: deepfake_context, first_permitted_evidence: E1, required_qualifier: motivation/related work only, still_forbidden_when: deepfake detection results, scenario_requirements: [], notes: framing only}
+  - {term: deepfake_detection, first_permitted_evidence: NOT_PERMITTED_IN_WEEK2A, required_qualifier: requires E6 plus perceptual and multi-condition studies, still_forbidden_when: always for now, scenario_requirements: [], notes: hard gate}
+  - {term: same_text_TTS_localization_signal, first_permitted_evidence: E2, required_qualifier: quote AUROC and AUPRC/F1; name checkpoint; constructed-protocol caveat, still_forbidden_when: TTS detection solved; generalization beyond the checkpoint, scenario_requirements: [A, C], notes: blocked under B and D}
+  - {term: robust, first_permitted_evidence: NOT_PERMITTED, required_qualifier: per-condition evidence only, still_forbidden_when: unqualified robust, scenario_requirements: [], notes: hard gate}
+  - {term: generalize, first_permitted_evidence: NOT_PERMITTED_IN_WEEK2A, required_qualifier: E6 missing, still_forbidden_when: generalizes to unseen generators/speakers/data, scenario_requirements: [], notes: hard gate}
+  - {term: adaptive_robustness, first_permitted_evidence: NOT_PERMITTED, required_qualifier: no adaptive experiment, still_forbidden_when: always for now, scenario_requirements: [], notes: hard gate}
+  - {term: native_audiobook, first_permitted_evidence: NOT_PERMITTED, required_qualifier: constructed protocol, still_forbidden_when: any native audiobook result or benchmark claim, scenario_requirements: [], notes: hard gate}
+  - {term: speaker_causality, first_permitted_evidence: NOT_PERMITTED, required_qualifier: may say consistent with speaker-representation dependence, still_forbidden_when: caused by speaker identity, scenario_requirements: [], notes: text confound remains}
+  - {term: deployment_ready, first_permitted_evidence: NOT_PERMITTED, required_qualifier: none, still_forbidden_when: any deployment/readiness claim, scenario_requirements: [], notes: hard gate}
+  - {term: universal_forensics, first_permitted_evidence: FORBIDDEN, required_qualifier: none, still_forbidden_when: always, scenario_requirements: [], notes: hard gate}
+  - {term: significant, first_permitted_evidence: NOT_PERMITTED, required_qualifier: CIs only; no hypothesis tests pre-registered, still_forbidden_when: statistically significant, scenario_requirements: [], notes: wording gate}
+  - {term: conditional_on_speech_active, first_permitted_evidence: E3, required_qualifier: always paired with the unmasked population, still_forbidden_when: masked-only presentation, scenario_requirements: [], notes: mandatory pairing}
+  - {term: ORACLE, first_permitted_evidence: labelled_as_in_week1, required_qualifier: B3 never in deployable tables, still_forbidden_when: B3 in primary A2 tables, scenario_requirements: [], notes: denylist enforced}
+
+scenario_rules:
+  B: blocks every positive TTS-related term; pivot to boundary-mapping framing
+  D: withdraws any A2 localization-signal claim; only artifact dependence may be claimed
+  C: graded framing with mandatory correlation-not-causation caveat
+  A: full qualifiers required per the pre-written maximal claim template

@@ -1,0 +1,51 @@
+protocol_version: "1.0"
+longform_type: constructed
+
+source:
+  catalog: data/manifests/day35_source_audio_portable.csv
+  dataset_root: 'F:\项目\申请实验室  TTS项目\datasets\AISHELL-3'
+  dataset_root_env: AUDIOBOOKBENCH_DATASET_ROOT
+  path_resolution: explicit_or_environment_dataset_root_plus_audio_relpath
+  allowed_speakers:
+    - SSB0005
+    - SSB0009
+    - SSB0011
+    - SSB0073
+    - SSB0139
+  ordering_rule: selection_rank_then_sample_id
+
+construction:
+  sequences_per_speaker: 2
+  target_duration_seconds:
+    minimum: 20.0
+    preferred: 30.0
+    maximum: 60.0
+  utterances_per_sequence:
+    minimum: 4
+    maximum: 12
+  gap:
+    duration_seconds: 0.3
+    waveform: zero_silence
+    interpretation: engineering_construction_not_natural_pause_ground_truth
+  target_sample_rate: 16000
+  channels: mono
+  normalization: none
+  time_stretch: false
+  denoise: false
+
+lineage:
+  sequence_id_rule: day35_<split>_<speaker>_seq<zero_based_3_digits>
+  sequence_pair_id_rule: longform_pair_<sequence_id>
+  source_lineage_rule: ordered_full_utterance_source_sample_ids
+  split_inheritance: source_speaker_split
+  cross_speaker: forbidden
+  cross_split: forbidden
+
+outputs:
+  audio_directory: data/constructed_longform/day35_smoke
+  lineage_manifest: data/manifests/day35_longform_manifest.csv
+
+analysis_condition:
+  standardized: 16_khz_mono
+  native_or_native_like_future_extension: true
+  note: 16 kHz is a standardized analysis condition, not the only real-world condition.

@@ -1,0 +1,45 @@
+# Day 8 executable Windows / Python 3.12 compatibility overlay.
+# Derived from third_party/CosyVoice/requirements.txt at source commit
+# 074ca6dc9e80a2f424f1f74b48bdd7d3fea531cc.  The official grpcio 1.57.0
+# pins predate CPython 3.12 wheels, so grpcio/grpcio-tools and their required
+# protobuf floor are moved to a documented CPython-3.12 wheel release.  All
+# other pins remain official.
+--extra-index-url https://download.pytorch.org/whl/cu121
+--extra-index-url https://aiinfra.pkgs.visualstudio.com/PublicPackages/_packaging/onnxruntime-cuda-12/pypi/simple/
+conformer==0.3.2
+diffusers==0.29.0
+fastapi==0.115.6
+fastapi-cli==0.0.4
+gdown==5.1.0
+gradio==5.4.0
+grpcio==1.67.1
+grpcio-tools==1.67.1
+hydra-core==1.3.2
+HyperPyYAML==1.2.3
+inflect==7.3.1
+librosa==0.10.2
+lightning==2.2.4
+matplotlib==3.7.5
+modelscope==1.20.0
+networkx==3.1
+numpy==1.26.4
+omegaconf==2.3.0
+onnx==1.16.0
+onnxruntime==1.18.0
+# ASR is deliberately not installed on Day 8; it is a future diagnostic-only
+# backend and is not required for CosyVoice inference readiness.
+# grpcio-tools 1.67.1 requires protobuf >=5.26.1; retain an explicit pin.
+protobuf==5.28.3
+pyarrow==18.1.0
+pydantic==2.7.0
+pyworld==0.3.4
+rich==13.7.1
+soundfile==0.12.1
+tensorboard==2.14.0
+torch==2.3.1
+torchaudio==2.3.1
+transformers==4.51.3
+x-transformers==2.11.24
+uvicorn==0.30.0
+wetext==0.0.4
+wget==3.2

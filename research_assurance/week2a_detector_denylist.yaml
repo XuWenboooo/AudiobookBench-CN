@@ -1,0 +1,28 @@
+# Week2A Detector Denylist Registry
+# ALLOWED surface is deliberately minimal: suspect waveform + Week1 baseline-required
+# waveform-derived features. Everything below is unreachable from the scoring input path.
+
+forbidden_to_detector:
+  reference_fields: [reference_*, reference_audio_path, reference_sample_id, reference_speaker, reference_text_exact, reference_audio_sha256, reference_text_sha256, reference_preprocessing]
+  conditioning_fields: [conditioning_*, voice_conditioned, speaker_match_intent, replacement_speaker]
+  speaker_enrollment_fields: [speaker_enrollment_*, target_speaker, reference_speaker, any_speaker_id]
+  paired_clean_fields: [paired_clean_*, clean_original, clean_timeline_*, B3_ORACLE, same_grid_oracle]
+  generator_fields: [generator_*, attack_generator, attack_generator_family, generator_version, generator_frontend, generator_vocoder, generator_training_data_provenance]
+  checkpoint_fields: [checkpoint_*, generator_checkpoint_sha256, generator_config_sha256, code_revision]
+  generation_state_fields: [generation_status, generation_failure_reason, generation_attempt_count, generation_seed]
+  qa_fields: [qa_flags, asr_backend, asr_transcript, asr_cer, reference_synthetic_ecapa_cosine, target_synthetic_ecapa_cosine]
+  gt_fields: [attack_start_sample, attack_end_sample, attack_core_start_sample, attack_core_end_sample, blend_start_sample, blend_end_sample, blend_in_start_sample, blend_in_end_sample, blend_out_start_sample, blend_out_end_sample, attack_start, attack_end, strict_core_*]
+  duration_fields: [duration_delta_samples, duration_ratio, final_synthetic_num_samples, source_real_num_samples]
+  split_metadata: [split, speaker_distribution_metadata]
+  derived_labels: [file_name_derived_labels, path_derived_labels]
+  score_based_filters: [auroc, auprc, f1, B1, B2, B4, any_detector_or_diagnostic_score]
+
+allowed:
+  suspect_waveform: true
+  week1_baseline_required_waveform_derived_features: true
+  frozen_day5_style_frame_features_computed_from_the_suspect_waveform: true
+  pretrained_ecapa_embeddings_computed_from_the_suspect_waveform: true
+
+notes:
+  - the denylist must be enforced by a unit test on the evaluation input path (test_a2_detector_input_denylist)
+  - the allowed surface must not be expanded without an amendment record

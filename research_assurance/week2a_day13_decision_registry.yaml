@@ -1,0 +1,37 @@
+# Week2A Day13 Decision Registry (transcribed from WEEK2_DAY13_DECISION_TREE.md)
+# No new scenario beyond A-D is permitted.
+scenarios:
+  - id: A
+    name: B1_remains_strong_on_A2
+    operative_definition: A2 B1b test AUROC (original, S2) >= 0.85, zone ordering outside < boundary <= core preserved, case-level CI excluding 0.5
+    supported_interpretation: sequence-local speaker-representation inconsistency survives same-text target-conditioned natural-duration TTS replacement under the tested immutable checkpoint
+    forbidden_interpretation: [B1 detects deepfakes/TTS, robust to voice cloning, generator-family generalization, deployment readiness, pure speaker-identity causality]
+    next_experiment: Day12 similarity-stratified analysis becomes headline; then a second generator (week2b)
+    priority_changes: {second_generator: RISES, channel_robustness: UNCHANGED, short_attack: UNCHANGED, native_long_form: UNCHANGED}
+    paper_framing: synthetic-speech section allowed with tested-checkpoint boundary; deepfake framing still forbidden
+  - id: B
+    name: B1_near_chance_on_A2
+    operative_definition: A2 B1b test AUROC (original, S2) within [0.40, 0.60] with CI including 0.5 and a flat zone audit
+    supported_interpretation: the Week1 B1 signal does not transfer to whole-utterance same-text target-conditioned TTS under the tested checkpoint
+    forbidden_interpretation: [B1 failed, the Week1 result was wrong, TTS is undetectable by speaker embeddings, A2 implementation must be wrong without failure-class evidence]
+    next_experiment: Day12 diagnostics to characterize why; then a second generator or reference-variation study; re-examine failure classes first (a chance result on a failure-heavy pilot is inconclusive)
+    priority_changes: {second_generator: RISES_STRONGLY, channel_robustness: UNCHANGED, short_attack: DROPS, native_long_form: UNCHANGED}
+    paper_framing: boundary-mapping study (Week1 positive on real-speech cross-speaker splice, Week2 negative boundary on same-text TTS); high scientific value; neither over-claim failure nor bury it
+  - id: C
+    name: performance_tracks_speaker_similarity
+    operative_definition: Day12 P1 Spearman association between target-synthetic cosine and B1b case AUROC/AUPRC has a bootstrap CI excluding zero (either direction)
+    supported_interpretation: B1 strength varies with synthetic-target representation distance, consistent with a graded representation-distance signal
+    forbidden_interpretation: [voice cloning of the target defeats detection, ECAPA cosine is a validated deepfake metric, causal claims, per-case similarity thresholds as operational detectors]
+    next_experiment: similarity-gradient study with multiple references/generators; perceptual similarity as a separate diagnostic
+    priority_changes: {second_generator: RISES, channel_robustness: UNCHANGED, short_attack: UNCHANGED, native_long_form: UNCHANGED}
+    paper_framing: graded-mechanism subsection; correlation-not-causation caveat in the abstract if headline
+  - id: D
+    name: boundary_artifact_driven
+    operative_definition: on A2, B1b boundary mean substantially above core mean (or frozen diagnostics fire at the crossfades) while conditional or blend-excluded views erase most signal
+    supported_interpretation: whatever A2 signal exists is dominated by splice-boundary artifacts rather than synthetic core properties
+    forbidden_interpretation: [retroactive re-attribution of Week1 as boundary-driven without re-running the Week1 zone audit under the same definitions, TTS core is undetectable]
+    next_experiment: crossfade ablation (requires an amendment) or core-only evaluation research; re-audit Week1 zone numbers for comparability
+    priority_changes: {second_generator: UNCHANGED, channel_robustness: UNCHANGED, short_attack: UNCHANGED, native_long_form: RISES}
+    paper_framing: withdraw positive A2 claims; report boundary dependence as the finding; keep diagnostics separate from detector claims
+
+mixed_outcome_rule: report every applicable branch and claim only the intersection of their allowed interpretations

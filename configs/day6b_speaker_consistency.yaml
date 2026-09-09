@@ -1,0 +1,101 @@
+protocol_version: "6B"
+purpose: >
+  Day 6B speaker-consistency localization on real pretrained speaker
+  embeddings. Forensic setting: the detector sees ONLY the suspect sequence;
+  no test-speaker enrollment, no clean original (except the explicitly
+  marked ORACLE baseline), no speaker-ID input features. All thresholds and
+  trimming ratios below were frozen before any localization result was
+  observed.
+
+embedding_backend:
+  package: speechbrain
+  package_version: "1.1.1"
+  torch_version: "2.14.0+cpu"
+  model_id: "speechbrain/spkrec-ecapa-voxceleb"
+  model_architecture: ECAPA-TDNN
+  training_data: VoxCeleb (pretrained, inference-only; the speaker encoder is never trained here)
+  expected_sample_rate: 16000
+  embedding_dim: 192
+  device: cpu
+  load_mode: offline local savedir (HF_HUB_OFFLINE=1); local copy under pretrained/spkrec-ecapa-voxceleb
+  determinism_note: >
+    repeated inference on identical input is bit-identical on this CPU setup
+    (verified in backend sanity); full-pipeline reproducibility is therefore
+    checked by hash where possible.
+
+speaker_temporal_grid:
+  sample_rate: 16000
+  # Independent from the Day 5 25 ms/10 ms measurement grid (which stays frozen
+  # and unused by Day 6B). Complete windows only; trailing samples that cannot
+  # fill a window are not covered. The same grid is shared by clean/A0/A1 of a
+  # paired case (equal sample counts, verified in Day 4.5).
+  scales:
+    - {name: "S1_1000ms_250ms", window_ms: 1000, hop_ms: 250}
+    - {name: "S2_1500ms_250ms", window_ms: 1500, hop_ms: 250}
+
+baselines:
+  B1a:
+    name: sequence_local_untrimmed_prototype
+    deployable: true
+    prototype: normalized centroid of ALL window embeddings of the suspect sequence
+    score: "1 - cosine(window_embedding, prototype)"
+  B1b:
+    name: sequence_local_robust_prototype
+    deployable: true
+    trimming:
+      rule: >
+        step1 normalized centroid v1 over all windows; step2 cosine distance
+        of every window to v1; step3 drop the top 20% most distant windows;
+        step4 recompute the prototype from the remaining 80%.
+      trim_ratio: 0.20          # frozen before any localization result
+    score: "1 - cosine(window_embedding, robust_prototype)"
+  B2:
+    name: neighbor_speaker_change
+    deployable: true
+    adjacent: "d_adj(t) = 1 - cos(emb(t), emb(t+1)), assigned to window t"
+    symmetric: "d_sym(t) = 1 - cos(emb(t-1), emb(t+1)), assigned to window t (NaN at both ends)"
+  B3:
+    name: paired_clean_embedding_differential
+    oracle: true                # NOT deployable: requires the clean original
+    score: "1 - cos(emb_manipulated(t), emb_clean(t)) at the same grid position"
+  B4:
+    name: boundary_transient
+    diagnostic: true            # shortcut audit only, not a detector
+    score: >
+      max over Day5 25ms frames covered by the speaker window of
+      |log_energy(f+1) - log_energy(f)|, i.e. the largest adjacent-frame
+      energy step inside the window (splice transient proxy).
+
+gt_projection:
+  label_threshold: 0.5          # majority rule, frozen (same convention as Day 6A)
+  recomputed: true              # overlap ratios recomputed on the speaker grid from sample bounds
+
+evaluation:
+  unit: speaker_window
+  splits: [train, val, test]
+  variants: [a0, a1]
+  gts: [full, core]
+  metrics: [auroc, auprc, f1]
+  thresholds:
+    fixed: null                 # no natural fixed unit for 1-cos; not used
+    train_f1_rule: >
+      choose tau maximizing window F1 on TRAIN manipulated windows only
+      (GT_FULL labels of the same scale/baseline), applied verbatim to
+      val/test and to both GT_FULL and GT_CORE.
+
+bootstrap:
+  unit: paired_case_id          # windows are not independent; resample cases
+  resamples: 2000
+  seed: 20260905
+  splits: [val, test]
+  metrics: [auroc, auprc]
+
+shortcut_audit:
+  zones: [outside, boundary, core]
+  stats: [mean, median, q25, q75]
+
+integrity:
+  speaker_id_as_feature: forbidden   # speaker metadata for audits only
+  speaker_disjoint_audit: required
+  oracle_marked: true
+  diagnostic_marked: true

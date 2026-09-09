@@ -1,0 +1,99 @@
+# AudiobookBench-CN manifest schema (Day 2, corrected before Day 3)
+# Shared data protocol for later security/evaluation experiments.
+# source_type describes the original/base speech source only; manipulation state is independent.
+
+schema_version: "0.2.0"
+format: csv
+
+allowed_values:
+  source_type:
+    - natural
+    - tts
+  split:
+    - train
+    - val
+    - test
+
+required_columns:
+  - audio_path
+  - sample_id
+  - pair_id
+  - source_sample_id
+  - source_type
+  - generator
+  - generator_family
+  - speaker
+  - text_id
+  - duration
+  - sample_rate
+  - segment_id
+  - segment_start
+  - segment_end
+  - position
+  - is_manipulated
+  - attack_type
+  - attack_start
+  - attack_end
+  - attack_generator
+  - source_generator
+  - replacement_speaker
+  - split
+
+required_non_empty:
+  - audio_path
+  - sample_id
+  - pair_id
+  - source_sample_id
+  - source_type
+  - generator
+  - generator_family
+  - speaker
+  - text_id
+  - duration
+  - sample_rate
+  - segment_id
+  - segment_start
+  - segment_end
+  - position
+  - is_manipulated
+  - split
+
+optional_for_clean_rows:
+  - attack_type
+  - attack_start
+  - attack_end
+  - attack_generator
+  - source_generator
+  - replacement_speaker
+
+conditional_rules:
+  - name: manipulated_rows_need_attack_metadata
+    when: "is_manipulated == true"
+    require_non_empty:
+      - attack_type
+      - attack_start
+      - attack_end
+  - name: clean_source_lineage
+    rule: "is_manipulated == false implies source_sample_id == sample_id"
+  - name: manipulated_source_lineage
+    rule: "is_manipulated == true implies source_sample_id references a clean sample in the same pair_id and split"
+  - name: pair_split_integrity
+    rule: "all rows sharing pair_id must share the same split"
+  - name: segment_interval_valid
+    rule: "segment_start < segment_end"
+  - name: attack_interval_valid_when_present
+    rule: "attack_start < attack_end"
+  - name: positive_duration
+    rule: "duration > 0"
+  - name: positive_sample_rate
+    rule: "sample_rate > 0"
+  - name: nonnegative_position
+    rule: "position >= 0"
+
+notes:
+  - source_type is deliberately decoupled from is_manipulated. It records whether the base/source speech is natural or TTS.
+  - Manipulated rows keep source_type=natural or source_type=tts and set is_manipulated=true.
+  - pair_id groups clean/manipulated counterfactual counterparts and must never cross train/val/test splits.
+  - source_sample_id records lineage. Clean rows self-reference; manipulated rows point to the clean source sample.
+  - All train/val/test splits must be controlled by the manifest, not random splitting inside scripts.
+  - example_manifest.csv is a schema/unit-test example only; it is not real experimental evidence.
