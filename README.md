@@ -1,89 +1,102 @@
 # AudiobookBench-CN
 
-Open research code and protocol materials for temporal security evaluation of
-long-form generative speech. This public release includes source code,
-configuration, manifests, test fixtures, documentation, and research-assurance
-materials. It intentionally excludes audio, source datasets, generated results,
-model checkpoints, and local environments.
+**A research benchmark for temporal security, forensics, and responsible
+evaluation of long-form generative speech.**
+
+AudiobookBench-CN studies whether reliability and security failures that emerge
+over time in long-form text-to-speech can be measured, localized, and evaluated
+under a frozen, auditable protocol.
+
+## Project status
+
+| Item | Current state |
+|---|---|
+| Engineering foundation | **Week 1–2 complete** |
+| Current milestone | **Week 3 — F5 Stage-A clean-rerun readiness** |
+| Clean-rerun engineering controls | **Ready** |
+| Active formal execution authorization | **Absent** |
+| Formal F5 generation / scientific metrics | **Not run** |
+
+```mermaid
+flowchart LR
+  W1["Week 1\nData + temporal-security baseline\n✓ Complete"] -->
+  W2["Week 2\nA2 protocol + leakage controls\n✓ Complete"] -->
+  W3["Week 3\nF5 Stage-A readiness\n● Current"] -->
+  R["Clean integrity rerun\nAuthorization required"] -->
+  W4["Stage B / Week 4\nNot started"]
+
+  classDef complete fill:#198754,color:#fff,stroke:#146c43;
+  classDef current fill:#0d6efd,color:#fff,stroke:#0a58ca;
+  classDef gated fill:#ffc107,color:#111,stroke:#cc9a06;
+  classDef future fill:#6c757d,color:#fff,stroke:#565e64;
+  class W1,W2 complete;
+  class W3 current;
+  class R gated;
+  class W4 future;
+```
+
+The current milestone is implementation readiness, **not scientific closure**.
+The earlier Week 3 execution is forensic-only; any future clean rerun must use
+the frozen protocol and a separately validated active authorization. See
+[the readiness record](research_assurance/WEEK3_CLEAN_RERUN_READINESS.md) and
+[the scientific-integrity adjudication](research_assurance/WEEK3_CLEAN_RERUN_SCIENTIFIC_INTEGRITY_ADJUDICATION.md).
+
+## What is in this repository?
+
+| Area | Contents |
+|---|---|
+| `src/audiobookbench/` | Data preparation, temporal features, security controls, evaluators, and statistics |
+| `experiments/` | Reproducible entry points for the research workflow |
+| `configs/` | Versioned protocols, schemas, and frozen experiment configurations |
+| `tests/` | Unit, security-contract, and orchestration tests |
+| `research_assurance/` | Audits, claim boundaries, integrity decisions, and protocol evidence |
+| `docs/` | Research plans and project documentation |
+| `data/manifests/` | Public schema examples only — not experimental source data |
+
+## How the evaluation is designed
+
+```mermaid
+flowchart LR
+  A["Licensed source audio\nnot included"] --> B["Manifest + lineage"]
+  B --> C["Controlled temporal manipulation"]
+  C --> D["Feature / speaker / waveform checks"]
+  D --> E["Leakage & ground-truth validation"]
+  E --> F["Frozen metrics + bootstrap"]
+  F --> G["Auditable research claim"]
+```
+
+Each scientific claim is gated by provenance, validator, and accounting checks.
+Synthetic fixtures are used only for software tests and never as formal
+research evidence.
+
+## Quick start
+
+```bash
+git clone https://github.com/XuWenboooo/AudiobookBench-CN.git
+cd AudiobookBench-CN
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1      # Windows PowerShell
+pip install -e .
+pip install -r requirements.txt
+pytest tests/test_manifest.py tests/test_portability.py -q
+```
+
+To use real data or model assets, obtain them directly from their original
+licensors, configure paths for your own environment, and read the relevant
+protocol and assurance documents before running a workflow.
 
 ## Reproducibility and data policy
 
-- Obtain datasets and model weights directly from their original licensors.
-- Local paths, generated audio, pretrained assets, and run outputs are ignored
-  by Git and are not distributed in this repository.
-- Some frozen historical records retain their original local paths so recorded
-  hashes remain auditable; configure your own dataset location before running a
-  workflow.
-- Third-party model repositories are deliberately not bundled. Obtain them
-  independently and comply with their respective licenses.
-- Research claims and frozen protocol decisions are documented in the root
-  reports and `research_assurance/`. Consult those documents before interpreting
-  or extending experimental workflows.
-- This repository is released under the [MIT License](LICENSE).
+- Audio, source datasets, generated results, model checkpoints, and local
+  environments are deliberately excluded from this public release.
+- Third-party model repositories are not bundled; obtain them independently
+  and comply with their respective licenses.
+- Some historical frozen records retain original local paths so their recorded
+  hashes remain auditable. They are not portable runtime settings.
+- The repository is released under the [MIT License](LICENSE).
 
-**Primary track:** Temporal Security and Forensics for Long-form Generative Speech.
+## Citation and contact
 
-**Secondary track:** Temporal Responsible Evaluation of Long-form TTS.
-
-This integrated starter repository keeps the previous scripts under `legacy/` and provides a cleaner structure for Week 1. The current goal is not to claim benchmark-level results, but to build a real-audio pipeline, a formal threat model, and a minimal detection/localization baseline.
-
-## Week 1 target
-
-```text
-Real long-form audio
-  -> controlled localized manipulation
-  -> temporal feature extraction
-  -> segment-level anomaly score
-  -> detection / localization metrics
-```
-
-## Key deliverables
-
-- `AUDIT.md`
-- `THREAT_MODEL.md`
-- `DATASET_CARD.md`
-- `results/security/week1/metrics.json`
-- `results/security/week1/segment_scores.csv`
-- `results/security/week1/figures/`
-
-## Important rule
-
-Do not use mock/random/synthetic-demo outputs as formal research evidence. Unit tests may use tiny synthetic arrays, but final claims must be based on real audio and documented protocols.
-
-## Day 2 manifest protocol
-
-The shared data protocol is now defined in `configs/manifest_schema.yaml` and implemented in `src/audiobookbench/data/manifest.py`.
-
-Example usage:
-
-```python
-from audiobookbench.data.manifest import load_manifest, validate_manifest
-
-records = load_manifest("data/manifests/example_manifest.csv")
-validate_manifest(records)
-```
-
-`data/manifests/example_manifest.csv` is only a schema example for unit tests. It is not real experimental evidence. Day 3 should replace this with manifests generated from actual audio files.
-
-Before Day 3, the schema was corrected so `source_type` records only the base source (`natural` or `tts`), while `is_manipulated` independently records manipulation state. `pair_id` groups clean/manipulated counterparts and `source_sample_id` records lineage; one `pair_id` must never cross train/val/test splits.
-
-## Day 3 real-audio ingestion
-
-Day 3 adds a deterministic clean-audio ingestion pipeline. The repository still does **not** bundle real research audio, so Day 3 engineering is complete while the real-data gate remains pending until actual audio is supplied.
-
-1. Copy `data/manifests/source_audio_template.csv` to `data/manifests/source_audio.csv`.
-2. Replace the placeholder rows with real natural/TTS audio paths and explicit metadata.
-3. Run:
-
-```bash
-python -m audiobookbench.data.prepare_audio \
-  --catalog data/manifests/source_audio.csv \
-  --output data/manifests/week1_manifest.csv \
-  --target-sr 16000 \
-  --window-seconds 5.0 \
-  --min-tail-seconds 1.0
-```
-
-The generated manifest stores the original audio path plus time-aligned segment boundaries; it does not duplicate audio files. Additional diagnostic columns include original sample rate/channels, segment duration, energy-VAD voiced ratio, RMS, and peak amplitude.
-
-The current energy VAD is explicitly a **sanity baseline**, not a validated production VAD. Unit tests generate tiny deterministic WAV fixtures only to test code behavior; those fixtures are not research evidence.
+This is an active research repository. Please cite the repository URL and the
+specific protocol or assurance record used in your work. A formal citation
+record will be added when the benchmark reaches scientific closure.
