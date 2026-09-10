@@ -12,10 +12,10 @@ under a frozen, auditable protocol.
 | Item | Current state |
 |---|---|
 | Engineering foundation | **Week 1–2 complete** |
-| Current milestone | **Week 3 — F5 Stage-A clean-rerun readiness** |
-| Clean-rerun engineering controls | **Ready** |
-| Active formal execution authorization | **Absent** |
-| Formal F5 generation / scientific metrics | **Not run** |
+| Current milestone | **Week 3 — F5 Stage-A scientifically complete** |
+| Clean-rerun engineering controls | **Verified** |
+| Active formal execution authorization | **Consumed by completed clean rerun** |
+| Formal F5 generation / scientific metrics | **Completed: 23/23; H1/H2/H3 + bootstrap** |
 
 ```mermaid
 flowchart LR
@@ -32,11 +32,11 @@ flowchart LR
   class N next;
 ```
 
-The current milestone is implementation readiness, **not scientific closure**.
-The earlier Week 3 execution is forensic-only; any future clean rerun must use
-the frozen protocol and a separately validated active authorization. See
+Week 3 is scientifically complete within the frozen claim boundary. The clean
+run is an integrity reexecution of the frozen protocol; the earlier Week 3
+execution remains forensic-only. See
 [the readiness record](research_assurance/WEEK3_CLEAN_RERUN_READINESS.md) and
-[the scientific-integrity adjudication](research_assurance/WEEK3_CLEAN_RERUN_SCIENTIFIC_INTEGRITY_ADJUDICATION.md).
+[the final closure record](research_assurance/WEEK3_FINAL_SCIENTIFIC_CLOSURE.md).
 
 ## What is in this repository?
 
