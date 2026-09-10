@@ -110,8 +110,13 @@ def test_formal_entrypoints_have_no_auth_or_test_only_overrides():
     assert "test_only" not in inspect.signature(evaluator.run_formal_evaluation).parameters
     assert "authorization_path" not in inspect.signature(pipeline.run_formal_generation).parameters
 
-def test_formal_entrypoints_fail_without_canonical_authorization():
-    import pytest
+def test_formal_entrypoints_fail_without_canonical_authorization(tmp_path, monkeypatch):
+    # The real repository now contains a completed clean-rerun authorization.
+    # Point both production entrypoints at an isolated absent artifact so this
+    # test verifies the missing-authorization gate, not repository history.
+    missing_authorization = tmp_path / "authorization.json"
+    monkeypatch.setattr(pipeline, "FUTURE_AUTH_REL", missing_authorization)
+    monkeypatch.setattr(evaluator, "FUTURE_AUTH_REL", missing_authorization)
     with pytest.raises(RuntimeError, match="authorization artifact is missing|authorization source hash mismatch|identity missing"):
         pipeline.run_formal_generation(ROOT)
     with pytest.raises(RuntimeError, match="authorization artifact is missing|authorization source hash mismatch|identity missing"):

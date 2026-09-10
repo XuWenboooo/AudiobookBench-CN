@@ -9,6 +9,7 @@ import pytest
 from audiobookbench.security.week3_accounting import (
     final_accounting_rows, validate_formal_attempt_provenance,
 )
+from audiobookbench.security import week3_pipeline as pipeline
 from audiobookbench.security.week3_pipeline import run_formal_generation
 from audiobookbench.security.week3_pipeline import canonical_run_root, _require_empty_clean_namespace, FrozenInputs
 
@@ -39,8 +40,11 @@ def test_formal_attempt_requires_complete_provenance() -> None:
         validate_formal_attempt_provenance({"run_id": "r", "invocation_id": "i"})
 
 
-def test_current_legacy_authorization_is_fail_closed() -> None:
+def test_current_legacy_authorization_is_fail_closed(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
     root = Path(__file__).resolve().parents[1]
+    # Do not depend on the live repository's post-run authorization state.
+    # This remains the real production entrypoint and real validator path.
+    monkeypatch.setattr(pipeline, "FUTURE_AUTH_REL", tmp_path / "authorization.json")
     with pytest.raises(RuntimeError, match="authorization artifact is missing|authorization source hash mismatch|identity missing"):
         run_formal_generation(root)
 
