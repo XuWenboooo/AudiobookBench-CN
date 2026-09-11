@@ -288,7 +288,7 @@ def validate_authorization(authorization: Mapping[str, Any] | None, *, spec: Fro
 
 
 def _record_hash(record: Mapping[str, Any]) -> str:
-    body = dict(record); body.pop("record_sha256", None)
+    body = dict(record); body.pop("record_sha256", None); body.pop("row_hash", None)
     return sha256_bytes(_canonical_json(body))
 
 
@@ -316,7 +316,10 @@ class CandidateLedger:
                 raise LedgerError(f"malformed candidate ledger row {line_number}") from exc
             if not isinstance(record, dict) or record.get("ledger_index") != line_number - 1:
                 raise LedgerError("candidate ledger is not append-contiguous")
-            if record.get("previous_record_sha256", "") != previous or record.get("record_sha256") != _record_hash(record):
+            if (record.get("previous_record_sha256", "") != previous
+                    or record.get("previous_ledger_hash", "") != previous
+                    or record.get("record_sha256") != _record_hash(record)
+                    or record.get("row_hash") != record.get("record_sha256")):
                 raise LedgerError("candidate ledger hash chain is broken")
             candidate_id = record.get("candidate_id")
             if not isinstance(candidate_id, str) or not candidate_id or candidate_id in candidate_ids:
@@ -331,7 +334,9 @@ class CandidateLedger:
         body = dict(record)
         body["ledger_index"] = len(existing)
         body["previous_record_sha256"] = existing[-1]["record_sha256"] if existing else ""
+        body["previous_ledger_hash"] = body["previous_record_sha256"]
         body["record_sha256"] = _record_hash(body)
+        body["row_hash"] = body["record_sha256"]
         self.path.parent.mkdir(parents=True, exist_ok=True)
         try:
             with self.path.open("a", encoding="utf-8", newline="") as stream:
@@ -468,8 +473,9 @@ class A0AttackController:
             proposal[name] = grid[min(max(current_index + sign * self.spec.search_mutation_scale_steps, 0), len(grid) - 1)]
         return self._deduplicate(proposal)
 
-    def _append_invalid(self, candidate_id: str, phase: str, params: Mapping[str, Any] | None, reason: str, *, detector_query: bool, query_index: int) -> dict[str, Any]:
-        return self.ledger.append({"recorded_at": datetime.now(timezone.utc).isoformat(), "candidate_id": candidate_id, "paired_case_id": self.case_id, "run_id": self.spec.run_id, "split": self.split, "phase": phase, "detector_query": detector_query, "query_index": query_index, "params": dict(params) if params is not None else None, "status": "INVALID", "valid": False, "failure_class": "candidate_invalid" if not detector_query else "detector_runtime_failure", "invalid_reason": reason})
+    def _append_invalid(self, candidate_id: str, phase: str, params: Mapping[str, Any] | None, reason: str, *, detector_query: bool, query_index: int, candidate_waveform_sha256: str | None = None, detector_outcome_hash: str | None = None, parent_candidate: str | None = None) -> dict[str, Any]:
+        generation = (query_index - 1) // self.spec.search_population_size if phase == ADAPTIVE_PHASE else 0
+        return self.ledger.append({"recorded_at": datetime.now(timezone.utc).isoformat(), "candidate_id": candidate_id, "paired_case_id": self.case_id, "case_id": self.case_id, "run_id": self.spec.run_id, "split": self.split, "phase": phase, "generation": generation, "detector_query": detector_query, "detector_invoked": detector_query, "query_index": query_index, "params": dict(params) if params is not None else None, "parameters": dict(params) if params is not None else None, "status": "INVALID", "valid": False, "validity": "INVALID", "invalid_reason": reason, "validity_reason": reason, "candidate_waveform_sha256": candidate_waveform_sha256, "detector_outcome_hash": detector_outcome_hash, "selected_status": "NOT_SELECTED", "parent_candidate": parent_candidate, "failure_class": "candidate_invalid" if not detector_query else "detector_runtime_failure"})
 
     def evaluate_candidate(self, *, waveform: np.ndarray, sample_rate: int, params: Mapping[str, Any], phase: str = ADAPTIVE_PHASE) -> dict[str, Any]:
         """Evaluate exactly the next A0 proposal or the one A_STATIC comparator."""
@@ -496,16 +502,23 @@ class A0AttackController:
         else:
             raise Week4ContractError("tuning is governance-only and may not invoke D0")
         array = np.asarray(waveform, dtype=np.float64)
+        waveform_hash = sha256_bytes(array.tobytes()) if array.ndim == 1 else None
+        parent_candidate = None
+        if phase == ADAPTIVE_PHASE and query_index > self.spec.search_population_size:
+            parent_candidate = str(self._best_valid()["candidate_id"])
         if array.ndim != 1 or not np.isfinite(array).all() or int(sample_rate) != 16000:
-            return self._append_invalid(candidate_id, phase, normalised, "invalid detector waveform", detector_query=False, query_index=query_index)
+            return self._append_invalid(candidate_id, phase, normalised, "invalid detector waveform", detector_query=False, query_index=query_index, candidate_waveform_sha256=waveform_hash, parent_candidate=parent_candidate)
         try:
             score = float(self._detector(DetectorQuery(array.copy(), int(sample_rate), self.spec.window_spec)))
             if not math.isfinite(score):
                 raise ValueError("detector score is non-finite")
         except Exception as exc:
-            self._append_invalid(candidate_id, phase, normalised, f"detector_failure:{type(exc).__name__}:{exc}", detector_query=True, query_index=query_index)
+            reason = f"detector_failure:{type(exc).__name__}:{exc}"
+            outcome_hash = sha256_bytes(_canonical_json({"status": "ERROR", "type": type(exc).__name__, "message": str(exc)}))
+            self._append_invalid(candidate_id, phase, normalised, reason, detector_query=True, query_index=query_index, candidate_waveform_sha256=waveform_hash, detector_outcome_hash=outcome_hash, parent_candidate=parent_candidate)
             raise
-        return self.ledger.append({"recorded_at": datetime.now(timezone.utc).isoformat(), "candidate_id": candidate_id, "paired_case_id": self.case_id, "run_id": self.spec.run_id, "split": self.split, "phase": phase, "detector_query": True, "query_index": query_index, "params": normalised, "score": score, "objective": self.spec.objective_name, "objective_direction": self.spec.objective_direction, "status": "VALID", "valid": True})
+        outcome_hash = sha256_bytes(_canonical_json({"status": "VALID", "score": score}))
+        return self.ledger.append({"recorded_at": datetime.now(timezone.utc).isoformat(), "candidate_id": candidate_id, "paired_case_id": self.case_id, "case_id": self.case_id, "run_id": self.spec.run_id, "split": self.split, "phase": phase, "generation": (query_index - 1) // self.spec.search_population_size if phase == ADAPTIVE_PHASE else 0, "detector_query": True, "detector_invoked": True, "query_index": query_index, "params": normalised, "parameters": normalised, "score": score, "objective": self.spec.objective_name, "objective_direction": self.spec.objective_direction, "status": "VALID", "valid": True, "validity": "VALID", "validity_reason": None, "invalid_reason": None, "candidate_waveform_sha256": waveform_hash, "detector_outcome_hash": outcome_hash, "selected_status": "NOT_SELECTED", "parent_candidate": parent_candidate})
 
 
 def paired_case_bootstrap(case_values: Mapping[str, Any] | Sequence[Any], *, statistic: Callable[[np.ndarray], float] = np.mean, n: int = BOOTSTRAP_N, seed: int = BOOTSTRAP_SEED, min_finite: int = MIN_FINITE_BOOTSTRAPS, alpha: float = BOOTSTRAP_ALPHA) -> dict[str, Any]:

@@ -39,9 +39,11 @@ execution remains forensic-only. See
 [the readiness record](research_assurance/WEEK3_CLEAN_RERUN_READINESS.md) and
 [the final closure record](research_assurance/WEEK3_FINAL_SCIENTIFIC_CLOSURE.md).
 
-Week 4 now has a frozen adaptive red-team preregistration and TEST_ONLY
-engineering scaffold. It has no active formal authorization and no observed
-Week4 result; see [the Week4 preregistration](research_assurance/WEEK4_ADAPTIVE_REDTEAM_PREREGISTRATION.md).
+Week 4 now has a frozen adaptive red-team preregistration, a finalized
+48-case speaker-disjoint population manifest, and a read-only formal preflight
+entrypoint. It has no active formal authorization and no observed Week4 result;
+see the [preregistration](research_assurance/WEEK4_ADAPTIVE_REDTEAM_PREREGISTRATION.md)
+and [population freeze record](research_assurance/WEEK4_POPULATION_FREEZE.md).
 
 ## What is in this repository?
 
@@ -53,7 +55,7 @@ Week4 result; see [the Week4 preregistration](research_assurance/WEEK4_ADAPTIVE_
 | `tests/` | Unit, security-contract, and orchestration tests |
 | `research_assurance/` | Audits, claim boundaries, integrity decisions, and protocol evidence |
 | `docs/` | Research plans and project documentation |
-| `data/manifests/` | Public schema examples only — not experimental source data |
+| `data/manifests/` | Versioned metadata manifests and public schema examples — not audio/source data |
 
 ## How the evaluation is designed
 

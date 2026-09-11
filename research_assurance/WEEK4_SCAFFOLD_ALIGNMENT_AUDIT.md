@@ -12,8 +12,12 @@ Week4 authorization was created.
 - Week3 closure SHA-256 matched
   `24ADA3B4D55FF077C62510C9A47E5DE7C0F9E9296196643B0B2A1C782354270C` before
   edits and is protected by a TEST_ONLY immutability check.
-- Week4 config binds only `results/week4_adaptive_redteam`; no Week1–3 output
-  path is accepted by the scaffold and no Week4 formal results directory exists.
+- Week4's frozen config remains byte-identical and binds only its historical
+  base field; the formal runner independently derives a unique
+  `results/week4_adaptive_redteam_runs/<invocation_id>` namespace, rejects
+  existing namespaces, and accepts no Week1–3 output path.
+- The finalized AISHELL-3-derived population is independently recorded in
+  `WEEK4_POPULATION_FREEZE.md`; no Week4 formal results directory exists.
 
 ## Post-alignment review matrix
 
@@ -33,6 +37,8 @@ Week4 authorization was created.
 | Score direction is frozen | PASS | `higher_is_more_anomalous` is a schema and spec constant |
 | Bootstrap is paired by case | PASS | Week4-only utility fixes paired-case unit, N=2000, seed and finite threshold |
 | Week3 namespace is protected | PASS | independent output root, no execution entry point, closure hash test |
+| Real 48-case population is frozen without D0 | PASS | canonical manifest, 149-pair pool, 12 prior exclusions, 24/12/12 split |
+| Formal authorization binds current evidence and F5 assets | PASS | canonical schema/validator and read-only preflight tests |
 
 ## Environment regression disposition
 

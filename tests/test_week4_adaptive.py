@@ -143,6 +143,18 @@ def test_failed_invoked_query_is_counted_and_invalid_uninvoked_candidate_is_reta
     assert all(row["candidate_id"] for row in valid_detector_ctl.ledger.records())
 
 
+def test_candidate_ledger_rows_include_replay_and_accounting_contract(tmp_path):
+    ctl, _ = controller(tmp_path)
+    proposal = ctl.next_candidate()
+    row = ctl.evaluate_candidate(waveform=np.array([0.25]), sample_rate=16000, params=proposal)
+    required = {"case_id", "generation", "parameters", "validity", "validity_reason", "candidate_waveform_sha256", "detector_invoked", "detector_outcome_hash", "selected_status", "parent_candidate", "previous_ledger_hash", "row_hash"}
+    assert required.issubset(row)
+    assert row["case_id"] == row["paired_case_id"] == ctl.case_id
+    assert row["validity"] == "VALID" and row["detector_invoked"] is True
+    assert row["selected_status"] == "NOT_SELECTED" and row["parent_candidate"] is None
+    assert row["row_hash"] == row["record_sha256"] and row["previous_ledger_hash"] == ""
+
+
 def test_ledger_is_append_only_hash_chained_and_detects_tamper(tmp_path):
     ledger = CandidateLedger(tmp_path / "ledger.jsonl")
     ledger.append({"candidate_id": "one"})

@@ -52,7 +52,7 @@ def build_candidate_population(rows: Iterable[Mapping[str, Any]], *, selection_s
     cases = []
     for index, row in enumerate(selected_rows):
         split = "dev" if index < DEV_TARGET else "validation" if index < DEV_TARGET + VALIDATION_TARGET else "held_out"
-        cases.append({"case_id": f"week4_case_{index + 1:04d}", "speaker": row["speaker"], "source_sample_id": row["source_sample_id"], "reference_sample_id": row["reference_sample_id"], "source_text_sha256": row["source_text_sha256"], "reference_text_sha256": row["reference_text_sha256"], "source_audio_sha256": row["source_audio_sha256"], "reference_audio_sha256": row["reference_audio_sha256"], "split": split, "selection_reason": "deterministic_seeded_speaker_disjoint_selection", "prior_week_overlap": False})
+        cases.append({"case_id": f"week4_case_{index + 1:04d}", "speaker_id": row["speaker"], "speaker": row["speaker"], "source_speaker": row["source_speaker"], "reference_speaker": row["reference_speaker"], "source_sample_id": row["source_sample_id"], "reference_sample_id": row["reference_sample_id"], "source_path": row.get("source_path"), "reference_path": row.get("reference_path"), "source_audio_sha256": row["source_audio_sha256"], "reference_audio_sha256": row["reference_audio_sha256"], "source_text_exact": row.get("source_text_exact"), "reference_text_exact": row.get("reference_text_exact"), "source_text_sha256": row["source_text_sha256"], "reference_text_sha256": row["reference_text_sha256"], "split": split, "selection_reason": "deterministic_seeded_speaker_disjoint_selection", "eligibility_decision": "PASS", "exclusion_reason": None, "prior_week_overlap": False, "selection_seed": selection_seed, "selection_rank": _rank(selection_seed, row)})
     return {"status": "CANDIDATE_POPULATION_REQUIRES_INDEPENDENT_ELIGIBILITY_REVIEW", "selection_seed": selection_seed, "target_cases": TOTAL_TARGET, "selected_cases": cases, "exclusions": exclusions, "eligible_unique_speakers": len(representatives), "split_counts": {"dev": DEV_TARGET, "validation": VALIDATION_TARGET, "held_out": HELD_OUT_TARGET}}
 
 
@@ -60,3 +60,57 @@ def write_candidate_population_manifest(manifest: Mapping[str, Any], path: Path)
     """Persist a candidate manifest only; callers choose a TEST_ONLY/output path."""
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(dict(manifest), ensure_ascii=False, sort_keys=True, indent=2) + "\n", encoding="utf-8")
+
+
+def build_aishell3_train_candidate_population(aishell_root: Path, *, selection_seed: int, prior_week_speakers: set[str]) -> dict[str, Any]:
+    """Build the real candidate population from AISHELL-3 with read-only access.
+
+    The function reads train audio and the official character/pinyin content
+    file, hashes inputs in memory, and never calls a detector or writes under
+    ``aishell_root``.  It returns a final manifest only after all 48 checks pass.
+    """
+    aishell_root = Path(aishell_root)
+    content: dict[str, str] = {}
+    for partition in ("train", "test"):
+        content_path = aishell_root / "raw" / partition / "content.txt"
+        if not content_path.is_file():
+            raise PopulationContractError(f"AISHELL-3 content file missing: {content_path}")
+        for line in content_path.read_text(encoding="utf-8").splitlines():
+            parts = line.split("\t", 1)
+            if len(parts) != 2:
+                continue
+            tokens = parts[1].split()
+            text = "".join(tokens[0::2])
+            content[Path(parts[0]).stem] = text
+    rows: list[dict[str, Any]] = []
+    train_root = aishell_root / "raw" / "train" / "wav"
+    for speaker_dir in sorted((path for path in train_root.iterdir() if path.is_dir()), key=lambda path: path.name):
+        files = sorted(speaker_dir.glob("*.wav"), key=lambda path: path.name)
+        pair: tuple[Path, Path] | None = None
+        for index, source in enumerate(files):
+            for reference in files[index + 1:]:
+                if source.stem in content and reference.stem in content and content[source.stem] != content[reference.stem]:
+                    pair = source, reference
+                    break
+            if pair is not None:
+                break
+        if pair is None:
+            continue
+        source, reference = pair
+        text_hash = lambda value: hashlib.sha256(value.encode("utf-8")).hexdigest().upper()
+        rows.append({"speaker": speaker_dir.name, "source_speaker": speaker_dir.name, "reference_speaker": speaker_dir.name, "source_sample_id": source.stem, "reference_sample_id": reference.stem, "source_path": str(source), "reference_path": str(reference), "source_text_exact": content[source.stem], "reference_text_exact": content[reference.stem], "source_text_sha256": text_hash(content[source.stem]), "reference_text_sha256": text_hash(content[reference.stem]), "source_audio_sha256": hashlib.sha256(source.read_bytes()).hexdigest().upper(), "reference_audio_sha256": hashlib.sha256(reference.read_bytes()).hexdigest().upper(), "same_speaker": True, "different_utterance": source.stem != reference.stem, "different_text": content[source.stem] != content[reference.stem], "eligible": True})
+    manifest = build_candidate_population(rows, selection_seed=selection_seed, prior_week_speakers=prior_week_speakers)
+    if len(manifest.get("selected_cases", [])) != TOTAL_TARGET or manifest.get("split_counts") != {"dev": DEV_TARGET, "validation": VALIDATION_TARGET, "held_out": HELD_OUT_TARGET}:
+        raise PopulationContractError("frozen 48/24/12/12 population could not be finalized")
+    manifest["status"] = "FINALIZED"
+    manifest["aishell3_root"] = str(aishell_root)
+    manifest["builder"] = "build_aishell3_train_candidate_population"
+    manifest["d0_invoked"] = False
+    manifest["selected_without_d0"] = True
+    manifest["d0_outcome_inspected"] = False
+    manifest["candidate_pool_count"] = manifest["eligible_unique_speakers"] + len([row for row in manifest["exclusions"] if row["reason"] == "prior_week_speaker_overlap"])
+    manifest["candidate_pair_count"] = manifest["candidate_pool_count"]
+    manifest["prior_week_speaker_count"] = len([row for row in manifest["exclusions"] if row["reason"] == "prior_week_speaker_overlap"])
+    manifest["eligible_after_prior_exclusion"] = manifest["eligible_unique_speakers"]
+    manifest["final_case_count"] = len(manifest["selected_cases"])
+    return manifest
