@@ -1,0 +1,87 @@
+protocol: WEEK4_ADAPTIVE_RED_TEAM_A0
+scientific_execution_enabled: false
+run_id: week4_adaptive_redteam_v0
+output_root: results/week4_adaptive_redteam
+defender:
+  name: B1b
+  window: S2_1500ms_250ms
+generator:
+  name: F5-TTS v1 Base
+  repo_commit: 82fc4fe622fe36047d1dff99b550e6018181ea11
+  model_revision: 84e5a410d9cead4de2f847e7c9369a6440bdfaca
+  copy_week3_waveforms: false
+population:
+  target_cases: 48
+  dev_cases: 24
+  validation_cases: 12
+  held_out_cases: 12
+  selection_seed: 20260912
+  speaker_disjoint: true
+  prior_week_speaker_exclusion: true
+static_comparator:
+  name: A_STATIC
+  insertion_position_rule: middle_of_source_active_interval_round_down
+  crossfade_samples: 400
+  gain_db: 0.0
+  channel_rule: mono_16khz_no_channel_postprocess
+  gt_rule: sample_first_deterministic
+attack_parameters:
+  insertion_crossfade_samples:
+    unit: samples_at_16khz
+    minimum: 160
+    maximum: 400
+    default: 400
+    resolution: 80
+    algorithm: linear_insertion_crossfade
+    validity_rule: integer_grid_and_sample_first_gt
+  synthetic_gain_db:
+    unit: dB
+    minimum: -3.0
+    maximum: 3.0
+    default: 0.0
+    resolution: 0.5
+    algorithm: multiply_synthetic_region_before_crossfade
+    validity_rule: finite_peak_not_above_0.999
+insertion_position:
+  adaptive_dimension: false
+  rule: middle_of_source_active_interval_round_down
+validity_contract: [mono, sample_rate_16000, finite_samples, no_nan_or_inf, no_crop, no_pad, no_time_stretch, text_content_identity_unchanged, generator_output_identity_unchanged, source_reference_identity_unchanged, natural_duration_contract, peak_not_above_0.999, sample_first_deterministic_gt, preregistered_transformations_only]
+parameter_bounds:
+  insertion_crossfade_samples: [160, 400]
+  synthetic_gain_db: [-3.0, 3.0]
+parameter_defaults:
+  insertion_crossfade_samples: 400
+  synthetic_gain_db: 0.0
+parameter_resolution:
+  insertion_crossfade_samples: 80
+  synthetic_gain_db: 0.5
+window_spec:
+  name: S2_1500ms_250ms
+  window_samples: 24000
+  hop_samples: 4000
+score_direction: higher_is_more_anomalous
+objective:
+  name: mean_full_attack_score_minus_mean_outside_clean_score
+  direction: minimize
+search_algorithm:
+  population_size: 8
+  generations: 5
+  elite_count: 1
+  mutation_scale_steps: 1
+  total_max_queries: 40
+  seed: 20260913
+  initialization: seeded_grid_without_replacement
+  mutation: seeded_symmetric_step_from_best_valid_candidate
+  parent_selection: lowest_objective_then_query_index
+  duplicate_handling: lexicographic_next_unseen_grid_point
+  early_stopping: none
+  rng: numpy_pcg64_seed_plus_case_sha256
+splits: [dev, validation, held_out]
+max_adaptive_d0_queries_per_case: 40
+bootstrap_n: 2000
+bootstrap_seed: 20260911
+min_finite_bootstraps: 1900
+failure_retry_policy:
+  retryable: [infrastructure_transient_before_detector_invocation]
+  non_retryable: [candidate_invalid, authorization_failure, query_budget_violation, data_identity_failure, detector_runtime_failure, ledger_integrity_failure, infrastructure_terminal]
+  detector_invocation_counts_when_failed: true

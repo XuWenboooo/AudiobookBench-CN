@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Canonical frozen Week4 adaptive red-team specification",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["protocol", "scientific_execution_enabled", "run_id", "output_root", "defender", "generator", "population", "static_comparator", "attack_parameters", "insertion_position", "validity_contract", "parameter_bounds", "parameter_defaults", "parameter_resolution", "window_spec", "score_direction", "objective", "search_algorithm", "splits", "max_adaptive_d0_queries_per_case", "bootstrap_n", "bootstrap_seed", "min_finite_bootstraps", "failure_retry_policy"],
+  "properties": {
+    "protocol": {"const": "WEEK4_ADAPTIVE_RED_TEAM_A0"},
+    "scientific_execution_enabled": {"const": false},
+    "run_id": {"const": "week4_adaptive_redteam_v0"},
+    "output_root": {"const": "results/week4_adaptive_redteam"},
+    "defender": {"type": "object", "additionalProperties": false, "required": ["name", "window"], "properties": {"name": {"const": "B1b"}, "window": {"const": "S2_1500ms_250ms"}}},
+    "generator": {"type": "object", "additionalProperties": false, "required": ["name", "repo_commit", "model_revision", "copy_week3_waveforms"], "properties": {"name": {"const": "F5-TTS v1 Base"}, "repo_commit": {"const": "82fc4fe622fe36047d1dff99b550e6018181ea11"}, "model_revision": {"const": "84e5a410d9cead4de2f847e7c9369a6440bdfaca"}, "copy_week3_waveforms": {"const": false}}},
+    "population": {"type": "object", "additionalProperties": false, "required": ["target_cases", "dev_cases", "validation_cases", "held_out_cases", "selection_seed", "speaker_disjoint", "prior_week_speaker_exclusion"], "properties": {"target_cases": {"const": 48}, "dev_cases": {"const": 24}, "validation_cases": {"const": 12}, "held_out_cases": {"const": 12}, "selection_seed": {"const": 20260912}, "speaker_disjoint": {"const": true}, "prior_week_speaker_exclusion": {"const": true}}},
+    "static_comparator": {"type": "object", "additionalProperties": false, "required": ["name", "insertion_position_rule", "crossfade_samples", "gain_db", "channel_rule", "gt_rule"], "properties": {"name": {"const": "A_STATIC"}, "insertion_position_rule": {"const": "middle_of_source_active_interval_round_down"}, "crossfade_samples": {"const": 400}, "gain_db": {"const": 0.0}, "channel_rule": {"const": "mono_16khz_no_channel_postprocess"}, "gt_rule": {"const": "sample_first_deterministic"}}},
+    "attack_parameters": {"type": "object", "additionalProperties": false, "required": ["insertion_crossfade_samples", "synthetic_gain_db"], "properties": {"insertion_crossfade_samples": {"type": "object", "additionalProperties": false, "required": ["unit", "minimum", "maximum", "default", "resolution", "algorithm", "validity_rule"], "properties": {"unit": {"const": "samples_at_16khz"}, "minimum": {"const": 160}, "maximum": {"const": 400}, "default": {"const": 400}, "resolution": {"const": 80}, "algorithm": {"const": "linear_insertion_crossfade"}, "validity_rule": {"const": "integer_grid_and_sample_first_gt"}}}, "synthetic_gain_db": {"type": "object", "additionalProperties": false, "required": ["unit", "minimum", "maximum", "default", "resolution", "algorithm", "validity_rule"], "properties": {"unit": {"const": "dB"}, "minimum": {"const": -3.0}, "maximum": {"const": 3.0}, "default": {"const": 0.0}, "resolution": {"const": 0.5}, "algorithm": {"const": "multiply_synthetic_region_before_crossfade"}, "validity_rule": {"const": "finite_peak_not_above_0.999"}}}}},
+    "insertion_position": {"type": "object", "additionalProperties": false, "required": ["adaptive_dimension", "rule"], "properties": {"adaptive_dimension": {"const": false}, "rule": {"const": "middle_of_source_active_interval_round_down"}}},
+    "validity_contract": {"const": ["mono", "sample_rate_16000", "finite_samples", "no_nan_or_inf", "no_crop", "no_pad", "no_time_stretch", "text_content_identity_unchanged", "generator_output_identity_unchanged", "source_reference_identity_unchanged", "natural_duration_contract", "peak_not_above_0.999", "sample_first_deterministic_gt", "preregistered_transformations_only"]},
+    "parameter_bounds": {"const": {"insertion_crossfade_samples": [160, 400], "synthetic_gain_db": [-3.0, 3.0]}},
+    "parameter_defaults": {"const": {"insertion_crossfade_samples": 400, "synthetic_gain_db": 0.0}},
+    "parameter_resolution": {"const": {"insertion_crossfade_samples": 80, "synthetic_gain_db": 0.5}},
+    "window_spec": {"const": {"name": "S2_1500ms_250ms", "window_samples": 24000, "hop_samples": 4000}},
+    "score_direction": {"const": "higher_is_more_anomalous"},
+    "objective": {"const": {"name": "mean_full_attack_score_minus_mean_outside_clean_score", "direction": "minimize"}},
+    "search_algorithm": {"const": {"population_size": 8, "generations": 5, "elite_count": 1, "mutation_scale_steps": 1, "total_max_queries": 40, "seed": 20260913, "initialization": "seeded_grid_without_replacement", "mutation": "seeded_symmetric_step_from_best_valid_candidate", "parent_selection": "lowest_objective_then_query_index", "duplicate_handling": "lexicographic_next_unseen_grid_point", "early_stopping": "none", "rng": "numpy_pcg64_seed_plus_case_sha256"}},
+    "splits": {"const": ["dev", "validation", "held_out"]},
+    "max_adaptive_d0_queries_per_case": {"const": 40},
+    "bootstrap_n": {"const": 2000},
+    "bootstrap_seed": {"const": 20260911},
+    "min_finite_bootstraps": {"const": 1900},
+    "failure_retry_policy": {"type": "object", "additionalProperties": false, "required": ["retryable", "non_retryable", "detector_invocation_counts_when_failed"], "properties": {"retryable": {"const": ["infrastructure_transient_before_detector_invocation"]}, "non_retryable": {"const": ["candidate_invalid", "authorization_failure", "query_budget_violation", "data_identity_failure", "detector_runtime_failure", "ledger_integrity_failure", "infrastructure_terminal"]}, "detector_invocation_counts_when_failed": {"const": true}}}
+  }
+}

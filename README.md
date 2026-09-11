@@ -12,23 +12,24 @@ under a frozen, auditable protocol.
 | Item | Current state |
 |---|---|
 | Engineering foundation | **Week 1–2 complete** |
-| Current milestone | **Week 3 — F5 Stage-A scientifically complete** |
+| Current milestone | **Week 4 — adaptive red-team preregistration frozen; engineering preparation only** |
 | Clean-rerun engineering controls | **Verified** |
-| Active formal execution authorization | **Consumed by completed clean rerun** |
-| Formal F5 generation / scientific metrics | **Completed: 23/23; H1/H2/H3 + bootstrap** |
+| Active Week4 formal execution authorization | **None** |
+| Week4 formal F5 generation / D0 search / H4 result | **Not started** |
 
 ```mermaid
 flowchart LR
   W1["✓ Week 1\nFoundation"] -->
   W2["✓ Week 2\nProtocol"] -->
-  W3["● Week 3\nReadiness"] -->
-  N["○ Next\nAuthorized rerun"]
+  W3["✓ Week 3\nScientific closure"] -->
+  W4["● Week 4\nFrozen preregistration"] -->
+  N["○ Next\nIndependent readiness review"]
 
   classDef complete fill:#198754,color:#fff,stroke:#146c43;
   classDef current fill:#0d6efd,color:#fff,stroke:#0a58ca;
   classDef next fill:#f8f9fa,color:#343a40,stroke:#6c757d;
-  class W1,W2 complete;
-  class W3 current;
+  class W1,W2,W3 complete;
+  class W4 current;
   class N next;
 ```
 
@@ -37,6 +38,10 @@ run is an integrity reexecution of the frozen protocol; the earlier Week 3
 execution remains forensic-only. See
 [the readiness record](research_assurance/WEEK3_CLEAN_RERUN_READINESS.md) and
 [the final closure record](research_assurance/WEEK3_FINAL_SCIENTIFIC_CLOSURE.md).
+
+Week 4 now has a frozen adaptive red-team preregistration and TEST_ONLY
+engineering scaffold. It has no active formal authorization and no observed
+Week4 result; see [the Week4 preregistration](research_assurance/WEEK4_ADAPTIVE_REDTEAM_PREREGISTRATION.md).
 
 ## What is in this repository?
 
