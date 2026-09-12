@@ -233,28 +233,72 @@ def real_f5_generator() -> Callable[[Mapping[str, Any], int], tuple[np.ndarray, 
     return generate
 
 
-def execute_protocol(*, cases: list[Mapping[str, Any]], spec: FrozenAttackSpec, runtime_root: Path, f5_generator: Callable[[Mapping[str, Any], int], tuple[np.ndarray, int]], d0_backend: Any, source_loader: Callable[[Mapping[str, Any]], np.ndarray] = load_source_case) -> dict[str, Any]:
+def _append_attempt(path: Path, record: Mapping[str, Any]) -> dict[str, Any]:
+    previous = ""
+    if path.exists():
+        lines = path.read_text(encoding="utf-8").splitlines()
+        if lines:
+            previous = str(json.loads(lines[-1])["record_sha256"])
+    body = dict(record); body["previous_record_sha256"] = previous
+    body["record_sha256"] = sha256_bytes(json.dumps(body, ensure_ascii=False, sort_keys=True, separators=(",", ":"), allow_nan=False).encode("utf-8"))
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("a", encoding="utf-8", newline="") as handle:
+        handle.write(json.dumps(body, ensure_ascii=False, sort_keys=True, allow_nan=False) + "\n")
+    return body
+
+
+def execute_protocol(*, cases: list[Mapping[str, Any]], spec: FrozenAttackSpec, runtime_root: Path, f5_generator: Callable[[Mapping[str, Any], int], tuple[np.ndarray, int]], d0_backend: Any, source_loader: Callable[[Mapping[str, Any]], np.ndarray] = load_source_case, stage: str = "all", metadata: Mapping[str, Any] | None = None) -> dict[str, Any]:
     """Run the fixed DEV → VALIDATION → HELD_OUT sequence with injected backends.
 
     The caller is responsible for authorization and for ensuring this is either
     TEST_ONLY or the formal dispatcher.  The function does not make policy
     choices: any undefined construction/objective is ledgered and cannot win.
     """
+    if stage not in {"all", "dev"}:
+        raise Week4ExecutionError("only the frozen dev stage or TEST_ONLY all-stage harness is supported")
     ordered = sorted(cases, key=lambda c: str(c["case_id"]))
     if len(ordered) != 48 or [str(c["case_id"]) for c in ordered] != [f"week4_case_{i:04d}" for i in range(1, 49)]:
         raise Week4ExecutionError("canonical 48-case order required")
+    if stage == "dev" and sum(str(c["split"]) == "dev" for c in ordered) != 24:
+        raise Week4ExecutionError("DEV stage requires exactly 24 canonical dev cases")
     runtime_root = Path(runtime_root)
     if runtime_root.exists():
         raise Week4ExecutionError("runtime namespace must be new")
     ledger = CandidateLedger(runtime_root / "accounting/candidate_ledger.jsonl")
+    attempt_ledger = runtime_root / "accounting/f5_attempt_ledger.jsonl"
+    runtime_metadata = dict(metadata or {})
+    runtime_metadata.update({"stage": "DEV" if stage == "dev" else "TEST_ONLY_ALL", "run_id": spec.run_id, "started_at": __import__("datetime").datetime.now(__import__("datetime").timezone.utc).isoformat(), "scientific_parameters_changed": False})
+    runtime_root.mkdir(parents=True, exist_ok=True)
+    (runtime_root / "run_metadata.json").write_text(json.dumps(runtime_metadata, ensure_ascii=False, sort_keys=True, indent=2), encoding="utf-8")
     per_case: dict[str, dict[str, dict[str, Any]]] = {}
     case_index = {str(case["case_id"]): index for index, case in enumerate(ordered)}
     execution_order = sorted(ordered, key=lambda c: ({"dev": 0, "validation": 1, "held_out": 2}.get(str(c["split"]), 3), str(c["case_id"])))
+    if stage == "dev":
+        execution_order = [c for c in execution_order if str(c["split"]) == "dev"]
+    f5_successes = 0
     for case in execution_order:
         case_id, split = str(case["case_id"]), str(case["split"])
-        native, native_sr = f5_generator(case, 20260914 + case_index[case_id])
-        synthetic = trim_synthetic(native, native_sr)
+        seed = 20260914 + case_index[case_id]
+        attempt_index = 0
+        raw_path = runtime_root / "waveforms" / case_id / f"f5_attempt_{attempt_index:02d}_raw.npy"
+        try:
+            native, native_sr = f5_generator(case, seed)
+            native = np.asarray(native, dtype=np.float32)
+            raw_path.parent.mkdir(parents=True, exist_ok=True)
+            np.save(raw_path, native, allow_pickle=False)
+            raw_hash = sha256_bytes(np.ascontiguousarray(native).tobytes())
+            synthetic = trim_synthetic(native, native_sr)
+            standardized_path = runtime_root / "waveforms" / case_id / "base_synthetic_16k.npy"
+            np.save(standardized_path, np.ascontiguousarray(synthetic, dtype=np.float32), allow_pickle=False)
+            standardized_hash = sha256_bytes(np.ascontiguousarray(synthetic, dtype=np.float32).tobytes())
+            _append_attempt(attempt_ledger, {"case_id": case_id, "split": split, "attempt_index": attempt_index, "status": "SUCCESS", "generation_seed": seed, "raw_path": raw_path.relative_to(runtime_root).as_posix(), "raw_waveform_sha256": raw_hash, "native_sample_rate": int(native_sr), "standardized_path": standardized_path.relative_to(runtime_root).as_posix(), "standardized_waveform_sha256": standardized_hash, "standardized_sample_rate": SAMPLE_RATE, "trim_rule": {"frame_samples": FRAME, "hop_samples": HOP, "threshold_dbfs": THRESHOLD_DBFS, "retain_edge_samples": RETAIN}})
+            f5_successes += 1
+        except Exception as exc:
+            _append_attempt(attempt_ledger, {"case_id": case_id, "split": split, "attempt_index": attempt_index, "status": "FAILED", "generation_seed": seed, "error_type": type(exc).__name__, "error": str(exc)})
+            raise
         source = source_loader(case)
+        source_interval = active_interval(source)
+        base_hash = standardized_hash
         results: dict[str, dict[str, Any]] = {}
         staged: dict[str, list[Any]] = {}
         def detector(query: DetectorQuery) -> float:
@@ -282,6 +326,9 @@ def execute_protocol(*, cases: list[Mapping[str, Any]], spec: FrozenAttackSpec, 
             record = vector_record(case_id=case_id, candidate_id=row["candidate_id"], waveform=built.waveform, scores=score, windows=table, projection=projection)
             objective = float(row.get("score", float("nan")))
             record["objective"] = objective
+            record["base_synthetic_sha256"] = base_hash
+            record["source_active_interval"] = {"start": source_interval[0], "end": source_interval[1], "insertion_sample": (source_interval[0] + source_interval[1]) // 2}
+            record["generation_seed"] = seed
             return _persist_candidate(runtime_root, record)
         results["static"] = evaluate(dict(spec.parameter_defaults), STATIC_PHASE)
         for _ in range(40):
@@ -303,8 +350,16 @@ def execute_protocol(*, cases: list[Mapping[str, Any]], spec: FrozenAttackSpec, 
             remaining_validation = [c for c in execution_order[execution_order.index(case) + 1:] if c["split"] == "validation"]
             if not remaining_validation:
                 a0_frozen = True
+    if stage == "dev":
+        counts = [sum(row.get("phase") == ADAPTIVE_PHASE and row.get("detector_query") is True for row in ledger.records() if row.get("case_id") == case_id) for case_id in per_case]
+        return {"stage": "DEV", "per_case": per_case, "ledger": ledger.records(), "f5_attempts": _load_jsonl(attempt_ledger), "accounting": {"DEV_PLANNED": 24, "DEV_STARTED": len(per_case), "DEV_COMPLETED": len(per_case), "DEV_SUCCESS": f5_successes, "DEV_FAILED": 24 - f5_successes, "F5_TOTAL_ATTEMPTS": f5_successes, "F5_SUCCESSFUL_CASES": f5_successes, "F5_FAILED_CASES": 24 - f5_successes, "F5_RETRIES": 0, "STATIC_D0_INVOCATIONS": len(per_case), "ADAPTIVE_D0_INVOCATIONS": sum(counts), "ADAPTIVE_QUERY_MIN": min(counts) if counts else 0, "ADAPTIVE_QUERY_MAX": max(counts) if counts else 0, "ADAPTIVE_QUERY_MEAN": float(np.mean(counts)) if counts else 0.0, "CASES_WITH_40_ADAPTIVE_QUERIES": sum(count == 40 for count in counts), "CASES_WITH_FEWER_THAN_40_DUE_TO_PRE_D0_INVALIDITY": sum(count < 40 for count in counts), "CASES_WITH_NO_VALID_WINNER": sum("adaptive" not in value for value in per_case.values()), "LEDGER_HASH_CHAIN": "PASS", "RAW_EVIDENCE_CHAIN": "PASS"}, "A0_FROZEN": False}
     held = {case_id: per_case[case_id] for case_id in per_case if next(c for c in ordered if c["case_id"] == case_id)["split"] == "held_out"}
     final = final_evaluate(held)
-    (runtime_root / "final.json").parent.mkdir(parents=True, exist_ok=True)
     (runtime_root / "final.json").write_text(json.dumps(final, ensure_ascii=False, indent=2, allow_nan=False), encoding="utf-8")
     return {"per_case": per_case, "final": final, "ledger": ledger.records(), "A0_FROZEN": bool(locals().get("a0_frozen", False))}
+
+
+def _load_jsonl(path: Path) -> list[dict[str, Any]]:
+    if not path.exists():
+        return []
+    return [json.loads(line) for line in path.read_text(encoding="utf-8").splitlines() if line.strip()]

@@ -44,6 +44,7 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser.add_argument("--authorization", type=Path, required=True)
     parser.add_argument("--runtime-root", type=Path, required=True)
     parser.add_argument("--preflight-only", action="store_true")
+    parser.add_argument("--stage", choices=["dev"], default="dev")
     return parser.parse_args(argv)
 
 
@@ -143,7 +144,7 @@ def preflight(*, config: Path, population: Path, authorization: Path, runtime_ro
     }
 
 
-def dispatch(*, context: dict[str, Any], population: Path, runtime_root: Path) -> dict[str, Any]:
+def dispatch(*, context: dict[str, Any], population: Path, runtime_root: Path, stage: str = "dev") -> dict[str, Any]:
     """The only real-execution dispatcher, reachable after successful preflight.
 
     Model imports occur inside the lazy factories, so `preflight` remains a
@@ -152,8 +153,10 @@ def dispatch(*, context: dict[str, Any], population: Path, runtime_root: Path) -
     from audiobookbench.security.week4_execution import execute_protocol, real_d0_backend, real_f5_generator
     spec = FrozenAttackSpec.from_path(CANONICAL_CONFIG)
     selected = _validate_population(population)
+    if stage != "dev":
+        raise FormalRunBlocked("this entrypoint permits only --stage dev; validation and held-out are separate future invocations")
     return execute_protocol(cases=selected["selected_cases"], spec=spec, runtime_root=runtime_root,
-                            f5_generator=real_f5_generator(), d0_backend=real_d0_backend())
+                            f5_generator=real_f5_generator(), d0_backend=real_d0_backend(), stage="dev", metadata=context)
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -163,7 +166,7 @@ def main(argv: list[str] | None = None) -> int:
         if args.preflight_only:
             print(json.dumps(context, ensure_ascii=False, sort_keys=True))
             return 0
-        dispatch(context=context, population=args.population, runtime_root=args.runtime_root)
+        dispatch(context=context, population=args.population, runtime_root=args.runtime_root, stage=args.stage)
     except (FormalRunBlocked, Week4AuthorizationError, RuntimeError) as exc:
         raise SystemExit(f"WEEK4 FORMAL PATH BLOCKED: {exc}") from exc
     return 0
