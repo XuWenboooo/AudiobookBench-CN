@@ -204,7 +204,9 @@ def paired_metric_bootstrap(held_out: Mapping[str, Mapping[str, Mapping[str, Any
 
 def real_d0_backend() -> SpeakerBackend:
     """Lazy, offline-only real backend; call only from an authorized dispatcher."""
-    backend = SpeakerBackend(); backend.load(); return backend
+    # SpeakerBackend.load() is intentionally deferred until the first
+    # score_candidate call, after run metadata and the attempt ledger exist.
+    return SpeakerBackend()
 
 
 def load_source_case(case: Mapping[str, Any]) -> np.ndarray:
@@ -222,9 +224,12 @@ def real_f5_generator() -> Callable[[Mapping[str, Any], int], tuple[np.ndarray, 
     from audiobookbench.security.week3_f5_stage_a import InferenceSettings, build_f5_api, infer_once
     root = Path(__file__).resolve().parents[3]
     assets = root / "results/week3_engineering_qualification/f5_tts_v1_base/assets"
-    api = build_f5_api(root / "results/week3_engineering_qualification/f5_tts_v1_base/source", InferenceSettings(),
-        ckpt_file=assets / "F5TTS_v1_Base/model_1250000.safetensors", vocab_file=assets / "F5TTS_v1_Base/vocab.txt", vocoder_local_path=assets / "vocos-mel-24khz")
+    api: Any = None
     def generate(case: Mapping[str, Any], seed: int) -> tuple[np.ndarray, int]:
+        nonlocal api
+        if api is None:
+            api = build_f5_api(root / "results/week3_engineering_qualification/f5_tts_v1_base/source", InferenceSettings(),
+                ckpt_file=assets / "F5TTS_v1_Base/model_1250000.safetensors", vocab_file=assets / "F5TTS_v1_Base/vocab.txt", vocoder_local_path=assets / "vocos-mel-24khz")
         if not str(case.get("reference_text_exact", "")) or not str(case.get("source_text_exact", "")):
             raise Week4ExecutionError("nonempty frozen F5 texts required")
         result = infer_once(api, ref_file=Path(str(case["reference_path"])), ref_text=str(case["reference_text_exact"]), gen_text=str(case["source_text_exact"]), seed=seed, settings=InferenceSettings())
