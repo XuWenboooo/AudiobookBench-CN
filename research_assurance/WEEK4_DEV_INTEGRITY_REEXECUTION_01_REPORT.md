@@ -96,6 +96,14 @@ The failure was recorded as an invalid candidate with
 `failure_class = detector_runtime_failure`; the process then terminated.
 No fifth case was started, and no automatic patch or retry was performed.
 
+Read-only reconstruction of the frozen case-0004 candidate found 9 complete
+S2 windows, of which 6 projected to `FULL_ATTACK` and 0 projected to
+`OUTSIDE_CLEAN`.  The B1b/S2 score vector was therefore not shown to be the
+source of the non-finite value; the frozen `attacker_objective()` returned
+`NaN` because its clean comparison set was empty, and the controller raised
+`ValueError: detector score is non-finite`.  The formal preflight did not
+reject this non-reportable case geometry before real execution.
+
 ## Evidence inventory and integrity
 
 ```text
@@ -140,5 +148,5 @@ READY_FOR_POST_DEV_INTEGRITY_REVIEW = NO
 
 The current output namespace is now a consumed partial formal run and must
 not be resumed or overwritten.  Any future action requires a separate review
-of the non-finite detector failure and the metadata finalization defect; this
-report does not authorize a new run.
+of the non-finite objective, the unaccounted duplicate D0 calls, and the
+metadata finalization defect; this report does not authorize a new run.
