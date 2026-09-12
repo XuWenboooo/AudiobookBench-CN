@@ -20,6 +20,7 @@ from audiobookbench.evaluation.day6a_localization import auprc, auroc
 from audiobookbench.preprocessing.audio_io import resample_audio
 from audiobookbench.security.week4_adaptive import (
     ADAPTIVE_PHASE, STATIC_PHASE, A0AttackController, CandidateLedger,
+    NoValidAdaptiveParent, canonical_waveform_sha256,
     DetectorOutcome,
     DetectorQuery, FrozenAttackSpec, paired_case_bootstrap,
 )
@@ -147,7 +148,7 @@ def attacker_objective(scores: np.ndarray, projection: list[Mapping[str, Any]]) 
 
 def vector_record(*, case_id: str, candidate_id: str, waveform: np.ndarray, scores: np.ndarray, windows: list[dict[str, Any]], projection: list[dict[str, Any]]) -> dict[str, Any]:
     raw = np.ascontiguousarray(scores, dtype=np.float64).tobytes(order="C")
-    return {"case_id": case_id, "candidate_id": candidate_id, "waveform_sha256": sha256_bytes(np.ascontiguousarray(waveform, dtype=np.float32).tobytes()), "score_vector_sha256": sha256_bytes(raw), "score_shape": list(np.asarray(scores).shape), "score_dtype": "float64", "score_vector": np.asarray(scores, dtype=np.float64).tolist(), "s2_windows": windows, "gt_projection": projection}
+    return {"case_id": case_id, "candidate_id": candidate_id, "waveform_sha256": canonical_waveform_sha256(waveform), "score_vector_sha256": sha256_bytes(raw), "score_shape": list(np.asarray(scores).shape), "score_dtype": "float64", "score_vector": np.asarray(scores, dtype=np.float64).tolist(), "s2_windows": windows, "gt_projection": projection}
 
 
 def _persist_candidate(runtime_root: Path, record: Mapping[str, Any]) -> dict[str, Any]:
@@ -164,11 +165,25 @@ def _persist_candidate(runtime_root: Path, record: Mapping[str, Any]) -> dict[st
     return body
 
 
-def final_evaluate(held_out: Mapping[str, Mapping[str, Mapping[str, Any]]]) -> dict[str, Any]:
+def _persist_case_outcome(runtime_root: Path, outcome: Mapping[str, Any]) -> dict[str, Any]:
+    """Persist a case-level terminal state independent of winner existence."""
+    case_id = str(outcome["case_id"])
+    target = runtime_root / "case_outcomes" / f"{case_id}.json"
+    target.parent.mkdir(parents=True, exist_ok=True)
+    body = dict(outcome)
+    target.write_text(json.dumps(body, ensure_ascii=False, sort_keys=True, allow_nan=False), encoding="utf-8")
+    body["case_outcome_relpath"] = target.relative_to(runtime_root).as_posix()
+    body["case_outcome_sha256"] = sha256_bytes(target.read_bytes())
+    return body
+
+
+def final_evaluate(held_out: Mapping[str, Mapping[str, Any]]) -> dict[str, Any]:
     if len(held_out) != 12:
         return {"PRIMARY_H4": "NOT_REPORTABLE", "reason": "held_out_not_12_of_12"}
     conditions: dict[str, tuple[list[np.ndarray], list[np.ndarray]]] = {}
     for case_id in sorted(held_out):
+        if held_out[case_id].get("adaptive_case_status") == "NO_VALID_ADAPTIVE_PARENT":
+            return {"PRIMARY_H4": "NOT_REPORTABLE", "reason": "HELD_OUT_NOT_12_OF_12_PAIRED_COMPLETE"}
         for condition in ("static", "adaptive"):
             record = held_out[case_id].get(condition)
             if not record or not record.get("score_vector_sha256"):
@@ -273,6 +288,7 @@ class _RunLifecycle:
             "status": "INITIALIZED", "lifecycle_status": "INITIALIZED", "final_status": None,
             "stage": stage, "run_id": run_id, "started_at": started,
             "generation_invoked": False, "d0_invoked": False,
+            "evaluator_invoked": False,
             "first_generation_timestamp": None, "first_d0_timestamp": None,
             "last_updated_at": started, "completed_case_count": 0,
             "failure_case_id": None, "failure_class": None,
@@ -324,12 +340,26 @@ class _RunLifecycle:
     def completed_case(self, case_id: str, count: int) -> None:
         self._update(status="RUNNING", event="CASE_COMPLETED", case_id=case_id, completed_case_count=count)
 
+    def no_valid_adaptive_parent(self, case_id: str, adaptive_queries: int) -> None:
+        self._update(
+            status="RUNNING",
+            event="CASE_TERMINAL_NO_VALID_ADAPTIVE_PARENT",
+            case_id=case_id,
+            adaptive_case_status="NO_VALID_ADAPTIVE_PARENT",
+            adaptive_search_terminal=True,
+            adaptive_d0_queries_consumed=adaptive_queries,
+            adaptive_winner="NONE",
+            remaining_adaptive_queries_status="NOT_EXECUTED_STRUCTURALLY_UNAVAILABLE",
+        )
+
     def failed(self, case_id: str | None, exc: Exception) -> None:
-        status = "BLOCKED" if "NO_VALID_ADAPTIVE_PARENT" in str(exc) else "FAILED"
-        self._update(status=status, final_status=status, event="RUN_TERMINATED", failure_case_id=case_id, failure_class=type(exc).__name__)
+        self._update(status="FAILED", final_status="FAILED", event="RUN_TERMINATED", failure_case_id=case_id, failure_class=type(exc).__name__)
 
     def completed(self, count: int) -> None:
         self._update(status="COMPLETED", final_status="COMPLETED", event="RUN_COMPLETED", completed_case_count=count)
+
+    def evaluator_started(self) -> None:
+        self._update(status="RUNNING", event="EVALUATOR_INVOCATION_STARTED", evaluator_invoked=True)
 
 
 def execute_protocol(*, cases: list[Mapping[str, Any]], spec: FrozenAttackSpec, runtime_root: Path, f5_generator: Callable[[Mapping[str, Any], int], tuple[np.ndarray, int]], d0_backend: Any, source_loader: Callable[[Mapping[str, Any]], np.ndarray] = load_source_case, stage: str = "all", metadata: Mapping[str, Any] | None = None) -> dict[str, Any]:
@@ -352,7 +382,7 @@ def execute_protocol(*, cases: list[Mapping[str, Any]], spec: FrozenAttackSpec, 
     ledger = CandidateLedger(runtime_root / "accounting/candidate_ledger.jsonl")
     attempt_ledger = runtime_root / "accounting/f5_attempt_ledger.jsonl"
     lifecycle = _RunLifecycle(runtime_root, metadata, stage="DEV" if stage == "dev" else "TEST_ONLY_ALL", run_id=spec.run_id)
-    per_case: dict[str, dict[str, dict[str, Any]]] = {}
+    per_case: dict[str, dict[str, Any]] = {}
     case_index = {str(case["case_id"]): index for index, case in enumerate(ordered)}
     execution_order = sorted(ordered, key=lambda c: ({"dev": 0, "validation": 1, "held_out": 2}.get(str(c["split"]), 3), str(c["case_id"])))
     if stage == "dev":
@@ -371,11 +401,11 @@ def execute_protocol(*, cases: list[Mapping[str, Any]], spec: FrozenAttackSpec, 
                 native = np.asarray(native, dtype=np.float32)
                 raw_path.parent.mkdir(parents=True, exist_ok=True)
                 np.save(raw_path, native, allow_pickle=False)
-                raw_hash = sha256_bytes(np.ascontiguousarray(native).tobytes())
+                raw_hash = canonical_waveform_sha256(native)
                 synthetic = trim_synthetic(native, native_sr)
                 standardized_path = runtime_root / "waveforms" / case_id / "base_synthetic_16k.npy"
                 np.save(standardized_path, np.ascontiguousarray(synthetic, dtype=np.float32), allow_pickle=False)
-                standardized_hash = sha256_bytes(np.ascontiguousarray(synthetic, dtype=np.float32).tobytes())
+                standardized_hash = canonical_waveform_sha256(synthetic)
                 _append_attempt(attempt_ledger, {"case_id": case_id, "split": split, "attempt_index": attempt_index, "status": "SUCCESS", "generation_seed": seed, "raw_path": raw_path.relative_to(runtime_root).as_posix(), "raw_waveform_sha256": raw_hash, "native_sample_rate": int(native_sr), "standardized_path": standardized_path.relative_to(runtime_root).as_posix(), "standardized_waveform_sha256": standardized_hash, "standardized_sample_rate": SAMPLE_RATE, "trim_rule": {"frame_samples": FRAME, "hop_samples": HOP, "threshold_dbfs": THRESHOLD_DBFS, "retain_edge_samples": RETAIN}})
                 f5_successes += 1
             except Exception as exc:
@@ -383,11 +413,11 @@ def execute_protocol(*, cases: list[Mapping[str, Any]], spec: FrozenAttackSpec, 
                 raise
             source, source_interval, base_hash = source_loader(case), None, standardized_hash
             source_interval = active_interval(source)
-            results: dict[str, dict[str, Any]] = {}
+            results: dict[str, Any] = {"case_id": case_id, "split": split}
             staged: dict[str, dict[str, Any]] = {}
             def detector(query: DetectorQuery) -> DetectorOutcome:
                 nonlocal d0_backend_calls
-                key = sha256_bytes(np.ascontiguousarray(query.waveform, dtype=np.float32).tobytes())
+                key = canonical_waveform_sha256(query.waveform)
                 if key not in staged:
                     raise Week4ExecutionError("unstaged candidate reached D0")
                 lifecycle.d0_started(case_id)
@@ -406,22 +436,57 @@ def execute_protocol(*, cases: list[Mapping[str, Any]], spec: FrozenAttackSpec, 
                 except Week4ExecutionError as exc:
                     return controller._append_invalid(controller._new_candidate_id(phase), phase, params, str(exc), detector_query=False, query_index=controller._adaptive_query_count() + (1 if phase == ADAPTIVE_PHASE else 0))
                 projection = project_gt(built.waveform, built.gt)
-                key = sha256_bytes(np.ascontiguousarray(built.waveform, dtype=np.float32).tobytes())
+                key = canonical_waveform_sha256(built.waveform)
                 staged[key] = {"projection": projection, "phase": phase}
                 row = controller.evaluate_candidate(waveform=built.waveform, sample_rate=SAMPLE_RATE, params=params, phase=phase)
                 stage_record = staged[key]
                 record = vector_record(case_id=case_id, candidate_id=row["candidate_id"], waveform=built.waveform, scores=stage_record["scores"], windows=stage_record["windows"], projection=projection)
                 record.update({"objective": row.get("objective"), "objective_status": row["objective_status"], "detector_status": row["detector_status"], "valid_for_winner": row["valid_for_winner"], "base_synthetic_sha256": base_hash, "source_active_interval": {"start": source_interval[0], "end": source_interval[1], "insertion_sample": (source_interval[0] + source_interval[1]) // 2}, "generation_seed": seed})
-                return _persist_candidate(runtime_root, record)
+                persisted = _persist_candidate(runtime_root, record)
+                if persisted["waveform_sha256"] != row["candidate_waveform_sha256"]:
+                    raise Week4ExecutionError("candidate ledger and sidecar waveform hashes disagree")
+                return persisted
             results["static"] = evaluate(dict(spec.parameter_defaults), STATIC_PHASE)
-            for _ in range(40):
-                candidate = controller.next_candidate()
-                record = evaluate(candidate, ADAPTIVE_PHASE)
-                if record["valid_for_winner"] is True and isinstance(record.get("objective"), (int, float)) and math.isfinite(float(record["objective"])):
-                    prior = results.get("adaptive")
-                    if prior is None or (float(record["objective"]), int(record["candidate_id"].rsplit(":", 1)[1]), record["candidate_id"]) < (float(prior["objective"]), int(prior["candidate_id"].rsplit(":", 1)[1]), prior["candidate_id"]):
-                        results["adaptive"] = record
+            try:
+                for _ in range(40):
+                    candidate = controller.next_candidate()
+                    record = evaluate(candidate, ADAPTIVE_PHASE)
+                    if record["valid_for_winner"] is True and isinstance(record.get("objective"), (int, float)) and math.isfinite(float(record["objective"])):
+                        prior = results.get("adaptive")
+                        if prior is None or (float(record["objective"]), int(record["candidate_id"].rsplit(":", 1)[1]), record["candidate_id"]) < (float(prior["objective"]), int(prior["candidate_id"].rsplit(":", 1)[1]), prior["candidate_id"]):
+                            results["adaptive"] = record
+            except NoValidAdaptiveParent:
+                adaptive_queries = controller.accounting()["adaptive_detector_queries"]
+                if adaptive_queries != spec.search_population_size:
+                    raise Week4ExecutionError("NO_VALID_ADAPTIVE_PARENT is only permitted after frozen generation 0")
+                results.update({
+                    "adaptive_case_status": "NO_VALID_ADAPTIVE_PARENT",
+                    "adaptive_search_terminal": True,
+                    "adaptive_d0_queries_consumed": adaptive_queries,
+                    "adaptive_winner": "NONE",
+                    "remaining_adaptive_queries_status": "NOT_EXECUTED_STRUCTURALLY_UNAVAILABLE",
+                })
+                lifecycle.no_valid_adaptive_parent(case_id, adaptive_queries)
+            else:
+                if "adaptive" not in results:
+                    raise Week4ExecutionError("adaptive search completed without a valid winner")
+                results.update({
+                    "adaptive_case_status": "COMPLETE_WITH_WINNER",
+                    "adaptive_search_terminal": False,
+                    "adaptive_d0_queries_consumed": controller.accounting()["adaptive_detector_queries"],
+                    "adaptive_winner": results["adaptive"]["candidate_id"],
+                    "remaining_adaptive_queries_status": "NOT_APPLICABLE",
+                })
             per_case[case_id] = results
+            _persist_case_outcome(runtime_root, {
+                "case_id": case_id,
+                "split": split,
+                "adaptive_case_status": results["adaptive_case_status"],
+                "adaptive_search_terminal": results["adaptive_search_terminal"],
+                "adaptive_d0_queries_consumed": results["adaptive_d0_queries_consumed"],
+                "adaptive_winner": results["adaptive_winner"],
+                "remaining_adaptive_queries_status": results["remaining_adaptive_queries_status"],
+            })
             if "adaptive" in results:
                 selection = {"case_id": case_id, "selected_candidate_id": results["adaptive"]["candidate_id"], "selected_objective": results["adaptive"]["objective"], "sidecar_relpath": results["adaptive"]["sidecar_relpath"], "sidecar_sha256": results["adaptive"]["sidecar_sha256"]}
                 target = runtime_root / "selections" / f"{case_id}.json"
@@ -440,13 +505,16 @@ def execute_protocol(*, cases: list[Mapping[str, Any]], spec: FrozenAttackSpec, 
         mismatch = Week4ExecutionError("ACTUAL_D0_BACKEND_CALLS does not equal accounted ledger invocations")
         lifecycle.failed(current_case_id, mismatch)
         raise mismatch
-    lifecycle.completed(len(per_case))
     if stage == "dev":
+        lifecycle.completed(len(per_case))
         counts = [sum(row.get("phase") == ADAPTIVE_PHASE and row.get("detector_query") is True for row in ledger.records() if row.get("case_id") == case_id) for case_id in per_case]
-        return {"stage": "DEV", "per_case": per_case, "ledger": ledger.records(), "f5_attempts": _load_jsonl(attempt_ledger), "accounting": {"DEV_PLANNED": 24, "DEV_STARTED": len(per_case), "DEV_COMPLETED": len(per_case), "DEV_SUCCESS": f5_successes, "DEV_FAILED": 24 - f5_successes, "F5_TOTAL_ATTEMPTS": f5_successes, "F5_SUCCESSFUL_CASES": f5_successes, "F5_FAILED_CASES": 24 - f5_successes, "F5_RETRIES": 0, "STATIC_D0_INVOCATIONS": len(per_case), "ADAPTIVE_D0_INVOCATIONS": sum(counts), "ACTUAL_D0_BACKEND_CALLS": d0_backend_calls, "ACCOUNTED_D0_INVOCATIONS": accounted_d0, "ADAPTIVE_QUERY_MIN": min(counts) if counts else 0, "ADAPTIVE_QUERY_MAX": max(counts) if counts else 0, "ADAPTIVE_QUERY_MEAN": float(np.mean(counts)) if counts else 0.0, "CASES_WITH_40_ADAPTIVE_QUERIES": sum(count == 40 for count in counts), "CASES_WITH_FEWER_THAN_40_DUE_TO_PRE_D0_INVALIDITY": sum(count < 40 for count in counts), "CASES_WITH_NO_VALID_WINNER": sum("adaptive" not in value for value in per_case.values()), "LEDGER_HASH_CHAIN": "PASS", "RAW_EVIDENCE_CHAIN": "PASS"}, "A0_FROZEN": False}
+        no_parent_cases = sum(value.get("adaptive_case_status") == "NO_VALID_ADAPTIVE_PARENT" for value in per_case.values())
+        return {"stage": "DEV", "per_case": per_case, "ledger": ledger.records(), "f5_attempts": _load_jsonl(attempt_ledger), "accounting": {"DEV_PLANNED": 24, "DEV_STARTED": len(per_case), "DEV_COMPLETED": len(per_case), "DEV_CASE_COMPLETE_WITH_WINNER": len(per_case) - no_parent_cases, "DEV_CASE_TERMINAL_NO_VALID_ADAPTIVE_PARENT": no_parent_cases, "DEV_SUCCESS": f5_successes, "DEV_FAILED": 24 - f5_successes, "F5_TOTAL_ATTEMPTS": f5_successes, "F5_SUCCESSFUL_CASES": f5_successes, "F5_FAILED_CASES": 24 - f5_successes, "F5_RETRIES": 0, "STATIC_D0_INVOCATIONS": len(per_case), "ADAPTIVE_D0_INVOCATIONS": sum(counts), "ACTUAL_D0_BACKEND_CALLS": d0_backend_calls, "ACCOUNTED_D0_INVOCATIONS": accounted_d0, "ADAPTIVE_QUERY_MIN": min(counts) if counts else 0, "ADAPTIVE_QUERY_MAX": max(counts) if counts else 0, "ADAPTIVE_QUERY_MEAN": float(np.mean(counts)) if counts else 0.0, "CASES_WITH_40_ADAPTIVE_QUERIES": sum(count == 40 for count in counts), "CASES_WITH_STRUCTURAL_NO_VALID_PARENT": no_parent_cases, "CASES_WITH_NO_VALID_WINNER": no_parent_cases, "LEDGER_HASH_CHAIN": "PASS", "RAW_EVIDENCE_CHAIN": "PASS"}, "A0_FROZEN": False}
     held = {case_id: per_case[case_id] for case_id in per_case if next(c for c in ordered if c["case_id"] == case_id)["split"] == "held_out"}
+    lifecycle.evaluator_started()
     final = final_evaluate(held)
     (runtime_root / "final.json").write_text(json.dumps(final, ensure_ascii=False, indent=2, allow_nan=False), encoding="utf-8")
+    lifecycle.completed(len(per_case))
     return {"per_case": per_case, "final": final, "ledger": ledger.records(), "ACTUAL_D0_BACKEND_CALLS": d0_backend_calls, "ACCOUNTED_D0_INVOCATIONS": accounted_d0, "A0_FROZEN": bool(locals().get("a0_frozen", False))}
 
 

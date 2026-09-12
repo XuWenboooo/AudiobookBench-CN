@@ -64,12 +64,33 @@ class LedgerError(Week4ContractError):
     pass
 
 
+class NoValidAdaptiveParent(Week4ContractError):
+    """A frozen case-level terminal state after an undefined generation 0.
+
+    This is deliberately distinct from a detector, waveform, or ledger
+    failure.  It means all eight frozen generation-0 candidates completed D0
+    successfully but none supplied a finite objective eligible to become the
+    frozen mutation parent.
+    """
+
+
 def _canonical_json(value: Any) -> bytes:
     return json.dumps(value, ensure_ascii=False, sort_keys=True, separators=(",", ":"), allow_nan=False).encode("utf-8")
 
 
 def sha256_bytes(value: bytes) -> str:
     return hashlib.sha256(value).hexdigest().upper()
+
+
+def canonical_waveform_sha256(waveform: np.ndarray | Sequence[float]) -> str:
+    """Hash the sole persisted candidate-waveform representation.
+
+    Candidate waveforms are scientific float32 audio arrays.  Canonicalizing
+    both dtype and contiguity before hashing makes ledger and sidecar evidence
+    comparable even when their callers received a non-contiguous or float64
+    view of the same waveform.
+    """
+    return sha256_bytes(np.ascontiguousarray(waveform, dtype=np.float32).tobytes(order="C"))
 
 
 def _finite_number(value: Any, field: str) -> float:
@@ -482,7 +503,20 @@ class A0AttackController:
     def _best_valid(self) -> Mapping[str, Any]:
         valid = [row for row in self._rows() if row.get("phase") == ADAPTIVE_PHASE and row.get("valid") is True and isinstance(row.get("score"), (int, float))]
         if not valid:
-            raise Week4ContractError("NO_VALID_ADAPTIVE_PARENT: frozen mutation requires a defined prior objective")
+            generation_zero = [row for row in self._rows() if row.get("phase") == ADAPTIVE_PHASE]
+            if (
+                len(generation_zero) == self.spec.search_population_size
+                and all(
+                    row.get("detector_status") == "SUCCESS"
+                    and row.get("objective_status") == "OBJECTIVE_UNDEFINED"
+                    and row.get("valid_for_winner") is False
+                    for row in generation_zero
+                )
+            ):
+                raise NoValidAdaptiveParent(
+                    "NO_VALID_ADAPTIVE_PARENT: all frozen generation-0 candidates have undefined objectives"
+                )
+            raise Week4ContractError("frozen mutation requires a defined prior objective")
         return min(valid, key=lambda row: (float(row["score"]), int(row.get("query_index", 0)), str(row["candidate_id"])))
 
     def next_candidate(self) -> dict[str, float]:
@@ -536,7 +570,7 @@ class A0AttackController:
         else:
             raise Week4ContractError("tuning is governance-only and may not invoke D0")
         array = np.asarray(waveform, dtype=np.float64)
-        waveform_hash = sha256_bytes(array.tobytes()) if array.ndim == 1 else None
+        waveform_hash = canonical_waveform_sha256(waveform) if array.ndim == 1 else None
         parent_candidate = None
         if phase == ADAPTIVE_PHASE and query_index > self.spec.search_population_size:
             parent_candidate = str(self._best_valid()["candidate_id"])

@@ -47,7 +47,9 @@ def active_artifact(invocation_id: str = "TEST_ONLY_preflight_20260911") -> dict
         "execution_source_manifest_sha256": hashes["execution_source_manifest"],
         "f5_frozen_source_manifest_sha256": hashes["f5_frozen_source_manifest"],
         "formal_runtime_environment_manifest_sha256": hashes["formal_runtime_environment_manifest"],
+        "execution_governance_amendment_v2_sha256": hashes["execution_governance_amendment_v2"],
         "partial_dev_invalidation_sha256": hashes["partial_dev_invalidation"],
+        "POST_DEV_GOVERNANCE_AMENDMENT_SHA256": hashes["execution_governance_amendment_v2"],
     })
     return artifact
 
@@ -72,7 +74,8 @@ def test_authorization_discloses_week1_3_and_prior_week4_outcome_history(tmp_pat
     artifact = active_artifact()
     assert artifact["week1_3_scientific_results_already_observed"] is True
     assert artifact["week4_scientific_results_observed_before_authorization"] is True
-    assert artifact["PRIOR_PARTIAL_RUN_SCIENTIFICALLY_ADMISSIBLE"] is False
+    assert artifact["PRIOR_PARTIAL_RUNS_SCIENTIFICALLY_ADMISSIBLE"] is False
+    assert artifact["EXECUTION_GOVERNANCE_CHANGED_AFTER_PARTIAL_DEV_OBSERVATION"] is True
     artifact["week4_scientific_results_observed_before_authorization"] = False
     with pytest.raises(Week4AuthorizationError, match="canonical JSON Schema validation"):
         validate_authorization_artifact(write_artifact(tmp_path, artifact))
@@ -89,7 +92,7 @@ def test_missing_week4_outcome_disclosure_fails_canonical_schema(tmp_path: Path)
     "preregistration_sha256", "canonical_config_sha256", "population_manifest_sha256",
     "controller_sha256", "search_implementation_sha256", "formal_runner_sha256", "f5_qualification_sha256",
     "execution_supplement_sha256", "execution_supplement_config_sha256", "d0_asset_manifest_sha256", "execution_source_manifest_sha256",
-    "f5_frozen_source_manifest_sha256", "formal_runtime_environment_manifest_sha256", "partial_dev_invalidation_sha256",
+    "f5_frozen_source_manifest_sha256", "formal_runtime_environment_manifest_sha256", "execution_governance_amendment_v2_sha256", "partial_dev_invalidation_sha256",
 ])
 def test_missing_malformed_and_mismatched_hashes_fail_closed(tmp_path: Path, field: str):
     valid = active_artifact()
@@ -104,6 +107,18 @@ def test_missing_malformed_and_mismatched_hashes_fail_closed(tmp_path: Path, fie
     mismatched = copy.deepcopy(valid)
     mismatched[field] = "0" * 64
     with pytest.raises(Week4AuthorizationError, match="canonical hash mismatch"):
+        validate_authorization_artifact(write_artifact(tmp_path / "mismatched", mismatched))
+
+
+def test_post_dev_governance_amendment_hash_is_required_and_current(tmp_path: Path):
+    valid = active_artifact()
+    missing = copy.deepcopy(valid)
+    missing.pop("POST_DEV_GOVERNANCE_AMENDMENT_SHA256")
+    with pytest.raises(Week4AuthorizationError, match="canonical JSON Schema validation"):
+        validate_authorization_artifact(write_artifact(tmp_path / "missing", missing))
+    mismatched = copy.deepcopy(valid)
+    mismatched["POST_DEV_GOVERNANCE_AMENDMENT_SHA256"] = "0" * 64
+    with pytest.raises(Week4AuthorizationError, match="does not bind the frozen post-DEV governance amendment"):
         validate_authorization_artifact(write_artifact(tmp_path / "mismatched", mismatched))
 
 
@@ -162,14 +177,25 @@ def test_frozen_config_hash_and_execution_flag_remain_unchanged():
     assert "scientific_execution_enabled: false" in config.read_text(encoding="utf-8")
 
 
-def test_reauthorization_discloses_invalidated_partial_dev_and_environment_binding():
+def test_reauthorization_discloses_post_dev_governance_and_environment_binding():
     artifact = json.loads((ROOT / "results/week4_adaptive_redteam/authorization.json").read_text(encoding="utf-8"))
-    assert artifact["invocation_id"] == "week4_dev_integrity_reexecution_02"
+    assert artifact["invocation_id"] == "week4_dev_integrity_reexecution_03"
     assert artifact["PRIOR_FAILED_ATTEMPT_EXISTED"] is True
     assert artifact["PRIOR_FAILED_ATTEMPT_PRODUCED_SCIENTIFIC_OUTCOME"] is False
     assert artifact["WEEK4_SCIENTIFIC_OUTCOME_OBSERVED_BEFORE_REAUTHORIZATION"] is True
     assert artifact["PRIOR_WEEK4_DEV_OUTCOMES_OBSERVED"] is True
-    assert artifact["PRIOR_PARTIAL_RUN_SCIENTIFICALLY_ADMISSIBLE"] is False
+    assert artifact["PRIOR_PARTIAL_RUNS_SCIENTIFICALLY_ADMISSIBLE"] is False
+    assert artifact["POST_DEV_GOVERNANCE_AMENDMENT_EXISTS"] is True
+    assert artifact["POST_DEV_GOVERNANCE_AMENDMENT_SHA256"] == sha256_file(
+        ROOT / "research_assurance/WEEK4_EXECUTION_GOVERNANCE_AMENDMENT_V2.md"
+    )
+    assert artifact["EXECUTION_GOVERNANCE_CHANGED_AFTER_PARTIAL_DEV_OBSERVATION"] is True
+    assert artifact["ATTACK_METHOD_CHANGED_AFTER_PARTIAL_DEV_OBSERVATION"] is False
+    assert artifact["OBJECTIVE_CHANGED_AFTER_PARTIAL_DEV_OBSERVATION"] is False
+    assert artifact["SEARCH_PROPOSAL_RULE_CHANGED_AFTER_PARTIAL_DEV_OBSERVATION"] is False
+    assert artifact["H4_CHANGED_AFTER_PARTIAL_DEV_OBSERVATION"] is False
+    assert artifact["SCIENTIFIC_ATTACK_AND_ESTIMAND_SPEC_CHANGED"] is False
+    assert artifact["EXECUTION_GOVERNANCE_AMENDED"] is True
     assert artifact["EXECUTION_IMPLEMENTATION_CHANGED_AFTER_PRIOR_DEV_OBSERVATION"] is True
     assert artifact["formal_runtime_environment_manifest_sha256"] == sha256_file(
         ROOT / "research_assurance/WEEK4_FORMAL_RUNTIME_ENVIRONMENT_MANIFEST.json"

@@ -18,6 +18,7 @@ from audiobookbench.security.week4_adaptive import (
     AuthorizationError,
     CandidateLedger,
     DetectorQuery,
+    DetectorOutcome,
     FreezeViolation,
     FrozenAttackSpec,
     LedgerError,
@@ -25,6 +26,7 @@ from audiobookbench.security.week4_adaptive import (
     SplitProtectionError,
     Week4ContractError,
     a0_freeze_sha256,
+    canonical_waveform_sha256,
     paired_case_bootstrap,
 )
 from audiobookbench.security.week4_population import build_candidate_population
@@ -184,6 +186,37 @@ def test_search_depends_on_prior_detector_outcomes(tmp_path):
         evaluate_next(left, 0.0 if index == 0 else 10.0)
         evaluate_next(right, 0.0 if index == 1 else 10.0)
     assert left.next_candidate() != right.next_candidate()
+
+
+def test_mixed_generation_zero_uses_the_only_defined_parent_and_reaches_40_queries(tmp_path):
+    calls: list[DetectorQuery] = []
+
+    def mixed_detector(query: DetectorQuery) -> DetectorOutcome:
+        calls.append(query)
+        if len(calls) <= 7:
+            return DetectorOutcome(None, "OBJECTIVE_UNDEFINED")
+        return DetectorOutcome(0.5 if len(calls) == 8 else 1.0, "DEFINED")
+
+    ctl, _ = controller(tmp_path, detector=mixed_detector)
+    rows = []
+    for _ in range(MAX_ADAPTIVE_D0_QUERIES_PER_CASE):
+        proposal = ctl.next_candidate()
+        rows.append(ctl.evaluate_candidate(waveform=np.array([0.25], dtype=np.float32), sample_rate=16000, params=proposal))
+    eighth = rows[7]["candidate_id"]
+    assert len(calls) == len(rows) == MAX_ADAPTIVE_D0_QUERIES_PER_CASE
+    assert [row["objective_status"] for row in rows[:7]] == ["OBJECTIVE_UNDEFINED"] * 7
+    assert rows[7]["objective_status"] == "DEFINED"
+    assert all(row["parent_candidate"] == eighth for row in rows[8:])
+    assert all(row["valid_for_winner"] is True for row in rows[7:])
+
+
+def test_canonical_waveform_hash_normalizes_dtype_and_memory_layout():
+    waveform = np.asarray([0.1, -0.2, 0.3, -0.4], dtype=np.float32)
+    noncontiguous = np.column_stack([waveform, waveform])[:, 0]
+    assert not noncontiguous.flags.c_contiguous
+    expected = canonical_waveform_sha256(waveform)
+    assert expected == canonical_waveform_sha256(noncontiguous)
+    assert expected == canonical_waveform_sha256(waveform.astype(np.float64))
 
 
 def test_missing_wrong_authorization_wrong_split_and_heldout_tuning_fail_closed(tmp_path):

@@ -31,7 +31,8 @@ CANONICAL_SOURCES = {
     "execution_source_manifest": REPO_ROOT / "research_assurance/WEEK4_EXECUTION_SOURCE_MANIFEST.json",
     "f5_frozen_source_manifest": REPO_ROOT / "research_assurance/WEEK4_F5_FROZEN_SOURCE_MANIFEST.json",
     "formal_runtime_environment_manifest": REPO_ROOT / "research_assurance/WEEK4_FORMAL_RUNTIME_ENVIRONMENT_MANIFEST.json",
-    "partial_dev_invalidation": REPO_ROOT / "research_assurance/WEEK4_DEV_REEXECUTION_01_INVALIDATION.md",
+    "execution_governance_amendment_v2": REPO_ROOT / "research_assurance/WEEK4_EXECUTION_GOVERNANCE_AMENDMENT_V2.md",
+    "partial_dev_invalidation": REPO_ROOT / "research_assurance/WEEK4_DEV_REEXECUTION_02_INVALIDATION.md",
 }
 HEX64 = r"^[A-Fa-f0-9]{64}$"
 
@@ -157,6 +158,7 @@ def validate_authorization_artifact(
         "execution_source_manifest_sha256": "execution_source_manifest",
         "f5_frozen_source_manifest_sha256": "f5_frozen_source_manifest",
         "formal_runtime_environment_manifest_sha256": "formal_runtime_environment_manifest",
+        "execution_governance_amendment_v2_sha256": "execution_governance_amendment_v2",
         "partial_dev_invalidation_sha256": "partial_dev_invalidation",
     }.items():
         if str(artifact.get(field, "")).upper() != str(hashes.get(filename, "")).upper():
@@ -178,13 +180,23 @@ def validate_authorization_artifact(
         "PRIOR_WEEK4_VALIDATION_OUTCOMES_OBSERVED": False,
         "PRIOR_WEEK4_HELD_OUT_OUTCOMES_OBSERVED": False,
         "PRIOR_WEEK4_H4_OUTCOME_OBSERVED": False,
-        "PRIOR_PARTIAL_RUN_SCIENTIFICALLY_ADMISSIBLE": False,
-        "SCIENTIFIC_PROTOCOL_CHANGED_AFTER_PRIOR_DEV_OBSERVATION": False,
+        "PRIOR_PARTIAL_RUNS_SCIENTIFICALLY_ADMISSIBLE": False,
+        "POST_DEV_GOVERNANCE_AMENDMENT_EXISTS": True,
+        "EXECUTION_GOVERNANCE_CHANGED_AFTER_PARTIAL_DEV_OBSERVATION": True,
+        "ATTACK_METHOD_CHANGED_AFTER_PARTIAL_DEV_OBSERVATION": False,
+        "OBJECTIVE_CHANGED_AFTER_PARTIAL_DEV_OBSERVATION": False,
+        "SEARCH_PROPOSAL_RULE_CHANGED_AFTER_PARTIAL_DEV_OBSERVATION": False,
+        "H4_CHANGED_AFTER_PARTIAL_DEV_OBSERVATION": False,
+        "SCIENTIFIC_ATTACK_AND_ESTIMAND_SPEC_CHANGED": False,
+        "EXECUTION_GOVERNANCE_AMENDED": True,
         "EXECUTION_IMPLEMENTATION_CHANGED_AFTER_PRIOR_DEV_OBSERVATION": True,
-        "IMPLEMENTATION_CHANGE_CLASS": "CORRECTIVE_IMPLEMENTATION_INTEGRITY_REPAIR",
+        "IMPLEMENTATION_CHANGE_CLASS": "POST_DEV_GOVERNANCE_AMENDMENT_AND_EVIDENCE_CANONICALIZATION_REPAIR",
     }
     if any(artifact.get(name) != expected for name, expected in required_provenance.items()):
         raise Week4AuthorizationError("authorization does not disclose the invalidated partial DEV provenance")
+    amendment_hash = artifact.get("POST_DEV_GOVERNANCE_AMENDMENT_SHA256")
+    if not isinstance(amendment_hash, str) or amendment_hash.upper() != str(hashes.get("execution_governance_amendment_v2", "")).upper():
+        raise Week4AuthorizationError("authorization does not bind the frozen post-DEV governance amendment")
 
     population = _load_json(sources["population_manifest"], "population manifest")
     if population.get("status") != "FINALIZED" or population.get("final_case_count") != 48:
