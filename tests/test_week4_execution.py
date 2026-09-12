@@ -4,8 +4,9 @@ import json
 from pathlib import Path
 
 import numpy as np
+import pytest
 
-from audiobookbench.security.week4_adaptive import FrozenAttackSpec
+from audiobookbench.security.week4_adaptive import CandidateLedger, FrozenAttackSpec, Week4ContractError
 from audiobookbench.security.week4_execution import (
     SAMPLE_RATE, active_interval, attacker_objective, construct_candidate,
     execute_protocol, project_gt, trim_synthetic,
@@ -78,14 +79,49 @@ def test_only_full_e2e_dev_validation_freeze_heldout_final(tmp_path: Path, monke
     def fake_f5(case, seed):
         seeds.append(seed)
         return np.full(32000, 0.2, dtype=np.float32), SAMPLE_RATE
-    result = execute_protocol(cases=cases, spec=spec, runtime_root=tmp_path / "TEST_ONLY", f5_generator=fake_f5, d0_backend=_FakeD0(), source_loader=lambda _: np.full(64000, 0.1, dtype=np.float32))
+    backend = _FakeD0()
+    result = execute_protocol(cases=cases, spec=spec, runtime_root=tmp_path / "TEST_ONLY", f5_generator=fake_f5, d0_backend=backend, source_loader=lambda _: np.full(64000, 0.1, dtype=np.float32))
     assert seeds == list(range(20260914, 20260962))
     assert result["A0_FROZEN"] is True
     assert result["final"]["PRIMARY_H4"] == "REPORTABLE"
     assert result["final"]["paired_bootstrap"]["auroc"]["finite"] >= 1900
     assert len(result["ledger"]) == 48 * 41
     assert all(row["candidate_id"] for row in result["ledger"])
+    assert backend.calls == len(result["ledger"])
+    assert result["ACTUAL_D0_BACKEND_CALLS"] == result["ACCOUNTED_D0_INVOCATIONS"] == backend.calls
+    metadata = json.loads((tmp_path / "TEST_ONLY/run_metadata.json").read_text(encoding="utf-8"))
+    assert metadata["status"] == metadata["final_status"] == "COMPLETED"
+    assert metadata["generation_invoked"] is True and metadata["d0_invoked"] is True
+    assert metadata["completed_case_count"] == 48
+    assert (tmp_path / "TEST_ONLY/accounting/run_status_events.jsonl").is_file()
     assert (tmp_path / "TEST_ONLY/final.json").is_file()
+
+
+def test_only_case_0004_geometry_keeps_static_and_rejects_undefined_adaptive_winner(tmp_path: Path, monkeypatch):
+    """The observed 9-window/6-attack/0-clean geometry is control-flow only."""
+    import audiobookbench.security.week4_execution as execution
+    spec = FrozenAttackSpec.from_path(ROOT / "configs/week4_adaptive_red_team.yaml")
+    cases = [{"case_id": f"week4_case_{i:04d}", "split": "dev" if i <= 24 else "validation" if i <= 36 else "held_out", "source_text_exact": "源文本", "reference_text_exact": "参考文本"} for i in range(1, 49)]
+    backend = _FakeD0()
+    # 38,336 source samples and 21,200 synthetic samples reproduce the stored
+    # case-0004 S2 geometry without using its waveform or score magnitude.
+    with pytest.raises(Week4ContractError, match="NO_VALID_ADAPTIVE_PARENT"):
+        execute_protocol(cases=cases, spec=spec, runtime_root=tmp_path / "TEST_ONLY_UNDEFINED", f5_generator=lambda _case, _seed: (np.full(21200, 0.2, dtype=np.float32), SAMPLE_RATE), d0_backend=backend, source_loader=lambda _: np.full(38336, 0.1, dtype=np.float32))
+    root = tmp_path / "TEST_ONLY_UNDEFINED"
+    rows = CandidateLedger(root / "accounting/candidate_ledger.jsonl").records()
+    static = next(row for row in rows if row["phase"] == "static_baseline")
+    adaptive = [row for row in rows if row["phase"] == "adaptive_search"]
+    assert len(rows) == backend.calls == 9
+    assert static["detector_status"] == "SUCCESS"
+    assert static["objective_status"] == "NOT_APPLICABLE"
+    assert static["valid_for_winner"] is False
+    assert len(adaptive) == 8 and all(row["objective_status"] == "OBJECTIVE_UNDEFINED" for row in adaptive)
+    assert all(row["detector_status"] == "SUCCESS" and row["valid_for_winner"] is False for row in adaptive)
+    static_sidecar = next((root / "sidecars/week4_case_0001").glob("*static_baseline*.json"))
+    static_record = json.loads(static_sidecar.read_text(encoding="utf-8"))
+    assert static_record["score_vector"] and static_record["objective_status"] == "NOT_APPLICABLE"
+    metadata = json.loads((root / "run_metadata.json").read_text(encoding="utf-8"))
+    assert metadata["status"] == metadata["final_status"] == "BLOCKED"
 
 
 def test_vector_sidecar_is_committed_with_raw_score_hash(tmp_path: Path):

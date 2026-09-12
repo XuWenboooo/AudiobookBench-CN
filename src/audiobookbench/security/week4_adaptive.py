@@ -367,6 +367,19 @@ class DetectorQuery:
     window_spec: FrozenWindowSpec
 
 
+@dataclass(frozen=True)
+class DetectorOutcome:
+    """One accounted D0 call and its separate objective semantics.
+
+    ``objective`` is deliberately optional: a finite B1b/S2 vector can be a
+    successful detector result while the frozen FULL_ATTACK/OUTSIDE_CLEAN
+    comparison is undefined.  Static candidates also have no winner objective.
+    """
+
+    objective: float | None
+    objective_status: str
+
+
 def _normalise_params(params: Mapping[str, Any], spec: FrozenAttackSpec) -> dict[str, float]:
     if not isinstance(params, Mapping) or set(params) != set(spec.parameter_bounds):
         raise Week4ContractError("candidate parameter names do not match frozen specification")
@@ -469,7 +482,7 @@ class A0AttackController:
     def _best_valid(self) -> Mapping[str, Any]:
         valid = [row for row in self._rows() if row.get("phase") == ADAPTIVE_PHASE and row.get("valid") is True and isinstance(row.get("score"), (int, float))]
         if not valid:
-            raise Week4ContractError("adaptive mutation requires a valid prior detector score")
+            raise Week4ContractError("NO_VALID_ADAPTIVE_PARENT: frozen mutation requires a defined prior objective")
         return min(valid, key=lambda row: (float(row["score"]), int(row.get("query_index", 0)), str(row["candidate_id"])))
 
     def next_candidate(self) -> dict[str, float]:
@@ -494,7 +507,7 @@ class A0AttackController:
 
     def _append_invalid(self, candidate_id: str, phase: str, params: Mapping[str, Any] | None, reason: str, *, detector_query: bool, query_index: int, candidate_waveform_sha256: str | None = None, detector_outcome_hash: str | None = None, parent_candidate: str | None = None) -> dict[str, Any]:
         generation = (query_index - 1) // self.spec.search_population_size if phase == ADAPTIVE_PHASE else 0
-        row = self.ledger.append({"recorded_at": datetime.now(timezone.utc).isoformat(), "candidate_id": candidate_id, "paired_case_id": self.case_id, "case_id": self.case_id, "run_id": self.spec.run_id, "split": self.split, "phase": phase, "generation": generation, "detector_query": detector_query, "detector_invoked": detector_query, "query_index": query_index, "params": dict(params) if params is not None else None, "parameters": dict(params) if params is not None else None, "status": "INVALID", "valid": False, "validity": "INVALID", "invalid_reason": reason, "validity_reason": reason, "candidate_waveform_sha256": candidate_waveform_sha256, "detector_outcome_hash": detector_outcome_hash, "selected_status": "NOT_SELECTED", "parent_candidate": parent_candidate, "failure_class": "candidate_invalid" if not detector_query else "detector_runtime_failure"})
+        row = self.ledger.append({"recorded_at": datetime.now(timezone.utc).isoformat(), "candidate_id": candidate_id, "paired_case_id": self.case_id, "case_id": self.case_id, "run_id": self.spec.run_id, "split": self.split, "phase": phase, "generation": generation, "detector_query": detector_query, "detector_invoked": detector_query, "detector_status": "D0_RUNTIME_FAILURE" if detector_query else "NOT_INVOKED", "objective": None, "objective_status": "NOT_AVAILABLE", "valid_for_winner": False, "query_index": query_index, "params": dict(params) if params is not None else None, "parameters": dict(params) if params is not None else None, "status": "INVALID", "valid": False, "validity": "INVALID", "invalid_reason": reason, "validity_reason": reason, "candidate_waveform_sha256": candidate_waveform_sha256, "detector_outcome_hash": detector_outcome_hash, "selected_status": "NOT_SELECTED", "parent_candidate": parent_candidate, "failure_class": "candidate_invalid" if not detector_query else "detector_runtime_failure"})
         self._case_rows.append(row)
         return row
 
@@ -530,16 +543,26 @@ class A0AttackController:
         if array.ndim != 1 or not np.isfinite(array).all() or int(sample_rate) != 16000:
             return self._append_invalid(candidate_id, phase, normalised, "invalid detector waveform", detector_query=False, query_index=query_index, candidate_waveform_sha256=waveform_hash, parent_candidate=parent_candidate)
         try:
-            score = float(self._detector(DetectorQuery(array.copy(), int(sample_rate), self.spec.window_spec)))
-            if not math.isfinite(score):
-                raise ValueError("detector score is non-finite")
+            detected = self._detector(DetectorQuery(array.copy(), int(sample_rate), self.spec.window_spec))
         except Exception as exc:
             reason = f"detector_failure:{type(exc).__name__}:{exc}"
             outcome_hash = sha256_bytes(_canonical_json({"status": "ERROR", "type": type(exc).__name__, "message": str(exc)}))
             self._append_invalid(candidate_id, phase, normalised, reason, detector_query=True, query_index=query_index, candidate_waveform_sha256=waveform_hash, detector_outcome_hash=outcome_hash, parent_candidate=parent_candidate)
             raise
-        outcome_hash = sha256_bytes(_canonical_json({"status": "VALID", "score": score}))
-        row = self.ledger.append({"recorded_at": datetime.now(timezone.utc).isoformat(), "candidate_id": candidate_id, "paired_case_id": self.case_id, "case_id": self.case_id, "run_id": self.spec.run_id, "split": self.split, "phase": phase, "generation": (query_index - 1) // self.spec.search_population_size if phase == ADAPTIVE_PHASE else 0, "detector_query": True, "detector_invoked": True, "query_index": query_index, "params": normalised, "parameters": normalised, "score": score, "objective": self.spec.objective_name, "objective_direction": self.spec.objective_direction, "status": "VALID", "valid": True, "validity": "VALID", "validity_reason": None, "invalid_reason": None, "candidate_waveform_sha256": waveform_hash, "detector_outcome_hash": outcome_hash, "selected_status": "NOT_SELECTED", "parent_candidate": parent_candidate})
+        if isinstance(detected, DetectorOutcome):
+            objective, objective_status = detected.objective, detected.objective_status
+        else:
+            objective = float(detected)
+            objective_status = "DEFINED" if math.isfinite(objective) else "OBJECTIVE_UNDEFINED"
+        if objective_status not in {"DEFINED", "OBJECTIVE_UNDEFINED", "NOT_APPLICABLE"}:
+            raise Week4ContractError("detector outcome has an unknown objective status")
+        if objective_status == "DEFINED" and (objective is None or not math.isfinite(float(objective))):
+            raise Week4ContractError("defined detector objective must be finite")
+        if objective_status != "DEFINED":
+            objective = None
+        valid_for_winner = phase == ADAPTIVE_PHASE and objective_status == "DEFINED"
+        outcome_hash = sha256_bytes(_canonical_json({"status": "SUCCESS", "objective": objective, "objective_status": objective_status}))
+        row = self.ledger.append({"recorded_at": datetime.now(timezone.utc).isoformat(), "candidate_id": candidate_id, "paired_case_id": self.case_id, "case_id": self.case_id, "run_id": self.spec.run_id, "split": self.split, "phase": phase, "generation": (query_index - 1) // self.spec.search_population_size if phase == ADAPTIVE_PHASE else 0, "detector_query": True, "detector_invoked": True, "detector_status": "SUCCESS", "query_index": query_index, "params": normalised, "parameters": normalised, "score": objective, "objective": objective, "objective_name": self.spec.objective_name, "objective_status": objective_status, "objective_direction": self.spec.objective_direction, "valid_for_winner": valid_for_winner, "status": "VALID" if objective_status == "DEFINED" else "D0_SUCCESS_OBJECTIVE_UNDEFINED", "valid": valid_for_winner, "validity": "VALID" if valid_for_winner else "OBJECTIVE_UNDEFINED", "validity_reason": None if valid_for_winner else objective_status, "invalid_reason": None if valid_for_winner else objective_status, "candidate_waveform_sha256": waveform_hash, "detector_outcome_hash": outcome_hash, "selected_status": "NOT_SELECTED", "parent_candidate": parent_candidate})
         self._case_rows.append(row)
         return row
 

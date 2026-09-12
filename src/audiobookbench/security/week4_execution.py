@@ -10,6 +10,7 @@ import hashlib
 import json
 import math
 from dataclasses import dataclass
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Callable, Mapping
 
@@ -19,6 +20,7 @@ from audiobookbench.evaluation.day6a_localization import auprc, auroc
 from audiobookbench.preprocessing.audio_io import resample_audio
 from audiobookbench.security.week4_adaptive import (
     ADAPTIVE_PHASE, STATIC_PHASE, A0AttackController, CandidateLedger,
+    DetectorOutcome,
     DetectorQuery, FrozenAttackSpec, paired_case_bootstrap,
 )
 from audiobookbench.temporal.day6b_embed import SpeakerBackend, SpeakerWindowScale, build_speaker_windows
@@ -252,6 +254,84 @@ def _append_attempt(path: Path, record: Mapping[str, Any]) -> dict[str, Any]:
     return body
 
 
+def _atomic_json(path: Path, value: Mapping[str, Any]) -> None:
+    """Atomically replace mutable run metadata while preserving event history."""
+    temporary = path.with_suffix(path.suffix + ".tmp")
+    temporary.write_text(json.dumps(value, ensure_ascii=False, sort_keys=True, indent=2), encoding="utf-8")
+    temporary.replace(path)
+
+
+class _RunLifecycle:
+    """Run metadata snapshot plus append-only, hash-chained status events."""
+
+    def __init__(self, runtime_root: Path, context: Mapping[str, Any] | None, *, stage: str, run_id: str):
+        self.metadata_path = runtime_root / "run_metadata.json"
+        self.events_path = runtime_root / "accounting" / "run_status_events.jsonl"
+        self.data = dict(context or {})
+        started = datetime.now(timezone.utc).isoformat()
+        self.data.update({
+            "status": "INITIALIZED", "lifecycle_status": "INITIALIZED", "final_status": None,
+            "stage": stage, "run_id": run_id, "started_at": started,
+            "generation_invoked": False, "d0_invoked": False,
+            "first_generation_timestamp": None, "first_d0_timestamp": None,
+            "last_updated_at": started, "completed_case_count": 0,
+            "failure_case_id": None, "failure_class": None,
+            "scientific_parameters_changed": False,
+        })
+        runtime_root.mkdir(parents=True, exist_ok=True)
+        _atomic_json(self.metadata_path, self.data)
+        self._event("INITIALIZED")
+
+    def _event(self, event: str, **details: Any) -> None:
+        previous = ""
+        if self.events_path.exists():
+            rows = [line for line in self.events_path.read_text(encoding="utf-8").splitlines() if line.strip()]
+            if rows:
+                previous = str(json.loads(rows[-1])["record_sha256"])
+        body = {"event": event, "recorded_at": datetime.now(timezone.utc).isoformat(), "previous_record_sha256": previous, **details}
+        body["record_sha256"] = sha256_bytes(json.dumps(body, ensure_ascii=False, sort_keys=True, separators=(",", ":"), allow_nan=False).encode("utf-8"))
+        self.events_path.parent.mkdir(parents=True, exist_ok=True)
+        with self.events_path.open("a", encoding="utf-8", newline="") as stream:
+            stream.write(json.dumps(body, ensure_ascii=False, sort_keys=True, allow_nan=False) + "\n")
+
+    def _update(self, *, status: str | None = None, final_status: str | None = None, event: str, **details: Any) -> None:
+        now = datetime.now(timezone.utc).isoformat()
+        if status is not None:
+            self.data["status"] = status
+            self.data["lifecycle_status"] = status
+        if final_status is not None:
+            self.data["final_status"] = final_status
+        self.data["last_updated_at"] = now
+        self.data.update(details)
+        _atomic_json(self.metadata_path, self.data)
+        self._event(event, status=self.data["status"], **details)
+
+    def running(self, case_id: str) -> None:
+        self._update(status="RUNNING", event="CASE_STARTED", case_id=case_id)
+
+    def generation_started(self, case_id: str) -> None:
+        now = datetime.now(timezone.utc).isoformat()
+        if self.data["first_generation_timestamp"] is None:
+            self.data["first_generation_timestamp"] = now
+        self._update(status="RUNNING", event="F5_INVOCATION_STARTED", case_id=case_id, generation_invoked=True)
+
+    def d0_started(self, case_id: str) -> None:
+        now = datetime.now(timezone.utc).isoformat()
+        if self.data["first_d0_timestamp"] is None:
+            self.data["first_d0_timestamp"] = now
+        self._update(status="RUNNING", event="D0_INVOCATION_STARTED", case_id=case_id, d0_invoked=True)
+
+    def completed_case(self, case_id: str, count: int) -> None:
+        self._update(status="RUNNING", event="CASE_COMPLETED", case_id=case_id, completed_case_count=count)
+
+    def failed(self, case_id: str | None, exc: Exception) -> None:
+        status = "BLOCKED" if "NO_VALID_ADAPTIVE_PARENT" in str(exc) else "FAILED"
+        self._update(status=status, final_status=status, event="RUN_TERMINATED", failure_case_id=case_id, failure_class=type(exc).__name__)
+
+    def completed(self, count: int) -> None:
+        self._update(status="COMPLETED", final_status="COMPLETED", event="RUN_COMPLETED", completed_case_count=count)
+
+
 def execute_protocol(*, cases: list[Mapping[str, Any]], spec: FrozenAttackSpec, runtime_root: Path, f5_generator: Callable[[Mapping[str, Any], int], tuple[np.ndarray, int]], d0_backend: Any, source_loader: Callable[[Mapping[str, Any]], np.ndarray] = load_source_case, stage: str = "all", metadata: Mapping[str, Any] | None = None) -> dict[str, Any]:
     """Run the fixed DEV → VALIDATION → HELD_OUT sequence with injected backends.
 
@@ -271,97 +351,103 @@ def execute_protocol(*, cases: list[Mapping[str, Any]], spec: FrozenAttackSpec, 
         raise Week4ExecutionError("runtime namespace must be new")
     ledger = CandidateLedger(runtime_root / "accounting/candidate_ledger.jsonl")
     attempt_ledger = runtime_root / "accounting/f5_attempt_ledger.jsonl"
-    runtime_metadata = dict(metadata or {})
-    runtime_metadata.update({"stage": "DEV" if stage == "dev" else "TEST_ONLY_ALL", "run_id": spec.run_id, "started_at": __import__("datetime").datetime.now(__import__("datetime").timezone.utc).isoformat(), "scientific_parameters_changed": False})
-    runtime_root.mkdir(parents=True, exist_ok=True)
-    (runtime_root / "run_metadata.json").write_text(json.dumps(runtime_metadata, ensure_ascii=False, sort_keys=True, indent=2), encoding="utf-8")
+    lifecycle = _RunLifecycle(runtime_root, metadata, stage="DEV" if stage == "dev" else "TEST_ONLY_ALL", run_id=spec.run_id)
     per_case: dict[str, dict[str, dict[str, Any]]] = {}
     case_index = {str(case["case_id"]): index for index, case in enumerate(ordered)}
     execution_order = sorted(ordered, key=lambda c: ({"dev": 0, "validation": 1, "held_out": 2}.get(str(c["split"]), 3), str(c["case_id"])))
     if stage == "dev":
         execution_order = [c for c in execution_order if str(c["split"]) == "dev"]
-    f5_successes = 0
-    for case in execution_order:
-        case_id, split = str(case["case_id"]), str(case["split"])
-        seed = 20260914 + case_index[case_id]
-        attempt_index = 0
-        raw_path = runtime_root / "waveforms" / case_id / f"f5_attempt_{attempt_index:02d}_raw.npy"
-        try:
-            native, native_sr = f5_generator(case, seed)
-            native = np.asarray(native, dtype=np.float32)
-            raw_path.parent.mkdir(parents=True, exist_ok=True)
-            np.save(raw_path, native, allow_pickle=False)
-            raw_hash = sha256_bytes(np.ascontiguousarray(native).tobytes())
-            synthetic = trim_synthetic(native, native_sr)
-            standardized_path = runtime_root / "waveforms" / case_id / "base_synthetic_16k.npy"
-            np.save(standardized_path, np.ascontiguousarray(synthetic, dtype=np.float32), allow_pickle=False)
-            standardized_hash = sha256_bytes(np.ascontiguousarray(synthetic, dtype=np.float32).tobytes())
-            _append_attempt(attempt_ledger, {"case_id": case_id, "split": split, "attempt_index": attempt_index, "status": "SUCCESS", "generation_seed": seed, "raw_path": raw_path.relative_to(runtime_root).as_posix(), "raw_waveform_sha256": raw_hash, "native_sample_rate": int(native_sr), "standardized_path": standardized_path.relative_to(runtime_root).as_posix(), "standardized_waveform_sha256": standardized_hash, "standardized_sample_rate": SAMPLE_RATE, "trim_rule": {"frame_samples": FRAME, "hop_samples": HOP, "threshold_dbfs": THRESHOLD_DBFS, "retain_edge_samples": RETAIN}})
-            f5_successes += 1
-        except Exception as exc:
-            _append_attempt(attempt_ledger, {"case_id": case_id, "split": split, "attempt_index": attempt_index, "status": "FAILED", "generation_seed": seed, "error_type": type(exc).__name__, "error": str(exc)})
-            raise
-        source = source_loader(case)
-        source_interval = active_interval(source)
-        base_hash = standardized_hash
-        results: dict[str, dict[str, Any]] = {}
-        staged: dict[str, list[Any]] = {}
-        def detector(query: DetectorQuery) -> float:
-            # GT is reconstructed from the deterministic construction associated
-            # with this waveform immediately below; this closure only returns J.
-            key = sha256_bytes(np.ascontiguousarray(query.waveform, dtype=np.float32).tobytes())
-            scores, windows = score_candidate(query, d0_backend)
-            staged[key][0], staged[key][1] = scores, windows
-            return attacker_objective(scores, staged[key][2])
-        auth = {"protocol": "WEEK4_ADAPTIVE_RED_TEAM_A0", "authorization_status": "ACTIVE", "run_id": spec.run_id, "split": split, "spec_sha256": spec.sha256(), "a0_freeze_sha256": __import__("audiobookbench.security.week4_adaptive", fromlist=["a0_freeze_sha256"]).a0_freeze_sha256(spec), "ready": True}
-        controller = A0AttackController(spec=spec, authorization=auth, case_id=case_id, split=split, ledger=ledger, detector=detector)
-        def evaluate(params: Mapping[str, float], phase: str) -> dict[str, Any]:
+    f5_successes, d0_backend_calls, current_case_id = 0, 0, None
+    try:
+        for case in execution_order:
+            case_id, split = str(case["case_id"]), str(case["split"])
+            current_case_id = case_id
+            lifecycle.running(case_id)
+            seed, attempt_index = 20260914 + case_index[case_id], 0
+            raw_path = runtime_root / "waveforms" / case_id / f"f5_attempt_{attempt_index:02d}_raw.npy"
             try:
-                built = construct_candidate(source, synthetic, crossfade_samples=int(params["insertion_crossfade_samples"]), gain_db=float(params["synthetic_gain_db"]))
-            except Week4ExecutionError as exc:
-                return controller._append_invalid(controller._new_candidate_id(phase), phase, params, str(exc), detector_query=False, query_index=controller._adaptive_query_count() + (1 if phase == ADAPTIVE_PHASE else 0))
-            projection = project_gt(built.waveform, built.gt)
-            key = sha256_bytes(np.ascontiguousarray(built.waveform, dtype=np.float32).tobytes())
-            scores, windows = score_candidate(DetectorQuery(built.waveform, SAMPLE_RATE, spec.window_spec), d0_backend)
-            staged[key] = [None, None, projection]
-            # The controller invocation is the sole accounted D0 query; its
-            # detector closure performs the one real/injected D0 evaluation.
-            row = controller.evaluate_candidate(waveform=built.waveform, sample_rate=SAMPLE_RATE, params=params, phase=phase)
-            score, table, projection = staged[key]
-            record = vector_record(case_id=case_id, candidate_id=row["candidate_id"], waveform=built.waveform, scores=score, windows=table, projection=projection)
-            objective = float(row.get("score", float("nan")))
-            record["objective"] = objective
-            record["base_synthetic_sha256"] = base_hash
-            record["source_active_interval"] = {"start": source_interval[0], "end": source_interval[1], "insertion_sample": (source_interval[0] + source_interval[1]) // 2}
-            record["generation_seed"] = seed
-            return _persist_candidate(runtime_root, record)
-        results["static"] = evaluate(dict(spec.parameter_defaults), STATIC_PHASE)
-        for _ in range(40):
-            candidate = controller.next_candidate()
-            record = evaluate(candidate, ADAPTIVE_PHASE)
-            if "score_vector" in record and math.isfinite(float(record["objective"])):
-                prior = results.get("adaptive")
-                if prior is None or (float(record["objective"]), int(record["candidate_id"].rsplit(":", 1)[1]), record["candidate_id"]) < (float(prior["objective"]), int(prior["candidate_id"].rsplit(":", 1)[1]), prior["candidate_id"]):
-                    results["adaptive"] = record
-        per_case[case_id] = results
-        if "adaptive" in results:
-            selection = {"case_id": case_id, "selected_candidate_id": results["adaptive"]["candidate_id"], "selected_objective": results["adaptive"]["objective"], "sidecar_relpath": results["adaptive"]["sidecar_relpath"], "sidecar_sha256": results["adaptive"]["sidecar_sha256"]}
-            target = runtime_root / "selections" / f"{case_id}.json"
-            target.parent.mkdir(parents=True, exist_ok=True)
-            target.write_text(json.dumps(selection, ensure_ascii=False, sort_keys=True, allow_nan=False), encoding="utf-8")
-        if split == "validation":
-            # The final validation case marks the immutable adaptive method
-            # boundary before any held-out waveform/D0 invocation.
-            remaining_validation = [c for c in execution_order[execution_order.index(case) + 1:] if c["split"] == "validation"]
-            if not remaining_validation:
-                a0_frozen = True
+                lifecycle.generation_started(case_id)
+                native, native_sr = f5_generator(case, seed)
+                native = np.asarray(native, dtype=np.float32)
+                raw_path.parent.mkdir(parents=True, exist_ok=True)
+                np.save(raw_path, native, allow_pickle=False)
+                raw_hash = sha256_bytes(np.ascontiguousarray(native).tobytes())
+                synthetic = trim_synthetic(native, native_sr)
+                standardized_path = runtime_root / "waveforms" / case_id / "base_synthetic_16k.npy"
+                np.save(standardized_path, np.ascontiguousarray(synthetic, dtype=np.float32), allow_pickle=False)
+                standardized_hash = sha256_bytes(np.ascontiguousarray(synthetic, dtype=np.float32).tobytes())
+                _append_attempt(attempt_ledger, {"case_id": case_id, "split": split, "attempt_index": attempt_index, "status": "SUCCESS", "generation_seed": seed, "raw_path": raw_path.relative_to(runtime_root).as_posix(), "raw_waveform_sha256": raw_hash, "native_sample_rate": int(native_sr), "standardized_path": standardized_path.relative_to(runtime_root).as_posix(), "standardized_waveform_sha256": standardized_hash, "standardized_sample_rate": SAMPLE_RATE, "trim_rule": {"frame_samples": FRAME, "hop_samples": HOP, "threshold_dbfs": THRESHOLD_DBFS, "retain_edge_samples": RETAIN}})
+                f5_successes += 1
+            except Exception as exc:
+                _append_attempt(attempt_ledger, {"case_id": case_id, "split": split, "attempt_index": attempt_index, "status": "FAILED", "generation_seed": seed, "error_type": type(exc).__name__, "error": str(exc)})
+                raise
+            source, source_interval, base_hash = source_loader(case), None, standardized_hash
+            source_interval = active_interval(source)
+            results: dict[str, dict[str, Any]] = {}
+            staged: dict[str, dict[str, Any]] = {}
+            def detector(query: DetectorQuery) -> DetectorOutcome:
+                nonlocal d0_backend_calls
+                key = sha256_bytes(np.ascontiguousarray(query.waveform, dtype=np.float32).tobytes())
+                if key not in staged:
+                    raise Week4ExecutionError("unstaged candidate reached D0")
+                lifecycle.d0_started(case_id)
+                d0_backend_calls += 1
+                scores, windows = score_candidate(query, d0_backend)
+                objective = attacker_objective(scores, staged[key]["projection"])
+                staged[key].update({"scores": scores, "windows": windows})
+                if staged[key]["phase"] == STATIC_PHASE:
+                    return DetectorOutcome(None, "NOT_APPLICABLE")
+                return DetectorOutcome(float(objective) if math.isfinite(objective) else None, "DEFINED" if math.isfinite(objective) else "OBJECTIVE_UNDEFINED")
+            auth = {"protocol": "WEEK4_ADAPTIVE_RED_TEAM_A0", "authorization_status": "ACTIVE", "run_id": spec.run_id, "split": split, "spec_sha256": spec.sha256(), "a0_freeze_sha256": __import__("audiobookbench.security.week4_adaptive", fromlist=["a0_freeze_sha256"]).a0_freeze_sha256(spec), "ready": True}
+            controller = A0AttackController(spec=spec, authorization=auth, case_id=case_id, split=split, ledger=ledger, detector=detector)
+            def evaluate(params: Mapping[str, float], phase: str) -> dict[str, Any]:
+                try:
+                    built = construct_candidate(source, synthetic, crossfade_samples=int(params["insertion_crossfade_samples"]), gain_db=float(params["synthetic_gain_db"]))
+                except Week4ExecutionError as exc:
+                    return controller._append_invalid(controller._new_candidate_id(phase), phase, params, str(exc), detector_query=False, query_index=controller._adaptive_query_count() + (1 if phase == ADAPTIVE_PHASE else 0))
+                projection = project_gt(built.waveform, built.gt)
+                key = sha256_bytes(np.ascontiguousarray(built.waveform, dtype=np.float32).tobytes())
+                staged[key] = {"projection": projection, "phase": phase}
+                row = controller.evaluate_candidate(waveform=built.waveform, sample_rate=SAMPLE_RATE, params=params, phase=phase)
+                stage_record = staged[key]
+                record = vector_record(case_id=case_id, candidate_id=row["candidate_id"], waveform=built.waveform, scores=stage_record["scores"], windows=stage_record["windows"], projection=projection)
+                record.update({"objective": row.get("objective"), "objective_status": row["objective_status"], "detector_status": row["detector_status"], "valid_for_winner": row["valid_for_winner"], "base_synthetic_sha256": base_hash, "source_active_interval": {"start": source_interval[0], "end": source_interval[1], "insertion_sample": (source_interval[0] + source_interval[1]) // 2}, "generation_seed": seed})
+                return _persist_candidate(runtime_root, record)
+            results["static"] = evaluate(dict(spec.parameter_defaults), STATIC_PHASE)
+            for _ in range(40):
+                candidate = controller.next_candidate()
+                record = evaluate(candidate, ADAPTIVE_PHASE)
+                if record["valid_for_winner"] is True and isinstance(record.get("objective"), (int, float)) and math.isfinite(float(record["objective"])):
+                    prior = results.get("adaptive")
+                    if prior is None or (float(record["objective"]), int(record["candidate_id"].rsplit(":", 1)[1]), record["candidate_id"]) < (float(prior["objective"]), int(prior["candidate_id"].rsplit(":", 1)[1]), prior["candidate_id"]):
+                        results["adaptive"] = record
+            per_case[case_id] = results
+            if "adaptive" in results:
+                selection = {"case_id": case_id, "selected_candidate_id": results["adaptive"]["candidate_id"], "selected_objective": results["adaptive"]["objective"], "sidecar_relpath": results["adaptive"]["sidecar_relpath"], "sidecar_sha256": results["adaptive"]["sidecar_sha256"]}
+                target = runtime_root / "selections" / f"{case_id}.json"
+                target.parent.mkdir(parents=True, exist_ok=True)
+                target.write_text(json.dumps(selection, ensure_ascii=False, sort_keys=True, allow_nan=False), encoding="utf-8")
+            lifecycle.completed_case(case_id, len(per_case))
+            if split == "validation":
+                remaining_validation = [c for c in execution_order[execution_order.index(case) + 1:] if c["split"] == "validation"]
+                if not remaining_validation:
+                    a0_frozen = True
+    except Exception as exc:
+        lifecycle.failed(current_case_id, exc)
+        raise
+    accounted_d0 = sum(row.get("detector_invoked") is True for row in ledger.records())
+    if d0_backend_calls != accounted_d0:
+        mismatch = Week4ExecutionError("ACTUAL_D0_BACKEND_CALLS does not equal accounted ledger invocations")
+        lifecycle.failed(current_case_id, mismatch)
+        raise mismatch
+    lifecycle.completed(len(per_case))
     if stage == "dev":
         counts = [sum(row.get("phase") == ADAPTIVE_PHASE and row.get("detector_query") is True for row in ledger.records() if row.get("case_id") == case_id) for case_id in per_case]
-        return {"stage": "DEV", "per_case": per_case, "ledger": ledger.records(), "f5_attempts": _load_jsonl(attempt_ledger), "accounting": {"DEV_PLANNED": 24, "DEV_STARTED": len(per_case), "DEV_COMPLETED": len(per_case), "DEV_SUCCESS": f5_successes, "DEV_FAILED": 24 - f5_successes, "F5_TOTAL_ATTEMPTS": f5_successes, "F5_SUCCESSFUL_CASES": f5_successes, "F5_FAILED_CASES": 24 - f5_successes, "F5_RETRIES": 0, "STATIC_D0_INVOCATIONS": len(per_case), "ADAPTIVE_D0_INVOCATIONS": sum(counts), "ADAPTIVE_QUERY_MIN": min(counts) if counts else 0, "ADAPTIVE_QUERY_MAX": max(counts) if counts else 0, "ADAPTIVE_QUERY_MEAN": float(np.mean(counts)) if counts else 0.0, "CASES_WITH_40_ADAPTIVE_QUERIES": sum(count == 40 for count in counts), "CASES_WITH_FEWER_THAN_40_DUE_TO_PRE_D0_INVALIDITY": sum(count < 40 for count in counts), "CASES_WITH_NO_VALID_WINNER": sum("adaptive" not in value for value in per_case.values()), "LEDGER_HASH_CHAIN": "PASS", "RAW_EVIDENCE_CHAIN": "PASS"}, "A0_FROZEN": False}
+        return {"stage": "DEV", "per_case": per_case, "ledger": ledger.records(), "f5_attempts": _load_jsonl(attempt_ledger), "accounting": {"DEV_PLANNED": 24, "DEV_STARTED": len(per_case), "DEV_COMPLETED": len(per_case), "DEV_SUCCESS": f5_successes, "DEV_FAILED": 24 - f5_successes, "F5_TOTAL_ATTEMPTS": f5_successes, "F5_SUCCESSFUL_CASES": f5_successes, "F5_FAILED_CASES": 24 - f5_successes, "F5_RETRIES": 0, "STATIC_D0_INVOCATIONS": len(per_case), "ADAPTIVE_D0_INVOCATIONS": sum(counts), "ACTUAL_D0_BACKEND_CALLS": d0_backend_calls, "ACCOUNTED_D0_INVOCATIONS": accounted_d0, "ADAPTIVE_QUERY_MIN": min(counts) if counts else 0, "ADAPTIVE_QUERY_MAX": max(counts) if counts else 0, "ADAPTIVE_QUERY_MEAN": float(np.mean(counts)) if counts else 0.0, "CASES_WITH_40_ADAPTIVE_QUERIES": sum(count == 40 for count in counts), "CASES_WITH_FEWER_THAN_40_DUE_TO_PRE_D0_INVALIDITY": sum(count < 40 for count in counts), "CASES_WITH_NO_VALID_WINNER": sum("adaptive" not in value for value in per_case.values()), "LEDGER_HASH_CHAIN": "PASS", "RAW_EVIDENCE_CHAIN": "PASS"}, "A0_FROZEN": False}
     held = {case_id: per_case[case_id] for case_id in per_case if next(c for c in ordered if c["case_id"] == case_id)["split"] == "held_out"}
     final = final_evaluate(held)
     (runtime_root / "final.json").write_text(json.dumps(final, ensure_ascii=False, indent=2, allow_nan=False), encoding="utf-8")
-    return {"per_case": per_case, "final": final, "ledger": ledger.records(), "A0_FROZEN": bool(locals().get("a0_frozen", False))}
+    return {"per_case": per_case, "final": final, "ledger": ledger.records(), "ACTUAL_D0_BACKEND_CALLS": d0_backend_calls, "ACCOUNTED_D0_INVOCATIONS": accounted_d0, "A0_FROZEN": bool(locals().get("a0_frozen", False))}
 
 
 def _load_jsonl(path: Path) -> list[dict[str, Any]]:

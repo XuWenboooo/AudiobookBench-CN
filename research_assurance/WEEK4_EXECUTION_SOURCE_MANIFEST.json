@@ -1,16 +1,19 @@
 {
   "manifest_type": "WEEK4_EXECUTION_SOURCE_MANIFEST",
   "status": "PASS",
+  "change_classification": "CORRECTIVE_IMPLEMENTATION_INTEGRITY_REPAIR",
+  "scientific_protocol_changed_after_prior_dev_observation": false,
   "sources": [
     {"relative_path":"configs/week4_execution_supplement_v1.schema.json","sha256":"9ACB7F4012D2C0C341425012DA7C644ED0294A34CECC780156C44B9FB829E0BE"},
     {"relative_path":"configs/week4_execution_supplement_v1.yaml","sha256":"D63943F67A56ED76928A26A92FB788EECD44F386A8DEEBAA37FDCF30521D9DDB"},
+    {"relative_path":"configs/week4_formal_authorization.schema.json","sha256":"28C4371DCEE1556510572163186E131A7454653971EB4893C4BA1B3BEB6BF647"},
     {"relative_path":"experiments/week4_adaptive_red_team/formal_run.py","sha256":"0DB2B4B57AAFEF35BD309A64A1DB8C9B8875D9CC5811974ED4C82269BB36B743"},
     {"relative_path":"src/audiobookbench/evaluation/day6a_localization.py","sha256":"588FA3A1AE835BC4509B1F21C68E09E1671EA33159BD79DA4F8C3373983BE22F"},
     {"relative_path":"src/audiobookbench/preprocessing/audio_io.py","sha256":"15395E8CE10F259D452C50B6E9DF6D7895F06E13701C6837180F693FCB8A2A95"},
     {"relative_path":"src/audiobookbench/security/week3_f5_stage_a.py","sha256":"78C72D3273495701C7A69C5CF9A19A5C965BC087EE2315CE6EE84A9D20E01CAF"},
-    {"relative_path":"src/audiobookbench/security/week4_adaptive.py","sha256":"D803F8CC4C2AE6A221A74E291B6F779FF3635ECA49DEA15C81B67D11F2CA9D6B"},
-    {"relative_path":"src/audiobookbench/security/week4_authorization.py","sha256":"C562F63DADC60C41A9907EEF6D5A54B944EB5142D9458AD2A27870226D412689"},
-    {"relative_path":"src/audiobookbench/security/week4_execution.py","sha256":"0766558D154AFBA344980B316498AFA14F333817F4C208480F4B34FA4EEA4A0B"},
+    {"relative_path":"src/audiobookbench/security/week4_adaptive.py","sha256":"00F7E3949BF15CA2E8BE9491D206F167E18B3E8B9A33494EC9B7F1721C5E093A"},
+    {"relative_path":"src/audiobookbench/security/week4_authorization.py","sha256":"E280C85D72D4A799FB5B69451417140547C01BBAFB4A7D5D44719FA8E908DA9C"},
+    {"relative_path":"src/audiobookbench/security/week4_execution.py","sha256":"63B1AA68507C86C2E35DFB1C3F762E32F278BF00725DCB74090C3B1C71C1EBAC"},
     {"relative_path":"src/audiobookbench/temporal/day6b_embed.py","sha256":"1AA4593BFD2F57C622110508580D45A21170B4F67FEF16F2B17A41BD80DA6CFD"},
     {"relative_path":"src/audiobookbench/temporal/day6b_scoring.py","sha256":"36606F096EDA23FA42FBEB91364464451BC9CB344D1603D9C6E9852E200AC055"}
   ],

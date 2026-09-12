@@ -31,6 +31,7 @@ CANONICAL_SOURCES = {
     "execution_source_manifest": REPO_ROOT / "research_assurance/WEEK4_EXECUTION_SOURCE_MANIFEST.json",
     "f5_frozen_source_manifest": REPO_ROOT / "research_assurance/WEEK4_F5_FROZEN_SOURCE_MANIFEST.json",
     "formal_runtime_environment_manifest": REPO_ROOT / "research_assurance/WEEK4_FORMAL_RUNTIME_ENVIRONMENT_MANIFEST.json",
+    "partial_dev_invalidation": REPO_ROOT / "research_assurance/WEEK4_DEV_REEXECUTION_01_INVALIDATION.md",
 }
 HEX64 = r"^[A-Fa-f0-9]{64}$"
 
@@ -120,8 +121,8 @@ def validate_authorization_artifact(
         raise Week4AuthorizationError("configuration self-authorization is forbidden")
     if artifact.get("week1_3_scientific_results_already_observed") is not True:
         raise Week4AuthorizationError("Week1-3 scientific-result history must be disclosed")
-    if artifact.get("week4_scientific_results_observed_before_authorization") is not False:
-        raise Week4AuthorizationError("observed Week4 results may not authorize Week4 execution")
+    if artifact.get("week4_scientific_results_observed_before_authorization") is not True:
+        raise Week4AuthorizationError("prior Week4 DEV outcome history must be disclosed")
     if artifact.get("run_id") != expected_run_id:
         raise Week4AuthorizationError("authorization run_id mismatch")
     output_namespace = str(artifact.get("output_namespace", ""))
@@ -156,6 +157,7 @@ def validate_authorization_artifact(
         "execution_source_manifest_sha256": "execution_source_manifest",
         "f5_frozen_source_manifest_sha256": "f5_frozen_source_manifest",
         "formal_runtime_environment_manifest_sha256": "formal_runtime_environment_manifest",
+        "partial_dev_invalidation_sha256": "partial_dev_invalidation",
     }.items():
         if str(artifact.get(field, "")).upper() != str(hashes.get(filename, "")).upper():
             mismatches.append(field)
@@ -168,8 +170,21 @@ def validate_authorization_artifact(
     environment = _load_json(sources["formal_runtime_environment_manifest"], "formal runtime environment manifest")
     if environment.get("status") != "QUALIFIED_OFFLINE_PREOUTPUT" or environment.get("f5_source", {}).get("source_manifest_sha256", "").upper() != sha256_file(sources["f5_frozen_source_manifest"]):
         raise Week4AuthorizationError("formal runtime environment does not bind the frozen F5 source")
-    if artifact.get("WEEK4_SCIENTIFIC_OUTCOME_OBSERVED_BEFORE_REAUTHORIZATION") is not False or artifact.get("PRIOR_FAILED_ATTEMPT_EXISTED") is not True or artifact.get("PRIOR_FAILED_ATTEMPT_PRODUCED_SCIENTIFIC_OUTCOME") is not False:
-        raise Week4AuthorizationError("authorization does not disclose the prior pre-output failure")
+    required_provenance = {
+        "WEEK4_SCIENTIFIC_OUTCOME_OBSERVED_BEFORE_REAUTHORIZATION": True,
+        "PRIOR_FAILED_ATTEMPT_EXISTED": True,
+        "PRIOR_FAILED_ATTEMPT_PRODUCED_SCIENTIFIC_OUTCOME": False,
+        "PRIOR_WEEK4_DEV_OUTCOMES_OBSERVED": True,
+        "PRIOR_WEEK4_VALIDATION_OUTCOMES_OBSERVED": False,
+        "PRIOR_WEEK4_HELD_OUT_OUTCOMES_OBSERVED": False,
+        "PRIOR_WEEK4_H4_OUTCOME_OBSERVED": False,
+        "PRIOR_PARTIAL_RUN_SCIENTIFICALLY_ADMISSIBLE": False,
+        "SCIENTIFIC_PROTOCOL_CHANGED_AFTER_PRIOR_DEV_OBSERVATION": False,
+        "EXECUTION_IMPLEMENTATION_CHANGED_AFTER_PRIOR_DEV_OBSERVATION": True,
+        "IMPLEMENTATION_CHANGE_CLASS": "CORRECTIVE_IMPLEMENTATION_INTEGRITY_REPAIR",
+    }
+    if any(artifact.get(name) != expected for name, expected in required_provenance.items()):
+        raise Week4AuthorizationError("authorization does not disclose the invalidated partial DEV provenance")
 
     population = _load_json(sources["population_manifest"], "population manifest")
     if population.get("status") != "FINALIZED" or population.get("final_case_count") != 48:
