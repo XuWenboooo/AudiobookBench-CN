@@ -32,6 +32,9 @@ CANONICAL_CONFIG = ROOT / "configs/week4_adaptive_red_team.yaml"
 CANONICAL_POPULATION = ROOT / "data/manifests/week4_population_manifest.json"
 CANONICAL_PREREG = ROOT / "research_assurance/WEEK4_ADAPTIVE_REDTEAM_PREREGISTRATION.md"
 CANONICAL_RUN_BASE = "results/week4_adaptive_redteam_runs"
+FROZEN_PREREGISTRATION_SHA256 = "6942358DFF60EBC042E06F9441436D2BCCAE43EA8A66C6BD6B891FAE345758C4"
+FROZEN_CONFIG_SHA256 = "1942A6CBF1571BECE97BEE53DF15C042431650F1EC882DD39A4DDC1A2AE1382D"
+FROZEN_POPULATION_SHA256 = "DD71B3B70E558B73FA5E5545A52C2A819999171930ADA81D207EC5BFB60973F6"
 
 
 def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
@@ -53,6 +56,17 @@ def _load_json(path: Path, label: str) -> Any:
         return json.loads(path.read_text(encoding="utf-8"))
     except (OSError, json.JSONDecodeError) as exc:
         raise FormalRunBlocked(f"{label} cannot be loaded") from exc
+
+
+def _require_frozen_hashes(config: Path, population: Path) -> None:
+    """Verify scientific freezes before reading population or authorization state."""
+    for label, path, expected in (
+        ("preregistration", CANONICAL_PREREG, FROZEN_PREREGISTRATION_SHA256),
+        ("canonical config", config, FROZEN_CONFIG_SHA256),
+        ("population manifest", population, FROZEN_POPULATION_SHA256),
+    ):
+        if sha256_file(path) != expected:
+            raise FormalRunBlocked(f"frozen {label} hash mismatch")
 
 
 def _validate_population(path: Path) -> dict[str, Any]:
@@ -87,7 +101,10 @@ def preflight(*, config: Path, population: Path, authorization: Path, runtime_ro
         raise FormalRunBlocked("only the canonical finalized population is accepted")
     if not config.is_file() or not population.is_file() or not CANONICAL_PREREG.is_file():
         raise FormalRunBlocked("canonical Week4 inputs are missing")
+    # Schema/spec precede every hash-bound input.  Frozen scientific hashes
+    # precede population parsing and active-authorization validation.
     spec = FrozenAttackSpec.from_path(config)
+    _require_frozen_hashes(config, population)
     selected = _validate_population(population)
     validated = validate_authorization_artifact(authorization, repo=ROOT, expected_run_id=spec.run_id, verify_f5_assets=True)
     expected_namespace = ROOT / Path(validated.output_namespace)
@@ -102,6 +119,9 @@ def preflight(*, config: Path, population: Path, authorization: Path, runtime_ro
         raise FormalRunBlocked("canonical config hash mismatch")
     if sha256_file(population) != validated.source_sha256["population_manifest"]:
         raise FormalRunBlocked("population manifest hash mismatch")
+    ledger_path = runtime_root / "accounting" / "candidate_ledger.jsonl"
+    if ledger_path.exists():  # defensive: runtime_root is required to be new above.
+        raise FormalRunBlocked("new formal namespace already contains accounting state")
     return {
         "status": "PASS",
         "mode": "VALIDATED_CONTEXT",
@@ -116,6 +136,10 @@ def preflight(*, config: Path, population: Path, authorization: Path, runtime_ro
         "config_sha256": sha256_file(config),
         "population_manifest_sha256": sha256_file(population),
         "population_counts": selected["split_counts"],
+        "accounting_ledger_path": str(ledger_path),
+        "accounting_initialization_safe": True,
+        "accounting_initialized": False,
+        "runtime_permitted_by_external_authorization": True,
     }
 
 
@@ -124,7 +148,7 @@ def main(argv: list[str] | None = None) -> int:
     try:
         context = preflight(config=args.config, population=args.population, authorization=args.authorization, runtime_root=args.runtime_root)
         if not args.preflight_only:
-            raise FormalRunBlocked("scientific execution is not enabled by configuration; no generation was started")
+            raise FormalRunBlocked("external authorization is valid, but this pre-execution process has no runtime dispatcher; no generation was started")
     except (FormalRunBlocked, Week4AuthorizationError, RuntimeError) as exc:
         raise SystemExit(f"WEEK4 FORMAL PATH BLOCKED: {exc}") from exc
     print(json.dumps(context, ensure_ascii=False, sort_keys=True))

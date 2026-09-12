@@ -67,6 +67,11 @@ arguments plus `--preflight-only`.  The frozen config retains
 `scientific_execution_enabled: false`; this means
 `CONFIG_SELF_AUTHORIZES_EXECUTION = NO`, not that the config may be edited.
 Formal permission can only come from a valid external active authorization.
+The authorization explicitly records
+`WEEK1_3_RESULTS_ALREADY_OBSERVED = TRUE` and
+`WEEK4_RESULTS_OBSERVED_BEFORE_AUTHORIZATION = FALSE`; the latter, rather
+than a misleading statement about all earlier project results, is the
+prospective authorization condition.
 Preflight never creates the output namespace and never invokes F5, D0, or an
 evaluator.
 

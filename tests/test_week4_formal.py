@@ -61,6 +61,22 @@ def test_inactive_template_is_schema_valid_but_cannot_authorize():
             validate_authorization_artifact(path)
 
 
+def test_authorization_discloses_week1_3_history_and_rejects_prior_week4_outcomes(tmp_path: Path):
+    artifact = active_artifact()
+    assert artifact["week1_3_scientific_results_already_observed"] is True
+    assert artifact["week4_scientific_results_observed_before_authorization"] is False
+    artifact["week4_scientific_results_observed_before_authorization"] = True
+    with pytest.raises(Week4AuthorizationError, match="canonical JSON Schema validation"):
+        validate_authorization_artifact(write_artifact(tmp_path, artifact))
+
+
+def test_missing_week4_outcome_disclosure_fails_canonical_schema(tmp_path: Path):
+    artifact = active_artifact()
+    artifact.pop("week4_scientific_results_observed_before_authorization")
+    with pytest.raises(Week4AuthorizationError, match="canonical JSON Schema validation"):
+        validate_authorization_artifact(write_artifact(tmp_path, artifact))
+
+
 @pytest.mark.parametrize("field", [
     "preregistration_sha256", "canonical_config_sha256", "population_manifest_sha256",
     "controller_sha256", "search_implementation_sha256", "formal_runner_sha256", "f5_qualification_sha256",
@@ -90,11 +106,34 @@ def test_valid_authorization_and_preflight_are_read_only(tmp_path: Path):
     context = formal_run.preflight(config=ROOT / "configs/week4_adaptive_red_team.yaml", population=ROOT / "data/manifests/week4_population_manifest.json", authorization=artifact_path, runtime_root=output)
     assert context["status"] == "PASS"
     assert context["generation_invoked"] is False and context["d0_invoked"] is False and context["evaluator_invoked"] is False
+    assert context["accounting_initialization_safe"] is True and context["accounting_initialized"] is False
+    assert context["scientific_execution_enabled"] is False
+    assert context["runtime_permitted_by_external_authorization"] is True
     assert not output.exists()
 
 
-def test_no_active_authorization_or_formal_run_namespace_exists():
-    assert not (ROOT / "results/week4_adaptive_redteam/authorization.json").exists()
+def test_frozen_hashes_are_checked_before_authorization(monkeypatch, tmp_path: Path):
+    formal_run = importlib.import_module("experiments.week4_adaptive_red_team.formal_run")
+    original_hash = formal_run.sha256_file
+    calls: list[str] = []
+
+    def fake_hash(path: Path) -> str:
+        if Path(path).resolve() == formal_run.CANONICAL_PREREG.resolve():
+            return "0" * 64
+        return original_hash(path)
+
+    def unexpected_authorization(*args, **kwargs):
+        calls.append("authorization")
+        raise AssertionError("authorization must not be read after a frozen-hash failure")
+
+    monkeypatch.setattr(formal_run, "sha256_file", fake_hash)
+    monkeypatch.setattr(formal_run, "validate_authorization_artifact", unexpected_authorization)
+    with pytest.raises(formal_run.FormalRunBlocked, match="frozen preregistration hash mismatch"):
+        formal_run.preflight(config=ROOT / "configs/week4_adaptive_red_team.yaml", population=ROOT / "data/manifests/week4_population_manifest.json", authorization=tmp_path / "authorization.json", runtime_root=ROOT / "results/week4_adaptive_redteam_runs/TEST_ONLY_not_created")
+    assert calls == []
+
+
+def test_no_formal_run_namespace_exists_before_runtime_dispatch():
     assert not (ROOT / "results/week4_adaptive_redteam_runs").exists()
 
 

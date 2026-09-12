@@ -12,9 +12,9 @@ under a frozen, auditable protocol.
 | Item | Current state |
 |---|---|
 | Engineering foundation | **Week 1–2 complete** |
-| Current milestone | **Week 4 — adaptive red-team preregistration frozen; engineering preparation only** |
+| Current milestone | **Week 4 — formal readiness passed; external authorization issued, execution not started** |
 | Clean-rerun engineering controls | **Verified** |
-| Active Week4 formal execution authorization | **None** |
+| Active Week4 formal execution authorization | **Active — preflight passed; no run namespace or scientific output** |
 | Week4 formal F5 generation / D0 search / H4 result | **Not started** |
 
 ```mermaid
@@ -22,14 +22,13 @@ flowchart LR
   W1["✓ Week 1\nFoundation"] -->
   W2["✓ Week 2\nProtocol"] -->
   W3["✓ Week 3\nScientific closure"] -->
-  W4["● Week 4\nFrozen preregistration"] -->
-  N["○ Next\nIndependent readiness review"]
+  W4["✓ Week 4\nAuthorized & preflighted"] -->
+  N["○ Next\nFormal execution in a separate session"]
 
   classDef complete fill:#198754,color:#fff,stroke:#146c43;
   classDef current fill:#0d6efd,color:#fff,stroke:#0a58ca;
   classDef next fill:#f8f9fa,color:#343a40,stroke:#6c757d;
-  class W1,W2,W3 complete;
-  class W4 current;
+  class W1,W2,W3,W4 complete;
   class N next;
 ```
 
@@ -39,10 +38,12 @@ execution remains forensic-only. See
 [the readiness record](research_assurance/WEEK3_CLEAN_RERUN_READINESS.md) and
 [the final closure record](research_assurance/WEEK3_FINAL_SCIENTIFIC_CLOSURE.md).
 
-Week 4 now has a frozen adaptive red-team preregistration, a finalized
-48-case speaker-disjoint population manifest, and a read-only formal preflight
-entrypoint. It has no active formal authorization and no observed Week4 result;
-see the [preregistration](research_assurance/WEEK4_ADAPTIVE_REDTEAM_PREREGISTRATION.md)
+Week 4 has a frozen adaptive red-team preregistration, a finalized 48-case
+speaker-disjoint population manifest, and an active external authorization
+whose preflight passed without creating a run directory or scientific output.
+F5 generation, D0 queries, validation/held-out runs, and H4 remain unstarted.
+See the [final readiness review](research_assurance/WEEK4_FINAL_READINESS_REVIEW.md),
+[preregistration](research_assurance/WEEK4_ADAPTIVE_REDTEAM_PREREGISTRATION.md),
 and [population freeze record](research_assurance/WEEK4_POPULATION_FREEZE.md).
 
 ## What is in this repository?

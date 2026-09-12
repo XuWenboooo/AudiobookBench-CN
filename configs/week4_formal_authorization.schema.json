@@ -3,7 +3,7 @@
   "title": "Week4 formal adaptive red-team authorization",
   "type": "object",
   "additionalProperties": false,
-  "required": ["protocol", "authorization_status", "ready", "READY_FOR_WEEK4_EXECUTION", "scientific_execution_enabled", "run_id", "invocation_id", "output_namespace", "issued_at", "prior_week_scientific_results_observed", "source_sha256", "preregistration_sha256", "canonical_config_sha256", "population_manifest_sha256", "controller_sha256", "search_implementation_sha256", "formal_runner_sha256", "f5_qualification_sha256", "d0_identity", "s2_identity", "f5_source_identity", "query_budget", "h4_identity", "bootstrap_contract", "population_finalized", "population_selected_without_d0"],
+  "required": ["protocol", "authorization_status", "ready", "READY_FOR_WEEK4_EXECUTION", "scientific_execution_enabled", "run_id", "invocation_id", "output_namespace", "issued_at", "week1_3_scientific_results_already_observed", "week4_scientific_results_observed_before_authorization", "source_sha256", "preregistration_sha256", "canonical_config_sha256", "population_manifest_sha256", "controller_sha256", "search_implementation_sha256", "formal_runner_sha256", "f5_qualification_sha256", "d0_identity", "s2_identity", "f5_source_identity", "query_budget", "h4_identity", "bootstrap_contract", "population_finalized", "population_selected_without_d0"],
   "properties": {
     "protocol": {"const": "WEEK4_ADAPTIVE_RED_TEAM_A0"},
     "authorization_status": {"enum": ["ACTIVE", "INACTIVE"]},
@@ -14,7 +14,8 @@
     "invocation_id": {"type": ["string", "null"], "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,63}$"},
     "output_namespace": {"type": ["string", "null"], "pattern": "^results/week4_adaptive_redteam_runs/[A-Za-z0-9][A-Za-z0-9._-]{0,63}$"},
     "issued_at": {"type": ["string", "null"], "minLength": 1},
-    "prior_week_scientific_results_observed": {"const": false},
+    "week1_3_scientific_results_already_observed": {"const": true},
+    "week4_scientific_results_observed_before_authorization": {"const": false},
     "source_sha256": {"type": ["object", "null"], "additionalProperties": false, "properties": {"preregistration": {"type": "string", "pattern": "^[A-Fa-f0-9]{64}$"}, "canonical_config": {"type": "string", "pattern": "^[A-Fa-f0-9]{64}$"}, "population_manifest": {"type": "string", "pattern": "^[A-Fa-f0-9]{64}$"}, "controller": {"type": "string", "pattern": "^[A-Fa-f0-9]{64}$"}, "search_implementation": {"type": "string", "pattern": "^[A-Fa-f0-9]{64}$"}, "formal_runner": {"type": "string", "pattern": "^[A-Fa-f0-9]{64}$"}, "f5_qualification": {"type": "string", "pattern": "^[A-Fa-f0-9]{64}$"}}},
     "preregistration_sha256": {"type": ["string", "null"], "pattern": "^[A-Fa-f0-9]{64}$"},
     "canonical_config_sha256": {"type": ["string", "null"], "pattern": "^[A-Fa-f0-9]{64}$"},

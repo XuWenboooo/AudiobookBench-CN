@@ -91,8 +91,10 @@ def validate_authorization_artifact(
         raise Week4AuthorizationError("authorization readiness is not true")
     if artifact.get("scientific_execution_enabled") is not False:
         raise Week4AuthorizationError("configuration self-authorization is forbidden")
-    if artifact.get("prior_week_scientific_results_observed") is not False:
-        raise Week4AuthorizationError("prior scientific results may not authorize Week4")
+    if artifact.get("week1_3_scientific_results_already_observed") is not True:
+        raise Week4AuthorizationError("Week1-3 scientific-result history must be disclosed")
+    if artifact.get("week4_scientific_results_observed_before_authorization") is not False:
+        raise Week4AuthorizationError("observed Week4 results may not authorize Week4 execution")
     if artifact.get("run_id") != expected_run_id:
         raise Week4AuthorizationError("authorization run_id mismatch")
     output_namespace = str(artifact.get("output_namespace", ""))
