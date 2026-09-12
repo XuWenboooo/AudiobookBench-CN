@@ -72,6 +72,17 @@ CASES_WITH_D0_RUNTIME_FAILURE = 1
 CASES_WITH_NO_VALID_WINNER = 1
 ```
 
+The counts above are the ledger-accounted candidate queries.  Read-only
+control-flow tracing identified an additional execution-integrity defect:
+`execute_protocol.evaluate()` calls `score_candidate()` once before invoking
+`A0AttackController.evaluate_candidate()`, and the controller's detector
+closure calls `score_candidate()` a second time for the same candidate.  Thus
+the real backend invocation count is not represented by the ledger: the
+observed candidates imply at least 8 static and 240 adaptive backend calls,
+while only 4 and 120 respectively were recorded.  This violates the
+exactly-one-query accounting contract and is an independent reason the formal
+run is invalid.  No attempt was made to repair or replay it.
+
 Cases `week4_case_0001` through `week4_case_0003` completed with one F5
 attempt, one static D0 invocation, and 40 adaptive D0 queries each.  Case
 `week4_case_0004` produced and retained its real F5 waveform, then failed at
