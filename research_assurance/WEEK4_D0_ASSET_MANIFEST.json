@@ -1,0 +1,13 @@
+{
+  "manifest_type": "WEEK4_D0_OFFLINE_ASSET_MANIFEST",
+  "backend": {"name": "B1b", "package": "speechbrain", "package_version": "1.1.1", "model": "speechbrain/spkrec-ecapa-voxceleb", "device": "cpu", "sample_rate": 16000, "embedding_dimension": 192, "network_access": false},
+  "assets": [
+    {"relative_path":"pretrained/spkrec-ecapa-voxceleb/classifier.ckpt","size_bytes":5534328,"SHA256":"FD9E3634FE68BD0A427C95E354C0C677374F62B3F434E45B78599950D860D535"},
+    {"relative_path":"pretrained/spkrec-ecapa-voxceleb/config.json","size_bytes":51,"SHA256":"15FF7AFAD09ADEC0936C31493A7397C13F855914F4579A8393FE82649778A664"},
+    {"relative_path":"pretrained/spkrec-ecapa-voxceleb/embedding_model.ckpt","size_bytes":83316686,"SHA256":"0575CB64845E6B9A10DB9BCB74D5AC32B326B8DC90352671D345E2EE3D0126A2"},
+    {"relative_path":"pretrained/spkrec-ecapa-voxceleb/hyperparams.yaml","size_bytes":1919,"SHA256":"6F78854FA04BA59E761437B76A2575D3ABA5E5016DE3E9B69F0C9A5077FB1A41"},
+    {"relative_path":"pretrained/spkrec-ecapa-voxceleb/label_encoder.ckpt","size_bytes":128619,"SHA256":"E13C3A167BB4112685670EE896D20E2B565AF16B3A4CEEAA8689FA4D22ADB8B9"},
+    {"relative_path":"pretrained/spkrec-ecapa-voxceleb/label_encoder.txt","size_bytes":128619,"SHA256":"E13C3A167BB4112685670EE896D20E2B565AF16B3A4CEEAA8689FA4D22ADB8B9"},
+    {"relative_path":"pretrained/spkrec-ecapa-voxceleb/mean_var_norm_emb.ckpt","size_bytes":1921,"SHA256":"CD70225B05B37BE64FC5A95E24395D804231D43F74B2E1E5A513DB7B69B34C33"}
+  ]
+}

@@ -25,6 +25,10 @@ CANONICAL_SOURCES = {
     "search_implementation": REPO_ROOT / "src/audiobookbench/security/week4_adaptive.py",
     "formal_runner": REPO_ROOT / "experiments/week4_adaptive_red_team/formal_run.py",
     "f5_qualification": REPO_ROOT / "results/week3_engineering_qualification/f5_tts_v1_base/qualification.json",
+    "execution_supplement": REPO_ROOT / "research_assurance/WEEK4_EXECUTION_SUPPLEMENT_V1.md",
+    "execution_supplement_config": REPO_ROOT / "configs/week4_execution_supplement_v1.yaml",
+    "d0_asset_manifest": REPO_ROOT / "research_assurance/WEEK4_D0_ASSET_MANIFEST.json",
+    "execution_source_manifest": REPO_ROOT / "research_assurance/WEEK4_EXECUTION_SOURCE_MANIFEST.json",
 }
 HEX64 = r"^[A-Fa-f0-9]{64}$"
 
@@ -70,6 +74,27 @@ def _validate_schema(artifact: Any) -> None:
         if exc.__class__.__module__.startswith("jsonschema"):
             raise Week4AuthorizationError("authorization artifact fails canonical JSON Schema validation") from exc
         raise
+
+
+def _verify_file_manifest(path: Path, *, asset_key: str, hash_key: str, root: Path) -> None:
+    """Require a canonical manifest and recompute every listed repository file."""
+    manifest = _load_json(path, path.name)
+    assets = manifest.get(asset_key)
+    if not isinstance(assets, list) or not assets:
+        raise Week4AuthorizationError(f"{path.name} has no canonical assets")
+    seen: set[str] = set()
+    for asset in assets:
+        if not isinstance(asset, Mapping):
+            raise Week4AuthorizationError(f"{path.name} contains malformed asset")
+        rel, supplied = asset.get("relative_path"), asset.get(hash_key)
+        if not isinstance(rel, str) or not isinstance(supplied, str) or rel in seen:
+            raise Week4AuthorizationError(f"{path.name} contains ambiguous asset identity")
+        seen.add(rel)
+        resolved = (root / rel).resolve()
+        if root not in resolved.parents or not resolved.is_file() or sha256_file(resolved) != supplied.upper():
+            raise Week4AuthorizationError(f"{path.name} asset hash mismatch: {rel}")
+        if "size_bytes" in asset and asset["size_bytes"] != resolved.stat().st_size:
+            raise Week4AuthorizationError(f"{path.name} asset size mismatch: {rel}")
 
 
 def validate_authorization_artifact(
@@ -123,11 +148,18 @@ def validate_authorization_artifact(
         "search_implementation_sha256": "search_implementation",
         "formal_runner_sha256": "formal_runner",
         "f5_qualification_sha256": "f5_qualification",
+        "execution_supplement_sha256": "execution_supplement",
+        "execution_supplement_config_sha256": "execution_supplement_config",
+        "d0_asset_manifest_sha256": "d0_asset_manifest",
+        "execution_source_manifest_sha256": "execution_source_manifest",
     }.items():
         if str(artifact.get(field, "")).upper() != str(hashes.get(filename, "")).upper():
             mismatches.append(field)
     if mismatches:
         raise Week4AuthorizationError(f"authorization canonical hash mismatch: {sorted(set(mismatches))}")
+
+    _verify_file_manifest(sources["d0_asset_manifest"], asset_key="assets", hash_key="SHA256", root=root)
+    _verify_file_manifest(sources["execution_source_manifest"], asset_key="sources", hash_key="sha256", root=root)
 
     population = _load_json(sources["population_manifest"], "population manifest")
     if population.get("status") != "FINALIZED" or population.get("final_case_count") != 48:

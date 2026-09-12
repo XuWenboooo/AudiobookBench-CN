@@ -41,6 +41,10 @@ def active_artifact(invocation_id: str = "TEST_ONLY_preflight_20260911") -> dict
         "search_implementation_sha256": hashes["search_implementation"],
         "formal_runner_sha256": hashes["formal_runner"],
         "f5_qualification_sha256": hashes["f5_qualification"],
+        "execution_supplement_sha256": hashes["execution_supplement"],
+        "execution_supplement_config_sha256": hashes["execution_supplement_config"],
+        "d0_asset_manifest_sha256": hashes["d0_asset_manifest"],
+        "execution_source_manifest_sha256": hashes["execution_source_manifest"],
     })
     return artifact
 
@@ -80,6 +84,7 @@ def test_missing_week4_outcome_disclosure_fails_canonical_schema(tmp_path: Path)
 @pytest.mark.parametrize("field", [
     "preregistration_sha256", "canonical_config_sha256", "population_manifest_sha256",
     "controller_sha256", "search_implementation_sha256", "formal_runner_sha256", "f5_qualification_sha256",
+    "execution_supplement_sha256", "execution_supplement_config_sha256", "d0_asset_manifest_sha256", "execution_source_manifest_sha256",
 ])
 def test_missing_malformed_and_mismatched_hashes_fail_closed(tmp_path: Path, field: str):
     valid = active_artifact()

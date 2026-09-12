@@ -143,15 +143,29 @@ def preflight(*, config: Path, population: Path, authorization: Path, runtime_ro
     }
 
 
+def dispatch(*, context: dict[str, Any], population: Path, runtime_root: Path) -> dict[str, Any]:
+    """The only real-execution dispatcher, reachable after successful preflight.
+
+    Model imports occur inside the lazy factories, so `preflight` remains a
+    strictly read-only authorization check.
+    """
+    from audiobookbench.security.week4_execution import execute_protocol, real_d0_backend, real_f5_generator
+    spec = FrozenAttackSpec.from_path(CANONICAL_CONFIG)
+    selected = _validate_population(population)
+    return execute_protocol(cases=selected["selected_cases"], spec=spec, runtime_root=runtime_root,
+                            f5_generator=real_f5_generator(), d0_backend=real_d0_backend())
+
+
 def main(argv: list[str] | None = None) -> int:
     args = parse_args(argv)
     try:
         context = preflight(config=args.config, population=args.population, authorization=args.authorization, runtime_root=args.runtime_root)
-        if not args.preflight_only:
-            raise FormalRunBlocked("external authorization is valid, but this pre-execution process has no runtime dispatcher; no generation was started")
+        if args.preflight_only:
+            print(json.dumps(context, ensure_ascii=False, sort_keys=True))
+            return 0
+        dispatch(context=context, population=args.population, runtime_root=args.runtime_root)
     except (FormalRunBlocked, Week4AuthorizationError, RuntimeError) as exc:
         raise SystemExit(f"WEEK4 FORMAL PATH BLOCKED: {exc}") from exc
-    print(json.dumps(context, ensure_ascii=False, sort_keys=True))
     return 0
 
 

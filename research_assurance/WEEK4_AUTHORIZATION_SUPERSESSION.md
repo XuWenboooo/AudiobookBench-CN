@@ -27,14 +27,12 @@ SUPERSESSION_REASON = PRE_EXECUTION_RUNTIME_DISPATCHER_INCOMPLETE
 ## Current status
 
 The old authorization remains forensic evidence and must not be used for
-scientific execution. It is not yet labelled
-`SUPERSEDED_BEFORE_SCIENTIFIC_EXECUTION`, because that terminal label is
-permitted only after a complete runtime dispatcher, deterministic execution
-source manifest, synthetic end-to-end closure, and replacement authorization
-exist.
+scientific execution. A replacement authorization now binds the frozen
+execution supplement, D0 asset manifest, and execution-source manifest after
+TEST_ONLY end-to-end closure.
 
 ```text
-OLD_AUTHORIZATION_STATUS = FORENSICALLY_PRESERVED_NONEXECUTABLE_PENDING_SUPERSESSION
+OLD_AUTHORIZATION_STATUS = SUPERSEDED_BEFORE_SCIENTIFIC_EXECUTION
 ```
 
 No frozen scientific artifact was changed by this preservation step.

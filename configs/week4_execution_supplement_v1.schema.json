@@ -1,0 +1,11 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "type":"object","additionalProperties":false,
+  "required":["protocol","supplement_version","supplement_status","generation","activity","synthetic_trim","static","d0","s2","objective","final"],
+  "properties":{
+    "protocol":{"const":"WEEK4_ADAPTIVE_RED_TEAM_A0"},"supplement_version":{"const":"WEEK4_EXECUTION_SUPPLEMENT_V1"},"supplement_status":{"const":"FROZEN_BEFORE_ANY_WEEK4_SCIENTIFIC_OUTCOME"},
+    "generation":{"type":"object","additionalProperties":false,"required":["model","device","ode_method","use_ema","target_rms","internal_cross_fade_duration","sway_sampling_coef","cfg_strength","nfe_step","speed","fix_duration","remove_silence","seed_base","assets"],"properties":{"model":{"const":"F5TTS_v1_Base"},"device":{"const":"cpu"},"ode_method":{"const":"euler"},"use_ema":{"const":true},"target_rms":{"const":0.1},"internal_cross_fade_duration":{"const":0.15},"sway_sampling_coef":{"const":-1},"cfg_strength":{"const":2},"nfe_step":{"const":32},"speed":{"const":1.0},"fix_duration":{"type":"null"},"remove_silence":{"const":false},"seed_base":{"const":20260914},"assets":{"type":"object","additionalProperties":false,"required":["checkpoint_sha256","vocab_sha256","vocoder_config_sha256","vocoder_model_sha256"],"properties":{"checkpoint_sha256":{"pattern":"^[A-F0-9]{64}$"},"vocab_sha256":{"pattern":"^[A-F0-9]{64}$"},"vocoder_config_sha256":{"pattern":"^[A-F0-9]{64}$"},"vocoder_model_sha256":{"pattern":"^[A-F0-9]{64}$"}}}}},
+    "activity":{"const":{"sample_rate":16000,"frame_samples":400,"hop_samples":160,"threshold_dbfs":-45.0}},"synthetic_trim":{"const":{"retain_edge_samples":800}},"static":{"const":{"insertion_crossfade_samples":400,"synthetic_gain_db":0.0}},
+    "d0":{"const":{"name":"B1b","package":"speechbrain","package_version":"1.1.1","model":"speechbrain/spkrec-ecapa-voxceleb","device":"cpu","local_path":"pretrained/spkrec-ecapa-voxceleb","embedding_dimension":192}},"s2":{"const":{"window_samples":24000,"hop_samples":4000,"sample_rate":16000}},"objective":{"const":"mean_full_attack_score_minus_mean_outside_clean_score"},"final":{"const":{"held_out_cases":12,"bootstrap_n":2000,"bootstrap_seed":20260911,"min_finite_bootstraps":1900}}
+  }
+}

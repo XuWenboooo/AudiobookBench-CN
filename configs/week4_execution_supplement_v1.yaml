@@ -1,0 +1,36 @@
+protocol: WEEK4_ADAPTIVE_RED_TEAM_A0
+supplement_version: WEEK4_EXECUTION_SUPPLEMENT_V1
+supplement_status: FROZEN_BEFORE_ANY_WEEK4_SCIENTIFIC_OUTCOME
+generation:
+  model: F5TTS_v1_Base
+  device: cpu
+  ode_method: euler
+  use_ema: true
+  target_rms: 0.1
+  internal_cross_fade_duration: 0.15
+  sway_sampling_coef: -1
+  cfg_strength: 2
+  nfe_step: 32
+  speed: 1.0
+  fix_duration: null
+  remove_silence: false
+  seed_base: 20260914
+  assets:
+    checkpoint_sha256: 670900FD14E6C458B95DA6E9ED317CDB20DBAF7A1C02AC06A05475A9D32B6A38
+    vocab_sha256: 2A05F992E00AF9B0BD3800A8D23E78D520DBD705284ED2EEDB5F4BD29398FA3C
+    vocoder_config_sha256: DA9033922F969A47F0C160010226919E59F27761FD5066F3828D46DE6650B0FC
+    vocoder_model_sha256: 97EC976AD1FD67A33AB2682D29C0AC7DF85234FAE875AEFCC5FB215681A91B2A
+activity: {sample_rate: 16000, frame_samples: 400, hop_samples: 160, threshold_dbfs: -45.0}
+synthetic_trim: {retain_edge_samples: 800}
+static: {insertion_crossfade_samples: 400, synthetic_gain_db: 0.0}
+d0:
+  name: B1b
+  package: speechbrain
+  package_version: 1.1.1
+  model: speechbrain/spkrec-ecapa-voxceleb
+  device: cpu
+  local_path: pretrained/spkrec-ecapa-voxceleb
+  embedding_dimension: 192
+s2: {window_samples: 24000, hop_samples: 4000, sample_rate: 16000}
+objective: mean_full_attack_score_minus_mean_outside_clean_score
+final: {held_out_cases: 12, bootstrap_n: 2000, bootstrap_seed: 20260911, min_finite_bootstraps: 1900}
