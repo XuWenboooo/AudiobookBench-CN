@@ -45,6 +45,8 @@ def active_artifact(invocation_id: str = "TEST_ONLY_preflight_20260911") -> dict
         "execution_supplement_config_sha256": hashes["execution_supplement_config"],
         "d0_asset_manifest_sha256": hashes["d0_asset_manifest"],
         "execution_source_manifest_sha256": hashes["execution_source_manifest"],
+        "f5_frozen_source_manifest_sha256": hashes["f5_frozen_source_manifest"],
+        "formal_runtime_environment_manifest_sha256": hashes["formal_runtime_environment_manifest"],
     })
     return artifact
 
@@ -85,6 +87,7 @@ def test_missing_week4_outcome_disclosure_fails_canonical_schema(tmp_path: Path)
     "preregistration_sha256", "canonical_config_sha256", "population_manifest_sha256",
     "controller_sha256", "search_implementation_sha256", "formal_runner_sha256", "f5_qualification_sha256",
     "execution_supplement_sha256", "execution_supplement_config_sha256", "d0_asset_manifest_sha256", "execution_source_manifest_sha256",
+    "f5_frozen_source_manifest_sha256", "formal_runtime_environment_manifest_sha256",
 ])
 def test_missing_malformed_and_mismatched_hashes_fail_closed(tmp_path: Path, field: str):
     valid = active_artifact()
@@ -138,8 +141,11 @@ def test_frozen_hashes_are_checked_before_authorization(monkeypatch, tmp_path: P
     assert calls == []
 
 
-def test_no_formal_run_namespace_exists_before_runtime_dispatch():
-    assert not (ROOT / "results/week4_adaptive_redteam_runs").exists()
+def test_failed_preoutput_namespace_is_preserved_but_future_namespace_is_absent():
+    failed = ROOT / "results/week4_adaptive_redteam_runs/week4_adaptive_redteam_v0_20260912_supplement_v1"
+    assert failed.is_dir()
+    assert (failed / "accounting/f5_attempt_ledger.jsonl").is_file()
+    assert not (ROOT / "results/week4_adaptive_redteam_runs/TEST_ONLY_preflight_20260911").exists()
 
 
 def test_formal_runner_accepts_paths_only_and_rejects_scientific_flags():
@@ -152,3 +158,19 @@ def test_frozen_config_hash_and_execution_flag_remain_unchanged():
     config = ROOT / "configs/week4_adaptive_red_team.yaml"
     assert sha256_file(config) == "1942A6CBF1571BECE97BEE53DF15C042431650F1EC882DD39A4DDC1A2AE1382D"
     assert "scientific_execution_enabled: false" in config.read_text(encoding="utf-8")
+
+
+def test_reauthorization_discloses_prior_preoutput_failure_and_environment_binding():
+    artifact = json.loads((ROOT / "results/week4_adaptive_redteam/authorization.json").read_text(encoding="utf-8"))
+    assert artifact["PRIOR_FAILED_ATTEMPT_EXISTED"] is True
+    assert artifact["PRIOR_FAILED_ATTEMPT_PRODUCED_SCIENTIFIC_OUTCOME"] is False
+    assert artifact["WEEK4_SCIENTIFIC_OUTCOME_OBSERVED_BEFORE_REAUTHORIZATION"] is False
+    assert artifact["formal_runtime_environment_manifest_sha256"] == sha256_file(
+        ROOT / "research_assurance/WEEK4_FORMAL_RUNTIME_ENVIRONMENT_MANIFEST.json"
+    )
+
+
+def test_system_python_is_rejected_for_the_bound_formal_environment():
+    formal_run = importlib.import_module("experiments.week4_adaptive_red_team.formal_run")
+    with pytest.raises(formal_run.FormalRunBlocked, match="authorization-bound Python environment"):
+        formal_run._validate_runtime_environment()

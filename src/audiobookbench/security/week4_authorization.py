@@ -29,6 +29,8 @@ CANONICAL_SOURCES = {
     "execution_supplement_config": REPO_ROOT / "configs/week4_execution_supplement_v1.yaml",
     "d0_asset_manifest": REPO_ROOT / "research_assurance/WEEK4_D0_ASSET_MANIFEST.json",
     "execution_source_manifest": REPO_ROOT / "research_assurance/WEEK4_EXECUTION_SOURCE_MANIFEST.json",
+    "f5_frozen_source_manifest": REPO_ROOT / "research_assurance/WEEK4_F5_FROZEN_SOURCE_MANIFEST.json",
+    "formal_runtime_environment_manifest": REPO_ROOT / "research_assurance/WEEK4_FORMAL_RUNTIME_ENVIRONMENT_MANIFEST.json",
 }
 HEX64 = r"^[A-Fa-f0-9]{64}$"
 
@@ -152,6 +154,8 @@ def validate_authorization_artifact(
         "execution_supplement_config_sha256": "execution_supplement_config",
         "d0_asset_manifest_sha256": "d0_asset_manifest",
         "execution_source_manifest_sha256": "execution_source_manifest",
+        "f5_frozen_source_manifest_sha256": "f5_frozen_source_manifest",
+        "formal_runtime_environment_manifest_sha256": "formal_runtime_environment_manifest",
     }.items():
         if str(artifact.get(field, "")).upper() != str(hashes.get(filename, "")).upper():
             mismatches.append(field)
@@ -160,6 +164,12 @@ def validate_authorization_artifact(
 
     _verify_file_manifest(sources["d0_asset_manifest"], asset_key="assets", hash_key="SHA256", root=root)
     _verify_file_manifest(sources["execution_source_manifest"], asset_key="sources", hash_key="sha256", root=root)
+    _verify_file_manifest(sources["f5_frozen_source_manifest"], asset_key="files", hash_key="sha256", root=root)
+    environment = _load_json(sources["formal_runtime_environment_manifest"], "formal runtime environment manifest")
+    if environment.get("status") != "QUALIFIED_OFFLINE_PREOUTPUT" or environment.get("f5_source", {}).get("source_manifest_sha256", "").upper() != sha256_file(sources["f5_frozen_source_manifest"]):
+        raise Week4AuthorizationError("formal runtime environment does not bind the frozen F5 source")
+    if artifact.get("WEEK4_SCIENTIFIC_OUTCOME_OBSERVED_BEFORE_REAUTHORIZATION") is not False or artifact.get("PRIOR_FAILED_ATTEMPT_EXISTED") is not True or artifact.get("PRIOR_FAILED_ATTEMPT_PRODUCED_SCIENTIFIC_OUTCOME") is not False:
+        raise Week4AuthorizationError("authorization does not disclose the prior pre-output failure")
 
     population = _load_json(sources["population_manifest"], "population manifest")
     if population.get("status") != "FINALIZED" or population.get("final_case_count") != 48:

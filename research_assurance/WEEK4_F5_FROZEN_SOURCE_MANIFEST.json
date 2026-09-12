@@ -1,0 +1,12 @@
+{
+  "manifest_type": "WEEK4_F5_FROZEN_SOURCE_MANIFEST",
+  "repo_commit": "82fc4fe622fe36047d1dff99b550e6018181ea11",
+  "package_root": "results/week3_engineering_qualification/f5_tts_v1_base/source/F5-TTS-82fc4fe622fe36047d1dff99b550e6018181ea11/src",
+  "package_name": "f5_tts",
+  "package_layout": "PEP420_namespace_package_without___init__.py",
+  "files": [
+    {"relative_path": "results/week3_engineering_qualification/f5_tts_v1_base/source/repo.zip", "sha256": "D62C6F7FC46D8EFF3EB8986AB1375983E68A231D44662A3A3C63FC812490301A"},
+    {"relative_path": "results/week3_engineering_qualification/f5_tts_v1_base/source/F5-TTS-82fc4fe622fe36047d1dff99b550e6018181ea11/pyproject.toml", "sha256": "26529BC12024FCCED798588E6BA517A107DCA872CA2AE57A0E9087D1FCB66A88"},
+    {"relative_path": "results/week3_engineering_qualification/f5_tts_v1_base/source/F5-TTS-82fc4fe622fe36047d1dff99b550e6018181ea11/src/f5_tts/api.py", "sha256": "3A1FE090E70F4C7EDAB5A3FB27727A93AC8F71D664768A54B7BC308933AF43A3"}
+  ]
+}

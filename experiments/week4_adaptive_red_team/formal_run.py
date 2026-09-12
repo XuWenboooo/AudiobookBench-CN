@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import sys
 from pathlib import Path
 from typing import Any
@@ -31,6 +32,7 @@ class FormalRunBlocked(RuntimeError):
 CANONICAL_CONFIG = ROOT / "configs/week4_adaptive_red_team.yaml"
 CANONICAL_POPULATION = ROOT / "data/manifests/week4_population_manifest.json"
 CANONICAL_PREREG = ROOT / "research_assurance/WEEK4_ADAPTIVE_REDTEAM_PREREGISTRATION.md"
+CANONICAL_FORMAL_ENVIRONMENT = ROOT / "research_assurance/WEEK4_FORMAL_RUNTIME_ENVIRONMENT_MANIFEST.json"
 CANONICAL_RUN_BASE = "results/week4_adaptive_redteam_runs"
 FROZEN_PREREGISTRATION_SHA256 = "6942358DFF60EBC042E06F9441436D2BCCAE43EA8A66C6BD6B891FAE345758C4"
 FROZEN_CONFIG_SHA256 = "1942A6CBF1571BECE97BEE53DF15C042431650F1EC882DD39A4DDC1A2AE1382D"
@@ -94,7 +96,26 @@ def _validate_population(path: Path) -> dict[str, Any]:
     return population
 
 
-def preflight(*, config: Path, population: Path, authorization: Path, runtime_root: Path) -> dict[str, Any]:
+def _validate_runtime_environment() -> dict[str, Any]:
+    """Require the hash-bound offline editable F5 environment before dispatch."""
+    environment = _load_json(CANONICAL_FORMAL_ENVIRONMENT, "formal runtime environment manifest")
+    expected_python = (ROOT / str(environment.get("python_executable", ""))).resolve()
+    if Path(sys.executable).resolve() != expected_python:
+        raise FormalRunBlocked("formal runner is not using the authorization-bound Python environment")
+    os.environ["HF_HUB_OFFLINE"] = "1"; os.environ["TRANSFORMERS_OFFLINE"] = "1"
+    try:
+        import f5_tts
+        import f5_tts.api
+    except Exception as exc:
+        raise FormalRunBlocked("frozen F5 runtime is not importable offline") from exc
+    expected_package = (ROOT / str(environment["f5_source"]["import_path"])).resolve()
+    roots = [Path(value).resolve() for value in f5_tts.__path__]
+    if expected_package not in roots or Path(f5_tts.api.__file__).resolve() != (ROOT / str(environment["f5_source"]["api_path"])).resolve():
+        raise FormalRunBlocked("F5 import does not resolve to the frozen local source")
+    return {"python_executable": str(expected_python), "f5_api": str(Path(f5_tts.api.__file__).resolve()), "offline": True}
+
+
+def preflight(*, config: Path, population: Path, authorization: Path, runtime_root: Path, verify_runtime_environment: bool = False) -> dict[str, Any]:
     """Read and validate every formal input without creating output."""
     if _canonical_path(config) != _canonical_path(CANONICAL_CONFIG):
         raise FormalRunBlocked("only the canonical Week4 config is accepted")
@@ -123,6 +144,7 @@ def preflight(*, config: Path, population: Path, authorization: Path, runtime_ro
     ledger_path = runtime_root / "accounting" / "candidate_ledger.jsonl"
     if ledger_path.exists():  # defensive: runtime_root is required to be new above.
         raise FormalRunBlocked("new formal namespace already contains accounting state")
+    environment = _validate_runtime_environment() if verify_runtime_environment else None
     return {
         "status": "PASS",
         "mode": "VALIDATED_CONTEXT",
@@ -141,6 +163,7 @@ def preflight(*, config: Path, population: Path, authorization: Path, runtime_ro
         "accounting_initialization_safe": True,
         "accounting_initialized": False,
         "runtime_permitted_by_external_authorization": True,
+        "formal_environment": environment,
     }
 
 
@@ -162,7 +185,7 @@ def dispatch(*, context: dict[str, Any], population: Path, runtime_root: Path, s
 def main(argv: list[str] | None = None) -> int:
     args = parse_args(argv)
     try:
-        context = preflight(config=args.config, population=args.population, authorization=args.authorization, runtime_root=args.runtime_root)
+        context = preflight(config=args.config, population=args.population, authorization=args.authorization, runtime_root=args.runtime_root, verify_runtime_environment=True)
         if args.preflight_only:
             print(json.dumps(context, ensure_ascii=False, sort_keys=True))
             return 0

@@ -1,0 +1,39 @@
+{
+  "manifest_type": "WEEK4_FORMAL_RUNTIME_ENVIRONMENT_MANIFEST",
+  "status": "QUALIFIED_OFFLINE_PREOUTPUT",
+  "python_executable": "results/week3_engineering_qualification/f5_tts_v1_base/env/Scripts/python.exe",
+  "python_version": "3.12.9",
+  "packages": {
+    "torch": "2.2.2+cpu",
+    "torchaudio": "2.2.2+cpu",
+    "speechbrain": "1.1.1",
+    "f5_tts": "1.1.18"
+  },
+  "offline_environment": {"HF_HUB_OFFLINE": "1", "TRANSFORMERS_OFFLINE": "1"},
+  "f5_source": {
+    "repo_commit": "82fc4fe622fe36047d1dff99b550e6018181ea11",
+    "source_manifest_path": "research_assurance/WEEK4_F5_FROZEN_SOURCE_MANIFEST.json",
+    "source_manifest_sha256": "689600D6D3C83335C19952492CB833F645EEDAB5ED517AC406A781DB88BB6317",
+    "package_root": "results/week3_engineering_qualification/f5_tts_v1_base/source/F5-TTS-82fc4fe622fe36047d1dff99b550e6018181ea11/src",
+    "import_path": "results/week3_engineering_qualification/f5_tts_v1_base/source/F5-TTS-82fc4fe622fe36047d1dff99b550e6018181ea11/src/f5_tts",
+    "api_path": "results/week3_engineering_qualification/f5_tts_v1_base/source/F5-TTS-82fc4fe622fe36047d1dff99b550e6018181ea11/src/f5_tts/api.py",
+    "api_construction": "PASS",
+    "editable_install": true
+  },
+  "assets": {
+    "checkpoint_sha256": "670900FD14E6C458B95DA6E9ED317CDB20DBAF7A1C02AC06A05475A9D32B6A38",
+    "vocab_sha256": "2A05F992E00AF9B0BD3800A8D23E78D520DBD705284ED2EEDB5F4BD29398FA3C",
+    "vocoder_config_sha256": "DA9033922F969A47F0C160010226919E59F27761FD5066F3828D46DE6650B0FC",
+    "vocoder_model_sha256": "97EC976AD1FD67A33AB2682D29C0AC7DF85234FAE875AEFCC5FB215681A91B2A"
+  },
+  "qualification": {
+    "f5_tts_import": "PASS",
+    "f5_tts_api_import": "PASS",
+    "f5_api_object_construction": "PASS",
+    "checkpoint_load": "PASS",
+    "vocoder_load": "PASS",
+    "network_access": "DISABLED",
+    "week4_population_used": false,
+    "week4_scientific_waveform_created": false
+  }
+}
