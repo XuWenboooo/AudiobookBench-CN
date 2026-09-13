@@ -1,0 +1,3 @@
+F:/项目/申请实验室  TTS项目/topconf_phase3_cache/PartialEdit_v1.1/materialized/E1/p225/p225_001_edited_partial_16k.wav
+F:/项目/申请实验室  TTS项目/topconf_phase3_cache/PartialEdit_v1.1/materialized/E1/p225/p225_002_edited_partial_16k.wav
+F:/项目/申请实验室  TTS项目/topconf_phase3_cache/PartialEdit_v1.1/materialized/E1/p225/p225_003_edited_partial_16k.wav
