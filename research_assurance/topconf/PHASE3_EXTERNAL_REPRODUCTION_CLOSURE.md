@@ -39,6 +39,18 @@ Status: **BLOCKED — INFRASTRUCTURE VALIDATION COMPLETE, EXTERNAL REPRODUCTION 
   as a core reproduction.
 - Parser/evaluator tests pass with `python -m pytest tests/topconf -q`.
 
+## Phase 3F required answers
+
+| Question | Answer |
+|---|---|
+| Were parsers validated? | **Partially.** PartialSpoof segment-label metadata and PartialEdit CSV/speaker metadata pass; audio-duration and path cross-checks remain blocked by incomplete archives. |
+| Were official baselines reproduced? | **No full baseline reproduction.** CFPRF reached checkpoint and infrastructure-smoke validation only; SAL, BAM and TRACE did not reach an authorized full run. |
+| Which paradigms are functional? | No external paradigm is established as fully functional. CFPRF FDN/PRN infrastructure is functional only; internal B1b/B4 were not run in Phase 3. |
+| Were all failures accounted for? | **Yes, as observed.** Checksum failure, official endpoint failures, unavailable checkpoint, rights restriction, missing archives and CPU-only deviation are ledgered. |
+| Were any models excluded based on results? | **No.** Result-based exclusions are zero. Any non-run status is due to provenance, rights, checkpoint, or materialization gates. |
+| Are outputs compatible with the unified evaluator? | **Schema feasibility only.** Parser/evaluator contract tests pass, but aligned full-audio model outputs were not produced, so end-to-end compatibility is not established. |
+| Is common-core metric feasibility understood, and can Phase 4 safely freeze? | Metric/schema feasibility is understood at the contract level; Phase 4 cannot safely freeze because the required external audio and baseline gates are incomplete. |
+
 ## Non-results
 
 No full external-baseline reproduction was completed, no full scientific

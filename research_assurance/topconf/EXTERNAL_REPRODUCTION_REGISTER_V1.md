@@ -3,7 +3,8 @@
 Status: **PHASE 3 NOT COMPLETE: EXTERNAL AUDIO/CHECKPOINT GATES BLOCKED**
 
 This is a run ledger, not a scientific result table. There are zero external
-model-output rows and zero reproduction scores.
+reproduction-metric rows. Infrastructure-only smoke rows are explicitly
+separated and carry no reproduction score.
 
 | Invocation | Dataset / split | Baseline | Scope | Status | Failure accounting |
 |---|---|---|---|---|---|
