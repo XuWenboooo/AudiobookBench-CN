@@ -40,7 +40,18 @@
         }
       },
       "audio_duration_crosscheck": "BLOCKED_DOWNLOAD_THROUGHPUT",
-      "overall_local_status": "GT_METADATA_PASS_AUDIO_BLOCKED"
+      "level1_smoke_sample": {
+        "sample_id": "CON_E_0005290",
+        "path": "PartialSpoof_v1.2/smoke_audio/database/eval/con_wav/CON_E_0005290.wav",
+        "source_archive_status": "PARTIAL_ARCHIVE_INVALID_MD5",
+        "sample_parse": "PASS_WAV_PCM16_MONO_16KHZ",
+        "duration_seconds": 2.1456875,
+        "label_resolution_seconds": 0.16,
+        "label_vector_length": 14,
+        "label_values": [1, 0],
+        "scope": "single-authorized-smoke-only"
+      },
+      "overall_local_status": "GT_METADATA_PASS_SINGLE_SMOKE_AUDIO_ONLY_FULL_AUDIO_BLOCKED"
     },
     {
       "dataset_id": "PartialEdit",
