@@ -86,3 +86,22 @@ mainline MultiReso rerun.
 No metrics, evaluator output, result-based case exclusion, scale selection, or
 other scientific outcome is authorized by this record. Phase3T remains active
 under the original authorization and this ownership amendment.
+
+## Corrected worker continuation
+
+At 2026-09-13T21:40:45+08:00, the worker owner started a new, separately
+identified invocation after the old partial namespace had been stopped and
+preserved. The serialization fix adds the authorized native utterance output,
+uses the canonical E1 case identifiers/order, adds a terminal attempt ledger,
+and uses the memory-safe strict checkpoint loader. Its technical preflight
+passed without accessing GT or computing scientific metrics.
+
+```text
+CORRECTED_WORKER_INVOCATION_ID=PHASE3T_MRM_FULL_E1_002
+CORRECTED_WORKER_NAMESPACE=results/topconf_phase3t/multireso_worker_02
+CORRECTED_WORKER_COMMIT=c7f0283
+CORRECTED_WORKER_PREFLIGHT=PASS
+CORRECTED_WORKER_SCIENTIFIC_METRICS_COMPUTED=0
+CORRECTED_WORKER_GT_ACCESSED=NO
+MAINLINE_MRM_FULL_INFERENCE_AFTER_STOP=NO
+```
