@@ -18,3 +18,17 @@ checkpoint. Its README explicitly describes an unofficial reimplementation
 and states that the linked Hugging Face checkpoints are different runs from
 the original LlamaPartialSpoof paper. That identity distinction remains part
 of the gate.
+
+## Append-only checkpoint result
+
+The author-repository-linked Hugging Face checkpoint identity and metadata
+were resolved, but the single authorized transport produced zero bytes because
+the local curl Schannel certificate-revocation check failed. It is therefore
+not a verified functional path and does not increase `EXTERNAL_BASELINE_PATHS`.
+
+```text
+MULTIRESO_SIMPLE_STATUS = CHECKPOINT_UNAVAILABLE
+MULTIRESO_SIMPLE_CHECKPOINT_SHA256 = NOT_COMPUTED
+MULTIRESO_SIMPLE_FUNCTIONAL_PATH = NOT_ESTABLISHED
+PHASE3U_CLOSURE = BLOCKED_CHECKPOINT_UNAVAILABLE
+```

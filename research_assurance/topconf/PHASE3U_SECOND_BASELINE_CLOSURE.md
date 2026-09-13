@@ -43,3 +43,52 @@ checkpoint provenance/hash, isolated environment, documented-compatible load,
 deterministic 1–3 sample GPU smoke, finite output, and temporal output
 semantics all pass. A pass establishes only a functional baseline path and
 permits review for Phase3T; it never authorizes Phase3T execution or Phase4.
+
+## Append-only checkpoint transport result
+
+The single authorized complete transport was attempted against the pinned,
+author-repository-linked public Hugging Face checkpoint:
+
+```text
+CHECKPOINT_SOURCE = https://huggingface.co/hieuthi/MultiResoModel-Simple-ckpts/resolve/31fd984c53a95e428551f13c4d95645b3cb8c885/baseline-ps-e55.tgz
+CHECKPOINT_EXPECTED_SIZE = 3701009843 bytes
+CHECKPOINT_EXPECTED_LFS_SHA256 = 0c394f03558ecdd7a6b81bf6c0fd8ee642c5937ba22cc852f58ae4e7dc480e32
+TRANSPORT = curl HTTP/1.1 with official pinned URL
+TRANSPORT_START = 2026-09-13T18:27:43+08:00 (recorded audit window)
+TRANSPORT_END = 2026-09-13T18:27:44+08:00
+TRANSPORT_RESULT = FAILED_CURL_35_SCHANNEL_CRYPT_E_NO_REVOCATION_CHECK
+TRANSPORT_BYTES = 0
+CHECKPOINT_MATERIALIZATION = FAIL_CHECKPOINT_UNAVAILABLE
+CHECKPOINT_HASH = NOT_COMPUTED_NO_BYTES
+RETRY = PROHIBITED_BY_FROZEN_AUTHORIZATION
+```
+
+No TLS verification was disabled, no mirror was used, and no second transport
+was attempted. Consequently the environment/load/smoke gates were not
+entered and no model inference or scientific metric was produced.
+
+## Phase3U closure decision
+
+```text
+CFPRF_PATH_STATUS = VERIFIED_EXISTING_PATH_UNCHANGED
+MULTIRESO_SIMPLE_PROVENANCE = PASS_REPOSITORY_LICENSE_AND_DOCUMENTATION
+MULTIRESO_SIMPLE_CHECKPOINT_PROVENANCE = PASS_SOURCE_IDENTITY_ONLY
+MULTIRESO_SIMPLE_CHECKPOINT = NOT_MATERIALIZED
+MULTIRESO_SIMPLE_ENVIRONMENT = NOT_CREATED_CHECKPOINT_GATE_FAILED
+MULTIRESO_SIMPLE_GPU_LOAD = NOT_RUN
+MULTIRESO_SIMPLE_SMOKE = NOT_RUN
+MULTIRESO_SIMPLE_TEMPORAL_OUTPUT = NOT_VERIFIED
+EXTERNAL_BASELINE_PATHS = 1
+SCIENTIFIC_METRICS_COMPUTED = 0
+SCIENTIFIC_OUTCOMES_PRODUCED = 0
+RESULT_BASED_BASELINE_SELECTIONS = 0
+PHASE3U_CLOSURE = BLOCKED_CHECKPOINT_UNAVAILABLE
+READY_FOR_PHASE3T_CONTROLLED_REPRODUCTION_REVIEW = NO
+PHASE3T_EXECUTION_AUTHORIZED = NO
+READY_FOR_PHASE4_REVIEW = NO
+READY_FOR_CONFIRMATORY_EXPERIMENT_EXECUTION = NO
+```
+
+The original Phase3, Phase3R, and Phase3S blocked closures remain unchanged.
+Future progress requires an externally available official checkpoint or a new
+explicit authorization with a revised official transport budget.
