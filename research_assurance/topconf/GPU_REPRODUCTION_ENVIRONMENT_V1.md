@@ -72,3 +72,21 @@ PIP_FREEZE = PHASE3S_GPU_PIP_FREEZE_V1.txt
 
 The checkpoint checks were load-only. No audio forward, metric, ranking, or
 scientific outcome was produced.
+
+## Append-only environment creation command record
+
+The isolated environment was created outside the repository and the primary
+Python 3.12 environment was not modified. The effective command sequence was:
+
+```text
+F:\项目\申请实验室\python.exe -m venv F:\项目\申请实验室  TTS项目\envs\topconf-phase3s-cfprf-py310
+<venv>\Scripts\python.exe -m pip install --upgrade pip setuptools wheel ninja
+<venv>\Scripts\python.exe -m pip install torch==2.2.2+cu121 torchaudio==2.2.2+cu121 torchvision==0.17.2+cu121 --index-url https://download.pytorch.org/whl/cu121
+<venv>\Scripts\python.exe -m pip install numpy==1.23.5 scipy==1.10.1 scikit-learn==1.3.2 librosa==0.10.2 hydra-core==1.0.7 omegaconf==2.0.6
+<venv>\Scripts\python.exe -m pip install --no-deps --no-build-isolation --editable F:\项目\申请实验室  TTS项目\topconf_phase3_cache\fairseq-a54021305d6b3c4c5959ac9395135f63202db8f1
+<venv>\Scripts\python.exe -m pip freeze > research_assurance/topconf/PHASE3S_GPU_PIP_FREEZE_V1.txt
+```
+
+The complete resulting package set is the adjacent
+`PHASE3S_GPU_PIP_FREEZE_V1.txt`; the commands above summarize creation and do
+not authorize a scientific run.

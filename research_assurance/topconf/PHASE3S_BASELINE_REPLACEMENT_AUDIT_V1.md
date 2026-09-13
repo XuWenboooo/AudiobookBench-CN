@@ -7,6 +7,7 @@ does not select a baseline by performance.
 
 | Candidate | Paper / paradigm | Official code | License | Checkpoint | Temporal output | Classification | Reason |
 |---|---|---|---|---|---|---|---|
+| UMMAFormer | multimodal/audio temporal forgery localization | official repository `ymhzyj/UMMAFormer@7882f840da3357099e612ed7fbf1d606c245ea9a` | MIT | official README documents pretrained-model links; not locally materialized | CONDITIONAL_REAUTH_REQUIRED | new model/dataset/checkpoint path outside frozen Phase3S authorization; no gate credit |
 | PartialSpoof MultiReso | canonical multi-resolution partial-spoof localization | verified repository at frozen commit | BSD-3-Clause code; dataset rights separately tracked | official Zenodo route, not yet materialized | documented multi-resolution localization | CONDITIONAL | canonical lineage and official pretrained route |
 | CFPRF | proposal refinement localization | verified repository and checkpoint hashes | MIT | verified existing FDN/PRN/XLSR | refined proposals | VERIFIED_EXISTING_PATH | existing infrastructure smoke only; full audio still required |
 | SAL | segment-aware localization | verified official repository | MIT source | unavailable | documented frame localization | BLOCKED | checkpoint unavailable |
