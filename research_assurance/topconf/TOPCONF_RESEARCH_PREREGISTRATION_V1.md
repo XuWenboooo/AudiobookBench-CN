@@ -90,6 +90,6 @@ skeleton and may not be promoted after outcome inspection.
 
 Before execution, the team must approve a versioned protocol, threat model, baseline matrix, leakage policy, and open-science manifest. Any post-observation change requires a new version and is exploratory, not confirmatory.
 
-## 5. Explicit prohibitions
+## 7. Explicit prohibitions
 
 Do not run F5, CosyVoice2, detector/localizer, evaluator, bootstrap, or model training as part of this preparation commit.

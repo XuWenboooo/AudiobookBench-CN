@@ -15,13 +15,17 @@ Status: **PASS FOR PHASE-2 INFRASTRUCTURE PLANNING / NOT AUTHORIZATION**
   model, and attack.
 - All unknown population, threshold, budget, hardware, and statistical values
   remain `TBD_BEFORE_AUTHORIZATION`.
+- Phase 2 adds an independent schema/evaluator namespace, metadata-only
+  dataset adapters, and model interfaces without touching historical code.
+- LD@DR95 has a formal candidate review; RangeEER is intentionally gated until
+  a primary/reference implementation is verified.
 
 ## Risks and blockers
 
 - Novelty claims remain unsafe until a dated, primary-source literature and
   implementation review populates the ledger.
 - Baseline code, checkpoints, licenses, formats, and compatible outputs remain
-  unverified.
+  partly unverified; source-level candidates are recorded without execution.
 - No confirmatory execution is authorized; any one unresolved TBD in a
   required lock field is a blocker for confirmatory experiments.
 
