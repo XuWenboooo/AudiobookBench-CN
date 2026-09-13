@@ -17,7 +17,10 @@ Status: **BLOCKED — INFRASTRUCTURE VALIDATION COMPLETE, EXTERNAL REPRODUCTION 
 - The official PartialSpoof v1.2 protocols, segment labels, VAD metadata and
   README pass checksum verification. Segment-label parsers pass for train,
   dev and eval metadata at 0.16 seconds. The official audio archive was not
-  completed; its local partial file fails the official MD5.
+  completed; its local partial file fails the official MD5. The official
+  v1.0 split fallback recommended by the v1.2 record was also probed, but the
+  server returned a 504 HTML error with zero archive payload; this is recorded
+  in the local manifest rather than treated as data.
 - The official PartialEdit v1.1 CSV and speaker archive pass checksum
   verification. The CSV parser validates 85,007 rows, 85,632 edited regions,
   E1/E2 counts, and speaker metadata. E1/E2 audio and codec archives are not

@@ -23,6 +23,18 @@
         {"name": "database_vad.tar.gz", "md5": "95e77e19a1bb4f2e79ed138fd35621ad", "local_status": "MATERIALIZED_VERIFIED", "local_md5": "95e77e19a1bb4f2e79ed138fd35621ad", "local_bytes": 10240345},
         {"name": "README_v1.2", "md5": "4fec0742e2a606d1b1186067d79862d6", "local_status": "MATERIALIZED_VERIFIED", "local_md5": "4fec0742e2a606d1b1186067d79862d6", "local_bytes": 17948}
       ],
+      "official_eval_fallback": {
+        "source_record": "https://zenodo.org/records/4817532",
+        "v1_2_page_instruction": "v1.2 page-recommended v1.0 split fallback for database_eval.tar.gz",
+        "parts": [
+          {"name": "database_eval.tar.gz.aa", "md5": "2f2087bb3b9c32b9f2ac24028e77a734"},
+          {"name": "database_eval.tar.gz.ab", "md5": "2e79c7cec8b05f4231e0144bd633174d"},
+          {"name": "database_eval.tar.gz.ac", "md5": "df620d7f685514b95409530f6b9b1253"}
+        ],
+        "probe_status": "FAILED_504_ZERO_PAYLOAD",
+        "probe_bytes": 92,
+        "probe_note": "HTTP 504 HTML error page; no archive bytes accepted"
+      },
       "ground_truth_materialization": {
         "path": "PartialSpoof_v1.2/extracted/database/segment_labels",
         "resolutions_seconds": [0.01, 0.02, 0.04, 0.08, 0.16, 0.32, 0.64],
