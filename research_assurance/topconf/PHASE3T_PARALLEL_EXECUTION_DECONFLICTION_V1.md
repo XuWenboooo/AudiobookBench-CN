@@ -167,3 +167,61 @@ FINAL_MULTIRESO_OWNER_DECISION_BASIS=COUNT_INTEGRITY_AUTHORIZATION_ONLY
 SCIENTIFIC_OUTCOMES_USED_FOR_FINAL_OWNER_DECISION=NO
 SECOND_ACTIVE_MULTIRESO_WRITER=NO
 ```
+
+## Final worker handoff and mainline read-only verification
+
+At `2026-09-14T01:05:10+08:00`, the selected r2 worker had completed the
+authorized full E1 population and released its namespace lock. Mainline read
+the handoff file from the worker worktree and verified its status and the
+reported output hashes. The handoff itself is committed and pushed on the r2
+branch.
+
+```text
+HANDOFF_FILE=F:/项目/申请实验室  TTS项目/AudiobookBench-CN-phase3t-multireso-worker-r2/PHASE3T_MULTIRRESO_WORKER_HANDOFF_V1.md
+HANDOFF_FILE_SHA256=2005CE7AB93347FD15A0A5D556AD9C28A457E81F20A50FA7F599214F7C46B60A
+HANDOFF_STATUS=READY_FOR_MAINLINE_READ_ONLY_INGESTION
+WORKER_R2_FINAL_EXECUTION_COMMIT=418593d2c9f0c90f7c663fa001fa15f8839bde7f
+WORKER_R2_CURRENT_HEAD=ebad7eac879cd4ae14c7cbb14bf0900101720e0f
+WORKER_R2_FINAL_NAMESPACE_STATUS=COMPLETE
+WORKER_R2_PLANNED=42471
+WORKER_R2_TERMINAL=42471
+WORKER_R2_VALID=42438
+WORKER_R2_FAILED=33
+WORKER_R2_MISSING=0
+WORKER_R2_FAILURE_CLASS=AUDIO_LOAD_FAILURE
+WORKER_R2_SCALES=6/6
+WORKER_R2_GT_ACCESSED=NO
+WORKER_R2_SCIENTIFIC_METRICS_COMPUTED=0
+WORKER_R2_RAW_SHA256=00E502AA418DC1279AE19F72E48E1617A4BCF56014307FE6E0BC666736E37925
+WORKER_R2_CASE_LEDGER_SHA256=24FAE99EEE5BE1E3CDE8D912AE8EF4C12DF6423A7705599F4C7C26DA97EA5733
+WORKER_R2_OUTPUT_MANIFEST_JSONL_SHA256=4A606CA23126AF50CDDF3ACA1AABA536BB03B96DDF4C962DA924080034F521AC
+WORKER_R2_ATTEMPTS_SHA256=D1C66CCF73538ECD810F56ABDD29402D85A38CA5A22323D83EED17869FCA204E
+WORKER_R2_RETRY_LEDGER_SHA256=87D9A2B86FBBCA61FFBCEC5788E3B205B0509D150F8A1D896EB0CF1EADC9F3AD
+WORKER_R2_RUN_MANIFEST_SHA256=0EE148D1305675369D7B8772BD37A2C39E769A4C0CA8A9D335756A6DC6BB2333
+WORKER_R2_T2_VALIDATION=PASS
+WORKER_R2_T2_VALIDATION_SHA256=BC87402447FEFDEF7DF1360B76B5910C4BFEF9A2580D7AA24F142BC7B4899054
+WORKER_R2_ATTEMPT_BACKFILL_REPORT_SHA256=ADAD92B6AE8B54D8C96C0D8EF2A84058D6FFFD38802374A6E6EED09211638B22
+WORKER_R2_RUN_RUNTIME_SEC=4815.7775395
+WORKER_R2_PEAK_VRAM_BYTES=2474151424
+```
+
+The raw, terminal case ledger, and output-manifest JSONL each contain 42,471
+unique records with continuous official case indices and zero set mismatch.
+The attempts history contains 42,482 append-only records, including seven
+retained duplicate attempt-start keys from earlier infrastructure restarts;
+all 42,471 terminal attempts are represented, and four attempt-2 records match
+the four retry-ledger entries. The 33 audio-load attempt-start rows missing
+from the worker's original append-only attempts file were backfilled without
+changing raw or the terminal case ledger. The exact before/after attempts
+hashes and case IDs are preserved in the backfill report.
+
+Mainline does not use the worker's per-record `runtime_sec` fields because the
+worker instrumentation started that timer immediately before terminal
+serialization. The run-level manifest runtime is retained as the authoritative
+execution runtime; this metadata defect does not alter native outputs,
+completeness, failure accounting, or the authorized evaluation boundary.
+
+The formal MultiReso owner is now locked to `PARALLEL_WORKER_R2`. The old
+worker namespace and the terminated mainline MultiReso partial remain preserved
+for provenance only. Mainline may ingest only the handoff namespace by
+read-only verification; it must not rerun MultiReso or use any partial output.
