@@ -1,0 +1,10 @@
+{
+  "archive_type": "GIT_CONTENT_ADDRESSED_AUTHORIZATION_ARCHIVE",
+  "artifact_sha256": "18E2E949689F79B397EACF06CAE2724BDEE41D45C7F5311F9ED9C9E7DFF7DEE3",
+  "artifact_path": "results/week4_adaptive_redteam/authorization.json",
+  "immutable_git_revision": "2a2904f8adab2416233029fc43eb7f4d16d6e818",
+  "retrieval": "git show 2a2904f8adab2416233029fc43eb7f4d16d6e818:results/week4_adaptive_redteam/authorization.json",
+  "invocation_id": "week4_validation_01",
+  "output_namespace": "results/week4_adaptive_redteam_runs/week4_validation_01",
+  "archive_reason": "Validation01 completed before the post-validation governance-record repair and separately scoped held-out authorization."
+}

@@ -17,7 +17,7 @@
     "preregistration_sha256", "canonical_config_sha256", "population_manifest_sha256", "controller_sha256", "search_implementation_sha256", "formal_runner_sha256",
     "f5_qualification_sha256", "execution_supplement_sha256", "execution_supplement_config_sha256", "d0_asset_manifest_sha256", "execution_source_manifest_sha256",
     "f5_frozen_source_manifest_sha256", "formal_runtime_environment_manifest_sha256", "execution_governance_amendment_v2_sha256", "partial_dev_invalidation_sha256",
-    "dev03_postrun_integrity_review_sha256", "post_validation_a0_freeze_sha256"
+    "dev03_postrun_integrity_review_sha256", "post_validation_a0_freeze_sha256", "validation01_report_sha256", "post_validation_freeze_contract_repair_sha256"
   ],
   "properties": {
     "protocol": {"const": "WEEK4_ADAPTIVE_RED_TEAM_A0"},
@@ -38,7 +38,7 @@
     "PRIOR_FAILED_ATTEMPT_EXISTED": {"const": true},
     "PRIOR_FAILED_ATTEMPT_PRODUCED_SCIENTIFIC_OUTCOME": {"const": false},
     "PRIOR_WEEK4_DEV_OUTCOMES_OBSERVED": {"const": true},
-    "PRIOR_WEEK4_VALIDATION_OUTCOMES_OBSERVED": {"const": false},
+    "PRIOR_WEEK4_VALIDATION_OUTCOMES_OBSERVED": {"type": "boolean"},
     "PRIOR_WEEK4_HELD_OUT_OUTCOMES_OBSERVED": {"const": false},
     "PRIOR_WEEK4_H4_OUTCOME_OBSERVED": {"const": false},
     "PRIOR_PARTIAL_RUNS_SCIENTIFICALLY_ADMISSIBLE": {"const": false},
@@ -59,7 +59,8 @@
       "f5_qualification": {"$ref": "#/$defs/hash"}, "execution_supplement": {"$ref": "#/$defs/hash"}, "execution_supplement_config": {"$ref": "#/$defs/hash"},
       "d0_asset_manifest": {"$ref": "#/$defs/hash"}, "execution_source_manifest": {"$ref": "#/$defs/hash"}, "f5_frozen_source_manifest": {"$ref": "#/$defs/hash"},
       "formal_runtime_environment_manifest": {"$ref": "#/$defs/hash"}, "execution_governance_amendment_v2": {"$ref": "#/$defs/hash"}, "partial_dev_invalidation": {"$ref": "#/$defs/hash"},
-      "dev03_postrun_integrity_review": {"$ref": "#/$defs/hash"}, "post_validation_a0_freeze": {"$ref": "#/$defs/hash"}
+      "dev03_postrun_integrity_review": {"$ref": "#/$defs/hash"}, "post_validation_a0_freeze": {"$ref": "#/$defs/hash"},
+      "validation01_report": {"$ref": "#/$defs/hash"}, "post_validation_freeze_contract_repair": {"$ref": "#/$defs/hash"}
     }},
     "preregistration_sha256": {"$ref": "#/$defs/nullable_hash"}, "canonical_config_sha256": {"$ref": "#/$defs/nullable_hash"}, "population_manifest_sha256": {"$ref": "#/$defs/nullable_hash"},
     "controller_sha256": {"$ref": "#/$defs/nullable_hash"}, "search_implementation_sha256": {"$ref": "#/$defs/nullable_hash"}, "formal_runner_sha256": {"$ref": "#/$defs/nullable_hash"},
@@ -67,6 +68,7 @@
     "d0_asset_manifest_sha256": {"$ref": "#/$defs/nullable_hash"}, "execution_source_manifest_sha256": {"$ref": "#/$defs/nullable_hash"}, "f5_frozen_source_manifest_sha256": {"$ref": "#/$defs/nullable_hash"},
     "formal_runtime_environment_manifest_sha256": {"$ref": "#/$defs/nullable_hash"}, "execution_governance_amendment_v2_sha256": {"$ref": "#/$defs/nullable_hash"}, "partial_dev_invalidation_sha256": {"$ref": "#/$defs/nullable_hash"},
     "dev03_postrun_integrity_review_sha256": {"$ref": "#/$defs/nullable_hash"}, "post_validation_a0_freeze_sha256": {"$ref": "#/$defs/nullable_hash"},
+    "validation01_report_sha256": {"$ref": "#/$defs/nullable_hash"}, "post_validation_freeze_contract_repair_sha256": {"$ref": "#/$defs/nullable_hash"},
     "d0_identity": {"const": {"name": "B1b", "implementation": "reference_free_frozen"}},
     "s2_identity": {"const": {"name": "S2_1500ms_250ms", "window_samples": 24000, "hop_samples": 4000}},
     "f5_source_identity": {"const": {"name": "F5-TTS v1 Base", "repo_commit": "82fc4fe622fe36047d1dff99b550e6018181ea11", "model_revision": "84e5a410d9cead4de2f847e7c9369a6440bdfaca"}},
@@ -85,7 +87,8 @@
       "issued_at": {"type": "string"}, "source_sha256": {"type": "object", "required": ["preregistration", "canonical_config", "population_manifest", "controller", "search_implementation", "formal_runner", "f5_qualification", "execution_supplement", "execution_supplement_config", "d0_asset_manifest", "execution_source_manifest", "f5_frozen_source_manifest", "formal_runtime_environment_manifest", "execution_governance_amendment_v2", "partial_dev_invalidation", "dev03_postrun_integrity_review"]},
       "preregistration_sha256": {"type": "string"}, "canonical_config_sha256": {"type": "string"}, "population_manifest_sha256": {"type": "string"}, "controller_sha256": {"type": "string"}, "search_implementation_sha256": {"type": "string"}, "formal_runner_sha256": {"type": "string"}, "f5_qualification_sha256": {"type": "string"}, "execution_supplement_sha256": {"type": "string"}, "execution_supplement_config_sha256": {"type": "string"}, "d0_asset_manifest_sha256": {"type": "string"}, "execution_source_manifest_sha256": {"type": "string"}, "f5_frozen_source_manifest_sha256": {"type": "string"}, "formal_runtime_environment_manifest_sha256": {"type": "string"}, "execution_governance_amendment_v2_sha256": {"type": "string"}, "partial_dev_invalidation_sha256": {"type": "string"}, "dev03_postrun_integrity_review_sha256": {"type": "string"}
     }}},
-    {"if": {"properties": {"stage": {"const": "held_out"}}}, "then": {"properties": {"source_sha256": {"type": "object", "required": ["post_validation_a0_freeze"]}, "post_validation_a0_freeze_sha256": {"type": "string"}}}},
+    {"if": {"properties": {"stage": {"const": "validation"}}}, "then": {"properties": {"PRIOR_WEEK4_VALIDATION_OUTCOMES_OBSERVED": {"const": false}}}},
+    {"if": {"properties": {"stage": {"const": "held_out"}}}, "then": {"properties": {"PRIOR_WEEK4_VALIDATION_OUTCOMES_OBSERVED": {"const": true}, "source_sha256": {"type": "object", "required": ["post_validation_a0_freeze", "validation01_report", "post_validation_freeze_contract_repair"]}, "post_validation_a0_freeze_sha256": {"type": "string"}, "validation01_report_sha256": {"type": "string"}, "post_validation_freeze_contract_repair_sha256": {"type": "string"}}}},
     {"if": {"properties": {"authorization_status": {"const": "INACTIVE"}}}, "then": {"properties": {"ready": {"const": false}, "READY_FOR_WEEK4_EXECUTION": {"const": false}, "READY_FOR_STAGE_EXECUTION": {"const": false}, "run_id": {"type": "null"}, "stage": {"type": "null"}, "stage_authorization": {"type": "null"}, "invocation_id": {"type": "null"}, "output_namespace": {"type": "null"}, "issued_at": {"type": "null"}, "source_sha256": {"type": "null"}}}}
   ]
 }

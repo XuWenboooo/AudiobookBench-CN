@@ -10,7 +10,7 @@ from pathlib import Path
 import pytest
 
 from audiobookbench.security.week4_authorization import (
-    CANONICAL_SOURCES,
+    CANONICAL_SOURCES, FREEZE_CONTRACT_REPAIR, POST_VALIDATION_FREEZE, VALIDATION01_REPORT,
     Week4AuthorizationError,
     sha256_file,
     validate_authorization_artifact,
@@ -38,6 +38,14 @@ def active_artifact(invocation_id: str = "TEST_ONLY_preflight_20260911", stage: 
         "issued_at": "2026-09-11T00:00:00Z",
     })
     hashes = {name: sha256_file(path) for name, path in CANONICAL_SOURCES.items()}
+    if stage == "held_out":
+        extra_sources = {
+            "post_validation_a0_freeze": POST_VALIDATION_FREEZE,
+            "validation01_report": VALIDATION01_REPORT,
+            "post_validation_freeze_contract_repair": FREEZE_CONTRACT_REPAIR,
+        }
+        hashes.update({name: sha256_file(path) if path.is_file() else "0" * 64 for name, path in extra_sources.items()})
+        artifact["PRIOR_WEEK4_VALIDATION_OUTCOMES_OBSERVED"] = True
     artifact["source_sha256"] = hashes
     artifact.update({
         "preregistration_sha256": hashes["preregistration"],
@@ -58,6 +66,12 @@ def active_artifact(invocation_id: str = "TEST_ONLY_preflight_20260911", stage: 
         "dev03_postrun_integrity_review_sha256": hashes["dev03_postrun_integrity_review"],
         "POST_DEV_GOVERNANCE_AMENDMENT_SHA256": hashes["execution_governance_amendment_v2"],
     })
+    if stage == "held_out":
+        artifact.update({
+            "post_validation_a0_freeze_sha256": hashes["post_validation_a0_freeze"],
+            "validation01_report_sha256": hashes["validation01_report"],
+            "post_validation_freeze_contract_repair_sha256": hashes["post_validation_freeze_contract_repair"],
+        })
     return artifact
 
 
@@ -195,10 +209,11 @@ def test_frozen_config_hash_and_execution_flag_remain_unchanged():
     assert "scientific_execution_enabled: false" in config.read_text(encoding="utf-8")
 
 
-def test_current_authorization_is_validation_scoped_and_discloses_post_dev_governance():
+def test_current_authorization_is_heldout_scoped_and_discloses_observed_validation():
     artifact = json.loads((ROOT / "results/week4_adaptive_redteam/authorization.json").read_text(encoding="utf-8"))
-    assert artifact["invocation_id"] == "week4_validation_01"
-    assert artifact["stage"] == artifact["stage_authorization"] == "validation"
+    assert artifact["invocation_id"] == "week4_heldout_01"
+    assert artifact["stage"] == artifact["stage_authorization"] == "held_out"
+    assert artifact["PRIOR_WEEK4_VALIDATION_OUTCOMES_OBSERVED"] is True
     assert artifact["PRIOR_FAILED_ATTEMPT_EXISTED"] is True
     assert artifact["PRIOR_FAILED_ATTEMPT_PRODUCED_SCIENTIFIC_OUTCOME"] is False
     assert artifact["WEEK4_SCIENTIFIC_OUTCOME_OBSERVED_BEFORE_REAUTHORIZATION"] is True

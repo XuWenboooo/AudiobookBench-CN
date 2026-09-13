@@ -36,6 +36,8 @@ CANONICAL_SOURCES = {
     "dev03_postrun_integrity_review": REPO_ROOT / "research_assurance/WEEK4_DEV03_POSTRUN_INTEGRITY_REVIEW.md",
 }
 POST_VALIDATION_FREEZE = REPO_ROOT / "research_assurance/WEEK4_POST_VALIDATION_A0_FREEZE.md"
+VALIDATION01_REPORT = REPO_ROOT / "research_assurance/WEEK4_VALIDATION_01_REPORT.md"
+FREEZE_CONTRACT_REPAIR = REPO_ROOT / "research_assurance/WEEK4_POST_VALIDATION_FREEZE_CONTRACT_REPAIR.md"
 
 
 class Week4AuthorizationError(RuntimeError):
@@ -106,13 +108,15 @@ def _stage_sources(root: Path, stage: str) -> dict[str, Path]:
     sources = {name: (root / path.relative_to(REPO_ROOT)).resolve() for name, path in CANONICAL_SOURCES.items()}
     if stage == "held_out":
         sources["post_validation_a0_freeze"] = (root / POST_VALIDATION_FREEZE.relative_to(REPO_ROOT)).resolve()
+        sources["validation01_report"] = (root / VALIDATION01_REPORT.relative_to(REPO_ROOT)).resolve()
+        sources["post_validation_freeze_contract_repair"] = (root / FREEZE_CONTRACT_REPAIR.relative_to(REPO_ROOT)).resolve()
     return sources
 
 
 def _require_post_validation_freeze(path: Path) -> None:
     try:
         from audiobookbench.security.week4_post_validation_freeze import validate_freeze_record
-        validate_freeze_record(path)
+        validate_freeze_record(path, expected_invocation_id="week4_validation_01")
     except ImportError as exc:  # pragma: no cover - defensive import boundary
         raise Week4AuthorizationError("post-validation freeze validator is unavailable") from exc
     except Exception as exc:
@@ -185,7 +189,7 @@ def validate_authorization_artifact(
         "PRIOR_FAILED_ATTEMPT_EXISTED": True,
         "PRIOR_FAILED_ATTEMPT_PRODUCED_SCIENTIFIC_OUTCOME": False,
         "PRIOR_WEEK4_DEV_OUTCOMES_OBSERVED": True,
-        "PRIOR_WEEK4_VALIDATION_OUTCOMES_OBSERVED": False,
+        "PRIOR_WEEK4_VALIDATION_OUTCOMES_OBSERVED": stage == "held_out",
         "PRIOR_WEEK4_HELD_OUT_OUTCOMES_OBSERVED": False,
         "PRIOR_WEEK4_H4_OUTCOME_OBSERVED": False,
         "PRIOR_PARTIAL_RUNS_SCIENTIFICALLY_ADMISSIBLE": False,

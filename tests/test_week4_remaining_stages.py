@@ -8,7 +8,10 @@ import pytest
 from audiobookbench.security.week4_authorization import CANONICAL_SOURCES, sha256_file
 from audiobookbench.security.week4_execution import SAMPLE_RATE, execute_protocol
 from audiobookbench.security.week4_final_evaluator import evaluate_committed_held_out
-from audiobookbench.security.week4_post_validation_freeze import PostValidationFreezeError, build_freeze_record
+from audiobookbench.security.week4_post_validation_freeze import (
+    COUNT_FIELDS, FREEZE_CLAIMS, VALIDATION_SOURCE_NAMES, PostValidationFreezeError,
+    _source_field, build_freeze_record, freeze_fields_from_evidence, validate_freeze_fields, validate_freeze_record,
+)
 from audiobookbench.security.week4_adaptive import FrozenAttackSpec
 
 
@@ -40,7 +43,11 @@ def source_hashes():
 def run_stage(tmp_path: Path, stage: str, *, no_parent: set[str] | None = None):
     no_parent = no_parent or set()
     spec = FrozenAttackSpec.from_path(ROOT / "configs/week4_adaptive_red_team.yaml")
-    metadata = {"authorization_source_sha256": source_hashes(), "invocation_id": f"TEST_ONLY_{stage}"}
+    metadata = {
+        "authorization_source_sha256": source_hashes(), "authorization_sha256": "A" * 64,
+        "invocation_id": f"TEST_ONLY_{stage}",
+        "output_namespace": f"results/week4_adaptive_redteam_runs/TEST_ONLY_{stage}",
+    }
     return execute_protocol(
         cases=cases(), spec=spec, runtime_root=tmp_path / stage, stage=stage, metadata=metadata,
         f5_generator=lambda case, _seed: (np.full(21200 if case["case_id"] in no_parent else 32000, 0.2, dtype=np.float32), SAMPLE_RATE),
@@ -89,3 +96,51 @@ def test_only_validation_integrity_or_hash_mutation_blocks_freeze(tmp_path: Path
     metadata.write_text(text, encoding="utf-8")
     with pytest.raises(PostValidationFreezeError, match="source hashes"):
         build_freeze_record(clean / "validation", clean / "freeze.md")
+
+
+def freeze_fields(*, winner: int, no_parent: int, other: int = 0) -> dict[str, str]:
+    fields = dict(FREEZE_CLAIMS)
+    fields.update({
+        "VALIDATION_PLANNED": "12", "VALIDATION_TERMINAL": str(winner + no_parent + other),
+        "VALIDATION_WITH_WINNER": str(winner), "VALIDATION_NO_VALID_ADAPTIVE_PARENT": str(no_parent),
+        "VALIDATION_OTHER_FAILURES": str(other), "VALIDATION_INVOCATION_ID": "week4_validation_01",
+        "VALIDATION_AUTHORIZATION_SHA256": "A" * 64,
+        "VALIDATION_OUTPUT_NAMESPACE": "results/week4_adaptive_redteam_runs/week4_validation_01",
+    })
+    fields.update({_source_field(name): "B" * 64 for name in VALIDATION_SOURCE_NAMES})
+    return fields
+
+
+@pytest.mark.parametrize(("winner", "no_parent"), [(7, 5), (12, 0), (0, 12)])
+def test_freeze_contract_accepts_terminal_completeness_independent_of_winner_count(winner: int, no_parent: int):
+    assert validate_freeze_fields(freeze_fields(winner=winner, no_parent=no_parent))["VALIDATION_TERMINAL"] == 12
+
+
+@pytest.mark.parametrize("field,value", [
+    ("VALIDATION_TERMINAL", "11"), ("HELD_OUT_OUTCOME_OBSERVED", "YES"), ("H4_OUTCOME_OBSERVED", "YES"),
+])
+def test_freeze_contract_rejects_bad_counts_or_observed_future_outcomes(field: str, value: str):
+    fields = freeze_fields(winner=7, no_parent=5)
+    fields[field] = value
+    with pytest.raises(PostValidationFreezeError):
+        validate_freeze_fields(fields)
+
+
+def test_freeze_field_rendering_ignores_effect_metrics():
+    evidence = {
+        "metadata": {"invocation_id": "week4_validation_01", "authorization_sha256": "A" * 64, "output_namespace": "results/week4_adaptive_redteam_runs/week4_validation_01"},
+        "counts": {"VALIDATION_PLANNED": 12, "VALIDATION_TERMINAL": 12, "VALIDATION_WITH_WINNER": 7, "VALIDATION_NO_VALID_ADAPTIVE_PARENT": 5, "VALIDATION_OTHER_FAILURES": 0},
+        "validation_source_sha256": {name: "B" * 64 for name in VALIDATION_SOURCE_NAMES},
+    }
+    baseline = freeze_fields_from_evidence(evidence)
+    evidence["validation_auroc"] = 0.01
+    evidence["validation_auprc"] = 0.99
+    assert freeze_fields_from_evidence(evidence) == baseline
+
+
+def test_freeze_record_rejects_duplicate_required_field(tmp_path: Path):
+    fields = freeze_fields(winner=7, no_parent=5)
+    path = tmp_path / "freeze.md"
+    path.write_text("\n".join(f"{key} = {value}" for key, value in fields.items()) + "\nVALIDATION_TERMINAL = 12\n", encoding="utf-8")
+    with pytest.raises(PostValidationFreezeError, match="duplicate"):
+        validate_freeze_record(path)
