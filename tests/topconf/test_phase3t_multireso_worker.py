@@ -25,7 +25,7 @@ def test_append_only_resume_and_duplicate_detection(tmp_path, monkeypatch):
     ledger = tmp_path / "ledger.jsonl"
     monkeypatch.setattr(worker, "LEDGER_JSONL", ledger)
     worker._append(ledger, {"case_id": "c1", "terminal_status": "VALID"})
-    assert worker._existing_case_ids() == {"c1"}
+    assert worker._existing_case_ids() == ({"c1"}, 1, 0)
     worker._append(ledger, {"case_id": "c1", "terminal_status": "VALID"})
     with pytest.raises(RuntimeError, match="duplicate"):
         worker._existing_case_ids()

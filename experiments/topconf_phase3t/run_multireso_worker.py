@@ -150,10 +150,12 @@ def _append(path: Path, value: dict[str, Any]) -> None:
         handle.flush()
 
 
-def _existing_case_ids() -> set[str]:
+def _existing_case_ids() -> tuple[set[str], int, int]:
     if not LEDGER_JSONL.exists():
-        return set()
+        return set(), 0, 0
     ids: set[str] = set()
+    valid = 0
+    failed = 0
     with LEDGER_JSONL.open(encoding="utf-8") as handle:
         for line in handle:
             record = json.loads(line)
@@ -161,7 +163,17 @@ def _existing_case_ids() -> set[str]:
             if case_id in ids:
                 raise RuntimeError("duplicate terminal record in existing ledger")
             ids.add(case_id)
-    return ids
+            if record.get("terminal_status") == "VALID":
+                valid += 1
+            elif record.get("terminal_status") == "FAILED":
+                failed += 1
+            else:
+                raise RuntimeError("invalid terminal status in existing ledger")
+    if RAW_JSONL.exists():
+        raw_ids = {json.loads(line)["case_id"] for line in RAW_JSONL.open(encoding="utf-8")}
+        if raw_ids - ids:
+            raise RuntimeError("orphan raw output without terminal ledger record")
+    return ids, valid, failed
 
 
 def _write_run_manifest(status: str, planned: int, terminal: int, valid: int, failed: int, runtime_sec: float) -> None:
@@ -180,7 +192,7 @@ def run(batch_size: int, resume: bool = False) -> int:
     if not CHECKPOINT_PATH.is_file():
         raise RuntimeError("authorized checkpoint path missing")
     cases = read_case_order()
-    completed = _existing_case_ids() if resume else set()
+    completed, valid, failed = _existing_case_ids() if resume else (set(), 0, 0)
     if len(completed) > len(cases):
         raise RuntimeError("existing ledger exceeds planned population")
     NAMESPACE.mkdir(parents=True, exist_ok=True)
@@ -188,8 +200,6 @@ def run(batch_size: int, resume: bool = False) -> int:
     device = torch.device("cuda")
     model = _load_model(device)
     _write_run_manifest("RUNNING", len(cases), len(completed), 0, 0, 0.0)
-    valid = 0
-    failed = 0
     index = 0
     while index < len(cases):
         pending = [row for row in cases[index:index + batch_size] if row["case_id"] not in completed]
@@ -234,8 +244,9 @@ def run(batch_size: int, resume: bool = False) -> int:
                 if "out of memory" in str(exc).lower() and batch_size > 1 and attempts == 1:
                     _append(RETRY_JSONL, {"attempt_id": f"{INVOCATION_ID}-{index}-oom", "case_id": pending[0]["case_id"], "attempt_type": "batch_size_reduction", "invoked": True, "failure": "CUDA_OOM", "retry_reason": "predeclared infrastructure policy; reduce batch only", "authorization_id": AUTHORIZATION_ID})
                     batch_size = 1
+                    index -= len(pending)
                     torch.cuda.empty_cache()
-                    continue
+                    break
                 for row, _, _, _ in loaded:
                     _append(LEDGER_JSONL, _terminal(row, "FAILED", time.perf_counter(), "MODEL_INFERENCE_FAILURE", attempts)); failed += 1; completed.add(row["case_id"])
                 break
