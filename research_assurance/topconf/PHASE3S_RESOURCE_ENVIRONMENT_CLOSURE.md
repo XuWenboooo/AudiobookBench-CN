@@ -89,3 +89,17 @@ PRIMARY_ENVIRONMENT_CHANGED = NO
 The native Windows environment is now sufficient for checkpoint/load-only
 validation on the RTX 4060. This does not satisfy the external-audio gate and
 does not authorize a full CFPRF reproduction.
+
+## Append-only PartialEdit official-record version audit
+
+The official PartialEdit README bundled with the locally verified metadata
+links to Zenodo record `15519188` (`10.5281/zenodo.15519188`). Its API metadata
+was inspected without downloading an archive. The record is an earlier 2025
+release and exposes an E1 archive with size `3536014410` bytes and MD5
+`aa8f1636ec374d5101eef6c51afd757f`, which differs from the authorized v1.1
+record `18829689` E1 identity (`1f489d2ff488ddd6c9b655127725af2f`). It is
+therefore not an authorized v1.1 transport or substitution and was not used.
+
+`PARTIALEDIT_15519188_STATUS = OFFICIAL_OLDER_RECORD_REJECTED_VERSION_AND_HASH_MISMATCH`
+
+`PARTIALEDIT_V1_1_TRANSPORT_REMAINS = ZENODO_18829689_CURL_ATTEMPT_IN_PROGRESS`
