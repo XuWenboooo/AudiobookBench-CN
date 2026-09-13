@@ -23,7 +23,9 @@ def test_native_outputs_preserve_all_six_scales_without_metrics():
 
 def test_append_only_resume_and_duplicate_detection(tmp_path, monkeypatch):
     ledger = tmp_path / "ledger.jsonl"
+    raw = tmp_path / "raw.jsonl"
     monkeypatch.setattr(worker, "LEDGER_JSONL", ledger)
+    monkeypatch.setattr(worker, "RAW_JSONL", raw)
     worker._append(ledger, {"case_id": "c1", "terminal_status": "VALID"})
     assert worker._existing_case_ids() == ({"c1"}, 1, 0)
     worker._append(ledger, {"case_id": "c1", "terminal_status": "VALID"})
