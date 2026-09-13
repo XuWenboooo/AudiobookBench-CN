@@ -1,0 +1,42 @@
+# Phase 3 External Reproduction Closure
+
+Status: **BLOCKED — INFRASTRUCTURE VALIDATION COMPLETE, EXTERNAL REPRODUCTION NOT COMPLETE**
+
+## Gate decision
+
+`PHASE3_EXTERNAL_REPRODUCTION_CLOSURE = BLOCKED`
+
+`READY_FOR_PHASE4_CONFIRMATORY_DESIGN_FREEZE = NO`
+
+`READY_FOR_CONFIRMATORY_EXPERIMENT_EXECUTION = NO`
+
+## Evidence
+
+- Phase 3 authorization was instantiated before any external model output was
+  observed. Scope is limited to reproduction and infrastructure validation.
+- The official PartialSpoof v1.2 protocols, segment labels, VAD metadata and
+  README pass checksum verification. Segment-label parsers pass for train,
+  dev and eval metadata at 0.16 seconds. The official audio archive was not
+  completed; its local partial file fails the official MD5.
+- The official PartialEdit v1.1 CSV and speaker archive pass checksum
+  verification. The CSV parser validates 85,007 rows, 85,632 edited regions,
+  E1/E2 counts, and speaker metadata. E1/E2 audio and codec archives are not
+  materialized, so duration/path cross-checks cannot pass.
+- CFPRF checkpoint acquisition is blocked by download throughput. SAL has no
+  verified local checkpoint. BAM remains rights-blocked. TRACE remains a
+  stretch reimplementation and is not counted as a core reproduction.
+- Parser/evaluator tests pass with `python -m pytest tests/topconf -q`.
+
+## Non-results
+
+No external checkpoint was loaded, no real audio was scored, no external
+metric was computed, and no baseline was ranked or excluded by outcome. The
+Phase 4 design freeze, confirmatory population, and RQ1/RQ2/RQ3 remain
+untouched.
+
+## Reopening condition
+
+Reopen only after the official audio archives and at least the authorized
+external baseline checkpoint path are materialized and checksum/load/smoke
+gates pass under a refreshed authorization commit. Any new model or output
+contract requires a provenance entry before execution.

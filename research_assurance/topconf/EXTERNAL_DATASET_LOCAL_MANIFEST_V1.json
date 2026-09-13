@@ -1,0 +1,82 @@
+{
+  "manifest_id": "EXTERNAL_DATASET_LOCAL_MANIFEST_V1",
+  "status": "PARTIAL_MATERIALIZATION_NO_AUDIO_EVALUATION",
+  "materialized_at": "2026-09-13",
+  "cache_root": "F:/项目/申请实验室  TTS项目/topconf_phase3_cache",
+  "redistribution": "LOCAL_ONLY_REVIEW_REQUIRED",
+  "datasets": [
+    {
+      "dataset_id": "PartialSpoof",
+      "version": "1.2",
+      "doi": "10.5281/zenodo.5766198",
+      "official_source": "https://zenodo.org/records/5766198",
+      "repository": "https://github.com/nii-yamagishilab/PartialSpoof",
+      "repository_commit": "847347aaec6f65c3c6d2f17c63515b826b94feb3",
+      "license": "CC BY 4.0 (dataset metadata); local redistribution not assumed",
+      "authorized_scope": "official metadata, dev/eval reproduction artifacts; no train/test redesign",
+      "official_files": [
+        {"name": "database_train.tar.gz", "md5": "c4853ddd831e8e96b0e279fc0a512e7e", "local_status": "NOT_MATERIALIZED"},
+        {"name": "database_dev.tar.gz", "md5": "ddd4cd3221b7210ac879f67452fb209e", "local_status": "NOT_MATERIALIZED"},
+        {"name": "database_eval.tar.gz", "md5": "79c7c834d0d9979ecd374a98a059ea19", "local_status": "INVALID_PARTIAL_DOWNLOAD", "local_md5": "1cf0f4f9865a596472c245f880fbc484", "local_bytes": 499712},
+        {"name": "database_protocols.tar.gz", "md5": "699d81f020e4b7fa8f33747010e1cba8", "local_status": "MATERIALIZED_VERIFIED", "local_md5": "699d81f020e4b7fa8f33747010e1cba8", "local_bytes": 5389040},
+        {"name": "database_segment_labels_v1.2.tar.gz", "md5": "c2bf6638e59ec7a5cf93c4a510fe4efe", "local_status": "MATERIALIZED_VERIFIED", "local_md5": "c2bf6638e59ec7a5cf93c4a510fe4efe", "local_bytes": 76583019},
+        {"name": "database_vad.tar.gz", "md5": "95e77e19a1bb4f2e79ed138fd35621ad", "local_status": "MATERIALIZED_VERIFIED", "local_md5": "95e77e19a1bb4f2e79ed138fd35621ad", "local_bytes": 10240345},
+        {"name": "README_v1.2", "md5": "4fec0742e2a606d1b1186067d79862d6", "local_status": "MATERIALIZED_VERIFIED", "local_md5": "4fec0742e2a606d1b1186067d79862d6", "local_bytes": 17948}
+      ],
+      "ground_truth_materialization": {
+        "path": "PartialSpoof_v1.2/extracted/database/segment_labels",
+        "resolutions_seconds": [0.01, 0.02, 0.04, 0.08, 0.16, 0.32, 0.64],
+        "parser": "PASS_METADATA_ONLY",
+        "validation": {
+          "train_0.16_keys": 25380,
+          "dev_0.16_keys": 24844,
+          "eval_0.16_keys": 71237,
+          "labels": [0, 1],
+          "empty_or_bad_vectors": 0,
+          "duplicate_keys": 0,
+          "train_vector_length_range": [4, 132],
+          "dev_vector_length_range": [4, 96],
+          "eval_vector_length_range": [4, 114]
+        }
+      },
+      "audio_duration_crosscheck": "BLOCKED_DOWNLOAD_THROUGHPUT",
+      "overall_local_status": "GT_METADATA_PASS_AUDIO_BLOCKED"
+    },
+    {
+      "dataset_id": "PartialEdit",
+      "version": "1.1",
+      "doi": "10.5281/zenodo.18829689",
+      "official_source": "https://zenodo.org/records/18829689",
+      "paper_source": "https://www.isca-archive.org/interspeech_2025/zhang25g_interspeech.pdf",
+      "license": "CC BY 4.0 (dataset metadata); local redistribution not assumed",
+      "authorized_scope": "E1, E2, E1-Codec, E2-Codec; E3/E4 excluded",
+      "official_files": [
+        {"name": "PartialEdit_E1E2.csv", "md5": "3ff74c4e5cab69013d1d9c4a30f59cae", "local_status": "MATERIALIZED_VERIFIED", "local_md5": "3ff74c4e5cab69013d1d9c4a30f59cae", "local_bytes": 4713104},
+        {"name": "PartialEdit_spk.zip", "md5": "09b1e6e2e345918ee8250b547dcd67ba", "local_status": "MATERIALIZED_VERIFIED", "local_md5": "09b1e6e2e345918ee8250b547dcd67ba", "local_bytes": 10828},
+        {"name": "README.md", "md5": "14f0fee2123e6b31ef9e36f3377c00f0", "local_status": "MATERIALIZED_VERIFIED", "local_md5": "14f0fee2123e6b31ef9e36f3377c00f0", "local_bytes": 6178},
+        {"name": "E1.tar.gz", "md5": "1f489d2ff488ddd6c9b655127725af2f", "local_status": "NOT_MATERIALIZED"},
+        {"name": "E2.tar.gz", "md5": "0e2cb7ba075b301de55ab8657cfa7631", "local_status": "NOT_MATERIALIZED"},
+        {"name": "E1-Codec.tar.gz", "md5": "a0c0904eaa7a079c825ab733ae69f700", "local_status": "NOT_MATERIALIZED"},
+        {"name": "E2-Codec.tar.gz", "md5": "e1e2fbfd2c145c24bf3d3a07068b06a5", "local_status": "NOT_MATERIALIZED"},
+        {"name": "modified_txt.tar.gz", "md5": "108934d45414c92c1bd14c9dc89b227b", "local_status": "NOT_MATERIALIZED"},
+        {"name": "txt.tar.gz", "md5": "5191f55b438d71cb47f07ccd75eddb43", "local_status": "NOT_MATERIALIZED"}
+      ],
+      "ground_truth_materialization": {
+        "path": "PartialEdit_v1.1/PartialEdit_E1E2.csv",
+        "parser": "PASS_CSV_METADATA_ONLY",
+        "validation": {
+          "rows": 85007,
+          "edited_regions": 85632,
+          "unique_audio_paths": 85007,
+          "subsets": {"E1": 42471, "E2": 42536},
+          "speaker_ids_in_paths": 109,
+          "invalid_rows": 0,
+          "duplicate_audio_paths": 0,
+          "speaker_split_lists": {"train": 20, "dev": 20, "eval": 70, "vctk": 110}
+        }
+      },
+      "audio_duration_crosscheck": "BLOCKED_AUDIO_ARCHIVES_NOT_MATERIALIZED",
+      "overall_local_status": "GT_CSV_AND_SPEAKER_PASS_AUDIO_BLOCKED"
+    }
+  ]
+}
