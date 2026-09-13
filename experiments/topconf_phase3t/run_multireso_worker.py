@@ -8,6 +8,7 @@ authorization; change them only in a new authorized invocation.
 from __future__ import annotations
 
 import argparse
+import gc
 import hashlib
 import json
 import os
@@ -27,6 +28,7 @@ MODEL_REPOSITORY_COMMIT = "0f69db3a2d654de47822d951fe6ad256bbaac9ba"
 CHECKPOINT_SHA256 = "0C394F03558ECDD7A6B81BF6C0FD8EE642C5937BA22CC852F58AE4E7DC480E32"
 CHECKPOINT_PATH = Path("F:/项目/申请实验室  TTS项目/topconf_phase3_cache/repos/MultiResoModel-Simple-schannel/materialized/baseline-ps-e55/exp/baseline/55.pth")
 MODEL_REPO = Path("F:/项目/申请实验室  TTS项目/topconf_phase3_cache/repos/MultiResoModel-Simple-schannel")
+SSL_PATH = MODEL_REPO / "pretrained" / "w2v_large_lv_fsh_swbd_cv_fixed.pt"
 DATASET_CSV = Path("F:/项目/申请实验室  TTS项目/topconf_phase3_cache/PartialEdit_v1.1/PartialEdit_E1E2.csv")
 AUDIO_ROOT = Path("F:/项目/申请实验室  TTS项目/topconf_phase3_cache/PartialEdit_v1.1/materialized") / "E1"
 DATASET_CSV_SHA256 = "ADEECB0A7DD39A982223C07970E02E41CA5395EA3D484FCC6CE03174EBDF6CBC"
@@ -74,19 +76,121 @@ def read_case_order() -> list[dict[str, Any]]:
     return rows
 
 
-def _load_model(device: torch.device):
-    sys.path.insert(0, str(MODEL_REPO))
-    from modules.multiresomodel import MultiResoModel  # type: ignore
+def _build_meta(torch_module: Any, builder: Any):
+    """Build the frozen fairseq architecture without allocating its weights."""
 
-    ssl_path = str(MODEL_REPO / "pretrained/w2v_large_lv_fsh_swbd_cv_fixed.pt")
-    model = MultiResoModel(
-        num_scales=6, include_utt=True, use_mask=True, ssl_path=ssl_path,
-        ssl_dim=1024, ssl_tuning=True, device=str(device),
-    ).to(device)
-    # Stage on CPU so checkpoint loading cannot transiently duplicate the
-    # multi-gigabyte SSL/model weights in the 8 GiB worker GPU.
-    state = torch.load(str(CHECKPOINT_PATH), map_location="cpu")
-    model.load_state_dict(state["modules"]["model"], strict=True)
+    import importlib
+
+    originals = {name: getattr(torch_module, name) for name in ("empty", "zeros", "ones", "full")}
+    weight_norm_module = importlib.import_module("torch.nn.utils.weight_norm")
+    original_compute_weight = weight_norm_module.WeightNorm.compute_weight
+    wav2vec_module = importlib.import_module("fairseq.models.wav2vec.wav2vec2")
+    original_init_bert_params = wav2vec_module.init_bert_params
+
+    def meta_factory(original: Any):
+        def factory(*args: Any, **kwargs: Any):
+            if kwargs.get("device") is None:
+                kwargs["device"] = "meta"
+            return original(*args, **kwargs)
+
+        return factory
+
+    try:
+        for name, original in originals.items():
+            setattr(torch_module, name, meta_factory(original))
+        weight_norm_module.WeightNorm.compute_weight = lambda self, module: module.weight_v.data
+        wav2vec_module.init_bert_params = lambda module: None
+        return builder()
+    finally:
+        for name, original in originals.items():
+            setattr(torch_module, name, original)
+        weight_norm_module.WeightNorm.compute_weight = original_compute_weight
+        wav2vec_module.init_bert_params = original_init_bert_params
+
+
+def _load_model(device: torch.device):
+    import torch.nn as nn
+    from fairseq.models.wav2vec.wav2vec2 import Wav2Vec2Config, Wav2Vec2Model
+
+    sys.path.insert(0, str(MODEL_REPO))
+    import modules.multiresomodel as multireso_module  # type: ignore
+
+    ssl_cfg = Wav2Vec2Config(
+        _name="wav2vec2", extractor_mode="layer_norm", encoder_layers=24,
+        encoder_embed_dim=1024, encoder_ffn_embed_dim=4096,
+        encoder_attention_heads=16, activation_fn="gelu", dropout=0.0,
+        attention_dropout=0.0, activation_dropout=0.0, encoder_layerdrop=0.0,
+        dropout_input=0.0, dropout_features=0.0, final_dim=768,
+        layer_norm_first=True,
+        conv_feature_layers="[(512, 10, 5)] + [(512, 3, 2)] * 4 + [(512,2,2)] + [(512,2,2)]",
+        conv_bias=True, logit_temp=0.1, quantize_targets=True,
+        quantize_input=False, same_quantizer=False, target_glu=False,
+        feature_grad_mult=1.0, quantizer_depth=1, quantizer_factor=3,
+        latent_vars=320, latent_groups=2, latent_dim=0, mask_length=10,
+        mask_prob=0.65, mask_selection="static", mask_other=0.0,
+        no_mask_overlap=False, mask_min_space=1, mask_channel_length=10,
+        mask_channel_prob=0.0, mask_channel_before=False,
+        mask_channel_selection="static", mask_channel_other=0.0,
+        no_mask_channel_overlap=False, mask_channel_min_space=1,
+        num_negatives=100, negatives_from_everywhere=False,
+        cross_sample_negatives=0, codebook_negatives=0, conv_pos=128,
+        conv_pos_groups=16, latent_temp=(2.0, 0.1, 0.999995),
+    )
+    fresh_ssl = _build_meta(torch, lambda: Wav2Vec2Model.build_model(ssl_cfg))
+
+    class LifecycleCompatibleSSL(nn.Module):
+        def __init__(self, ssl_path: str = "unused", ssl_dim: int = 1024, device: str = "cuda"):
+            super().__init__()
+            self.model = fresh_ssl
+            self.device = device
+            self.out_dim = ssl_dim
+
+        def extract_layers_feat(self, input_data: Any):
+            if next(self.model.parameters()).device != input_data.device or next(self.model.parameters()).dtype != input_data.dtype:
+                self.model.to(input_data.device, dtype=input_data.dtype)
+            self.model.train()
+            input_tmp = input_data[:, 0, :] if input_data.ndim == 3 else input_data
+            results = self.model(input_tmp, mask=False, features_only=True)
+            return [hidden[2].transpose(0, 1) for hidden in results["layer_results"]]
+
+        def extract_feat(self, input_data: Any):
+            if next(self.model.parameters()).device != input_data.device or next(self.model.parameters()).dtype != input_data.dtype:
+                self.model.to(input_data.device, dtype=input_data.dtype)
+            self.model.train()
+            input_tmp = input_data[:, 0, :] if input_data.ndim == 3 else input_data
+            return self.model(input_tmp, mask=False, features_only=True)["x"]
+
+    multireso_module.SSLModel = LifecycleCompatibleSSL
+    model = _build_meta(torch, lambda: multireso_module.MultiResoModel(
+        num_scales=6, include_utt=True, use_mask=True, ssl_dim=1024,
+        ssl_path=str(SSL_PATH), ssl_tuning=True, device="meta",
+    ))
+    checkpoint = torch.load(str(CHECKPOINT_PATH), map_location="cpu")
+    state = checkpoint["modules"]["model"]
+    model_keys = set(model.state_dict().keys())
+    state_keys = set(state.keys())
+    if model_keys != state_keys:
+        raise RuntimeError(f"strict MultiReso state mismatch: missing={sorted(model_keys - state_keys)[:5]} unexpected={sorted(state_keys - model_keys)[:5]}")
+
+    def assign_tensor(module: nn.Module, key: str, tensor: Any) -> None:
+        parent_name, _, local_name = key.rpartition(".")
+        parent = module.get_submodule(parent_name) if parent_name else module
+        if local_name in parent._parameters:
+            original = parent._parameters[local_name]
+            parent._parameters[local_name] = nn.Parameter(tensor, requires_grad=original.requires_grad)
+        elif local_name in parent._buffers:
+            parent._buffers[local_name] = tensor
+        else:
+            raise RuntimeError(f"cannot assign checkpoint tensor {key}")
+
+    for key, tensor in state.items():
+        if tuple(tensor.shape) != tuple(model.state_dict()[key].shape):
+            raise RuntimeError(f"shape mismatch for {key}")
+        assign_tensor(model, key, tensor)
+    del state, checkpoint
+    gc.collect()
+    model.device = str(device)
+    model = model.to(device)
     model.eval()
     return model
 
