@@ -16,3 +16,13 @@ are required before any full reproduction.
 
 Failure accounting is infrastructure-based only. No result-based retry,
 threshold selection, pooling selection, or model ranking was performed.
+
+## Append-only Phase3V result
+
+| Baseline | Official source and frozen commit | License / rights | Checkpoint evidence | Phase3V status |
+|---|---|---|---|---|
+| MultiResoModel-Simple | `https://github.com/hieuthi/MultiResoModel-Simple` at `0f69db3a2d654de47822d951fe6ad256bbaac9ba` | root MIT; partialspoof-metrics submodule terms tracked separately | author-repository-linked HF revision `31fd984c53a95e428551f13c4d95645b3cb8c885`, `baseline-ps-e55.tgz`, 3701009843 bytes, SHA256 `0C394F03558ECDD7A6B81BF6C0FD8EE642C5937BA22CC852F58AE4E7DC480E32`; strict GPU load and bounded E1 smoke pass | `FUNCTIONAL_BASELINE_PATH_PASS_NOT_PAPER_EXACT_CHECKPOINT` |
+
+The Phase3V output is limited to three deterministic E1 samples and raw
+temporal arrays. No ground truth, metric, ranking, threshold, or scientific
+outcome was produced.
