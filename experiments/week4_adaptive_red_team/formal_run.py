@@ -46,7 +46,7 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser.add_argument("--authorization", type=Path, required=True)
     parser.add_argument("--runtime-root", type=Path, required=True)
     parser.add_argument("--preflight-only", action="store_true")
-    parser.add_argument("--stage", choices=["dev"], default="dev")
+    parser.add_argument("--stage", choices=["dev", "validation", "held_out"], default="validation")
     return parser.parse_args(argv)
 
 
@@ -115,7 +115,7 @@ def _validate_runtime_environment() -> dict[str, Any]:
     return {"python_executable": str(expected_python), "f5_api": str(Path(f5_tts.api.__file__).resolve()), "offline": True}
 
 
-def preflight(*, config: Path, population: Path, authorization: Path, runtime_root: Path, verify_runtime_environment: bool = False) -> dict[str, Any]:
+def preflight(*, config: Path, population: Path, authorization: Path, runtime_root: Path, stage: str = "validation", verify_runtime_environment: bool = False) -> dict[str, Any]:
     """Read and validate every formal input without creating output."""
     if _canonical_path(config) != _canonical_path(CANONICAL_CONFIG):
         raise FormalRunBlocked("only the canonical Week4 config is accepted")
@@ -128,7 +128,12 @@ def preflight(*, config: Path, population: Path, authorization: Path, runtime_ro
     spec = FrozenAttackSpec.from_path(config)
     _require_frozen_hashes(config, population)
     selected = _validate_population(population)
-    validated = validate_authorization_artifact(authorization, repo=ROOT, expected_run_id=spec.run_id, verify_f5_assets=True)
+    if stage not in {"dev", "validation", "held_out"}:
+        raise FormalRunBlocked("requested stage is not a frozen Week4 stage")
+    validated = validate_authorization_artifact(
+        authorization, repo=ROOT, expected_run_id=spec.run_id,
+        expected_stage=stage, verify_f5_assets=True,
+    )
     expected_namespace = ROOT / Path(validated.output_namespace)
     runtime_root = _canonical_path(runtime_root)
     if runtime_root != expected_namespace:
@@ -153,9 +158,12 @@ def preflight(*, config: Path, population: Path, authorization: Path, runtime_ro
         "d0_invoked": False,
         "evaluator_invoked": False,
         "run_id": validated.run_id,
+        "stage": validated.stage.upper(),
+        "authorization_stage": validated.stage,
         "invocation_id": validated.invocation_id,
         "output_namespace": validated.output_namespace,
         "authorization_sha256": validated.artifact_sha256,
+        "authorization_source_sha256": dict(validated.source_sha256),
         "config_sha256": sha256_file(config),
         "population_manifest_sha256": sha256_file(population),
         "population_counts": selected["split_counts"],
@@ -167,7 +175,7 @@ def preflight(*, config: Path, population: Path, authorization: Path, runtime_ro
     }
 
 
-def dispatch(*, context: dict[str, Any], population: Path, runtime_root: Path, stage: str = "dev") -> dict[str, Any]:
+def dispatch(*, context: dict[str, Any], population: Path, runtime_root: Path, stage: str = "validation") -> dict[str, Any]:
     """The only real-execution dispatcher, reachable after successful preflight.
 
     Model imports occur inside the lazy factories, so `preflight` remains a
@@ -176,16 +184,16 @@ def dispatch(*, context: dict[str, Any], population: Path, runtime_root: Path, s
     from audiobookbench.security.week4_execution import execute_protocol, real_d0_backend, real_f5_generator
     spec = FrozenAttackSpec.from_path(CANONICAL_CONFIG)
     selected = _validate_population(population)
-    if stage != "dev":
-        raise FormalRunBlocked("this entrypoint permits only --stage dev; validation and held-out are separate future invocations")
+    if stage not in {"dev", "validation", "held_out"} or context.get("authorization_stage") != stage:
+        raise FormalRunBlocked("requested stage is not authorized by the validated context")
     return execute_protocol(cases=selected["selected_cases"], spec=spec, runtime_root=runtime_root,
-                            f5_generator=real_f5_generator(), d0_backend=real_d0_backend(), stage="dev", metadata=context)
+                            f5_generator=real_f5_generator(), d0_backend=real_d0_backend(), stage=stage, metadata=context)
 
 
 def main(argv: list[str] | None = None) -> int:
     args = parse_args(argv)
     try:
-        context = preflight(config=args.config, population=args.population, authorization=args.authorization, runtime_root=args.runtime_root, verify_runtime_environment=True)
+        context = preflight(config=args.config, population=args.population, authorization=args.authorization, runtime_root=args.runtime_root, stage=args.stage, verify_runtime_environment=True)
         if args.preflight_only:
             print(json.dumps(context, ensure_ascii=False, sort_keys=True))
             return 0

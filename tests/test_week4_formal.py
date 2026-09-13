@@ -4,6 +4,7 @@ import copy
 import hashlib
 import importlib
 import json
+import sys
 from pathlib import Path
 
 import pytest
@@ -17,16 +18,21 @@ from audiobookbench.security.week4_authorization import (
 
 
 ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
 TEMPLATE = ROOT / "results/week4_adaptive_redteam/authorization.template.json"
 
 
-def active_artifact(invocation_id: str = "TEST_ONLY_preflight_20260911") -> dict[str, object]:
+def active_artifact(invocation_id: str = "TEST_ONLY_preflight_20260911", stage: str = "validation") -> dict[str, object]:
     artifact = json.loads(TEMPLATE.read_text(encoding="utf-8"))
     artifact.update({
         "authorization_status": "ACTIVE",
         "ready": True,
         "READY_FOR_WEEK4_EXECUTION": True,
+        "READY_FOR_STAGE_EXECUTION": True,
         "run_id": "week4_adaptive_redteam_v0",
+        "stage": stage,
+        "stage_authorization": stage,
         "invocation_id": invocation_id,
         "output_namespace": f"results/week4_adaptive_redteam_runs/{invocation_id}",
         "issued_at": "2026-09-11T00:00:00Z",
@@ -49,6 +55,7 @@ def active_artifact(invocation_id: str = "TEST_ONLY_preflight_20260911") -> dict
         "formal_runtime_environment_manifest_sha256": hashes["formal_runtime_environment_manifest"],
         "execution_governance_amendment_v2_sha256": hashes["execution_governance_amendment_v2"],
         "partial_dev_invalidation_sha256": hashes["partial_dev_invalidation"],
+        "dev03_postrun_integrity_review_sha256": hashes["dev03_postrun_integrity_review"],
         "POST_DEV_GOVERNANCE_AMENDMENT_SHA256": hashes["execution_governance_amendment_v2"],
     })
     return artifact
@@ -92,7 +99,7 @@ def test_missing_week4_outcome_disclosure_fails_canonical_schema(tmp_path: Path)
     "preregistration_sha256", "canonical_config_sha256", "population_manifest_sha256",
     "controller_sha256", "search_implementation_sha256", "formal_runner_sha256", "f5_qualification_sha256",
     "execution_supplement_sha256", "execution_supplement_config_sha256", "d0_asset_manifest_sha256", "execution_source_manifest_sha256",
-    "f5_frozen_source_manifest_sha256", "formal_runtime_environment_manifest_sha256", "execution_governance_amendment_v2_sha256", "partial_dev_invalidation_sha256",
+    "f5_frozen_source_manifest_sha256", "formal_runtime_environment_manifest_sha256", "execution_governance_amendment_v2_sha256", "partial_dev_invalidation_sha256", "dev03_postrun_integrity_review_sha256",
 ])
 def test_missing_malformed_and_mismatched_hashes_fail_closed(tmp_path: Path, field: str):
     valid = active_artifact()
@@ -128,13 +135,24 @@ def test_valid_authorization_and_preflight_are_read_only(tmp_path: Path):
     artifact_path = write_artifact(tmp_path, active_artifact(invocation_id))
     output = ROOT / "results/week4_adaptive_redteam_runs" / invocation_id
     assert not output.exists()
-    context = formal_run.preflight(config=ROOT / "configs/week4_adaptive_red_team.yaml", population=ROOT / "data/manifests/week4_population_manifest.json", authorization=artifact_path, runtime_root=output)
+    context = formal_run.preflight(config=ROOT / "configs/week4_adaptive_red_team.yaml", population=ROOT / "data/manifests/week4_population_manifest.json", authorization=artifact_path, runtime_root=output, stage="validation")
     assert context["status"] == "PASS"
     assert context["generation_invoked"] is False and context["d0_invoked"] is False and context["evaluator_invoked"] is False
     assert context["accounting_initialization_safe"] is True and context["accounting_initialized"] is False
     assert context["scientific_execution_enabled"] is False
     assert context["runtime_permitted_by_external_authorization"] is True
     assert not output.exists()
+
+
+def test_validation_authorization_cannot_preflight_heldout_and_heldout_needs_freeze(tmp_path: Path):
+    validation = write_artifact(tmp_path / "validation", active_artifact("TEST_ONLY_validation", "validation"))
+    with pytest.raises(Week4AuthorizationError, match="stage does not match"):
+        validate_authorization_artifact(validation, expected_stage="held_out")
+    heldout = active_artifact("TEST_ONLY_heldout", "held_out")
+    heldout["source_sha256"]["post_validation_a0_freeze"] = "0" * 64  # type: ignore[index]
+    heldout["post_validation_a0_freeze_sha256"] = "0" * 64
+    with pytest.raises(Week4AuthorizationError, match="canonical hash mismatch"):
+        validate_authorization_artifact(write_artifact(tmp_path / "heldout", heldout), expected_stage="held_out")
 
 
 def test_frozen_hashes_are_checked_before_authorization(monkeypatch, tmp_path: Path):
@@ -154,7 +172,7 @@ def test_frozen_hashes_are_checked_before_authorization(monkeypatch, tmp_path: P
     monkeypatch.setattr(formal_run, "sha256_file", fake_hash)
     monkeypatch.setattr(formal_run, "validate_authorization_artifact", unexpected_authorization)
     with pytest.raises(formal_run.FormalRunBlocked, match="frozen preregistration hash mismatch"):
-        formal_run.preflight(config=ROOT / "configs/week4_adaptive_red_team.yaml", population=ROOT / "data/manifests/week4_population_manifest.json", authorization=tmp_path / "authorization.json", runtime_root=ROOT / "results/week4_adaptive_redteam_runs/TEST_ONLY_not_created")
+        formal_run.preflight(config=ROOT / "configs/week4_adaptive_red_team.yaml", population=ROOT / "data/manifests/week4_population_manifest.json", authorization=tmp_path / "authorization.json", runtime_root=ROOT / "results/week4_adaptive_redteam_runs/TEST_ONLY_not_created", stage="validation")
     assert calls == []
 
 
@@ -177,9 +195,10 @@ def test_frozen_config_hash_and_execution_flag_remain_unchanged():
     assert "scientific_execution_enabled: false" in config.read_text(encoding="utf-8")
 
 
-def test_reauthorization_discloses_post_dev_governance_and_environment_binding():
+def test_current_authorization_is_validation_scoped_and_discloses_post_dev_governance():
     artifact = json.loads((ROOT / "results/week4_adaptive_redteam/authorization.json").read_text(encoding="utf-8"))
-    assert artifact["invocation_id"] == "week4_dev_integrity_reexecution_03"
+    assert artifact["invocation_id"] == "week4_validation_01"
+    assert artifact["stage"] == artifact["stage_authorization"] == "validation"
     assert artifact["PRIOR_FAILED_ATTEMPT_EXISTED"] is True
     assert artifact["PRIOR_FAILED_ATTEMPT_PRODUCED_SCIENTIFIC_OUTCOME"] is False
     assert artifact["WEEK4_SCIENTIFIC_OUTCOME_OBSERVED_BEFORE_REAUTHORIZATION"] is True

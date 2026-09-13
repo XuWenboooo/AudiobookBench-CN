@@ -1,9 +1,8 @@
-"""Canonical Week4 authorization validation.
+"""Canonical, stage-scoped Week4 execution authorization validation.
 
-An active artifact is intentionally separate from the frozen configuration:
-the configuration describes the protocol but cannot authorize execution by
-itself.  This module only validates an already-issued artifact; it never
-creates one and never starts F5, D0, or an evaluator.
+Authorization is deliberately separate from the frozen scientific protocol.
+This module validates an already-issued artifact only; it never creates an
+artifact and never imports F5, D0, or the final evaluator.
 """
 from __future__ import annotations
 
@@ -15,6 +14,7 @@ from typing import Any, Mapping
 
 
 PROTOCOL = "WEEK4_ADAPTIVE_RED_TEAM_A0"
+STAGES = ("dev", "validation", "held_out")
 REPO_ROOT = Path(__file__).resolve().parents[3]
 CANONICAL_SCHEMA = REPO_ROOT / "configs/week4_formal_authorization.schema.json"
 CANONICAL_SOURCES = {
@@ -33,8 +33,9 @@ CANONICAL_SOURCES = {
     "formal_runtime_environment_manifest": REPO_ROOT / "research_assurance/WEEK4_FORMAL_RUNTIME_ENVIRONMENT_MANIFEST.json",
     "execution_governance_amendment_v2": REPO_ROOT / "research_assurance/WEEK4_EXECUTION_GOVERNANCE_AMENDMENT_V2.md",
     "partial_dev_invalidation": REPO_ROOT / "research_assurance/WEEK4_DEV_REEXECUTION_02_INVALIDATION.md",
+    "dev03_postrun_integrity_review": REPO_ROOT / "research_assurance/WEEK4_DEV03_POSTRUN_INTEGRITY_REVIEW.md",
 }
-HEX64 = r"^[A-Fa-f0-9]{64}$"
+POST_VALIDATION_FREEZE = REPO_ROOT / "research_assurance/WEEK4_POST_VALIDATION_A0_FREEZE.md"
 
 
 class Week4AuthorizationError(RuntimeError):
@@ -57,6 +58,7 @@ class ValidatedWeek4Authorization:
     run_id: str
     invocation_id: str
     output_namespace: str
+    stage: str
 
 
 def _load_json(path: Path, label: str) -> Any:
@@ -81,7 +83,6 @@ def _validate_schema(artifact: Any) -> None:
 
 
 def _verify_file_manifest(path: Path, *, asset_key: str, hash_key: str, root: Path) -> None:
-    """Require a canonical manifest and recompute every listed repository file."""
     manifest = _load_json(path, path.name)
     assets = manifest.get(asset_key)
     if not isinstance(assets, list) or not assets:
@@ -101,14 +102,32 @@ def _verify_file_manifest(path: Path, *, asset_key: str, hash_key: str, root: Pa
             raise Week4AuthorizationError(f"{path.name} asset size mismatch: {rel}")
 
 
+def _stage_sources(root: Path, stage: str) -> dict[str, Path]:
+    sources = {name: (root / path.relative_to(REPO_ROOT)).resolve() for name, path in CANONICAL_SOURCES.items()}
+    if stage == "held_out":
+        sources["post_validation_a0_freeze"] = (root / POST_VALIDATION_FREEZE.relative_to(REPO_ROOT)).resolve()
+    return sources
+
+
+def _require_post_validation_freeze(path: Path) -> None:
+    try:
+        from audiobookbench.security.week4_post_validation_freeze import validate_freeze_record
+        validate_freeze_record(path)
+    except ImportError as exc:  # pragma: no cover - defensive import boundary
+        raise Week4AuthorizationError("post-validation freeze validator is unavailable") from exc
+    except Exception as exc:
+        raise Week4AuthorizationError("held-out authorization requires a valid post-validation A0 freeze") from exc
+
+
 def validate_authorization_artifact(
     artifact_path: Path,
     *,
     repo: Path = REPO_ROOT,
     expected_run_id: str = "week4_adaptive_redteam_v0",
+    expected_stage: str | None = None,
     verify_f5_assets: bool = False,
 ) -> ValidatedWeek4Authorization:
-    """Validate the sole active Week4 authorization and recompute every hash."""
+    """Validate a canonical authorization and bind it to exactly one stage."""
     artifact_path = Path(artifact_path)
     if artifact_path.name not in {"authorization.json", "authorization.template.json"}:
         raise Week4AuthorizationError("only canonical Week4 authorization filenames are accepted")
@@ -116,7 +135,12 @@ def validate_authorization_artifact(
     _validate_schema(artifact)
     if artifact.get("protocol") != PROTOCOL or artifact.get("authorization_status") != "ACTIVE":
         raise Week4AuthorizationError("authorization is not active")
-    if artifact.get("ready") is not True or artifact.get("READY_FOR_WEEK4_EXECUTION") is not True:
+    stage = artifact.get("stage")
+    if stage not in STAGES or artifact.get("stage_authorization") != stage:
+        raise Week4AuthorizationError("authorization does not bind exactly one valid execution stage")
+    if expected_stage is not None and stage != expected_stage:
+        raise Week4AuthorizationError("authorization stage does not match requested stage")
+    if artifact.get("ready") is not True or artifact.get("READY_FOR_WEEK4_EXECUTION") is not True or artifact.get("READY_FOR_STAGE_EXECUTION") is not True:
         raise Week4AuthorizationError("authorization readiness is not true")
     if artifact.get("scientific_execution_enabled") is not False:
         raise Week4AuthorizationError("configuration self-authorization is forbidden")
@@ -127,42 +151,23 @@ def validate_authorization_artifact(
     if artifact.get("run_id") != expected_run_id:
         raise Week4AuthorizationError("authorization run_id mismatch")
     output_namespace = str(artifact.get("output_namespace", ""))
-    expected_prefix = "results/week4_adaptive_redteam_runs/"
-    if not output_namespace.startswith(expected_prefix) or output_namespace == expected_prefix:
+    prefix = "results/week4_adaptive_redteam_runs/"
+    if not output_namespace.startswith(prefix) or output_namespace == prefix:
         raise Week4AuthorizationError("output namespace must be a unique Week4 run directory")
 
     root = Path(repo).resolve()
-    sources = {name: (root / path.relative_to(REPO_ROOT)).resolve() for name, path in CANONICAL_SOURCES.items()}
+    sources = _stage_sources(root, stage)
     hashes = artifact.get("source_sha256")
     if not isinstance(hashes, Mapping):
         raise Week4AuthorizationError("authorization source hashes are missing")
     mismatches: list[str] = []
     for name, path in sources.items():
         supplied = hashes.get(name)
-        if not isinstance(supplied, str) or len(supplied) != 64:
+        if not isinstance(supplied, str) or len(supplied) != 64 or not path.is_file() or supplied.upper() != sha256_file(path):
             mismatches.append(name)
-            continue
-        if not path.is_file() or supplied.upper() != sha256_file(path):
-            mismatches.append(name)
-    for field, filename in {
-        "preregistration_sha256": "preregistration",
-        "canonical_config_sha256": "canonical_config",
-        "population_manifest_sha256": "population_manifest",
-        "controller_sha256": "controller",
-        "search_implementation_sha256": "search_implementation",
-        "formal_runner_sha256": "formal_runner",
-        "f5_qualification_sha256": "f5_qualification",
-        "execution_supplement_sha256": "execution_supplement",
-        "execution_supplement_config_sha256": "execution_supplement_config",
-        "d0_asset_manifest_sha256": "d0_asset_manifest",
-        "execution_source_manifest_sha256": "execution_source_manifest",
-        "f5_frozen_source_manifest_sha256": "f5_frozen_source_manifest",
-        "formal_runtime_environment_manifest_sha256": "formal_runtime_environment_manifest",
-        "execution_governance_amendment_v2_sha256": "execution_governance_amendment_v2",
-        "partial_dev_invalidation_sha256": "partial_dev_invalidation",
-    }.items():
-        if str(artifact.get(field, "")).upper() != str(hashes.get(filename, "")).upper():
-            mismatches.append(field)
+    for name in sources:
+        if str(artifact.get(f"{name}_sha256", "")).upper() != str(hashes.get(name, "")).upper():
+            mismatches.append(f"{name}_sha256")
     if mismatches:
         raise Week4AuthorizationError(f"authorization canonical hash mismatch: {sorted(set(mismatches))}")
 
@@ -172,6 +177,9 @@ def validate_authorization_artifact(
     environment = _load_json(sources["formal_runtime_environment_manifest"], "formal runtime environment manifest")
     if environment.get("status") != "QUALIFIED_OFFLINE_PREOUTPUT" or environment.get("f5_source", {}).get("source_manifest_sha256", "").upper() != sha256_file(sources["f5_frozen_source_manifest"]):
         raise Week4AuthorizationError("formal runtime environment does not bind the frozen F5 source")
+    if stage == "held_out":
+        _require_post_validation_freeze(sources["post_validation_a0_freeze"])
+
     required_provenance = {
         "WEEK4_SCIENTIFIC_OUTCOME_OBSERVED_BEFORE_REAUTHORIZATION": True,
         "PRIOR_FAILED_ATTEMPT_EXISTED": True,
@@ -194,8 +202,7 @@ def validate_authorization_artifact(
     }
     if any(artifact.get(name) != expected for name, expected in required_provenance.items()):
         raise Week4AuthorizationError("authorization does not disclose the invalidated partial DEV provenance")
-    amendment_hash = artifact.get("POST_DEV_GOVERNANCE_AMENDMENT_SHA256")
-    if not isinstance(amendment_hash, str) or amendment_hash.upper() != str(hashes.get("execution_governance_amendment_v2", "")).upper():
+    if artifact.get("POST_DEV_GOVERNANCE_AMENDMENT_SHA256", "").upper() != str(hashes.get("execution_governance_amendment_v2", "")).upper():
         raise Week4AuthorizationError("authorization does not bind the frozen post-DEV governance amendment")
 
     population = _load_json(sources["population_manifest"], "population manifest")
@@ -210,23 +217,19 @@ def validate_authorization_artifact(
         raise Week4AuthorizationError("F5 qualification is not engineering-only eligible")
     if verify_f5_assets:
         assets_root = root / "results/week3_engineering_qualification/f5_tts_v1_base/assets"
-        asset_mismatches = []
+        mismatched_assets: list[str] = []
         for asset in qualification.get("assets", []):
             if not isinstance(asset, Mapping) or asset.get("license") != "LICENSE_PASS":
-                asset_mismatches.append(str(asset.get("name", "unknown")) if isinstance(asset, Mapping) else "malformed")
+                mismatched_assets.append(str(asset.get("name", "unknown")) if isinstance(asset, Mapping) else "malformed")
                 continue
-            asset_name = str(asset.get("name", ""))
-            relative_name = asset_name.split("/", 1)[1] if asset_name.startswith("charactr/") else asset_name
-            asset_path = assets_root / relative_name
-            if not asset_path.is_file() or str(asset.get("sha256", "")).upper() != sha256_file(asset_path):
-                asset_mismatches.append(asset_name or "unknown")
-        if asset_mismatches:
-            raise Week4AuthorizationError(f"F5 asset hash mismatch: {asset_mismatches}")
+            name = str(asset.get("name", "")); relative = name.split("/", 1)[1] if name.startswith("charactr/") else name
+            if not (assets_root / relative).is_file() or str(asset.get("sha256", "")).upper() != sha256_file(assets_root / relative):
+                mismatched_assets.append(name or "unknown")
+        if mismatched_assets:
+            raise Week4AuthorizationError(f"F5 asset hash mismatch: {mismatched_assets}")
     return ValidatedWeek4Authorization(
-        artifact=artifact,
-        artifact_sha256=sha256_file(artifact_path),
+        artifact=artifact, artifact_sha256=sha256_file(artifact_path),
         source_sha256={name: str(value).upper() for name, value in hashes.items()},
-        run_id=str(artifact["run_id"]),
-        invocation_id=str(artifact["invocation_id"]),
-        output_namespace=output_namespace,
+        run_id=str(artifact["run_id"]), invocation_id=str(artifact["invocation_id"]),
+        output_namespace=output_namespace, stage=stage,
     )

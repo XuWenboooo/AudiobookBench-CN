@@ -179,7 +179,7 @@ def _persist_case_outcome(runtime_root: Path, outcome: Mapping[str, Any]) -> dic
 
 def final_evaluate(held_out: Mapping[str, Mapping[str, Any]]) -> dict[str, Any]:
     if len(held_out) != 12:
-        return {"PRIMARY_H4": "NOT_REPORTABLE", "reason": "held_out_not_12_of_12"}
+        return {"PRIMARY_H4": "NOT_REPORTABLE", "reason": "HELD_OUT_NOT_12_OF_12_PAIRED_COMPLETE"}
     conditions: dict[str, tuple[list[np.ndarray], list[np.ndarray]]] = {}
     for case_id in sorted(held_out):
         if held_out[case_id].get("adaptive_case_status") == "NO_VALID_ADAPTIVE_PARENT":
@@ -369,24 +369,25 @@ def execute_protocol(*, cases: list[Mapping[str, Any]], spec: FrozenAttackSpec, 
     TEST_ONLY or the formal dispatcher.  The function does not make policy
     choices: any undefined construction/objective is ledgered and cannot win.
     """
-    if stage not in {"all", "dev"}:
-        raise Week4ExecutionError("only the frozen dev stage or TEST_ONLY all-stage harness is supported")
+    if stage not in {"all", "dev", "validation", "held_out"}:
+        raise Week4ExecutionError("only frozen single stages or the TEST_ONLY all-stage harness are supported")
     ordered = sorted(cases, key=lambda c: str(c["case_id"]))
     if len(ordered) != 48 or [str(c["case_id"]) for c in ordered] != [f"week4_case_{i:04d}" for i in range(1, 49)]:
         raise Week4ExecutionError("canonical 48-case order required")
-    if stage == "dev" and sum(str(c["split"]) == "dev" for c in ordered) != 24:
-        raise Week4ExecutionError("DEV stage requires exactly 24 canonical dev cases")
+    expected_cases = {"dev": 24, "validation": 12, "held_out": 12}
+    if stage in expected_cases and sum(str(c["split"]) == stage for c in ordered) != expected_cases[stage]:
+        raise Week4ExecutionError(f"{stage} stage requires exactly {expected_cases[stage]} canonical cases")
     runtime_root = Path(runtime_root)
     if runtime_root.exists():
         raise Week4ExecutionError("runtime namespace must be new")
     ledger = CandidateLedger(runtime_root / "accounting/candidate_ledger.jsonl")
     attempt_ledger = runtime_root / "accounting/f5_attempt_ledger.jsonl"
-    lifecycle = _RunLifecycle(runtime_root, metadata, stage="DEV" if stage == "dev" else "TEST_ONLY_ALL", run_id=spec.run_id)
+    lifecycle = _RunLifecycle(runtime_root, metadata, stage=stage.upper() if stage != "all" else "TEST_ONLY_ALL", run_id=spec.run_id)
     per_case: dict[str, dict[str, Any]] = {}
     case_index = {str(case["case_id"]): index for index, case in enumerate(ordered)}
     execution_order = sorted(ordered, key=lambda c: ({"dev": 0, "validation": 1, "held_out": 2}.get(str(c["split"]), 3), str(c["case_id"])))
-    if stage == "dev":
-        execution_order = [c for c in execution_order if str(c["split"]) == "dev"]
+    if stage in expected_cases:
+        execution_order = [c for c in execution_order if str(c["split"]) == stage]
     f5_successes, d0_backend_calls, current_case_id = 0, 0, None
     try:
         for case in execution_order:
@@ -505,11 +506,13 @@ def execute_protocol(*, cases: list[Mapping[str, Any]], spec: FrozenAttackSpec, 
         mismatch = Week4ExecutionError("ACTUAL_D0_BACKEND_CALLS does not equal accounted ledger invocations")
         lifecycle.failed(current_case_id, mismatch)
         raise mismatch
-    if stage == "dev":
+    if stage in expected_cases:
         lifecycle.completed(len(per_case))
         counts = [sum(row.get("phase") == ADAPTIVE_PHASE and row.get("detector_query") is True for row in ledger.records() if row.get("case_id") == case_id) for case_id in per_case]
         no_parent_cases = sum(value.get("adaptive_case_status") == "NO_VALID_ADAPTIVE_PARENT" for value in per_case.values())
-        return {"stage": "DEV", "per_case": per_case, "ledger": ledger.records(), "f5_attempts": _load_jsonl(attempt_ledger), "accounting": {"DEV_PLANNED": 24, "DEV_STARTED": len(per_case), "DEV_COMPLETED": len(per_case), "DEV_CASE_COMPLETE_WITH_WINNER": len(per_case) - no_parent_cases, "DEV_CASE_TERMINAL_NO_VALID_ADAPTIVE_PARENT": no_parent_cases, "DEV_SUCCESS": f5_successes, "DEV_FAILED": 24 - f5_successes, "F5_TOTAL_ATTEMPTS": f5_successes, "F5_SUCCESSFUL_CASES": f5_successes, "F5_FAILED_CASES": 24 - f5_successes, "F5_RETRIES": 0, "STATIC_D0_INVOCATIONS": len(per_case), "ADAPTIVE_D0_INVOCATIONS": sum(counts), "ACTUAL_D0_BACKEND_CALLS": d0_backend_calls, "ACCOUNTED_D0_INVOCATIONS": accounted_d0, "ADAPTIVE_QUERY_MIN": min(counts) if counts else 0, "ADAPTIVE_QUERY_MAX": max(counts) if counts else 0, "ADAPTIVE_QUERY_MEAN": float(np.mean(counts)) if counts else 0.0, "CASES_WITH_40_ADAPTIVE_QUERIES": sum(count == 40 for count in counts), "CASES_WITH_STRUCTURAL_NO_VALID_PARENT": no_parent_cases, "CASES_WITH_NO_VALID_WINNER": no_parent_cases, "LEDGER_HASH_CHAIN": "PASS", "RAW_EVIDENCE_CHAIN": "PASS"}, "A0_FROZEN": False}
+        label = stage.upper()
+        planned = expected_cases[stage]
+        return {"stage": label, "per_case": per_case, "ledger": ledger.records(), "f5_attempts": _load_jsonl(attempt_ledger), "accounting": {f"{label}_PLANNED": planned, f"{label}_STARTED": len(per_case), f"{label}_COMPLETED": len(per_case), f"{label}_CASE_COMPLETE_WITH_WINNER": len(per_case) - no_parent_cases, f"{label}_CASE_TERMINAL_NO_VALID_ADAPTIVE_PARENT": no_parent_cases, f"{label}_SUCCESS": f5_successes, f"{label}_FAILED": planned - f5_successes, "F5_TOTAL_ATTEMPTS": f5_successes, "F5_SUCCESSFUL_CASES": f5_successes, "F5_FAILED_CASES": planned - f5_successes, "F5_RETRIES": 0, "STATIC_D0_INVOCATIONS": len(per_case), "ADAPTIVE_D0_INVOCATIONS": sum(counts), "ACTUAL_D0_BACKEND_CALLS": d0_backend_calls, "ACCOUNTED_D0_INVOCATIONS": accounted_d0, "ADAPTIVE_QUERY_MIN": min(counts) if counts else 0, "ADAPTIVE_QUERY_MAX": max(counts) if counts else 0, "ADAPTIVE_QUERY_MEAN": float(np.mean(counts)) if counts else 0.0, "CASES_WITH_40_ADAPTIVE_QUERIES": sum(count == 40 for count in counts), "CASES_WITH_STRUCTURAL_NO_VALID_PARENT": no_parent_cases, "CASES_WITH_NO_VALID_WINNER": no_parent_cases, "LEDGER_HASH_CHAIN": "PASS", "RAW_EVIDENCE_CHAIN": "PASS"}, "A0_FROZEN": False}
     held = {case_id: per_case[case_id] for case_id in per_case if next(c for c in ordered if c["case_id"] == case_id)["split"] == "held_out"}
     lifecycle.evaluator_started()
     final = final_evaluate(held)

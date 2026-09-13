@@ -1,0 +1,10 @@
+{
+  "archive_type": "GIT_CONTENT_ADDRESSED_AUTHORIZATION_ARCHIVE",
+  "artifact_sha256": "2971130A92C8A6250FD338DBEC01E766171E81D222EB97747AE70C17FE743D9E",
+  "artifact_path": "results/week4_adaptive_redteam/authorization.json",
+  "immutable_git_revision": "347e05d7a0b67b51a05ed68cff0216b328bd8440",
+  "retrieval": "git show 347e05d7a0b67b51a05ed68cff0216b328bd8440:results/week4_adaptive_redteam/authorization.json",
+  "invocation_id": "week4_dev_integrity_reexecution_03",
+  "output_namespace": "results/week4_adaptive_redteam_runs/week4_dev_integrity_reexecution_03",
+  "archive_reason": "DEV03 authorization superseded by the separately scoped Week4 validation authorization; DEV03 namespace remains immutable."
+}
