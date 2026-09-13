@@ -105,3 +105,28 @@ CORRECTED_WORKER_SCIENTIFIC_METRICS_COMPUTED=0
 CORRECTED_WORKER_GT_ACCESSED=NO
 MAINLINE_MRM_FULL_INFERENCE_AFTER_STOP=NO
 ```
+
+## Worker resume accounting
+
+The corrected worker process exited after writing 21,588 raw terminal records
+(21,549 valid and 39 audio-load failures). A read-only audit found exactly one
+raw record without its terminal ledger line; that line was appended to the
+ledger using the already-written failure record, without changing the raw
+output. The 39 affected files were subsequently readable, so the event is
+classified as transient I/O and retained in the failure accounting.
+
+The authorized worker resumed in the same `multireso_worker_02` namespace.
+Resume skips every case already represented by the reconciled terminal ledger;
+it does not rerun or overwrite completed raw records. This continuation is a
+bounded execution recovery, not a new scientific invocation or an ownership
+change.
+
+```text
+WORKER_E1_002_INITIAL_RAW_TERMINAL=21588
+WORKER_E1_002_INITIAL_VALID=21549
+WORKER_E1_002_INITIAL_AUDIO_LOAD_FAILURE=39
+WORKER_E1_002_ORPHAN_RAW_LEDGER_LINES_REPAIRED=1
+WORKER_E1_002_RESUME_NAMESPACE_REUSED=YES
+WORKER_E1_002_COMPLETED_CASES_RERUN=0
+WORKER_E1_002_SCIENTIFIC_OUTCOMES_INSPECTED=NO
+```
