@@ -25,7 +25,7 @@ auditable official reproduction. No result-based substitution is permitted.
 |---|---|---|
 | PartialEdit E1 full audio | `NOT_STARTED` | bounded official Zenodo attempts after authorization commit |
 | PartialSpoof v1.2 full audio | `BLOCKED_FROM_PHASE3` | bounded recovery retry only; previous invalid archive and endpoint failures retained |
-| PartialSpoof MultiReso | `NOT_STARTED` | inspect official repository route before checkpoint download |
+| PartialSpoof MultiReso | `SOURCE_ROUTE_VERIFIED_CHECKPOINT_BLOCKED` | official commit/script/Zenodo route verified; bounded checkpoint probe failed |
 | CFPRF | `INFRASTRUCTURE_SMOKE_PASS` | do not repeat unchanged smoke; full run requires validated audio |
 | SAL | `DEFERRED_CHECKPOINT_UNAVAILABLE` | no self-training or unofficial checkpoint |
 | BAM | `BLOCKED_RIGHTS_CLEARANCE` | provenance/rights inspection only |
@@ -38,6 +38,7 @@ auditable official reproduction. No result-based substitution is permitted.
 | `P3R-2026-09-13-01-E1-001` | `2026-09-13T16:12:45+08:00` | `https://zenodo.org/records/18829689/files/E1.tar.gz?download=1` | `504` | `0` | approximately 3.4 GB | `1f489d2ff488ddd6c9b655127725af2f` | `HTTP_504` |
 | `P3R-2026-09-13-01-E1-002` | `2026-09-13T16:14:11+08:00` | `https://zenodo.org/api/records/18829689/files/E1.tar.gz/content` | `504` | `0` | approximately 3.4 GB | `1f489d2ff488ddd6c9b655127725af2f` | `HTTP_504` |
 | `P3R-2026-09-13-01-E1-003` | `2026-09-13T16:15:21+08:00` | `https://zenodo.org/records/18829689/files/E1.tar.gz?download=1` | `504` | `0` | approximately 3.4 GB | `1f489d2ff488ddd6c9b655127725af2f` | `HTTP_504` |
+| `P3R-2026-09-13-01-MR-001` | `2026-09-13T16:17:47+08:00` | `https://zenodo.org/record/6674660/files/multi-reso.tar.gz?download=1` | `504` | `0` | not returned by endpoint | `NOT_AVAILABLE` | `HTTP_504` |
 
 ## Required recovery fields
 
@@ -47,7 +48,10 @@ PARTIALEDIT_E1_CHECKSUM = NOT_STARTED
 PARTIALEDIT_FULL_AUDIO_PARSER = NOT_STARTED
 PARTIALSPOOF_RECOVERY_ATTEMPTS = 0 OF 3
 PARTIALSPOOF_MATERIALIZATION = BLOCKED_FROM_PHASE3_PENDING_BOUNDED_RETRY
-PARTIALSPOOF_MULTIRESO_PROVENANCE = NOT_STARTED
+PARTIALSPOOF_MULTIRESO_REPO_COMMIT = 847347aaec6f65c3c6d2f17c63515b826b94feb3
+PARTIALSPOOF_MULTIRESO_PROVENANCE = SOURCE_ROUTE_VERIFIED
+PARTIALSPOOF_MULTIRESO_CHECKPOINT_SHA256 = NOT_MATERIALIZED
+PARTIALSPOOF_MULTIRESO_STATUS = BLOCKED_EXTERNAL_SERVICE_AFTER_PROBE
 CFPRF_FULL_REPRODUCTION = BLOCKED_UNTIL_FULL_AUDIO_VALIDATION
 SAL_STATUS = DEFERRED_CHECKPOINT_UNAVAILABLE
 BAM_RIGHTS_STATUS = UNRESOLVED
