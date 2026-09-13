@@ -26,6 +26,7 @@ auditable official reproduction. No result-based substitution is permitted.
 | PartialEdit E1 full audio | `BLOCKED_EXTERNAL_SERVICE_AFTER_3_ATTEMPTS` | all authorized bounded attempts returned HTTP 504 with zero archive bytes |
 | PartialSpoof v1.2 full audio | `BLOCKED_EXTERNAL_SERVICE_AFTER_3_ATTEMPTS` | all three 3R bounded probes returned HTTP 504 with zero archive bytes; previous failures retained |
 | PartialSpoof MultiReso | `SOURCE_ROUTE_VERIFIED_CHECKPOINT_BLOCKED` | official commit/script/Zenodo route verified; bounded checkpoint probe failed |
+| LlamaPartialSpoof fallback | `REPOSITORY_SPLIT_METADATA_PASS_AUDIO_BLOCKED` | availability-only fallback triggered; official split metadata is validated, but audio archives remain unavailable |
 | CFPRF | `INFRASTRUCTURE_SMOKE_PASS` | do not repeat unchanged smoke; full run requires validated audio |
 | SAL | `DEFERRED_CHECKPOINT_UNAVAILABLE` | no self-training or unofficial checkpoint |
 | BAM | `BLOCKED_RIGHTS_CLEARANCE` | provenance/rights inspection only |
@@ -80,8 +81,8 @@ existence, waveform duration alignment, or a full-audio fallback dataset.
 
 ```text
 PARTIALEDIT_E1_MATERIALIZATION = BLOCKED_EXTERNAL_SERVICE_AFTER_3_ATTEMPTS
-PARTIALEDIT_E1_CHECKSUM = NOT_STARTED
-PARTIALEDIT_FULL_AUDIO_PARSER = NOT_STARTED
+PARTIALEDIT_E1_CHECKSUM = BLOCKED_NO_ARCHIVE
+PARTIALEDIT_FULL_AUDIO_PARSER = BLOCKED_NO_AUDIO
 PARTIALSPOOF_RECOVERY_ATTEMPTS = 3 OF 3 FAILED_HTTP_504
 PARTIALSPOOF_MATERIALIZATION = BLOCKED_EXTERNAL_SERVICE_AFTER_3_ATTEMPTS
 PARTIALSPOOF_MULTIRESO_REPO_COMMIT = 847347aaec6f65c3c6d2f17c63515b826b94feb3
