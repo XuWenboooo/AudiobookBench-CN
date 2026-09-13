@@ -40,6 +40,25 @@ auditable official reproduction. No result-based substitution is permitted.
 | `P3R-2026-09-13-01-E1-003` | `2026-09-13T16:15:21+08:00` | `https://zenodo.org/records/18829689/files/E1.tar.gz?download=1` | `504` | `0` | approximately 3.4 GB | `1f489d2ff488ddd6c9b655127725af2f` | `HTTP_504` |
 | `P3R-2026-09-13-01-MR-001` | `2026-09-13T16:17:47+08:00` | `https://zenodo.org/record/6674660/files/multi-reso.tar.gz?download=1` | `504` | `0` | not returned by endpoint | `NOT_AVAILABLE` | `HTTP_504` |
 
+## Availability fallback
+
+`LLAMAPARTIALSPOOF_FALLBACK_TRIGGERED = YES`
+
+The trigger is availability-only: the three authorized PartialSpoof recovery
+attempts were exhausted with `BLOCKED_EXTERNAL_SERVICE` before this source was
+selected, and no model result was observed beforehand. The official fallback
+source is LlamaPartialSpoof v1.0.b at Zenodo record `14214149`, with the
+official repository `hieuthi/LlamaPartialSpoof` and CC BY 4.0 metadata. Its
+large audio archives remain unmaterialized; it is not yet an evaluation
+dataset.
+
+| Fallback artifact | Official source | Official identity | Local status |
+|---|---|---|---|
+| `label_R01TTS.0.a.txt` | `https://zenodo.org/records/14214149/files/label_R01TTS.0.a.txt?download=1` | MD5 `86c60280e4cb2957542b365c3c8f52ac`, approximately 10.5 MB | `NOT_PROBED` |
+| `label_R01TTS.0.b.txt` | `https://zenodo.org/records/14214149/files/label_R01TTS.0.b.txt?download=1` | MD5 `6f5f94d3dbca70c011370ded232c8519`, approximately 14.2 MB | `NOT_PROBED` |
+| `R01TTS.0.a.tgz` | `https://zenodo.org/records/14214149/files/R01TTS.0.a.tgz?download=1` | MD5 `685acfe986b50baaf3e25e9d5e3091a4`, approximately 15.4 GB | `NOT_PROBED` |
+| `R01TTS.0.b.tgz` | `https://zenodo.org/records/14214149/files/R01TTS.0.b.tgz?download=1` | MD5 `a4de860a845816fa65785dddd7849700`, approximately 12.8 GB | `NOT_PROBED` |
+
 ## Required recovery fields
 
 ```text
@@ -55,7 +74,8 @@ PARTIALSPOOF_MULTIRESO_STATUS = BLOCKED_EXTERNAL_SERVICE_AFTER_PROBE
 CFPRF_FULL_REPRODUCTION = BLOCKED_UNTIL_FULL_AUDIO_VALIDATION
 SAL_STATUS = DEFERRED_CHECKPOINT_UNAVAILABLE
 BAM_RIGHTS_STATUS = UNRESOLVED
-LLAMAPARTIALSPOOF_FALLBACK_TRIGGERED = NO
+LLAMAPARTIALSPOOF_FALLBACK_TRIGGERED = YES_AVAILABILITY_ONLY_NO_MODEL_RESULTS
+LLAMAPARTIALSPOOF_STATUS = SOURCE_VERIFIED_AUDIO_AND_METADATA_NOT_MATERIALIZED
 FULL_AUDIO_EXTERNAL_DATASETS = 0
 EXTERNAL_FUNCTIONAL_PARADIGMS = 0 FULL / 1 INFRASTRUCTURE_ONLY
 OFFICIAL_REPRODUCTIONS = 0 FUNCTIONAL

@@ -41,6 +41,9 @@ RETRY_POLICY = bounded infrastructure retry only; no outcome/performance/seed/ch
 CODE_FIX_POLICY = append-only defect report and new commit; reauthorize before any affected output
 SUBSTITUTION_POLICY = availability/provenance/rights/hardware only; RESULT_BASED_SUBSTITUTIONS = 0
 LLAMAPARTIALSPOOF_FALLBACK_TRIGGER = only after PartialSpoof official retry budget is exhausted and status is BLOCKED_EXTERNAL_SERVICE, before observing model results on the fallback
+LLAMAPARTIALSPOOF_FALLBACK_SOURCE = https://zenodo.org/records/14214149 (v1.0.b); https://github.com/hieuthi/LlamaPartialSpoof
+LLAMAPARTIALSPOOF_FALLBACK_LICENSE = CC BY 4.0 per official Zenodo record
+LLAMAPARTIALSPOOF_FALLBACK_AUDIO_SCOPE = R01TTS.0.a and R01TTS.0.b only if complete archives and GT/path/duration checks pass; metadata-only probe is not a usable evaluation dataset
 
 PROHIBITED_ACTIONS = Phase 4 freeze/execution; confirmatory cohort; RQ1/RQ2/RQ3; attack/defense; training/retraining; unofficial mirror; GT edits; result-based model/data selection; metric/pooling/threshold tuning; forced CPU full reproduction
 REAUTHORIZATION_REQUIRED_FOR = new dataset, new checkpoint, new output contract, new adapter/evaluator commit, any full reproduction after a code change
