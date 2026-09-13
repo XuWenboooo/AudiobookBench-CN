@@ -37,3 +37,38 @@ PIP_FREEZE = PENDING_ENVIRONMENT_CREATION
 No model inference is authorized from this manifest until the environment is
 created, its complete dependency manifest is captured, and the Phase 3S
 authorization remains applicable.
+
+## Append-only execution record
+
+Recorded after isolated environment creation on `2026-09-13`:
+
+```text
+ENVIRONMENT_CREATION = PASS
+SYSTEM_PYTHON_CHANGED = NO
+PRIMARY_ENVIRONMENT_CHANGED = NO
+LEGACY_PYTHON = 3.10.11
+PYTORCH_VERSION = 2.2.2+cu121
+TORCHAUDIO_VERSION = 2.2.2+cu121
+TORCHVISION_VERSION = 0.17.2+cu121
+NUMPY_VERSION = 1.23.5
+FAIRSEQ_VERSION = 1.0.0a0 (editable source)
+HYDRA_VERSION = 1.0.7
+OMEGACONF_VERSION = 2.0.6
+
+GPU = NVIDIA GeForce RTX 4060 Laptop GPU
+GPU_VRAM = 8585216000 bytes reported by PyTorch (8188 MiB class)
+CUDA = 12.1
+CUDA_VISIBLE = YES
+CUDA_TENSOR_ALLOCATION = PASS
+CUDA_SMALL_MATMUL = PASS (4x4, finite, sum 64.0)
+FAIRSEQ_IMPORT = PASS
+XLSR_CHECKPOINT_LOAD = PASS (317390592 parameters, moved to cuda:0)
+CFPRF_FDN_CHECKPOINT_LOAD = PASS (0 missing, 0 unexpected, cuda:0)
+CFPRF_PRN_CHECKPOINT_LOAD = PASS (0 missing, 0 unexpected, cuda:0)
+CFPRF_LOAD_PEAK_ALLOCATED = 2566092800 bytes
+GPU_AUDIO_SMOKE = VALIDLY_DEFERRED_NO_FULL_AUDIO_DATASET
+PIP_FREEZE = PHASE3S_GPU_PIP_FREEZE_V1.txt
+```
+
+The checkpoint checks were load-only. No audio forward, metric, ranking, or
+scientific outcome was produced.

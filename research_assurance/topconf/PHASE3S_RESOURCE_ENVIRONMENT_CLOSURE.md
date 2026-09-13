@@ -72,3 +72,20 @@ EXTERNAL_BASELINE_PATHS >= 2
 Even a Phase 3S `PASS` only permits a human review for controlled Phase 3T
 reproduction resumption. It never authorizes Phase 4 or confirmatory
 execution.
+
+## Append-only environment gate result
+
+```text
+GPU_REPRODUCTION_ENVIRONMENT = PASS
+GPU_ENVIRONMENT_SMOKE = PASS
+CFPRF_CHECKPOINT_LOAD_GPU = PASS
+CFPRF_GPU_SMOKE = VALIDLY_DEFERRED_NO_AUDIO
+WSL_GPU_PATH = UNAVAILABLE_NO_USABLE_DISTRO
+STORAGE_STATUS = PASS_FOR_AUTHORIZED_ARTIFACTS (F: approximately 158 GB free at audit)
+SYSTEM_PYTHON_CHANGED = NO
+PRIMARY_ENVIRONMENT_CHANGED = NO
+```
+
+The native Windows environment is now sufficient for checkpoint/load-only
+validation on the RTX 4060. This does not satisfy the external-audio gate and
+does not authorize a full CFPRF reproduction.
