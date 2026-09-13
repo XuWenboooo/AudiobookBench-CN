@@ -116,7 +116,7 @@ def validate(model_id: str, manifest_path: Path, raw_path: Path, attempts_path: 
         if record.get("status") == "VALID_INFERENCE":
             if not isinstance(record.get("native_outputs"), dict) or not isinstance(record.get("raw_output_sha256"), str):
                 raise ValueError(f"{case_id}: valid record missing raw output/hash")
-            if sha256_json(to_jsonable(record["native_outputs"])) != record["raw_output_sha256"]:
+            if sha256_json(to_jsonable(record["native_outputs"])).upper() != str(record["raw_output_sha256"]).upper():
                 raise ValueError(f"{case_id}: raw output hash mismatch")
             if record.get("sample_rate") != 16_000 or not math.isfinite(float(record.get("duration_sec"))):
                 raise ValueError(f"{case_id}: invalid audio metadata")
