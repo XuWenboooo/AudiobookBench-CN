@@ -127,3 +127,37 @@ Phase 4 action may be used to turn this record into PASS.
 `GPU_RUNTIME_COMPATIBILITY = OFFICIAL_FAIRSEQ_IMPORT_FAILED_PYTHON312_DATACLASS_INCOMPATIBILITY`
 
 `FULL_REPRODUCTION_CPU_FEASIBILITY = IMPRACTICAL_FOR_FULL_AUDIO`
+
+## Append-only official rights and checkpoint inspection
+
+Inspection date: `2026-09-13` (read-only; no restricted artifact was
+downloaded or used).
+
+### BAM
+
+The official repository API reports no declared repository license
+(`license = null`) at `https://api.github.com/repos/media-sec-lab/BAM`. Its
+default branch tree contains source/model code but no checkpoint, weight, or
+license artifact. The only official release, `version1.0.0`, is published at
+`https://github.com/media-sec-lab/BAM/releases/tag/version1.0.0` and has no
+release assets. The official README directs users to a Google Drive file for
+`./checkpoint/model.ckpt`, but this does not resolve redistribution or usage
+rights for this recovery. Accordingly:
+
+`BAM_RIGHTS_STATUS = UNRESOLVED_NO_CHECKPOINT_ASSET_LICENSE_OR_CLEARANCE`
+
+`BAM_REPRODUCTION_STATUS = NOT_USED_AND_NOT_COUNTED`
+
+### SAL
+
+The official repository API reports MIT source licensing and zero releases at
+`https://api.github.com/repos/SentryMao/SAL`. The frozen official tree contains
+configs and model source but no checkpoint or weight artifact. The missing
+checkpoint remains a prerequisite for an auditable evaluation; no self-trained
+or unofficial checkpoint is admitted.
+
+`SAL_STATUS = DEFERRED_CHECKPOINT_UNAVAILABLE_CONFIRMED_BY_OFFICIAL_TREE`
+
+These inspections do not alter the recovery gate: full-audio datasets remain
+zero, functional external paradigms remain below two, and functional official
+reproductions remain zero.
