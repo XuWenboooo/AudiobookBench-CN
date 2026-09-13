@@ -1,6 +1,6 @@
 {
   "manifest_id": "EXTERNAL_DATASET_LOCAL_MANIFEST_V1",
-  "status": "PARTIAL_MATERIALIZATION_NO_AUDIO_EVALUATION",
+  "status": "FULL_E1_AUDIO_MATERIALIZED_NO_AUDIO_EVALUATION",
   "materialized_at": "2026-09-13",
   "cache_root": "F:/项目/申请实验室  TTS项目/topconf_phase3_cache",
   "redistribution": "LOCAL_ONLY_REVIEW_REQUIRED",
@@ -81,7 +81,7 @@
         {"name": "PartialEdit_E1E2.csv", "md5": "3ff74c4e5cab69013d1d9c4a30f59cae", "local_status": "MATERIALIZED_VERIFIED", "local_md5": "3ff74c4e5cab69013d1d9c4a30f59cae", "local_bytes": 4713104},
         {"name": "PartialEdit_spk.zip", "md5": "09b1e6e2e345918ee8250b547dcd67ba", "local_status": "MATERIALIZED_VERIFIED", "local_md5": "09b1e6e2e345918ee8250b547dcd67ba", "local_bytes": 10828},
         {"name": "README.md", "md5": "14f0fee2123e6b31ef9e36f3377c00f0", "local_status": "MATERIALIZED_VERIFIED", "local_md5": "14f0fee2123e6b31ef9e36f3377c00f0", "local_bytes": 6178},
-        {"name": "E1.tar.gz", "md5": "1f489d2ff488ddd6c9b655127725af2f", "local_status": "NOT_MATERIALIZED"},
+        {"name": "E1.tar.gz", "md5": "1f489d2ff488ddd6c9b655127725af2f", "local_status": "MATERIALIZED_VERIFIED_FULL_AUDIO", "local_md5": "1f489d2ff488ddd6c9b655127725af2f", "local_sha256": "f4bb1a632eed8ddc66bb9285de8b4bc07192d0539385efe9afc9ea04aef3ddcb", "local_bytes": 3371917226, "archive_integrity": "TAR_LIST_EXIT_0", "transport": "official Zenodo 18829689 curl HTTP/1.1 complete transfer", "transport_exit": 0, "extracted_path": "PartialEdit_v1.1/materialized/E1"},
         {"name": "E2.tar.gz", "md5": "0e2cb7ba075b301de55ab8657cfa7631", "local_status": "NOT_MATERIALIZED"},
         {"name": "E1-Codec.tar.gz", "md5": "a0c0904eaa7a079c825ab733ae69f700", "local_status": "NOT_MATERIALIZED"},
         {"name": "E2-Codec.tar.gz", "md5": "e1e2fbfd2c145c24bf3d3a07068b06a5", "local_status": "NOT_MATERIALIZED"},
@@ -102,8 +102,9 @@
           "speaker_split_lists": {"train": 20, "dev": 20, "eval": 70, "vctk": 110}
         }
       },
-      "audio_duration_crosscheck": "BLOCKED_AUDIO_ARCHIVES_NOT_MATERIALIZED",
-      "overall_local_status": "GT_CSV_AND_SPEAKER_PASS_AUDIO_BLOCKED"
+      "audio_duration_crosscheck": "PASS_E1_FULL_AUDIO",
+      "audio_validation": {"subset": "E1", "csv_records": 42471, "wav_files": 42471, "missing": 0, "extra": 0, "duplicate_paths": 0, "sample_rates": {"16000": 42471}, "channels": {"1": 42471}, "subtypes": {"PCM_16": 42471}, "total_audio_seconds": 150764.46, "max_abs_duration_diff_seconds": 0.0, "duration_mismatch_gt_5ms": 0, "edited_region_violations": 0, "speaker_split_records": {"train": 7850, "dev": 7780, "eval": 26841}, "speaker_split_wavs": {"train": 7850, "dev": 7780, "eval": 26841}},
+      "overall_local_status": "GT_CSV_SPEAKER_AND_E1_FULL_AUDIO_PASS_E2_AUDIO_NOT_MATERIALIZED"
     }
   ],
   "recovery_fallbacks": [

@@ -103,3 +103,97 @@ therefore not an authorized v1.1 transport or substitution and was not used.
 `PARTIALEDIT_15519188_STATUS = OFFICIAL_OLDER_RECORD_REJECTED_VERSION_AND_HASH_MISMATCH`
 
 `PARTIALEDIT_V1_1_TRANSPORT_REMAINS = ZENODO_18829689_CURL_ATTEMPT_IN_PROGRESS`
+
+## Append-only final Phase3S resource audit
+
+The authorized complete curl transport for the official PartialEdit v1.1 E1
+archive completed successfully:
+
+```text
+PARTIALEDIT_E1_SOURCE = https://zenodo.org/records/18829689/files/E1.tar.gz?download=1
+PARTIALEDIT_E1_TRANSPORT = OFFICIAL_CURL_HTTP1_1_COMPLETE_EXIT_0
+PARTIALEDIT_E1_START = 2026-09-13T17:09:58.0229362+08:00
+PARTIALEDIT_E1_END = 2026-09-13T18:00:21.9115695+08:00
+PARTIALEDIT_E1_BYTES = 3371917226
+PARTIALEDIT_E1_MD5 = 1f489d2ff488ddd6c9b655127725af2f
+PARTIALEDIT_E1_MD5_STATUS = PASS_EXACT_OFFICIAL
+PARTIALEDIT_E1_SHA256 = f4bb1a632eed8ddc66bb9285de8b4bc07192d0539385efe9afc9ea04aef3ddcb
+PARTIALEDIT_E1_ARCHIVE_INTEGRITY = PASS_TAR_LIST_EXIT_0
+PARTIALEDIT_E1_EXTRACTED_PATH = F:/项目/申请实验室  TTS项目/topconf_phase3_cache/PartialEdit_v1.1/materialized/E1
+PARTIALEDIT_E1_AUDIO = PASS_FULL_SUBSET
+PARTIALEDIT_E1_CSV_RECORDS = 42471
+PARTIALEDIT_E1_WAV_FILES = 42471
+PARTIALEDIT_E1_MISSING = 0
+PARTIALEDIT_E1_EXTRA = 0
+PARTIALEDIT_E1_DUPLICATE_PATHS = 0
+PARTIALEDIT_E1_FORMAT = 42471 x MONO_PCM16_16000_HZ
+PARTIALEDIT_E1_DURATION_MAX_ABS_DIFF_SECONDS = 0.0
+PARTIALEDIT_E1_DURATION_MISMATCH_GT_5MS = 0
+PARTIALEDIT_E1_EDITED_REGION_VIOLATIONS = 0
+PARTIALEDIT_E1_SPEAKER_SPLIT = train=7850; dev=7780; eval=26841
+PARTIALEDIT_E1_TOTAL_AUDIO_SECONDS = 150764.46
+```
+
+The merged official CSV contains E2 rows as well; E2 remains intentionally
+unmaterialized and is not counted as an E1 failure. The full-audio parser and
+WAV cross-check above were run in the isolated Phase3S Python environment.
+
+The authorized single MultiReso checkpoint transport was attempted only once,
+from the official repository-documented Zenodo route, and returned HTTP 504
+with zero bytes:
+
+```text
+PARTIALSPOOF_MULTIRESO_SOURCE = https://zenodo.org/record/6674660/files/multi-reso.tar.gz?download=1
+PARTIALSPOOF_MULTIRESO_EXPECTED = 3895061057 bytes; md5:138fc6901a495ff71137d9ca15d9393a
+PARTIALSPOOF_MULTIRESO_TRANSPORT = OFFICIAL_CURL_HTTP1_1_SINGLE_ATTEMPT_HTTP_504
+PARTIALSPOOF_MULTIRESO_BYTES = 0
+PARTIALSPOOF_MULTIRESO_CHECKPOINT = NOT_MATERIALIZED
+```
+
+No Phase3R HTTP request was repeated. No unofficial mirror, paid compute,
+training, retraining, inference, metric computation, ranking, or scientific
+outcome was performed.
+
+## Phase3S closure decision
+
+```text
+GPU_REPRODUCTION_ENVIRONMENT = PASS
+FULL_AUDIO_EXTERNAL_DATASETS = 1 (PartialEdit E1)
+FULL_AUDIO_PARSER_VALIDATED = 1 (PartialEdit E1)
+EXTERNAL_BASELINE_PATHS = 1 (CFPRF infrastructure-only; MultiReso checkpoint unavailable)
+PHASE3S_CLOSURE = BLOCKED_BASELINE_PATH_GATE
+READY_FOR_PHASE3_REPRODUCTION_RESUME_REVIEW = NO
+READY_FOR_PHASE4_REVIEW = NO
+READY_FOR_CONFIRMATORY_EXPERIMENT_EXECUTION = NO
+```
+
+The Phase3S resource and environment work is therefore closed as blocked at
+the independent baseline-path gate. The original Phase3 and Phase3R blocked
+closures remain unchanged. A future resumption would require a newly
+authorized official second baseline checkpoint or equivalent official path;
+this record does not authorize that work.
+
+## Append-only reproducibility handoff fields
+
+```text
+BRANCH = topconf-dl-robustness
+PHASE3S_AUTHORIZATION_SHA256 = 8e3663273894e751b8dec42fb311351c850ea77aca0fa73bc31ba3647e8e4e9d
+LEGACY_ENVIRONMENT = F:/项目/申请实验室  TTS项目/envs/topconf-phase3s-cfprf-py310
+LEGACY_ENVIRONMENT_PYTHON = 3.10.11
+LEGACY_ENVIRONMENT_TORCH = 2.2.2+cu121
+LEGACY_ENVIRONMENT_FAIRSEQ = 1.0.0a0 editable; official source commit a54021305d6b3c4c5959ac9395135f63202db8f1
+GPU = NVIDIA GeForce RTX 4060 Laptop GPU; VRAM_BYTES=8585216000; DRIVER=610.62; CUDA=12.1
+GPU_SMOKE = PASS_CUDA_TENSOR_AND_MATMUL; FAIRSEQ_IMPORT=PASS; XLSR_LOAD_GPU=PASS
+CFPRF_CHECKPOINT_LOAD_GPU = PASS_FDN_AND_PRN_STRICT_ZERO_MISSING_ZERO_UNEXPECTED
+CFPRF_AUDIO_FORWARD = NOT_RUN_VALIDLY_DEFERRED_NO_AUDIO_SCIENTIFIC_GATE
+PRIMARY_ENVIRONMENT_CHANGED = NO
+SYSTEM_PYTHON_CHANGED = NO
+WSL2 = UNAVAILABLE_NO_USABLE_DISTRO
+NO_SCIENTIFIC_RUNS = YES
+NO_SCIENTIFIC_OUTCOMES = YES
+PHASE4_REVIEW = NO
+RQ1_RQ2_RQ3 = NO
+TESTS = python -m pytest tests/topconf -q -> 26 passed
+ORIGINAL_PHASE3_CLOSURE = BLOCKED_UNCHANGED
+PHASE3R_CLOSURE = BLOCKED_UNCHANGED
+```

@@ -15,6 +15,28 @@ does not select a baseline by performance.
 
 `RESULT_BASED_SUBSTITUTIONS = 0`
 
+## Append-only Phase3S materialization result
+
+The official MultiReso checkpoint route was tested once under the frozen
+Phase3S budget:
+
+```text
+SOURCE = https://zenodo.org/record/6674660/files/multi-reso.tar.gz?download=1
+EXPECTED = 3895061057 bytes; md5:138fc6901a495ff71137d9ca15d9393a
+RESULT = HTTP_504_ZERO_BYTES
+STATUS = NOT_MATERIALIZED
+```
+
+CFPRF remains the only verified external baseline path, and only at
+infrastructure/load level. PartialEdit E1 is a fully validated external audio
+dataset, not a second baseline. Consequently:
+
+```text
+EXTERNAL_BASELINE_PATHS = 1
+BASELINE_GATE = BLOCKED
+PHASE3S_CLOSURE = BLOCKED_BASELINE_PATH_GATE
+```
+
 No candidate is promoted to a replacement baseline in Phase 3S. A new
 candidate would require paper provenance, official code, clear license,
 checkpoint identity, and temporal output verification before authorization.
