@@ -63,6 +63,19 @@ dataset.
 | `R01TTS.0.a.tgz` | `https://zenodo.org/records/14214149/files/R01TTS.0.a.tgz?download=1` | MD5 `685acfe986b50baaf3e25e9d5e3091a4`, approximately 15.4 GB | `NOT_PROBED` |
 | `R01TTS.0.b.tgz` | `https://zenodo.org/records/14214149/files/R01TTS.0.b.tgz?download=1` | MD5 `a4de860a845816fa65785dddd7849700`, approximately 12.8 GB | `NOT_PROBED` |
 
+The official repository split metadata was materialized through the GitHub
+Contents/Git blob API at commit `61d072e472dbbec6c17b3a591d3ae046b7d8ef72`:
+
+| Artifact | Official Git blob SHA | Local bytes | Local SHA256 | Validation |
+|---|---|---:|---|---|
+| `split/train.spk` | `4495c88831a21c9f3838b01e806bf7b1b7ceebd9` | 97 | `0BFD2564E7A41006CDB4BB06A7E357AF7960E4C112EFD54D358B28BA718FA992` | 20 unique numeric speakers |
+| `split/train.utt` | `ab08e9916455466f32a549fe9dfac2af8ef5c4db` | 1,405,900 | `E754DA1867C06A34B49D3EADA45BAC8F6612A49BA367F6DB42A1452F2B77ADF6` | 29,880 unique utterance IDs |
+| `split/test.spk` | `fe4128811545702ac7a0b2ec682518d7e3f0e611` | 284 | `524BA2D73AFA269D57967828D1B941B8EB4FFCD2DB80607AE1DA495E00CF9AA6` | 59 unique numeric speakers |
+| `split/test.utt` | `bed7ddb43fa36de16c3ae500f950188434e2225d` | 2,120,692 | `C39934BE2DD4EFEF5FC4B9CBE61C742A5C584A89E696731D21C8D96D3E8CD375` | 46,348 unique utterance IDs |
+
+This is repository metadata validation only. It does not establish audio
+existence, waveform duration alignment, or a full-audio fallback dataset.
+
 ## Required recovery fields
 
 ```text
@@ -79,7 +92,7 @@ CFPRF_FULL_REPRODUCTION = BLOCKED_UNTIL_FULL_AUDIO_VALIDATION
 SAL_STATUS = DEFERRED_CHECKPOINT_UNAVAILABLE
 BAM_RIGHTS_STATUS = UNRESOLVED
 LLAMAPARTIALSPOOF_FALLBACK_TRIGGERED = YES_AVAILABILITY_ONLY_NO_MODEL_RESULTS
-LLAMAPARTIALSPOOF_STATUS = BLOCKED_EXTERNAL_SERVICE_AFTER_METADATA_PROBE; AUDIO_NOT_MATERIALIZED
+LLAMAPARTIALSPOOF_STATUS = REPOSITORY_SPLIT_METADATA_PASS_AUDIO_NOT_MATERIALIZED
 FULL_AUDIO_EXTERNAL_DATASETS = 0
 EXTERNAL_FUNCTIONAL_PARADIGMS = 0 FULL / 1 INFRASTRUCTURE_ONLY
 OFFICIAL_REPRODUCTIONS = 0 FUNCTIONAL
