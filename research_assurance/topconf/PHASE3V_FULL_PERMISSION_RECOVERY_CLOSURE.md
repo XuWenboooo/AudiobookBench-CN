@@ -113,3 +113,11 @@ READY_FOR_CONFIRMATORY_EXPERIMENT_EXECUTION = NO
 The PASS is limited to a provenance-verified functional second baseline path
 and the authorized bounded smoke. It does not claim reproduction of the
 original MultiResoModel paper checkpoint or any scientific result.
+
+## Post-commit finalization ledger (append-only)
+
+```text
+EVIDENCE_COMMIT = c17e7f1
+EVIDENCE_COMMIT_PUSH_STATUS = PUSHED to origin/topconf-dl-robustness
+FINAL_CLOSURE_LEDGER = this append-only record is included in the next commit and will be pushed immediately
+```
