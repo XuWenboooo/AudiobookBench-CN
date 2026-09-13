@@ -374,6 +374,7 @@ def run(batch_size: int, resume: bool = False) -> int:
                 with torch.inference_mode():
                     logits, _ = model(batch)
                 per_case = _native_outputs(logits, [item[2] for item in loaded])
+                del logits, batch
                 if len(per_case) != len(loaded):
                     raise ValueError("batch output length mismatch")
                 for (row, _, samples, audio_hash), native in zip(loaded, per_case):
@@ -390,7 +391,17 @@ def run(batch_size: int, resume: bool = False) -> int:
                     _append(RETRY_JSONL, {"attempt_id": f"{INVOCATION_ID}-{index}-oom", "case_id": pending[0]["case_id"], "attempt_type": "batch_size_reduction", "invoked": True, "failure": "CUDA_OOM", "retry_reason": "predeclared infrastructure policy; reduce batch only", "authorization_id": AUTHORIZATION_ID})
                     batch_size = 1
                     index -= len(pending)
-                    torch.cuda.empty_cache()
+                    # OOM can surface asynchronously and even cache release
+                    # may report the same condition; the retry is still a
+                    # predeclared batch-size-only infrastructure amendment.
+                    try:
+                        del logits, batch
+                    except UnboundLocalError:
+                        pass
+                    try:
+                        torch.cuda.empty_cache()
+                    except RuntimeError:
+                        pass
                     break
                 for row, _, _, _ in loaded:
                     _append(RAW_JSONL, _raw_failure(row, "MODEL_INFERENCE_FAILURE", "MODEL_INFERENCE_FAILURE", attempts))
