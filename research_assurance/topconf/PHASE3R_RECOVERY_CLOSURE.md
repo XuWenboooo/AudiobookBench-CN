@@ -161,3 +161,22 @@ or unofficial checkpoint is admitted.
 These inspections do not alter the recovery gate: full-audio datasets remain
 zero, functional external paradigms remain below two, and functional official
 reproductions remain zero.
+
+## Append-only current-state continuity audit
+
+The attachment's reported recovery base `9873ac4b527f3bd72499b8e8230be8a337c9dd2a`
+is superseded by the continuous TopConf Phase 3/3R history. The current
+authoritative state is:
+
+`CURRENT_HEAD_SUPERSEDES_REPORTED_HEAD = YES`
+
+`LOCAL_HEAD = fe0b87ade6a2b069dd80d0e405ae3e1565c72223`
+
+`REMOTE_HEAD = fe0b87ade6a2b069dd80d0e405ae3e1565c72223`
+
+`WORKING_TREE = CLEAN`
+
+`ORIGINAL_PHASE3_CLOSURE_UNCHANGED_SINCE_RECOVERY_BASE = YES`
+
+The original Phase 3 closure remains `BLOCKED`; no reset, checkout, rebase,
+amend, force push, or history rewrite was performed.
