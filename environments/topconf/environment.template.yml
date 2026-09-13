@@ -1,0 +1,16 @@
+name: audiobookbench-topconf-rq1-template
+channels:
+  - conda-forge
+  - pytorch
+dependencies:
+  - python=3.10
+  - pip
+  - numpy
+  - scipy
+  - scikit-learn
+  - pyyaml
+  - soundfile
+  - pytest
+  - pip:
+      # Pin exact versions only after the selected external model contract is known.
+      - -r requirements-template.txt

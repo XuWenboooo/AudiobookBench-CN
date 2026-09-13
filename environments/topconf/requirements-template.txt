@@ -1,0 +1,4 @@
+# Template only. Exact versions and CUDA wheels remain TBD_BEFORE_AUTHORIZATION.
+# Keep the base project requirements separate from model-specific legacy stacks.
+matplotlib
+praat-parselmouth
