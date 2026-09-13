@@ -37,10 +37,11 @@ Status: **BLOCKED — INFRASTRUCTURE VALIDATION COMPLETE, EXTERNAL REPRODUCTION 
 
 ## Non-results
 
-No external checkpoint was loaded, no real audio was scored, no external
-metric was computed, and no baseline was ranked or excluded by outcome. The
-Phase 4 design freeze, confirmatory population, and RQ1/RQ2/RQ3 remain
-untouched.
+No full external-baseline reproduction was completed, no full scientific
+audio population was scored, and no external metric was computed. The limited
+CFPRF infrastructure checkpoint/smoke loads above are not reproduction
+metrics. No baseline was ranked or excluded by outcome. The Phase 4 design
+freeze, confirmatory population, and RQ1/RQ2/RQ3 remain untouched.
 
 ## Reopening condition
 
