@@ -32,3 +32,8 @@ MULTIRESO_SIMPLE_CHECKPOINT_SHA256 = NOT_COMPUTED
 MULTIRESO_SIMPLE_FUNCTIONAL_PATH = NOT_ESTABLISHED
 PHASE3U_CLOSURE = BLOCKED_CHECKPOINT_UNAVAILABLE
 ```
+
+The pinned Hugging Face API recheck still exposes the same public
+`baseline-ps-e55.tgz` file and LFS SHA256. No content request was made during
+this recheck; the checkpoint remains unavailable locally because the single
+authorized curl transport failed at the Schannel revocation-check step.

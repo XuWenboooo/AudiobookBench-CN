@@ -92,3 +92,21 @@ READY_FOR_CONFIRMATORY_EXPERIMENT_EXECUTION = NO
 The original Phase3, Phase3R, and Phase3S blocked closures remain unchanged.
 Future progress requires an externally available official checkpoint or a new
 explicit authorization with a revised official transport budget.
+
+## Append-only resumed availability recheck
+
+The official Hugging Face API was rechecked without requesting the checkpoint
+content. The pinned file remains public and unchanged:
+
+```text
+CHECKPOINT_API_STATUS = PRESENT_PUBLIC_NOT_GATED
+CHECKPOINT_API_REVISION = 31fd984c53a95e428551f13c4d95645b3cb8c885
+CHECKPOINT_API_SIZE = 3701009843 bytes
+CHECKPOINT_API_LFS_SHA256 = 0c394f03558ecdd7a6b81bf6c0fd8ee642c5937ba22cc852f58ae4e7dc480e32
+LOCAL_ARCHIVE_STATUS = ABSENT_ZERO_BYTES
+BLOCKER_CLASS = LOCAL_SCHANNEL_REVOCATION_CHECK_FAILURE
+NEW_TRANSPORT_ATTEMPTED = NO
+```
+
+This confirms that the remaining blocker is transport execution under the
+frozen one-attempt authorization, not an untraceable or changed checkpoint.
