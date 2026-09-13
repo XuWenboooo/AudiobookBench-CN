@@ -32,8 +32,11 @@
           {"name": "database_eval.tar.gz.ac", "md5": "df620d7f685514b95409530f6b9b1253"}
         ],
         "probe_status": "FAILED_504_ZERO_PAYLOAD",
-        "probe_bytes": 92,
-        "probe_note": "HTTP 504 HTML error page; no archive bytes accepted"
+        "probe_endpoints": [
+          {"endpoint": "record-file-download", "status": "FAILED_504_ZERO_PAYLOAD", "response_bytes": 92},
+          {"endpoint": "api-file-content", "status": "FAILED_504_ZERO_PAYLOAD", "response_bytes": 92}
+        ],
+        "probe_note": "Both official download and API content endpoints returned HTTP 504 HTML error pages; no archive bytes accepted"
       },
       "ground_truth_materialization": {
         "path": "PartialSpoof_v1.2/extracted/database/segment_labels",
