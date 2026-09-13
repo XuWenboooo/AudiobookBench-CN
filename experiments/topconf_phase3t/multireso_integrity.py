@@ -10,6 +10,7 @@ import json
 import os
 import platform
 import tempfile
+import time
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Callable, Mapping
@@ -62,7 +63,19 @@ def write_json_atomic(path: Path, value: Mapping[str, Any]) -> None:
             handle.write("\n")
             handle.flush()
             os.fsync(handle.fileno())
-        os.replace(temporary, path)
+        last_error: PermissionError | None = None
+        for attempt in range(20):
+            try:
+                os.replace(temporary, path)
+                last_error = None
+                break
+            except PermissionError as exc:
+                last_error = exc
+                if attempt == 19:
+                    raise
+                time.sleep(0.25)
+        if last_error is not None:
+            raise last_error
     finally:
         try:
             os.unlink(temporary)
@@ -213,4 +226,3 @@ def assert_resume_manifest(namespace: Path, identity: Mapping[str, Any]) -> dict
     if manifest.get("status") == "COMPLETE":
         raise NamespaceOwnershipError("completed namespace reuse is forbidden")
     return manifest
-
