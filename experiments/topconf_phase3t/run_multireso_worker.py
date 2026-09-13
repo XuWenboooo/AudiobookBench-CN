@@ -286,7 +286,9 @@ def _raw_failure(case: dict[str, Any], status: str, failure: str, attempt: int) 
 
 
 def _append(path: Path, value: dict[str, Any]) -> None:
-    with path.open("a", encoding="utf-8", newline="\n") as handle:
+    # Let the Windows text layer use its default newline handling.  Explicit
+    # ``newline="\n"`` can raise OSError 22 during long append-only runs.
+    with path.open("a", encoding="utf-8") as handle:
         handle.write(json.dumps(value, sort_keys=True, separators=(",", ":")) + "\n")
         handle.flush()
 
@@ -437,6 +439,7 @@ def main() -> int:
     parser.add_argument("--batch-size", type=int, default=4)
     parser.add_argument("--resume", action="store_true")
     parser.add_argument("--preflight", action="store_true")
+    parser.add_argument("--recover-stale-lock", action="store_true", help=argparse.SUPPRESS)
     args = parser.parse_args()
     if args.preflight:
         return preflight()
