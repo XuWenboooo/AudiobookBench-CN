@@ -27,9 +27,12 @@ Status: **BLOCKED — INFRASTRUCTURE VALIDATION COMPLETE, EXTERNAL REPRODUCTION 
   loads strictly with 0 missing and 0 unexpected keys, and one authorized
   PartialSpoof WAV produces finite segment/boundary outputs of shape
   `(1,107,2)` under a CPU-only infrastructure smoke. This is recorded only as
-  `INFRASTRUCTURE_VALIDATION_ONLY`; no metric is reported. SAL has no verified
-  local checkpoint. BAM remains rights-blocked. TRACE remains a stretch
-  reimplementation and is not counted as a core reproduction.
+  `INFRASTRUCTURE_VALIDATION_ONLY`; no metric is reported. The official PRN
+  checkpoint also loads strictly and produces finite verification/regression
+  tensors on a synthetic embedding/proposal fixture; that fixture is not an
+  external audio result. SAL has no verified local checkpoint. BAM remains
+  rights-blocked. TRACE remains a stretch reimplementation and is not counted
+  as a core reproduction.
 - Parser/evaluator tests pass with `python -m pytest tests/topconf -q`.
 
 ## Non-results
