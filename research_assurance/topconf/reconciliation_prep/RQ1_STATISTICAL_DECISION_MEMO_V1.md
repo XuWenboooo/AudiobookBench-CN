@@ -1,0 +1,3 @@
+# RQ1 Statistical Decision Memo v1
+
+Status: **DRAFT / CANDIDATE / NON-AUTHORIZING**. Cases are paired within source and nested in speaker. Candidate primary uncertainty is paired-source bootstrap with hierarchical speaker-to-source sensitivity; row bootstrap is diagnostic only. Candidate bootstrap N=2,000, seed predeclared, percentile CI, declared multiplicity family, and planned/valid denominator reporting. Planning bands are 300/100/3, 400/120/4, 500/150+/4 source/speaker/mechanism, not power claims. Final unit, N, missingness and bootstrap are blocked on Phase3T contracts and may not be selected from outcomes.

@@ -1,0 +1,3 @@
+# LD@DR95 Implementation Spec Draft v1
+
+Status: **DRAFT / FROZEN = NO / NON-AUTHORIZING**. Transform each metric to documented higher-is-better utility `U`; HIB uses native direction, LIB needs a predeclared monotone utility or stays secondary. `DR_c=U_det(c)/U_det(clean)`, `LR_c=U_where(c)/U_where(clean)`, and `LD@DR95=1-mean(LR_c where DR_c>=.95)`. Clean zero/nonfinite values, empty feasible sets, NaN, ambiguity/ties, unsupported condition aggregation, or incompatible paired support yield `NOT_ESTIMABLE`. Fix equal/weighted condition aggregation and use paired source bootstrap plus speaker sensitivity.
