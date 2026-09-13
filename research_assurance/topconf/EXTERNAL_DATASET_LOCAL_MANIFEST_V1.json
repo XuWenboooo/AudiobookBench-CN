@@ -105,5 +105,29 @@
       "audio_duration_crosscheck": "BLOCKED_AUDIO_ARCHIVES_NOT_MATERIALIZED",
       "overall_local_status": "GT_CSV_AND_SPEAKER_PASS_AUDIO_BLOCKED"
     }
+  ],
+  "recovery_fallbacks": [
+    {
+      "dataset_id": "LlamaPartialSpoof",
+      "version": "v1.0.b",
+      "doi": "10.5281/zenodo.14214149",
+      "official_source": "https://zenodo.org/records/14214149",
+      "repository": "https://github.com/hieuthi/LlamaPartialSpoof",
+      "repository_commit": "61d072e472dbbec6c17b3a591d3ae046b7d8ef72",
+      "license": "CC BY 4.0",
+      "selection_reason": "EXTERNAL_DATA_AVAILABILITY_ONLY_AFTER_PARTIALSPOOF_BUDGET_EXHAUSTED",
+      "model_results_observed_before_selection": false,
+      "metadata_source": "official repository GitHub Contents/Git blob API",
+      "metadata_local_status": "MATERIALIZED_VERIFIED",
+      "metadata_artifacts": [
+        {"path": "LlamaPartialSpoof_v1.0.b/split/train.spk", "official_git_blob_sha": "4495c88831a21c9f3838b01e806bf7b1b7ceebd9", "local_bytes": 97, "local_sha256": "0bfd2564e7a41006cdb4bb06a7e357af7960e4c112efd54d358b28ba718fa992", "validation": "20_unique_numeric_speakers"},
+        {"path": "LlamaPartialSpoof_v1.0.b/split/train.utt", "official_git_blob_sha": "ab08e9916455466f32a549fe9dfac2af8ef5c4db", "local_bytes": 1405900, "local_sha256": "e754da1867c06a34b49d3eada45bac8f6612a49ba367f6db42a1452f2b77adf6", "validation": "29880_unique_utterance_ids"},
+        {"path": "LlamaPartialSpoof_v1.0.b/split/test.spk", "official_git_blob_sha": "fe4128811545702ac7a0b2ec682518d7e3f0e611", "local_bytes": 284, "local_sha256": "524ba2d73afa269d57967828d1b941b8eb4ffcd2db80607ae1da495e00cf9aa6", "validation": "59_unique_numeric_speakers"},
+        {"path": "LlamaPartialSpoof_v1.0.b/split/test.utt", "official_git_blob_sha": "bed7ddb43fa36de16c3ae500f950188434e2225d", "local_bytes": 2120692, "local_sha256": "c39934be2dd4efef5fc4b9cbe61c742a5c584a89e696731d21c8d96d3e8cd375", "validation": "46348_unique_utterance_ids"}
+      ],
+      "audio_archives": "NOT_MATERIALIZED",
+      "gt_time_label_validation": "NOT_POSSIBLE_WITHOUT_AUDIO_AND_ZENODO_LABEL_ARCHIVE",
+      "overall_local_status": "REPOSITORY_SPLIT_METADATA_PASS_AUDIO_BLOCKED"
+    }
   ]
 }
