@@ -23,13 +23,13 @@ auditable official reproduction. No result-based substitution is permitted.
 
 | Gate | Current status | Evidence / next permitted action |
 |---|---|---|
-| PartialEdit E1 full audio | `NOT_STARTED` | bounded official Zenodo attempts after authorization commit |
+| PartialEdit E1 full audio | `BLOCKED_EXTERNAL_SERVICE_AFTER_3_ATTEMPTS` | all authorized bounded attempts returned HTTP 504 with zero archive bytes |
 | PartialSpoof v1.2 full audio | `BLOCKED_FROM_PHASE3` | bounded recovery retry only; previous invalid archive and endpoint failures retained |
 | PartialSpoof MultiReso | `SOURCE_ROUTE_VERIFIED_CHECKPOINT_BLOCKED` | official commit/script/Zenodo route verified; bounded checkpoint probe failed |
 | CFPRF | `INFRASTRUCTURE_SMOKE_PASS` | do not repeat unchanged smoke; full run requires validated audio |
 | SAL | `DEFERRED_CHECKPOINT_UNAVAILABLE` | no self-training or unofficial checkpoint |
 | BAM | `BLOCKED_RIGHTS_CLEARANCE` | provenance/rights inspection only |
-| GPU environment | `NOT_AVAILABLE_UNVERIFIED` | audit actual accessible environments; no paid resource creation |
+| GPU environment | `LOCAL_GPU_VISIBLE_RUNTIME_INCOMPATIBLE` | RTX 4060 Laptop 8 GB and CUDA 12.1 are visible in an existing environment; official fairseq import fails under that environment's Python 3.12, so CFPRF GPU execution is not yet validated |
 
 ## Recovery attempt ledger
 
@@ -60,7 +60,7 @@ FULL_AUDIO_EXTERNAL_DATASETS = 0
 EXTERNAL_FUNCTIONAL_PARADIGMS = 0 FULL / 1 INFRASTRUCTURE_ONLY
 OFFICIAL_REPRODUCTIONS = 0 FUNCTIONAL
 UNIFIED_EVALUATOR_COMPATIBILITY = SCHEMA_ONLY_NOT_END_TO_END
-FAILURE_ACCOUNTING = PRIOR_FAILURES RETAINED; RECOVERY LEDGER TO BE APPENDED
+FAILURE_ACCOUNTING = PRIOR_FAILURES AND RECOVERY_ATTEMPTS RETAINED; NO SILENT SKIP
 RESULT_BASED_SUBSTITUTIONS = 0
 ```
 
@@ -70,3 +70,8 @@ If the bounded official recovery paths fail, the closure remains
 `BLOCKED_EXTERNAL_SERVICE` or another explicit infrastructure class. No
 unofficial data, self-generated checkpoint, forced CPU full benchmark, or
 Phase 4 action may be used to turn this record into PASS.
+`GPU_EXECUTION_ENVIRONMENT_STATUS = LOCAL_RTX4060_8GB_CUDA12.1_VISIBLE_IN_EXISTING_ENVIRONMENT`
+
+`GPU_RUNTIME_COMPATIBILITY = OFFICIAL_FAIRSEQ_IMPORT_FAILED_PYTHON312_DATACLASS_INCOMPATIBILITY`
+
+`FULL_REPRODUCTION_CPU_FEASIBILITY = IMPRACTICAL_FOR_FULL_AUDIO`
