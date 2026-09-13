@@ -22,9 +22,14 @@ Status: **BLOCKED — INFRASTRUCTURE VALIDATION COMPLETE, EXTERNAL REPRODUCTION 
   verification. The CSV parser validates 85,007 rows, 85,632 edited regions,
   E1/E2 counts, and speaker metadata. E1/E2 audio and codec archives are not
   materialized, so duration/path cross-checks cannot pass.
-- CFPRF checkpoint acquisition is blocked by download throughput. SAL has no
-  verified local checkpoint. BAM remains rights-blocked. TRACE remains a
-  stretch reimplementation and is not counted as a core reproduction.
+- The two authorized CFPRF PS checkpoint files and the official fairseq XLSR
+  front-end pass SHA256 recording and load checks. The official FDN state dict
+  loads strictly with 0 missing and 0 unexpected keys, and one authorized
+  PartialSpoof WAV produces finite segment/boundary outputs of shape
+  `(1,107,2)` under a CPU-only infrastructure smoke. This is recorded only as
+  `INFRASTRUCTURE_VALIDATION_ONLY`; no metric is reported. SAL has no verified
+  local checkpoint. BAM remains rights-blocked. TRACE remains a stretch
+  reimplementation and is not counted as a core reproduction.
 - Parser/evaluator tests pass with `python -m pytest tests/topconf -q`.
 
 ## Non-results
