@@ -180,3 +180,19 @@ authoritative state is:
 
 The original Phase 3 closure remains `BLOCKED`; no reset, checkout, rebase,
 amend, force push, or history rewrite was performed.
+
+## Append-only official project-route audit
+
+The official PartialSpoof repository's `01_download_database.sh` was checked
+against the repository page and the frozen recovery lineage. It downloads
+`train`, `dev`, `eval`, `segment_labels_v1.2`, and `protocols` from the same
+Zenodo record-file family at
+`https://zenodo.org/record/5766198/files/database_<name>.tar.gz?download=1`.
+The repository exposes no separate official mirror, release asset, or
+alternative project-hosted archive for the missing full audio. This route is
+therefore not a new source that can be safely retried within the frozen
+budget; it corroborates the already recorded Zenodo infrastructure failure.
+
+`PARTIALSPOOF_OFFICIAL_PROJECT_ROUTE = SAME_ZENODO_ENDPOINT_NO_NEW_ARCHIVE`
+
+`PARTIALSPOOF_RECOVERY_STOP_JUSTIFICATION = BOUNDED_OFFICIAL_ROUTES_EXHAUSTED`
