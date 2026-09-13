@@ -130,3 +130,40 @@ WORKER_E1_002_RESUME_NAMESPACE_REUSED=YES
 WORKER_E1_002_COMPLETED_CASES_RERUN=0
 WORKER_E1_002_SCIENTIFIC_OUTCOMES_INSPECTED=NO
 ```
+
+## Final MultiReso owner selection
+
+Read-only audit found a second parallel-worker worktree created for
+integrity-controlled continuation:
+
+```text
+WORKER_R2_WORKTREE=F:/项目/申请实验室  TTS项目/AudiobookBench-CN-phase3t-multireso-worker-r2
+WORKER_R2_BRANCH=topconf-phase3t-multireso-worker-r2
+WORKER_R2_COMMIT=a210287b0473b628b8ba4b85f9658fbc10f0d832
+WORKER_R2_NAMESPACE=results/topconf_phase3t/multireso_worker_02
+WORKER_R2_OWNER_LOCK=phase3t_namespace_owner_v1; exclusive writer
+WORKER_R2_RAW_TERMINAL_AT_AUDIT=8047
+WORKER_R2_LEDGER_TERMINAL_AT_AUDIT=8047
+WORKER_R2_RAW_DUPLICATES_AT_AUDIT=0
+WORKER_R2_LEDGER_DUPLICATES_AT_AUDIT=0
+WORKER_R2_RAW_LEDGER_SET_MISMATCH_AT_AUDIT=0
+WORKER_R2_SCHEMA=six temporal scales plus native utterance output
+WORKER_R2_GT_ACCESSED=NO
+WORKER_R2_SCIENTIFIC_METRICS_COMPUTED=0
+```
+
+The final MultiReso owner is the r2 parallel worker. This decision uses only
+completed-count, exclusive-writer integrity, schema compliance, and frozen
+authorization provenance. No score, metric, ranking, threshold, or other
+scientific outcome was inspected. The original `multireso_worker_02`
+namespace in the first worker worktree remains preserved as a superseded
+partial execution artifact and must not be ingested or resumed as a second
+writer. The r2 worker must finish and provide
+`PHASE3T_MULTIRRESO_WORKER_HANDOFF_V1.md` before mainline ingestion.
+
+```text
+FINAL_MULTIRESO_EXECUTION_OWNER=PARALLEL_WORKER_R2
+FINAL_MULTIRESO_OWNER_DECISION_BASIS=COUNT_INTEGRITY_AUTHORIZATION_ONLY
+SCIENTIFIC_OUTCOMES_USED_FOR_FINAL_OWNER_DECISION=NO
+SECOND_ACTIVE_MULTIRESO_WRITER=NO
+```
