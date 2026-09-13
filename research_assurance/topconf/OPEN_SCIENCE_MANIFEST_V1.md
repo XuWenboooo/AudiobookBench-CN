@@ -1,4 +1,4 @@
-# Open Science Manifest v1
+# Open Science Manifest v1 (Protocol-Hardening Draft)
 
 Status: **DRAFT / RELEASE CHECKLIST**
 
@@ -13,6 +13,16 @@ Status: **DRAFT / RELEASE CHECKLIST**
 - [ ] Analysis scripts and exact metric definitions
 - [ ] Redacted outputs sufficient for reproduction
 - [ ] Limitations, deviations, and incident log
+
+## Required per-run provenance
+
+Record git commit, configuration, environment, hardware/software, seed,
+dataset manifest and legally shareable hashes, model identity and checkpoint
+hash, exact command, stdout/stderr, raw predictions, derived metrics,
+bootstrap artifacts, failure ledger, and report. The release must classify
+each artifact as `PUBLICLY_RELEASABLE`, `REPRODUCIBLE_WITH_EXTERNAL_DOWNLOAD`,
+`LICENSE_RESTRICTED`, or `PRIVATE_NOT_RELEASABLE`; every `TBD_BEFORE_AUTHORIZATION`
+entry blocks release approval.
 
 ## Privacy and safety gate
 
