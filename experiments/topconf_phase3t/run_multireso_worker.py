@@ -33,10 +33,11 @@ DATASET_CSV_SHA256 = "ADEECB0A7DD39A982223C07970E02E41CA5395EA3D484FCC6CE03174EB
 UNITS = (0.02, 0.04, 0.08, 0.16, 0.32, 0.64)
 SAMPLE_RATE = 16000
 EXPECTED_CASES = 42471
-INVOCATION_ID = "PHASE3T_MRM_FULL_E1_001"
-NAMESPACE = Path("results/topconf_phase3t/multireso_worker_01")
+INVOCATION_ID = "PHASE3T_MRM_FULL_E1_002"
+NAMESPACE = Path("results/topconf_phase3t/multireso_worker_02")
 RAW_JSONL = NAMESPACE / "multireso_raw_v1.jsonl"
 LEDGER_JSONL = NAMESPACE / "multireso_case_ledger_v1.jsonl"
+ATTEMPTS_JSONL = NAMESPACE / "multireso_attempts_v1.jsonl"
 RETRY_JSONL = NAMESPACE / "multireso_retry_ledger_v1.jsonl"
 RUN_MANIFEST = NAMESPACE / "MULTIRESO_PHASE3T_RAW_OUTPUT_MANIFEST_V1.json"
 
@@ -65,7 +66,7 @@ def read_case_order() -> list[dict[str, Any]]:
             if not relative.startswith("E1/"):
                 continue
             path = AUDIO_ROOT / relative.removeprefix("E1/")
-            rows.append({"case_id": relative.removesuffix(".wav"), "audio_path": path, "csv_line": line_number})
+            rows.append({"case_id": relative, "audio_path": path, "csv_line": line_number, "case_index": len(rows)})
     if len(rows) != EXPECTED_CASES:
         raise RuntimeError(f"expected {EXPECTED_CASES} E1 cases, got {len(rows)}")
     if len({row["case_id"] for row in rows}) != len(rows):
@@ -98,7 +99,10 @@ def preflight() -> int:
     with torch.inference_mode():
         logits, _ = model(_padded([waveform]).cuda())
     native = _native_outputs(logits, [samples])[0]
-    if len(native) != 6 or not all(torch.isfinite(torch.tensor([score for item in scale["temporal_scores"] for score in (item["class_0"], item["class_1"])] )).all() for scale in native):
+    if len(native["scales"]) != 6 or not torch.isfinite(torch.tensor(native["utterance_class_scores"])).all() or not all(
+        torch.isfinite(torch.tensor(scale["native_class_scores"])).all()
+        for scale in native["scales"].values()
+    ):
         raise RuntimeError("technical preflight failed")
     print(json.dumps({"preflight": "PASS", "case_id": case["case_id"], "scales": 6, "scientific_metrics_computed": 0, "gt_accessed": "NO"}, sort_keys=True))
     return 0
@@ -121,27 +125,60 @@ def _padded(waveforms: list[torch.Tensor]) -> torch.Tensor:
     return torch.cat([torch.nn.functional.pad(item, (0, target - item.shape[-1])) for item in waveforms], dim=0)
 
 
-def _native_outputs(logits: list[torch.Tensor], durations: list[int]) -> list[list[dict[str, Any]]]:
-    if len(logits) < 6:
-        raise ValueError("fewer than six native temporal scales")
-    output: list[list[dict[str, Any]]] = []
+def _native_outputs(logits: list[torch.Tensor], durations: list[int]) -> list[dict[str, Any]]:
+    if len(logits) < 7:
+        raise ValueError("fewer than six native temporal scales plus utterance output")
+    output: list[dict[str, Any]] = []
     for batch_index, samples in enumerate(durations):
-        per_case: list[dict[str, Any]] = []
+        scales: dict[str, dict[str, Any]] = {}
         for scale, unit in enumerate(UNITS):
             tensor = logits[scale].reshape(len(durations), -1, 2)[batch_index].detach().cpu()
             nsegs = max(int(samples / (0.02 * SAMPLE_RATE) / (2 ** scale)), 1)
             if tensor.shape[0] < nsegs or tensor.shape[-1] != 2:
                 raise ValueError(f"native scale {scale} output shape is incompatible")
-            rows = []
-            for index in range(nsegs):
-                rows.append({"start_sec": index * unit, "end_sec": (index + 1) * unit, "class_0": float(tensor[index, 0]), "class_1": float(tensor[index, 1])})
-            per_case.append({"scale_id": f"native_{unit:.2f}s", "unit_sec": unit, "output_shape": [nsegs, 2], "temporal_scores": rows})
-        output.append(per_case)
+            scores = tensor[:nsegs, :].tolist()
+            supports = [[index * unit, (index + 1) * unit] for index in range(nsegs)]
+            scales[f"scale_{scale}_{unit:.2f}s"] = {
+                "scale_index": scale,
+                "unit_sec": unit,
+                "native_times_sec": supports,
+                "native_class_scores": scores,
+                "class_order": ["spoof", "bonafide"],
+                "output_shape": [nsegs, 2],
+            }
+        utterance = logits[-1].reshape(len(durations), 2)[batch_index].detach().cpu().tolist()
+        output.append({
+            "scales": scales,
+            "utterance_class_scores": utterance,
+            "utterance_class_order": ["spoof", "bonafide"],
+        })
     return output
 
 
 def _terminal(case: dict[str, Any], status: str, started: float, failure: str | None = None, attempt: int = 1) -> dict[str, Any]:
     return {"case_id": case["case_id"], "invocation_id": INVOCATION_ID, "attempt": attempt, "terminal_status": status, "failure": failure, "runtime_sec": time.perf_counter() - started, "timestamp_utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())}
+
+
+def _raw_failure(case: dict[str, Any], status: str, failure: str, attempt: int) -> dict[str, Any]:
+    return {
+        "case_id": case["case_id"],
+        "case_index": case["case_index"],
+        "model_id": MODEL_ID,
+        "authorization_id": AUTHORIZATION_ID,
+        "dataset_id": "PartialEdit_v1.1_E1",
+        "checkpoint_sha256": CHECKPOINT_SHA256,
+        "ssl_checkpoint_sha256": "4E1B1AE691F26947FBF0B709FF1DD5F2F16CB586161CC3E9461E35BCD9CB5F75",
+        "native_outputs": None,
+        "raw_output_shapes": {},
+        "raw_output_sha256": None,
+        "runtime_sec": 0.0,
+        "peak_vram_bytes": 0,
+        "attempt": attempt,
+        "retry_count": max(attempt - 1, 0),
+        "status": status,
+        "terminal": True,
+        "failure": failure,
+    }
 
 
 def _append(path: Path, value: dict[str, Any]) -> None:
@@ -177,7 +214,7 @@ def _existing_case_ids() -> tuple[set[str], int, int]:
 
 
 def _write_run_manifest(status: str, planned: int, terminal: int, valid: int, failed: int, runtime_sec: float) -> None:
-    payload = {"schema_version": "phase3t_raw_manifest_v1", "status": status, "data_source": "PartialEdit_v1.1_E1", "authorization_id": AUTHORIZATION_ID, "authorization_base_commit": BASE_COMMIT, "invocation_id": INVOCATION_ID, "namespace": str(NAMESPACE).replace("\\", "/"), "model_id": MODEL_ID, "model_repository_commit": MODEL_REPOSITORY_COMMIT, "checkpoint_sha256": CHECKPOINT_SHA256, "dataset_csv_sha256": DATASET_CSV_SHA256, "planned": planned, "terminal": terminal, "valid": valid, "failed": failed, "missing": planned - terminal, "scales_expected": 6, "scales_preserved": 6 if status == "COMPLETE" else "PENDING", "scientific_metrics_computed": 0, "result_based_scale_selections": 0, "result_based_case_exclusions": 0, "gt_accessed": "NO", "runtime_sec": runtime_sec, "raw_output_path": str(RAW_JSONL).replace("\\", "/"), "ledger_path": str(LEDGER_JSONL).replace("\\", "/"), "retry_ledger_path": str(RETRY_JSONL).replace("\\", "/")}
+    payload = {"schema_version": "phase3t_raw_manifest_v1", "status": status, "data_source": "PartialEdit_v1.1_E1", "authorization_id": AUTHORIZATION_ID, "authorization_base_commit": BASE_COMMIT, "invocation_id": INVOCATION_ID, "namespace": str(NAMESPACE).replace("\\", "/"), "model_id": MODEL_ID, "model_repository_commit": MODEL_REPOSITORY_COMMIT, "checkpoint_sha256": CHECKPOINT_SHA256, "ssl_checkpoint_sha256": "4E1B1AE691F26947FBF0B709FF1DD5F2F16CB586161CC3E9461E35BCD9CB5F75", "dataset_csv_sha256": DATASET_CSV_SHA256, "planned": planned, "terminal": terminal, "valid": valid, "failed": failed, "missing": planned - terminal, "scales_expected": 6, "scales_preserved": 6 if status == "COMPLETE" else "PENDING", "scientific_metrics_computed": 0, "result_based_scale_selections": 0, "result_based_case_exclusions": 0, "gt_accessed": "NO", "runtime_sec": runtime_sec, "raw_output_path": str(RAW_JSONL).replace("\\", "/"), "ledger_path": str(LEDGER_JSONL).replace("\\", "/"), "attempts_path": str(ATTEMPTS_JSONL).replace("\\", "/"), "retry_ledger_path": str(RETRY_JSONL).replace("\\", "/")}
     NAMESPACE.mkdir(parents=True, exist_ok=True)
     RUN_MANIFEST.write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8")
 
@@ -199,7 +236,7 @@ def run(batch_size: int, resume: bool = False) -> int:
     start = time.perf_counter()
     device = torch.device("cuda")
     model = _load_model(device)
-    _write_run_manifest("RUNNING", len(cases), len(completed), 0, 0, 0.0)
+    _write_run_manifest("RUNNING", len(cases), len(completed), valid, failed, 0.0)
     index = 0
     while index < len(cases):
         pending = [row for row in cases[index:index + batch_size] if row["case_id"] not in completed]
@@ -213,14 +250,20 @@ def run(batch_size: int, resume: bool = False) -> int:
                 waveform, samples, audio_hash = _load_audio(row)
                 loaded.append((row, waveform, samples, audio_hash))
             except FileNotFoundError as exc:
+                _append(ATTEMPTS_JSONL, {"authorization_id": AUTHORIZATION_ID, "case_id": row["case_id"], "attempt": 1, "retry_count": 0, "status": "TERMINAL"})
+                _append(RAW_JSONL, _raw_failure(row, "AUDIO_LOAD_FAILURE", "AUDIO_LOAD_FAILURE", 1))
                 _append(LEDGER_JSONL, _terminal(row, "FAILED", started, "AUDIO_LOAD_FAILURE")); failed += 1; completed.add(row["case_id"])
             except Exception:
+                _append(ATTEMPTS_JSONL, {"authorization_id": AUTHORIZATION_ID, "case_id": row["case_id"], "attempt": 1, "retry_count": 0, "status": "TERMINAL"})
+                _append(RAW_JSONL, _raw_failure(row, "AUDIO_LOAD_FAILURE", "AUDIO_LOAD_FAILURE", 1))
                 _append(LEDGER_JSONL, _terminal(row, "FAILED", started, "AUDIO_LOAD_FAILURE")); failed += 1; completed.add(row["case_id"])
         if not loaded:
             continue
         attempts = 0
         while True:
             attempts += 1
+            for row, _, _, _ in loaded:
+                _append(ATTEMPTS_JSONL, {"authorization_id": AUTHORIZATION_ID, "case_id": row["case_id"], "attempt": attempts, "retry_count": attempts - 1, "status": "STARTED"})
             try:
                 batch = _padded([item[1] for item in loaded]).to(device)
                 infer_started = time.perf_counter()
@@ -231,11 +274,9 @@ def run(batch_size: int, resume: bool = False) -> int:
                     raise ValueError("batch output length mismatch")
                 for (row, _, samples, audio_hash), native in zip(loaded, per_case):
                     started = time.perf_counter()
-                    scores = [entry["temporal_scores"] for entry in native]
-                    if not all(torch.isfinite(torch.tensor([x["class_0"] for x in scale])).all() and torch.isfinite(torch.tensor([x["class_1"] for x in scale])).all() for scale in scores):
+                    if not all(torch.isfinite(torch.tensor(scale["native_class_scores"])).all() for scale in native["scales"].values()) or not torch.isfinite(torch.tensor(native["utterance_class_scores"])).all():
                         raise FloatingPointError("nonfinite native output")
-                    raw = {"case_id": row["case_id"], "model_id": MODEL_ID, "checkpoint_sha256": CHECKPOINT_SHA256, "audio_sha256": audio_hash, "sample_rate": SAMPLE_RATE, "duration_sec": samples / SAMPLE_RATE, "native_scales": native, "scale_count": len(native), "finite": True, "runtime_sec": time.perf_counter() - infer_started, "attempt": attempts, "retry_count": max(attempts - 1, 0), "terminal_status": "VALID_INFERENCE", "failure": None}
-                    raw["raw_output_sha256"] = canonical_hash(raw)
+                    raw = {"case_id": row["case_id"], "case_index": row["case_index"], "model_id": MODEL_ID, "authorization_id": AUTHORIZATION_ID, "dataset_id": "PartialEdit_v1.1_E1", "checkpoint_sha256": CHECKPOINT_SHA256, "ssl_checkpoint_sha256": "4E1B1AE691F26947FBF0B709FF1DD5F2F16CB586161CC3E9461E35BCD9CB5F75", "input_audio_sha256": audio_hash, "sample_rate": SAMPLE_RATE, "duration_sec": samples / SAMPLE_RATE, "native_outputs": native, "raw_output_shapes": {key: value["output_shape"] for key, value in native["scales"].items()} | {"utterance_class_scores": [2]}, "raw_output_sha256": canonical_hash(native), "runtime_sec": time.perf_counter() - infer_started, "peak_vram_bytes": int(torch.cuda.max_memory_allocated()) if torch.cuda.is_available() else 0, "attempt": attempts, "retry_count": max(attempts - 1, 0), "status": "VALID_INFERENCE", "terminal": True, "failure": None}
                     _append(RAW_JSONL, raw)
                     _append(LEDGER_JSONL, _terminal(row, "VALID", started, None, attempts))
                     valid += 1; completed.add(row["case_id"])
@@ -248,18 +289,22 @@ def run(batch_size: int, resume: bool = False) -> int:
                     torch.cuda.empty_cache()
                     break
                 for row, _, _, _ in loaded:
+                    _append(RAW_JSONL, _raw_failure(row, "MODEL_INFERENCE_FAILURE", "MODEL_INFERENCE_FAILURE", attempts))
                     _append(LEDGER_JSONL, _terminal(row, "FAILED", time.perf_counter(), "MODEL_INFERENCE_FAILURE", attempts)); failed += 1; completed.add(row["case_id"])
                 break
             except FloatingPointError:
                 for row, _, _, _ in loaded:
+                    _append(RAW_JSONL, _raw_failure(row, "NONFINITE_OUTPUT", "NONFINITE_OUTPUT", attempts))
                     _append(LEDGER_JSONL, _terminal(row, "FAILED", time.perf_counter(), "NONFINITE_OUTPUT", attempts)); failed += 1; completed.add(row["case_id"])
                 break
             except ValueError:
                 for row, _, _, _ in loaded:
+                    _append(RAW_JSONL, _raw_failure(row, "INVALID_OUTPUT", "INVALID_OUTPUT_SHAPE", attempts))
                     _append(LEDGER_JSONL, _terminal(row, "FAILED", time.perf_counter(), "INVALID_OUTPUT_SHAPE", attempts)); failed += 1; completed.add(row["case_id"])
                 break
             except OSError:
                 for row, _, _, _ in loaded:
+                    _append(RAW_JSONL, _raw_failure(row, "INFRASTRUCTURE_FAILURE", "SERIALIZATION_FAILURE", attempts))
                     _append(LEDGER_JSONL, _terminal(row, "FAILED", time.perf_counter(), "SERIALIZATION_FAILURE", attempts)); failed += 1; completed.add(row["case_id"])
                 break
     total = time.perf_counter() - start
