@@ -31,10 +31,16 @@ auditable official reproduction. No result-based substitution is permitted.
 | BAM | `BLOCKED_RIGHTS_CLEARANCE` | provenance/rights inspection only |
 | GPU environment | `NOT_AVAILABLE_UNVERIFIED` | audit actual accessible environments; no paid resource creation |
 
+## Recovery attempt ledger
+
+| Attempt ID | Timestamp | Official URL | HTTP status | Bytes received | Expected size | Official MD5 | Failure category |
+|---|---|---|---:|---:|---:|---|---|
+| `P3R-2026-09-13-01-E1-001` | `2026-09-13T16:12:45+08:00` | `https://zenodo.org/records/18829689/files/E1.tar.gz?download=1` | `504` | `0` | approximately 3.4 GB | `1f489d2ff488ddd6c9b655127725af2f` | `HTTP_504` |
+
 ## Required recovery fields
 
 ```text
-PARTIALEDIT_E1_MATERIALIZATION = NOT_STARTED
+PARTIALEDIT_E1_MATERIALIZATION = ATTEMPT_1_OF_3_FAILED_HTTP_504
 PARTIALEDIT_E1_CHECKSUM = NOT_STARTED
 PARTIALEDIT_FULL_AUDIO_PARSER = NOT_STARTED
 PARTIALSPOOF_RECOVERY_ATTEMPTS = 0 OF 3

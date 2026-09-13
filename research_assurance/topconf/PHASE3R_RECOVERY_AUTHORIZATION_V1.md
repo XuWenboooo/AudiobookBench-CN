@@ -40,7 +40,7 @@ FAILURE_ACCOUNTING = every attempt records id, timestamp, URL, HTTP status, byte
 RETRY_POLICY = bounded infrastructure retry only; no outcome/performance/seed/checkpoint shopping
 CODE_FIX_POLICY = append-only defect report and new commit; reauthorize before any affected output
 SUBSTITUTION_POLICY = availability/provenance/rights/hardware only; RESULT_BASED_SUBSTITUTIONS = 0
-LlamAPARTIALSPOOF_TRIGGER = only after PartialSpoof official retry budget is exhausted and status is BLOCKED_EXTERNAL_SERVICE, before observing model results on the fallback
+LLAMAPARTIALSPOOF_FALLBACK_TRIGGER = only after PartialSpoof official retry budget is exhausted and status is BLOCKED_EXTERNAL_SERVICE, before observing model results on the fallback
 
 PROHIBITED_ACTIONS = Phase 4 freeze/execution; confirmatory cohort; RQ1/RQ2/RQ3; attack/defense; training/retraining; unofficial mirror; GT edits; result-based model/data selection; metric/pooling/threshold tuning; forced CPU full reproduction
 REAUTHORIZATION_REQUIRED_FOR = new dataset, new checkpoint, new output contract, new adapter/evaluator commit, any full reproduction after a code change
