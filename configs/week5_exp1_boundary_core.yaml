@@ -1,0 +1,18 @@
+protocol: WEEK5_EXP1_BOUNDARY_CORE_RECOVERABILITY_QUALIFICATION
+population: WEEK5_EXP1_QUALIFICATION_ONLY
+seed: 20260915
+window:
+  name: S2_1500ms_250ms
+  size_samples: 24000
+  hop_samples: 4000
+label_threshold: 0.5
+bootstrap:
+  n: 2000
+  seed: 20260915
+features:
+  all: [b1b_score, left_delta, right_delta, local_gradient, local_mean, local_std, local_max, local_min, boundary_contrast]
+  derivatives: [b1b_score, left_delta, right_delta, local_gradient, boundary_contrast]
+  neighborhood: [b1b_score, local_mean, local_std, local_max, local_min, boundary_contrast]
+week4_guard:
+  forbidden_tokens: [week4_validation, held_out, week4_adaptive_redteam_runs]
+  forbidden_glob: '*held*'

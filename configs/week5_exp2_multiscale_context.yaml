@@ -1,0 +1,16 @@
+protocol: WEEK5_EXP2_MULTISCALE_CORE_CONTEXT_AND_GENERATOR_OOD_QUALIFICATION
+population: WEEK5_EXP2_QUALIFICATION_ONLY
+seed: 20260916
+scales:
+  short: {window_samples: 8000, context_radius: 1}
+  medium: {window_samples: 24000, context_radius: 3}
+  long: {window_samples: 64000, context_radius: 8}
+hop_samples: 4000
+center_alignment: medium_window_center
+edge_padding: nan_then_train_median_imputation
+bootstrap: {n: 2000, seed: 20260916, unit: case_id, ci: percentile_95}
+generator_ood_folds:
+  fold_a: {train: [controlled_splice, F5], ood: CosyVoice2}
+  fold_b: {train: [controlled_splice, CosyVoice2], ood: F5}
+  fold_c: {train: [F5, CosyVoice2], ood: controlled_splice}
+week4_guard: {forbidden_tokens: [week4_validation, held_out, week4_adaptive_redteam_runs]}

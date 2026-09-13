@@ -1,0 +1,13 @@
+protocol: WEEK5_EXP3_GENERATOR_DIVERSE_REPRESENTATION_LEARNING
+population: WEEK5_EXP2_QUALIFICATION_ONLY
+parent_population: data/manifests/week5_exp2_qualification_population.json
+temporal_scale_search: CLOSED
+input: Exp2_B4_FULL_features
+architecture: {hidden_dim: 32, representation_dim: 8, activation: ReLU, classifier: Linear}
+training: {seed: 20260917, optimizer: Adam, learning_rate: 0.001, weight_decay: 0.0001, epochs: 60, batch_size: 96}
+objectives: {R1: balanced_ERM, R2: balanced_ERM_plus_supervised_contrastive, R3: R2_plus_group_robust}
+contrastive: {temperature: 0.2, weight: 0.25, positive: same_label_cross_generator, negative: different_label}
+group_robust_weight: 0.5
+bootstrap: {n: 2000, seed: 20260917, unit: case_id, ci: percentile_95}
+generator_id_at_inference: false
+week4_guard: {forbidden_tokens: [week4_validation, held_out, week4_adaptive_redteam_runs]}

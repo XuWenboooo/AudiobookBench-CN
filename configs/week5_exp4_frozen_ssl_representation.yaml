@@ -1,0 +1,14 @@
+protocol: WEEK5_EXP4_FROZEN_SSL_REPRESENTATION_REPLACEMENT_QUALIFICATION
+population: WEEK5_EXP2_QUALIFICATION_ONLY
+parent_population: data/manifests/week5_exp2_qualification_population.json
+temporal_scale_search: CLOSED
+temporal_contract: {short_samples: 8000, medium_samples: 24000, long_samples: 64000, hop_samples: 4000, alignment: medium_center, edge: nan_padding}
+representations:
+  E0: {model: SpeechBrain ECAPA-TDNN, backbone_trainable: false, layer_policy: full_frozen_backend, pooling: official_window_embedding, normalization: per_vector_l2}
+  E1: {model: chinese-hubert-base, local_asset: results/week3_engineering_qualification/gpt_sovits_v3/assets/chinese-hubert-base, backbone_trainable: false, layer_policy: last_hidden_layer, pooling: mean_over_sample_overlapping_frames, normalization: per_vector_l2}
+head: {family: logistic_regression, C: 1.0, same_for_all: true}
+tracks: {A: representation_only, B: representation_plus_Exp2_context}
+bootstrap: {n: 2000, seed: 20260918, unit: case_id, ci: percentile_95}
+material_ood_degradation_auroc: -0.03
+generator_id_at_inference: false
+week4_guard: {forbidden_tokens: [week4_validation, held_out, week4_adaptive_redteam_runs]}

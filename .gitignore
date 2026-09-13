@@ -13,6 +13,7 @@ Thumbs.db
 data/**
 !data/manifests/
 data/manifests/*
+!data/manifests/week5_exp1_qualification_population.json
 !data/manifests/.gitkeep
 !data/manifests/example_manifest.csv
 !data/manifests/source_audio_template.csv
