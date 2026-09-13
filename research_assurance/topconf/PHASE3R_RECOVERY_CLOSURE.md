@@ -1,10 +1,10 @@
 # Phase 3R External Reproduction Recovery Closure
 
-Status: **BLOCKED_PENDING_RECOVERY**
+Status: **BLOCKED — OFFICIAL RECOVERY RESOURCES UNAVAILABLE**
 
 `ORIGINAL_PHASE3_CLOSURE = BLOCKED`
 
-`PHASE3R_RECOVERY_CLOSURE = BLOCKED_PENDING_RECOVERY`
+`PHASE3R_RECOVERY_CLOSURE = BLOCKED`
 
 `READY_FOR_PHASE4_REVIEW = NO`
 
@@ -39,6 +39,7 @@ auditable official reproduction. No result-based substitution is permitted.
 | `P3R-2026-09-13-01-E1-002` | `2026-09-13T16:14:11+08:00` | `https://zenodo.org/api/records/18829689/files/E1.tar.gz/content` | `504` | `0` | approximately 3.4 GB | `1f489d2ff488ddd6c9b655127725af2f` | `HTTP_504` |
 | `P3R-2026-09-13-01-E1-003` | `2026-09-13T16:15:21+08:00` | `https://zenodo.org/records/18829689/files/E1.tar.gz?download=1` | `504` | `0` | approximately 3.4 GB | `1f489d2ff488ddd6c9b655127725af2f` | `HTTP_504` |
 | `P3R-2026-09-13-01-MR-001` | `2026-09-13T16:17:47+08:00` | `https://zenodo.org/record/6674660/files/multi-reso.tar.gz?download=1` | `504` | `0` | not returned by endpoint | `NOT_AVAILABLE` | `HTTP_504` |
+| `P3R-2026-09-13-01-LPS-001` | `2026-09-13T16:24:29+08:00` | `https://zenodo.org/records/14214149/files/label_R01TTS.0.a.txt?download=1` | `504` | `0` | approximately 10.5 MB | `86c60280e4cb2957542b365c3c8f52ac` | `HTTP_504` |
 
 ## Availability fallback
 
@@ -54,7 +55,7 @@ dataset.
 
 | Fallback artifact | Official source | Official identity | Local status |
 |---|---|---|---|
-| `label_R01TTS.0.a.txt` | `https://zenodo.org/records/14214149/files/label_R01TTS.0.a.txt?download=1` | MD5 `86c60280e4cb2957542b365c3c8f52ac`, approximately 10.5 MB | `NOT_PROBED` |
+| `label_R01TTS.0.a.txt` | `https://zenodo.org/records/14214149/files/label_R01TTS.0.a.txt?download=1` | MD5 `86c60280e4cb2957542b365c3c8f52ac`, approximately 10.5 MB | `ATTEMPT_1_FAILED_HTTP_504` |
 | `label_R01TTS.0.b.txt` | `https://zenodo.org/records/14214149/files/label_R01TTS.0.b.txt?download=1` | MD5 `6f5f94d3dbca70c011370ded232c8519`, approximately 14.2 MB | `NOT_PROBED` |
 | `R01TTS.0.a.tgz` | `https://zenodo.org/records/14214149/files/R01TTS.0.a.tgz?download=1` | MD5 `685acfe986b50baaf3e25e9d5e3091a4`, approximately 15.4 GB | `NOT_PROBED` |
 | `R01TTS.0.b.tgz` | `https://zenodo.org/records/14214149/files/R01TTS.0.b.tgz?download=1` | MD5 `a4de860a845816fa65785dddd7849700`, approximately 12.8 GB | `NOT_PROBED` |
@@ -66,7 +67,7 @@ PARTIALEDIT_E1_MATERIALIZATION = BLOCKED_EXTERNAL_SERVICE_AFTER_3_ATTEMPTS
 PARTIALEDIT_E1_CHECKSUM = NOT_STARTED
 PARTIALEDIT_FULL_AUDIO_PARSER = NOT_STARTED
 PARTIALSPOOF_RECOVERY_ATTEMPTS = 0 OF 3
-PARTIALSPOOF_MATERIALIZATION = BLOCKED_FROM_PHASE3_PENDING_BOUNDED_RETRY
+PARTIALSPOOF_MATERIALIZATION = BLOCKED_EXTERNAL_SERVICE_AFTER_3_ATTEMPTS
 PARTIALSPOOF_MULTIRESO_REPO_COMMIT = 847347aaec6f65c3c6d2f17c63515b826b94feb3
 PARTIALSPOOF_MULTIRESO_PROVENANCE = SOURCE_ROUTE_VERIFIED
 PARTIALSPOOF_MULTIRESO_CHECKPOINT_SHA256 = NOT_MATERIALIZED
@@ -75,7 +76,7 @@ CFPRF_FULL_REPRODUCTION = BLOCKED_UNTIL_FULL_AUDIO_VALIDATION
 SAL_STATUS = DEFERRED_CHECKPOINT_UNAVAILABLE
 BAM_RIGHTS_STATUS = UNRESOLVED
 LLAMAPARTIALSPOOF_FALLBACK_TRIGGERED = YES_AVAILABILITY_ONLY_NO_MODEL_RESULTS
-LLAMAPARTIALSPOOF_STATUS = SOURCE_VERIFIED_AUDIO_AND_METADATA_NOT_MATERIALIZED
+LLAMAPARTIALSPOOF_STATUS = BLOCKED_EXTERNAL_SERVICE_AFTER_METADATA_PROBE; AUDIO_NOT_MATERIALIZED
 FULL_AUDIO_EXTERNAL_DATASETS = 0
 EXTERNAL_FUNCTIONAL_PARADIGMS = 0 FULL / 1 INFRASTRUCTURE_ONLY
 OFFICIAL_REPRODUCTIONS = 0 FUNCTIONAL
@@ -83,6 +84,20 @@ UNIFIED_EVALUATOR_COMPATIBILITY = SCHEMA_ONLY_NOT_END_TO_END
 FAILURE_ACCOUNTING = PRIOR_FAILURES AND RECOVERY_ATTEMPTS RETAINED; NO SILENT SKIP
 RESULT_BASED_SUBSTITUTIONS = 0
 ```
+
+## Recovery exit gate
+
+| Required condition | Observed status | Gate |
+|---|---|---|
+| At least one full-audio external dataset | `0` | `FAIL` |
+| At least one full-audio parser pass | `0` | `FAIL` |
+| At least two functional external paradigms | `0 full; 1 infrastructure-only` | `FAIL` |
+| At least one functional official reproduction | `0` | `FAIL` |
+| Failure accounting, zero result-based substitutions, pilot boundary intact | `PASS / 0 / PASS` | `PASS` |
+
+Therefore the recovery exit gate is not met. The original Phase 3 `BLOCKED`
+closure remains authoritative, and this recovery record stops without any
+Phase 4 authorization.
 
 ## Stop condition
 
