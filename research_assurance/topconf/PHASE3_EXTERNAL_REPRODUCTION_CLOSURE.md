@@ -19,9 +19,9 @@ Status: **BLOCKED — INFRASTRUCTURE VALIDATION COMPLETE, EXTERNAL REPRODUCTION 
   dev and eval metadata at 0.16 seconds. The official audio archive was not
   completed; its local partial file fails the official MD5. The official
   v1.0 split fallback recommended by the v1.2 record was also probed through
-  both its record-file and API-content endpoints, but the server returned 504
-  HTML errors with zero archive payload; this is recorded in the local
-  manifest rather than treated as data.
+  its record-file, API-content, and files-archive endpoints, but the server
+  returned 504 HTML errors or timed out with zero archive payload; this is
+  recorded in the local manifest rather than treated as data.
 - The official PartialEdit v1.1 CSV and speaker archive pass checksum
   verification. The CSV parser validates 85,007 rows, 85,632 edited regions,
   E1/E2 counts, and speaker metadata. E1/E2 audio and codec archives are not

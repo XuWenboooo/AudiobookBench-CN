@@ -34,9 +34,10 @@
         "probe_status": "FAILED_504_ZERO_PAYLOAD",
         "probe_endpoints": [
           {"endpoint": "record-file-download", "status": "FAILED_504_ZERO_PAYLOAD", "response_bytes": 92},
-          {"endpoint": "api-file-content", "status": "FAILED_504_ZERO_PAYLOAD", "response_bytes": 92}
+          {"endpoint": "api-file-content", "status": "FAILED_504_ZERO_PAYLOAD", "response_bytes": 92},
+          {"endpoint": "api-files-archive", "status": "FAILED_TIMEOUT_ZERO_PAYLOAD", "response_bytes": 0}
         ],
-        "probe_note": "Both official download and API content endpoints returned HTTP 504 HTML error pages; no archive bytes accepted"
+        "probe_note": "Official record-file and API content endpoints returned HTTP 504 HTML error pages; API files-archive timed out; no archive bytes accepted"
       },
       "ground_truth_materialization": {
         "path": "PartialSpoof_v1.2/extracted/database/segment_labels",
