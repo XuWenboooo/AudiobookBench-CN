@@ -16,6 +16,16 @@ Status: **DRAFT / NOT EXECUTABLE**
 9. Exclusions, missingness, retries, deviations, and invalidation rules: `TBD_BEFORE_AUTHORIZATION`
 10. Reproducibility, hashes, commands, stdout/stderr, raw predictions, ledger, report, and release procedure: `TBD_BEFORE_AUTHORIZATION`
 
+## Phase 3 preparation policy
+
+The primary statistical unit is source/case and paired designs are used where
+the same source is observed under multiple conditions. The default uncertainty
+plan is a paired source-level bootstrap with 95% confidence intervals;
+resample count remains `TBD_BEFORE_AUTHORIZATION`. The primary hierarchy is
+predefined; Holm adjustment is used only for a locked family of secondary
+comparisons. All registered seeds are reported. Missing or invalid cases are
+explicit categories and are never dropped for convenience.
+
 ## Execution gate
 
 No confirmatory experiment starts until this skeleton is converted into a reviewed, versioned protocol and the data classification, threat model, baseline matrix, and open-science manifest are approved together.

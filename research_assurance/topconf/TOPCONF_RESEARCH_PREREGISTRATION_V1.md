@@ -63,6 +63,19 @@ Primary/secondary/diagnostic metric assignments, thresholds, and aggregation
 are `TBD_BEFORE_AUTHORIZATION`; candidate metrics are listed in the protocol
 skeleton and may not be promoted after outcome inspection.
 
+Whether-A primary pooling is **NOT FROZEN**. Before Phase 3 authorization, the
+team must choose exactly one of `mean_pool`, `max_pool`, or `top_k_mean` using
+only task semantics, prevalence sensitivity, temporal-resolution dependence,
+calibration stability, and cross-model comparability. No confirmatory score
+comparison may inform this choice. If evidence remains insufficient, the
+authorization record must explicitly defer the choice and designate the
+procedure as non-primary.
+
+Threshold policy: detection, frame-localization, and event/proposal thresholds
+must come from an official fixed threshold, Level 1 calibration, or frozen
+target-FPR/EER rule, each named in the authorization record. Level 2 test-set
+threshold optimization is prohibited.
+
 ## 4. Design fields requiring lock
 
 - Dataset and inclusion/exclusion rules: `[TBD]`
@@ -75,6 +88,10 @@ skeleton and may not be promoted after outcome inspection.
 - Statistical model, uncertainty interval, multiplicity, and stopping rule:
   `TBD_BEFORE_AUTHORIZATION`
 - Reproducibility seed/configuration policy: `TBD_BEFORE_AUTHORIZATION`
+- Statistical unit is source/case; paired comparisons use paired source-level
+  bootstrap with 95% CIs, bootstrap N `TBD_BEFORE_AUTHORIZATION`, predefined
+  primary hierarchy, and Holm adjustment only where required by the locked
+  family. Missing/invalid cases are explicit fail-closed categories.
 
 ## 5. Mandatory stop gates
 
