@@ -1,0 +1,1 @@
+{"fixture":"SYNTHETIC_ONLY","expected_failure":"speaker leakage across splits","mutation":{"copy_case":"c1","new_case":"c4","split":"test","same_speaker":"p1"}}

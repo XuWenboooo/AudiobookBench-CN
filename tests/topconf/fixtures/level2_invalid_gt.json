@@ -1,0 +1,1 @@
+{"fixture":"SYNTHETIC_ONLY","expected_failure":"GT interval outside waveform","mutation":{"case_id":"c1","target_end_sec":99.0}}

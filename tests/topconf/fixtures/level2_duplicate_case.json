@@ -1,0 +1,1 @@
+{"fixture":"SYNTHETIC_ONLY","expected_failure":"duplicate case ID","mutation":{"copy_case":"c1","case_id":"c1"}}

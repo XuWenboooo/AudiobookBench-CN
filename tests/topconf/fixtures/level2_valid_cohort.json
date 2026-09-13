@@ -1,0 +1,17 @@
+{
+  "schema_version": "topconf.level2.synthetic.v1",
+  "data_source": "SYNTHETIC_GOVERNANCE_DRY_RUN",
+  "sources": [
+    {"source_id":"s1","speaker_id":"p1","session_id":"x1","language":"zh","duration_sec":12.0,"waveform_sha256":"1111111111111111111111111111111111111111111111111111111111111111","text_hash":"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"},
+    {"source_id":"s2","speaker_id":"p2","session_id":"x2","language":"zh","duration_sec":12.0,"waveform_sha256":"2222222222222222222222222222222222222222222222222222222222222222","text_hash":"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"},
+    {"source_id":"s3","speaker_id":"p3","session_id":"x3","language":"zh","duration_sec":12.0,"waveform_sha256":"3333333333333333333333333333333333333333333333333333333333333333","text_hash":"cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"}
+  ],
+  "references": [{"reference_id":"r1","source_id":"s3","speaker_id":"p3","waveform_sha256":"4444444444444444444444444444444444444444444444444444444444444444","text_hash":"dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"}],
+  "variants": [
+    {"case_id":"c1","source_id":"s1","speaker_id":"p1","mechanism_id":"synthetic-splice","generator_id":"synthetic-generator","generator_version":"v0","seed":1,"waveform_sha256":"5555555555555555555555555555555555555555555555555555555555555555","duration_sec":12.0},
+    {"case_id":"c2","source_id":"s2","speaker_id":"p2","mechanism_id":"synthetic-edit","generator_id":"synthetic-generator","generator_version":"v0","seed":2,"waveform_sha256":"6666666666666666666666666666666666666666666666666666666666666666","duration_sec":12.0,"reference_id":"r1"},
+    {"case_id":"c3","source_id":"s3","speaker_id":"p3","mechanism_id":"synthetic-codec","generator_id":"synthetic-generator","generator_version":"v0","seed":3,"waveform_sha256":"7777777777777777777777777777777777777777777777777777777777777777","duration_sec":12.0}
+  ],
+  "splits": [{"case_id":"c1","split":"train","seed":1},{"case_id":"c2","split":"dev","seed":1},{"case_id":"c3","split":"test","seed":1}],
+  "ground_truth": [{"case_id":"c1","target_start_sec":2.0,"target_end_sec":4.0,"label":"manipulated","visibility":"PRIVATE_GT"},{"case_id":"c2","target_start_sec":2.0,"target_end_sec":4.0,"label":"manipulated","visibility":"PRIVATE_GT"},{"case_id":"c3","target_start_sec":2.0,"target_end_sec":4.0,"label":"manipulated","visibility":"PRIVATE_GT"}]
+}

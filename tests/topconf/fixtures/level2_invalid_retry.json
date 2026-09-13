@@ -1,0 +1,1 @@
+{"fixture":"SYNTHETIC_ONLY","expected_failure":"retry after valid scientific result","retry":{"attempt_id":"a2","case_id":"c1","attempt_type":"rerun","invoked":true,"retry_reason":"better result","authorization_hash":"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"}}

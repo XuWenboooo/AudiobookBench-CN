@@ -195,6 +195,51 @@ def validate_manifest(
     return errors
 
 
+def validate_level2_governance_package(
+    package: dict[str, Any], *, registry: Iterable[dict[str, Any]] = ()
+) -> list[str]:
+    """Validate a future Level-2 *metadata* package without reading metrics.
+
+    This lane recognizes only a synthetic governance rehearsal.  It checks the
+    protocol/dataset/checkpoint bindings, manifest and ledger state, namespace
+    uniqueness, and GT state.  It deliberately has no field for a score.
+    """
+    errors: list[str] = []
+    if not isinstance(package, dict):
+        return ["Level-2 package must be a JSON object"]
+    if package.get("schema_version") != "topconf.level2.governance.v1":
+        errors.append("unsupported Level-2 governance schema")
+    if package.get("data_source") != "SYNTHETIC_GOVERNANCE_DRY_RUN":
+        errors.append("only synthetic governance dry runs are accepted")
+    for key in ("protocol_sha256", "dataset_sha256", "authorization_sha256", "manifest_sha256"):
+        _require_hash(package.get(key), key, errors)
+    namespace = package.get("namespace")
+    if not isinstance(namespace, dict):
+        errors.append("missing namespace object")
+    else:
+        _require(namespace, "invocation_id", errors, "namespace")
+        _require(namespace, "output_namespace", errors, "namespace")
+        for old in registry:
+            old_space = old.get("namespace", {}) if isinstance(old, dict) else {}
+            if namespace.get("invocation_id") == old_space.get("invocation_id") or namespace.get("output_namespace") == old_space.get("output_namespace"):
+                errors.append("Level-2 namespace collision")
+    checkpoints = package.get("checkpoint_sha256s")
+    if not isinstance(checkpoints, list) or not checkpoints:
+        errors.append("missing checkpoint hashes")
+    else:
+        for index, value in enumerate(checkpoints):
+            _require_hash(value, f"checkpoint_sha256s[{index}]", errors)
+    if package.get("gt_state") not in {"BLINDED", "REVEALED_AFTER_SYNTHETIC_GATE"}:
+        errors.append("invalid GT state")
+    if package.get("failure_ledger_state") != "COMPLETE_ONE_TERMINAL_PER_CASE":
+        errors.append("incomplete failure ledger state")
+    if package.get("authorization_status") != "SYNTHETIC_GOVERNANCE_DRY_RUN":
+        errors.append("missing synthetic authorization state")
+    if any("metric" in str(key).lower() or "score" in str(key).lower() for key in package):
+        errors.append("scientific metrics/scores are forbidden in governance package")
+    return errors
+
+
 def find_forbidden_path_mutations(changed_paths: Iterable[str]) -> list[str]:
     errors: list[str] = []
     for raw_path in changed_paths:

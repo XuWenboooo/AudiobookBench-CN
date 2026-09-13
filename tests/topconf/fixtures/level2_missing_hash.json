@@ -1,0 +1,1 @@
+{"fixture":"SYNTHETIC_ONLY","expected_failure":"invalid SHA256","mutation":{"record":"source:s1","field":"waveform_sha256","value":""}}

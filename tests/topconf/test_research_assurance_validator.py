@@ -9,6 +9,7 @@ sys.path.insert(0, str(TOOLS_DIR))
 
 from validate_research_assurance import (  # noqa: E402
     find_forbidden_path_mutations,
+    validate_level2_governance_package,
     validate_manifest,
 )
 
@@ -99,3 +100,19 @@ def test_historical_path_mutation_fixture_fails_closed():
         ]
     )
     assert len(errors) == 2
+
+
+def test_synthetic_level2_governance_contract_is_metadata_only():
+    package = {
+        "schema_version": "topconf.level2.governance.v1",
+        "data_source": "SYNTHETIC_GOVERNANCE_DRY_RUN",
+        "protocol_sha256": _hash("protocol"), "dataset_sha256": _hash("dataset"),
+        "authorization_sha256": _hash("auth"), "manifest_sha256": _hash("manifest"),
+        "checkpoint_sha256s": [_hash("synthetic-no-model")],
+        "namespace": {"invocation_id": "i2", "output_namespace": "synthetic/i2"},
+        "gt_state": "BLINDED", "failure_ledger_state": "COMPLETE_ONE_TERMINAL_PER_CASE",
+        "authorization_status": "SYNTHETIC_GOVERNANCE_DRY_RUN",
+    }
+    assert validate_level2_governance_package(package) == []
+    package["metric"] = "forbidden"
+    assert any("forbidden" in error for error in validate_level2_governance_package(package))

@@ -1,0 +1,3 @@
+# Synthetic Governance Dry Run v1
+
+Status: **SYNTHETIC_GOVERNANCE_DRY_RUN / NO SCIENTIFIC OUTPUTS**. Fabricated fixture metadata validates manifest, speaker/source-disjoint split, blinded manifest, template authorization, synthetic completion marker, gated reveal, terminal ledger and closure. Intentional speaker/source leakage, duplicate case, missing hash, early reveal, wrong protocol/dataset, namespace collision, invalid terminal/retry fail closed. No waveform, checkpoint, dataset, prediction, metric, selection or exclusion exists. `SYNTHETIC_GOVERNANCE_DRY_RUN=PASS` is only a tooling result.
