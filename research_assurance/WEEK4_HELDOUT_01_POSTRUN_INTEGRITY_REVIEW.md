@@ -1,0 +1,70 @@
+# Week4 Held-out 01 Postrun Integrity Review
+
+## Bound identity
+
+COMMIT = 68ce71e8e87a93c4ae653c7ae5f554521086e5bf  
+AUTHORIZATION_SHA256 = 299631FF47E80937AFEE362FA8A10B61278DAF2CE03CDB542F615FBF4A7B6F79  
+EXECUTION_SOURCE_MANIFEST_SHA256 = 5B47CE12D68AF1EC376C7747AC2334C28D374E361A40E265C3B276B25F5711A5  
+POST_VALIDATION_A0_FREEZE_SHA256 = 365BEEDA158A93B4F458687AE2C4CA1887B0849E1F467041F316CB3EFF3666BA  
+INVOCATION_ID = week4_heldout_01  
+OUTPUT_NAMESPACE = results/week4_adaptive_redteam_runs/week4_heldout_01  
+
+## Independently recomputed counts
+
+HELDOUT_PLANNED = 12  
+HELDOUT_ATTEMPTED = 12  
+HELDOUT_TERMINAL = 12  
+HELDOUT_WITH_WINNER = 10  
+HELDOUT_NO_VALID_ADAPTIVE_PARENT = 2  
+HELDOUT_OTHER_FAILURES = 0  
+
+F5_TOTAL_ATTEMPTS = 12  
+F5_RETRIES = 0  
+STATIC_ACTUAL_D0 = 12  
+STATIC_LEDGER_D0 = 12  
+ADAPTIVE_ACTUAL_D0 = 416  
+ADAPTIVE_LEDGER_D0 = 416  
+ADAPTIVE_QUERY_MIN = 8  
+ADAPTIVE_QUERY_MAX = 40  
+ADAPTIVE_QUERY_MEAN = 34.666666666666664  
+RUNTIME_COUNTS_MATCH_RECOMPUTATION = PASS  
+
+## Integrity results
+
+ATTEMPT_LEDGER_INTEGRITY = PASS  
+CANDIDATE_LEDGER_INTEGRITY = PASS  
+STATUS_EVENT_LEDGER_INTEGRITY = PASS  
+WAVEFORM_HASH_INTEGRITY = PASS  
+SCORE_VECTOR_HASH_INTEGRITY = PASS  
+SAMPLE_FIRST_GT_INTEGRITY = PASS  
+STATIC_ACCOUNTING = PASS  
+ADAPTIVE_ACCOUNTING = PASS  
+
+The attempt ledger contains one successful F5 attempt for each canonical
+Held-out case and no retries. The candidate ledger and status-event chain are
+hash-valid. All 428 detector-invoked candidates have matching sidecars,
+canonical float64 C-contiguous score-vector hashes, S2 windows, and
+sample-first GT projections. The 12 base waveforms have matching canonical
+waveform hashes.
+
+## Terminal governance and H4 gate
+
+NO_VALID_PARENT_TERMINATES_CASE = YES  
+NO_VALID_PARENT_TERMINATES_STAGE = NO  
+CASE_REPLACEMENT = NO  
+CASE_DROPPING = NO  
+FALLBACK_PARENT = NO  
+QUERY_TRANSFER = NO  
+F5_RERUN_FOR_DETECTOR_OUTCOME = NO  
+GT_ALTERED = NO  
+
+PRIMARY_H4_REPORTABILITY = NOT_REPORTABLE  
+PRIMARY_H4_REASON = HELDOUT_WITH_NO_VALID_ADAPTIVE_PARENT  
+EVALUATOR_INVOKED = NO  
+H4_RESULT_OBSERVED = NO  
+FINAL_JSON_CREATED = NO  
+
+The two no-parent cases are terminal, valid execution outcomes. Since the
+frozen primary H4 rule requires 12 terminal cases with 12 winners and zero
+no-parent cases, primary H4 evaluation and bootstrap were correctly not run.
+No subset primary metric was calculated.
