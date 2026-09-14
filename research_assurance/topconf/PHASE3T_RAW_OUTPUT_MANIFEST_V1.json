@@ -1,0 +1,96 @@
+{
+  "manifest_id": "PHASE3T_RAW_OUTPUT_MANIFEST_V1",
+  "status": "CLOSED_RAW_OUTPUTS_VERIFIED",
+  "authorization_id": "P3T-2026-09-13-01",
+  "dataset": {
+    "id": "PartialEdit_v1.1_E1",
+    "case_count": 42471,
+    "case_manifest_sha256": "E30914242156A9383E0B71755FCE85CEDE01DB5CA91165ADCDB3EBF33F315FEE",
+    "csv_sha256": "ADEECB0A7DD39A982223C07970E02E41CA5395EA3D484FCC6CE03174EBDF6CBC",
+    "archive_md5": "1f489d2ff488ddd6c9b655127725af2f",
+    "archive_sha256": "F4BB1A632EED8DDC66BB9285DE8B4BC07192D0539385EFE9AFC9EA04AEF3DDCB"
+  },
+  "artifacts": [
+    {
+      "model": "CFPRF",
+      "invocation": "mainline authorized resume chain; invocation ID not persisted",
+      "namespace": "results/topconf_phase3t/cfprf",
+      "checkpoint": {
+        "fdn_sha256": "5FCBBC725761F99F7CA22A6BD095242B7D4FCBB2B285A766047941766D496267",
+        "prn_sha256": "88B605BA432B978D481264266F3DE5BC434B4C1E74A1ABAAA1BDADC3313FAC36",
+        "xlsr_sha256": "B08927597F2C9EB2EBD7DCC3AC78EE4B5F6021CBAC4B3A6C5A9DEEC445D80ED9"
+      },
+      "case_count": 42471,
+      "terminal_count": 42471,
+      "valid_count": 42455,
+      "failed_count": 16,
+      "raw_artifact": {
+        "path": "results/topconf_phase3t/cfprf/raw.jsonl",
+        "bytes": 684587777,
+        "sha256": "CF86B16808DEC9580B46FA89DDBB49C8121E392B749ED7DF7B5A9F883EC8C493"
+      },
+      "attempts_artifact": {
+        "path": "results/topconf_phase3t/cfprf/attempts.jsonl",
+        "bytes": 16829824,
+        "sha256": "D5B213794C9C0970EFEF5BE804FEA47D0F4763B71E445EBD22AA3B6CE83C6CCD"
+      },
+      "output_manifest_artifact": {
+        "path": "results/topconf_phase3t/cfprf/cfprf_output_manifest_v1.jsonl",
+        "bytes": 29545458,
+        "sha256": "1ECA30A6F95B166D4466989AE0CB33A79C6314AFB710ACCCC6C42E47279F407C"
+      }
+    },
+    {
+      "model": "MultiResoModel-Simple",
+      "invocation": "PHASE3T_MRM_FULL_E1_002",
+      "namespace": "F:/项目/申请实验室  TTS项目/AudiobookBench-CN-phase3t-multireso-worker-r2/results/topconf_phase3t/multireso_worker_02",
+      "checkpoint": {
+        "repository_commit": "0f69db3a2d654de47822d951fe6ad256bbaac9ba",
+        "archive_sha256": "0C394F03558ECDD7A6B81BF6C0FD8EE642C5937BA22CC852F58AE4E7DC480E32",
+        "inner_checkpoint_sha256": "5B753752F7C25370C6ABF973F69F58E100DAD4B5D3EA035872335358A876FDD1",
+        "ssl_checkpoint_sha256": "4E1B1AE691F26947FBF0B709FF1DD5F2F16CB586161CC3E9461E35BCD9CB5F75"
+      },
+      "case_count": 42471,
+      "terminal_count": 42471,
+      "valid_count": 42438,
+      "failed_count": 33,
+      "native_temporal_scales": [0.02, 0.04, 0.08, 0.16, 0.32, 0.64],
+      "raw_artifact": {
+        "path": "F:/项目/申请实验室  TTS项目/AudiobookBench-CN-phase3t-multireso-worker-r2/results/topconf_phase3t/multireso_worker_02/multireso_raw_v1.jsonl",
+        "bytes": 902219250,
+        "sha256": "00E502AA418DC1279AE19F72E48E1617A4BCF56014307FE6E0BC666736E37925"
+      },
+      "attempts_artifact": {
+        "path": "F:/项目/申请实验室  TTS项目/AudiobookBench-CN-phase3t-multireso-worker-r2/results/topconf_phase3t/multireso_worker_02/multireso_attempts_v1.jsonl",
+        "bytes": 8405372,
+        "sha256": "D1C66CCF73538ECD810F56ABDD29402D85A38CA5A22323D83EED17869FCA204E"
+      },
+      "case_ledger_artifact": {
+        "path": "F:/项目/申请实验室  TTS项目/AudiobookBench-CN-phase3t-multireso-worker-r2/results/topconf_phase3t/multireso_worker_02/multireso_case_ledger_v1.jsonl",
+        "bytes": 10289093,
+        "sha256": "24FAE99EEE5BE1E3CDE8D912AE8EF4C12DF6423A7705599F4C7C26DA97EA5733"
+      },
+      "output_manifest_artifact": {
+        "path": "F:/项目/申请实验室  TTS项目/AudiobookBench-CN-phase3t-multireso-worker-r2/results/topconf_phase3t/multireso_worker_02/multireso_output_manifest_v1.jsonl",
+        "bytes": 9074697,
+        "sha256": "4A606CA23126AF50CDDF3ACA1AABA536BB03B96DDF4C962DA924080034F521AC"
+      },
+      "retry_ledger_artifact": {
+        "path": "F:/项目/申请实验室  TTS项目/AudiobookBench-CN-phase3t-multireso-worker-r2/results/topconf_phase3t/multireso_worker_02/multireso_retry_ledger_v1.jsonl",
+        "bytes": 1408,
+        "sha256": "87D9A2B86FBBCA61FFBCEC5788E3B205B0509D150F8A1D896EB0CF1EADC9F3AD"
+      }
+    }
+  ],
+  "gates": {
+    "raw_output_completeness": "PASS",
+    "failure_accounting": "PASS",
+    "missing_cases": 0,
+    "duplicate_terminal_cases": 0,
+    "orphan_raw_cases": 0,
+    "result_based_selections": 0,
+    "result_based_exclusions": 0,
+    "result_based_scale_selections": 0,
+    "result_based_head_selections": 0
+  }
+}

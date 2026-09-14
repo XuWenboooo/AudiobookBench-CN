@@ -17,7 +17,12 @@ class AdapterError(ValueError):
 def deterministic_supports(count: int, unit_sec: float, duration_sec: float) -> np.ndarray:
     if count <= 0 or not np.isfinite([unit_sec, duration_sec]).all() or unit_sec <= 0 or duration_sec <= 0:
         raise AdapterError("support arguments must be finite and positive")
-    supports = np.asarray([[i * unit_sec, (i + 1) * unit_sec] for i in range(count)], dtype=float)
+    # Normalize only decimal-grid roundoff (for example, 2.76 becoming
+    # 2.7600000000000002); this is not duration clipping or support repair.
+    supports = np.round(
+        np.asarray([[i * unit_sec, (i + 1) * unit_sec] for i in range(count)], dtype=float),
+        decimals=12,
+    )
     if not np.isfinite(supports).all() or np.any(supports[:, 1] <= supports[:, 0]):
         raise AdapterError("generated supports are invalid")
     if np.any(supports[1:, 0] < supports[:-1, 1]):

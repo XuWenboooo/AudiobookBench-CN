@@ -57,12 +57,25 @@ def _validate_cfprf(record: dict[str, Any]) -> None:
     deterministic_supports(len(seg), 0.02, duration)
     if native.get("fdn_segment_class_order") != ["spoof", "bonafide"]:
         raise ValueError("CFPRF class order missing")
-    for key in ("fdn_coarse_proposals", "prn_input_coarse_proposals", "prn_scored_coarse_proposals", "prn_verification_proposals", "prn_refined_proposals"):
+    bounded_keys = {
+        "fdn_coarse_proposals",
+        "prn_input_coarse_proposals",
+        "prn_scored_coarse_proposals",
+        "prn_verification_proposals",
+    }
+    for key in (*sorted(bounded_keys), "prn_refined_proposals"):
         proposals = native.get(key)
         if not isinstance(proposals, list):
             raise ValueError(f"CFPRF {key} must be a list")
         for proposal in proposals:
-            if len(proposal) != 3 or not np.isfinite(np.asarray(proposal, dtype=float)).all() or proposal[2] <= proposal[1] or proposal[1] < 0 or proposal[2] > duration + 1e-9:
+            if len(proposal) != 3 or not np.isfinite(np.asarray(proposal, dtype=float)).all() or proposal[2] <= proposal[1] or proposal[1] < 0:
+                raise ValueError(f"CFPRF invalid proposal in {key}")
+            # The official decoder_reg path clamps negative starts but does
+            # not clip refined ends to the waveform duration. Preserve that
+            # native behavior in raw output validation; only proposals that
+            # originate from the frame-level detector/verification path are
+            # required to stay inside the audio support.
+            if key in bounded_keys and proposal[2] > duration + 1e-9:
                 raise ValueError(f"CFPRF invalid proposal in {key}")
     ver = np.asarray(native.get("prn_verification_scores"), dtype=float)
     reg = np.asarray(native.get("prn_regression_outputs"), dtype=float)

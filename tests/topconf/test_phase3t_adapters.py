@@ -7,6 +7,7 @@ import pytest
 
 from experiments.topconf_phase3t.adapter import AdapterError, adapt_cfprf, adapt_multireso, deterministic_supports
 from experiments.topconf_phase3t.common import existing_terminal_ids
+from experiments.topconf_phase3t.validate_raw import _validate_cfprf
 
 
 def _cfprf_record() -> dict:
@@ -57,11 +58,33 @@ def test_time_mapping_refuses_duration_clipping():
         deterministic_supports(2, 0.64, 1.0)
 
 
+def test_time_mapping_normalizes_decimal_grid_roundoff_at_duration_boundary():
+    supports = deterministic_supports(138, 0.02, 2.76)
+    assert supports[-1].tolist() == [2.74, 2.76]
+    assert supports[-1, 1] <= 2.76
+
+
 def test_nan_is_rejected_by_cfprf_adapter():
     record = _cfprf_record()
     record["native_outputs"]["fdn_segment_scores"][0][0] = float("nan")
     with pytest.raises(ValueError, match="non-finite"):
         adapt_cfprf(record)
+
+
+def test_cfprf_native_refined_proposal_preserves_unclipped_decoder_end():
+    record = _cfprf_record()
+    record["duration_sec"] = 0.1
+    record["native_outputs"].update({
+        "fdn_segment_class_order": ["spoof", "bonafide"],
+        "fdn_coarse_proposals": [[1.0, 0.0, 0.1]],
+        "prn_input_coarse_proposals": [[1.0, 0.0, 0.1]],
+        "prn_scored_coarse_proposals": [[1.0, 0.0, 0.1]],
+        "prn_verification_proposals": [[1.0, 0.0, 0.1]],
+        "prn_refined_proposals": [[1.0, 0.0, 12.0]],
+        "prn_verification_scores": [[1.0]],
+        "prn_regression_outputs": [[0.0, 0.0]],
+    })
+    _validate_cfprf(record)
 
 
 def test_duplicate_case_ids_are_rejected(tmp_path):
