@@ -26,7 +26,7 @@ replaces the candidate wording. No source branch was merged or rewritten.
 |---|---|---|---|---|
 | `PREFREEZE_CONTEXT_AUDIT_V1.md` | boundary and dependency audit | this matrix, outcome firewall, decision dossier | ACCEPT_WITH_UPDATE | Phase3T is the actual dependency; historical Phase3R wording is corrected. |
 | `PHASE4_PREFREEZE_HANDOFF_V1.md` | non-authorizing handoff | closure and ledger | ACCEPT_AS_PROVENANCE | Correct boundary; all candidate labels are superseded by reviewed decisions. |
-| `PHASE4_DECISION_DEPENDENCY_MATRIX_V1.md` | decision blockers | decision dossier | ACCEPT_WITH_UPDATE | Retains candidate-vs-freeze distinction and records the Whether-B blocker. |
+| `PHASE4_DECISION_DEPENDENCY_MATRIX_V1.md` | decision blockers | decision dossier | ACCEPT_WITH_UPDATE | Retains candidate-vs-freeze distinction; the historical Whether-B blocker is superseded by the AASIST capability record. |
 | `RQ1_LEVEL2_POPULATION_DRAFT_V1.md` | fresh population and paired units | preregistration and freshness manifest | ACCEPT_WITH_UPDATE | Fixed to 400/120/4 design with no E1 reuse or result-driven replacement. |
 | `RQ1_GT_BLINDING_AND_LEAKAGE_DRAFT_V1.md` | GT separation | preregistration and governance code | ACCEPT_WITH_UPDATE | Mechanical separation retained; single-human custody limitation retained. |
 | `RQ1_FAILURE_ACCOUNTING_DRAFT_V1.md` | terminal states and retries | preregistration and governance code | ACCEPT_WITH_UPDATE | Converted to executable exact-once/known-case fail-closed gates. |
@@ -35,7 +35,7 @@ replaces the candidate wording. No source branch was merged or rewritten.
 | `RQ1_METRIC_HIERARCHY_PREFREEZE_V1.md` | candidate Where/metric hierarchy | decision dossier and preregistration | ACCEPT_WITH_UPDATE | Frame-AUPRC at native common 20 ms is fixed; native alternatives remain secondary. |
 | `RQ1_STATISTICAL_SIMULATION_REPORT_V1.md` | synthetic planning sensitivity | decision dossier and synthetic result | ACCEPT_WITH_UPDATE | Used only to justify a declared planning band and sensitivity, never power or effects. |
 | `WHETHER_A_PREFREEZE_REVIEW_V1.md` | pooling comparison | decision dossier and preregistration | ACCEPT_WITH_UPDATE | Normalized mean is fixed from semantics/support normalization, not performance. |
-| `WHETHER_B_CANDIDATE_AUDIT_V1.md` | independent-detector audit | decision dossier | ACCEPT_WITH_UPDATE | Codecfake remains a candidate; absent checkpoint hash/license/runtime prevents freeze. |
+| `WHETHER_B_CANDIDATE_AUDIT_V1.md` | independent-detector audit | decision dossier and AASIST capability artifact | ACCEPT_WITH_UPDATE | Codecfake remains an unselected alternative; official AASIST supplies the independently hashed checkpoint, MIT license record, and runtime smoke required for freeze. |
 | `CLAIM_SAFETY_REVIEW_V2.md` | claim boundary | claim-evidence map | ACCEPT_AS_PROVENANCE | Bounded wording is retained; no novelty result is asserted. |
 | `CLOSEST_PRIOR_ART_MATRIX_V2.md` | source-backed prior art | claim-evidence map | ACCEPT_AS_PROVENANCE | Background only; dated search is not treated as exhaustive. |
 | `NOVELTY_SEARCH_LOG_V2.md` | search trace | claim-evidence map | ACCEPT_AS_PROVENANCE | Search limitations remain explicit. |
@@ -51,7 +51,7 @@ replaces the candidate wording. No source branch was merged or rewritten.
 |---|---|---|---|---|
 | `reconciliation_prep/PHASE4_HUMAN_RECONCILIATION_RUNBOOK_V1.md` | review sequence | this matrix and ledger | ACCEPT_AS_PROVENANCE | Sequence was followed; runbook itself grants no authority. |
 | `reconciliation_prep/PHASE4_RECONCILIATION_MAP_V1.md` | destination map | this matrix | ACCEPT_WITH_UPDATE | Converted from candidate map to per-file dispositions. |
-| `reconciliation_prep/PHASE4_DECISION_DOSSIER_V1.md` | candidate decisions | final decision dossier | ACCEPT_WITH_UPDATE | Candidates are resolved where safe; unresolved Whether-B is explicit. |
+| `reconciliation_prep/PHASE4_DECISION_DOSSIER_V1.md` | candidate decisions | final decision dossier | ACCEPT_WITH_UPDATE | Candidates are resolved where safe; the prior unresolved Whether-B candidate is superseded by the AASIST record. |
 | `reconciliation_prep/PHASE4_MERGE_CONFLICT_FORECAST_V1.md` | static conflict forecast | ledger | ACCEPT_AS_PROVENANCE | No merge was attempted; mainline authority files were preserved. |
 | `reconciliation_prep/PREFREEZE_INTEGRATION_PLAN_V1.md` | proposed cherry-pick plan | ledger | SUPERSEDED | Content was audited and manually integrated; no blind cherry-pick occurred. |
 | `reconciliation_prep/PREFREEZE_QUALITY_AUDIT_V1.md` | quality review | this matrix / firewall | ACCEPT_WITH_UPDATE | Its warnings are reflected in blocker and limitation fields. |
@@ -83,6 +83,8 @@ replaces the candidate wording. No source branch was merged or rewritten.
 | `BASELINE_PROVENANCE_REGISTER_V2.md` and dataset manifest | ACCEPT_AS_PROVENANCE; no outcome-driven edits |
 | existing evaluator/adapters/tests | ACCEPT_AS_BASELINE; regression coverage preserved |
 
-No disposition above authorizes data materialization, checkpoint loading, or
-scientific inference. The unresolved Whether-B row is intentionally visible
-and is the only current Phase4 closure blocker recorded in the ledger.
+No disposition above authorizes data materialization or scientific inference.
+The historical Codecfake uncertainty remains visible as an unselected
+alternative; the official AASIST capability/provenance artifact resolves the
+Whether-B design-freeze gate. No disposition above authorizes a future Level-2
+run.

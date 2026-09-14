@@ -1,23 +1,22 @@
 # Phase 4 Human Reconciliation and Confirmatory Design Freeze Closure
 
-Status: **BLOCKED — DESIGN FIELDS FROZEN, AUTHORIZATION NOT READY**
+Status: **PASS — DESIGN FIELDS FROZEN, READY FOR AUTHORIZATION REVIEW**
 Closure date: **2026-09-14**
 Phase4 base head: `17b6419e4ee185a7029034776034235bcf17eac7`
 
 ## Closure decision
 
 Content-level reconciliation is complete. The RQ1 Level-2 design fields are
-frozen in the reviewed preregistration and decision dossier, but Phase4 cannot
-close PASS because Whether-B does not yet have a locally verified checkpoint
-SHA256, complete license/provenance chain, and runtime capability smoke. The
-official Codecfake candidate is retained as a blocker; no localizer-derived
-score is substituted. A third-paradigm requirement is also retained as the
-predeclared H1 claim gate, not solved by adding a model after outcomes.
+frozen in the reviewed preregistration and decision dossier. The independent
+Whether-B gate is now satisfied by the official AASIST repository/checkpoint
+provenance and a deterministic synthetic capability smoke; no localizer-derived
+score is substituted. A third-paradigm requirement remains the predeclared H1
+claim gate, not something to solve by adding a model after outcomes.
 
 ```text
-PHASE4_CLOSURE = BLOCKED
+PHASE4_CLOSURE = PASS
 PHASE4_RECONCILIATION = COMPLETE
-READY_FOR_RQ1_CONFIRMATORY_AUTHORIZATION_REVIEW = NO
+READY_FOR_RQ1_CONFIRMATORY_AUTHORIZATION_REVIEW = YES
 RQ1_CONFIRMATORY_EXECUTION_AUTHORIZED = NO
 RQ1_CONFIRMATORY_EXECUTION_STARTED = NO
 ```
@@ -51,9 +50,11 @@ MULTIRESO_SCALE_POLICY = fixed native 0.02s common scale + all six secondary;
 WHETHER_A = duration-weighted mean native higher-is-better spoof score;
   Level-1 calibration target FPR 0.05
 WHETHER_A_FREEZE = FROZEN
-WHETHER_B = independent detector required; Codecfake candidate not included
-WHETHER_B_CHECKPOINT = NOT_MATERIALIZED / SHA256_NOT_VERIFIED
-WHETHER_B_FREEZE = BLOCKED_ON_CHECKPOINT_LICENSE_RUNTIME_PROVENANCE
+WHETHER_B = official AASIST independent utterance detector
+WHETHER_B_REPOSITORY_COMMIT = a04c9863f63d44471dde8a6abcb3b082b07cd1d1
+WHETHER_B_CHECKPOINT = models/weights/AASIST.pth;
+  SHA256 51D2D9CF0738172F61E2A384EC50A54A55363240F67C971ED55A92435BC1A1C0
+WHETHER_B_FREEZE = FROZEN_FOR_AUTHORIZATION_REVIEW
 PRIMARY_WHERE_METRIC = native common 20ms frame AUPRC
 SECONDARY_WHERE_METRICS = frame AUROC/AUPRC at all native scales;
   native boundary/proposal/event diagnostics when compatible
@@ -98,8 +99,9 @@ RESULT_BASED_DESIGN_CHANGES = 0
 TESTS = python -m pytest tests/topconf -q (44 passed)
 GIT_DIFF_CHECK = PASS
 
-BLOCKERS = Whether-B checkpoint/license/runtime provenance; positive H1 claim
-  also requires preauthorized third paradigm and materialized freshness proof
+BLOCKERS = none for Phase4 design freeze; authorization still requires
+  preauthorized third-paradigm disposition, materialized freshness proof, and
+  model-specific preflight
 COMMITS = 9691e92 (governance); 72409df (reconciliation/design freeze);
   c3dc854 (dry-run hardening and formatting); this closure record
   is finalized in the subsequent Git commit
@@ -115,7 +117,7 @@ PUSH_STATUS = PUSHED to origin/topconf-dl-robustness
 | Outcome firewall | PASS | `PHASE4_OUTCOME_FIREWALL_V1.md` |
 | Baseline/output/scale policies | PASS | decision dossier; no score-driven selection |
 | Whether-A | PASS | fixed pooling, direction, calibration, failure behavior |
-| Whether-B | BLOCKED | exact checkpoint hash/license/runtime chain not verified |
+| Whether-B | PASS | official AASIST exact checkpoint/license/runtime capability record |
 | Where / LD@DR95 / gap gate | PASS | fixed native common metric and `NOT_ESTIMABLE` rules |
 | Mechanisms / transformations | PASS | fixed paired taxonomy and bounded one-step matrix |
 | Population / sample size / statistics | PASS AS DESIGN | materialization is future and separately gated |
@@ -123,8 +125,8 @@ PUSH_STATUS = PUSHED to origin/topconf-dl-robustness
 | Failure / retry / namespace | PASS | strict code gates and tests |
 | Synthetic Level-2 dry run | PASS | `PHASE4_SYNTHETIC_DRY_RUN_RESULT_V1.json` |
 | Real Level-2 outcomes accessed | PASS | none accessed |
-| Phase4 closure | BLOCKED | Whether-B blocker remains |
+| Phase4 closure | PASS | all design-freeze gates pass; authorization remains separate |
 
-This is the safe stopping point. No confirmatory execution may start from this
-closure, and no automatic action should convert the blocker into an
-authorization.
+This is the safe stopping point. The design is ready for a separate human
+authorization review, but no confirmatory execution may start from this
+closure and no automatic action converts readiness into authorization.

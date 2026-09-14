@@ -1,6 +1,6 @@
 # Phase 4 Confirmatory Design Decision Dossier v1
 
-Status: **DESIGN FIELDS FROZEN / PHASE4 CLOSURE BLOCKED ON WHETHER-B**
+Status: **DESIGN FIELDS FROZEN / READY FOR AUTHORIZATION REVIEW / EXECUTION NOT AUTHORIZED**
 Decision ID: `P4-RQ1-DESIGN-20260914-01`
 Decision date: **2026-09-14**
 Scope: **RQ1 Level-2 design only; no execution authority**
@@ -102,33 +102,47 @@ WHETHER_A_MISSING_OUTPUT = NOT_ESTIMABLE
 `max_pool` and `top_k_mean` are not alternate primary analyses. They may appear
 only as clearly labelled exploratory diagnostics after the confirmatory lock.
 
-### Whether-B — explicit blocker
+### Whether-B — frozen independent detector
 
 Whether-B must be a strong, independent, frozen utterance-level detector whose
-score is not computed from a localizer. The preferred audit candidate is
-Codecfake W2V2+AASIST at official commit
-`72c32e2840eef95fbeade349425fa9c5391fa11e`, with a 16 kHz input contract and
-the repository-provided checkpoint path
-`pretrained_model/codec_w2v2aasist/anti-spoofing_feat_model.pt`.
+score is not computed from a localizer. The frozen candidate is the official
+AASIST implementation at commit
+`a04c9863f63d44471dde8a6abcb3b082b07cd1d1`, using the repository-provided
+`models/weights/AASIST.pth` checkpoint. The repository license is MIT with
+`LICENSE` SHA256
+`B7290F12E8346F663833EC1C4F9964A84C74CD091DB042B3CD680548BDD18A3F`.
 
-The candidate cannot be frozen in this Phase4 record because the checkpoint
-could not be materialized and independently hashed in the authorized local
-environment, the repository has no explicit root code-license file in the
-audited commit, the dataset is CC BY-NC-ND 4.0, and the official script
-requires a separately provisioned XLS-R path and CUDA execution. AASIST and
-SSL alternatives likewise lack a locally pinned checkpoint hash and complete
-Mandarin/runtime compatibility record.
+The fixed input contract is mono waveform at 16 kHz with exactly 64,600
+samples, matching the official `config/AASIST.conf` model configuration. The
+fixed score adapter is the softmax posterior of output class 0, whose official
+training label mapping is `0 = spoof` and `1 = bonafide`; this makes higher
+Whether-B scores mean more likely fake without using a localization output.
+The adapter emits `NOT_ESTIMABLE` for invalid, non-finite, or contract-violating
+inputs/outputs and never pads, clips, or tunes against Level 2.
+
+The checkpoint was strictly loaded and run twice on a deterministic synthetic
+waveform in the pinned local Python environment. Both runs produced the fixed
+two-class output schema, finite values, and identical outputs. This is a
+capability smoke only: no ASVspoof or Level-2 dataset was loaded and no
+performance, threshold, or scientific outcome was computed. The full audit is
+recorded in `WHETHER_B_AASIST_CAPABILITY_SMOKE_V1.json`.
 
 ```text
-WHETHER_B = INDEPENDENT_DETECTOR_REQUIRED_BUT_NOT_INCLUDED
-WHETHER_B_CHECKPOINT = NOT_MATERIALIZED / SHA256_NOT_VERIFIED
-WHETHER_B_FREEZE = BLOCKED_ON_CHECKPOINT_LICENSE_RUNTIME_PROVENANCE
+WHETHER_B = OFFICIAL_AASIST_INDEPENDENT_UTTERANCE_DETECTOR
+WHETHER_B_REPOSITORY_COMMIT = a04c9863f63d44471dde8a6abcb3b082b07cd1d1
+WHETHER_B_CHECKPOINT = models/weights/AASIST.pth
+WHETHER_B_CHECKPOINT_SHA256 = 51D2D9CF0738172F61E2A384EC50A54A55363240F67C971ED55A92435BC1A1C0
+WHETHER_B_INPUT = MONO_16KHZ_64600_SAMPLES
+WHETHER_B_SCORE = SOFTMAX_CLASS_0_SPOOF_POSTERIOR
+WHETHER_B_CAPABILITY_SMOKE = PASS
+WHETHER_B_FREEZE = FROZEN_FOR_AUTHORIZATION_REVIEW
 WHETHER_B_FALLBACK = DO_NOT_DERIVE_FROM_LOCALIZER; REPORT_LIMITATION
 ```
 
-This is a genuine blocker, not a reason to substitute a localizer-derived
-score. A separate versioned provenance amendment must pass before
-`RQ1_CONFIRMATORY_EXECUTION_AUTHORIZED` can become `YES`.
+Whether-B capability provenance is now complete for design-freeze review. This
+does not itself authorize `RQ1_CONFIRMATORY_EXECUTION_AUTHORIZED = YES`;
+materialized freshness proof, the third-paradigm claim gate, and the remaining
+preflight checks are still separate authorization conditions.
 
 ## 4. Where hierarchy and common metric
 
@@ -360,10 +374,11 @@ conditions, all selected model invocations, and all terminal ledger rows have
 been processed or explicitly failed. It never stops when significant, positive,
 or computationally convenient.
 
-Phase4 freezes the design but creates no execution authorization. The separate
-authorization template must be completed only after the Whether-B provenance
-blocker and any third-paradigm gap-claim requirement are resolved by a new
-human review.
+Phase4 freezes the design and makes it ready for a separate authorization
+review, but creates no execution authorization. The separate authorization
+template must still be completed only after materialized freshness proof, the
+third-paradigm gap-claim disposition, and all model-specific preflight checks
+are resolved by a new human review.
 
 ```text
 RQ1_CONFIRMATORY_EXECUTION_AUTHORIZED = NO

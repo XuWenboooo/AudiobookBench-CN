@@ -1,0 +1,54 @@
+{
+  "schema_version": "topconf.whether_b.capability_smoke.v1",
+  "status": "PASS",
+  "audit_date": "2026-09-14",
+  "purpose": "Capability and provenance smoke only; not a performance evaluation",
+  "repository": {
+    "url": "https://github.com/clovaai/aasist",
+    "commit": "a04c9863f63d44471dde8a6abcb3b082b07cd1d1",
+    "license": "MIT",
+    "license_sha256": "B7290F12E8346F663833EC1C4F9964A84C74CD091DB042B3CD680548BDD18A3F"
+  },
+  "checkpoint": {
+    "relative_path": "models/weights/AASIST.pth",
+    "bytes": 1281532,
+    "sha256": "51D2D9CF0738172F61E2A384EC50A54A55363240F67C971ED55A92435BC1A1C0"
+  },
+  "input_contract": {
+    "sample_rate_hz": 16000,
+    "channels": 1,
+    "samples": 64600,
+    "padding_or_clipping_in_smoke": false
+  },
+  "score_contract": {
+    "output_schema": "two-class logits",
+    "higher_is_spoof": "softmax output class 0",
+    "official_label_mapping": "0=spoof, 1=bonafide",
+    "invalid_or_nonfinite": "NOT_ESTIMABLE"
+  },
+  "runtime": {
+    "python": "F:/项目/申请实验室  TTS项目/envs/topconf-phase3s-cfprf-py310/Scripts/python.exe",
+    "device": "cpu",
+    "checkpoint_load": "PASS",
+    "strict_state_dict": true
+  },
+  "synthetic_forward": {
+    "input_kind": "deterministic synthetic sinusoid",
+    "output_shape": [1, 2],
+    "finite_output": true,
+    "deterministic_repeat": true,
+    "forward": "PASS"
+  },
+  "scope_guards": {
+    "dataset_loaded": false,
+    "asvspoof_loaded": false,
+    "real_level2_outcomes_accessed": false,
+    "dataset_wide_inference": false,
+    "performance_metrics_computed": false,
+    "threshold_tuning": false,
+    "scientific_claims_generated": false,
+    "result_based_design_changes": 0,
+    "rq1_confirmatory_execution_authorized": false,
+    "rq1_confirmatory_execution_started": false
+  }
+}

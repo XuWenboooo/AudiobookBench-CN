@@ -6,9 +6,8 @@ Freeze date: **2026-09-14**
 
 This is the outcome-blind RQ1 Level-2 design produced by Phase4 human
 reconciliation. It is not a model, data-generation, inference, evaluation,
-bootstrap, attack, or mitigation authorization. The current record is blocked
-from authorization because the independent Whether-B checkpoint/license/runtime
-contract is not complete.
+bootstrap, attack, or mitigation authorization. The design is ready for a
+separate authorization review; execution remains explicitly unauthorized.
 
 ## 1. Question and hypotheses
 
@@ -56,11 +55,17 @@ Whether-A thresholding uses only a speaker/source-disjoint Level-1 calibration
 split and a target FPR of `0.05`, with a deterministic empirical quantile and
 fixed tie rule. Level-2 threshold optimization is prohibited.
 
-Whether-B is an independent frozen utterance detector, never a pooling of a
-localization map. The audited Codecfake W2V2+AASIST candidate is not currently
-qualified because its checkpoint SHA256, explicit license chain, and local
-runtime smoke are incomplete. Whether-B is therefore a frozen requirement but
-an unresolved blocker; it is not substituted by CFPRF or MultiReso.
+Whether-B is the independent frozen official AASIST utterance detector at
+repository commit `a04c9863f63d44471dde8a6abcb3b082b07cd1d1`, using
+`models/weights/AASIST.pth` (SHA256
+`51D2D9CF0738172F61E2A384EC50A54A55363240F67C971ED55A92435BC1A1C0`) under
+the repository's MIT license (LICENSE SHA256
+`B7290F12E8346F663833EC1C4F9964A84C74CD091DB042B3CD680548BDD18A3F`). Its
+fixed input is mono 16 kHz, 64,600 samples; its higher-is-better spoof score
+is softmax class 0 under the official `0=spoof, 1=bonafide` mapping. The
+checkpoint load and deterministic finite two-class synthetic forward smoke
+passed, as recorded in `WHETHER_B_AASIST_CAPABILITY_SMOKE_V1.json`. It is not
+substituted by CFPRF or MultiReso.
 
 ## 4. Where metrics and LD@DR95
 
@@ -193,6 +198,6 @@ RQ1_CONFIRMATORY_EXECUTION_AUTHORIZED = NO
 RQ1_CONFIRMATORY_EXECUTION_STARTED = NO
 ```
 
-Authorization remains a separate human decision after the Whether-B blocker,
-third-paradigm claim requirement, materialized freshness proof, and any
-model-specific environment gates are resolved.
+Authorization remains a separate human decision after the third-paradigm claim
+requirement, materialized freshness proof, and any model-specific environment
+gates are resolved.
