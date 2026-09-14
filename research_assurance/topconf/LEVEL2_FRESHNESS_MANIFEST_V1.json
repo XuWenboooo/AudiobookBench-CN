@@ -1,0 +1,42 @@
+{
+  "schema_version": "topconf.level2.freshness.v1",
+  "manifest_id": "TOPCONF_RQ1_LEVEL2_FRESH_V1",
+  "status": "DESIGN_TEMPLATE_NOT_MATERIALIZED",
+  "materialized": false,
+  "real_level2_outcomes_accessed": false,
+  "result_based_selection": false,
+  "design_commit_at_review": "17b6419e4ee185a7029034776034235bcf17eac7",
+  "population_plan": {
+    "regime": "long-form Mandarin speech",
+    "independent_source_pools": 2,
+    "primary_sources": 400,
+    "speakers": 120,
+    "sources_per_pool": 200,
+    "speakers_per_pool": 60,
+    "mechanisms_per_source": 4,
+    "manipulated_variants_before_transformations": 1600,
+    "predeclared_source_reserve": 40,
+    "target_duration_sec": [8, 30]
+  },
+  "excluded_lineages": [
+    "WEEK1_5_HISTORICAL_PILOT",
+    "PHASE3T_PARTIALEDIT_V1.1_E1",
+    "ANY_LEVEL1_MODEL_SELECTION_SET",
+    "ANY_LEVEL1_METRIC_SELECTION_SET",
+    "ANY_LEVEL1_THRESHOLD_CALIBRATION_TEST_SET"
+  ],
+  "required_materialization_proof": {
+    "source_pool_ids": "REQUIRED_BEFORE_AUTHORIZATION",
+    "source_pool_manifest_sha256s": "REQUIRED_BEFORE_AUTHORIZATION",
+    "case_id_list_sha256": "REQUIRED_BEFORE_AUTHORIZATION",
+    "speaker_disjoint_split_audit": "REQUIRED_BEFORE_AUTHORIZATION",
+    "source_session_disjoint_audit": "REQUIRED_BEFORE_AUTHORIZATION",
+    "phase3t_e1_non_overlap_audit": "REQUIRED_BEFORE_AUTHORIZATION",
+    "pilot_non_overlap_audit": "REQUIRED_BEFORE_AUTHORIZATION",
+    "generator_checkpoint_and_seed_manifest": "REQUIRED_BEFORE_AUTHORIZATION",
+    "private_gt_manifest_sha256": "REQUIRED_BEFORE_AUTHORIZATION",
+    "operator_timestamp": "REQUIRED_BEFORE_AUTHORIZATION"
+  },
+  "authorization_gate": "NO_AUTHORIZATION_UNTIL_MATERIALIZED_PROOF_IS_PASS",
+  "freshness_claim": "NO_CASE_LEVEL_FRESHNESS_CLAIM_IS_MADE_BY_THIS_TEMPLATE"
+}
