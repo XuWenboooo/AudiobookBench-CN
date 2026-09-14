@@ -1,7 +1,7 @@
 # Phase 4 Human Reconciliation and Confirmatory Design Freeze Closure
 
-Status: **BLOCKED — DESIGN FIELDS FROZEN, AUTHORIZATION NOT READY**  
-Closure date: **2026-09-14**  
+Status: **BLOCKED — DESIGN FIELDS FROZEN, AUTHORIZATION NOT READY**
+Closure date: **2026-09-14**
 Phase4 base head: `17b6419e4ee185a7029034776034235bcf17eac7`
 
 ## Closure decision

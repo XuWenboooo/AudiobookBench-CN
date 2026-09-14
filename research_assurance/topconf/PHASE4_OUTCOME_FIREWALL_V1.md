@@ -1,6 +1,6 @@
 # Phase 4 Outcome Firewall v1
 
-Status: **PASS — DESIGN FIREWALL ACTIVE / NON-AUTHORIZING**  
+Status: **PASS — DESIGN FIREWALL ACTIVE / NON-AUTHORIZING**
 Audit date: **2026-09-14**
 
 ## Authority and scope

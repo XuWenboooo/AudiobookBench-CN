@@ -1,6 +1,6 @@
 # Phase 4 Reconciliation Matrix v1
 
-Status: **COMPLETE — CONTENT-LEVEL REVIEW / BLIND MERGES = 0**  
+Status: **COMPLETE — CONTENT-LEVEL REVIEW / BLIND MERGES = 0**
 Reconciliation date: **2026-09-14**
 
 ## Frozen inputs

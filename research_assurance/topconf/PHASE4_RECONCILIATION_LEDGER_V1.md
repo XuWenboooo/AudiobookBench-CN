@@ -1,6 +1,6 @@
 # Phase 4 Reconciliation Ledger v1
 
-Status: **COMPLETE — MANUAL CONTENT RECONCILIATION**  
+Status: **COMPLETE — MANUAL CONTENT RECONCILIATION**
 Ledger date: **2026-09-14**
 
 This append-oriented ledger records what was adopted from the two frozen

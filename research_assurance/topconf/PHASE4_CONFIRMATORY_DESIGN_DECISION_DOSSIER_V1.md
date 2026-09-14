@@ -1,8 +1,8 @@
 # Phase 4 Confirmatory Design Decision Dossier v1
 
-Status: **DESIGN FIELDS FROZEN / PHASE4 CLOSURE BLOCKED ON WHETHER-B**  
-Decision ID: `P4-RQ1-DESIGN-20260914-01`  
-Decision date: **2026-09-14**  
+Status: **DESIGN FIELDS FROZEN / PHASE4 CLOSURE BLOCKED ON WHETHER-B**
+Decision ID: `P4-RQ1-DESIGN-20260914-01`
+Decision date: **2026-09-14**
 Scope: **RQ1 Level-2 design only; no execution authority**
 
 This dossier is the content-level resolution of the two frozen parallel lanes

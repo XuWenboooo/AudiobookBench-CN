@@ -10,6 +10,7 @@ import argparse
 import json
 import math
 from pathlib import Path
+import random
 import sys
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -52,8 +53,12 @@ def run(manifest_path: Path) -> dict[str, object]:
     # Synthetic adapter/evaluator placeholders: finite scalars with stable
     # identities, never model or audio outputs.
     adapter_rows = [
-        {"case_id": case_id, "where_score": 0.5, "whether_score": 0.5}
-        for case_id in case_ids
+        {
+            "case_id": case_id,
+            "where_score": 0.4 + 0.1 * index,
+            "whether_score": 0.6 - 0.1 * index,
+        }
+        for index, case_id in enumerate(case_ids)
     ]
     if not all(
         math.isfinite(row["where_score"]) and math.isfinite(row["whether_score"])
@@ -68,6 +73,17 @@ def run(manifest_path: Path) -> dict[str, object]:
             "frozen_before_level2_reveal": True,
         }
     )
+
+    # Exercise the resampling path with fabricated scalar values.  The means
+    # are intentionally not emitted: this is a control-flow rehearsal, not a
+    # scientific estimate.
+    rng = random.Random(20260914)
+    bootstrap_means = []
+    for _ in range(64):
+        sample = [adapter_rows[rng.randrange(len(adapter_rows))]["where_score"] for _ in case_ids]
+        bootstrap_means.append(sum(sample) / len(sample))
+    if not all(math.isfinite(value) for value in bootstrap_means):
+        raise ValueError("synthetic bootstrap produced a non-finite placeholder")
 
     authorization = {
         "status": "SYNTHETIC_GOVERNANCE_DRY_RUN",

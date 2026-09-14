@@ -1,7 +1,7 @@
 # TopConf RQ1 Confirmatory Preregistration v1
 
-Status: **DESIGN FROZEN FOR REVIEW / EXECUTION NOT AUTHORIZED**  
-Protocol ID: `P4-RQ1-DESIGN-20260914-01`  
+Status: **DESIGN FROZEN FOR REVIEW / EXECUTION NOT AUTHORIZED**
+Protocol ID: `P4-RQ1-DESIGN-20260914-01`
 Freeze date: **2026-09-14**
 
 This is the outcome-blind RQ1 Level-2 design produced by Phase4 human
