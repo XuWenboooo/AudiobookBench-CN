@@ -1,0 +1,24 @@
+{
+  "blinded_case_count": 3,
+  "bootstrap_replicates": 64,
+  "data_source": "SYNTHETIC_GOVERNANCE_DRY_RUN",
+  "real_level2_outcomes_accessed": false,
+  "result_based_design_changes": 0,
+  "schema_version": "topconf.phase4.synthetic-dry-run.v1",
+  "scientific_outputs": 0,
+  "scientific_runs_invoked": false,
+  "stages": {
+    "adapter": "PASS",
+    "blinding": "PASS",
+    "bootstrap": "PASS",
+    "evaluator": "PASS",
+    "failure_accounting": "PASS",
+    "inference_safe_view": "PASS",
+    "manifest": "PASS",
+    "namespace": "PASS",
+    "retry_ledger": "PASS",
+    "reveal_gate": "PASS"
+  },
+  "status": "PASS",
+  "synthetic_case_count": 3
+}
