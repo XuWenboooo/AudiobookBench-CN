@@ -25,9 +25,9 @@ RQ1_CONFIRMATORY_EXECUTION_STARTED = NO
 
 ```text
 BRANCH = topconf-dl-robustness
-PHASE4_BASE_HEAD = 17b6419e4ee185a7029034776034235bcf17eac7
+PHASE4_BASE_HEAD = 17b6419e4ee185a7029034776034235bcf17eac7 (pre-freeze anchor)
 WORKING_TREE_AT_AUDIT = clean before Phase4 additions
-REMOTE_SYNC_AT_AUDIT = origin/topconf-dl-robustness matched 17b6419
+REMOTE_SYNC_AT_AUDIT = origin/topconf-dl-robustness matched 69dca09 at AASIST freeze audit
 
 PHASE3T_CLOSURE_VERIFIED = PASS
 RQ1_PREFREEZE_BRANCH = topconf-rq1-prefreeze
@@ -103,8 +103,8 @@ BLOCKERS = none for Phase4 design freeze; authorization still requires
   preauthorized third-paradigm disposition, materialized freshness proof, and
   model-specific preflight
 COMMITS = 9691e92 (governance); 72409df (reconciliation/design freeze);
-  c3dc854 (dry-run hardening and formatting); this closure record
-  is finalized in the subsequent Git commit
+  c3dc854 (dry-run hardening and formatting); 2797bf0 (initial closure audit);
+  69dca09 (AASIST capability freeze and PASS closure)
 PUSH_STATUS = PUSHED to origin/topconf-dl-robustness
 ```
 
