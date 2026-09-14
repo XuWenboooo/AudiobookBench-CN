@@ -95,14 +95,15 @@ LEVEL2_SYNTHETIC_DRY_RUN = PASS
 FAIL_CLOSED_TESTS = PASS; 11 governance tests including all requested cases
 REAL_LEVEL2_OUTCOMES_ACCESSED = NO
 RESULT_BASED_DESIGN_CHANGES = 0
-TESTS = python -m pytest tests/topconf -q (44 passed at closure preparation)
-GIT_DIFF_CHECK = PENDING_FINAL_COMMIT_CHECK
+TESTS = python -m pytest tests/topconf -q (44 passed)
+GIT_DIFF_CHECK = PASS
 
 BLOCKERS = Whether-B checkpoint/license/runtime provenance; positive H1 claim
   also requires preauthorized third paradigm and materialized freshness proof
-COMMITS = Phase4 reconciliation, governance, metric/design freeze, and closure
-  commits recorded in Git history
-PUSH_STATUS = pending final reviewed push
+COMMITS = 9691e92 (governance); 72409df (reconciliation/design freeze);
+  c3dc854 (dry-run hardening and formatting); this closure record
+  is finalized in the subsequent Git commit
+PUSH_STATUS = PUSHED to origin/topconf-dl-robustness
 ```
 
 ## Gate table
