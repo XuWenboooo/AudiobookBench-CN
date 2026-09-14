@@ -129,3 +129,13 @@ The MultiReso Level-1 evaluator artifact contains all six scale rows with
 `winner_selected=false`; no scale or head was chosen. All evaluator rows are
 descriptive Level-1 external functional diagnostics only and must not be
 treated as RQ1 confirmatory evidence.
+
+## Post-commit finalization ledger (append-only)
+
+```text
+EVIDENCE_COMMIT = 34403202400ca3c10a8a313ea49cbc805fd60189
+EVIDENCE_COMMIT_PUSH_STATUS = PUSHED to origin/topconf-dl-robustness
+REMOTE_HEAD_AFTER_EVIDENCE_PUSH = 34403202400ca3c10a8a313ea49cbc805fd60189
+FINAL_WORKTREE_BEFORE_THIS_APPEND = clean
+FINALIZATION_COMMIT = pending commit for this append-only ledger entry
+```
