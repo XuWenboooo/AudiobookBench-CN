@@ -1,11 +1,11 @@
 # Phase 4.9 Mainline Audit Support Bundle v1
 
-Date: 2026-09-15  
-Mainline branch: `topconf-dl-robustness`  
-Mainline HEAD: `ad44f6b29db1930e039c57f8b5412854e8349e3f`  
-Remote-tracking HEAD at bundle preparation: `110e2b91c04625898b955c0d0dfcfccfe04515cb`  
-Independent audit worktree: `AudiobookBench-CN-topconf-phase4-9-freshness-audit`  
-Independent audit branch: `topconf-phase4-9-freshness-audit`  
+Date: 2026-09-15
+Mainline branch: `topconf-dl-robustness`
+Mainline HEAD: `ad44f6b29db1930e039c57f8b5412854e8349e3f`
+Remote-tracking HEAD at bundle preparation: `110e2b91c04625898b955c0d0dfcfccfe04515cb`
+Independent audit worktree: `AudiobookBench-CN-topconf-phase4-9-freshness-audit`
+Independent audit branch: `topconf-phase4-9-freshness-audit`
 Independent audit status at preparation: active; no verdict yet
 
 ## Frozen mainline state
@@ -142,4 +142,3 @@ The mainline records, but does not answer, the distinction between:
 The auditor must return exactly one of:
 `TRUE_EVIDENCE_GAP`, `VALIDATOR_OVERCONSTRAINT`,
 `FROZEN_POLICY_AMBIGUITY`, or `ADDITIONAL_NON_FRESHNESS_BLOCKER`.
-

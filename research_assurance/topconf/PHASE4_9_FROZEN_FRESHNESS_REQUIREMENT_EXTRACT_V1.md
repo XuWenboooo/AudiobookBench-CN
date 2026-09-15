@@ -87,5 +87,4 @@ ambiguity, add an exception, or reinterpret a policy in favor of PASS.
 - The preregistration records `PROTOCOL_FROZEN = YES` while
   `RQ1_CONFIRMATORY_EXECUTION_AUTHORIZED = NO` and
   `RQ1_CONFIRMATORY_EXECUTION_STARTED = NO`. Source:
-  `TOPCONF_RQ1_CONFIRMATORY_PREREGISTRATION_V1.md`, §10.
-
+`TOPCONF_RQ1_CONFIRMATORY_PREREGISTRATION_V1.md`, §10.
