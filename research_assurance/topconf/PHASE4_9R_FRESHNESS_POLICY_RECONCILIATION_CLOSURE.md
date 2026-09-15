@@ -1,6 +1,6 @@
 # Phase 4.9R freshness-policy reconciliation closure
 
-Status: `V5_PASS / RECONCILIATION_COMPLETE / FINAL_AUTHORIZATION_NO_GO_UNSYNCED`
+Status: `V5_PASS / RECONCILIATION_COMPLETE / FINAL_AUTHORIZATION_NO_GO_PREFLIGHT_BLOCKED`
 Date: 2026-09-15
 
 This closure records the result of the prospective governance clarification
@@ -105,17 +105,19 @@ RQ3_STARTED = NO
 ## Authorization disposition
 
 V5 freshness is `PASS`, but this closure does not create a GO authorization.
-The final authorization record remains `NO_GO` because the current mainline is
-not synchronized to its remote and the required push-before-GO condition is
-not satisfied. A human final review must re-bind the current mainline HEAD,
-V3/V5 hashes, policy/amendment hashes, validator commit, GT-isolation proof,
-and evaluation/inference manifests after synchronization. No confirmatory
-execution has started.
+The key reconciliation commits are synchronized to `origin/topconf-dl-robustness`;
+the final authorization remains `NO_GO` because the existing authorization
+record still has independent Level-1 calibration, blinded inference-manifest,
+namespace, GT/identity, third-paradigm, and model-specific preflight items that
+are not all PASS. A later human final review must re-bind the current mainline
+HEAD, V3/V5 hashes, policy/amendment hashes, validator commit, GT-isolation
+proof, and evaluation/inference manifests. No confirmatory execution has
+started.
 
 ```text
 PHASE4_9R_CLOSURE = PASS_RECONCILIATION_COMPLETE
 FINAL_AUTHORIZATION_DECISION = NO_GO
-READY_BUT_UNSYNCED = YES
+READY_BUT_UNSYNCED = NO
 RQ1_CONFIRMATORY_EXECUTION_AUTHORIZED = NO
 RQ1_CONFIRMATORY_EXECUTION_STARTED = NO
 ```
