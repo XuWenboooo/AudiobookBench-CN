@@ -7,7 +7,7 @@ or incomplete manifest is deliberately not treated as an empty valid cohort.
 
 from __future__ import annotations
 
-from collections import Counter
+from collections import Counter, defaultdict
 import math
 import re
 from typing import Any, Iterable, Mapping
@@ -807,4 +807,294 @@ def validate_level2_freshness_v3(
             "speaker_overlap_ids": comparison["speaker_overlap_ids"],
         },
         "corpus_isolation": isolation_records,
+    }
+
+
+REPLACEMENT_FORBIDDEN_FIELDS = frozenset(
+    {
+        "ground_truth",
+        "label",
+        "target_start_sec",
+        "target_end_sec",
+        "fake_region",
+        "outcome",
+        "prediction",
+        "score",
+        "auroc",
+        "auprc",
+        "ld_dr95",
+        "scientific_outcome",
+    }
+)
+
+
+def _replacement_reserve_key(row: Mapping[str, Any]) -> tuple[str, ...]:
+    return (
+        str(row.get("corpus") or row.get("dataset") or ""),
+        str(row.get("speaker_id") or ""),
+        str(row.get("utterance_id") or ""),
+        str(row.get("source_id") or ""),
+        str(row.get("source_audio_sha256") or "").lower(),
+        str(row.get("parent_asset_id") or ""),
+    )
+
+
+def _replacement_forbidden_fields(value: Any, path: str = "manifest") -> list[str]:
+    found: list[str] = []
+    if isinstance(value, Mapping):
+        for key, child in value.items():
+            if key in REPLACEMENT_FORBIDDEN_FIELDS:
+                found.append(f"{path}.{key}")
+            found.extend(_replacement_forbidden_fields(child, f"{path}.{key}"))
+    elif isinstance(value, list):
+        for index, child in enumerate(value):
+            found.extend(_replacement_forbidden_fields(child, f"{path}[{index}]"))
+    return found
+
+
+def validate_level2_rematerialization_plan(
+    parent_population: Mapping[str, Any],
+    exclusion: Mapping[str, Any],
+    ledger: Mapping[str, Any],
+    reserve_records: Iterable[Mapping[str, Any]],
+    rematerialized_population: Mapping[str, Any] | None = None,
+) -> dict[str, Any]:
+    """Validate one prospective V2-to-V3 replacement plan, fail closed.
+
+    This validator is metadata-only.  It verifies that replacements are drawn
+    from the frozen reserve, stay in the original pool, preserve the frozen
+    population contract, and do not reintroduce excluded case/speaker/lineage
+    identities.  A blocked plan is a valid terminal result only when the
+    clean same-pool reserve is demonstrably insufficient and no partial V3 was
+    created.
+    """
+    parent_summary = validate_level2_population(parent_population)
+    if exclusion.get("schema_version") != "topconf.level2.v2.contamination_exclusion.v1":
+        raise MaterializationValidationError("wrong contamination exclusion schema")
+    if exclusion.get("reason") != "VERIFIED_FRESHNESS_CONTAMINATION":
+        raise MaterializationValidationError("replacement trigger is not verified freshness contamination")
+    if exclusion.get("scientific_outcomes_accessed") is not False:
+        raise MaterializationValidationError("scientific outcomes were used for replacement")
+    excluded_sources = {str(value) for value in exclusion.get("excluded_source_ids", [])}
+    excluded_speakers = {str(value) for value in exclusion.get("excluded_speaker_ids", [])}
+    excluded_cases = {str(value) for value in exclusion.get("excluded_case_ids", [])}
+    excluded_hashes = {
+        str(value).lower()
+        for value in exclusion.get("excluded_source_audio_sha256s", [])
+        if isinstance(value, str)
+    }
+    excluded_parents = {
+        str(value)
+        for value in exclusion.get("excluded_parent_asset_ids", [])
+        if isinstance(value, str)
+    }
+    if not excluded_sources or not excluded_cases or not excluded_speakers:
+        raise MaterializationValidationError("contamination exclusion is incomplete")
+
+    parent_sources = _records(parent_population, "sources")
+    parent_cases = _records(parent_population, "case_records")
+    parent_source_by_id = {str(row["source_id"]): row for row in parent_sources}
+    parent_cases_by_source: dict[str, list[dict[str, Any]]] = defaultdict(list)
+    for row in parent_cases:
+        parent_cases_by_source[str(row["source_id"])].append(row)
+    if not excluded_sources.issubset(parent_source_by_id):
+        raise MaterializationValidationError("exclusion names a source outside the parent population")
+    expected_excluded_cases = {
+        str(row["case_id"])
+        for source_id in excluded_sources
+        for row in parent_cases_by_source.get(source_id, [])
+    }
+    if expected_excluded_cases != excluded_cases:
+        raise MaterializationValidationError("exclusion case membership is incomplete")
+    if not excluded_speakers.issubset({str(row["speaker_id"]) for row in parent_sources}):
+        raise MaterializationValidationError("exclusion names a speaker outside the parent population")
+
+    # Check an offered V3 before reading the replacement ledger deeply.  This
+    # makes retention of contamination, count drift, pair drift, and GT leaks
+    # fail closed even when the ledger is incomplete or maliciously reordered.
+    if rematerialized_population is not None:
+        leaked = _replacement_forbidden_fields(rematerialized_population)
+        if leaked:
+            raise MaterializationValidationError(f"GT or scientific outcome leaked: {leaked[0]}")
+        validate_level2_population(rematerialized_population)
+        offered_sources = _records(rematerialized_population, "sources")
+        offered_cases = _records(rematerialized_population, "case_records")
+        offered_source_ids = {str(row["source_id"]) for row in offered_sources}
+        offered_case_ids = {str(row["case_id"]) for row in offered_cases}
+        offered_speakers = {str(row["speaker_id"]) for row in offered_sources}
+        offered_hashes = {str(row["source_audio_sha256"]).lower() for row in offered_sources}
+        offered_parents = {str(row["parent_asset_id"]) for row in offered_sources}
+        if offered_source_ids.intersection(excluded_sources):
+            raise MaterializationValidationError("contaminated source retained in V3")
+        if offered_case_ids.intersection(excluded_cases):
+            raise MaterializationValidationError("contaminated case retained in V3")
+        if offered_speakers.intersection(excluded_speakers):
+            raise MaterializationValidationError("prohibited speaker retained in V3")
+        if offered_hashes.intersection(excluded_hashes):
+            raise MaterializationValidationError("excluded lineage retained in V3")
+        if offered_parents.intersection(excluded_parents):
+            raise MaterializationValidationError("excluded parent lineage retained in V3")
+
+    reserves = [dict(row) for row in reserve_records]
+    reserve_by_id: dict[str, dict[str, Any]] = {}
+    for row in reserves:
+        source_id = _text(row.get("source_id"), "reserve.source_id")
+        if source_id in reserve_by_id:
+            raise MaterializationValidationError("duplicate reserve source")
+        reserve_by_id[source_id] = row
+    ordered_reserves = sorted(reserves, key=_replacement_reserve_key)
+    reserve_rank = {str(row["source_id"]): index for index, row in enumerate(ordered_reserves, 1)}
+    clean_reserves: dict[str, list[dict[str, Any]]] = defaultdict(list)
+    for row in ordered_reserves:
+        speaker = str(row.get("speaker_id") or "")
+        audio_hash = str(row.get("source_audio_sha256") or "").lower()
+        parent_asset = str(row.get("parent_asset_id") or "")
+        if speaker in excluded_speakers or audio_hash in excluded_hashes or parent_asset in excluded_parents:
+            continue
+        pool_id = str(row.get("pool_id") or "")
+        clean_reserves[pool_id].append(row)
+
+    entries = ledger.get("entries")
+    if ledger.get("schema_version") != "topconf.level2.v2_to_v3.replacement_ledger.v1":
+        raise MaterializationValidationError("wrong replacement ledger schema")
+    if ledger.get("activation_rule_id") != "LEVEL2_RESERVE_ACTIVATION_RULE_V1":
+        raise MaterializationValidationError("replacement ledger is not bound to the activation rule")
+    if ledger.get("scientific_outcome_consulted") is not False:
+        raise MaterializationValidationError("replacement ledger consulted scientific outcome")
+    if not isinstance(entries, list) or len(entries) != len(excluded_sources):
+        raise MaterializationValidationError("replacement ledger does not cover every excluded source")
+
+    entry_source_ids: list[str] = []
+    activated_ranks: list[int] = []
+    replacement_ids: list[str] = []
+    old_to_new: dict[str, str] = {}
+    for index, entry in enumerate(entries):
+        if not isinstance(entry, Mapping):
+            raise MaterializationValidationError(f"invalid replacement ledger entry: {index}")
+        old_id = _text(entry.get("old_source_id"), f"ledger.entries[{index}].old_source_id")
+        if old_id in entry_source_ids:
+            raise MaterializationValidationError("duplicate old source in replacement ledger")
+        if old_id not in excluded_sources:
+            raise MaterializationValidationError("replacement ledger contains non-excluded source")
+        entry_source_ids.append(old_id)
+        old_source = parent_source_by_id[old_id]
+        if entry.get("old_speaker_id") != old_source["speaker_id"]:
+            raise MaterializationValidationError("old speaker binding mismatch")
+        old_case_ids = entry.get("old_case_ids")
+        expected_case_ids = sorted(row["case_id"] for row in parent_cases_by_source[old_id])
+        if old_case_ids != expected_case_ids:
+            raise MaterializationValidationError("old case membership mismatch")
+        if entry.get("exclusion_reason") != "VERIFIED_FRESHNESS_CONTAMINATION":
+            raise MaterializationValidationError("replacement entry has an invalid reason")
+        if entry.get("scientific_outcome_consulted") is not False:
+            raise MaterializationValidationError("replacement entry consulted scientific outcome")
+
+        replacement_id = entry.get("replacement_source_id")
+        if replacement_id is None:
+            if entry.get("replacement_speaker_id") is not None or entry.get("new_case_ids") != []:
+                raise MaterializationValidationError("blocked entry contains partial replacement")
+            if entry.get("reserve_rank") is not None:
+                raise MaterializationValidationError("blocked entry has an activated reserve rank")
+            continue
+        replacement_id = _text(replacement_id, f"ledger.entries[{index}].replacement_source_id")
+        if replacement_id not in reserve_by_id:
+            raise MaterializationValidationError("replacement source is not in the frozen reserve universe")
+        if replacement_id in replacement_ids:
+            raise MaterializationValidationError("replacement reserve source is reused")
+        replacement = reserve_by_id[replacement_id]
+        if str(replacement.get("pool_id")) != str(old_source["pool_id"]):
+            raise MaterializationValidationError("replacement crosses source pools")
+        if str(replacement.get("speaker_id")) in excluded_speakers:
+            raise MaterializationValidationError("replacement uses a prohibited speaker")
+        replacement_hash = str(replacement.get("source_audio_sha256") or "").lower()
+        if replacement_hash in excluded_hashes:
+            raise MaterializationValidationError("replacement reuses an excluded audio lineage")
+        if str(replacement.get("parent_asset_id") or "") in excluded_parents:
+            raise MaterializationValidationError("replacement reuses an excluded parent asset")
+        rank = entry.get("reserve_rank")
+        if not isinstance(rank, int) or isinstance(rank, bool) or reserve_rank.get(replacement_id) != rank:
+            raise MaterializationValidationError("reserve ordering/rank mismatch")
+        if activated_ranks and rank <= activated_ranks[-1]:
+            raise MaterializationValidationError("reserve activation order is not ascending")
+        if replacement_id not in {str(row["source_id"]) for row in clean_reserves[str(old_source["pool_id"])]}:
+            raise MaterializationValidationError("replacement is not a clean same-pool reserve")
+        if entry.get("replacement_speaker_id") != replacement.get("speaker_id"):
+            raise MaterializationValidationError("replacement speaker binding mismatch")
+        new_case_ids = entry.get("new_case_ids")
+        if not isinstance(new_case_ids, list) or len(new_case_ids) != int(parent_summary["case_count"]) // int(parent_summary["source_count"]):
+            raise MaterializationValidationError("replacement case membership is incomplete")
+        replacement_ids.append(replacement_id)
+        activated_ranks.append(rank)
+        old_to_new[old_id] = replacement_id
+
+    if set(entry_source_ids) != excluded_sources:
+        raise MaterializationValidationError("replacement ledger source coverage is incomplete")
+
+    status = ledger.get("status")
+    required_replacements = len(excluded_sources)
+    affected_pools = {
+        str(parent_source_by_id[source_id]["pool_id"])
+        for source_id in excluded_sources
+    }
+    clean_same_pool_count = sum(len(clean_reserves[pool_id]) for pool_id in affected_pools)
+    if status == "BLOCKED_INSUFFICIENT_CLEAN_RESERVE":
+        if replacement_ids or rematerialized_population is not None:
+            raise MaterializationValidationError("blocked ledger contains an activated or materialized replacement")
+        if clean_same_pool_count >= required_replacements:
+            raise MaterializationValidationError("blocked status is not supported by reserve capacity")
+        return {
+            "status": "BLOCKED_INSUFFICIENT_CLEAN_RESERVE",
+            "required_replacements": required_replacements,
+            "activated_reserves": 0,
+            "clean_same_pool_reserve_count": clean_same_pool_count,
+            "parent_population": parent_summary,
+        }
+    if status != "READY_FOR_V3_MATERIALIZATION":
+        raise MaterializationValidationError("invalid replacement ledger status")
+    if len(replacement_ids) != required_replacements or rematerialized_population is None:
+        raise MaterializationValidationError("ready ledger has incomplete replacement materialization")
+
+    leaked = _replacement_forbidden_fields(rematerialized_population)
+    if leaked:
+        raise MaterializationValidationError(f"GT or scientific outcome leaked: {leaked[0]}")
+    new_summary = validate_level2_population(rematerialized_population)
+    new_sources = _records(rematerialized_population, "sources")
+    new_cases = _records(rematerialized_population, "case_records")
+    new_source_ids = {str(row["source_id"]) for row in new_sources}
+    new_case_ids = {str(row["case_id"]) for row in new_cases}
+    new_speakers = {str(row["speaker_id"]) for row in new_sources}
+    new_hashes = {str(row["source_audio_sha256"]).lower() for row in new_sources}
+    new_parents = {str(row["parent_asset_id"]) for row in new_sources}
+    if new_source_ids.intersection(excluded_sources):
+        raise MaterializationValidationError("contaminated source retained in V3")
+    if new_case_ids.intersection(excluded_cases):
+        raise MaterializationValidationError("contaminated case retained in V3")
+    if new_speakers.intersection(excluded_speakers):
+        raise MaterializationValidationError("prohibited speaker retained in V3")
+    if new_hashes.intersection(excluded_hashes):
+        raise MaterializationValidationError("excluded lineage retained in V3")
+    if new_parents.intersection(excluded_parents):
+        raise MaterializationValidationError("excluded parent lineage retained in V3")
+    if len(new_sources) != len(parent_sources) or len(new_cases) != len(parent_cases):
+        raise MaterializationValidationError("V3 source/case count drift")
+    parent_pool_counts = Counter(str(row["pool_id"]) for row in parent_sources)
+    new_pool_counts = Counter(str(row["pool_id"]) for row in new_sources)
+    if new_pool_counts != parent_pool_counts:
+        raise MaterializationValidationError("V3 source-pool allocation drift")
+    if not set(old_to_new).issubset(excluded_sources) or not set(old_to_new.values()).issubset(new_source_ids):
+        raise MaterializationValidationError("V2-to-V3 source mapping is incomplete")
+    for entry in entries:
+        old_id = str(entry["old_source_id"])
+        replacement_id = str(entry["replacement_source_id"])
+        expected_new_case_ids = sorted(
+            row["case_id"] for row in new_cases if row["source_id"] == replacement_id
+        )
+        if entry.get("new_case_ids") != expected_new_case_ids:
+            raise MaterializationValidationError("new case mapping does not match V3 population")
+    return {
+        "status": "PASS",
+        "parent_population": parent_summary,
+        "v3_population": new_summary,
+        "activated_reserves": len(replacement_ids),
+        "replacement_source_ids": replacement_ids,
     }

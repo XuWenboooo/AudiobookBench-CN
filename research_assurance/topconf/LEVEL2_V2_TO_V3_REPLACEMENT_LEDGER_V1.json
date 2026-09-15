@@ -1,0 +1,596 @@
+{
+  "schema_version": "topconf.level2.v2_to_v3.replacement_ledger.v1",
+  "status": "BLOCKED_INSUFFICIENT_CLEAN_RESERVE",
+  "parent_population_version": "V2",
+  "parent_population_manifest": "LEVEL2_RQ1_POPULATION_MANIFEST_V2.json",
+  "parent_population_sha256": "ED6FE30A4F9B7AEFA4C36821E04CB7E5F9B1780B20EE7ED9A0AA84F52B3955D0",
+  "contamination_exclusion_manifest": "LEVEL2_V2_VERIFIED_CONTAMINATION_EXCLUSION_V1.json",
+  "contamination_exclusion_sha256": "C663288E792ED96F1FF214AED0FBDD98DCEAF0D7E769930462013A9730B4149E",
+  "activation_rule_id": "LEVEL2_RESERVE_ACTIVATION_RULE_V1",
+  "activation_trigger": "VERIFIED_FRESHNESS_CONTAMINATION",
+  "activation_is_result_independent": true,
+  "required_replacements": 7,
+  "required_replacements_by_pool": {
+    "SOURCE_POOL_A_AISHELL3": 7
+  },
+  "reserve_counts_by_pool": {
+    "SOURCE_POOL_B_AISHELL1": 20,
+    "SOURCE_POOL_A_AISHELL3": 0
+  },
+  "clean_same_pool_reserve_count": 0,
+  "activated_reserve_source_ids": [],
+  "reserve_audit": [
+    {
+      "source_id": "AISHELL1-RESERVE-0001",
+      "pool_id": "SOURCE_POOL_B_AISHELL1",
+      "speaker_id": "AISHELL1_S0002",
+      "reserve_rank": 1,
+      "metadata_qualified_from_frozen_v2": true,
+      "speaker_allowed": true,
+      "source_lineage_disjoint": true,
+      "parent_lineage_disjoint": true,
+      "eligible_clean_same_pool_reserve": true
+    },
+    {
+      "source_id": "AISHELL1-RESERVE-0002",
+      "pool_id": "SOURCE_POOL_B_AISHELL1",
+      "speaker_id": "AISHELL1_S0002",
+      "reserve_rank": 2,
+      "metadata_qualified_from_frozen_v2": true,
+      "speaker_allowed": true,
+      "source_lineage_disjoint": true,
+      "parent_lineage_disjoint": true,
+      "eligible_clean_same_pool_reserve": true
+    },
+    {
+      "source_id": "AISHELL1-RESERVE-0003",
+      "pool_id": "SOURCE_POOL_B_AISHELL1",
+      "speaker_id": "AISHELL1_S0002",
+      "reserve_rank": 3,
+      "metadata_qualified_from_frozen_v2": true,
+      "speaker_allowed": true,
+      "source_lineage_disjoint": true,
+      "parent_lineage_disjoint": true,
+      "eligible_clean_same_pool_reserve": true
+    },
+    {
+      "source_id": "AISHELL1-RESERVE-0004",
+      "pool_id": "SOURCE_POOL_B_AISHELL1",
+      "speaker_id": "AISHELL1_S0002",
+      "reserve_rank": 4,
+      "metadata_qualified_from_frozen_v2": true,
+      "speaker_allowed": true,
+      "source_lineage_disjoint": true,
+      "parent_lineage_disjoint": true,
+      "eligible_clean_same_pool_reserve": true
+    },
+    {
+      "source_id": "AISHELL1-RESERVE-0005",
+      "pool_id": "SOURCE_POOL_B_AISHELL1",
+      "speaker_id": "AISHELL1_S0002",
+      "reserve_rank": 5,
+      "metadata_qualified_from_frozen_v2": true,
+      "speaker_allowed": true,
+      "source_lineage_disjoint": true,
+      "parent_lineage_disjoint": true,
+      "eligible_clean_same_pool_reserve": true
+    },
+    {
+      "source_id": "AISHELL1-RESERVE-0006",
+      "pool_id": "SOURCE_POOL_B_AISHELL1",
+      "speaker_id": "AISHELL1_S0002",
+      "reserve_rank": 6,
+      "metadata_qualified_from_frozen_v2": true,
+      "speaker_allowed": true,
+      "source_lineage_disjoint": true,
+      "parent_lineage_disjoint": true,
+      "eligible_clean_same_pool_reserve": true
+    },
+    {
+      "source_id": "AISHELL1-RESERVE-0007",
+      "pool_id": "SOURCE_POOL_B_AISHELL1",
+      "speaker_id": "AISHELL1_S0002",
+      "reserve_rank": 7,
+      "metadata_qualified_from_frozen_v2": true,
+      "speaker_allowed": true,
+      "source_lineage_disjoint": true,
+      "parent_lineage_disjoint": true,
+      "eligible_clean_same_pool_reserve": true
+    },
+    {
+      "source_id": "AISHELL1-RESERVE-0008",
+      "pool_id": "SOURCE_POOL_B_AISHELL1",
+      "speaker_id": "AISHELL1_S0002",
+      "reserve_rank": 8,
+      "metadata_qualified_from_frozen_v2": true,
+      "speaker_allowed": true,
+      "source_lineage_disjoint": true,
+      "parent_lineage_disjoint": true,
+      "eligible_clean_same_pool_reserve": true
+    },
+    {
+      "source_id": "AISHELL1-RESERVE-0009",
+      "pool_id": "SOURCE_POOL_B_AISHELL1",
+      "speaker_id": "AISHELL1_S0002",
+      "reserve_rank": 9,
+      "metadata_qualified_from_frozen_v2": true,
+      "speaker_allowed": true,
+      "source_lineage_disjoint": true,
+      "parent_lineage_disjoint": true,
+      "eligible_clean_same_pool_reserve": true
+    },
+    {
+      "source_id": "AISHELL1-RESERVE-0010",
+      "pool_id": "SOURCE_POOL_B_AISHELL1",
+      "speaker_id": "AISHELL1_S0002",
+      "reserve_rank": 10,
+      "metadata_qualified_from_frozen_v2": true,
+      "speaker_allowed": true,
+      "source_lineage_disjoint": true,
+      "parent_lineage_disjoint": true,
+      "eligible_clean_same_pool_reserve": true
+    },
+    {
+      "source_id": "AISHELL1-RESERVE-0011",
+      "pool_id": "SOURCE_POOL_B_AISHELL1",
+      "speaker_id": "AISHELL1_S0002",
+      "reserve_rank": 11,
+      "metadata_qualified_from_frozen_v2": true,
+      "speaker_allowed": true,
+      "source_lineage_disjoint": true,
+      "parent_lineage_disjoint": true,
+      "eligible_clean_same_pool_reserve": true
+    },
+    {
+      "source_id": "AISHELL1-RESERVE-0012",
+      "pool_id": "SOURCE_POOL_B_AISHELL1",
+      "speaker_id": "AISHELL1_S0003",
+      "reserve_rank": 12,
+      "metadata_qualified_from_frozen_v2": true,
+      "speaker_allowed": true,
+      "source_lineage_disjoint": true,
+      "parent_lineage_disjoint": true,
+      "eligible_clean_same_pool_reserve": true
+    },
+    {
+      "source_id": "AISHELL1-RESERVE-0013",
+      "pool_id": "SOURCE_POOL_B_AISHELL1",
+      "speaker_id": "AISHELL1_S0003",
+      "reserve_rank": 13,
+      "metadata_qualified_from_frozen_v2": true,
+      "speaker_allowed": true,
+      "source_lineage_disjoint": true,
+      "parent_lineage_disjoint": true,
+      "eligible_clean_same_pool_reserve": true
+    },
+    {
+      "source_id": "AISHELL1-RESERVE-0014",
+      "pool_id": "SOURCE_POOL_B_AISHELL1",
+      "speaker_id": "AISHELL1_S0003",
+      "reserve_rank": 14,
+      "metadata_qualified_from_frozen_v2": true,
+      "speaker_allowed": true,
+      "source_lineage_disjoint": true,
+      "parent_lineage_disjoint": true,
+      "eligible_clean_same_pool_reserve": true
+    },
+    {
+      "source_id": "AISHELL1-RESERVE-0015",
+      "pool_id": "SOURCE_POOL_B_AISHELL1",
+      "speaker_id": "AISHELL1_S0003",
+      "reserve_rank": 15,
+      "metadata_qualified_from_frozen_v2": true,
+      "speaker_allowed": true,
+      "source_lineage_disjoint": true,
+      "parent_lineage_disjoint": true,
+      "eligible_clean_same_pool_reserve": true
+    },
+    {
+      "source_id": "AISHELL1-RESERVE-0016",
+      "pool_id": "SOURCE_POOL_B_AISHELL1",
+      "speaker_id": "AISHELL1_S0003",
+      "reserve_rank": 16,
+      "metadata_qualified_from_frozen_v2": true,
+      "speaker_allowed": true,
+      "source_lineage_disjoint": true,
+      "parent_lineage_disjoint": true,
+      "eligible_clean_same_pool_reserve": true
+    },
+    {
+      "source_id": "AISHELL1-RESERVE-0017",
+      "pool_id": "SOURCE_POOL_B_AISHELL1",
+      "speaker_id": "AISHELL1_S0003",
+      "reserve_rank": 17,
+      "metadata_qualified_from_frozen_v2": true,
+      "speaker_allowed": true,
+      "source_lineage_disjoint": true,
+      "parent_lineage_disjoint": true,
+      "eligible_clean_same_pool_reserve": true
+    },
+    {
+      "source_id": "AISHELL1-RESERVE-0018",
+      "pool_id": "SOURCE_POOL_B_AISHELL1",
+      "speaker_id": "AISHELL1_S0003",
+      "reserve_rank": 18,
+      "metadata_qualified_from_frozen_v2": true,
+      "speaker_allowed": true,
+      "source_lineage_disjoint": true,
+      "parent_lineage_disjoint": true,
+      "eligible_clean_same_pool_reserve": true
+    },
+    {
+      "source_id": "AISHELL1-RESERVE-0019",
+      "pool_id": "SOURCE_POOL_B_AISHELL1",
+      "speaker_id": "AISHELL1_S0003",
+      "reserve_rank": 19,
+      "metadata_qualified_from_frozen_v2": true,
+      "speaker_allowed": true,
+      "source_lineage_disjoint": true,
+      "parent_lineage_disjoint": true,
+      "eligible_clean_same_pool_reserve": true
+    },
+    {
+      "source_id": "AISHELL1-RESERVE-0020",
+      "pool_id": "SOURCE_POOL_B_AISHELL1",
+      "speaker_id": "AISHELL1_S0003",
+      "reserve_rank": 20,
+      "metadata_qualified_from_frozen_v2": true,
+      "speaker_allowed": true,
+      "source_lineage_disjoint": true,
+      "parent_lineage_disjoint": true,
+      "eligible_clean_same_pool_reserve": true
+    },
+    {
+      "source_id": "AISHELL3-RESERVE-0001",
+      "pool_id": "SOURCE_POOL_A_AISHELL3",
+      "speaker_id": "AISHELL3_SSB0005",
+      "reserve_rank": 21,
+      "metadata_qualified_from_frozen_v2": true,
+      "speaker_allowed": false,
+      "source_lineage_disjoint": true,
+      "parent_lineage_disjoint": true,
+      "eligible_clean_same_pool_reserve": false
+    },
+    {
+      "source_id": "AISHELL3-RESERVE-0002",
+      "pool_id": "SOURCE_POOL_A_AISHELL3",
+      "speaker_id": "AISHELL3_SSB0005",
+      "reserve_rank": 22,
+      "metadata_qualified_from_frozen_v2": true,
+      "speaker_allowed": false,
+      "source_lineage_disjoint": true,
+      "parent_lineage_disjoint": true,
+      "eligible_clean_same_pool_reserve": false
+    },
+    {
+      "source_id": "AISHELL3-RESERVE-0003",
+      "pool_id": "SOURCE_POOL_A_AISHELL3",
+      "speaker_id": "AISHELL3_SSB0005",
+      "reserve_rank": 23,
+      "metadata_qualified_from_frozen_v2": true,
+      "speaker_allowed": false,
+      "source_lineage_disjoint": true,
+      "parent_lineage_disjoint": true,
+      "eligible_clean_same_pool_reserve": false
+    },
+    {
+      "source_id": "AISHELL3-RESERVE-0004",
+      "pool_id": "SOURCE_POOL_A_AISHELL3",
+      "speaker_id": "AISHELL3_SSB0005",
+      "reserve_rank": 24,
+      "metadata_qualified_from_frozen_v2": true,
+      "speaker_allowed": false,
+      "source_lineage_disjoint": true,
+      "parent_lineage_disjoint": true,
+      "eligible_clean_same_pool_reserve": false
+    },
+    {
+      "source_id": "AISHELL3-RESERVE-0005",
+      "pool_id": "SOURCE_POOL_A_AISHELL3",
+      "speaker_id": "AISHELL3_SSB0005",
+      "reserve_rank": 25,
+      "metadata_qualified_from_frozen_v2": true,
+      "speaker_allowed": false,
+      "source_lineage_disjoint": true,
+      "parent_lineage_disjoint": true,
+      "eligible_clean_same_pool_reserve": false
+    },
+    {
+      "source_id": "AISHELL3-RESERVE-0006",
+      "pool_id": "SOURCE_POOL_A_AISHELL3",
+      "speaker_id": "AISHELL3_SSB0005",
+      "reserve_rank": 26,
+      "metadata_qualified_from_frozen_v2": true,
+      "speaker_allowed": false,
+      "source_lineage_disjoint": true,
+      "parent_lineage_disjoint": true,
+      "eligible_clean_same_pool_reserve": false
+    },
+    {
+      "source_id": "AISHELL3-RESERVE-0007",
+      "pool_id": "SOURCE_POOL_A_AISHELL3",
+      "speaker_id": "AISHELL3_SSB0005",
+      "reserve_rank": 27,
+      "metadata_qualified_from_frozen_v2": true,
+      "speaker_allowed": false,
+      "source_lineage_disjoint": true,
+      "parent_lineage_disjoint": true,
+      "eligible_clean_same_pool_reserve": false
+    },
+    {
+      "source_id": "AISHELL3-RESERVE-0008",
+      "pool_id": "SOURCE_POOL_A_AISHELL3",
+      "speaker_id": "AISHELL3_SSB0005",
+      "reserve_rank": 28,
+      "metadata_qualified_from_frozen_v2": true,
+      "speaker_allowed": false,
+      "source_lineage_disjoint": true,
+      "parent_lineage_disjoint": true,
+      "eligible_clean_same_pool_reserve": false
+    },
+    {
+      "source_id": "AISHELL3-RESERVE-0009",
+      "pool_id": "SOURCE_POOL_A_AISHELL3",
+      "speaker_id": "AISHELL3_SSB0005",
+      "reserve_rank": 29,
+      "metadata_qualified_from_frozen_v2": true,
+      "speaker_allowed": false,
+      "source_lineage_disjoint": true,
+      "parent_lineage_disjoint": true,
+      "eligible_clean_same_pool_reserve": false
+    },
+    {
+      "source_id": "AISHELL3-RESERVE-0010",
+      "pool_id": "SOURCE_POOL_A_AISHELL3",
+      "speaker_id": "AISHELL3_SSB0005",
+      "reserve_rank": 30,
+      "metadata_qualified_from_frozen_v2": true,
+      "speaker_allowed": false,
+      "source_lineage_disjoint": true,
+      "parent_lineage_disjoint": true,
+      "eligible_clean_same_pool_reserve": false
+    },
+    {
+      "source_id": "AISHELL3-RESERVE-0011",
+      "pool_id": "SOURCE_POOL_A_AISHELL3",
+      "speaker_id": "AISHELL3_SSB0005",
+      "reserve_rank": 31,
+      "metadata_qualified_from_frozen_v2": true,
+      "speaker_allowed": false,
+      "source_lineage_disjoint": true,
+      "parent_lineage_disjoint": true,
+      "eligible_clean_same_pool_reserve": false
+    },
+    {
+      "source_id": "AISHELL3-RESERVE-0012",
+      "pool_id": "SOURCE_POOL_A_AISHELL3",
+      "speaker_id": "AISHELL3_SSB0005",
+      "reserve_rank": 32,
+      "metadata_qualified_from_frozen_v2": true,
+      "speaker_allowed": false,
+      "source_lineage_disjoint": true,
+      "parent_lineage_disjoint": true,
+      "eligible_clean_same_pool_reserve": false
+    },
+    {
+      "source_id": "AISHELL3-RESERVE-0013",
+      "pool_id": "SOURCE_POOL_A_AISHELL3",
+      "speaker_id": "AISHELL3_SSB0005",
+      "reserve_rank": 33,
+      "metadata_qualified_from_frozen_v2": true,
+      "speaker_allowed": false,
+      "source_lineage_disjoint": true,
+      "parent_lineage_disjoint": true,
+      "eligible_clean_same_pool_reserve": false
+    },
+    {
+      "source_id": "AISHELL3-RESERVE-0014",
+      "pool_id": "SOURCE_POOL_A_AISHELL3",
+      "speaker_id": "AISHELL3_SSB0005",
+      "reserve_rank": 34,
+      "metadata_qualified_from_frozen_v2": true,
+      "speaker_allowed": false,
+      "source_lineage_disjoint": true,
+      "parent_lineage_disjoint": true,
+      "eligible_clean_same_pool_reserve": false
+    },
+    {
+      "source_id": "AISHELL3-RESERVE-0015",
+      "pool_id": "SOURCE_POOL_A_AISHELL3",
+      "speaker_id": "AISHELL3_SSB0005",
+      "reserve_rank": 35,
+      "metadata_qualified_from_frozen_v2": true,
+      "speaker_allowed": false,
+      "source_lineage_disjoint": true,
+      "parent_lineage_disjoint": true,
+      "eligible_clean_same_pool_reserve": false
+    },
+    {
+      "source_id": "AISHELL3-RESERVE-0016",
+      "pool_id": "SOURCE_POOL_A_AISHELL3",
+      "speaker_id": "AISHELL3_SSB0005",
+      "reserve_rank": 36,
+      "metadata_qualified_from_frozen_v2": true,
+      "speaker_allowed": false,
+      "source_lineage_disjoint": true,
+      "parent_lineage_disjoint": true,
+      "eligible_clean_same_pool_reserve": false
+    },
+    {
+      "source_id": "AISHELL3-RESERVE-0017",
+      "pool_id": "SOURCE_POOL_A_AISHELL3",
+      "speaker_id": "AISHELL3_SSB0005",
+      "reserve_rank": 37,
+      "metadata_qualified_from_frozen_v2": true,
+      "speaker_allowed": false,
+      "source_lineage_disjoint": true,
+      "parent_lineage_disjoint": true,
+      "eligible_clean_same_pool_reserve": false
+    },
+    {
+      "source_id": "AISHELL3-RESERVE-0018",
+      "pool_id": "SOURCE_POOL_A_AISHELL3",
+      "speaker_id": "AISHELL3_SSB0005",
+      "reserve_rank": 38,
+      "metadata_qualified_from_frozen_v2": true,
+      "speaker_allowed": false,
+      "source_lineage_disjoint": true,
+      "parent_lineage_disjoint": true,
+      "eligible_clean_same_pool_reserve": false
+    },
+    {
+      "source_id": "AISHELL3-RESERVE-0019",
+      "pool_id": "SOURCE_POOL_A_AISHELL3",
+      "speaker_id": "AISHELL3_SSB0005",
+      "reserve_rank": 39,
+      "metadata_qualified_from_frozen_v2": true,
+      "speaker_allowed": false,
+      "source_lineage_disjoint": true,
+      "parent_lineage_disjoint": true,
+      "eligible_clean_same_pool_reserve": false
+    },
+    {
+      "source_id": "AISHELL3-RESERVE-0020",
+      "pool_id": "SOURCE_POOL_A_AISHELL3",
+      "speaker_id": "AISHELL3_SSB0005",
+      "reserve_rank": 40,
+      "metadata_qualified_from_frozen_v2": true,
+      "speaker_allowed": false,
+      "source_lineage_disjoint": true,
+      "parent_lineage_disjoint": true,
+      "eligible_clean_same_pool_reserve": false
+    }
+  ],
+  "entries": [
+    {
+      "old_source_id": "AISHELL3-SRC-0001",
+      "old_speaker_id": "AISHELL3_SSB0005",
+      "old_pool_id": "SOURCE_POOL_A_AISHELL3",
+      "old_case_ids": [
+        "CASE-0001-M01",
+        "CASE-0001-M02",
+        "CASE-0001-M03",
+        "CASE-0001-M04"
+      ],
+      "exclusion_reason": "VERIFIED_FRESHNESS_CONTAMINATION",
+      "replacement_source_id": null,
+      "replacement_speaker_id": null,
+      "reserve_rank": null,
+      "activation_rule": "LEVEL2_RESERVE_ACTIVATION_RULE_V1",
+      "new_case_ids": [],
+      "scientific_outcome_consulted": false
+    },
+    {
+      "old_source_id": "AISHELL3-SRC-0036",
+      "old_speaker_id": "AISHELL3_SSB1203",
+      "old_pool_id": "SOURCE_POOL_A_AISHELL3",
+      "old_case_ids": [
+        "CASE-0036-M01",
+        "CASE-0036-M02",
+        "CASE-0036-M03",
+        "CASE-0036-M04"
+      ],
+      "exclusion_reason": "VERIFIED_FRESHNESS_CONTAMINATION",
+      "replacement_source_id": null,
+      "replacement_speaker_id": null,
+      "reserve_rank": null,
+      "activation_rule": "LEVEL2_RESERVE_ACTIVATION_RULE_V1",
+      "new_case_ids": [],
+      "scientific_outcome_consulted": false
+    },
+    {
+      "old_source_id": "AISHELL3-SRC-0061",
+      "old_speaker_id": "AISHELL3_SSB0005",
+      "old_pool_id": "SOURCE_POOL_A_AISHELL3",
+      "old_case_ids": [
+        "CASE-0061-M01",
+        "CASE-0061-M02",
+        "CASE-0061-M03",
+        "CASE-0061-M04"
+      ],
+      "exclusion_reason": "VERIFIED_FRESHNESS_CONTAMINATION",
+      "replacement_source_id": null,
+      "replacement_speaker_id": null,
+      "reserve_rank": null,
+      "activation_rule": "LEVEL2_RESERVE_ACTIVATION_RULE_V1",
+      "new_case_ids": [],
+      "scientific_outcome_consulted": false
+    },
+    {
+      "old_source_id": "AISHELL3-SRC-0096",
+      "old_speaker_id": "AISHELL3_SSB1203",
+      "old_pool_id": "SOURCE_POOL_A_AISHELL3",
+      "old_case_ids": [
+        "CASE-0096-M01",
+        "CASE-0096-M02",
+        "CASE-0096-M03",
+        "CASE-0096-M04"
+      ],
+      "exclusion_reason": "VERIFIED_FRESHNESS_CONTAMINATION",
+      "replacement_source_id": null,
+      "replacement_speaker_id": null,
+      "reserve_rank": null,
+      "activation_rule": "LEVEL2_RESERVE_ACTIVATION_RULE_V1",
+      "new_case_ids": [],
+      "scientific_outcome_consulted": false
+    },
+    {
+      "old_source_id": "AISHELL3-SRC-0121",
+      "old_speaker_id": "AISHELL3_SSB0005",
+      "old_pool_id": "SOURCE_POOL_A_AISHELL3",
+      "old_case_ids": [
+        "CASE-0121-M01",
+        "CASE-0121-M02",
+        "CASE-0121-M03",
+        "CASE-0121-M04"
+      ],
+      "exclusion_reason": "VERIFIED_FRESHNESS_CONTAMINATION",
+      "replacement_source_id": null,
+      "replacement_speaker_id": null,
+      "reserve_rank": null,
+      "activation_rule": "LEVEL2_RESERVE_ACTIVATION_RULE_V1",
+      "new_case_ids": [],
+      "scientific_outcome_consulted": false
+    },
+    {
+      "old_source_id": "AISHELL3-SRC-0156",
+      "old_speaker_id": "AISHELL3_SSB1203",
+      "old_pool_id": "SOURCE_POOL_A_AISHELL3",
+      "old_case_ids": [
+        "CASE-0156-M01",
+        "CASE-0156-M02",
+        "CASE-0156-M03",
+        "CASE-0156-M04"
+      ],
+      "exclusion_reason": "VERIFIED_FRESHNESS_CONTAMINATION",
+      "replacement_source_id": null,
+      "replacement_speaker_id": null,
+      "reserve_rank": null,
+      "activation_rule": "LEVEL2_RESERVE_ACTIVATION_RULE_V1",
+      "new_case_ids": [],
+      "scientific_outcome_consulted": false
+    },
+    {
+      "old_source_id": "AISHELL3-SRC-0181",
+      "old_speaker_id": "AISHELL3_SSB0005",
+      "old_pool_id": "SOURCE_POOL_A_AISHELL3",
+      "old_case_ids": [
+        "CASE-0181-M01",
+        "CASE-0181-M02",
+        "CASE-0181-M03",
+        "CASE-0181-M04"
+      ],
+      "exclusion_reason": "VERIFIED_FRESHNESS_CONTAMINATION",
+      "replacement_source_id": null,
+      "replacement_speaker_id": null,
+      "reserve_rank": null,
+      "activation_rule": "LEVEL2_RESERVE_ACTIVATION_RULE_V1",
+      "new_case_ids": [],
+      "scientific_outcome_consulted": false
+    }
+  ],
+  "rematerialized_population_created": false,
+  "scientific_outcome_consulted": false,
+  "model_inference_runs": 0,
+  "result_based_design_changes": 0
+}
