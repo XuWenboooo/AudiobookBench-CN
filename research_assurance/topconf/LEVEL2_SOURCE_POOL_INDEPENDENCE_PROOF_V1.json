@@ -1,0 +1,82 @@
+{
+  "schema_version": "topconf.level2.source_pool_independence.v1",
+  "status": "PASS_CAPACITY_PENDING_FRESHNESS_AND_PHYSICAL_IDENTITY_REVIEW",
+  "protocol_id": "P4-RQ1-DESIGN-20260914-01",
+  "source_corpus_identity_frozen": false,
+  "independence_definition": "two independently rights-cleared Mandarin corpus-level source distributions with disjoint source/session/speaker allocation in the materialized population",
+  "physical_speaker_overlap": "NOT_DIRECTLY_VERIFIABLE_FROM_PUBLIC_METADATA",
+  "pools": [
+    {
+      "pool_id": "SOURCE_POOL_A_AISHELL3",
+      "corpus_id": "AISHELL-3",
+      "source_authority": "Beijing Shell Shell Technology Co.,Ltd via OpenSLR SLR93",
+      "official_source": "https://www.openslr.org/93/",
+      "license": "Apache License 2.0",
+      "archive_identity": {
+        "local_path": "F:\\项目\\申请实验室  TTS项目\\datasets\\AISHELL-3\\raw\\data_aishell3.tgz",
+        "bytes": 19057141777,
+        "sha256": "BE2507D431AD59419EC871E60674CAEDB2B585F84FFA01FE359784686DB0E0CC"
+      },
+      "speaker_namespace": "AISHELL3_SSB####",
+      "recording_provenance": "single AISHELL-3 corpus; 44.1 kHz source headers observed locally; historical Week1–5 use",
+      "lineage_policy": "all source/session/utterance/text/parent hashes required; historical exclusion currently incomplete",
+      "historical_usage": "WEEK1_5_PILOT_AND_PHASE4_QUALIFICATION_FOUND",
+      "observed_capacity": {
+        "raw_wav_files": 88035,
+        "raw_speakers": 218,
+        "eligible_8_30_wav_files": 532,
+        "eligible_8_30_speakers": 112
+      },
+      "independence_status": "PASS_CAPACITY_AS_POOL_A; HISTORICAL_FRESHNESS_NOT_CLEARED"
+    },
+    {
+      "pool_id": "SOURCE_POOL_B_AISHELL1",
+      "corpus_id": "AISHELL-1",
+      "source_authority": "Beijing Shell Shell Technology Co.,Ltd via OpenSLR SLR33",
+      "official_source": "https://www.openslr.org/33/",
+      "license": "Apache License 2.0",
+      "archive_identity": {
+        "audio_url": "https://openslr.trmal.net/resources/33/data_aishell.tgz",
+        "declared_bytes": 15582913665,
+        "server_etag": "3a0d06481-55aad06723ac7",
+        "resource_url": "https://openslr.trmal.net/resources/33/resource_aishell.tgz",
+        "resource_bytes": 1246920,
+        "resource_sha256": "1A6749854456E9402BC7295767937367AFED1327799A5E1DF0ED64BAA5F77409",
+        "audio_archive_status": "COMPLETE_ARCHIVE_INTEGRITY_PASS",
+        "observed_audio_archive_sha256": "A4A0313CDE0A933E0E01A451F77DE0A23D6C942F4694AF5BB7F40B9DC38143FE"
+      },
+      "speaker_namespace": "AISHELL1_####",
+      "recording_provenance": "distinct AISHELL-1 recording project; official OpenSLR SLR33 source",
+      "lineage_policy": "audio, transcript, speaker, session, utterance, and parent lineage to be hashed after archive audit",
+      "historical_usage": "NONE_FOUND_IN_REPOSITORY_SCAN; final cross-dimensional exclusion review pending",
+      "observed_capacity": {
+        "speaker_info_rows": 400,
+        "unique_speaker_ids": 400,
+        "eligible_8_30_wav_files": 2761,
+        "eligible_8_30_transcript_complete_wav_files": 2750,
+        "eligible_8_30_speakers": 300,
+        "eligible_8_30_transcript_complete_speakers": 300,
+        "eligible_wav_without_transcript_excluded": 11,
+        "all_wav_files": 141925,
+        "invalid_wav_files": 0,
+        "format": "16000Hz/1ch/2byte",
+        "transcript_unique_ids": 141600,
+        "audio_rows_missing_transcript": 325
+      },
+      "cross_corpus_physical_speaker_overlap": "NOT_DIRECTLY_VERIFIABLE",
+      "independence_status": "PASS_CORPUS_LEVEL_PENDING_PHYSICAL_IDENTITY_AND_FRESHNESS"
+    }
+  ],
+  "materialized_population_manifest": "LEVEL2_RQ1_POPULATION_MANIFEST_V2.json",
+  "materialized_population_sha256": "FCFFEEC32F4CAB32DA53BFAD06C0BBBC6F1354AA87277DCE1B1A4EA8E6F90674",
+  "materialized_population_counts": {
+    "primary_sources": 400,
+    "speakers": 120,
+    "source_pools": 2,
+    "reserve_sources": 40,
+    "cases": 1600
+  },
+  "decision": "DO_NOT_AUTHORIZE_UNTIL_HISTORICAL_FRESHNESS_AND_PHYSICAL_IDENTITY_REVIEW_PASS",
+  "model_inference_runs": 0,
+  "scientific_outcomes_used": false
+}

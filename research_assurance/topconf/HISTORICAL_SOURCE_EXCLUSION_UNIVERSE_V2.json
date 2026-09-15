@@ -1,0 +1,122 @@
+{
+  "schema_version": "topconf.level2.historical_source_exclusion.v2",
+  "status": "PARTIAL_RECONSTRUCTION_NOT_AUTHORIZING",
+  "purpose": "Best-effort source-level reconstruction; no missing identity is treated as no overlap.",
+  "identity_dimensions": [
+    "source_id",
+    "speaker_id",
+    "session_id",
+    "utterance_id",
+    "reference_audio_id",
+    "text_sha256",
+    "parent_asset_id",
+    "source_audio_sha256",
+    "generator_input_identity"
+  ],
+  "stages": [
+    {
+      "set_id": "WEEK1_PILOT",
+      "sources_known": 200,
+      "archival_raw_sources_known": 480,
+      "speakers_known": 12,
+      "lineage_known": "PARTIAL",
+      "evidence_source": ["F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\data\\manifests\\source_audio.csv", "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\results\\week1\\hashes.json"],
+      "completeness": "PARTIAL",
+      "status": "EXCLUDE_WITH_PARTIAL_IDENTITY"
+    },
+    {
+      "set_id": "WEEK2_PILOT",
+      "sources_known": 23,
+      "speakers_known": 12,
+      "lineage_known": "UNKNOWN",
+      "evidence_source": ["research_assurance/WEEK2_SCIENTIFIC_CLOSURE.md"],
+      "completeness": "PARTIAL",
+      "status": "EXCLUDE_WITH_UNKNOWN_LINEAGE_FIELDS"
+    },
+    {
+      "set_id": "WEEK3_PILOT",
+      "sources_known": 23,
+      "speakers_known": 12,
+      "lineage_known": "UNKNOWN",
+      "evidence_source": ["research_assurance/WEEK3_FINAL_SCIENTIFIC_CLOSURE.md"],
+      "completeness": "PARTIAL",
+      "status": "EXCLUDE_WITH_UNKNOWN_LINEAGE_FIELDS"
+    },
+    {
+      "set_id": "WEEK4_PILOT",
+      "sources_known": 48,
+      "speakers_known": 48,
+      "lineage_known": "PARTIAL",
+      "evidence_source": ["F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-Week5\\data\\manifests\\week4_population_manifest.json"],
+      "completeness": "PARTIAL",
+      "status": "EXCLUDE_WITH_PARTIAL_IDENTITY"
+    },
+    {
+      "set_id": "WEEK5_QUALIFICATION",
+      "sources_known": null,
+      "speakers_known": 12,
+      "lineage_known": "PARTIAL",
+      "evidence_source": ["F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-Week5\\data\\manifests\\week5_exp2_qualification_population.json", "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-Week5\\data\\manifests\\week5_exp5_qualification_population.json", "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-Week5\\data\\manifests\\week5_exp6_qualification_population.json"],
+      "completeness": "PARTIAL",
+      "status": "EXCLUDE_WITH_PARTIAL_IDENTITY"
+    },
+    {
+      "set_id": "PHASE3T_PARTIALEDIT_E1",
+      "sources_known": 42471,
+      "speakers_known": 109,
+      "lineage_known": "PARTIAL",
+      "evidence_source": ["results/topconf_phase3t/case_manifest.tsv", "research_assurance/topconf/PHASE3T_RAW_OUTPUT_MANIFEST_V1.json"],
+      "completeness": "PARTIAL",
+      "status": "EXCLUDE_WITH_PARTIAL_IDENTITY"
+    },
+    {
+      "set_id": "MODEL_SELECTION_SETS",
+      "sources_known": null,
+      "speakers_known": null,
+      "lineage_known": "UNKNOWN",
+      "evidence_source": ["research_assurance/topconf/LEVEL2_EXCLUSION_UNIVERSE_V1.json"],
+      "completeness": "UNKNOWN",
+      "status": "EXCLUDE_FAIL_CLOSED_UNTIL_RECONSTRUCTED"
+    },
+    {
+      "set_id": "METRIC_SELECTION_SETS",
+      "sources_known": null,
+      "speakers_known": null,
+      "lineage_known": "UNKNOWN",
+      "evidence_source": ["research_assurance/topconf/LEVEL2_EXCLUSION_UNIVERSE_V1.json"],
+      "completeness": "UNKNOWN",
+      "status": "EXCLUDE_FAIL_CLOSED_UNTIL_RECONSTRUCTED"
+    },
+    {
+      "set_id": "THRESHOLD_SELECTION_SETS",
+      "sources_known": null,
+      "speakers_known": null,
+      "lineage_known": "UNKNOWN",
+      "evidence_source": ["research_assurance/topconf/LEVEL2_EXCLUSION_UNIVERSE_V1.json"],
+      "completeness": "UNKNOWN",
+      "status": "EXCLUDE_FAIL_CLOSED_UNTIL_RECONSTRUCTED"
+    },
+    {
+      "set_id": "WHETHER_A_DECISION_SET",
+      "sources_known": null,
+      "speakers_known": null,
+      "lineage_known": "UNKNOWN",
+      "evidence_source": ["research_assurance/topconf/LEVEL2_EXCLUSION_UNIVERSE_V1.json"],
+      "completeness": "UNKNOWN",
+      "status": "EXCLUDE_FAIL_CLOSED_UNTIL_RECONSTRUCTED"
+    },
+    {
+      "set_id": "WHETHER_B_CAPABILITY_SMOKE",
+      "sources_known": 0,
+      "speakers_known": 0,
+      "lineage_known": "COMPLETE",
+      "evidence_source": ["research_assurance/topconf/WHETHER_B_AASIST_CAPABILITY_SMOKE_V1.json"],
+      "completeness": "COMPLETE",
+      "status": "EXCLUSION_EMPTY"
+    }
+  ],
+  "overall_completeness": "PARTIAL",
+  "authorization_effect": "INSUFFICIENT_FOR_FRESHNESS_PASS",
+  "real_level2_outcomes_accessed": false,
+  "model_inference_runs": 0
+}

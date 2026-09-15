@@ -1,0 +1,174 @@
+{
+  "schema_version": "topconf.level2.freshness.v1",
+  "manifest_id": "TOPCONF_RQ1_LEVEL2_FRESH_V2",
+  "status": "BLOCKED_INSUFFICIENT_EVIDENCE",
+  "freshness_verdict": "INSUFFICIENT_EVIDENCE",
+  "materialized": true,
+  "source_corpus_identity_frozen": false,
+  "real_level2_outcomes_accessed": false,
+  "result_based_selection": false,
+  "level2_population_manifest": "LEVEL2_RQ1_POPULATION_MANIFEST_V2.json",
+  "level2_population_manifest_sha256": "FCFFEEC32F4CAB32DA53BFAD06C0BBBC6F1354AA87277DCE1B1A4EA8E6F90674",
+  "exclusion_universe_manifest": "HISTORICAL_CASE_EXCLUSION_UNIVERSE_V2.json",
+  "exclusion_universe_manifest_sha256": "9BC2F90D60818D061E0817D50E8C05E0F81722CA9D083928A07637C704796D87",
+  "speaker_overlap_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT",
+  "comparison_dimensions": [
+    "case_id",
+    "pair_id",
+    "source_id",
+    "speaker_id",
+    "session_id",
+    "utterance_id",
+    "reference_audio_id",
+    "text_sha256",
+    "parent_asset_id",
+    "source_audio_sha256",
+    "generator_input_identity"
+  ],
+  "required_exclusion_sets": [
+    "WEEK1_PILOT",
+    "WEEK2_PILOT",
+    "WEEK3_PILOT",
+    "WEEK4_PILOT",
+    "WEEK5_QUALIFICATION",
+    "PHASE3T_PARTIALEDIT_E1",
+    "MODEL_SELECTION_SETS",
+    "METRIC_SELECTION_SETS",
+    "THRESHOLD_SELECTION_SETS",
+    "WHETHER_A_DECISION_SET",
+    "WHETHER_B_CAPABILITY_SMOKE"
+  ],
+  "all_historical_exclusion_set_hashes": {
+    "WEEK1_PILOT": "CCEF216B7D96986C19C2A06CA57541C8E7C215ABFD0CA16A9F456EE3107013BC",
+    "WEEK2_PILOT": "4B57762B87CB97911779847FA30EA146935DA34D32936249F614BEFEB7E55186",
+    "WEEK3_PILOT": "E2213D905C69527BE49BC1B6849A7EED62AFCFCB235F8445317A07EA1DDB76A9",
+    "WEEK4_PILOT": "DD0EFF81FF63A3C70CB4D75F78E20C4D9A531B02E204D94DD2B0FF8941BD6093",
+    "WEEK5_QUALIFICATION": "663291EB5DD80142472EBCC681CD46525E4CCB757D66F177305857EAE476AA8F",
+    "PHASE3T_PARTIALEDIT_E1": "1EF572C9860372D96F3DDEAF94BCF296D6DCCC0898AB379A6F6228028456F3AE",
+    "MODEL_SELECTION_SETS": "0D2E9445BF47BD34EECAB009364192C6AFA038D193A2E3E7AA25EC9222264968",
+    "METRIC_SELECTION_SETS": "9AC33E3ADE2607E6EAF3ECD2B0EE60900436FFC6CE8D4F8017E5D921C0835C13",
+    "THRESHOLD_SELECTION_SETS": "58408F088D8A7539209EEFDC1931C0ABC5BCD72974D65FA4926894E00A06323F",
+    "WHETHER_A_DECISION_SET": "214B2FE61EA1A0D9E65F56ED1A04850DC5F099BC1D5B4D29B2263F26F6874EE8",
+    "WHETHER_B_CAPABILITY_SMOKE": "A5F8B6F5713A0B4752158457E6F0CC0960B9510E7B9D02D860D8B667AB7729D7"
+  },
+  "exclusion_sets": [
+    {
+      "set_id": "WEEK1_PILOT",
+      "status": "INCOMPLETE_NOT_RECONSTRUCTED",
+      "manifest_sha256": "CCEF216B7D96986C19C2A06CA57541C8E7C215ABFD0CA16A9F456EE3107013BC",
+      "identity_dimensions": [],
+      "records": [],
+      "evidence_source": []
+    },
+    {
+      "set_id": "WEEK2_PILOT",
+      "status": "INCOMPLETE_NOT_RECONSTRUCTED",
+      "manifest_sha256": "4B57762B87CB97911779847FA30EA146935DA34D32936249F614BEFEB7E55186",
+      "identity_dimensions": [],
+      "records": [],
+      "evidence_source": []
+    },
+    {
+      "set_id": "WEEK3_PILOT",
+      "status": "INCOMPLETE_NOT_RECONSTRUCTED",
+      "manifest_sha256": "E2213D905C69527BE49BC1B6849A7EED62AFCFCB235F8445317A07EA1DDB76A9",
+      "identity_dimensions": [],
+      "records": [],
+      "evidence_source": []
+    },
+    {
+      "set_id": "WEEK4_PILOT",
+      "status": "INCOMPLETE_NOT_RECONSTRUCTED",
+      "manifest_sha256": "DD0EFF81FF63A3C70CB4D75F78E20C4D9A531B02E204D94DD2B0FF8941BD6093",
+      "identity_dimensions": [],
+      "records": [],
+      "evidence_source": []
+    },
+    {
+      "set_id": "WEEK5_QUALIFICATION",
+      "status": "INCOMPLETE_NOT_RECONSTRUCTED",
+      "manifest_sha256": "663291EB5DD80142472EBCC681CD46525E4CCB757D66F177305857EAE476AA8F",
+      "identity_dimensions": [],
+      "records": [],
+      "evidence_source": []
+    },
+    {
+      "set_id": "PHASE3T_PARTIALEDIT_E1",
+      "status": "INCOMPLETE_NOT_RECONSTRUCTED",
+      "manifest_sha256": "1EF572C9860372D96F3DDEAF94BCF296D6DCCC0898AB379A6F6228028456F3AE",
+      "identity_dimensions": [],
+      "records": [],
+      "evidence_source": []
+    },
+    {
+      "set_id": "MODEL_SELECTION_SETS",
+      "status": "INCOMPLETE_NOT_RECONSTRUCTED",
+      "manifest_sha256": "0D2E9445BF47BD34EECAB009364192C6AFA038D193A2E3E7AA25EC9222264968",
+      "identity_dimensions": [],
+      "records": [],
+      "evidence_source": []
+    },
+    {
+      "set_id": "METRIC_SELECTION_SETS",
+      "status": "INCOMPLETE_NOT_RECONSTRUCTED",
+      "manifest_sha256": "9AC33E3ADE2607E6EAF3ECD2B0EE60900436FFC6CE8D4F8017E5D921C0835C13",
+      "identity_dimensions": [],
+      "records": [],
+      "evidence_source": []
+    },
+    {
+      "set_id": "THRESHOLD_SELECTION_SETS",
+      "status": "INCOMPLETE_NOT_RECONSTRUCTED",
+      "manifest_sha256": "58408F088D8A7539209EEFDC1931C0ABC5BCD72974D65FA4926894E00A06323F",
+      "identity_dimensions": [],
+      "records": [],
+      "evidence_source": []
+    },
+    {
+      "set_id": "WHETHER_A_DECISION_SET",
+      "status": "INCOMPLETE_NOT_RECONSTRUCTED",
+      "manifest_sha256": "214B2FE61EA1A0D9E65F56ED1A04850DC5F099BC1D5B4D29B2263F26F6874EE8",
+      "identity_dimensions": [],
+      "records": [],
+      "evidence_source": []
+    },
+    {
+      "set_id": "WHETHER_B_CAPABILITY_SMOKE",
+      "status": "COMPLETE_EXCLUSION_EMPTY",
+      "manifest_sha256": "A5F8B6F5713A0B4752158457E6F0CC0960B9510E7B9D02D860D8B667AB7729D7",
+      "identity_dimensions": [],
+      "records": [],
+      "evidence_source": []
+    }
+  ],
+  "overlap_counts": {
+    "case_id": null,
+    "pair_id": null,
+    "source_id": null,
+    "speaker_id": null,
+    "session_id": null,
+    "utterance_id": null,
+    "reference_audio_id": null,
+    "text_sha256": null,
+    "parent_asset_id": null,
+    "source_audio_sha256": null,
+    "generator_input_identity": null
+  },
+  "policy": {
+    "speaker_overlap_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT",
+    "case_overlap": "PROHIBITED",
+    "source_overlap": "PROHIBITED",
+    "lineage_overlap": "PROHIBITED",
+    "selection_data_overlap": "PROHIBITED",
+    "capability_smoke_source_ids": [],
+    "freshness_claim": "NO_PASS_CLAIM; HISTORICAL_EXCLUSION_UNIVERSE_INCOMPLETE"
+  },
+  "authorization_gate": "NO_AUTHORIZATION_UNTIL_MATERIALIZED_POPULATION_AND_FRESHNESS_PROOF_PASS",
+  "firewall": {
+    "model_inference_runs": 0,
+    "scientific_scores_computed": false,
+    "real_level2_outcomes_accessed": false,
+    "result_based_design_changes": 0,
+    "authorization": "NO_GO"
+  }
+}

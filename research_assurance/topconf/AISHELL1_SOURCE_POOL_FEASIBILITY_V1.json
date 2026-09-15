@@ -1,0 +1,83 @@
+{
+  "schema_version": "topconf.level2.aishell1-feasibility.v1",
+  "status": "AUDITED_METADATA_AND_WAV_HEADERS",
+  "corpus_id": "AISHELL-1",
+  "source_authority": "Beijing Shell Shell Technology Co.,Ltd via OpenSLR SLR33",
+  "official_page": "https://www.openslr.org/33/",
+  "license": "Apache License 2.0",
+  "language": "Mandarin Chinese",
+  "official_audio_archive": {
+    "url": "https://openslr.trmal.net/resources/33/data_aishell.tgz",
+    "declared_bytes": 15582913665,
+    "observed_archive_sha256": "A4A0313CDE0A933E0E01A451F77DE0A23D6C942F4694AF5BB7F40B9DC38143FE",
+    "archive_present": true
+  },
+  "official_resource_archive": {
+    "url": "https://openslr.trmal.net/resources/33/resource_aishell.tgz",
+    "sha256": "1A6749854456E9402BC7295767937367AFED1327799A5E1DF0ED64BAA5F77409"
+  },
+  "speaker_metadata": {
+    "path": "resource_aishell/speaker.info",
+    "rows": 400,
+    "unique_ids": 400,
+    "malformed_rows": 0,
+    "gender_values": [
+      "F",
+      "M"
+    ],
+    "missing_for_audio_speakers": []
+  },
+  "transcription": {
+    "path": "data_aishell/transcript/aishell_transcript_v0.8.txt",
+    "present": true,
+    "unique_ids": 141600,
+    "malformed_rows": 0,
+    "audio_rows_missing_transcript": 325
+  },
+  "full_audit": {
+    "path": "F:\\项目\\申请实验室  TTS项目\\datasets\\AISHELL-1\\aishell1_feasibility_full.json",
+    "sha256": "E20DA0D9C1281AD87C6FD36B079B70004C49F81CAF2ED79EC421380BA0E198A3",
+    "records_retained": 141925,
+    "eligible_transcript_complete_wav_files": 2750,
+    "eligible_wav_without_transcript_excluded": 11,
+    "eligible_transcript_complete_speakers": 300,
+    "source_audio_hashes_present": 2750,
+    "text_hashes_present": 2750
+  },
+  "frozen_filter": {
+    "duration_sec_inclusive": [
+      8,
+      30
+    ],
+    "sample_rate_hz": 16000,
+    "channels": 1,
+    "sample_width_bytes": 2,
+    "selection_is_model_free": true
+  },
+  "counts": {
+    "wav_files": 141925,
+    "valid_wav_files": 141925,
+    "invalid_wav_files": 0,
+    "all_speakers_from_audio": 400,
+    "eligible_wav_files": 2761,
+    "eligible_speakers": 300,
+    "split_wav_files": {
+      "train": 120418,
+      "dev": 14331,
+      "test": 7176
+    },
+    "split_eligible_wav_files": {
+      "train": 2127,
+      "dev": 224,
+      "test": 410
+    },
+    "format_counts": {
+      "16000Hz/1ch/2byte": 141925
+    }
+  },
+  "records": [],
+  "historical_usage": "NONE_FOUND_IN_REPOSITORY_SCAN; requires final exclusion-universe review",
+  "freshness_eligibility": "PENDING_COMPLETE_HISTORICAL_EXCLUSION_AND_CROSS_CORPUS_IDENTITY_REVIEW",
+  "model_inference_runs": 0,
+  "scientific_outcomes_computed": false
+}

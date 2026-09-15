@@ -37,6 +37,9 @@ Phase4 state is `PASS`.
 ## 2. Level-2 population and freshness binding
 
 ```text
+SOURCE_CORPUS_IDENTITY_FROZEN = NO
+AMENDMENT_REQUIRED = NO
+AMENDMENT_STATUS = NOT_REQUIRED_IMPLEMENTATION_ONLY
 LEVEL2_POPULATION_MANIFEST = LEVEL2_RQ1_POPULATION_MANIFEST_V1.json
 LEVEL2_POPULATION_MANIFEST_STATUS = BLOCKED_INSUFFICIENT_MATERIALIZATION_EVIDENCE
 LEVEL2_POPULATION_MANIFEST_SHA256 = E270B21842ECF0A1A287B51B3984CEB56A95C0C06DEB011060BDAAA3D2B3F516
@@ -57,12 +60,23 @@ FRESHNESS_POLICY = exclude WEEK1_5_HISTORICAL_PILOT and PHASE3T_PARTIALEDIT_V1.1
   prove source/session/speaker disjointness and generator/checkpoint lineage
 POPULATION = 2 independent Mandarin long-form source pools;
   400 primary sources / 120 speakers / 4 mechanisms / 40 reserve
+LEVEL2_POPULATION_MANIFEST_V2 = LEVEL2_RQ1_POPULATION_MANIFEST_V2.json
+LEVEL2_POPULATION_MANIFEST_V2_SHA256 = ED6FE30A4F9B7AEFA4C36821E04CB7E5F9B1780B20EE7ED9A0AA84F52B3955D0
+LEVEL2_POPULATION_MANIFEST_V2_INTERNAL_IDENTITY_SHA256 = FCFFEEC32F4CAB32DA53BFAD06C0BBBC6F1354AA87277DCE1B1A4EA8E6F90674
+LEVEL2_POPULATION_MANIFEST_V2_STATUS = MATERIALIZED_METADATA_CANDIDATE / POPULATION_VALIDATOR_PASS
+LEVEL2_FRESHNESS_MANIFEST_V2 = LEVEL2_FRESHNESS_MANIFEST_V2.json
+LEVEL2_FRESHNESS_MANIFEST_V2_SHA256 = BFD62914A0580FD96AFF1F2847727F016E0BE554AB4A9E3CDC4E418E26B94420
+LEVEL2_FRESHNESS_MANIFEST_V2_STATUS = BLOCKED_INSUFFICIENT_EVIDENCE / FRESHNESS_VALIDATOR_EXIT_2
+LEVEL2_V2_AUTHORIZATION = NO_GO
 ```
 
-No case-level freshness claim is made by the current template. The listed
-manifest hash binds the design template, not a dataset and not a result set.
-Actual authorization requires a newly materialized, independently checked
-freshness record.
+V1 remains the blocked template and is preserved. V2 is a metadata-only
+candidate population produced after AISHELL-1 capacity recovery. Its
+population validator passes the frozen 400/120/two-pool/4-mechanism/40-reserve
+contract, but its freshness validator fails closed because the historical
+exclusion universe is still partial. No case-level freshness PASS claim is
+made, and V2 does not authorize inference, evaluation, GT reveal, or namespace
+ownership.
 
 ## 3. Frozen baseline and score contracts
 
@@ -169,9 +183,12 @@ STOPPING_RULE = process complete frozen population/grid and every terminal ledge
 [PASS] Whether-A and Whether-B design contracts frozen
 [PASS] Synthetic governance dry run and fail-closed tests
 [PASS] AASIST checkpoint/license/runtime capability record
-[NO_GO] Level-2 materialization and freshness proof
-[BLOCKED] Frozen cardinality requires 400 sources / 120 speakers / 2 independent pools;
-  audited local AISHELL-3 resource provides only 532 eligible files / 112 speakers
+[PASS] AISHELL-1 capacity and read-only audio/transcript lineage audit
+[PASS] V2 metadata-only population materialization and population validator
+[NO_GO] V2 freshness proof; historical exclusion universe remains partial
+[PASS] Frozen cardinality requires 400 sources / 120 speakers / 2 independent pools;
+  V2 satisfies the cardinality and metadata allocation contract
+[BLOCKED] Corpus-level physical cross-corpus speaker identity is not directly verifiable
 [BLOCKED] Complete cross-dimensional historical exclusion universe
 [NOT_READY] Level-1 calibration manifest/hash for the final run
 [NOT_READY] Materialized blinded inference manifest/hash
@@ -180,13 +197,15 @@ STOPPING_RULE = process complete frozen population/grid and every terminal ledge
 [REVIEW] Model-specific final environment locks and all checkpoint hashes
 ```
 
-The final authorization decision remains `NO_GO`. Phase 4.5 recorded an
-explicit blocked materialization attempt and an `INSUFFICIENT_EVIDENCE`
-freshness verdict. The preregistration does not declare an execution-time
-population generation exception. No source-pool, case-list, split,
-non-overlap, generator-lineage, private-GT, or operator-time proof is therefore
-available for authorization. This is a Level-2 population authorization
-blocker, not a Phase4 design defect.
+The final authorization decision remains `NO_GO`. Phase 4.6 recovered enough
+audited AISHELL-1 capacity to materialize a V2 metadata candidate, while
+preserving the V1 blocked artifact. The V2 freshness validator returns
+`INSUFFICIENT_EVIDENCE` at the incomplete historical exclusion universe, and
+public metadata cannot prove physical cross-corpus speaker identity. The
+preregistration does not declare an execution-time population-generation
+exception. No source-pool, case-level non-overlap, generator-lineage,
+private-GT, or operator-time proof is therefore available for authorization.
+This remains a Level-2 authorization blocker, not a Phase4 design defect.
 
 ## 8. Explicit non-authorization state
 
@@ -195,8 +214,10 @@ AUTHORIZATION_STATUS = BLOCKED_LEVEL2_POPULATION
 FINAL_AUTHORIZATION_DECISION = NO_GO
 PHASE4_CLOSURE = PASS
 PHASE4_5_CLOSURE = BLOCKED_POPULATION_MATERIALIZATION
-POPULATION_MATERIALIZATION = FAIL
-LEVEL2_FRESHNESS = INSUFFICIENT_EVIDENCE
+PHASE4_6_CLOSURE = BLOCKED_POPULATION_RECOVERED_FRESHNESS_INSUFFICIENT
+POPULATION_MATERIALIZATION_V1 = BLOCKED
+POPULATION_MATERIALIZATION_V2 = PASS_METADATA_ONLY_CANDIDATE
+LEVEL2_FRESHNESS_V2 = INSUFFICIENT_EVIDENCE
 REAL_LEVEL2_OUTCOMES_ACCESSED = NO
 RQ1_CONFIRMATORY_EXECUTION_AUTHORIZED = NO
 RQ1_CONFIRMATORY_EXECUTION_STARTED = NO

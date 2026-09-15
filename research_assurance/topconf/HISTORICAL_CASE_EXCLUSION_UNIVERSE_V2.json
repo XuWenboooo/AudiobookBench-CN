@@ -1,0 +1,164 @@
+{
+  "schema_version": "topconf.level2.historical_case_exclusion.v2",
+  "status": "PARTIAL_RECONSTRUCTION_NOT_AUTHORIZING",
+  "purpose": "Best-effort case-level reconstruction before any Level-2 outcome; missing evidence remains explicit.",
+  "identity_dimensions": [
+    "case_id",
+    "pair_id",
+    "source_id",
+    "speaker_id",
+    "session_id",
+    "utterance_id",
+    "reference_audio_id",
+    "text_sha256",
+    "parent_asset_id",
+    "source_audio_sha256",
+    "generator_input_identity"
+  ],
+  "completeness_legend": {
+    "COMPLETE": "all required identity dimensions are available and checked",
+    "PARTIAL": "some IDs/counts are available but at least one required dimension is missing",
+    "UNKNOWN": "the repository does not expose a trustworthy identity/count projection"
+  },
+  "stages": [
+    {
+      "set_id": "WEEK1_PILOT",
+      "cases_known": 217,
+      "sources_known": 200,
+      "speakers_known": 12,
+      "speakers_tracked_in_source_csv": 5,
+      "lineage_known": "PARTIAL",
+      "evidence_source": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\data\\manifests\\week1_manifest.csv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\data\\manifests\\source_audio.csv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\results\\week1\\hashes.json",
+        "research_assurance/archive/PILOT_EVIDENCE_REGISTER.md"
+      ],
+      "completeness": "PARTIAL",
+      "identity_projection": "Tracked CSV exposes paths, sample/pair/source IDs, speaker, text ID, duration and split; archival chain states 480 raw sources and 12 speakers, but the complete cross-dimensional case universe is not available in this worktree.",
+      "status": "EXCLUDE_WITH_PARTIAL_IDENTITY"
+    },
+    {
+      "set_id": "WEEK2_PILOT",
+      "cases_known": 23,
+      "sources_known": 23,
+      "speakers_known": 12,
+      "lineage_known": "UNKNOWN",
+      "evidence_source": ["research_assurance/WEEK2_SCIENTIFIC_CLOSURE.md", "research_assurance/archive/PILOT_EVIDENCE_REGISTER.md"],
+      "completeness": "PARTIAL",
+      "identity_projection": "Closure-level population count and speaker count only; source/reference/text/parent identity rows are not imported.",
+      "status": "EXCLUDE_WITH_UNKNOWN_LINEAGE_FIELDS"
+    },
+    {
+      "set_id": "WEEK3_PILOT",
+      "cases_known": 23,
+      "sources_known": 23,
+      "speakers_known": 12,
+      "lineage_known": "UNKNOWN",
+      "evidence_source": ["research_assurance/WEEK3_FINAL_SCIENTIFIC_CLOSURE.md", "research_assurance/archive/PILOT_EVIDENCE_REGISTER.md"],
+      "completeness": "PARTIAL",
+      "identity_projection": "Same frozen 23-case population as the Week2/Week3 pilot lane is known by closure, but the complete cross-dimensional identity array is not imported.",
+      "status": "EXCLUDE_WITH_UNKNOWN_LINEAGE_FIELDS"
+    },
+    {
+      "set_id": "WEEK4_PILOT",
+      "cases_known": 48,
+      "sources_known": 48,
+      "speakers_known": 48,
+      "lineage_known": "PARTIAL",
+      "evidence_source": ["F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-Week5\\data\\manifests\\week4_population_manifest.json"],
+      "completeness": "PARTIAL",
+      "identity_projection": "The selected-case manifest exposes case/source/reference IDs, speakers, exact text, text hashes, source/reference audio hashes, paths, and selection metadata; session and parent lineage dimensions remain absent.",
+      "status": "EXCLUDE_WITH_PARTIAL_IDENTITY"
+    },
+    {
+      "set_id": "WEEK5_QUALIFICATION",
+      "cases_known": 92,
+      "sources_known": null,
+      "speakers_known": 12,
+      "lineage_known": "PARTIAL",
+      "evidence_source": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-Week5\\data\\manifests\\week5_exp2_qualification_population.json",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-Week5\\data\\manifests\\week5_exp5_qualification_population.json",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-Week5\\data\\manifests\\week5_exp6_qualification_population.json"
+      ],
+      "completeness": "PARTIAL",
+      "identity_projection": "Each of three qualification manifests lists 92 case labels and the same 12 speaker assignments; source audio, session, reference, text-hash, parent, and generator identities are not represented. Cross-manifest deduplication is not assumed.",
+      "status": "EXCLUDE_WITH_PARTIAL_IDENTITY"
+    },
+    {
+      "set_id": "PHASE3T_PARTIALEDIT_E1",
+      "cases_known": 42471,
+      "sources_known": 42471,
+      "speakers_known": 109,
+      "lineage_known": "PARTIAL",
+      "evidence_source": [
+        "results/topconf_phase3t/case_manifest.tsv",
+        "research_assurance/topconf/PHASE3T_RAW_OUTPUT_MANIFEST_V1.json",
+        "F:\\项目\\申请实验室  TTS项目\\topconf_phase3_cache\\PartialEdit_v1.1\\PartialEdit_E1E2.csv"
+      ],
+      "completeness": "PARTIAL",
+      "identity_projection": "All 42,471 case IDs and audio paths are countable; the external E1 CSV supplies source and speaker split context, but the full case/source/session/reference/text/parent projection is not materialized here.",
+      "status": "EXCLUDE_WITH_PARTIAL_IDENTITY"
+    },
+    {
+      "set_id": "MODEL_SELECTION_SETS",
+      "cases_known": null,
+      "sources_known": null,
+      "speakers_known": null,
+      "lineage_known": "UNKNOWN",
+      "evidence_source": ["research_assurance/topconf/PHASE4_CONFIRMATORY_DESIGN_DECISION_DOSSIER_V1.md", "research_assurance/topconf/LEVEL2_EXCLUSION_UNIVERSE_V1.json"],
+      "completeness": "UNKNOWN",
+      "identity_projection": "A complete hashed model-selection identity universe was not found.",
+      "status": "EXCLUDE_FAIL_CLOSED_UNTIL_RECONSTRUCTED"
+    },
+    {
+      "set_id": "METRIC_SELECTION_SETS",
+      "cases_known": null,
+      "sources_known": null,
+      "speakers_known": null,
+      "lineage_known": "UNKNOWN",
+      "evidence_source": ["research_assurance/topconf/PHASE4_CONFIRMATORY_DESIGN_DECISION_DOSSIER_V1.md", "research_assurance/topconf/LEVEL2_EXCLUSION_UNIVERSE_V1.json"],
+      "completeness": "UNKNOWN",
+      "identity_projection": "A complete hashed metric-selection identity universe was not found.",
+      "status": "EXCLUDE_FAIL_CLOSED_UNTIL_RECONSTRUCTED"
+    },
+    {
+      "set_id": "THRESHOLD_SELECTION_SETS",
+      "cases_known": null,
+      "sources_known": null,
+      "speakers_known": null,
+      "lineage_known": "UNKNOWN",
+      "evidence_source": ["research_assurance/topconf/TOPCONF_RQ1_CONFIRMATORY_PREREGISTRATION_V1.md", "research_assurance/topconf/LEVEL2_EXCLUSION_UNIVERSE_V1.json"],
+      "completeness": "UNKNOWN",
+      "identity_projection": "The final Level-1 calibration/test identity set is not consolidated into a hashed manifest.",
+      "status": "EXCLUDE_FAIL_CLOSED_UNTIL_RECONSTRUCTED"
+    },
+    {
+      "set_id": "WHETHER_A_DECISION_SET",
+      "cases_known": null,
+      "sources_known": null,
+      "speakers_known": null,
+      "lineage_known": "UNKNOWN",
+      "evidence_source": ["research_assurance/topconf/PHASE4_CONFIRMATORY_DESIGN_DECISION_DOSSIER_V1.md", "research_assurance/topconf/LEVEL2_EXCLUSION_UNIVERSE_V1.json"],
+      "completeness": "UNKNOWN",
+      "identity_projection": "Whether-A is frozen by design contract, but the complete identity projection of all prior decision/debugging inputs is not materialized.",
+      "status": "EXCLUDE_FAIL_CLOSED_UNTIL_RECONSTRUCTED"
+    },
+    {
+      "set_id": "WHETHER_B_CAPABILITY_SMOKE",
+      "cases_known": 0,
+      "sources_known": 0,
+      "speakers_known": 0,
+      "lineage_known": "COMPLETE",
+      "evidence_source": ["research_assurance/topconf/WHETHER_B_AASIST_CAPABILITY_SMOKE_V1.json"],
+      "completeness": "COMPLETE",
+      "identity_projection": "The smoke used a deterministic synthetic sinusoid and loaded no dataset source; source_ids=[] is explicit.",
+      "status": "EXCLUSION_EMPTY"
+    }
+  ],
+  "overall_completeness": "PARTIAL",
+  "authorization_effect": "INSUFFICIENT_FOR_FRESHNESS_PASS",
+  "real_level2_outcomes_accessed": false,
+  "model_inference_runs": 0
+}
