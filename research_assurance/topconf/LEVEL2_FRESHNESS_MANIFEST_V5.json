@@ -1,0 +1,244 @@
+{
+  "schema_version": "topconf.level2.freshness.v3",
+  "manifest_id": "TOPCONF_RQ1_LEVEL2_FRESH_V5",
+  "materialized": true,
+  "result_based_selection": false,
+  "level2_population_manifest": "LEVEL2_RQ1_POPULATION_MANIFEST_V3.json",
+  "level2_population_manifest_sha256": "AFCE602F7A1F77F07BC18F05B78CB717DCDE3BFB6FC35289A26AB23F9DE4F8E4",
+  "selection_record": "LEVEL2_NEW_POOL_A_SELECTION_RECORD_V1.md",
+  "selection_record_sha256": "3F3BE07DD837DCC718771C672015A676FD2ACBBC9539717833D91620DBD5DACB",
+  "source_pool_independence_proof": "LEVEL2_SOURCE_POOL_INDEPENDENCE_PROOF_V2.json",
+  "universe_references": {
+    "CASE_EXCLUSION": {
+      "path": "HISTORICAL_CASE_EXCLUSION_UNIVERSE_V3.json",
+      "sha256": "C1B94DDD99A691EA19509A3424D24801526A55635688F90DC69635C0D0C3D9E6",
+      "status": "PARTIAL",
+      "source_status": "PARTIAL_RECONSTRUCTION_WITH_PHASE3T_CASE_COMPLETENESS",
+      "evidence_sources": [
+        "HISTORICAL_CASE_EXCLUSION_UNIVERSE_V3.json",
+        "PHASE4_7_HISTORICAL_FRESHNESS_PROOF_V1.md",
+        "PHASE4_7_HISTORICAL_EXCLUSION_AND_FRESHNESS_CLOSURE.md"
+      ]
+    },
+    "SOURCE_EXCLUSION": {
+      "path": "HISTORICAL_SOURCE_EXCLUSION_UNIVERSE_V3.json",
+      "sha256": "91919B1DF4DDF47EE0D65DEEAB7E7BB9822725C8CF6FA0C46BF48B0339ACC58C",
+      "status": "PARTIAL",
+      "source_status": "PARTIAL_RECONSTRUCTION_WITH_DIRECT_HASHED_SOURCES",
+      "evidence_sources": [
+        "HISTORICAL_SOURCE_EXCLUSION_UNIVERSE_V3.json",
+        "PHASE4_7_HISTORICAL_FRESHNESS_PROOF_V1.md",
+        "PHASE4_7_HISTORICAL_EXCLUSION_AND_FRESHNESS_CLOSURE.md"
+      ]
+    },
+    "SPEAKER_USAGE": {
+      "path": "HISTORICAL_SPEAKER_USAGE_UNIVERSE_V1.json",
+      "sha256": "E04D35848465CD2BDE3E20704413D388D327DA798F907421197C5D2BF22747FC",
+      "status": "PARTIAL",
+      "source_status": "PARTIAL_RECONSTRUCTION",
+      "evidence_sources": [
+        "HISTORICAL_SPEAKER_USAGE_UNIVERSE_V1.json",
+        "PHASE4_7_HISTORICAL_FRESHNESS_PROOF_V1.md",
+        "PHASE4_7_HISTORICAL_EXCLUSION_AND_FRESHNESS_CLOSURE.md"
+      ]
+    },
+    "LINEAGE_EXCLUSION": {
+      "path": "HISTORICAL_LINEAGE_EXCLUSION_UNIVERSE_V1.json",
+      "sha256": "410D8436A2FB369E76399DA4DA4FC8BEA6A29212071CDFE9559EE4D0698A761F",
+      "status": "PARTIAL",
+      "source_status": "PARTIAL_RECONSTRUCTION_WITH_SOURCE_AUDIO_HASH_LINEAGE",
+      "evidence_sources": [
+        "HISTORICAL_LINEAGE_EXCLUSION_UNIVERSE_V1.json",
+        "PHASE4_7_HISTORICAL_FRESHNESS_PROOF_V1.md",
+        "PHASE4_7_HISTORICAL_EXCLUSION_AND_FRESHNESS_CLOSURE.md"
+      ]
+    }
+  },
+  "speaker_overlap_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT",
+  "comparison_counts": {
+    "case_id_overlap_count": 0,
+    "case_lineage_overlap_count": 0,
+    "source_overlap_count": 0,
+    "lineage_overlap_count": 0,
+    "speaker_overlap_count": 0,
+    "prohibited_speaker_overlap_count": 0,
+    "unknown_case_comparisons": 0,
+    "unknown_source_comparisons": 0,
+    "unknown_lineage_comparisons": 0
+  },
+  "comparison_scope": {
+    "population_cases_compared": 1600,
+    "population_sources_compared": 400,
+    "population_speakers_compared": 120,
+    "population_lineages_compared": 260,
+    "dimensions": [
+      "case_id",
+      "case_lineage",
+      "source_audio_sha256",
+      "parent_asset_id",
+      "speaker_key"
+    ],
+    "method": "exact identity comparison against all records present in the four Phase4.7 universes; no overlap observed"
+  },
+  "overlap_details": {
+    "case_id_overlap_ids": [],
+    "source_overlap_details": [],
+    "lineage_overlap_details": [],
+    "speaker_overlap_ids": []
+  },
+  "corpus_isolation": [
+    {
+      "corpus": "ALIMEETING_SLR119",
+      "pool_id": "SOURCE_POOL_A_ALIMEETING_SLR119",
+      "status": "PASS_POST_FREEZE_ACQUISITION",
+      "evidence_sources": [
+        "LEVEL2_NEW_POOL_A_PROJECT_ENTRY_PROOF_V1.json",
+        "LEVEL2_SOURCE_POOL_INDEPENDENCE_PROOF_V2.json"
+      ],
+      "path": "PATH_B_PROSPECTIVE_PROJECT_ENTRY",
+      "proof_strength": "STRONG",
+      "prior_use_status": "NO_PRIOR_PROJECT_USAGE_FOUND",
+      "project_entry_after_freeze": true,
+      "asset_lineage_binding": "BOUND",
+      "proof_checks": [
+        "UNIQUE_CORPUS_ARCHIVE_IDENTITY",
+        "OFFICIAL_SOURCE_PROVENANCE",
+        "ARCHIVE_OR_FILE_HASH",
+        "FIRST_GIT_REFERENCE",
+        "FIRST_MANIFEST_REFERENCE",
+        "FIRST_PROJECT_USE_REFERENCE",
+        "REPOSITORY_WIDE_HISTORICAL_SEARCH",
+        "ALIAS_PATH_ARCHIVE_SEARCH",
+        "NO_PRIOR_SCIENTIFIC_PROJECT_USAGE",
+        "ACQUISITION_PROJECT_ENTRY_TIMING",
+        "ASSET_LINEAGE_BOUND_TO_ARCHIVE_IDENTITY"
+      ],
+      "corpus_identity_proof": true,
+      "project_entry_proof": "LEVEL2_NEW_POOL_A_PROJECT_ENTRY_PROOF_V1.json",
+      "channel_semantics": {
+        "channel_type": "NEAR_FIELD_PARTICIPANT_HEADSET",
+        "audio_rendering": "MONO",
+        "sample_rate_hz": 16000,
+        "far_field_8ch_included": false
+      }
+    },
+    {
+      "corpus": "AISHELL1_SLR33",
+      "pool_id": "SOURCE_POOL_B_AISHELL1",
+      "status": "PASS_POST_FREEZE_ACQUISITION",
+      "evidence_sources": [
+        "AISHELL1_PROJECT_ENTRY_PROOF_V1.json",
+        "LEVEL2_SOURCE_POOL_INDEPENDENCE_PROOF_V2.json"
+      ],
+      "path": "PATH_B_PROSPECTIVE_PROJECT_ENTRY",
+      "proof_strength": "STRONG",
+      "prior_use_status": "NO_PRIOR_PROJECT_USAGE_FOUND",
+      "project_entry_after_freeze": true,
+      "asset_lineage_binding": "BOUND",
+      "proof_checks": [
+        "UNIQUE_CORPUS_ARCHIVE_IDENTITY",
+        "OFFICIAL_SOURCE_PROVENANCE",
+        "ARCHIVE_OR_FILE_HASH",
+        "FIRST_GIT_REFERENCE",
+        "FIRST_MANIFEST_REFERENCE",
+        "FIRST_PROJECT_USE_REFERENCE",
+        "REPOSITORY_WIDE_HISTORICAL_SEARCH",
+        "ALIAS_PATH_ARCHIVE_SEARCH",
+        "NO_PRIOR_SCIENTIFIC_PROJECT_USAGE",
+        "ACQUISITION_PROJECT_ENTRY_TIMING",
+        "ASSET_LINEAGE_BOUND_TO_ARCHIVE_IDENTITY"
+      ],
+      "corpus_identity_proof": true,
+      "project_entry_proof": "AISHELL1_PROJECT_ENTRY_PROOF_V1.json",
+      "channel_semantics": {
+        "channel_type": "SINGLE_SPEAKER_MONO",
+        "audio_rendering": "MONO",
+        "sample_rate_hz": 16000,
+        "far_field_8ch_included": false
+      }
+    }
+  ],
+  "new_pool_a_historical_comparison": {
+    "source_id_overlap_count": 0,
+    "source_audio_sha256_overlap_count": 0,
+    "parent_lineage_overlap_count": 0,
+    "case_id_overlap_count": 0,
+    "speaker_overlap_count": 0,
+    "prohibited_speaker_overlap_count": 0,
+    "result": "NO_OVERLAP_OBSERVED_IN_AVAILABLE_UNIVERSES"
+  },
+  "prior_v2_population_comparison": {
+    "prior_manifest": "LEVEL2_RQ1_POPULATION_MANIFEST_V2.json",
+    "prior_manifest_sha256": "ED6FE30A4F9B7AEFA4C36821E04CB7E5F9B1780B20EE7ED9A0AA84F52B3955D0",
+    "case_id_overlap_count": 0,
+    "source_id_overlap_count": 200,
+    "source_audio_sha256_overlap_count": 200,
+    "parent_asset_overlap_count": 200,
+    "speaker_overlap_count": 60,
+    "retained_pool_b_overlap_expected": true,
+    "retained_pool_b_source_count": 200,
+    "retired_pool_a_source_overlap_count": 0,
+    "retired_pool_a_speaker_overlap_count": 0,
+    "retained_pool_b_hashes_checked": 200
+  },
+  "decision": {
+    "reason": "STRONG_POST_FREEZE_PROJECT_ENTRY_FOR_ALL_POOLS",
+    "stop_rule": "STOP_AFTER_ONE_V3_AND_ONE_V4_AUDIT",
+    "closure": "PASS_WITHOUT_AUTHORIZATION",
+    "authorization": "PENDING_FINAL_HUMAN_REVIEW",
+    "real_level2_outcomes_accessed": false,
+    "freshness_path": "PATH_B_PROSPECTIVE_PROJECT_ENTRY"
+  },
+  "firewall": {
+    "model_inference_runs": 0,
+    "scientific_scores_computed": false,
+    "real_level2_outcomes_accessed": false,
+    "result_based_selection": false,
+    "rq2_invoked": false,
+    "rq3_invoked": false
+  },
+  "previous_freshness_manifest": "LEVEL2_FRESHNESS_MANIFEST_V4.json",
+  "previous_freshness_manifest_sha256": "9DFAEB6A699F7463914F6A91047A8A638C68C3C6439FD874616D3F2E5FF6D1F3",
+  "freshness_policy_id": "PHASE4_9R_FRESHNESS_POLICY_CLARIFICATION_V1",
+  "freshness_evidence_path": "PATH_B_PROSPECTIVE_PROJECT_ENTRY",
+  "policy_clarification": "PHASE4_9R_FRESHNESS_POLICY_CLARIFICATION_V1.md",
+  "policy_clarification_sha256": "319503B1CBB68FD3B6BFD0CC10779F6A3B88E501D2B7AD62352038ADD09556A7",
+  "preregistration_amendment": "TOPCONF_RQ1_CONFIRMATORY_PREREGISTRATION_AMENDMENT_V1.md",
+  "preregistration_amendment_sha256": "A50260F3D0823A812C14F71C31AA61492154C96C52D599EBA79EDBEF499B3731",
+  "independent_audit_commit": "58e036d",
+  "independent_audit_report": "PHASE4_9_INDEPENDENT_FRESHNESS_SEMANTICS_AUDIT_V1.md",
+  "independent_audit_report_sha256": "C4B9FB83722A19760FEFE53297D732F11FEF9AC43A3FEBDA187D157405FFB10F",
+  "validator_commit": "aa07e98",
+  "validator_version": "validate_level2_freshness_v3:phase4_9r",
+  "historical_universe_relevance": {
+    "SOURCE_POOL_A_ALIMEETING_SLR119": {
+      "CASE_EXCLUSION": "IRRELEVANT_BY_STRONG_POST_FREEZE_PROJECT_ENTRY",
+      "SOURCE_EXCLUSION": "IRRELEVANT_BY_STRONG_POST_FREEZE_PROJECT_ENTRY",
+      "SPEAKER_USAGE": "IRRELEVANT_BY_STRONG_POST_FREEZE_PROJECT_ENTRY",
+      "LINEAGE_EXCLUSION": "IRRELEVANT_BY_STRONG_POST_FREEZE_PROJECT_ENTRY"
+    },
+    "SOURCE_POOL_B_AISHELL1": {
+      "CASE_EXCLUSION": "IRRELEVANT_BY_STRONG_POST_FREEZE_PROJECT_ENTRY",
+      "SOURCE_EXCLUSION": "IRRELEVANT_BY_STRONG_POST_FREEZE_PROJECT_ENTRY",
+      "SPEAKER_USAGE": "IRRELEVANT_BY_STRONG_POST_FREEZE_PROJECT_ENTRY",
+      "LINEAGE_EXCLUSION": "IRRELEVANT_BY_STRONG_POST_FREEZE_PROJECT_ENTRY"
+    }
+  },
+  "provenance_bindings": {
+    "population_manifest": "LEVEL2_RQ1_POPULATION_MANIFEST_V3.json",
+    "population_manifest_sha256": "AFCE602F7A1F77F07BC18F05B78CB717DCDE3BFB6FC35289A26AB23F9DE4F8E4",
+    "previous_freshness_manifest": "LEVEL2_FRESHNESS_MANIFEST_V4.json",
+    "previous_freshness_manifest_sha256": "9DFAEB6A699F7463914F6A91047A8A638C68C3C6439FD874616D3F2E5FF6D1F3",
+    "independent_audit_report": "PHASE4_9_INDEPENDENT_FRESHNESS_SEMANTICS_AUDIT_V1.md",
+    "independent_audit_report_sha256": "C4B9FB83722A19760FEFE53297D732F11FEF9AC43A3FEBDA187D157405FFB10F",
+    "policy_clarification": "PHASE4_9R_FRESHNESS_POLICY_CLARIFICATION_V1.md",
+    "policy_clarification_sha256": "319503B1CBB68FD3B6BFD0CC10779F6A3B88E501D2B7AD62352038ADD09556A7",
+    "preregistration_amendment": "TOPCONF_RQ1_CONFIRMATORY_PREREGISTRATION_AMENDMENT_V1.md",
+    "preregistration_amendment_sha256": "A50260F3D0823A812C14F71C31AA61492154C96C52D599EBA79EDBEF499B3731",
+    "validator_commit": "aa07e98"
+  },
+  "status": "PASS",
+  "freshness_verdict": "PASS",
+  "manifest_hash_scope": "canonical JSON excluding manifest_sha256",
+  "manifest_sha256": "52B6B9B872B619DD6EBC7163EDE5FAC28D7B8CE970B87AD2C0D4C0ED99E92B84"
+}
