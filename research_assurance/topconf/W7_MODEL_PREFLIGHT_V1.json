@@ -1,0 +1,93 @@
+{
+  "schema_version": "topconf.w7.model_preflight.v1",
+  "audit_date": "2026-09-15",
+  "status": "BLOCKED_INCOMPLETE_LOCALIZER_SET",
+  "scope": "load, smoke, output-contract and failure-propagation checks only; no W7 scientific inference",
+  "required_fields": [
+    "CHECKPOINT_IDENTITY",
+    "STRICT_LOAD",
+    "RUNTIME",
+    "SMOKE_INFERENCE",
+    "OUTPUT_SCHEMA",
+    "TIMESTAMP_SEMANTICS",
+    "UNIFIED_ADAPTER",
+    "FAILURE_PROPAGATION"
+  ],
+  "records": [
+    {
+      "model_id": "CFPRF",
+      "paradigm_id": "P2_FRAME_PLUS_PROPOSAL_REFINEMENT",
+      "eligibility": "W7_LOCALIZER_ELIGIBLE",
+      "CHECKPOINT_IDENTITY": "PASS",
+      "STRICT_LOAD": "PASS",
+      "RUNTIME": "PASS; Python 3.10.11, torch 2.2.2+cu121, fairseq 1.0.0a0, RTX 4060",
+      "SMOKE_INFERENCE": "PASS; authorized bounded FDN/PRN smoke",
+      "OUTPUT_SCHEMA": "PASS; native FDN scores, boundary scores and PRN proposals",
+      "TIMESTAMP_SEMANTICS": "PASS; 20 ms supports and official proposal seconds",
+      "UNIFIED_ADAPTER": "PASS; phase3t_adapter_v1",
+      "FAILURE_PROPAGATION": "PASS; 16 explicit MODEL_INFERENCE_FAILURE terminal rows, no silent deletion",
+      "evidence": [
+        "research_assurance/topconf/PHASE3T_RAW_OUTPUT_MANIFEST_V1.json",
+        "research_assurance/topconf/PHASE3T_CONTROLLED_REPRODUCTION_CLOSURE.md"
+      ]
+    },
+    {
+      "model_id": "MultiResoModel-Simple",
+      "paradigm_id": "P3_MULTI_RESOLUTION_FRAME",
+      "eligibility": "W7_LOCALIZER_ELIGIBLE",
+      "CHECKPOINT_IDENTITY": "PASS; author-linked public reimplementation, explicitly not paper-exact",
+      "STRICT_LOAD": "PASS; zero missing and zero unexpected",
+      "RUNTIME": "PASS; Python 3.10.11, torch 1.13.1+cu117, fairseq 0.12.2, RTX 4060",
+      "SMOKE_INFERENCE": "PASS; exactly 3 deterministic E1 samples, finite outputs",
+      "OUTPUT_SCHEMA": "PASS; utterance score plus six native temporal scales",
+      "TIMESTAMP_SEMANTICS": "PASS; native units 20/40/80/160/320/640 ms preserved",
+      "UNIFIED_ADAPTER": "PASS; six-scale canonical adapter",
+      "FAILURE_PROPAGATION": "PASS; 33 explicit AUDIO_LOAD_FAILURE terminal rows, no silent deletion",
+      "evidence": [
+        "research_assurance/topconf/PHASE3V_CHECKPOINT_MANIFEST_V1.json",
+        "research_assurance/topconf/PHASE3T_RAW_OUTPUT_MANIFEST_V1.json"
+      ]
+    },
+    {
+      "model_id": "BAM",
+      "paradigm_id": "P4_BOUNDARY_AWARE_FRAME",
+      "eligibility": "BLOCKED",
+      "CHECKPOINT_IDENTITY": "BLOCKED",
+      "STRICT_LOAD": "NOT_RUN",
+      "RUNTIME": "NOT_QUALIFIED",
+      "SMOKE_INFERENCE": "NOT_RUN",
+      "OUTPUT_SCHEMA": "UNVERIFIED",
+      "TIMESTAMP_SEMANTICS": "UNVERIFIED",
+      "UNIFIED_ADAPTER": "NOT_IMPLEMENTED",
+      "FAILURE_PROPAGATION": "NOT_RUN"
+    },
+    {
+      "model_id": "SAL",
+      "paradigm_id": "P5_SEGMENT_AWARE_SEQUENCE",
+      "eligibility": "BLOCKED",
+      "CHECKPOINT_IDENTITY": "BLOCKED_CHECKPOINT_UNAVAILABLE",
+      "STRICT_LOAD": "NOT_RUN",
+      "RUNTIME": "NOT_QUALIFIED",
+      "SMOKE_INFERENCE": "NOT_RUN",
+      "OUTPUT_SCHEMA": "UNVERIFIED",
+      "TIMESTAMP_SEMANTICS": "UNVERIFIED",
+      "UNIFIED_ADAPTER": "NOT_IMPLEMENTED",
+      "FAILURE_PROPAGATION": "NOT_RUN"
+    },
+    {
+      "model_id": "TRACE",
+      "paradigm_id": "P6_TRAJECTORY_DERIVATIVE",
+      "eligibility": "BLOCKED_REIMPLEMENTATION_REQUIRED",
+      "CHECKPOINT_IDENTITY": "UNVERIFIED",
+      "STRICT_LOAD": "NOT_RUN",
+      "RUNTIME": "NOT_QUALIFIED",
+      "SMOKE_INFERENCE": "NOT_RUN",
+      "OUTPUT_SCHEMA": "UNVERIFIED",
+      "TIMESTAMP_SEMANTICS": "UNVERIFIED",
+      "UNIFIED_ADAPTER": "NOT_IMPLEMENTED",
+      "FAILURE_PROPAGATION": "NOT_RUN"
+    }
+  ],
+  "overall_model_preflight_pass": false,
+  "overall_reason": "Only two localization paradigms currently satisfy the full W7 preflight; the W6 four-paradigm gate is not met."
+}
