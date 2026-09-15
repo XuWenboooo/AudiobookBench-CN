@@ -487,8 +487,12 @@ def _overlap_counts(population: Mapping[str, Any], exclusion_sets: Iterable[Mapp
 def validate_level2_freshness(
     population: Mapping[str, Any],
     freshness: Mapping[str, Any],
+    *,
+    universes: Mapping[str, Mapping[str, Any]] | None = None,
 ) -> dict[str, Any]:
     """Validate a case/lineage freshness claim, failing closed on gaps."""
+    if freshness.get("schema_version") == "topconf.level2.freshness.v3":
+        return validate_level2_freshness_v3(population, freshness, universes=universes)
     if population.get("materialized") is not True or population.get("status") != "MATERIALIZED":
         raise FreshnessInsufficientEvidence("population is not materialized")
     if freshness.get("schema_version") != "topconf.level2.freshness.v1":
@@ -535,3 +539,272 @@ def validate_level2_freshness(
     if freshness.get("freshness_verdict") != "PASS" or freshness.get("status") != "PASS":
         raise FreshnessInsufficientEvidence("freshness verdict is not PASS")
     return {"status": "PASS", "overlap_counts": overlaps}
+
+
+V3_UNIVERSES = (
+    "CASE_EXCLUSION",
+    "SOURCE_EXCLUSION",
+    "SPEAKER_USAGE",
+    "LINEAGE_EXCLUSION",
+)
+V3_COMPLETENESS = frozenset({"COMPLETE", "PARTIAL", "UNKNOWN", "COMPLETE_EXCLUSION_EMPTY"})
+
+
+def _v3_records(universe: Mapping[str, Any], universe_id: str) -> list[dict[str, Any]]:
+    records = universe.get("records")
+    if not isinstance(records, list) or not all(isinstance(row, Mapping) for row in records):
+        raise FreshnessInsufficientEvidence(f"{universe_id} records are unavailable")
+    return [dict(row) for row in records]
+
+
+def _v3_speaker_key(row: Mapping[str, Any]) -> str | None:
+    explicit = row.get("speaker_key")
+    if isinstance(explicit, str) and explicit.strip():
+        return explicit
+    speaker = row.get("speaker_id")
+    if not isinstance(speaker, str) or not speaker.strip():
+        return None
+    corpus = row.get("corpus") or row.get("dataset") or row.get("speaker_namespace")
+    if isinstance(corpus, str) and corpus.strip():
+        return f"{corpus}:{speaker}"
+    return speaker
+
+
+def _v3_population_speaker_key(row: Mapping[str, Any]) -> str | None:
+    speaker = row.get("speaker_id")
+    if not isinstance(speaker, str) or not speaker.strip():
+        return None
+    if speaker.startswith("AISHELL3_"):
+        return f"AISHELL3:{speaker.removeprefix('AISHELL3_')}"
+    if speaker.startswith("AISHELL1_"):
+        return f"AISHELL1:{speaker.removeprefix('AISHELL1_')}"
+    return speaker
+
+
+def _v3_nonempty_strings(row: Mapping[str, Any], fields: Iterable[str]) -> set[str]:
+    return {
+        str(row[field])
+        for field in fields
+        if isinstance(row.get(field), str) and row[field].strip()
+    }
+
+
+def _v3_comparisons(
+    population: Mapping[str, Any],
+    universes: Mapping[str, Mapping[str, Any]],
+) -> dict[str, Any]:
+    sources = _records(population, "sources")
+    cases = _records(population, "case_records")
+    case_history = _v3_records(universes["CASE_EXCLUSION"], "CASE_EXCLUSION")
+    source_history = _v3_records(universes["SOURCE_EXCLUSION"], "SOURCE_EXCLUSION")
+    speaker_history = _v3_records(universes["SPEAKER_USAGE"], "SPEAKER_USAGE")
+    lineage_history = _v3_records(universes["LINEAGE_EXCLUSION"], "LINEAGE_EXCLUSION")
+
+    historical_case_ids = {
+        str(row["case_id"])
+        for row in case_history
+        if isinstance(row.get("case_id"), str) and row["case_id"].strip()
+    }
+    population_case_ids = {
+        str(row["case_id"])
+        for row in cases
+        if isinstance(row.get("case_id"), str) and row["case_id"].strip()
+    }
+    case_id_overlap = population_case_ids.intersection(historical_case_ids)
+
+    historical_source_keys: dict[str, list[dict[str, Any]]] = {}
+    for row in source_history:
+        for key in _v3_nonempty_strings(row, ("source_audio_sha256", "source_id")):
+            historical_source_keys.setdefault(key.lower(), []).append(row)
+    historical_lineage_keys: dict[str, list[dict[str, Any]]] = {}
+    for row in lineage_history:
+        for key in _v3_nonempty_strings(row, ("source_audio_sha256", "parent_asset_id", "lineage_id")):
+            historical_lineage_keys.setdefault(key.lower(), []).append(row)
+
+    source_overlaps: list[dict[str, Any]] = []
+    lineage_overlaps: list[dict[str, Any]] = []
+    lineage_overlap_case_ids: set[str] = set()
+    overlap_speakers: set[str] = set()
+    for source in sources:
+        source_keys = _v3_nonempty_strings(source, ("source_audio_sha256", "source_id"))
+        matched_source_rows: list[dict[str, Any]] = []
+        for key in source_keys:
+            matched_source_rows.extend(historical_source_keys.get(key.lower(), []))
+        if matched_source_rows:
+            source_overlaps.append({
+                "population_source_id": source.get("source_id"),
+                "population_speaker_id": source.get("speaker_id"),
+                "source_audio_sha256": source.get("source_audio_sha256"),
+                "historical_matches": matched_source_rows,
+            })
+            speaker_key = _v3_population_speaker_key(source)
+            if speaker_key:
+                overlap_speakers.add(speaker_key)
+
+        lineage_keys = _v3_nonempty_strings(source, ("source_audio_sha256", "parent_asset_id"))
+        matched_lineage_rows: list[dict[str, Any]] = []
+        for key in lineage_keys:
+            matched_lineage_rows.extend(historical_lineage_keys.get(key.lower(), []))
+        if matched_lineage_rows:
+            lineage_overlaps.append({
+                "population_source_id": source.get("source_id"),
+                "population_speaker_id": source.get("speaker_id"),
+                "source_audio_sha256": source.get("source_audio_sha256"),
+                "historical_matches": matched_lineage_rows,
+            })
+            speaker_key = _v3_population_speaker_key(source)
+            if speaker_key:
+                overlap_speakers.add(speaker_key)
+            source_id = source.get("source_id")
+            if isinstance(source_id, str):
+                lineage_overlap_case_ids.update(
+                    str(row["case_id"])
+                    for row in cases
+                    if row.get("source_id") == source_id and isinstance(row.get("case_id"), str)
+                )
+
+    population_speakers = {
+        key
+        for key in (_v3_population_speaker_key(row) for row in sources)
+        if key is not None
+    }
+    historical_speakers = {
+        key
+        for key in (_v3_speaker_key(row) for row in speaker_history)
+        if key is not None
+    }
+    speaker_overlap = population_speakers.intersection(historical_speakers)
+
+    return {
+        "case_id_overlap_count": len(case_id_overlap),
+        "case_id_overlap_ids": sorted(case_id_overlap),
+        "case_lineage_overlap_count": len(lineage_overlap_case_ids),
+        "source_overlap_count": len({row["population_source_id"] for row in source_overlaps}),
+        "lineage_overlap_count": len({row["population_source_id"] for row in lineage_overlaps}),
+        "speaker_overlap_count": len(speaker_overlap),
+        "prohibited_speaker_overlap_count": len(speaker_overlap.intersection(overlap_speakers)),
+        "source_overlap_details": source_overlaps,
+        "lineage_overlap_details": lineage_overlaps,
+        "speaker_overlap_ids": sorted(speaker_overlap),
+    }
+
+
+def validate_level2_freshness_v3(
+    population: Mapping[str, Any],
+    freshness: Mapping[str, Any],
+    universes: Mapping[str, Mapping[str, Any]] | None = None,
+) -> dict[str, Any]:
+    """Validate V2 freshness against separate historical case/source/lineage universes.
+
+    The function returns a detailed PASS, FAIL, or INSUFFICIENT_EVIDENCE
+    summary.  It never turns missing historical identity into zero overlap.
+    """
+    if population.get("materialized") is not True or population.get("status") != "MATERIALIZED":
+        raise FreshnessInsufficientEvidence("population is not materialized")
+    if freshness.get("schema_version") != "topconf.level2.freshness.v3":
+        raise FreshnessValidationError("wrong V3 freshness schema")
+    if freshness.get("result_based_selection") is not False:
+        raise FreshnessValidationError("freshness record permits result-based selection")
+
+    references = freshness.get("universe_references")
+    if not isinstance(references, Mapping):
+        raise FreshnessInsufficientEvidence("V3 universe references are unavailable")
+    if universes is None:
+        embedded = freshness.get("embedded_universes")
+        universes = embedded if isinstance(embedded, Mapping) else None
+    if universes is None:
+        raise FreshnessInsufficientEvidence("V3 historical universes were not supplied")
+
+    completeness: dict[str, str] = {}
+    for universe_id in V3_UNIVERSES:
+        reference = references.get(universe_id)
+        universe = universes.get(universe_id)
+        if not isinstance(reference, Mapping) or not isinstance(universe, Mapping):
+            raise FreshnessInsufficientEvidence(f"missing V3 universe: {universe_id}")
+        status = reference.get("status") or universe.get("status")
+        if status not in V3_COMPLETENESS:
+            raise FreshnessValidationError(f"invalid V3 completeness status: {universe_id}")
+        completeness[universe_id] = str(status)
+        evidence = reference.get("evidence_sources") or universe.get("evidence_sources")
+        if status != "COMPLETE_EXCLUSION_EMPTY" and (not isinstance(evidence, list) or not evidence):
+            raise FreshnessInsufficientEvidence(f"missing evidence source: {universe_id}")
+        _v3_records(universe, universe_id)
+
+    isolation_records = freshness.get("corpus_isolation", [])
+    if not isinstance(isolation_records, list):
+        raise FreshnessValidationError("invalid V3 corpus isolation evidence")
+    for index, record in enumerate(isolation_records):
+        if not isinstance(record, Mapping):
+            raise FreshnessValidationError(f"invalid V3 corpus isolation record: {index}")
+        if record.get("status") not in {
+            "PASS_POST_FREEZE_ACQUISITION",
+            "NO_PRIOR_PROJECT_USAGE_FOUND",
+            "FAIL_PRIOR_USAGE_FOUND",
+        }:
+            raise FreshnessValidationError(f"invalid V3 corpus isolation status: {index}")
+        if not isinstance(record.get("evidence_sources"), list) or not record["evidence_sources"]:
+            raise FreshnessInsufficientEvidence(f"missing evidence source: corpus_isolation[{index}]")
+
+    comparison = _v3_comparisons(population, universes)
+    declared = freshness.get("comparison_counts")
+    if not isinstance(declared, Mapping):
+        raise FreshnessInsufficientEvidence("V3 comparison counts are unavailable")
+    count_fields = (
+        "case_id_overlap_count", "case_lineage_overlap_count", "source_overlap_count",
+        "lineage_overlap_count", "speaker_overlap_count", "prohibited_speaker_overlap_count",
+        "unknown_case_comparisons", "unknown_source_comparisons", "unknown_lineage_comparisons",
+    )
+    for field in count_fields:
+        if field in comparison:
+            observed = comparison[field]
+            if declared.get(field) != observed:
+                raise FreshnessValidationError(f"declared V3 count mismatch: {field}")
+        else:
+            value = declared.get(field)
+            if not isinstance(value, int) or isinstance(value, bool) or value < 0:
+                raise FreshnessValidationError(f"invalid V3 count: {field}")
+
+    prohibited = (
+        comparison["case_id_overlap_count"]
+        or comparison["case_lineage_overlap_count"]
+        or comparison["source_overlap_count"]
+        or comparison["lineage_overlap_count"]
+    )
+    speaker_policy = freshness.get("speaker_overlap_policy")
+    if speaker_policy == "PROHIBIT_ALL_SPEAKER_REUSE":
+        prohibited = prohibited or comparison["speaker_overlap_count"]
+    elif speaker_policy == "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT":
+        prohibited = prohibited or comparison["prohibited_speaker_overlap_count"]
+    else:
+        raise FreshnessValidationError("missing or unsupported V3 speaker overlap policy")
+
+    unknown_total = sum(
+        int(declared[field])
+        for field in ("unknown_case_comparisons", "unknown_source_comparisons", "unknown_lineage_comparisons")
+    )
+    if prohibited:
+        status = "FAIL"
+        verdict = "FAIL"
+    elif unknown_total or any(value in {"PARTIAL", "UNKNOWN"} for value in completeness.values()):
+        status = "INSUFFICIENT_EVIDENCE"
+        verdict = "INSUFFICIENT_EVIDENCE"
+    else:
+        status = "PASS"
+        verdict = "PASS"
+    declared_verdict = freshness.get("freshness_verdict")
+    if declared_verdict != verdict:
+        raise FreshnessValidationError("declared V3 freshness verdict does not match evidence")
+
+    return {
+        "status": status,
+        "freshness_verdict": verdict,
+        "completeness": completeness,
+        "comparison_counts": dict(declared),
+        "overlap_details": {
+            "case_id_overlap_ids": comparison["case_id_overlap_ids"],
+            "source_overlap_details": comparison["source_overlap_details"],
+            "lineage_overlap_details": comparison["lineage_overlap_details"],
+            "speaker_overlap_ids": comparison["speaker_overlap_ids"],
+        },
+        "corpus_isolation": isolation_records,
+    }

@@ -1,0 +1,95 @@
+{
+  "schema_version": "topconf.level2.aishell1.project_entry_proof.v1",
+  "status": "NO_PRIOR_PROJECT_USAGE_FOUND_POST_FREEZE_ACQUISITION_EVIDENCE",
+  "corpus": "AISHELL-1",
+  "protocol_freeze_commit": "2797bf0",
+  "phase4_6_entry_commit": "ad58622667098f02b119192e1d5a7c93e0aef77d",
+  "first_filesystem_evidence": "2017-06-21T04:36:49+00:00",
+  "filesystem_evidence": [
+    {
+      "path": "F:\\项目\\申请实验室  TTS项目\\datasets\\AISHELL-1\\extracted\\data_aishell\\transcript\\aishell_transcript_v0.8.txt",
+      "bytes": 10091431,
+      "sha256": "B5F33B9E0B47548E20A5EA4E504297F80DF41D559133924C4E5B7B544C15B5C4",
+      "filesystem_mtime": "2017-07-04T16:01:25+00:00"
+    },
+    {
+      "path": "F:\\项目\\申请实验室  TTS项目\\datasets\\AISHELL-1\\extracted\\resource_aishell\\speaker.info",
+      "bytes": 2800,
+      "sha256": "569CEF88F7FB1C3173CF3A45B00B4659B427D90AF120AF91513A2C6F151F7E08",
+      "filesystem_mtime": "2017-06-21T04:36:49+00:00"
+    }
+  ],
+  "archive_hash_from_audit": "A4A0313CDE0A933E0E01A451F77DE0A23D6C942F4694AF5BB7F40B9DC38143FE",
+  "search_result": "NO_PRIOR_PROJECT_USAGE_FOUND",
+  "search_scope": {
+    "topconf_all_refs": {
+      "aishell1_or_slr33_matches_before_phase4_6": [],
+      "all_matches": [
+        {
+          "commit": "ad58622667098f02b119192e1d5a7c93e0aef77d",
+          "date": "2026-09-15 13:37:50 +0800",
+          "subject": "topconf: close Phase 4.6 source pool recovery"
+        }
+      ]
+    },
+    "main_all_refs": [
+      {
+        "commit": "ad58622667098f02b119192e1d5a7c93e0aef77d",
+        "date": "2026-09-15 13:37:50 +0800",
+        "subject": "topconf: close Phase 4.6 source pool recovery"
+      }
+    ],
+    "week5_all_refs": [
+      {
+        "commit": "ad58622667098f02b119192e1d5a7c93e0aef77d",
+        "date": "2026-09-15 13:37:50 +0800",
+        "subject": "topconf: close Phase 4.6 source pool recovery"
+      }
+    ],
+    "external_text_scan_paths": [
+      "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\AISHELL1_SOURCE_POOL_FEASIBILITY_V1.json",
+      "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\LEVEL2_RQ1_POPULATION_MANIFEST_V2.json",
+      "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\LEVEL2_SOURCE_POOL_FEASIBILITY_MATRIX_V1.md",
+      "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\LEVEL2_SOURCE_POOL_INDEPENDENCE_PROOF_V1.json",
+      "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE4_6_SOURCE_POOL_RECOVERY_CLOSURE.md",
+      "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE4_6_VALIDATION_RECORD_V1.md",
+      "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\RQ1_CONFIRMATORY_EXECUTION_AUTHORIZATION_V1.md",
+      "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\src\\audiobookbench\\topconf\\level2\\materialization.py",
+      "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\tests\\topconf\\test_level2_freshness_v3.py",
+      "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\tools\\topconf\\audit_aishell1_feasibility.py",
+      "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\tools\\topconf\\download_aishell1_range_parts.ps1",
+      "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\tools\\topconf\\materialize_level2_population_v2.py",
+      "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\tools\\topconf\\reconstruct_historical_exclusions_v3.py",
+      "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\tools\\topconf\\resume_aishell1_range_parts.ps1"
+    ],
+    "worktrees_checked": [
+      "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN",
+      "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-Week5",
+      "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness",
+      "F:\\项目\\申请实验室  TTS项目\\topconf_phase3t_integrity_prep",
+      "F:\\项目\\申请实验室  TTS项目\\topconf_phase3t_multireso_worker",
+      "F:\\项目\\申请实验室  TTS项目\\topconf_phase3t_multireso_worker_r2",
+      "F:\\项目\\申请实验室  TTS项目\\topconf_phase4_reconcile_prep",
+      "F:\\项目\\申请实验室  TTS项目\\topconf_rq1_prefreeze"
+    ],
+    "search_terms": [
+      "AISHELL-1",
+      "AISHELL1",
+      "SLR33",
+      "data_aishell",
+      "speaker IDs",
+      "archive names",
+      "paths",
+      "hashes"
+    ],
+    "deleted_history_checked": true
+  },
+  "interpretation": "This supports post-freeze acquisition and no prior project reference was found; it is not an absolute claim that the corpus never existed outside the searched evidence.",
+  "limitations": [
+    "filesystem timestamps are local metadata",
+    "public corpus metadata cannot prove physical human identity across corpora",
+    "absence from incomplete logs is not treated as non-use"
+  ],
+  "model_inference_runs": 0,
+  "scientific_outcomes_accessed": false
+}

@@ -1,0 +1,2733 @@
+{
+  "schema_version": "topconf.level2.historical_speaker_usage.v1",
+  "status": "PARTIAL_RECONSTRUCTION",
+  "identity_dimensions": [
+    "corpus",
+    "speaker_namespace",
+    "speaker_id",
+    "speaker_key",
+    "historical_stages",
+    "reuse_policy"
+  ],
+  "records": [
+    {
+      "corpus": "AISHELL3",
+      "speaker_namespace": "AISHELL3",
+      "speaker_id": "SSB0005",
+      "speaker_key": "AISHELL3:SSB0005",
+      "historical_stages": [
+        "WEEK1_PILOT",
+        "WEEK2_PILOT",
+        "WEEK3_PILOT",
+        "WEEK5_EXP1_QUALIFICATION",
+        "WEEK5_EXP2_QUALIFICATION",
+        "WEEK5_EXP3_QUALIFICATION",
+        "WEEK5_EXP4_QUALIFICATION",
+        "WEEK5_EXP5_QUALIFICATION",
+        "WEEK5_EXP6_QUALIFICATION"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\data\\manifests\\source_audio.csv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\data\\manifests\\week1_manifest.csv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\data\\manifests\\week2a_a2_planned_manifest.csv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\data\\manifests\\week2a_reference_manifest.csv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\research_assurance\\WEEK2_SCIENTIFIC_CLOSURE.md",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\research_assurance\\WEEK3_FINAL_SCIENTIFIC_CLOSURE.md",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-Week5\\data\\manifests\\week5_exp1_qualification_population.json",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-Week5\\data\\manifests\\week5_exp2_qualification_population.json",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-Week5\\data\\manifests\\week5_exp3_qualification_population.json",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-Week5\\data\\manifests\\week5_exp4_qualification_population.json",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-Week5\\data\\manifests\\week5_exp5_qualification_population.json",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-Week5\\data\\manifests\\week5_exp6_qualification_population.json"
+      ],
+      "confidence": "VERIFIED",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "AISHELL3",
+      "speaker_namespace": "AISHELL3",
+      "speaker_id": "SSB0009",
+      "speaker_key": "AISHELL3:SSB0009",
+      "historical_stages": [
+        "WEEK1_PILOT",
+        "WEEK2_PILOT",
+        "WEEK3_PILOT",
+        "WEEK5_EXP1_QUALIFICATION",
+        "WEEK5_EXP2_QUALIFICATION",
+        "WEEK5_EXP3_QUALIFICATION",
+        "WEEK5_EXP4_QUALIFICATION",
+        "WEEK5_EXP5_QUALIFICATION",
+        "WEEK5_EXP6_QUALIFICATION"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\data\\manifests\\source_audio.csv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\data\\manifests\\week1_manifest.csv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\data\\manifests\\week2a_a2_planned_manifest.csv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\data\\manifests\\week2a_reference_manifest.csv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\research_assurance\\WEEK2_SCIENTIFIC_CLOSURE.md",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\research_assurance\\WEEK3_FINAL_SCIENTIFIC_CLOSURE.md",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-Week5\\data\\manifests\\week5_exp1_qualification_population.json",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-Week5\\data\\manifests\\week5_exp2_qualification_population.json",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-Week5\\data\\manifests\\week5_exp3_qualification_population.json",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-Week5\\data\\manifests\\week5_exp4_qualification_population.json",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-Week5\\data\\manifests\\week5_exp5_qualification_population.json",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-Week5\\data\\manifests\\week5_exp6_qualification_population.json"
+      ],
+      "confidence": "VERIFIED",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "AISHELL3",
+      "speaker_namespace": "AISHELL3",
+      "speaker_id": "SSB0011",
+      "speaker_key": "AISHELL3:SSB0011",
+      "historical_stages": [
+        "WEEK1_PILOT",
+        "WEEK2_PILOT",
+        "WEEK3_PILOT",
+        "WEEK5_EXP1_QUALIFICATION",
+        "WEEK5_EXP2_QUALIFICATION",
+        "WEEK5_EXP3_QUALIFICATION",
+        "WEEK5_EXP4_QUALIFICATION",
+        "WEEK5_EXP5_QUALIFICATION",
+        "WEEK5_EXP6_QUALIFICATION"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\data\\manifests\\source_audio.csv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\data\\manifests\\week1_manifest.csv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\data\\manifests\\week2a_a2_planned_manifest.csv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\data\\manifests\\week2a_reference_manifest.csv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\research_assurance\\WEEK2_SCIENTIFIC_CLOSURE.md",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\research_assurance\\WEEK3_FINAL_SCIENTIFIC_CLOSURE.md",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-Week5\\data\\manifests\\week5_exp1_qualification_population.json",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-Week5\\data\\manifests\\week5_exp2_qualification_population.json",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-Week5\\data\\manifests\\week5_exp3_qualification_population.json",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-Week5\\data\\manifests\\week5_exp4_qualification_population.json",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-Week5\\data\\manifests\\week5_exp5_qualification_population.json",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-Week5\\data\\manifests\\week5_exp6_qualification_population.json"
+      ],
+      "confidence": "VERIFIED",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "AISHELL3",
+      "speaker_namespace": "AISHELL3",
+      "speaker_id": "SSB0012",
+      "speaker_key": "AISHELL3:SSB0012",
+      "historical_stages": [
+        "WEEK4_PILOT"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\data\\manifests\\week4_population_manifest.json"
+      ],
+      "confidence": "VERIFIED",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "AISHELL3",
+      "speaker_namespace": "AISHELL3",
+      "speaker_id": "SSB0018",
+      "speaker_key": "AISHELL3:SSB0018",
+      "historical_stages": [
+        "WEEK4_PILOT"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\data\\manifests\\week4_population_manifest.json"
+      ],
+      "confidence": "VERIFIED",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "AISHELL3",
+      "speaker_namespace": "AISHELL3",
+      "speaker_id": "SSB0033",
+      "speaker_key": "AISHELL3:SSB0033",
+      "historical_stages": [
+        "WEEK4_PILOT"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\data\\manifests\\week4_population_manifest.json"
+      ],
+      "confidence": "VERIFIED",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "AISHELL3",
+      "speaker_namespace": "AISHELL3",
+      "speaker_id": "SSB0073",
+      "speaker_key": "AISHELL3:SSB0073",
+      "historical_stages": [
+        "WEEK1_PILOT",
+        "WEEK2_PILOT",
+        "WEEK3_PILOT",
+        "WEEK5_EXP1_QUALIFICATION",
+        "WEEK5_EXP2_QUALIFICATION",
+        "WEEK5_EXP3_QUALIFICATION",
+        "WEEK5_EXP4_QUALIFICATION",
+        "WEEK5_EXP5_QUALIFICATION",
+        "WEEK5_EXP6_QUALIFICATION"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\data\\manifests\\source_audio.csv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\data\\manifests\\week1_manifest.csv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\data\\manifests\\week2a_a2_planned_manifest.csv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\data\\manifests\\week2a_reference_manifest.csv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\research_assurance\\WEEK2_SCIENTIFIC_CLOSURE.md",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\research_assurance\\WEEK3_FINAL_SCIENTIFIC_CLOSURE.md",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-Week5\\data\\manifests\\week5_exp1_qualification_population.json",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-Week5\\data\\manifests\\week5_exp2_qualification_population.json",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-Week5\\data\\manifests\\week5_exp3_qualification_population.json",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-Week5\\data\\manifests\\week5_exp4_qualification_population.json",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-Week5\\data\\manifests\\week5_exp5_qualification_population.json",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-Week5\\data\\manifests\\week5_exp6_qualification_population.json"
+      ],
+      "confidence": "VERIFIED",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "AISHELL3",
+      "speaker_namespace": "AISHELL3",
+      "speaker_id": "SSB0080",
+      "speaker_key": "AISHELL3:SSB0080",
+      "historical_stages": [
+        "WEEK4_PILOT"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\data\\manifests\\week4_population_manifest.json"
+      ],
+      "confidence": "VERIFIED",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "AISHELL3",
+      "speaker_namespace": "AISHELL3",
+      "speaker_id": "SSB0112",
+      "speaker_key": "AISHELL3:SSB0112",
+      "historical_stages": [
+        "WEEK4_PILOT"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\data\\manifests\\week4_population_manifest.json"
+      ],
+      "confidence": "VERIFIED",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "AISHELL3",
+      "speaker_namespace": "AISHELL3",
+      "speaker_id": "SSB0139",
+      "speaker_key": "AISHELL3:SSB0139",
+      "historical_stages": [
+        "WEEK1_PILOT",
+        "WEEK2_PILOT",
+        "WEEK3_PILOT",
+        "WEEK5_EXP1_QUALIFICATION",
+        "WEEK5_EXP2_QUALIFICATION",
+        "WEEK5_EXP3_QUALIFICATION",
+        "WEEK5_EXP4_QUALIFICATION",
+        "WEEK5_EXP5_QUALIFICATION",
+        "WEEK5_EXP6_QUALIFICATION"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\data\\manifests\\source_audio.csv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\data\\manifests\\week1_manifest.csv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\data\\manifests\\week2a_a2_planned_manifest.csv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\data\\manifests\\week2a_reference_manifest.csv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\research_assurance\\WEEK2_SCIENTIFIC_CLOSURE.md",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\research_assurance\\WEEK3_FINAL_SCIENTIFIC_CLOSURE.md",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-Week5\\data\\manifests\\week5_exp1_qualification_population.json",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-Week5\\data\\manifests\\week5_exp2_qualification_population.json",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-Week5\\data\\manifests\\week5_exp3_qualification_population.json",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-Week5\\data\\manifests\\week5_exp4_qualification_population.json",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-Week5\\data\\manifests\\week5_exp5_qualification_population.json",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-Week5\\data\\manifests\\week5_exp6_qualification_population.json"
+      ],
+      "confidence": "VERIFIED",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "AISHELL3",
+      "speaker_namespace": "AISHELL3",
+      "speaker_id": "SSB0145",
+      "speaker_key": "AISHELL3:SSB0145",
+      "historical_stages": [
+        "WEEK4_PILOT"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\data\\manifests\\week4_population_manifest.json"
+      ],
+      "confidence": "VERIFIED",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "AISHELL3",
+      "speaker_namespace": "AISHELL3",
+      "speaker_id": "SSB0149",
+      "speaker_key": "AISHELL3:SSB0149",
+      "historical_stages": [
+        "WEEK4_PILOT"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\data\\manifests\\week4_population_manifest.json"
+      ],
+      "confidence": "VERIFIED",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "AISHELL3",
+      "speaker_namespace": "AISHELL3",
+      "speaker_id": "SSB0197",
+      "speaker_key": "AISHELL3:SSB0197",
+      "historical_stages": [
+        "WEEK2_PILOT",
+        "WEEK3_PILOT",
+        "WEEK5_EXP1_QUALIFICATION",
+        "WEEK5_EXP2_QUALIFICATION",
+        "WEEK5_EXP3_QUALIFICATION",
+        "WEEK5_EXP4_QUALIFICATION",
+        "WEEK5_EXP5_QUALIFICATION",
+        "WEEK5_EXP6_QUALIFICATION"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\data\\manifests\\week2a_a2_planned_manifest.csv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\data\\manifests\\week2a_reference_manifest.csv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\research_assurance\\WEEK2_SCIENTIFIC_CLOSURE.md",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\research_assurance\\WEEK3_FINAL_SCIENTIFIC_CLOSURE.md",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-Week5\\data\\manifests\\week5_exp1_qualification_population.json",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-Week5\\data\\manifests\\week5_exp2_qualification_population.json",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-Week5\\data\\manifests\\week5_exp3_qualification_population.json",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-Week5\\data\\manifests\\week5_exp4_qualification_population.json",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-Week5\\data\\manifests\\week5_exp5_qualification_population.json",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-Week5\\data\\manifests\\week5_exp6_qualification_population.json"
+      ],
+      "confidence": "VERIFIED",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "AISHELL3",
+      "speaker_namespace": "AISHELL3",
+      "speaker_id": "SSB0200",
+      "speaker_key": "AISHELL3:SSB0200",
+      "historical_stages": [
+        "WEEK4_PILOT"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\data\\manifests\\week4_population_manifest.json"
+      ],
+      "confidence": "VERIFIED",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "AISHELL3",
+      "speaker_namespace": "AISHELL3",
+      "speaker_id": "SSB0261",
+      "speaker_key": "AISHELL3:SSB0261",
+      "historical_stages": [
+        "WEEK2_PILOT",
+        "WEEK3_PILOT",
+        "WEEK5_EXP1_QUALIFICATION",
+        "WEEK5_EXP2_QUALIFICATION",
+        "WEEK5_EXP3_QUALIFICATION",
+        "WEEK5_EXP4_QUALIFICATION",
+        "WEEK5_EXP5_QUALIFICATION",
+        "WEEK5_EXP6_QUALIFICATION"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\data\\manifests\\week2a_a2_planned_manifest.csv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\data\\manifests\\week2a_reference_manifest.csv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\research_assurance\\WEEK2_SCIENTIFIC_CLOSURE.md",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\research_assurance\\WEEK3_FINAL_SCIENTIFIC_CLOSURE.md",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-Week5\\data\\manifests\\week5_exp1_qualification_population.json",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-Week5\\data\\manifests\\week5_exp2_qualification_population.json",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-Week5\\data\\manifests\\week5_exp3_qualification_population.json",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-Week5\\data\\manifests\\week5_exp4_qualification_population.json",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-Week5\\data\\manifests\\week5_exp5_qualification_population.json",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-Week5\\data\\manifests\\week5_exp6_qualification_population.json"
+      ],
+      "confidence": "VERIFIED",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "AISHELL3",
+      "speaker_namespace": "AISHELL3",
+      "speaker_id": "SSB0273",
+      "speaker_key": "AISHELL3:SSB0273",
+      "historical_stages": [
+        "WEEK4_PILOT"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\data\\manifests\\week4_population_manifest.json"
+      ],
+      "confidence": "VERIFIED",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "AISHELL3",
+      "speaker_namespace": "AISHELL3",
+      "speaker_id": "SSB0288",
+      "speaker_key": "AISHELL3:SSB0288",
+      "historical_stages": [
+        "WEEK4_PILOT"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\data\\manifests\\week4_population_manifest.json"
+      ],
+      "confidence": "VERIFIED",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "AISHELL3",
+      "speaker_namespace": "AISHELL3",
+      "speaker_id": "SSB0299",
+      "speaker_key": "AISHELL3:SSB0299",
+      "historical_stages": [
+        "WEEK4_PILOT"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\data\\manifests\\week4_population_manifest.json"
+      ],
+      "confidence": "VERIFIED",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "AISHELL3",
+      "speaker_namespace": "AISHELL3",
+      "speaker_id": "SSB0309",
+      "speaker_key": "AISHELL3:SSB0309",
+      "historical_stages": [
+        "WEEK2_PILOT",
+        "WEEK3_PILOT",
+        "WEEK5_EXP1_QUALIFICATION",
+        "WEEK5_EXP2_QUALIFICATION",
+        "WEEK5_EXP3_QUALIFICATION",
+        "WEEK5_EXP4_QUALIFICATION",
+        "WEEK5_EXP5_QUALIFICATION",
+        "WEEK5_EXP6_QUALIFICATION"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\data\\manifests\\week2a_a2_planned_manifest.csv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\data\\manifests\\week2a_reference_manifest.csv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\research_assurance\\WEEK2_SCIENTIFIC_CLOSURE.md",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\research_assurance\\WEEK3_FINAL_SCIENTIFIC_CLOSURE.md",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-Week5\\data\\manifests\\week5_exp1_qualification_population.json",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-Week5\\data\\manifests\\week5_exp2_qualification_population.json",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-Week5\\data\\manifests\\week5_exp3_qualification_population.json",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-Week5\\data\\manifests\\week5_exp4_qualification_population.json",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-Week5\\data\\manifests\\week5_exp5_qualification_population.json",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-Week5\\data\\manifests\\week5_exp6_qualification_population.json"
+      ],
+      "confidence": "VERIFIED",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "AISHELL3",
+      "speaker_namespace": "AISHELL3",
+      "speaker_id": "SSB0341",
+      "speaker_key": "AISHELL3:SSB0341",
+      "historical_stages": [
+        "WEEK4_PILOT"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\data\\manifests\\week4_population_manifest.json"
+      ],
+      "confidence": "VERIFIED",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "AISHELL3",
+      "speaker_namespace": "AISHELL3",
+      "speaker_id": "SSB0342",
+      "speaker_key": "AISHELL3:SSB0342",
+      "historical_stages": [
+        "WEEK2_PILOT",
+        "WEEK3_PILOT",
+        "WEEK5_EXP1_QUALIFICATION",
+        "WEEK5_EXP2_QUALIFICATION",
+        "WEEK5_EXP3_QUALIFICATION",
+        "WEEK5_EXP4_QUALIFICATION",
+        "WEEK5_EXP5_QUALIFICATION",
+        "WEEK5_EXP6_QUALIFICATION"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\data\\manifests\\week2a_a2_planned_manifest.csv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\data\\manifests\\week2a_reference_manifest.csv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\research_assurance\\WEEK2_SCIENTIFIC_CLOSURE.md",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\research_assurance\\WEEK3_FINAL_SCIENTIFIC_CLOSURE.md",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-Week5\\data\\manifests\\week5_exp1_qualification_population.json",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-Week5\\data\\manifests\\week5_exp2_qualification_population.json",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-Week5\\data\\manifests\\week5_exp3_qualification_population.json",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-Week5\\data\\manifests\\week5_exp4_qualification_population.json",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-Week5\\data\\manifests\\week5_exp5_qualification_population.json",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-Week5\\data\\manifests\\week5_exp6_qualification_population.json"
+      ],
+      "confidence": "VERIFIED",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "AISHELL3",
+      "speaker_namespace": "AISHELL3",
+      "speaker_id": "SSB0354",
+      "speaker_key": "AISHELL3:SSB0354",
+      "historical_stages": [
+        "WEEK4_PILOT"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\data\\manifests\\week4_population_manifest.json"
+      ],
+      "confidence": "VERIFIED",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "AISHELL3",
+      "speaker_namespace": "AISHELL3",
+      "speaker_id": "SSB0379",
+      "speaker_key": "AISHELL3:SSB0379",
+      "historical_stages": [
+        "WEEK4_PILOT"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\data\\manifests\\week4_population_manifest.json"
+      ],
+      "confidence": "VERIFIED",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "AISHELL3",
+      "speaker_namespace": "AISHELL3",
+      "speaker_id": "SSB0380",
+      "speaker_key": "AISHELL3:SSB0380",
+      "historical_stages": [
+        "WEEK4_PILOT"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\data\\manifests\\week4_population_manifest.json"
+      ],
+      "confidence": "VERIFIED",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "AISHELL3",
+      "speaker_namespace": "AISHELL3",
+      "speaker_id": "SSB0393",
+      "speaker_key": "AISHELL3:SSB0393",
+      "historical_stages": [
+        "WEEK2_PILOT",
+        "WEEK3_PILOT",
+        "WEEK5_EXP1_QUALIFICATION",
+        "WEEK5_EXP2_QUALIFICATION",
+        "WEEK5_EXP3_QUALIFICATION",
+        "WEEK5_EXP4_QUALIFICATION",
+        "WEEK5_EXP5_QUALIFICATION",
+        "WEEK5_EXP6_QUALIFICATION"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\data\\manifests\\week2a_a2_planned_manifest.csv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\data\\manifests\\week2a_reference_manifest.csv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\research_assurance\\WEEK2_SCIENTIFIC_CLOSURE.md",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\research_assurance\\WEEK3_FINAL_SCIENTIFIC_CLOSURE.md",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-Week5\\data\\manifests\\week5_exp1_qualification_population.json",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-Week5\\data\\manifests\\week5_exp2_qualification_population.json",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-Week5\\data\\manifests\\week5_exp3_qualification_population.json",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-Week5\\data\\manifests\\week5_exp4_qualification_population.json",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-Week5\\data\\manifests\\week5_exp5_qualification_population.json",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-Week5\\data\\manifests\\week5_exp6_qualification_population.json"
+      ],
+      "confidence": "VERIFIED",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "AISHELL3",
+      "speaker_namespace": "AISHELL3",
+      "speaker_id": "SSB0395",
+      "speaker_key": "AISHELL3:SSB0395",
+      "historical_stages": [
+        "WEEK4_PILOT"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\data\\manifests\\week4_population_manifest.json"
+      ],
+      "confidence": "VERIFIED",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "AISHELL3",
+      "speaker_namespace": "AISHELL3",
+      "speaker_id": "SSB0427",
+      "speaker_key": "AISHELL3:SSB0427",
+      "historical_stages": [
+        "WEEK4_PILOT"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\data\\manifests\\week4_population_manifest.json"
+      ],
+      "confidence": "VERIFIED",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "AISHELL3",
+      "speaker_namespace": "AISHELL3",
+      "speaker_id": "SSB0434",
+      "speaker_key": "AISHELL3:SSB0434",
+      "historical_stages": [
+        "WEEK2_PILOT",
+        "WEEK3_PILOT",
+        "WEEK5_EXP1_QUALIFICATION",
+        "WEEK5_EXP2_QUALIFICATION",
+        "WEEK5_EXP3_QUALIFICATION",
+        "WEEK5_EXP4_QUALIFICATION",
+        "WEEK5_EXP5_QUALIFICATION",
+        "WEEK5_EXP6_QUALIFICATION"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\data\\manifests\\week2a_a2_planned_manifest.csv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\data\\manifests\\week2a_reference_manifest.csv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\research_assurance\\WEEK2_SCIENTIFIC_CLOSURE.md",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\research_assurance\\WEEK3_FINAL_SCIENTIFIC_CLOSURE.md",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-Week5\\data\\manifests\\week5_exp1_qualification_population.json",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-Week5\\data\\manifests\\week5_exp2_qualification_population.json",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-Week5\\data\\manifests\\week5_exp3_qualification_population.json",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-Week5\\data\\manifests\\week5_exp4_qualification_population.json",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-Week5\\data\\manifests\\week5_exp5_qualification_population.json",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-Week5\\data\\manifests\\week5_exp6_qualification_population.json"
+      ],
+      "confidence": "VERIFIED",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "AISHELL3",
+      "speaker_namespace": "AISHELL3",
+      "speaker_id": "SSB0502",
+      "speaker_key": "AISHELL3:SSB0502",
+      "historical_stages": [
+        "WEEK4_PILOT"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\data\\manifests\\week4_population_manifest.json"
+      ],
+      "confidence": "VERIFIED",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "AISHELL3",
+      "speaker_namespace": "AISHELL3",
+      "speaker_id": "SSB0578",
+      "speaker_key": "AISHELL3:SSB0578",
+      "historical_stages": [
+        "WEEK4_PILOT"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\data\\manifests\\week4_population_manifest.json"
+      ],
+      "confidence": "VERIFIED",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "AISHELL3",
+      "speaker_namespace": "AISHELL3",
+      "speaker_id": "SSB0588",
+      "speaker_key": "AISHELL3:SSB0588",
+      "historical_stages": [
+        "WEEK4_PILOT"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\data\\manifests\\week4_population_manifest.json"
+      ],
+      "confidence": "VERIFIED",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "AISHELL3",
+      "speaker_namespace": "AISHELL3",
+      "speaker_id": "SSB0606",
+      "speaker_key": "AISHELL3:SSB0606",
+      "historical_stages": [
+        "WEEK4_PILOT"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\data\\manifests\\week4_population_manifest.json"
+      ],
+      "confidence": "VERIFIED",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "AISHELL3",
+      "speaker_namespace": "AISHELL3",
+      "speaker_id": "SSB0609",
+      "speaker_key": "AISHELL3:SSB0609",
+      "historical_stages": [
+        "WEEK4_PILOT"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\data\\manifests\\week4_population_manifest.json"
+      ],
+      "confidence": "VERIFIED",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "AISHELL3",
+      "speaker_namespace": "AISHELL3",
+      "speaker_id": "SSB0614",
+      "speaker_key": "AISHELL3:SSB0614",
+      "historical_stages": [
+        "WEEK4_PILOT"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\data\\manifests\\week4_population_manifest.json"
+      ],
+      "confidence": "VERIFIED",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "AISHELL3",
+      "speaker_namespace": "AISHELL3",
+      "speaker_id": "SSB0629",
+      "speaker_key": "AISHELL3:SSB0629",
+      "historical_stages": [
+        "WEEK4_PILOT"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\data\\manifests\\week4_population_manifest.json"
+      ],
+      "confidence": "VERIFIED",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "AISHELL3",
+      "speaker_namespace": "AISHELL3",
+      "speaker_id": "SSB0671",
+      "speaker_key": "AISHELL3:SSB0671",
+      "historical_stages": [
+        "WEEK4_PILOT"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\data\\manifests\\week4_population_manifest.json"
+      ],
+      "confidence": "VERIFIED",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "AISHELL3",
+      "speaker_namespace": "AISHELL3",
+      "speaker_id": "SSB0723",
+      "speaker_key": "AISHELL3:SSB0723",
+      "historical_stages": [
+        "WEEK4_PILOT"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\data\\manifests\\week4_population_manifest.json"
+      ],
+      "confidence": "VERIFIED",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "AISHELL3",
+      "speaker_namespace": "AISHELL3",
+      "speaker_id": "SSB0737",
+      "speaker_key": "AISHELL3:SSB0737",
+      "historical_stages": [
+        "WEEK4_PILOT"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\data\\manifests\\week4_population_manifest.json"
+      ],
+      "confidence": "VERIFIED",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "AISHELL3",
+      "speaker_namespace": "AISHELL3",
+      "speaker_id": "SSB0748",
+      "speaker_key": "AISHELL3:SSB0748",
+      "historical_stages": [
+        "WEEK4_PILOT"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\data\\manifests\\week4_population_manifest.json"
+      ],
+      "confidence": "VERIFIED",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "AISHELL3",
+      "speaker_namespace": "AISHELL3",
+      "speaker_id": "SSB0758",
+      "speaker_key": "AISHELL3:SSB0758",
+      "historical_stages": [
+        "WEEK4_PILOT"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\data\\manifests\\week4_population_manifest.json"
+      ],
+      "confidence": "VERIFIED",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "AISHELL3",
+      "speaker_namespace": "AISHELL3",
+      "speaker_id": "SSB0762",
+      "speaker_key": "AISHELL3:SSB0762",
+      "historical_stages": [
+        "WEEK4_PILOT"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\data\\manifests\\week4_population_manifest.json"
+      ],
+      "confidence": "VERIFIED",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "AISHELL3",
+      "speaker_namespace": "AISHELL3",
+      "speaker_id": "SSB0784",
+      "speaker_key": "AISHELL3:SSB0784",
+      "historical_stages": [
+        "WEEK4_PILOT"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\data\\manifests\\week4_population_manifest.json"
+      ],
+      "confidence": "VERIFIED",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "AISHELL3",
+      "speaker_namespace": "AISHELL3",
+      "speaker_id": "SSB0935",
+      "speaker_key": "AISHELL3:SSB0935",
+      "historical_stages": [
+        "WEEK4_PILOT"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\data\\manifests\\week4_population_manifest.json"
+      ],
+      "confidence": "VERIFIED",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "AISHELL3",
+      "speaker_namespace": "AISHELL3",
+      "speaker_id": "SSB1050",
+      "speaker_key": "AISHELL3:SSB1050",
+      "historical_stages": [
+        "WEEK4_PILOT"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\data\\manifests\\week4_population_manifest.json"
+      ],
+      "confidence": "VERIFIED",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "AISHELL3",
+      "speaker_namespace": "AISHELL3",
+      "speaker_id": "SSB1072",
+      "speaker_key": "AISHELL3:SSB1072",
+      "historical_stages": [
+        "WEEK4_PILOT"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\data\\manifests\\week4_population_manifest.json"
+      ],
+      "confidence": "VERIFIED",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "AISHELL3",
+      "speaker_namespace": "AISHELL3",
+      "speaker_id": "SSB1100",
+      "speaker_key": "AISHELL3:SSB1100",
+      "historical_stages": [
+        "WEEK2_PILOT",
+        "WEEK3_PILOT",
+        "WEEK5_EXP1_QUALIFICATION",
+        "WEEK5_EXP2_QUALIFICATION",
+        "WEEK5_EXP3_QUALIFICATION",
+        "WEEK5_EXP4_QUALIFICATION",
+        "WEEK5_EXP5_QUALIFICATION",
+        "WEEK5_EXP6_QUALIFICATION"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\data\\manifests\\week2a_a2_planned_manifest.csv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\data\\manifests\\week2a_reference_manifest.csv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\research_assurance\\WEEK2_SCIENTIFIC_CLOSURE.md",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\research_assurance\\WEEK3_FINAL_SCIENTIFIC_CLOSURE.md",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-Week5\\data\\manifests\\week5_exp1_qualification_population.json",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-Week5\\data\\manifests\\week5_exp2_qualification_population.json",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-Week5\\data\\manifests\\week5_exp3_qualification_population.json",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-Week5\\data\\manifests\\week5_exp4_qualification_population.json",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-Week5\\data\\manifests\\week5_exp5_qualification_population.json",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-Week5\\data\\manifests\\week5_exp6_qualification_population.json"
+      ],
+      "confidence": "VERIFIED",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "AISHELL3",
+      "speaker_namespace": "AISHELL3",
+      "speaker_id": "SSB1115",
+      "speaker_key": "AISHELL3:SSB1115",
+      "historical_stages": [
+        "WEEK4_PILOT"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\data\\manifests\\week4_population_manifest.json"
+      ],
+      "confidence": "VERIFIED",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "AISHELL3",
+      "speaker_namespace": "AISHELL3",
+      "speaker_id": "SSB1125",
+      "speaker_key": "AISHELL3:SSB1125",
+      "historical_stages": [
+        "WEEK4_PILOT"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\data\\manifests\\week4_population_manifest.json"
+      ],
+      "confidence": "VERIFIED",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "AISHELL3",
+      "speaker_namespace": "AISHELL3",
+      "speaker_id": "SSB1161",
+      "speaker_key": "AISHELL3:SSB1161",
+      "historical_stages": [
+        "WEEK4_PILOT"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\data\\manifests\\week4_population_manifest.json"
+      ],
+      "confidence": "VERIFIED",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "AISHELL3",
+      "speaker_namespace": "AISHELL3",
+      "speaker_id": "SSB1203",
+      "speaker_key": "AISHELL3:SSB1203",
+      "historical_stages": [
+        "WEEK4_PILOT"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\data\\manifests\\week4_population_manifest.json"
+      ],
+      "confidence": "VERIFIED",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "AISHELL3",
+      "speaker_namespace": "AISHELL3",
+      "speaker_id": "SSB1366",
+      "speaker_key": "AISHELL3:SSB1366",
+      "historical_stages": [
+        "WEEK4_PILOT"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\data\\manifests\\week4_population_manifest.json"
+      ],
+      "confidence": "VERIFIED",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "AISHELL3",
+      "speaker_namespace": "AISHELL3",
+      "speaker_id": "SSB1448",
+      "speaker_key": "AISHELL3:SSB1448",
+      "historical_stages": [
+        "WEEK4_PILOT"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\data\\manifests\\week4_population_manifest.json"
+      ],
+      "confidence": "VERIFIED",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "AISHELL3",
+      "speaker_namespace": "AISHELL3",
+      "speaker_id": "SSB1575",
+      "speaker_key": "AISHELL3:SSB1575",
+      "historical_stages": [
+        "WEEK4_PILOT"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\data\\manifests\\week4_population_manifest.json"
+      ],
+      "confidence": "VERIFIED",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "AISHELL3",
+      "speaker_namespace": "AISHELL3",
+      "speaker_id": "SSB1593",
+      "speaker_key": "AISHELL3:SSB1593",
+      "historical_stages": [
+        "WEEK4_PILOT"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\data\\manifests\\week4_population_manifest.json"
+      ],
+      "confidence": "VERIFIED",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "AISHELL3",
+      "speaker_namespace": "AISHELL3",
+      "speaker_id": "SSB1607",
+      "speaker_key": "AISHELL3:SSB1607",
+      "historical_stages": [
+        "WEEK4_PILOT"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\data\\manifests\\week4_population_manifest.json"
+      ],
+      "confidence": "VERIFIED",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "AISHELL3",
+      "speaker_namespace": "AISHELL3",
+      "speaker_id": "SSB1759",
+      "speaker_key": "AISHELL3:SSB1759",
+      "historical_stages": [
+        "WEEK4_PILOT"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\data\\manifests\\week4_population_manifest.json"
+      ],
+      "confidence": "VERIFIED",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "AISHELL3",
+      "speaker_namespace": "AISHELL3",
+      "speaker_id": "SSB1828",
+      "speaker_key": "AISHELL3:SSB1828",
+      "historical_stages": [
+        "WEEK4_PILOT"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\data\\manifests\\week4_population_manifest.json"
+      ],
+      "confidence": "VERIFIED",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "AISHELL3",
+      "speaker_namespace": "AISHELL3",
+      "speaker_id": "SSB1837",
+      "speaker_key": "AISHELL3:SSB1837",
+      "historical_stages": [
+        "WEEK4_PILOT"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\data\\manifests\\week4_population_manifest.json"
+      ],
+      "confidence": "VERIFIED",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "AISHELL3",
+      "speaker_namespace": "AISHELL3",
+      "speaker_id": "SSB1891",
+      "speaker_key": "AISHELL3:SSB1891",
+      "historical_stages": [
+        "WEEK4_PILOT"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\data\\manifests\\week4_population_manifest.json"
+      ],
+      "confidence": "VERIFIED",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "AISHELL3",
+      "speaker_namespace": "AISHELL3",
+      "speaker_id": "SSB1918",
+      "speaker_key": "AISHELL3:SSB1918",
+      "historical_stages": [
+        "WEEK4_PILOT"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\data\\manifests\\week4_population_manifest.json"
+      ],
+      "confidence": "VERIFIED",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "PartialEdit_v1.1_E1",
+      "speaker_namespace": "PARTIALEDIT_OUTPUT_PATH",
+      "speaker_id": "p225",
+      "speaker_key": "PartialEdit_v1.1_E1:p225",
+      "historical_stages": [
+        "PHASE3T_PARTIALEDIT_E1"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\results\\topconf_phase3t\\case_manifest.tsv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3T_RAW_OUTPUT_MANIFEST_V1.json"
+      ],
+      "confidence": "DERIVED_WITH_STRONG_EVIDENCE",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "PartialEdit_v1.1_E1",
+      "speaker_namespace": "PARTIALEDIT_OUTPUT_PATH",
+      "speaker_id": "p226",
+      "speaker_key": "PartialEdit_v1.1_E1:p226",
+      "historical_stages": [
+        "PHASE3T_PARTIALEDIT_E1"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\results\\topconf_phase3t\\case_manifest.tsv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3T_RAW_OUTPUT_MANIFEST_V1.json"
+      ],
+      "confidence": "DERIVED_WITH_STRONG_EVIDENCE",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "PartialEdit_v1.1_E1",
+      "speaker_namespace": "PARTIALEDIT_OUTPUT_PATH",
+      "speaker_id": "p227",
+      "speaker_key": "PartialEdit_v1.1_E1:p227",
+      "historical_stages": [
+        "PHASE3T_PARTIALEDIT_E1"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\results\\topconf_phase3t\\case_manifest.tsv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3T_RAW_OUTPUT_MANIFEST_V1.json"
+      ],
+      "confidence": "DERIVED_WITH_STRONG_EVIDENCE",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "PartialEdit_v1.1_E1",
+      "speaker_namespace": "PARTIALEDIT_OUTPUT_PATH",
+      "speaker_id": "p228",
+      "speaker_key": "PartialEdit_v1.1_E1:p228",
+      "historical_stages": [
+        "PHASE3T_PARTIALEDIT_E1"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\results\\topconf_phase3t\\case_manifest.tsv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3T_RAW_OUTPUT_MANIFEST_V1.json"
+      ],
+      "confidence": "DERIVED_WITH_STRONG_EVIDENCE",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "PartialEdit_v1.1_E1",
+      "speaker_namespace": "PARTIALEDIT_OUTPUT_PATH",
+      "speaker_id": "p229",
+      "speaker_key": "PartialEdit_v1.1_E1:p229",
+      "historical_stages": [
+        "PHASE3T_PARTIALEDIT_E1"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\results\\topconf_phase3t\\case_manifest.tsv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3T_RAW_OUTPUT_MANIFEST_V1.json"
+      ],
+      "confidence": "DERIVED_WITH_STRONG_EVIDENCE",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "PartialEdit_v1.1_E1",
+      "speaker_namespace": "PARTIALEDIT_OUTPUT_PATH",
+      "speaker_id": "p230",
+      "speaker_key": "PartialEdit_v1.1_E1:p230",
+      "historical_stages": [
+        "PHASE3T_PARTIALEDIT_E1"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\results\\topconf_phase3t\\case_manifest.tsv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3T_RAW_OUTPUT_MANIFEST_V1.json"
+      ],
+      "confidence": "DERIVED_WITH_STRONG_EVIDENCE",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "PartialEdit_v1.1_E1",
+      "speaker_namespace": "PARTIALEDIT_OUTPUT_PATH",
+      "speaker_id": "p231",
+      "speaker_key": "PartialEdit_v1.1_E1:p231",
+      "historical_stages": [
+        "PHASE3T_PARTIALEDIT_E1"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\results\\topconf_phase3t\\case_manifest.tsv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3T_RAW_OUTPUT_MANIFEST_V1.json"
+      ],
+      "confidence": "DERIVED_WITH_STRONG_EVIDENCE",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "PartialEdit_v1.1_E1",
+      "speaker_namespace": "PARTIALEDIT_OUTPUT_PATH",
+      "speaker_id": "p232",
+      "speaker_key": "PartialEdit_v1.1_E1:p232",
+      "historical_stages": [
+        "PHASE3T_PARTIALEDIT_E1"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\results\\topconf_phase3t\\case_manifest.tsv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3T_RAW_OUTPUT_MANIFEST_V1.json"
+      ],
+      "confidence": "DERIVED_WITH_STRONG_EVIDENCE",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "PartialEdit_v1.1_E1",
+      "speaker_namespace": "PARTIALEDIT_OUTPUT_PATH",
+      "speaker_id": "p233",
+      "speaker_key": "PartialEdit_v1.1_E1:p233",
+      "historical_stages": [
+        "PHASE3T_PARTIALEDIT_E1"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\results\\topconf_phase3t\\case_manifest.tsv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3T_RAW_OUTPUT_MANIFEST_V1.json"
+      ],
+      "confidence": "DERIVED_WITH_STRONG_EVIDENCE",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "PartialEdit_v1.1_E1",
+      "speaker_namespace": "PARTIALEDIT_OUTPUT_PATH",
+      "speaker_id": "p234",
+      "speaker_key": "PartialEdit_v1.1_E1:p234",
+      "historical_stages": [
+        "PHASE3T_PARTIALEDIT_E1"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\results\\topconf_phase3t\\case_manifest.tsv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3T_RAW_OUTPUT_MANIFEST_V1.json"
+      ],
+      "confidence": "DERIVED_WITH_STRONG_EVIDENCE",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "PartialEdit_v1.1_E1",
+      "speaker_namespace": "PARTIALEDIT_OUTPUT_PATH",
+      "speaker_id": "p236",
+      "speaker_key": "PartialEdit_v1.1_E1:p236",
+      "historical_stages": [
+        "PHASE3T_PARTIALEDIT_E1"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\results\\topconf_phase3t\\case_manifest.tsv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3T_RAW_OUTPUT_MANIFEST_V1.json"
+      ],
+      "confidence": "DERIVED_WITH_STRONG_EVIDENCE",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "PartialEdit_v1.1_E1",
+      "speaker_namespace": "PARTIALEDIT_OUTPUT_PATH",
+      "speaker_id": "p237",
+      "speaker_key": "PartialEdit_v1.1_E1:p237",
+      "historical_stages": [
+        "PHASE3T_PARTIALEDIT_E1"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\results\\topconf_phase3t\\case_manifest.tsv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3T_RAW_OUTPUT_MANIFEST_V1.json"
+      ],
+      "confidence": "DERIVED_WITH_STRONG_EVIDENCE",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "PartialEdit_v1.1_E1",
+      "speaker_namespace": "PARTIALEDIT_OUTPUT_PATH",
+      "speaker_id": "p238",
+      "speaker_key": "PartialEdit_v1.1_E1:p238",
+      "historical_stages": [
+        "PHASE3T_PARTIALEDIT_E1"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\results\\topconf_phase3t\\case_manifest.tsv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3T_RAW_OUTPUT_MANIFEST_V1.json"
+      ],
+      "confidence": "DERIVED_WITH_STRONG_EVIDENCE",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "PartialEdit_v1.1_E1",
+      "speaker_namespace": "PARTIALEDIT_OUTPUT_PATH",
+      "speaker_id": "p239",
+      "speaker_key": "PartialEdit_v1.1_E1:p239",
+      "historical_stages": [
+        "PHASE3T_PARTIALEDIT_E1"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\results\\topconf_phase3t\\case_manifest.tsv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3T_RAW_OUTPUT_MANIFEST_V1.json"
+      ],
+      "confidence": "DERIVED_WITH_STRONG_EVIDENCE",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "PartialEdit_v1.1_E1",
+      "speaker_namespace": "PARTIALEDIT_OUTPUT_PATH",
+      "speaker_id": "p240",
+      "speaker_key": "PartialEdit_v1.1_E1:p240",
+      "historical_stages": [
+        "PHASE3T_PARTIALEDIT_E1"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\results\\topconf_phase3t\\case_manifest.tsv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3T_RAW_OUTPUT_MANIFEST_V1.json"
+      ],
+      "confidence": "DERIVED_WITH_STRONG_EVIDENCE",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "PartialEdit_v1.1_E1",
+      "speaker_namespace": "PARTIALEDIT_OUTPUT_PATH",
+      "speaker_id": "p241",
+      "speaker_key": "PartialEdit_v1.1_E1:p241",
+      "historical_stages": [
+        "PHASE3T_PARTIALEDIT_E1"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\results\\topconf_phase3t\\case_manifest.tsv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3T_RAW_OUTPUT_MANIFEST_V1.json"
+      ],
+      "confidence": "DERIVED_WITH_STRONG_EVIDENCE",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "PartialEdit_v1.1_E1",
+      "speaker_namespace": "PARTIALEDIT_OUTPUT_PATH",
+      "speaker_id": "p243",
+      "speaker_key": "PartialEdit_v1.1_E1:p243",
+      "historical_stages": [
+        "PHASE3T_PARTIALEDIT_E1"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\results\\topconf_phase3t\\case_manifest.tsv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3T_RAW_OUTPUT_MANIFEST_V1.json"
+      ],
+      "confidence": "DERIVED_WITH_STRONG_EVIDENCE",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "PartialEdit_v1.1_E1",
+      "speaker_namespace": "PARTIALEDIT_OUTPUT_PATH",
+      "speaker_id": "p244",
+      "speaker_key": "PartialEdit_v1.1_E1:p244",
+      "historical_stages": [
+        "PHASE3T_PARTIALEDIT_E1"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\results\\topconf_phase3t\\case_manifest.tsv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3T_RAW_OUTPUT_MANIFEST_V1.json"
+      ],
+      "confidence": "DERIVED_WITH_STRONG_EVIDENCE",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "PartialEdit_v1.1_E1",
+      "speaker_namespace": "PARTIALEDIT_OUTPUT_PATH",
+      "speaker_id": "p245",
+      "speaker_key": "PartialEdit_v1.1_E1:p245",
+      "historical_stages": [
+        "PHASE3T_PARTIALEDIT_E1"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\results\\topconf_phase3t\\case_manifest.tsv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3T_RAW_OUTPUT_MANIFEST_V1.json"
+      ],
+      "confidence": "DERIVED_WITH_STRONG_EVIDENCE",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "PartialEdit_v1.1_E1",
+      "speaker_namespace": "PARTIALEDIT_OUTPUT_PATH",
+      "speaker_id": "p246",
+      "speaker_key": "PartialEdit_v1.1_E1:p246",
+      "historical_stages": [
+        "PHASE3T_PARTIALEDIT_E1"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\results\\topconf_phase3t\\case_manifest.tsv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3T_RAW_OUTPUT_MANIFEST_V1.json"
+      ],
+      "confidence": "DERIVED_WITH_STRONG_EVIDENCE",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "PartialEdit_v1.1_E1",
+      "speaker_namespace": "PARTIALEDIT_OUTPUT_PATH",
+      "speaker_id": "p247",
+      "speaker_key": "PartialEdit_v1.1_E1:p247",
+      "historical_stages": [
+        "PHASE3T_PARTIALEDIT_E1"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\results\\topconf_phase3t\\case_manifest.tsv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3T_RAW_OUTPUT_MANIFEST_V1.json"
+      ],
+      "confidence": "DERIVED_WITH_STRONG_EVIDENCE",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "PartialEdit_v1.1_E1",
+      "speaker_namespace": "PARTIALEDIT_OUTPUT_PATH",
+      "speaker_id": "p248",
+      "speaker_key": "PartialEdit_v1.1_E1:p248",
+      "historical_stages": [
+        "PHASE3T_PARTIALEDIT_E1"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\results\\topconf_phase3t\\case_manifest.tsv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3T_RAW_OUTPUT_MANIFEST_V1.json"
+      ],
+      "confidence": "DERIVED_WITH_STRONG_EVIDENCE",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "PartialEdit_v1.1_E1",
+      "speaker_namespace": "PARTIALEDIT_OUTPUT_PATH",
+      "speaker_id": "p249",
+      "speaker_key": "PartialEdit_v1.1_E1:p249",
+      "historical_stages": [
+        "PHASE3T_PARTIALEDIT_E1"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\results\\topconf_phase3t\\case_manifest.tsv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3T_RAW_OUTPUT_MANIFEST_V1.json"
+      ],
+      "confidence": "DERIVED_WITH_STRONG_EVIDENCE",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "PartialEdit_v1.1_E1",
+      "speaker_namespace": "PARTIALEDIT_OUTPUT_PATH",
+      "speaker_id": "p250",
+      "speaker_key": "PartialEdit_v1.1_E1:p250",
+      "historical_stages": [
+        "PHASE3T_PARTIALEDIT_E1"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\results\\topconf_phase3t\\case_manifest.tsv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3T_RAW_OUTPUT_MANIFEST_V1.json"
+      ],
+      "confidence": "DERIVED_WITH_STRONG_EVIDENCE",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "PartialEdit_v1.1_E1",
+      "speaker_namespace": "PARTIALEDIT_OUTPUT_PATH",
+      "speaker_id": "p251",
+      "speaker_key": "PartialEdit_v1.1_E1:p251",
+      "historical_stages": [
+        "PHASE3T_PARTIALEDIT_E1"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\results\\topconf_phase3t\\case_manifest.tsv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3T_RAW_OUTPUT_MANIFEST_V1.json"
+      ],
+      "confidence": "DERIVED_WITH_STRONG_EVIDENCE",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "PartialEdit_v1.1_E1",
+      "speaker_namespace": "PARTIALEDIT_OUTPUT_PATH",
+      "speaker_id": "p252",
+      "speaker_key": "PartialEdit_v1.1_E1:p252",
+      "historical_stages": [
+        "PHASE3T_PARTIALEDIT_E1"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\results\\topconf_phase3t\\case_manifest.tsv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3T_RAW_OUTPUT_MANIFEST_V1.json"
+      ],
+      "confidence": "DERIVED_WITH_STRONG_EVIDENCE",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "PartialEdit_v1.1_E1",
+      "speaker_namespace": "PARTIALEDIT_OUTPUT_PATH",
+      "speaker_id": "p253",
+      "speaker_key": "PartialEdit_v1.1_E1:p253",
+      "historical_stages": [
+        "PHASE3T_PARTIALEDIT_E1"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\results\\topconf_phase3t\\case_manifest.tsv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3T_RAW_OUTPUT_MANIFEST_V1.json"
+      ],
+      "confidence": "DERIVED_WITH_STRONG_EVIDENCE",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "PartialEdit_v1.1_E1",
+      "speaker_namespace": "PARTIALEDIT_OUTPUT_PATH",
+      "speaker_id": "p254",
+      "speaker_key": "PartialEdit_v1.1_E1:p254",
+      "historical_stages": [
+        "PHASE3T_PARTIALEDIT_E1"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\results\\topconf_phase3t\\case_manifest.tsv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3T_RAW_OUTPUT_MANIFEST_V1.json"
+      ],
+      "confidence": "DERIVED_WITH_STRONG_EVIDENCE",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "PartialEdit_v1.1_E1",
+      "speaker_namespace": "PARTIALEDIT_OUTPUT_PATH",
+      "speaker_id": "p255",
+      "speaker_key": "PartialEdit_v1.1_E1:p255",
+      "historical_stages": [
+        "PHASE3T_PARTIALEDIT_E1"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\results\\topconf_phase3t\\case_manifest.tsv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3T_RAW_OUTPUT_MANIFEST_V1.json"
+      ],
+      "confidence": "DERIVED_WITH_STRONG_EVIDENCE",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "PartialEdit_v1.1_E1",
+      "speaker_namespace": "PARTIALEDIT_OUTPUT_PATH",
+      "speaker_id": "p256",
+      "speaker_key": "PartialEdit_v1.1_E1:p256",
+      "historical_stages": [
+        "PHASE3T_PARTIALEDIT_E1"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\results\\topconf_phase3t\\case_manifest.tsv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3T_RAW_OUTPUT_MANIFEST_V1.json"
+      ],
+      "confidence": "DERIVED_WITH_STRONG_EVIDENCE",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "PartialEdit_v1.1_E1",
+      "speaker_namespace": "PARTIALEDIT_OUTPUT_PATH",
+      "speaker_id": "p257",
+      "speaker_key": "PartialEdit_v1.1_E1:p257",
+      "historical_stages": [
+        "PHASE3T_PARTIALEDIT_E1"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\results\\topconf_phase3t\\case_manifest.tsv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3T_RAW_OUTPUT_MANIFEST_V1.json"
+      ],
+      "confidence": "DERIVED_WITH_STRONG_EVIDENCE",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "PartialEdit_v1.1_E1",
+      "speaker_namespace": "PARTIALEDIT_OUTPUT_PATH",
+      "speaker_id": "p258",
+      "speaker_key": "PartialEdit_v1.1_E1:p258",
+      "historical_stages": [
+        "PHASE3T_PARTIALEDIT_E1"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\results\\topconf_phase3t\\case_manifest.tsv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3T_RAW_OUTPUT_MANIFEST_V1.json"
+      ],
+      "confidence": "DERIVED_WITH_STRONG_EVIDENCE",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "PartialEdit_v1.1_E1",
+      "speaker_namespace": "PARTIALEDIT_OUTPUT_PATH",
+      "speaker_id": "p259",
+      "speaker_key": "PartialEdit_v1.1_E1:p259",
+      "historical_stages": [
+        "PHASE3T_PARTIALEDIT_E1"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\results\\topconf_phase3t\\case_manifest.tsv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3T_RAW_OUTPUT_MANIFEST_V1.json"
+      ],
+      "confidence": "DERIVED_WITH_STRONG_EVIDENCE",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "PartialEdit_v1.1_E1",
+      "speaker_namespace": "PARTIALEDIT_OUTPUT_PATH",
+      "speaker_id": "p260",
+      "speaker_key": "PartialEdit_v1.1_E1:p260",
+      "historical_stages": [
+        "PHASE3T_PARTIALEDIT_E1"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\results\\topconf_phase3t\\case_manifest.tsv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3T_RAW_OUTPUT_MANIFEST_V1.json"
+      ],
+      "confidence": "DERIVED_WITH_STRONG_EVIDENCE",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "PartialEdit_v1.1_E1",
+      "speaker_namespace": "PARTIALEDIT_OUTPUT_PATH",
+      "speaker_id": "p261",
+      "speaker_key": "PartialEdit_v1.1_E1:p261",
+      "historical_stages": [
+        "PHASE3T_PARTIALEDIT_E1"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\results\\topconf_phase3t\\case_manifest.tsv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3T_RAW_OUTPUT_MANIFEST_V1.json"
+      ],
+      "confidence": "DERIVED_WITH_STRONG_EVIDENCE",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "PartialEdit_v1.1_E1",
+      "speaker_namespace": "PARTIALEDIT_OUTPUT_PATH",
+      "speaker_id": "p262",
+      "speaker_key": "PartialEdit_v1.1_E1:p262",
+      "historical_stages": [
+        "PHASE3T_PARTIALEDIT_E1"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\results\\topconf_phase3t\\case_manifest.tsv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3T_RAW_OUTPUT_MANIFEST_V1.json"
+      ],
+      "confidence": "DERIVED_WITH_STRONG_EVIDENCE",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "PartialEdit_v1.1_E1",
+      "speaker_namespace": "PARTIALEDIT_OUTPUT_PATH",
+      "speaker_id": "p263",
+      "speaker_key": "PartialEdit_v1.1_E1:p263",
+      "historical_stages": [
+        "PHASE3T_PARTIALEDIT_E1"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\results\\topconf_phase3t\\case_manifest.tsv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3T_RAW_OUTPUT_MANIFEST_V1.json"
+      ],
+      "confidence": "DERIVED_WITH_STRONG_EVIDENCE",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "PartialEdit_v1.1_E1",
+      "speaker_namespace": "PARTIALEDIT_OUTPUT_PATH",
+      "speaker_id": "p264",
+      "speaker_key": "PartialEdit_v1.1_E1:p264",
+      "historical_stages": [
+        "PHASE3T_PARTIALEDIT_E1"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\results\\topconf_phase3t\\case_manifest.tsv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3T_RAW_OUTPUT_MANIFEST_V1.json"
+      ],
+      "confidence": "DERIVED_WITH_STRONG_EVIDENCE",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "PartialEdit_v1.1_E1",
+      "speaker_namespace": "PARTIALEDIT_OUTPUT_PATH",
+      "speaker_id": "p265",
+      "speaker_key": "PartialEdit_v1.1_E1:p265",
+      "historical_stages": [
+        "PHASE3T_PARTIALEDIT_E1"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\results\\topconf_phase3t\\case_manifest.tsv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3T_RAW_OUTPUT_MANIFEST_V1.json"
+      ],
+      "confidence": "DERIVED_WITH_STRONG_EVIDENCE",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "PartialEdit_v1.1_E1",
+      "speaker_namespace": "PARTIALEDIT_OUTPUT_PATH",
+      "speaker_id": "p266",
+      "speaker_key": "PartialEdit_v1.1_E1:p266",
+      "historical_stages": [
+        "PHASE3T_PARTIALEDIT_E1"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\results\\topconf_phase3t\\case_manifest.tsv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3T_RAW_OUTPUT_MANIFEST_V1.json"
+      ],
+      "confidence": "DERIVED_WITH_STRONG_EVIDENCE",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "PartialEdit_v1.1_E1",
+      "speaker_namespace": "PARTIALEDIT_OUTPUT_PATH",
+      "speaker_id": "p267",
+      "speaker_key": "PartialEdit_v1.1_E1:p267",
+      "historical_stages": [
+        "PHASE3T_PARTIALEDIT_E1"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\results\\topconf_phase3t\\case_manifest.tsv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3T_RAW_OUTPUT_MANIFEST_V1.json"
+      ],
+      "confidence": "DERIVED_WITH_STRONG_EVIDENCE",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "PartialEdit_v1.1_E1",
+      "speaker_namespace": "PARTIALEDIT_OUTPUT_PATH",
+      "speaker_id": "p268",
+      "speaker_key": "PartialEdit_v1.1_E1:p268",
+      "historical_stages": [
+        "PHASE3T_PARTIALEDIT_E1"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\results\\topconf_phase3t\\case_manifest.tsv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3T_RAW_OUTPUT_MANIFEST_V1.json"
+      ],
+      "confidence": "DERIVED_WITH_STRONG_EVIDENCE",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "PartialEdit_v1.1_E1",
+      "speaker_namespace": "PARTIALEDIT_OUTPUT_PATH",
+      "speaker_id": "p269",
+      "speaker_key": "PartialEdit_v1.1_E1:p269",
+      "historical_stages": [
+        "PHASE3T_PARTIALEDIT_E1"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\results\\topconf_phase3t\\case_manifest.tsv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3T_RAW_OUTPUT_MANIFEST_V1.json"
+      ],
+      "confidence": "DERIVED_WITH_STRONG_EVIDENCE",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "PartialEdit_v1.1_E1",
+      "speaker_namespace": "PARTIALEDIT_OUTPUT_PATH",
+      "speaker_id": "p270",
+      "speaker_key": "PartialEdit_v1.1_E1:p270",
+      "historical_stages": [
+        "PHASE3T_PARTIALEDIT_E1"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\results\\topconf_phase3t\\case_manifest.tsv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3T_RAW_OUTPUT_MANIFEST_V1.json"
+      ],
+      "confidence": "DERIVED_WITH_STRONG_EVIDENCE",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "PartialEdit_v1.1_E1",
+      "speaker_namespace": "PARTIALEDIT_OUTPUT_PATH",
+      "speaker_id": "p271",
+      "speaker_key": "PartialEdit_v1.1_E1:p271",
+      "historical_stages": [
+        "PHASE3T_PARTIALEDIT_E1"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\results\\topconf_phase3t\\case_manifest.tsv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3T_RAW_OUTPUT_MANIFEST_V1.json"
+      ],
+      "confidence": "DERIVED_WITH_STRONG_EVIDENCE",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "PartialEdit_v1.1_E1",
+      "speaker_namespace": "PARTIALEDIT_OUTPUT_PATH",
+      "speaker_id": "p272",
+      "speaker_key": "PartialEdit_v1.1_E1:p272",
+      "historical_stages": [
+        "PHASE3T_PARTIALEDIT_E1"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\results\\topconf_phase3t\\case_manifest.tsv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3T_RAW_OUTPUT_MANIFEST_V1.json"
+      ],
+      "confidence": "DERIVED_WITH_STRONG_EVIDENCE",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "PartialEdit_v1.1_E1",
+      "speaker_namespace": "PARTIALEDIT_OUTPUT_PATH",
+      "speaker_id": "p273",
+      "speaker_key": "PartialEdit_v1.1_E1:p273",
+      "historical_stages": [
+        "PHASE3T_PARTIALEDIT_E1"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\results\\topconf_phase3t\\case_manifest.tsv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3T_RAW_OUTPUT_MANIFEST_V1.json"
+      ],
+      "confidence": "DERIVED_WITH_STRONG_EVIDENCE",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "PartialEdit_v1.1_E1",
+      "speaker_namespace": "PARTIALEDIT_OUTPUT_PATH",
+      "speaker_id": "p274",
+      "speaker_key": "PartialEdit_v1.1_E1:p274",
+      "historical_stages": [
+        "PHASE3T_PARTIALEDIT_E1"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\results\\topconf_phase3t\\case_manifest.tsv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3T_RAW_OUTPUT_MANIFEST_V1.json"
+      ],
+      "confidence": "DERIVED_WITH_STRONG_EVIDENCE",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "PartialEdit_v1.1_E1",
+      "speaker_namespace": "PARTIALEDIT_OUTPUT_PATH",
+      "speaker_id": "p275",
+      "speaker_key": "PartialEdit_v1.1_E1:p275",
+      "historical_stages": [
+        "PHASE3T_PARTIALEDIT_E1"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\results\\topconf_phase3t\\case_manifest.tsv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3T_RAW_OUTPUT_MANIFEST_V1.json"
+      ],
+      "confidence": "DERIVED_WITH_STRONG_EVIDENCE",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "PartialEdit_v1.1_E1",
+      "speaker_namespace": "PARTIALEDIT_OUTPUT_PATH",
+      "speaker_id": "p276",
+      "speaker_key": "PartialEdit_v1.1_E1:p276",
+      "historical_stages": [
+        "PHASE3T_PARTIALEDIT_E1"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\results\\topconf_phase3t\\case_manifest.tsv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3T_RAW_OUTPUT_MANIFEST_V1.json"
+      ],
+      "confidence": "DERIVED_WITH_STRONG_EVIDENCE",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "PartialEdit_v1.1_E1",
+      "speaker_namespace": "PARTIALEDIT_OUTPUT_PATH",
+      "speaker_id": "p277",
+      "speaker_key": "PartialEdit_v1.1_E1:p277",
+      "historical_stages": [
+        "PHASE3T_PARTIALEDIT_E1"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\results\\topconf_phase3t\\case_manifest.tsv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3T_RAW_OUTPUT_MANIFEST_V1.json"
+      ],
+      "confidence": "DERIVED_WITH_STRONG_EVIDENCE",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "PartialEdit_v1.1_E1",
+      "speaker_namespace": "PARTIALEDIT_OUTPUT_PATH",
+      "speaker_id": "p278",
+      "speaker_key": "PartialEdit_v1.1_E1:p278",
+      "historical_stages": [
+        "PHASE3T_PARTIALEDIT_E1"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\results\\topconf_phase3t\\case_manifest.tsv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3T_RAW_OUTPUT_MANIFEST_V1.json"
+      ],
+      "confidence": "DERIVED_WITH_STRONG_EVIDENCE",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "PartialEdit_v1.1_E1",
+      "speaker_namespace": "PARTIALEDIT_OUTPUT_PATH",
+      "speaker_id": "p279",
+      "speaker_key": "PartialEdit_v1.1_E1:p279",
+      "historical_stages": [
+        "PHASE3T_PARTIALEDIT_E1"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\results\\topconf_phase3t\\case_manifest.tsv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3T_RAW_OUTPUT_MANIFEST_V1.json"
+      ],
+      "confidence": "DERIVED_WITH_STRONG_EVIDENCE",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "PartialEdit_v1.1_E1",
+      "speaker_namespace": "PARTIALEDIT_OUTPUT_PATH",
+      "speaker_id": "p280",
+      "speaker_key": "PartialEdit_v1.1_E1:p280",
+      "historical_stages": [
+        "PHASE3T_PARTIALEDIT_E1"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\results\\topconf_phase3t\\case_manifest.tsv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3T_RAW_OUTPUT_MANIFEST_V1.json"
+      ],
+      "confidence": "DERIVED_WITH_STRONG_EVIDENCE",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "PartialEdit_v1.1_E1",
+      "speaker_namespace": "PARTIALEDIT_OUTPUT_PATH",
+      "speaker_id": "p281",
+      "speaker_key": "PartialEdit_v1.1_E1:p281",
+      "historical_stages": [
+        "PHASE3T_PARTIALEDIT_E1"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\results\\topconf_phase3t\\case_manifest.tsv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3T_RAW_OUTPUT_MANIFEST_V1.json"
+      ],
+      "confidence": "DERIVED_WITH_STRONG_EVIDENCE",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "PartialEdit_v1.1_E1",
+      "speaker_namespace": "PARTIALEDIT_OUTPUT_PATH",
+      "speaker_id": "p282",
+      "speaker_key": "PartialEdit_v1.1_E1:p282",
+      "historical_stages": [
+        "PHASE3T_PARTIALEDIT_E1"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\results\\topconf_phase3t\\case_manifest.tsv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3T_RAW_OUTPUT_MANIFEST_V1.json"
+      ],
+      "confidence": "DERIVED_WITH_STRONG_EVIDENCE",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "PartialEdit_v1.1_E1",
+      "speaker_namespace": "PARTIALEDIT_OUTPUT_PATH",
+      "speaker_id": "p283",
+      "speaker_key": "PartialEdit_v1.1_E1:p283",
+      "historical_stages": [
+        "PHASE3T_PARTIALEDIT_E1"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\results\\topconf_phase3t\\case_manifest.tsv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3T_RAW_OUTPUT_MANIFEST_V1.json"
+      ],
+      "confidence": "DERIVED_WITH_STRONG_EVIDENCE",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "PartialEdit_v1.1_E1",
+      "speaker_namespace": "PARTIALEDIT_OUTPUT_PATH",
+      "speaker_id": "p284",
+      "speaker_key": "PartialEdit_v1.1_E1:p284",
+      "historical_stages": [
+        "PHASE3T_PARTIALEDIT_E1"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\results\\topconf_phase3t\\case_manifest.tsv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3T_RAW_OUTPUT_MANIFEST_V1.json"
+      ],
+      "confidence": "DERIVED_WITH_STRONG_EVIDENCE",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "PartialEdit_v1.1_E1",
+      "speaker_namespace": "PARTIALEDIT_OUTPUT_PATH",
+      "speaker_id": "p285",
+      "speaker_key": "PartialEdit_v1.1_E1:p285",
+      "historical_stages": [
+        "PHASE3T_PARTIALEDIT_E1"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\results\\topconf_phase3t\\case_manifest.tsv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3T_RAW_OUTPUT_MANIFEST_V1.json"
+      ],
+      "confidence": "DERIVED_WITH_STRONG_EVIDENCE",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "PartialEdit_v1.1_E1",
+      "speaker_namespace": "PARTIALEDIT_OUTPUT_PATH",
+      "speaker_id": "p286",
+      "speaker_key": "PartialEdit_v1.1_E1:p286",
+      "historical_stages": [
+        "PHASE3T_PARTIALEDIT_E1"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\results\\topconf_phase3t\\case_manifest.tsv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3T_RAW_OUTPUT_MANIFEST_V1.json"
+      ],
+      "confidence": "DERIVED_WITH_STRONG_EVIDENCE",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "PartialEdit_v1.1_E1",
+      "speaker_namespace": "PARTIALEDIT_OUTPUT_PATH",
+      "speaker_id": "p287",
+      "speaker_key": "PartialEdit_v1.1_E1:p287",
+      "historical_stages": [
+        "PHASE3T_PARTIALEDIT_E1"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\results\\topconf_phase3t\\case_manifest.tsv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3T_RAW_OUTPUT_MANIFEST_V1.json"
+      ],
+      "confidence": "DERIVED_WITH_STRONG_EVIDENCE",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "PartialEdit_v1.1_E1",
+      "speaker_namespace": "PARTIALEDIT_OUTPUT_PATH",
+      "speaker_id": "p288",
+      "speaker_key": "PartialEdit_v1.1_E1:p288",
+      "historical_stages": [
+        "PHASE3T_PARTIALEDIT_E1"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\results\\topconf_phase3t\\case_manifest.tsv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3T_RAW_OUTPUT_MANIFEST_V1.json"
+      ],
+      "confidence": "DERIVED_WITH_STRONG_EVIDENCE",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "PartialEdit_v1.1_E1",
+      "speaker_namespace": "PARTIALEDIT_OUTPUT_PATH",
+      "speaker_id": "p292",
+      "speaker_key": "PartialEdit_v1.1_E1:p292",
+      "historical_stages": [
+        "PHASE3T_PARTIALEDIT_E1"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\results\\topconf_phase3t\\case_manifest.tsv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3T_RAW_OUTPUT_MANIFEST_V1.json"
+      ],
+      "confidence": "DERIVED_WITH_STRONG_EVIDENCE",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "PartialEdit_v1.1_E1",
+      "speaker_namespace": "PARTIALEDIT_OUTPUT_PATH",
+      "speaker_id": "p293",
+      "speaker_key": "PartialEdit_v1.1_E1:p293",
+      "historical_stages": [
+        "PHASE3T_PARTIALEDIT_E1"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\results\\topconf_phase3t\\case_manifest.tsv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3T_RAW_OUTPUT_MANIFEST_V1.json"
+      ],
+      "confidence": "DERIVED_WITH_STRONG_EVIDENCE",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "PartialEdit_v1.1_E1",
+      "speaker_namespace": "PARTIALEDIT_OUTPUT_PATH",
+      "speaker_id": "p294",
+      "speaker_key": "PartialEdit_v1.1_E1:p294",
+      "historical_stages": [
+        "PHASE3T_PARTIALEDIT_E1"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\results\\topconf_phase3t\\case_manifest.tsv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3T_RAW_OUTPUT_MANIFEST_V1.json"
+      ],
+      "confidence": "DERIVED_WITH_STRONG_EVIDENCE",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "PartialEdit_v1.1_E1",
+      "speaker_namespace": "PARTIALEDIT_OUTPUT_PATH",
+      "speaker_id": "p295",
+      "speaker_key": "PartialEdit_v1.1_E1:p295",
+      "historical_stages": [
+        "PHASE3T_PARTIALEDIT_E1"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\results\\topconf_phase3t\\case_manifest.tsv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3T_RAW_OUTPUT_MANIFEST_V1.json"
+      ],
+      "confidence": "DERIVED_WITH_STRONG_EVIDENCE",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "PartialEdit_v1.1_E1",
+      "speaker_namespace": "PARTIALEDIT_OUTPUT_PATH",
+      "speaker_id": "p297",
+      "speaker_key": "PartialEdit_v1.1_E1:p297",
+      "historical_stages": [
+        "PHASE3T_PARTIALEDIT_E1"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\results\\topconf_phase3t\\case_manifest.tsv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3T_RAW_OUTPUT_MANIFEST_V1.json"
+      ],
+      "confidence": "DERIVED_WITH_STRONG_EVIDENCE",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "PartialEdit_v1.1_E1",
+      "speaker_namespace": "PARTIALEDIT_OUTPUT_PATH",
+      "speaker_id": "p298",
+      "speaker_key": "PartialEdit_v1.1_E1:p298",
+      "historical_stages": [
+        "PHASE3T_PARTIALEDIT_E1"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\results\\topconf_phase3t\\case_manifest.tsv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3T_RAW_OUTPUT_MANIFEST_V1.json"
+      ],
+      "confidence": "DERIVED_WITH_STRONG_EVIDENCE",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "PartialEdit_v1.1_E1",
+      "speaker_namespace": "PARTIALEDIT_OUTPUT_PATH",
+      "speaker_id": "p299",
+      "speaker_key": "PartialEdit_v1.1_E1:p299",
+      "historical_stages": [
+        "PHASE3T_PARTIALEDIT_E1"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\results\\topconf_phase3t\\case_manifest.tsv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3T_RAW_OUTPUT_MANIFEST_V1.json"
+      ],
+      "confidence": "DERIVED_WITH_STRONG_EVIDENCE",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "PartialEdit_v1.1_E1",
+      "speaker_namespace": "PARTIALEDIT_OUTPUT_PATH",
+      "speaker_id": "p300",
+      "speaker_key": "PartialEdit_v1.1_E1:p300",
+      "historical_stages": [
+        "PHASE3T_PARTIALEDIT_E1"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\results\\topconf_phase3t\\case_manifest.tsv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3T_RAW_OUTPUT_MANIFEST_V1.json"
+      ],
+      "confidence": "DERIVED_WITH_STRONG_EVIDENCE",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "PartialEdit_v1.1_E1",
+      "speaker_namespace": "PARTIALEDIT_OUTPUT_PATH",
+      "speaker_id": "p301",
+      "speaker_key": "PartialEdit_v1.1_E1:p301",
+      "historical_stages": [
+        "PHASE3T_PARTIALEDIT_E1"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\results\\topconf_phase3t\\case_manifest.tsv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3T_RAW_OUTPUT_MANIFEST_V1.json"
+      ],
+      "confidence": "DERIVED_WITH_STRONG_EVIDENCE",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "PartialEdit_v1.1_E1",
+      "speaker_namespace": "PARTIALEDIT_OUTPUT_PATH",
+      "speaker_id": "p302",
+      "speaker_key": "PartialEdit_v1.1_E1:p302",
+      "historical_stages": [
+        "PHASE3T_PARTIALEDIT_E1"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\results\\topconf_phase3t\\case_manifest.tsv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3T_RAW_OUTPUT_MANIFEST_V1.json"
+      ],
+      "confidence": "DERIVED_WITH_STRONG_EVIDENCE",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "PartialEdit_v1.1_E1",
+      "speaker_namespace": "PARTIALEDIT_OUTPUT_PATH",
+      "speaker_id": "p303",
+      "speaker_key": "PartialEdit_v1.1_E1:p303",
+      "historical_stages": [
+        "PHASE3T_PARTIALEDIT_E1"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\results\\topconf_phase3t\\case_manifest.tsv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3T_RAW_OUTPUT_MANIFEST_V1.json"
+      ],
+      "confidence": "DERIVED_WITH_STRONG_EVIDENCE",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "PartialEdit_v1.1_E1",
+      "speaker_namespace": "PARTIALEDIT_OUTPUT_PATH",
+      "speaker_id": "p304",
+      "speaker_key": "PartialEdit_v1.1_E1:p304",
+      "historical_stages": [
+        "PHASE3T_PARTIALEDIT_E1"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\results\\topconf_phase3t\\case_manifest.tsv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3T_RAW_OUTPUT_MANIFEST_V1.json"
+      ],
+      "confidence": "DERIVED_WITH_STRONG_EVIDENCE",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "PartialEdit_v1.1_E1",
+      "speaker_namespace": "PARTIALEDIT_OUTPUT_PATH",
+      "speaker_id": "p305",
+      "speaker_key": "PartialEdit_v1.1_E1:p305",
+      "historical_stages": [
+        "PHASE3T_PARTIALEDIT_E1"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\results\\topconf_phase3t\\case_manifest.tsv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3T_RAW_OUTPUT_MANIFEST_V1.json"
+      ],
+      "confidence": "DERIVED_WITH_STRONG_EVIDENCE",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "PartialEdit_v1.1_E1",
+      "speaker_namespace": "PARTIALEDIT_OUTPUT_PATH",
+      "speaker_id": "p306",
+      "speaker_key": "PartialEdit_v1.1_E1:p306",
+      "historical_stages": [
+        "PHASE3T_PARTIALEDIT_E1"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\results\\topconf_phase3t\\case_manifest.tsv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3T_RAW_OUTPUT_MANIFEST_V1.json"
+      ],
+      "confidence": "DERIVED_WITH_STRONG_EVIDENCE",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "PartialEdit_v1.1_E1",
+      "speaker_namespace": "PARTIALEDIT_OUTPUT_PATH",
+      "speaker_id": "p307",
+      "speaker_key": "PartialEdit_v1.1_E1:p307",
+      "historical_stages": [
+        "PHASE3T_PARTIALEDIT_E1"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\results\\topconf_phase3t\\case_manifest.tsv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3T_RAW_OUTPUT_MANIFEST_V1.json"
+      ],
+      "confidence": "DERIVED_WITH_STRONG_EVIDENCE",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "PartialEdit_v1.1_E1",
+      "speaker_namespace": "PARTIALEDIT_OUTPUT_PATH",
+      "speaker_id": "p308",
+      "speaker_key": "PartialEdit_v1.1_E1:p308",
+      "historical_stages": [
+        "PHASE3T_PARTIALEDIT_E1"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\results\\topconf_phase3t\\case_manifest.tsv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3T_RAW_OUTPUT_MANIFEST_V1.json"
+      ],
+      "confidence": "DERIVED_WITH_STRONG_EVIDENCE",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "PartialEdit_v1.1_E1",
+      "speaker_namespace": "PARTIALEDIT_OUTPUT_PATH",
+      "speaker_id": "p310",
+      "speaker_key": "PartialEdit_v1.1_E1:p310",
+      "historical_stages": [
+        "PHASE3T_PARTIALEDIT_E1"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\results\\topconf_phase3t\\case_manifest.tsv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3T_RAW_OUTPUT_MANIFEST_V1.json"
+      ],
+      "confidence": "DERIVED_WITH_STRONG_EVIDENCE",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "PartialEdit_v1.1_E1",
+      "speaker_namespace": "PARTIALEDIT_OUTPUT_PATH",
+      "speaker_id": "p311",
+      "speaker_key": "PartialEdit_v1.1_E1:p311",
+      "historical_stages": [
+        "PHASE3T_PARTIALEDIT_E1"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\results\\topconf_phase3t\\case_manifest.tsv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3T_RAW_OUTPUT_MANIFEST_V1.json"
+      ],
+      "confidence": "DERIVED_WITH_STRONG_EVIDENCE",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "PartialEdit_v1.1_E1",
+      "speaker_namespace": "PARTIALEDIT_OUTPUT_PATH",
+      "speaker_id": "p312",
+      "speaker_key": "PartialEdit_v1.1_E1:p312",
+      "historical_stages": [
+        "PHASE3T_PARTIALEDIT_E1"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\results\\topconf_phase3t\\case_manifest.tsv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3T_RAW_OUTPUT_MANIFEST_V1.json"
+      ],
+      "confidence": "DERIVED_WITH_STRONG_EVIDENCE",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "PartialEdit_v1.1_E1",
+      "speaker_namespace": "PARTIALEDIT_OUTPUT_PATH",
+      "speaker_id": "p313",
+      "speaker_key": "PartialEdit_v1.1_E1:p313",
+      "historical_stages": [
+        "PHASE3T_PARTIALEDIT_E1"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\results\\topconf_phase3t\\case_manifest.tsv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3T_RAW_OUTPUT_MANIFEST_V1.json"
+      ],
+      "confidence": "DERIVED_WITH_STRONG_EVIDENCE",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "PartialEdit_v1.1_E1",
+      "speaker_namespace": "PARTIALEDIT_OUTPUT_PATH",
+      "speaker_id": "p314",
+      "speaker_key": "PartialEdit_v1.1_E1:p314",
+      "historical_stages": [
+        "PHASE3T_PARTIALEDIT_E1"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\results\\topconf_phase3t\\case_manifest.tsv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3T_RAW_OUTPUT_MANIFEST_V1.json"
+      ],
+      "confidence": "DERIVED_WITH_STRONG_EVIDENCE",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "PartialEdit_v1.1_E1",
+      "speaker_namespace": "PARTIALEDIT_OUTPUT_PATH",
+      "speaker_id": "p316",
+      "speaker_key": "PartialEdit_v1.1_E1:p316",
+      "historical_stages": [
+        "PHASE3T_PARTIALEDIT_E1"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\results\\topconf_phase3t\\case_manifest.tsv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3T_RAW_OUTPUT_MANIFEST_V1.json"
+      ],
+      "confidence": "DERIVED_WITH_STRONG_EVIDENCE",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "PartialEdit_v1.1_E1",
+      "speaker_namespace": "PARTIALEDIT_OUTPUT_PATH",
+      "speaker_id": "p317",
+      "speaker_key": "PartialEdit_v1.1_E1:p317",
+      "historical_stages": [
+        "PHASE3T_PARTIALEDIT_E1"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\results\\topconf_phase3t\\case_manifest.tsv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3T_RAW_OUTPUT_MANIFEST_V1.json"
+      ],
+      "confidence": "DERIVED_WITH_STRONG_EVIDENCE",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "PartialEdit_v1.1_E1",
+      "speaker_namespace": "PARTIALEDIT_OUTPUT_PATH",
+      "speaker_id": "p318",
+      "speaker_key": "PartialEdit_v1.1_E1:p318",
+      "historical_stages": [
+        "PHASE3T_PARTIALEDIT_E1"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\results\\topconf_phase3t\\case_manifest.tsv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3T_RAW_OUTPUT_MANIFEST_V1.json"
+      ],
+      "confidence": "DERIVED_WITH_STRONG_EVIDENCE",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "PartialEdit_v1.1_E1",
+      "speaker_namespace": "PARTIALEDIT_OUTPUT_PATH",
+      "speaker_id": "p323",
+      "speaker_key": "PartialEdit_v1.1_E1:p323",
+      "historical_stages": [
+        "PHASE3T_PARTIALEDIT_E1"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\results\\topconf_phase3t\\case_manifest.tsv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3T_RAW_OUTPUT_MANIFEST_V1.json"
+      ],
+      "confidence": "DERIVED_WITH_STRONG_EVIDENCE",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "PartialEdit_v1.1_E1",
+      "speaker_namespace": "PARTIALEDIT_OUTPUT_PATH",
+      "speaker_id": "p326",
+      "speaker_key": "PartialEdit_v1.1_E1:p326",
+      "historical_stages": [
+        "PHASE3T_PARTIALEDIT_E1"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\results\\topconf_phase3t\\case_manifest.tsv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3T_RAW_OUTPUT_MANIFEST_V1.json"
+      ],
+      "confidence": "DERIVED_WITH_STRONG_EVIDENCE",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "PartialEdit_v1.1_E1",
+      "speaker_namespace": "PARTIALEDIT_OUTPUT_PATH",
+      "speaker_id": "p329",
+      "speaker_key": "PartialEdit_v1.1_E1:p329",
+      "historical_stages": [
+        "PHASE3T_PARTIALEDIT_E1"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\results\\topconf_phase3t\\case_manifest.tsv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3T_RAW_OUTPUT_MANIFEST_V1.json"
+      ],
+      "confidence": "DERIVED_WITH_STRONG_EVIDENCE",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "PartialEdit_v1.1_E1",
+      "speaker_namespace": "PARTIALEDIT_OUTPUT_PATH",
+      "speaker_id": "p330",
+      "speaker_key": "PartialEdit_v1.1_E1:p330",
+      "historical_stages": [
+        "PHASE3T_PARTIALEDIT_E1"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\results\\topconf_phase3t\\case_manifest.tsv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3T_RAW_OUTPUT_MANIFEST_V1.json"
+      ],
+      "confidence": "DERIVED_WITH_STRONG_EVIDENCE",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "PartialEdit_v1.1_E1",
+      "speaker_namespace": "PARTIALEDIT_OUTPUT_PATH",
+      "speaker_id": "p333",
+      "speaker_key": "PartialEdit_v1.1_E1:p333",
+      "historical_stages": [
+        "PHASE3T_PARTIALEDIT_E1"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\results\\topconf_phase3t\\case_manifest.tsv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3T_RAW_OUTPUT_MANIFEST_V1.json"
+      ],
+      "confidence": "DERIVED_WITH_STRONG_EVIDENCE",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "PartialEdit_v1.1_E1",
+      "speaker_namespace": "PARTIALEDIT_OUTPUT_PATH",
+      "speaker_id": "p334",
+      "speaker_key": "PartialEdit_v1.1_E1:p334",
+      "historical_stages": [
+        "PHASE3T_PARTIALEDIT_E1"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\results\\topconf_phase3t\\case_manifest.tsv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3T_RAW_OUTPUT_MANIFEST_V1.json"
+      ],
+      "confidence": "DERIVED_WITH_STRONG_EVIDENCE",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "PartialEdit_v1.1_E1",
+      "speaker_namespace": "PARTIALEDIT_OUTPUT_PATH",
+      "speaker_id": "p335",
+      "speaker_key": "PartialEdit_v1.1_E1:p335",
+      "historical_stages": [
+        "PHASE3T_PARTIALEDIT_E1"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\results\\topconf_phase3t\\case_manifest.tsv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3T_RAW_OUTPUT_MANIFEST_V1.json"
+      ],
+      "confidence": "DERIVED_WITH_STRONG_EVIDENCE",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "PartialEdit_v1.1_E1",
+      "speaker_namespace": "PARTIALEDIT_OUTPUT_PATH",
+      "speaker_id": "p336",
+      "speaker_key": "PartialEdit_v1.1_E1:p336",
+      "historical_stages": [
+        "PHASE3T_PARTIALEDIT_E1"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\results\\topconf_phase3t\\case_manifest.tsv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3T_RAW_OUTPUT_MANIFEST_V1.json"
+      ],
+      "confidence": "DERIVED_WITH_STRONG_EVIDENCE",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "PartialEdit_v1.1_E1",
+      "speaker_namespace": "PARTIALEDIT_OUTPUT_PATH",
+      "speaker_id": "p339",
+      "speaker_key": "PartialEdit_v1.1_E1:p339",
+      "historical_stages": [
+        "PHASE3T_PARTIALEDIT_E1"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\results\\topconf_phase3t\\case_manifest.tsv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3T_RAW_OUTPUT_MANIFEST_V1.json"
+      ],
+      "confidence": "DERIVED_WITH_STRONG_EVIDENCE",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "PartialEdit_v1.1_E1",
+      "speaker_namespace": "PARTIALEDIT_OUTPUT_PATH",
+      "speaker_id": "p340",
+      "speaker_key": "PartialEdit_v1.1_E1:p340",
+      "historical_stages": [
+        "PHASE3T_PARTIALEDIT_E1"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\results\\topconf_phase3t\\case_manifest.tsv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3T_RAW_OUTPUT_MANIFEST_V1.json"
+      ],
+      "confidence": "DERIVED_WITH_STRONG_EVIDENCE",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "PartialEdit_v1.1_E1",
+      "speaker_namespace": "PARTIALEDIT_OUTPUT_PATH",
+      "speaker_id": "p341",
+      "speaker_key": "PartialEdit_v1.1_E1:p341",
+      "historical_stages": [
+        "PHASE3T_PARTIALEDIT_E1"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\results\\topconf_phase3t\\case_manifest.tsv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3T_RAW_OUTPUT_MANIFEST_V1.json"
+      ],
+      "confidence": "DERIVED_WITH_STRONG_EVIDENCE",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "PartialEdit_v1.1_E1",
+      "speaker_namespace": "PARTIALEDIT_OUTPUT_PATH",
+      "speaker_id": "p343",
+      "speaker_key": "PartialEdit_v1.1_E1:p343",
+      "historical_stages": [
+        "PHASE3T_PARTIALEDIT_E1"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\results\\topconf_phase3t\\case_manifest.tsv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3T_RAW_OUTPUT_MANIFEST_V1.json"
+      ],
+      "confidence": "DERIVED_WITH_STRONG_EVIDENCE",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "PartialEdit_v1.1_E1",
+      "speaker_namespace": "PARTIALEDIT_OUTPUT_PATH",
+      "speaker_id": "p345",
+      "speaker_key": "PartialEdit_v1.1_E1:p345",
+      "historical_stages": [
+        "PHASE3T_PARTIALEDIT_E1"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\results\\topconf_phase3t\\case_manifest.tsv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3T_RAW_OUTPUT_MANIFEST_V1.json"
+      ],
+      "confidence": "DERIVED_WITH_STRONG_EVIDENCE",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "PartialEdit_v1.1_E1",
+      "speaker_namespace": "PARTIALEDIT_OUTPUT_PATH",
+      "speaker_id": "p347",
+      "speaker_key": "PartialEdit_v1.1_E1:p347",
+      "historical_stages": [
+        "PHASE3T_PARTIALEDIT_E1"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\results\\topconf_phase3t\\case_manifest.tsv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3T_RAW_OUTPUT_MANIFEST_V1.json"
+      ],
+      "confidence": "DERIVED_WITH_STRONG_EVIDENCE",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "PartialEdit_v1.1_E1",
+      "speaker_namespace": "PARTIALEDIT_OUTPUT_PATH",
+      "speaker_id": "p351",
+      "speaker_key": "PartialEdit_v1.1_E1:p351",
+      "historical_stages": [
+        "PHASE3T_PARTIALEDIT_E1"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\results\\topconf_phase3t\\case_manifest.tsv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3T_RAW_OUTPUT_MANIFEST_V1.json"
+      ],
+      "confidence": "DERIVED_WITH_STRONG_EVIDENCE",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "PartialEdit_v1.1_E1",
+      "speaker_namespace": "PARTIALEDIT_OUTPUT_PATH",
+      "speaker_id": "p360",
+      "speaker_key": "PartialEdit_v1.1_E1:p360",
+      "historical_stages": [
+        "PHASE3T_PARTIALEDIT_E1"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\results\\topconf_phase3t\\case_manifest.tsv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3T_RAW_OUTPUT_MANIFEST_V1.json"
+      ],
+      "confidence": "DERIVED_WITH_STRONG_EVIDENCE",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "PartialEdit_v1.1_E1",
+      "speaker_namespace": "PARTIALEDIT_OUTPUT_PATH",
+      "speaker_id": "p361",
+      "speaker_key": "PartialEdit_v1.1_E1:p361",
+      "historical_stages": [
+        "PHASE3T_PARTIALEDIT_E1"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\results\\topconf_phase3t\\case_manifest.tsv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3T_RAW_OUTPUT_MANIFEST_V1.json"
+      ],
+      "confidence": "DERIVED_WITH_STRONG_EVIDENCE",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "PartialEdit_v1.1_E1",
+      "speaker_namespace": "PARTIALEDIT_OUTPUT_PATH",
+      "speaker_id": "p362",
+      "speaker_key": "PartialEdit_v1.1_E1:p362",
+      "historical_stages": [
+        "PHASE3T_PARTIALEDIT_E1"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\results\\topconf_phase3t\\case_manifest.tsv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3T_RAW_OUTPUT_MANIFEST_V1.json"
+      ],
+      "confidence": "DERIVED_WITH_STRONG_EVIDENCE",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "PartialEdit_v1.1_E1",
+      "speaker_namespace": "PARTIALEDIT_OUTPUT_PATH",
+      "speaker_id": "p363",
+      "speaker_key": "PartialEdit_v1.1_E1:p363",
+      "historical_stages": [
+        "PHASE3T_PARTIALEDIT_E1"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\results\\topconf_phase3t\\case_manifest.tsv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3T_RAW_OUTPUT_MANIFEST_V1.json"
+      ],
+      "confidence": "DERIVED_WITH_STRONG_EVIDENCE",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "PartialEdit_v1.1_E1",
+      "speaker_namespace": "PARTIALEDIT_OUTPUT_PATH",
+      "speaker_id": "p364",
+      "speaker_key": "PartialEdit_v1.1_E1:p364",
+      "historical_stages": [
+        "PHASE3T_PARTIALEDIT_E1"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\results\\topconf_phase3t\\case_manifest.tsv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3T_RAW_OUTPUT_MANIFEST_V1.json"
+      ],
+      "confidence": "DERIVED_WITH_STRONG_EVIDENCE",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "PartialEdit_v1.1_E1",
+      "speaker_namespace": "PARTIALEDIT_OUTPUT_PATH",
+      "speaker_id": "p374",
+      "speaker_key": "PartialEdit_v1.1_E1:p374",
+      "historical_stages": [
+        "PHASE3T_PARTIALEDIT_E1"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\results\\topconf_phase3t\\case_manifest.tsv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3T_RAW_OUTPUT_MANIFEST_V1.json"
+      ],
+      "confidence": "DERIVED_WITH_STRONG_EVIDENCE",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "PartialEdit_v1.1_E1",
+      "speaker_namespace": "PARTIALEDIT_OUTPUT_PATH",
+      "speaker_id": "p376",
+      "speaker_key": "PartialEdit_v1.1_E1:p376",
+      "historical_stages": [
+        "PHASE3T_PARTIALEDIT_E1"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\results\\topconf_phase3t\\case_manifest.tsv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3T_RAW_OUTPUT_MANIFEST_V1.json"
+      ],
+      "confidence": "DERIVED_WITH_STRONG_EVIDENCE",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    },
+    {
+      "corpus": "PartialEdit_v1.1_E1",
+      "speaker_namespace": "PARTIALEDIT_OUTPUT_PATH",
+      "speaker_id": "s5",
+      "speaker_key": "PartialEdit_v1.1_E1:s5",
+      "historical_stages": [
+        "PHASE3T_PARTIALEDIT_E1"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\results\\topconf_phase3t\\case_manifest.tsv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3T_RAW_OUTPUT_MANIFEST_V1.json"
+      ],
+      "confidence": "DERIVED_WITH_STRONG_EVIDENCE",
+      "reuse_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT"
+    }
+  ],
+  "unresolved_projections": [
+    {
+      "stage": "WEEK5_QUALIFICATION",
+      "unknown_source_count": 529,
+      "missing_fields": [
+        "source_id",
+        "parent_recording",
+        "utterance_id",
+        "lineage_id"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-Week5\\data\\manifests\\week5_exp1_qualification_population.json",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-Week5\\data\\manifests\\week5_exp2_qualification_population.json",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-Week5\\data\\manifests\\week5_exp3_qualification_population.json",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-Week5\\data\\manifests\\week5_exp4_qualification_population.json",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-Week5\\data\\manifests\\week5_exp5_qualification_population.json",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-Week5\\data\\manifests\\week5_exp6_qualification_population.json"
+      ]
+    },
+    {
+      "stage": "PHASE3T_PARTIALEDIT_E1",
+      "unknown_source_count": 42471,
+      "missing_fields": [
+        "original_recording",
+        "source_id",
+        "session_id",
+        "reference_audio_id",
+        "parent_asset_id",
+        "generator_input_identity"
+      ],
+      "evidence_sources": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\results\\topconf_phase3t\\case_manifest.tsv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3T_RAW_OUTPUT_MANIFEST_V1.json"
+      ]
+    }
+  ],
+  "authorization_effect": "SPEAKER_REUSE_ALLOWED_ONLY_WITH_LINEAGE_DISJOINT; UNKNOWN_REMAINS_UNKNOWN"
+}

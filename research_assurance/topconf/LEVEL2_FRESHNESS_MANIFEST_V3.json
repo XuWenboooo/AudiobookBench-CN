@@ -1,0 +1,448 @@
+{
+  "schema_version": "topconf.level2.freshness.v3",
+  "manifest_id": "TOPCONF_RQ1_LEVEL2_FRESH_V3",
+  "status": "FAIL_PROHIBITED_OVERLAP",
+  "freshness_verdict": "FAIL",
+  "materialized": true,
+  "source_corpus_identity_frozen": false,
+  "result_based_selection": false,
+  "real_level2_outcomes_accessed": false,
+  "level2_population_manifest": "LEVEL2_RQ1_POPULATION_MANIFEST_V2.json",
+  "level2_population_manifest_sha256": "FCFFEEC32F4CAB32DA53BFAD06C0BBBC6F1354AA87277DCE1B1A4EA8E6F90674",
+  "level2_population_file_sha256": "ED6FE30A4F9B7AEFA4C36821E04CB7E5F9B1780B20EE7ED9A0AA84F52B3955D0",
+  "repository_head": "45b95dd224f7172a41dccaa4663fd9c8256b62b7",
+  "validator_version": "topconf.level2.freshness.v3",
+  "speaker_overlap_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT",
+  "universe_references": {
+    "CASE_EXCLUSION": {
+      "path": "HISTORICAL_CASE_EXCLUSION_UNIVERSE_V3.json",
+      "sha256": "C1B94DDD99A691EA19509A3424D24801526A55635688F90DC69635C0D0C3D9E6",
+      "status": "PARTIAL",
+      "evidence_sources": [
+        "HISTORICAL_CASE_EXCLUSION_UNIVERSE_V3.json",
+        "HISTORICAL_EXCLUSION_EVIDENCE_INDEX_V1.json"
+      ]
+    },
+    "SOURCE_EXCLUSION": {
+      "path": "HISTORICAL_SOURCE_EXCLUSION_UNIVERSE_V3.json",
+      "sha256": "91919B1DF4DDF47EE0D65DEEAB7E7BB9822725C8CF6FA0C46BF48B0339ACC58C",
+      "status": "PARTIAL",
+      "evidence_sources": [
+        "HISTORICAL_SOURCE_EXCLUSION_UNIVERSE_V3.json",
+        "HISTORICAL_EXCLUSION_EVIDENCE_INDEX_V1.json"
+      ]
+    },
+    "SPEAKER_USAGE": {
+      "path": "HISTORICAL_SPEAKER_USAGE_UNIVERSE_V1.json",
+      "sha256": "E04D35848465CD2BDE3E20704413D388D327DA798F907421197C5D2BF22747FC",
+      "status": "PARTIAL",
+      "evidence_sources": [
+        "HISTORICAL_SPEAKER_USAGE_UNIVERSE_V1.json",
+        "HISTORICAL_EXCLUSION_EVIDENCE_INDEX_V1.json"
+      ]
+    },
+    "LINEAGE_EXCLUSION": {
+      "path": "HISTORICAL_LINEAGE_EXCLUSION_UNIVERSE_V1.json",
+      "sha256": "410D8436A2FB369E76399DA4DA4FC8BEA6A29212071CDFE9559EE4D0698A761F",
+      "status": "PARTIAL",
+      "evidence_sources": [
+        "HISTORICAL_LINEAGE_EXCLUSION_UNIVERSE_V1.json",
+        "HISTORICAL_EXCLUSION_EVIDENCE_INDEX_V1.json"
+      ]
+    }
+  },
+  "comparison_counts": {
+    "case_id_overlap_count": 0,
+    "case_lineage_overlap_count": 20,
+    "source_overlap_count": 5,
+    "lineage_overlap_count": 5,
+    "speaker_overlap_count": 23,
+    "prohibited_speaker_overlap_count": 2,
+    "unknown_case_comparisons": 780,
+    "unknown_source_comparisons": 195,
+    "unknown_lineage_comparisons": 195
+  },
+  "overlap_counts": {
+    "case_id_overlap_count": 0,
+    "case_lineage_overlap_count": 20,
+    "source_overlap_count": 5,
+    "lineage_overlap_count": 5,
+    "speaker_overlap_count": 23,
+    "prohibited_speaker_overlap_count": 2,
+    "unknown_case_comparisons": 780,
+    "unknown_source_comparisons": 195,
+    "unknown_lineage_comparisons": 195
+  },
+  "overlap_details": {
+    "case_id_overlap_ids": [],
+    "case_lineage_overlap_case_ids": [
+      "CASE-0001-M01",
+      "CASE-0001-M02",
+      "CASE-0001-M03",
+      "CASE-0001-M04",
+      "CASE-0036-M01",
+      "CASE-0036-M02",
+      "CASE-0036-M03",
+      "CASE-0036-M04",
+      "CASE-0061-M01",
+      "CASE-0061-M02",
+      "CASE-0061-M03",
+      "CASE-0061-M04",
+      "CASE-0121-M01",
+      "CASE-0121-M02",
+      "CASE-0121-M03",
+      "CASE-0121-M04",
+      "CASE-0181-M01",
+      "CASE-0181-M02",
+      "CASE-0181-M03",
+      "CASE-0181-M04"
+    ],
+    "source_overlap_details": [
+      {
+        "population_source_id": "AISHELL3-SRC-0001",
+        "population_speaker_id": "AISHELL3_SSB0005",
+        "source_audio_sha256": "BB61E8E29F25FA6AD9702EB42BE6FD81B82E7A55DF4066E6AFDE21DADAF8B927",
+        "historical_matches": [
+          {
+            "source_id": "SSB00050001",
+            "parent_recording": "F:\\项目\\申请实验室  TTS项目\\datasets\\AISHELL-3\\raw\\train\\wav\\SSB0005\\SSB00050001.wav",
+            "corpus": "AISHELL3",
+            "speaker_id": "SSB0005",
+            "speaker_key": "AISHELL3:SSB0005",
+            "utterance_id": "SSB00050001",
+            "text_sha256": "F70F45C1E63E04FDF7D3A9CAB372641F7BA527EDC29F5392CDA6281F8A657CBA",
+            "source_audio_sha256": "BB61E8E29F25FA6AD9702EB42BE6FD81B82E7A55DF4066E6AFDE21DADAF8B927",
+            "lineage_id": "AUDIO_SHA256:BB61E8E29F25FA6AD9702EB42BE6FD81B82E7A55DF4066E6AFDE21DADAF8B927",
+            "historical_stages": [
+              "WEEK1_PILOT"
+            ],
+            "historical_roles": [
+              "PILOT_SOURCE"
+            ],
+            "evidence_sources": [
+              "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\data\\manifests\\source_audio.csv",
+              "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\data\\manifests\\week1_manifest.csv"
+            ],
+            "confidence": "VERIFIED"
+          }
+        ]
+      },
+      {
+        "population_source_id": "AISHELL3-SRC-0036",
+        "population_speaker_id": "AISHELL3_SSB1203",
+        "source_audio_sha256": "8B89A052DD76790E282EA045E23E5192DE0A94F9FC465F2C65375DB2D9575CB6",
+        "historical_matches": [
+          {
+            "source_id": "SSB12030001",
+            "parent_recording": "F:\\项目\\申请实验室  TTS项目\\datasets\\AISHELL-3\\raw\\train\\wav\\SSB1203\\SSB12030001.wav",
+            "corpus": "AISHELL3",
+            "speaker_id": "SSB1203",
+            "speaker_key": "AISHELL3:SSB1203",
+            "utterance_id": "SSB12030001",
+            "text_sha256": "31DCDD7462B8FFAB0FB154FCFB6D14E04747C38E936205630B4A4FEEBB41BEF7",
+            "source_audio_sha256": "8B89A052DD76790E282EA045E23E5192DE0A94F9FC465F2C65375DB2D9575CB6",
+            "lineage_id": "AUDIO_SHA256:8B89A052DD76790E282EA045E23E5192DE0A94F9FC465F2C65375DB2D9575CB6",
+            "historical_stages": [
+              "WEEK4_PILOT"
+            ],
+            "historical_roles": [
+              "PILOT_SOURCE"
+            ],
+            "evidence_sources": [
+              "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\data\\manifests\\week4_population_manifest.json"
+            ],
+            "confidence": "VERIFIED"
+          }
+        ]
+      },
+      {
+        "population_source_id": "AISHELL3-SRC-0061",
+        "population_speaker_id": "AISHELL3_SSB0005",
+        "source_audio_sha256": "F7C2E359847AF780EBFEA6D06A170D38AC5D4CD5E91B51B7CD98216A11D32BC0",
+        "historical_matches": [
+          {
+            "source_id": "SSB00050007",
+            "parent_recording": "F:\\项目\\申请实验室  TTS项目\\datasets\\AISHELL-3\\raw\\train\\wav\\SSB0005\\SSB00050007.wav",
+            "corpus": "AISHELL3",
+            "speaker_id": "SSB0005",
+            "speaker_key": "AISHELL3:SSB0005",
+            "utterance_id": "SSB00050007",
+            "text_sha256": "F0C4E5D403504AF0DEBC2C48233328D3E64222C9CBE78FE8A6B5F97895E57EEF",
+            "source_audio_sha256": "F7C2E359847AF780EBFEA6D06A170D38AC5D4CD5E91B51B7CD98216A11D32BC0",
+            "lineage_id": "AUDIO_SHA256:F7C2E359847AF780EBFEA6D06A170D38AC5D4CD5E91B51B7CD98216A11D32BC0",
+            "historical_stages": [
+              "WEEK1_PILOT"
+            ],
+            "historical_roles": [
+              "PILOT_SOURCE"
+            ],
+            "evidence_sources": [
+              "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\data\\manifests\\source_audio.csv",
+              "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\data\\manifests\\week1_manifest.csv"
+            ],
+            "confidence": "VERIFIED"
+          }
+        ]
+      },
+      {
+        "population_source_id": "AISHELL3-SRC-0121",
+        "population_speaker_id": "AISHELL3_SSB0005",
+        "source_audio_sha256": "30BBFE43D675533FA5FA023920197E9CC176592D4DDAE45F55765B3C9AAF0E75",
+        "historical_matches": [
+          {
+            "source_id": "SSB00050022",
+            "parent_recording": "F:\\项目\\申请实验室  TTS项目\\datasets\\AISHELL-3\\raw\\train\\wav\\SSB0005\\SSB00050022.wav",
+            "corpus": "AISHELL3",
+            "speaker_id": "SSB0005",
+            "speaker_key": "AISHELL3:SSB0005",
+            "utterance_id": "SSB00050022",
+            "text_sha256": "7136751C05541ABAD56941563B9C6F37356F12574DFFEC7CD65CC3D53439AEBE",
+            "source_audio_sha256": "30BBFE43D675533FA5FA023920197E9CC176592D4DDAE45F55765B3C9AAF0E75",
+            "lineage_id": "AUDIO_SHA256:30BBFE43D675533FA5FA023920197E9CC176592D4DDAE45F55765B3C9AAF0E75",
+            "historical_stages": [
+              "WEEK1_PILOT"
+            ],
+            "historical_roles": [
+              "PILOT_SOURCE"
+            ],
+            "evidence_sources": [
+              "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\data\\manifests\\source_audio.csv",
+              "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\data\\manifests\\week1_manifest.csv"
+            ],
+            "confidence": "VERIFIED"
+          }
+        ]
+      },
+      {
+        "population_source_id": "AISHELL3-SRC-0181",
+        "population_speaker_id": "AISHELL3_SSB0005",
+        "source_audio_sha256": "781DA576104AB7E62E823E739C38DBADBB87BBD114C17A82FC85777BCE2A3E55",
+        "historical_matches": [
+          {
+            "source_id": "SSB00050027",
+            "parent_recording": "F:\\项目\\申请实验室  TTS项目\\datasets\\AISHELL-3\\raw\\train\\wav\\SSB0005\\SSB00050027.wav",
+            "corpus": "AISHELL3",
+            "speaker_id": "SSB0005",
+            "speaker_key": "AISHELL3:SSB0005",
+            "utterance_id": "SSB00050027",
+            "text_sha256": "BCEBE35314DB67959A06B192D3B87D6B000842B634D5C46CDC4E3A0E315B3072",
+            "source_audio_sha256": "781DA576104AB7E62E823E739C38DBADBB87BBD114C17A82FC85777BCE2A3E55",
+            "lineage_id": "AUDIO_SHA256:781DA576104AB7E62E823E739C38DBADBB87BBD114C17A82FC85777BCE2A3E55",
+            "historical_stages": [
+              "WEEK1_PILOT"
+            ],
+            "historical_roles": [
+              "PILOT_SOURCE"
+            ],
+            "evidence_sources": [
+              "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\data\\manifests\\source_audio.csv",
+              "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\data\\manifests\\week1_manifest.csv"
+            ],
+            "confidence": "VERIFIED"
+          }
+        ]
+      }
+    ],
+    "lineage_overlap_details": [
+      {
+        "population_source_id": "AISHELL3-SRC-0001",
+        "population_speaker_id": "AISHELL3_SSB0005",
+        "source_audio_sha256": "BB61E8E29F25FA6AD9702EB42BE6FD81B82E7A55DF4066E6AFDE21DADAF8B927",
+        "historical_matches": [
+          {
+            "lineage_id": "AUDIO_SHA256:BB61E8E29F25FA6AD9702EB42BE6FD81B82E7A55DF4066E6AFDE21DADAF8B927",
+            "original_recording": "F:\\项目\\申请实验室  TTS项目\\datasets\\AISHELL-3\\raw\\train\\wav\\SSB0005\\SSB00050001.wav",
+            "derived_segments": [
+              "SSB00050001_seg0000",
+              "SSB00050001_seg0001"
+            ],
+            "synthetic_replacement_parent": null,
+            "reference_audio": null,
+            "speaker_reference": "AISHELL3:SSB0005",
+            "text_content_source": "F70F45C1E63E04FDF7D3A9CAB372641F7BA527EDC29F5392CDA6281F8A657CBA",
+            "generator_input": null,
+            "source_audio_sha256": "BB61E8E29F25FA6AD9702EB42BE6FD81B82E7A55DF4066E6AFDE21DADAF8B927",
+            "historical_stages": [
+              "WEEK1_PILOT"
+            ],
+            "evidence_sources": [
+              "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\data\\manifests\\source_audio.csv",
+              "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\data\\manifests\\week1_manifest.csv"
+            ],
+            "confidence": "VERIFIED"
+          }
+        ]
+      },
+      {
+        "population_source_id": "AISHELL3-SRC-0036",
+        "population_speaker_id": "AISHELL3_SSB1203",
+        "source_audio_sha256": "8B89A052DD76790E282EA045E23E5192DE0A94F9FC465F2C65375DB2D9575CB6",
+        "historical_matches": [
+          {
+            "lineage_id": "AUDIO_SHA256:8B89A052DD76790E282EA045E23E5192DE0A94F9FC465F2C65375DB2D9575CB6",
+            "original_recording": "F:\\项目\\申请实验室  TTS项目\\datasets\\AISHELL-3\\raw\\train\\wav\\SSB1203\\SSB12030001.wav",
+            "derived_segments": [
+              "week4_case_0038"
+            ],
+            "synthetic_replacement_parent": null,
+            "reference_audio": null,
+            "speaker_reference": "AISHELL3:SSB1203",
+            "text_content_source": "31DCDD7462B8FFAB0FB154FCFB6D14E04747C38E936205630B4A4FEEBB41BEF7",
+            "generator_input": null,
+            "source_audio_sha256": "8B89A052DD76790E282EA045E23E5192DE0A94F9FC465F2C65375DB2D9575CB6",
+            "historical_stages": [
+              "WEEK4_PILOT"
+            ],
+            "evidence_sources": [
+              "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\data\\manifests\\week4_population_manifest.json"
+            ],
+            "confidence": "VERIFIED"
+          }
+        ]
+      },
+      {
+        "population_source_id": "AISHELL3-SRC-0061",
+        "population_speaker_id": "AISHELL3_SSB0005",
+        "source_audio_sha256": "F7C2E359847AF780EBFEA6D06A170D38AC5D4CD5E91B51B7CD98216A11D32BC0",
+        "historical_matches": [
+          {
+            "lineage_id": "AUDIO_SHA256:F7C2E359847AF780EBFEA6D06A170D38AC5D4CD5E91B51B7CD98216A11D32BC0",
+            "original_recording": "F:\\项目\\申请实验室  TTS项目\\datasets\\AISHELL-3\\raw\\train\\wav\\SSB0005\\SSB00050007.wav",
+            "derived_segments": [
+              "SSB00050007_seg0000",
+              "SSB00050007_seg0001"
+            ],
+            "synthetic_replacement_parent": null,
+            "reference_audio": null,
+            "speaker_reference": "AISHELL3:SSB0005",
+            "text_content_source": "F0C4E5D403504AF0DEBC2C48233328D3E64222C9CBE78FE8A6B5F97895E57EEF",
+            "generator_input": null,
+            "source_audio_sha256": "F7C2E359847AF780EBFEA6D06A170D38AC5D4CD5E91B51B7CD98216A11D32BC0",
+            "historical_stages": [
+              "WEEK1_PILOT"
+            ],
+            "evidence_sources": [
+              "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\data\\manifests\\source_audio.csv",
+              "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\data\\manifests\\week1_manifest.csv"
+            ],
+            "confidence": "VERIFIED"
+          }
+        ]
+      },
+      {
+        "population_source_id": "AISHELL3-SRC-0121",
+        "population_speaker_id": "AISHELL3_SSB0005",
+        "source_audio_sha256": "30BBFE43D675533FA5FA023920197E9CC176592D4DDAE45F55765B3C9AAF0E75",
+        "historical_matches": [
+          {
+            "lineage_id": "AUDIO_SHA256:30BBFE43D675533FA5FA023920197E9CC176592D4DDAE45F55765B3C9AAF0E75",
+            "original_recording": "F:\\项目\\申请实验室  TTS项目\\datasets\\AISHELL-3\\raw\\train\\wav\\SSB0005\\SSB00050022.wav",
+            "derived_segments": [
+              "SSB00050022_seg0000",
+              "SSB00050022_seg0001"
+            ],
+            "synthetic_replacement_parent": null,
+            "reference_audio": null,
+            "speaker_reference": "AISHELL3:SSB0005",
+            "text_content_source": "7136751C05541ABAD56941563B9C6F37356F12574DFFEC7CD65CC3D53439AEBE",
+            "generator_input": null,
+            "source_audio_sha256": "30BBFE43D675533FA5FA023920197E9CC176592D4DDAE45F55765B3C9AAF0E75",
+            "historical_stages": [
+              "WEEK1_PILOT"
+            ],
+            "evidence_sources": [
+              "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\data\\manifests\\source_audio.csv",
+              "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\data\\manifests\\week1_manifest.csv"
+            ],
+            "confidence": "VERIFIED"
+          }
+        ]
+      },
+      {
+        "population_source_id": "AISHELL3-SRC-0181",
+        "population_speaker_id": "AISHELL3_SSB0005",
+        "source_audio_sha256": "781DA576104AB7E62E823E739C38DBADBB87BBD114C17A82FC85777BCE2A3E55",
+        "historical_matches": [
+          {
+            "lineage_id": "AUDIO_SHA256:781DA576104AB7E62E823E739C38DBADBB87BBD114C17A82FC85777BCE2A3E55",
+            "original_recording": "F:\\项目\\申请实验室  TTS项目\\datasets\\AISHELL-3\\raw\\train\\wav\\SSB0005\\SSB00050027.wav",
+            "derived_segments": [
+              "SSB00050027_seg0000",
+              "SSB00050027_seg0001"
+            ],
+            "synthetic_replacement_parent": null,
+            "reference_audio": null,
+            "speaker_reference": "AISHELL3:SSB0005",
+            "text_content_source": "BCEBE35314DB67959A06B192D3B87D6B000842B634D5C46CDC4E3A0E315B3072",
+            "generator_input": null,
+            "source_audio_sha256": "781DA576104AB7E62E823E739C38DBADBB87BBD114C17A82FC85777BCE2A3E55",
+            "historical_stages": [
+              "WEEK1_PILOT"
+            ],
+            "evidence_sources": [
+              "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\data\\manifests\\source_audio.csv",
+              "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\data\\manifests\\week1_manifest.csv"
+            ],
+            "confidence": "VERIFIED"
+          }
+        ]
+      }
+    ],
+    "speaker_overlap_ids": [
+      "AISHELL3:SSB0005",
+      "AISHELL3:SSB0011",
+      "AISHELL3:SSB0149",
+      "AISHELL3:SSB0261",
+      "AISHELL3:SSB0273",
+      "AISHELL3:SSB0288",
+      "AISHELL3:SSB0309",
+      "AISHELL3:SSB0354",
+      "AISHELL3:SSB0395",
+      "AISHELL3:SSB0434",
+      "AISHELL3:SSB0609",
+      "AISHELL3:SSB0629",
+      "AISHELL3:SSB0671",
+      "AISHELL3:SSB0758",
+      "AISHELL3:SSB0935",
+      "AISHELL3:SSB1050",
+      "AISHELL3:SSB1161",
+      "AISHELL3:SSB1203",
+      "AISHELL3:SSB1366",
+      "AISHELL3:SSB1448",
+      "AISHELL3:SSB1575",
+      "AISHELL3:SSB1828",
+      "AISHELL3:SSB1918"
+    ]
+  },
+  "unknown_comparison_details": {
+    "case": "V2 AISHELL-3 cases whose source hash was not found in the partial direct source universe remain unresolved; different case IDs are not treated as proof of freshness.",
+    "source": "195 AISHELL-3 primary source hashes have no matching retained historical source record, but Week5/selection/Phase3 lineage is incomplete.",
+    "lineage": "195 AISHELL-3 source lineages are not fully resolved across all historical derived artifacts."
+  },
+  "corpus_isolation": [
+    {
+      "corpus": "AISHELL-1",
+      "pool_id": "SOURCE_POOL_B_AISHELL1",
+      "status": "PASS_POST_FREEZE_ACQUISITION",
+      "evidence_sources": [
+        "AISHELL1_PROJECT_ENTRY_PROOF_V1.json"
+      ],
+      "population_primary_sources": 200,
+      "unknown_source_comparisons": 0
+    },
+    {
+      "corpus": "AISHELL-3",
+      "pool_id": "SOURCE_POOL_A_AISHELL3",
+      "status": "FAIL_PRIOR_USAGE_FOUND",
+      "evidence_sources": [
+        "HISTORICAL_SOURCE_EXCLUSION_UNIVERSE_V3.json",
+        "HISTORICAL_LINEAGE_EXCLUSION_UNIVERSE_V1.json"
+      ],
+      "population_primary_sources": 200,
+      "confirmed_source_overlaps": 5,
+      "unknown_source_comparisons": 195
+    }
+  ],
+  "frozen_population_changed": false,
+  "authorization_gate": "NO_GO; V2 population is evaluated as-is and cannot be silently replaced"
+}

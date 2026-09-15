@@ -1,0 +1,853 @@
+{
+  "schema_version": "topconf.level2.historical_data_usage_stage_index.v1",
+  "status": "AUDITED_WITH_EXPLICIT_PARTIAL_AND_UNKNOWN_STAGES",
+  "audit_date": "2026-09-15",
+  "repositories": {
+    "topconf": {
+      "root": "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness",
+      "head": "45b95dd224f7172a41dccaa4663fd9c8256b62b7",
+      "all_refs_checked": true
+    },
+    "main": {
+      "root": "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN",
+      "head": "f772d5c489c5ab34164f1dda29075aad2dc59ad1",
+      "all_refs_checked": true
+    },
+    "week5": {
+      "root": "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-Week5",
+      "head": "d758eccf492a681e08e4faad591fde583f358769",
+      "all_refs_checked": true
+    }
+  },
+  "worktrees_checked": [
+    "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN",
+    "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-Week5",
+    "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness",
+    "F:\\项目\\申请实验室  TTS项目\\topconf_phase3t_integrity_prep",
+    "F:\\项目\\申请实验室  TTS项目\\topconf_phase3t_multireso_worker",
+    "F:\\项目\\申请实验室  TTS项目\\topconf_phase3t_multireso_worker_r2",
+    "F:\\项目\\申请实验室  TTS项目\\topconf_phase4_reconcile_prep",
+    "F:\\项目\\申请实验室  TTS项目\\topconf_rq1_prefreeze"
+  ],
+  "historical_search_method": {
+    "git_commands": [
+      "git log --all --name-status",
+      "git log --all -S",
+      "git log --all -G",
+      "git show",
+      "git grep"
+    ],
+    "deleted_historical_files_checked": true,
+    "filesystem_search_excludes_only": [
+      ".git",
+      ".venv",
+      "__pycache__",
+      "datasets",
+      "dist-packages",
+      "env",
+      "generated",
+      "node_modules",
+      "site-packages",
+      "smoke",
+      "venv"
+    ],
+    "no_audio_or_model_loaded": true
+  },
+  "stages": [
+    {
+      "stage_id": "WEEK1_PILOT",
+      "date_or_commit_range": {
+        "main_repository_head": "f772d5c489c5ab34164f1dda29075aad2dc59ad1",
+        "week5_repository_head": "d758eccf492a681e08e4faad591fde583f358769",
+        "topconf_repository_head": "45b95dd224f7172a41dccaa4663fd9c8256b62b7",
+        "protocol_freeze_commit": "2797bf0"
+      },
+      "data_role": "PILOT_ONLY",
+      "known_datasets": [
+        "AISHELL-3"
+      ],
+      "known_manifests": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\data\\manifests\\source_audio.csv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\data\\manifests\\week1_manifest.csv"
+      ],
+      "known_logs": [],
+      "known_raw_outputs": [],
+      "known_case_ids": {
+        "count": 217,
+        "sample": [
+          "SSB00050001_seg0000",
+          "SSB00050001_seg0001",
+          "SSB00050002_seg0000",
+          "SSB00050003_seg0000",
+          "SSB00050004_seg0000"
+        ]
+      },
+      "known_source_ids": {
+        "count": 200,
+        "sample": [
+          "SSB00050001",
+          "SSB00050002",
+          "SSB00050003",
+          "SSB00050004",
+          "SSB00050005"
+        ]
+      },
+      "known_speaker_ids": {
+        "count": 5,
+        "sample": [
+          "SSB0005",
+          "SSB0009",
+          "SSB0011",
+          "SSB0073",
+          "SSB0139"
+        ]
+      },
+      "lineage_evidence": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\data\\manifests\\source_audio.csv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\data\\manifests\\week1_manifest.csv"
+      ],
+      "case_history_completeness": "PARTIAL",
+      "source_history_completeness": "PARTIAL",
+      "lineage_history_completeness": "PARTIAL",
+      "identity_projection": null
+    },
+    {
+      "stage_id": "WEEK2_PILOT",
+      "date_or_commit_range": {
+        "main_repository_head": "f772d5c489c5ab34164f1dda29075aad2dc59ad1",
+        "week5_repository_head": "d758eccf492a681e08e4faad591fde583f358769",
+        "topconf_repository_head": "45b95dd224f7172a41dccaa4663fd9c8256b62b7",
+        "protocol_freeze_commit": "2797bf0"
+      },
+      "data_role": "PILOT_ONLY",
+      "known_datasets": [
+        "AISHELL-3"
+      ],
+      "known_manifests": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\data\\manifests\\week2a_a2_planned_manifest.csv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\data\\manifests\\week2a_reference_manifest.csv"
+      ],
+      "known_logs": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\research_assurance\\WEEK2_SCIENTIFIC_CLOSURE.md",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\research_assurance\\WEEK3_FINAL_SCIENTIFIC_CLOSURE.md"
+      ],
+      "known_raw_outputs": [],
+      "known_case_ids": {
+        "count": 23,
+        "sample": [
+          "paircase_0001",
+          "paircase_0002",
+          "paircase_0003",
+          "paircase_0004",
+          "paircase_0005"
+        ]
+      },
+      "known_source_ids": {
+        "count": 35,
+        "sample": [
+          "SSB00050003",
+          "SSB00050010",
+          "SSB00050014",
+          "SSB00090015",
+          "SSB00090021"
+        ]
+      },
+      "known_speaker_ids": {
+        "count": 12,
+        "sample": [
+          "SSB0005",
+          "SSB0009",
+          "SSB0011",
+          "SSB0073",
+          "SSB0139",
+          "SSB0197",
+          "SSB0261",
+          "SSB0309",
+          "SSB0342",
+          "SSB0393"
+        ]
+      },
+      "lineage_evidence": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\data\\manifests\\week2a_a2_planned_manifest.csv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\data\\manifests\\week2a_reference_manifest.csv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\research_assurance\\WEEK2_SCIENTIFIC_CLOSURE.md",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\research_assurance\\WEEK3_FINAL_SCIENTIFIC_CLOSURE.md"
+      ],
+      "case_history_completeness": "COMPLETE",
+      "source_history_completeness": "PARTIAL",
+      "lineage_history_completeness": "PARTIAL",
+      "identity_projection": null
+    },
+    {
+      "stage_id": "WEEK3_PILOT",
+      "date_or_commit_range": {
+        "main_repository_head": "f772d5c489c5ab34164f1dda29075aad2dc59ad1",
+        "week5_repository_head": "d758eccf492a681e08e4faad591fde583f358769",
+        "topconf_repository_head": "45b95dd224f7172a41dccaa4663fd9c8256b62b7",
+        "protocol_freeze_commit": "2797bf0"
+      },
+      "data_role": "PILOT_ONLY",
+      "known_datasets": [
+        "AISHELL-3"
+      ],
+      "known_manifests": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\data\\manifests\\week2a_a2_planned_manifest.csv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\data\\manifests\\week2a_reference_manifest.csv"
+      ],
+      "known_logs": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\research_assurance\\WEEK2_SCIENTIFIC_CLOSURE.md",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\research_assurance\\WEEK3_FINAL_SCIENTIFIC_CLOSURE.md"
+      ],
+      "known_raw_outputs": [],
+      "known_case_ids": {
+        "count": 23,
+        "sample": [
+          "paircase_0001",
+          "paircase_0002",
+          "paircase_0003",
+          "paircase_0004",
+          "paircase_0005"
+        ]
+      },
+      "known_source_ids": {
+        "count": 35,
+        "sample": [
+          "SSB00050003",
+          "SSB00050010",
+          "SSB00090021",
+          "SSB00110004",
+          "SSB00110013"
+        ]
+      },
+      "known_speaker_ids": {
+        "count": 12,
+        "sample": [
+          "SSB0005",
+          "SSB0009",
+          "SSB0011",
+          "SSB0073",
+          "SSB0139",
+          "SSB0197",
+          "SSB0261",
+          "SSB0309",
+          "SSB0342",
+          "SSB0393"
+        ]
+      },
+      "lineage_evidence": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\data\\manifests\\week2a_a2_planned_manifest.csv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\data\\manifests\\week2a_reference_manifest.csv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\research_assurance\\WEEK2_SCIENTIFIC_CLOSURE.md",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\research_assurance\\WEEK3_FINAL_SCIENTIFIC_CLOSURE.md"
+      ],
+      "case_history_completeness": "COMPLETE",
+      "source_history_completeness": "PARTIAL",
+      "lineage_history_completeness": "PARTIAL",
+      "identity_projection": null
+    },
+    {
+      "stage_id": "WEEK4_PILOT",
+      "date_or_commit_range": {
+        "main_repository_head": "f772d5c489c5ab34164f1dda29075aad2dc59ad1",
+        "week5_repository_head": "d758eccf492a681e08e4faad591fde583f358769",
+        "topconf_repository_head": "45b95dd224f7172a41dccaa4663fd9c8256b62b7",
+        "protocol_freeze_commit": "2797bf0"
+      },
+      "data_role": "PILOT_ONLY",
+      "known_datasets": [
+        "AISHELL-3"
+      ],
+      "known_manifests": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\data\\manifests\\week4_population_manifest.json"
+      ],
+      "known_logs": [],
+      "known_raw_outputs": [],
+      "known_case_ids": {
+        "count": 48,
+        "sample": [
+          "week4_case_0001",
+          "week4_case_0002",
+          "week4_case_0003",
+          "week4_case_0004",
+          "week4_case_0005"
+        ]
+      },
+      "known_source_ids": {
+        "count": 96,
+        "sample": [
+          "SSB00120001",
+          "SSB00120002",
+          "SSB00180001",
+          "SSB00180002",
+          "SSB00330001"
+        ]
+      },
+      "known_speaker_ids": {
+        "count": 48,
+        "sample": [
+          "SSB0012",
+          "SSB0018",
+          "SSB0033",
+          "SSB0080",
+          "SSB0112",
+          "SSB0145",
+          "SSB0149",
+          "SSB0200",
+          "SSB0273",
+          "SSB0288"
+        ]
+      },
+      "lineage_evidence": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\data\\manifests\\week4_population_manifest.json"
+      ],
+      "case_history_completeness": "PARTIAL",
+      "source_history_completeness": "PARTIAL",
+      "lineage_history_completeness": "PARTIAL",
+      "identity_projection": null
+    },
+    {
+      "stage_id": "WEEK5_QUALIFICATION",
+      "date_or_commit_range": {
+        "main_repository_head": "f772d5c489c5ab34164f1dda29075aad2dc59ad1",
+        "week5_repository_head": "d758eccf492a681e08e4faad591fde583f358769",
+        "topconf_repository_head": "45b95dd224f7172a41dccaa4663fd9c8256b62b7",
+        "protocol_freeze_commit": "2797bf0"
+      },
+      "data_role": "PILOT_ONLY",
+      "known_datasets": [
+        "AISHELL-3"
+      ],
+      "known_manifests": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-Week5\\data\\manifests\\week5_exp1_qualification_population.json",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-Week5\\data\\manifests\\week5_exp2_qualification_population.json",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-Week5\\data\\manifests\\week5_exp3_qualification_population.json",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-Week5\\data\\manifests\\week5_exp4_qualification_population.json",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-Week5\\data\\manifests\\week5_exp5_qualification_population.json",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-Week5\\data\\manifests\\week5_exp6_qualification_population.json"
+      ],
+      "known_logs": [],
+      "known_raw_outputs": [],
+      "known_case_ids": {
+        "count": 92,
+        "sample": []
+      },
+      "known_source_ids": {
+        "count": null,
+        "sample": []
+      },
+      "known_speaker_ids": {
+        "count": 12,
+        "sample": []
+      },
+      "lineage_evidence": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-Week5\\data\\manifests\\week5_exp1_qualification_population.json",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-Week5\\data\\manifests\\week5_exp2_qualification_population.json",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-Week5\\data\\manifests\\week5_exp3_qualification_population.json",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-Week5\\data\\manifests\\week5_exp4_qualification_population.json",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-Week5\\data\\manifests\\week5_exp5_qualification_population.json",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-Week5\\data\\manifests\\week5_exp6_qualification_population.json"
+      ],
+      "case_history_completeness": "PARTIAL",
+      "source_history_completeness": "UNKNOWN",
+      "lineage_history_completeness": "UNKNOWN",
+      "identity_projection": null
+    },
+    {
+      "stage_id": "PHASE3",
+      "date_or_commit_range": {
+        "main_repository_head": "f772d5c489c5ab34164f1dda29075aad2dc59ad1",
+        "week5_repository_head": "d758eccf492a681e08e4faad591fde583f358769",
+        "topconf_repository_head": "45b95dd224f7172a41dccaa4663fd9c8256b62b7",
+        "protocol_freeze_commit": "2797bf0"
+      },
+      "data_role": "LEVEL1_DEVELOPMENT_OR_EVALUATION",
+      "known_datasets": [],
+      "known_manifests": [],
+      "known_logs": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3_EXTERNAL_REPRODUCTION_CLOSURE.md"
+      ],
+      "known_raw_outputs": [],
+      "known_case_ids": {
+        "count": null,
+        "sample": []
+      },
+      "known_source_ids": {
+        "count": null,
+        "sample": []
+      },
+      "known_speaker_ids": {
+        "count": null,
+        "sample": []
+      },
+      "lineage_evidence": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3_EXTERNAL_REPRODUCTION_CLOSURE.md"
+      ],
+      "case_history_completeness": "UNKNOWN",
+      "source_history_completeness": "UNKNOWN",
+      "lineage_history_completeness": "UNKNOWN",
+      "identity_projection": "Closure/provenance documents are present, but no complete case/source/lineage universe was materialized for this stage."
+    },
+    {
+      "stage_id": "PHASE3R",
+      "date_or_commit_range": {
+        "main_repository_head": "f772d5c489c5ab34164f1dda29075aad2dc59ad1",
+        "week5_repository_head": "d758eccf492a681e08e4faad591fde583f358769",
+        "topconf_repository_head": "45b95dd224f7172a41dccaa4663fd9c8256b62b7",
+        "protocol_freeze_commit": "2797bf0"
+      },
+      "data_role": "LEVEL1_DEVELOPMENT_OR_EVALUATION",
+      "known_datasets": [],
+      "known_manifests": [],
+      "known_logs": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3R_RECOVERY_CLOSURE.md"
+      ],
+      "known_raw_outputs": [],
+      "known_case_ids": {
+        "count": null,
+        "sample": []
+      },
+      "known_source_ids": {
+        "count": null,
+        "sample": []
+      },
+      "known_speaker_ids": {
+        "count": null,
+        "sample": []
+      },
+      "lineage_evidence": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3R_RECOVERY_CLOSURE.md"
+      ],
+      "case_history_completeness": "UNKNOWN",
+      "source_history_completeness": "UNKNOWN",
+      "lineage_history_completeness": "UNKNOWN",
+      "identity_projection": "Closure/provenance documents are present, but no complete case/source/lineage universe was materialized for this stage."
+    },
+    {
+      "stage_id": "PHASE3S",
+      "date_or_commit_range": {
+        "main_repository_head": "f772d5c489c5ab34164f1dda29075aad2dc59ad1",
+        "week5_repository_head": "d758eccf492a681e08e4faad591fde583f358769",
+        "topconf_repository_head": "45b95dd224f7172a41dccaa4663fd9c8256b62b7",
+        "protocol_freeze_commit": "2797bf0"
+      },
+      "data_role": "LEVEL1_DEVELOPMENT_OR_EVALUATION",
+      "known_datasets": [],
+      "known_manifests": [],
+      "known_logs": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3S_BASELINE_REPLACEMENT_AUDIT_V1.md",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3S_RESOURCE_ENVIRONMENT_CLOSURE.md"
+      ],
+      "known_raw_outputs": [],
+      "known_case_ids": {
+        "count": null,
+        "sample": []
+      },
+      "known_source_ids": {
+        "count": null,
+        "sample": []
+      },
+      "known_speaker_ids": {
+        "count": null,
+        "sample": []
+      },
+      "lineage_evidence": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3S_BASELINE_REPLACEMENT_AUDIT_V1.md",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3S_RESOURCE_ENVIRONMENT_CLOSURE.md"
+      ],
+      "case_history_completeness": "UNKNOWN",
+      "source_history_completeness": "UNKNOWN",
+      "lineage_history_completeness": "UNKNOWN",
+      "identity_projection": "Closure/provenance documents are present, but no complete case/source/lineage universe was materialized for this stage."
+    },
+    {
+      "stage_id": "PHASE3U",
+      "date_or_commit_range": {
+        "main_repository_head": "f772d5c489c5ab34164f1dda29075aad2dc59ad1",
+        "week5_repository_head": "d758eccf492a681e08e4faad591fde583f358769",
+        "topconf_repository_head": "45b95dd224f7172a41dccaa4663fd9c8256b62b7",
+        "protocol_freeze_commit": "2797bf0"
+      },
+      "data_role": "LEVEL1_DEVELOPMENT_OR_EVALUATION",
+      "known_datasets": [],
+      "known_manifests": [],
+      "known_logs": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3U_SECOND_BASELINE_CLOSURE.md"
+      ],
+      "known_raw_outputs": [],
+      "known_case_ids": {
+        "count": null,
+        "sample": []
+      },
+      "known_source_ids": {
+        "count": null,
+        "sample": []
+      },
+      "known_speaker_ids": {
+        "count": null,
+        "sample": []
+      },
+      "lineage_evidence": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3U_SECOND_BASELINE_CLOSURE.md"
+      ],
+      "case_history_completeness": "UNKNOWN",
+      "source_history_completeness": "UNKNOWN",
+      "lineage_history_completeness": "UNKNOWN",
+      "identity_projection": "Closure/provenance documents are present, but no complete case/source/lineage universe was materialized for this stage."
+    },
+    {
+      "stage_id": "PHASE3V",
+      "date_or_commit_range": {
+        "main_repository_head": "f772d5c489c5ab34164f1dda29075aad2dc59ad1",
+        "week5_repository_head": "d758eccf492a681e08e4faad591fde583f358769",
+        "topconf_repository_head": "45b95dd224f7172a41dccaa4663fd9c8256b62b7",
+        "protocol_freeze_commit": "2797bf0"
+      },
+      "data_role": "LEVEL1_DEVELOPMENT_OR_EVALUATION",
+      "known_datasets": [],
+      "known_manifests": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3V_CHECKPOINT_MANIFEST_V1.json"
+      ],
+      "known_logs": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3V_FULL_PERMISSION_RECOVERY_CLOSURE.md"
+      ],
+      "known_raw_outputs": [],
+      "known_case_ids": {
+        "count": null,
+        "sample": []
+      },
+      "known_source_ids": {
+        "count": null,
+        "sample": []
+      },
+      "known_speaker_ids": {
+        "count": null,
+        "sample": []
+      },
+      "lineage_evidence": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3V_FULL_PERMISSION_RECOVERY_CLOSURE.md",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3V_CHECKPOINT_MANIFEST_V1.json"
+      ],
+      "case_history_completeness": "UNKNOWN",
+      "source_history_completeness": "UNKNOWN",
+      "lineage_history_completeness": "UNKNOWN",
+      "identity_projection": "Closure/provenance documents are present, but no complete case/source/lineage universe was materialized for this stage."
+    },
+    {
+      "stage_id": "PHASE3T_PARTIALEDIT_E1",
+      "date_or_commit_range": {
+        "main_repository_head": "f772d5c489c5ab34164f1dda29075aad2dc59ad1",
+        "week5_repository_head": "d758eccf492a681e08e4faad591fde583f358769",
+        "topconf_repository_head": "45b95dd224f7172a41dccaa4663fd9c8256b62b7",
+        "protocol_freeze_commit": "2797bf0"
+      },
+      "data_role": "LEVEL1_DEVELOPMENT_OR_EVALUATION",
+      "known_datasets": [
+        "PartialEdit_v1.1_E1"
+      ],
+      "known_manifests": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\results\\topconf_phase3t\\case_manifest.tsv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3T_RAW_OUTPUT_MANIFEST_V1.json"
+      ],
+      "known_logs": [],
+      "known_raw_outputs": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\results\\topconf_phase3t\\case_manifest.tsv"
+      ],
+      "known_case_ids": {
+        "count": 42471,
+        "sample": [
+          "E1/p225/p225_001_edited_partial_16k.wav",
+          "E1/p225/p225_002_edited_partial_16k.wav",
+          "E1/p225/p225_003_edited_partial_16k.wav",
+          "E1/p225/p225_004_edited_partial_16k.wav",
+          "E1/p225/p225_005_edited_partial_16k.wav"
+        ]
+      },
+      "known_source_ids": {
+        "count": 42471,
+        "sample": []
+      },
+      "known_speaker_ids": {
+        "count": 109,
+        "sample": [
+          "p225",
+          "p226",
+          "p227",
+          "p228",
+          "p229",
+          "p230",
+          "p231",
+          "p232",
+          "p233",
+          "p234"
+        ]
+      },
+      "lineage_evidence": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\results\\topconf_phase3t\\case_manifest.tsv",
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\PHASE3T_RAW_OUTPUT_MANIFEST_V1.json"
+      ],
+      "case_history_completeness": "COMPLETE",
+      "source_history_completeness": "PARTIAL",
+      "lineage_history_completeness": "PARTIAL",
+      "identity_projection": null
+    },
+    {
+      "stage_id": "WHETHER_B_CAPABILITY_SMOKE",
+      "date_or_commit_range": {
+        "main_repository_head": "f772d5c489c5ab34164f1dda29075aad2dc59ad1",
+        "week5_repository_head": "d758eccf492a681e08e4faad591fde583f358769",
+        "topconf_repository_head": "45b95dd224f7172a41dccaa4663fd9c8256b62b7",
+        "protocol_freeze_commit": "2797bf0"
+      },
+      "data_role": "CAPABILITY_SMOKE",
+      "known_datasets": [],
+      "known_manifests": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\WHETHER_B_AASIST_CAPABILITY_SMOKE_V1.json"
+      ],
+      "known_logs": [],
+      "known_raw_outputs": [],
+      "known_case_ids": {
+        "count": 0,
+        "sample": []
+      },
+      "known_source_ids": {
+        "count": 0,
+        "sample": []
+      },
+      "known_speaker_ids": {
+        "count": 0,
+        "sample": []
+      },
+      "lineage_evidence": [
+        "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\WHETHER_B_AASIST_CAPABILITY_SMOKE_V1.json"
+      ],
+      "case_history_completeness": "COMPLETE_EXCLUSION_EMPTY",
+      "source_history_completeness": "COMPLETE_EXCLUSION_EMPTY",
+      "lineage_history_completeness": "COMPLETE_EXCLUSION_EMPTY",
+      "identity_projection": "Synthetic sinusoid only; no real dataset source IDs."
+    },
+    {
+      "stage_id": "METRIC_DEVELOPMENT",
+      "date_or_commit_range": {
+        "main_repository_head": "f772d5c489c5ab34164f1dda29075aad2dc59ad1",
+        "week5_repository_head": "d758eccf492a681e08e4faad591fde583f358769",
+        "topconf_repository_head": "45b95dd224f7172a41dccaa4663fd9c8256b62b7",
+        "protocol_freeze_commit": "2797bf0"
+      },
+      "data_role": "LEVEL1_DEVELOPMENT_OR_EVALUATION",
+      "known_datasets": [],
+      "known_manifests": [],
+      "known_logs": [],
+      "known_raw_outputs": [],
+      "known_case_ids": {
+        "count": null,
+        "sample": []
+      },
+      "known_source_ids": {
+        "count": null,
+        "sample": []
+      },
+      "known_speaker_ids": {
+        "count": null,
+        "sample": []
+      },
+      "lineage_evidence": [],
+      "case_history_completeness": "UNKNOWN",
+      "source_history_completeness": "UNKNOWN",
+      "lineage_history_completeness": "UNKNOWN",
+      "identity_projection": "metric development and metric-selection identity not consolidated"
+    },
+    {
+      "stage_id": "THRESHOLD_CALIBRATION",
+      "date_or_commit_range": {
+        "main_repository_head": "f772d5c489c5ab34164f1dda29075aad2dc59ad1",
+        "week5_repository_head": "d758eccf492a681e08e4faad591fde583f358769",
+        "topconf_repository_head": "45b95dd224f7172a41dccaa4663fd9c8256b62b7",
+        "protocol_freeze_commit": "2797bf0"
+      },
+      "data_role": "LEVEL1_DEVELOPMENT_OR_EVALUATION",
+      "known_datasets": [],
+      "known_manifests": [],
+      "known_logs": [],
+      "known_raw_outputs": [],
+      "known_case_ids": {
+        "count": null,
+        "sample": []
+      },
+      "known_source_ids": {
+        "count": null,
+        "sample": []
+      },
+      "known_speaker_ids": {
+        "count": null,
+        "sample": []
+      },
+      "lineage_evidence": [],
+      "case_history_completeness": "UNKNOWN",
+      "source_history_completeness": "UNKNOWN",
+      "lineage_history_completeness": "UNKNOWN",
+      "identity_projection": "Level-1 calibration/threshold identity not consolidated"
+    },
+    {
+      "stage_id": "MODEL_SELECTION",
+      "date_or_commit_range": {
+        "main_repository_head": "f772d5c489c5ab34164f1dda29075aad2dc59ad1",
+        "week5_repository_head": "d758eccf492a681e08e4faad591fde583f358769",
+        "topconf_repository_head": "45b95dd224f7172a41dccaa4663fd9c8256b62b7",
+        "protocol_freeze_commit": "2797bf0"
+      },
+      "data_role": "LEVEL1_DEVELOPMENT_OR_EVALUATION",
+      "known_datasets": [],
+      "known_manifests": [],
+      "known_logs": [],
+      "known_raw_outputs": [],
+      "known_case_ids": {
+        "count": null,
+        "sample": []
+      },
+      "known_source_ids": {
+        "count": null,
+        "sample": []
+      },
+      "known_speaker_ids": {
+        "count": null,
+        "sample": []
+      },
+      "lineage_evidence": [],
+      "case_history_completeness": "UNKNOWN",
+      "source_history_completeness": "UNKNOWN",
+      "lineage_history_completeness": "UNKNOWN",
+      "identity_projection": "model-selection identity not consolidated"
+    },
+    {
+      "stage_id": "ADAPTER_DEBUGGING",
+      "date_or_commit_range": {
+        "main_repository_head": "f772d5c489c5ab34164f1dda29075aad2dc59ad1",
+        "week5_repository_head": "d758eccf492a681e08e4faad591fde583f358769",
+        "topconf_repository_head": "45b95dd224f7172a41dccaa4663fd9c8256b62b7",
+        "protocol_freeze_commit": "2797bf0"
+      },
+      "data_role": "LEVEL1_DEVELOPMENT_OR_EVALUATION",
+      "known_datasets": [],
+      "known_manifests": [],
+      "known_logs": [],
+      "known_raw_outputs": [],
+      "known_case_ids": {
+        "count": null,
+        "sample": []
+      },
+      "known_source_ids": {
+        "count": null,
+        "sample": []
+      },
+      "known_speaker_ids": {
+        "count": null,
+        "sample": []
+      },
+      "lineage_evidence": [],
+      "case_history_completeness": "UNKNOWN",
+      "source_history_completeness": "UNKNOWN",
+      "lineage_history_completeness": "UNKNOWN",
+      "identity_projection": "adapter/debugging identity only partially represented by retained logs/reports"
+    },
+    {
+      "stage_id": "MANUAL_INSPECTION",
+      "date_or_commit_range": {
+        "main_repository_head": "f772d5c489c5ab34164f1dda29075aad2dc59ad1",
+        "week5_repository_head": "d758eccf492a681e08e4faad591fde583f358769",
+        "topconf_repository_head": "45b95dd224f7172a41dccaa4663fd9c8256b62b7",
+        "protocol_freeze_commit": "2797bf0"
+      },
+      "data_role": "LEVEL1_DEVELOPMENT_OR_EVALUATION",
+      "known_datasets": [],
+      "known_manifests": [],
+      "known_logs": [],
+      "known_raw_outputs": [],
+      "known_case_ids": {
+        "count": null,
+        "sample": []
+      },
+      "known_source_ids": {
+        "count": null,
+        "sample": []
+      },
+      "known_speaker_ids": {
+        "count": null,
+        "sample": []
+      },
+      "lineage_evidence": [],
+      "case_history_completeness": "UNKNOWN",
+      "source_history_completeness": "UNKNOWN",
+      "lineage_history_completeness": "UNKNOWN",
+      "identity_projection": "manual inspection identity not fully logged as a case universe"
+    },
+    {
+      "stage_id": "PILOT_VISUALIZATION",
+      "date_or_commit_range": {
+        "main_repository_head": "f772d5c489c5ab34164f1dda29075aad2dc59ad1",
+        "week5_repository_head": "d758eccf492a681e08e4faad591fde583f358769",
+        "topconf_repository_head": "45b95dd224f7172a41dccaa4663fd9c8256b62b7",
+        "protocol_freeze_commit": "2797bf0"
+      },
+      "data_role": "LEVEL1_DEVELOPMENT_OR_EVALUATION",
+      "known_datasets": [],
+      "known_manifests": [],
+      "known_logs": [],
+      "known_raw_outputs": [],
+      "known_case_ids": {
+        "count": null,
+        "sample": []
+      },
+      "known_source_ids": {
+        "count": null,
+        "sample": []
+      },
+      "known_speaker_ids": {
+        "count": null,
+        "sample": []
+      },
+      "lineage_evidence": [],
+      "case_history_completeness": "UNKNOWN",
+      "source_history_completeness": "UNKNOWN",
+      "lineage_history_completeness": "UNKNOWN",
+      "identity_projection": "debug figures and visualization inputs are not a complete identity universe"
+    },
+    {
+      "stage_id": "SCIENTIFIC_SELECTION",
+      "date_or_commit_range": {
+        "main_repository_head": "f772d5c489c5ab34164f1dda29075aad2dc59ad1",
+        "week5_repository_head": "d758eccf492a681e08e4faad591fde583f358769",
+        "topconf_repository_head": "45b95dd224f7172a41dccaa4663fd9c8256b62b7",
+        "protocol_freeze_commit": "2797bf0"
+      },
+      "data_role": "LEVEL1_DEVELOPMENT_OR_EVALUATION",
+      "known_datasets": [],
+      "known_manifests": [],
+      "known_logs": [],
+      "known_raw_outputs": [],
+      "known_case_ids": {
+        "count": null,
+        "sample": []
+      },
+      "known_source_ids": {
+        "count": null,
+        "sample": []
+      },
+      "known_speaker_ids": {
+        "count": null,
+        "sample": []
+      },
+      "lineage_evidence": [],
+      "case_history_completeness": "UNKNOWN",
+      "source_history_completeness": "UNKNOWN",
+      "lineage_history_completeness": "UNKNOWN",
+      "identity_projection": "selection decisions are documented but not projected to complete source/lineage rows"
+    }
+  ],
+  "population_binding": {
+    "manifest": "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness\\research_assurance\\topconf\\LEVEL2_RQ1_POPULATION_MANIFEST_V2.json",
+    "file_sha256_before": "ED6FE30A4F9B7AEFA4C36821E04CB7E5F9B1780B20EE7ED9A0AA84F52B3955D0",
+    "file_sha256_after": "ED6FE30A4F9B7AEFA4C36821E04CB7E5F9B1780B20EE7ED9A0AA84F52B3955D0",
+    "unchanged": true,
+    "internal_manifest_sha256": "FCFFEEC32F4CAB32DA53BFAD06C0BBBC6F1354AA87277DCE1B1A4EA8E6F90674"
+  }
+}

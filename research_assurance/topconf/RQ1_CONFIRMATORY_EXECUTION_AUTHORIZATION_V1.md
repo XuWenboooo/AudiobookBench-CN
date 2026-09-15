@@ -185,11 +185,11 @@ STOPPING_RULE = process complete frozen population/grid and every terminal ledge
 [PASS] AASIST checkpoint/license/runtime capability record
 [PASS] AISHELL-1 capacity and read-only audio/transcript lineage audit
 [PASS] V2 metadata-only population materialization and population validator
-[NO_GO] V2 freshness proof; historical exclusion universe remains partial
+[NO_GO] V2 freshness proof; Phase 4.7 V3 reconstruction found verified overlap
 [PASS] Frozen cardinality requires 400 sources / 120 speakers / 2 independent pools;
   V2 satisfies the cardinality and metadata allocation contract
 [BLOCKED] Corpus-level physical cross-corpus speaker identity is not directly verifiable
-[BLOCKED] Complete cross-dimensional historical exclusion universe
+[BLOCKED] Complete cross-dimensional historical exclusion universe; unresolved dimensions remain
 [NOT_READY] Level-1 calibration manifest/hash for the final run
 [NOT_READY] Materialized blinded inference manifest/hash
 [NOT_READY] New namespace registry ownership for the final invocation
@@ -199,13 +199,14 @@ STOPPING_RULE = process complete frozen population/grid and every terminal ledge
 
 The final authorization decision remains `NO_GO`. Phase 4.6 recovered enough
 audited AISHELL-1 capacity to materialize a V2 metadata candidate, while
-preserving the V1 blocked artifact. The V2 freshness validator returns
-`INSUFFICIENT_EVIDENCE` at the incomplete historical exclusion universe, and
-public metadata cannot prove physical cross-corpus speaker identity. The
-preregistration does not declare an execution-time population-generation
-exception. No source-pool, case-level non-overlap, generator-lineage,
-private-GT, or operator-time proof is therefore available for authorization.
-This remains a Level-2 authorization blocker, not a Phase4 design defect.
+preserving the V1 blocked artifact. Phase 4.7 reconstructed the retained
+historical identities and found five verified AISHELL-3 source/audio lineage
+overlaps, expanding to 20 V2 cases and two directly implicated speaker keys.
+The V3 validator also retains partial/unknown historical dimensions as
+evidence gaps rather than zero-overlap claims. No source-pool, case-level
+non-overlap, generator-lineage, private-GT, or operator-time proof is
+therefore available for authorization. This remains a Level-2 authorization
+blocker, not a Phase4 design defect.
 
 ## 8. Explicit non-authorization state
 
@@ -215,9 +216,17 @@ FINAL_AUTHORIZATION_DECISION = NO_GO
 PHASE4_CLOSURE = PASS
 PHASE4_5_CLOSURE = BLOCKED_POPULATION_MATERIALIZATION
 PHASE4_6_CLOSURE = BLOCKED_POPULATION_RECOVERED_FRESHNESS_INSUFFICIENT
+PHASE4_7_CLOSURE = CLOSED_WITH_FAIL_HISTORICAL_OVERLAP_CONFIRMED
 POPULATION_MATERIALIZATION_V1 = BLOCKED
 POPULATION_MATERIALIZATION_V2 = PASS_METADATA_ONLY_CANDIDATE
 LEVEL2_FRESHNESS_V2 = INSUFFICIENT_EVIDENCE
+LEVEL2_FRESHNESS_V3 = FAIL
+HISTORICAL_SOURCE_OVERLAP_COUNT_V3 = 5
+HISTORICAL_LINEAGE_OVERLAP_COUNT_V3 = 5
+HISTORICAL_CASE_LINEAGE_OVERLAP_COUNT_V3 = 20
+HISTORICAL_PROHIBITED_SPEAKER_OVERLAP_COUNT_V3 = 2
+LEVEL2_V2_POPULATION_SHA256 = ED6FE30A4F9B7AEFA4C36821E04CB7E5F9B1780B20EE7ED9A0AA84F52B3955D0
+LEVEL2_V2_POPULATION_CHANGED_DURING_PHASE4_7 = NO
 REAL_LEVEL2_OUTCOMES_ACCESSED = NO
 RQ1_CONFIRMATORY_EXECUTION_AUTHORIZED = NO
 RQ1_CONFIRMATORY_EXECUTION_STARTED = NO
