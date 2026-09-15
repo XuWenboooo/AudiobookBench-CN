@@ -1,7 +1,7 @@
 # RQ1 Confirmatory Execution Authorization v1 — Readiness Record
 
-Status: **READY_FOR_FINAL_REVIEW / NOT AUTHORIZED / NOT STARTED**
-Readiness review date: **2026-09-15**
+Status: **FINAL REVIEW COMPLETE / NO_GO / NOT AUTHORIZED / NOT STARTED**
+Final authorization review date: **2026-09-15**
 Authorization ID: `P4-RQ1-AUTH-READINESS-20260915-01`
 
 This record prepares the final human authorization review after the Phase4
@@ -14,7 +14,7 @@ work.
 
 ```text
 BRANCH = topconf-dl-robustness
-CURRENT_REVIEW_HEAD = 1e543c00678eca69339e874f4f9f98e44f0f77db
+CURRENT_REVIEW_HEAD = b8d0aeb824b03b3470783480637deab8caee6c20
 PHASE4_CLOSURE_COMMIT = 1e543c00678eca69339e874f4f9f98e44f0f77db
 PHASE4_CLOSURE_SHA256 = 7B8FD4E7214840171C32F22EEBB64CBDA85B2EB2F2915535FE23F88B82AB5659
 PROTOCOL_ID = P4-RQ1-DESIGN-20260914-01
@@ -23,6 +23,9 @@ PROTOCOL_SHA256 = 91BB6BE78BFBFF948C7B2559AFDC7ED6F3A87BA116BDC59807D1194B15BB11
 RECONCILIATION_MATRIX_SHA256 = 2FD60C3139F3FEFC180646C2E58687E83CA7DF2A2B072D84EECAC499BB8BB86F
 RECONCILIATION_LEDGER_SHA256 = 6DC9744234D1B9163E19996C8B7D3C57CBDBD5BFD218A73D7E705876758C8174
 OUTCOME_FIREWALL_SHA256 = A75A7C1F50B6E72C7EF4CA1B14BF65872292C93CE7B9E4C3114C83E133603CB0
+REMOTE_HEAD_AT_FINAL_REVIEW = b8d0aeb824b03b3470783480637deab8caee6c20
+REMOTE_PROVENANCE_SYNCHRONIZED = YES
+PUSH_STATUS_AT_FINAL_REVIEW = PASS
 ```
 
 The protocol commit predates any Level-2 reveal. The closure history records
@@ -152,7 +155,7 @@ STOPPING_RULE = process complete frozen population/grid and every terminal ledge
 [PASS] Whether-A and Whether-B design contracts frozen
 [PASS] Synthetic governance dry run and fail-closed tests
 [PASS] AASIST checkpoint/license/runtime capability record
-[NOT_READY] Materialized Level-2 freshness proof
+[NO_GO] Materialized Level-2 freshness proof
 [NOT_READY] Level-1 calibration manifest/hash for the final run
 [NOT_READY] Materialized blinded inference manifest/hash
 [NOT_READY] New namespace registry ownership for the final invocation
@@ -160,10 +163,19 @@ STOPPING_RULE = process complete frozen population/grid and every terminal ledge
 [REVIEW] Model-specific final environment locks and all checkpoint hashes
 ```
 
+The final authorization decision is `NO_GO` because the current freshness
+manifest is explicitly a non-materialized design template and its gate says
+`NO_AUTHORIZATION_UNTIL_MATERIALIZED_PROOF_IS_PASS`. The preregistration does
+not declare an execution-time population generation exception. No source-pool,
+case-list, split, non-overlap, generator-lineage, private-GT, or operator-time
+proof is therefore available for authorization. This is a Level-2 population
+authorization blocker, not a Phase4 design defect.
+
 ## 8. Explicit non-authorization state
 
 ```text
-AUTHORIZATION_STATUS = READY_FOR_FINAL_REVIEW
+AUTHORIZATION_STATUS = BLOCKED_LEVEL2_POPULATION
+FINAL_AUTHORIZATION_DECISION = NO_GO
 PHASE4_CLOSURE = PASS
 REAL_LEVEL2_OUTCOMES_ACCESSED = NO
 RQ1_CONFIRMATORY_EXECUTION_AUTHORIZED = NO
@@ -174,5 +186,6 @@ RQ3_STARTED = NO
 
 The remaining entries are prerequisites for a later human authorization
 decision, not permission to begin work. This artifact must not be converted to
-`AUTHORIZED = YES` by a test, dry-run, preregistration build, or automated
-follow-up.
+`AUTHORIZED = YES` until the materialized freshness proof and all other
+preflight gates pass through a new human review. No authorization commit is
+created for this `NO_GO` decision.
