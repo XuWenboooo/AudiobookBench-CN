@@ -6,7 +6,7 @@ Decision: `W6 BLOCKED; W7 FORMAL PILOT NOT AUTHORIZED; STOP WITHOUT SCIENTIFIC I
 ```text
 AUTHORITATIVE_PLAN = TOPCONF_19_WEEK_PLAN
 BRANCH = topconf-dl-robustness
-LOCAL_HEAD = final report-finalization commit; pre-finalization anchor `bc7f309`
+LOCAL_HEAD = final pushed audit head (exact SHA recorded by closing Git verification)
 REMOTE_HEAD = same as LOCAL_HEAD after final push
 WORKTREE = F:/项目/申请实验室  TTS项目/AudiobookBench-CN-topconf-dl-robustness
 PUSH_STATUS = PUSHED_AFTER_FINAL_REPORT_FINALIZATION
