@@ -92,4 +92,3 @@ and GT leakage. The synthetic governance pipeline remains required to pass.
 This is a terminal Phase4.8 blocker. It must not be followed by repeated
 replacement-and-audit cycles. Any future attempt requires a separately reviewed
 prospective amendment that supplies a clean same-pool candidate universe.
-

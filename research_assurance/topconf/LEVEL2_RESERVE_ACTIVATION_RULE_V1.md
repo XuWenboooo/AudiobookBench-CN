@@ -1,6 +1,6 @@
 # Level-2 reserve activation rule v1
 
-**Status:** `PROSPECTIVE_RULE_CREATED_BEFORE_ACTIVATION`  
+**Status:** `PROSPECTIVE_RULE_CREATED_BEFORE_ACTIVATION`
 **Purpose:** one-time, outcome-independent remediation of verified historical
 freshness contamination in the frozen V2 candidate
 
@@ -70,4 +70,3 @@ MANUAL_SELECTION = FORBIDDEN
 SCORE_SELECTION = FORBIDDEN
 QUALITY_SELECTION = FORBIDDEN
 ```
-

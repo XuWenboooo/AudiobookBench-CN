@@ -1,7 +1,7 @@
 # Phase 4.8 pre-outcome population rematerialization record
 
-**Date:** 2026-09-15  
-**Status:** `BLOCKED_INSUFFICIENT_CLEAN_RESERVE`  
+**Date:** 2026-09-15
+**Status:** `BLOCKED_INSUFFICIENT_CLEAN_RESERVE`
 **Amendment type:** prospective governance rule for one contamination-remediation attempt
 
 ## Trigger and pre-outcome firewall
@@ -108,4 +108,3 @@ EVALUATION_MANIFEST_V2 = NOT_CREATED
 REAL_LEVEL2_OUTCOMES_ACCESSED = NO
 MODEL_INFERENCE_RUNS = 0
 ```
-
