@@ -548,6 +548,35 @@ V3_UNIVERSES = (
     "LINEAGE_EXCLUSION",
 )
 V3_COMPLETENESS = frozenset({"COMPLETE", "PARTIAL", "UNKNOWN", "COMPLETE_EXCLUSION_EMPTY"})
+V3_COMPLETE_STATUSES = frozenset({"COMPLETE", "COMPLETE_EXCLUSION_EMPTY"})
+FRESHNESS_POLICY_CLARIFICATION_ID = "PHASE4_9R_FRESHNESS_POLICY_CLARIFICATION_V1"
+FRESHNESS_PATH_A = "PATH_A_HISTORICAL_EXCLUSION"
+FRESHNESS_PATH_B = "PATH_B_PROSPECTIVE_PROJECT_ENTRY"
+FRESHNESS_PATH_MIXED = "MIXED"
+V3_RELEVANCE_CLASSES = frozenset(
+    {
+        "DIRECTLY_RELEVANT",
+        "POTENTIALLY_RELEVANT",
+        "IRRELEVANT_BY_CORPUS_IDENTITY",
+        "IRRELEVANT_BY_STRONG_POST_FREEZE_PROJECT_ENTRY",
+        "UNKNOWN",
+    }
+)
+V3_STRONG_PROJECT_ENTRY_CHECKS = frozenset(
+    {
+        "UNIQUE_CORPUS_ARCHIVE_IDENTITY",
+        "OFFICIAL_SOURCE_PROVENANCE",
+        "ARCHIVE_OR_FILE_HASH",
+        "FIRST_GIT_REFERENCE",
+        "FIRST_MANIFEST_REFERENCE",
+        "FIRST_PROJECT_USE_REFERENCE",
+        "REPOSITORY_WIDE_HISTORICAL_SEARCH",
+        "ALIAS_PATH_ARCHIVE_SEARCH",
+        "NO_PRIOR_SCIENTIFIC_PROJECT_USAGE",
+        "ACQUISITION_PROJECT_ENTRY_TIMING",
+        "ASSET_LINEAGE_BOUND_TO_ARCHIVE_IDENTITY",
+    }
+)
 
 
 def _v3_records(universe: Mapping[str, Any], universe_id: str) -> list[dict[str, Any]]:
@@ -689,10 +718,38 @@ def _v3_comparisons(
     }
 
 
+def _v3_validate_strong_project_entry(record: Mapping[str, Any], pool_id: str) -> None:
+    if record.get("path") != FRESHNESS_PATH_B:
+        raise FreshnessInsufficientEvidence(f"Path B is not declared for {pool_id}")
+    if record.get("proof_strength") != "STRONG":
+        raise FreshnessInsufficientEvidence(f"project-entry proof is not STRONG: {pool_id}")
+    if record.get("prior_use_status") != "NO_PRIOR_PROJECT_USAGE_FOUND":
+        raise FreshnessInsufficientEvidence(f"prior-use proof is not clean: {pool_id}")
+    if record.get("project_entry_after_freeze") is not True:
+        raise FreshnessInsufficientEvidence(f"post-freeze timing is not established: {pool_id}")
+    if record.get("asset_lineage_binding") != "BOUND":
+        raise FreshnessInsufficientEvidence(f"asset lineage is not bound: {pool_id}")
+    checks = record.get("proof_checks")
+    if not isinstance(checks, list) or not V3_STRONG_PROJECT_ENTRY_CHECKS.issubset(checks):
+        raise FreshnessInsufficientEvidence(f"strong project-entry checks are incomplete: {pool_id}")
+    channel = record.get("channel_semantics")
+    if not isinstance(channel, Mapping):
+        raise FreshnessInsufficientEvidence(f"channel semantics are unavailable: {pool_id}")
+    for field in ("channel_type", "audio_rendering", "sample_rate_hz", "far_field_8ch_included"):
+        if field not in channel or channel[field] in (None, ""):
+            raise FreshnessInsufficientEvidence(f"channel semantics are incomplete: {pool_id}.{field}")
+    if not isinstance(channel.get("sample_rate_hz"), int) or isinstance(channel.get("sample_rate_hz"), bool):
+        raise FreshnessValidationError(f"invalid channel sample rate: {pool_id}")
+    if not isinstance(channel.get("far_field_8ch_included"), bool):
+        raise FreshnessValidationError(f"invalid far-field channel flag: {pool_id}")
+
+
 def validate_level2_freshness_v3(
     population: Mapping[str, Any],
     freshness: Mapping[str, Any],
     universes: Mapping[str, Mapping[str, Any]] | None = None,
+    *,
+    allow_undecided_verdict: bool = False,
 ) -> dict[str, Any]:
     """Validate V2 freshness against separate historical case/source/lineage universes.
 
@@ -705,6 +762,8 @@ def validate_level2_freshness_v3(
         raise FreshnessValidationError("wrong V3 freshness schema")
     if freshness.get("result_based_selection") is not False:
         raise FreshnessValidationError("freshness record permits result-based selection")
+    if not allow_undecided_verdict and freshness.get("freshness_verdict") is None:
+        raise FreshnessInsufficientEvidence("freshness verdict is not declared")
 
     references = freshness.get("universe_references")
     if not isinstance(references, Mapping):
@@ -730,9 +789,16 @@ def validate_level2_freshness_v3(
             raise FreshnessInsufficientEvidence(f"missing evidence source: {universe_id}")
         _v3_records(universe, universe_id)
 
+    clarified_policy = freshness.get("freshness_policy_id") == FRESHNESS_POLICY_CLARIFICATION_ID
+    if "freshness_policy_id" in freshness and not clarified_policy:
+        raise FreshnessValidationError("unsupported freshness policy clarification")
+
     isolation_records = freshness.get("corpus_isolation", [])
     if not isinstance(isolation_records, list):
         raise FreshnessValidationError("invalid V3 corpus isolation evidence")
+    isolation_by_pool: dict[str, Mapping[str, Any]] = {}
+    prior_usage_records: list[Mapping[str, Any]] = []
+    contradiction_records: list[Mapping[str, Any]] = []
     for index, record in enumerate(isolation_records):
         if not isinstance(record, Mapping):
             raise FreshnessValidationError(f"invalid V3 corpus isolation record: {index}")
@@ -740,10 +806,34 @@ def validate_level2_freshness_v3(
             "PASS_POST_FREEZE_ACQUISITION",
             "NO_PRIOR_PROJECT_USAGE_FOUND",
             "FAIL_PRIOR_USAGE_FOUND",
+            "PROVENANCE_CONTRADICTION",
         }:
             raise FreshnessValidationError(f"invalid V3 corpus isolation status: {index}")
         if not isinstance(record.get("evidence_sources"), list) or not record["evidence_sources"]:
             raise FreshnessInsufficientEvidence(f"missing evidence source: corpus_isolation[{index}]")
+        prior_use_status = record.get("prior_use_status")
+        if prior_use_status is not None and prior_use_status not in {
+            "NO_PRIOR_PROJECT_USAGE_FOUND",
+            "FAIL_PRIOR_USAGE_FOUND",
+            "UNKNOWN",
+        }:
+            raise FreshnessValidationError(f"invalid prior-use status: corpus_isolation[{index}]")
+        if record.get("status") == "FAIL_PRIOR_USAGE_FOUND" or prior_use_status == "FAIL_PRIOR_USAGE_FOUND":
+            prior_usage_records.append(record)
+        if (
+            record.get("status") == "PROVENANCE_CONTRADICTION"
+            or record.get("provenance_contradiction") is True
+            or record.get("identity_conflict") is True
+            or record.get("lineage_conflict") is True
+        ):
+            contradiction_records.append(record)
+        pool_id = record.get("pool_id")
+        if clarified_policy:
+            if not isinstance(pool_id, str) or not pool_id.strip():
+                raise FreshnessInsufficientEvidence(f"missing pool_id: corpus_isolation[{index}]")
+            if pool_id in isolation_by_pool:
+                raise FreshnessValidationError(f"duplicate corpus isolation pool: {pool_id}")
+            isolation_by_pool[pool_id] = record
 
     comparison = _v3_comparisons(population, universes)
     declared = freshness.get("comparison_counts")
@@ -782,22 +872,8 @@ def validate_level2_freshness_v3(
         int(declared[field])
         for field in ("unknown_case_comparisons", "unknown_source_comparisons", "unknown_lineage_comparisons")
     )
-    if prohibited:
-        status = "FAIL"
-        verdict = "FAIL"
-    elif unknown_total or any(value in {"PARTIAL", "UNKNOWN"} for value in completeness.values()):
-        status = "INSUFFICIENT_EVIDENCE"
-        verdict = "INSUFFICIENT_EVIDENCE"
-    else:
-        status = "PASS"
-        verdict = "PASS"
-    declared_verdict = freshness.get("freshness_verdict")
-    if declared_verdict != verdict:
-        raise FreshnessValidationError("declared V3 freshness verdict does not match evidence")
 
-    return {
-        "status": status,
-        "freshness_verdict": verdict,
+    base_result = {
         "completeness": completeness,
         "comparison_counts": dict(declared),
         "overlap_details": {
@@ -808,6 +884,129 @@ def validate_level2_freshness_v3(
         },
         "corpus_isolation": isolation_records,
     }
+
+    def _result(verdict: str, reason: str, **extra: Any) -> dict[str, Any]:
+        declared_verdict = freshness.get("freshness_verdict")
+        if declared_verdict is not None and declared_verdict != verdict:
+            raise FreshnessValidationError("declared V3 freshness verdict does not match evidence")
+        declared_status = freshness.get("status")
+        if declared_status is not None and declared_status != verdict:
+            raise FreshnessValidationError("declared V3 status does not match evidence")
+        result = {"status": verdict, "freshness_verdict": verdict, "decision_reason": reason}
+        result.update(base_result)
+        result.update(extra)
+        return result
+
+    # Precedence 1 and 2: verified prior use and provenance/identity conflicts
+    # are hard failures and cannot be bypassed by any completeness or entry path.
+    if prior_usage_records:
+        return _result("FAIL", "VERIFIED_PRIOR_USAGE_FOUND")
+    if contradiction_records:
+        return _result("FAIL", "PROVENANCE_CONTRADICTION")
+    if prohibited:
+        return _result("FAIL", "VERIFIED_PROHIBITED_OVERLAP")
+    if unknown_total:
+        return _result("INSUFFICIENT_EVIDENCE", "UNKNOWN_IDENTITY_COMPARISON")
+
+    if not clarified_policy:
+        # Legacy V3/V4 manifests have no per-pool relevance contract. Preserve
+        # their conservative global fail-closed behavior while still enforcing
+        # the new hard prior-use and contradiction precedence above.
+        if any(value in {"PARTIAL", "UNKNOWN"} for value in completeness.values()):
+            return _result("INSUFFICIENT_EVIDENCE", "LEGACY_GLOBAL_HISTORICAL_COMPLETENESS_GATE")
+        return _result("PASS", "LEGACY_COMPLETE_HISTORICAL_PROOF")
+
+    references_by_pool = freshness.get("historical_universe_relevance")
+    if not isinstance(references_by_pool, Mapping):
+        raise FreshnessInsufficientEvidence("per-pool historical relevance is unavailable")
+    population_sources = _records(population, "sources")
+    population_pool_ids = {
+        str(row.get("pool_id"))
+        for row in population_sources
+        if isinstance(row.get("pool_id"), str) and row["pool_id"].strip()
+    }
+    if not population_pool_ids:
+        raise FreshnessInsufficientEvidence("population pool identities are unavailable")
+    if set(isolation_by_pool) != population_pool_ids:
+        raise FreshnessInsufficientEvidence("corpus isolation does not cover exactly the population pools")
+
+    path_by_pool: dict[str, str] = {}
+    relevance_by_pool: dict[str, dict[str, str]] = {}
+    for pool_id in sorted(population_pool_ids):
+        record = isolation_by_pool[pool_id]
+        path = record.get("path")
+        if path not in {FRESHNESS_PATH_A, FRESHNESS_PATH_B}:
+            raise FreshnessInsufficientEvidence(f"invalid freshness path: {pool_id}")
+        path_by_pool[pool_id] = str(path)
+        if path == FRESHNESS_PATH_B:
+            _v3_validate_strong_project_entry(record, pool_id)
+        relevance = references_by_pool.get(pool_id)
+        if not isinstance(relevance, Mapping):
+            raise FreshnessInsufficientEvidence(f"missing historical relevance: {pool_id}")
+        if set(relevance) != set(V3_UNIVERSES):
+            raise FreshnessInsufficientEvidence(f"historical relevance dimensions are incomplete: {pool_id}")
+        relevance_by_pool[pool_id] = {}
+        for universe_id in V3_UNIVERSES:
+            classification = relevance.get(universe_id)
+            if classification not in V3_RELEVANCE_CLASSES:
+                raise FreshnessValidationError(f"invalid historical relevance: {pool_id}.{universe_id}")
+            relevance_by_pool[pool_id][universe_id] = str(classification)
+            if classification == "UNKNOWN":
+                return _result(
+                    "INSUFFICIENT_EVIDENCE",
+                    f"UNKNOWN_CRITICAL_HISTORICAL_RELEVANCE:{pool_id}.{universe_id}",
+                    freshness_evidence_path=FRESHNESS_PATH_MIXED,
+                    historical_universe_relevance=relevance_by_pool,
+                )
+            if classification == "IRRELEVANT_BY_STRONG_POST_FREEZE_PROJECT_ENTRY" and path != FRESHNESS_PATH_B:
+                return _result(
+                    "INSUFFICIENT_EVIDENCE",
+                    f"PATH_B_REQUIRES_STRONG_ENTRY_PROOF:{pool_id}.{universe_id}",
+                    freshness_evidence_path=FRESHNESS_PATH_MIXED,
+                    historical_universe_relevance=relevance_by_pool,
+                )
+            if classification in {"DIRECTLY_RELEVANT", "POTENTIALLY_RELEVANT"} and completeness[universe_id] not in V3_COMPLETE_STATUSES:
+                return _result(
+                    "INSUFFICIENT_EVIDENCE",
+                    f"RELEVANT_HISTORICAL_UNIVERSE_INCOMPLETE:{pool_id}.{universe_id}",
+                    freshness_evidence_path=FRESHNESS_PATH_MIXED,
+                    historical_universe_relevance=relevance_by_pool,
+                )
+            if classification == "IRRELEVANT_BY_CORPUS_IDENTITY" and record.get("corpus_identity_proof") is not True:
+                return _result(
+                    "INSUFFICIENT_EVIDENCE",
+                    f"CORPUS_IDENTITY_IRRELEVANCE_NOT_BOUND:{pool_id}.{universe_id}",
+                    freshness_evidence_path=FRESHNESS_PATH_MIXED,
+                    historical_universe_relevance=relevance_by_pool,
+                )
+
+    all_path_b = all(path == FRESHNESS_PATH_B for path in path_by_pool.values())
+    all_path_b_irrelevant = all(
+        classification in {
+            "IRRELEVANT_BY_CORPUS_IDENTITY",
+            "IRRELEVANT_BY_STRONG_POST_FREEZE_PROJECT_ENTRY",
+        }
+        for relevance in relevance_by_pool.values()
+        for classification in relevance.values()
+    )
+    if all_path_b and all_path_b_irrelevant:
+        evidence_path = FRESHNESS_PATH_B
+        reason = "STRONG_POST_FREEZE_PROJECT_ENTRY_FOR_ALL_POOLS"
+    elif all(path == FRESHNESS_PATH_A for path in path_by_pool.values()):
+        evidence_path = FRESHNESS_PATH_A
+        reason = "COMPLETE_RELEVANT_HISTORICAL_PROOF"
+    else:
+        evidence_path = FRESHNESS_PATH_MIXED
+        reason = "MIXED_PATH_COMPLETE_RELEVANT_PROOF"
+    declared_path = freshness.get("freshness_evidence_path")
+    if declared_path is not None and declared_path != evidence_path:
+        raise FreshnessValidationError("declared freshness evidence path does not match evidence")
+    return _result(
+        "PASS",
+        reason,
+        freshness_evidence_path=evidence_path,
+        historical_universe_relevance=relevance_by_pool,
+    )
 
 
 REPLACEMENT_FORBIDDEN_FIELDS = frozenset(

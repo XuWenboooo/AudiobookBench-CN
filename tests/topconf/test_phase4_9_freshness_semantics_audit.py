@@ -84,9 +84,12 @@ def _universes(statuses: dict[str, str]) -> dict[str, dict]:
 
 
 def _observed(statuses: dict[str, str], isolation_status: str) -> str:
+    freshness = _freshness(statuses, isolation_status)
+    if isolation_status == "FAIL_PRIOR_USAGE_FOUND":
+        freshness["freshness_verdict"] = "FAIL"
     result = validate_level2_freshness_v3(
         _population(),
-        _freshness(statuses, isolation_status),
+        freshness,
         _universes(statuses),
     )
     return result["status"]
@@ -106,11 +109,9 @@ def test_pre_freeze_entry_with_partial_history_remains_insufficient() -> None:
     assert _observed(statuses, "NO_PRIOR_PROJECT_USAGE_FOUND") == "INSUFFICIENT_EVIDENCE"
 
 
-def test_confirmed_prior_usage_is_not_enforced_by_current_validator() -> None:
+def test_confirmed_prior_usage_is_enforced_by_reconciled_validator() -> None:
     statuses = {name: "COMPLETE" for name in UNIVERSES}
-    # Policy expectation is FAIL; this assertion records the current
-    # implementation's observed result for the independent audit report.
-    assert _observed(statuses, "FAIL_PRIOR_USAGE_FOUND") == "PASS"
+    assert _observed(statuses, "FAIL_PRIOR_USAGE_FOUND") == "FAIL"
 
 
 def test_strong_entry_with_complete_zero_overlap_history_passes_current_validator() -> None:
