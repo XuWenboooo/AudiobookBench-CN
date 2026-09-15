@@ -1,0 +1,168 @@
+{
+  "schema_version": "topconf.level2.exclusion-universe.v1",
+  "manifest_id": "TOPCONF_RQ1_LEVEL2_EXCLUSION_UNIVERSE_V1",
+  "status": "INCOMPLETE_NOT_AUTHORIZING",
+  "purpose": "Machine-readable audit inventory for future Level-2 freshness proof; this file makes no freshness claim.",
+  "required_for_freshness": [
+    "WEEK1_PILOT",
+    "WEEK2_PILOT",
+    "WEEK3_PILOT",
+    "WEEK4_PILOT",
+    "WEEK5_QUALIFICATION",
+    "PHASE3T_PARTIALEDIT_E1",
+    "MODEL_SELECTION_SETS",
+    "METRIC_SELECTION_SETS",
+    "THRESHOLD_SELECTION_SETS",
+    "WHETHER_A_DECISION_SET",
+    "WHETHER_B_CAPABILITY_SMOKE"
+  ],
+  "identity_dimensions": [
+    "case_id",
+    "pair_id",
+    "source_id",
+    "speaker_id",
+    "session_id",
+    "utterance_id",
+    "reference_audio_id",
+    "text_sha256",
+    "parent_asset_id",
+    "source_audio_sha256",
+    "generator_input_identity"
+  ],
+  "sets": [
+    {
+      "set_id": "WEEK1_PILOT",
+      "status": "INCOMPLETE_HASH_AND_PARTIAL_ID_INVENTORY",
+      "role": "WEEK1_5_HISTORICAL_PILOT",
+      "known_case_or_source_count": 480,
+      "known_speaker_count": 12,
+      "manifest_sha256": "544F3D1D69AF6CFBB0AAB8FA3BEE552E9C64005CEA854ED9CFF83417BB79C9E9",
+      "source_artifacts": [
+        {"path": "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\results\\week1\\hashes.json", "sha256": "544F3D1D69AF6CFBB0AAB8FA3BEE552E9C64005CEA854ED9CFF83417BB79C9E9"},
+        {"path": "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\data\\manifests\\week1_manifest.csv", "sha256": "B1D77517031AAB2D02D29A7978CE3FA44097E23E9CC69095786D4746179C7264"},
+        {"path": "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN\\data\\manifests\\source_audio.csv", "sha256": "6F6D165B020416DA3153DC4D129E06998ED0A193C88C932C5CDF03B72E04A596"}
+      ],
+      "records": [],
+      "gap": "The archival chain records 480 raw sources, while the accessible tracked manifest exposes only 200 unique sample IDs; no complete case-level lineage array is imported here."
+    },
+    {
+      "set_id": "WEEK2_PILOT",
+      "status": "INCOMPLETE_CLOSURE_ONLY",
+      "role": "WEEK1_5_HISTORICAL_PILOT",
+      "known_case_or_source_count": 23,
+      "known_speaker_count": 12,
+      "manifest_sha256": "EC5B0121570E4679272763BD14E08EDE18D47B49455CA8062AF7E861961EAFB3",
+      "source_artifacts": [{"path": "research_assurance/WEEK2_SCIENTIFIC_CLOSURE.md", "sha256": "EC5B0121570E4679272763BD14E08EDE18D47B49455CA8062AF7E861961EAFB3"}],
+      "records": [],
+      "gap": "Closure-level counts are available; complete source, reference, text, and parent-asset identities are not materialized in this branch."
+    },
+    {
+      "set_id": "WEEK3_PILOT",
+      "status": "INCOMPLETE_CLOSURE_ONLY",
+      "role": "WEEK1_5_HISTORICAL_PILOT",
+      "known_case_or_source_count": 23,
+      "known_speaker_count": 12,
+      "manifest_sha256": "24ADA3B4D55FF077C62510C9A47E5DE7C0F9E9296196643B0B2A1C782354270C",
+      "source_artifacts": [{"path": "research_assurance/WEEK3_FINAL_SCIENTIFIC_CLOSURE.md", "sha256": "24ADA3B4D55FF077C62510C9A47E5DE7C0F9E9296196643B0B2A1C782354270C"}],
+      "records": [],
+      "gap": "Closure-level counts are available; complete source and derived-clip lineage array is not materialized here."
+    },
+    {
+      "set_id": "WEEK4_PILOT",
+      "status": "INCOMPLETE_CASE_MANIFEST_NOT_IMPORTED",
+      "role": "WEEK1_5_HISTORICAL_PILOT",
+      "known_case_or_source_count": 48,
+      "known_speaker_count": 48,
+      "manifest_sha256": "DD71B3B70E558B73FA5E5545A52C2A819999171930ADA81D207EC5BFB60973F6",
+      "source_artifacts": [{"path": "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-Week5\\data\\manifests\\week4_population_manifest.json", "sha256": "DD71B3B70E558B73FA5E5545A52C2A819999171930ADA81D207EC5BFB60973F6"}],
+      "records": [],
+      "gap": "The exact historical manifest is available outside this branch but has not been converted into the complete cross-dimensional exclusion array."
+    },
+    {
+      "set_id": "WEEK5_QUALIFICATION",
+      "status": "INCOMPLETE_WORKTREE_ISOLATED",
+      "role": "WEEK1_5_HISTORICAL_QUALIFICATION",
+      "known_case_or_source_count": 92,
+      "known_speaker_count": 12,
+      "manifest_sha256": "71D55F01901E1D0245A0B23A7D82A55DD3F9F3014530F92EAEE46F0651DF9654",
+      "source_artifacts": [
+        {"path": "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-Week5\\data\\manifests\\week5_exp2_qualification_population.json", "sha256": "71D55F01901E1D0245A0B23A7D82A55DD3F9F3014530F92EAEE46F0651DF9654"},
+        {"path": "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-Week5\\data\\manifests\\week5_exp5_qualification_population.json", "sha256": "B5AAB72A80FF36C65609DD3ABA2DBE6A501F9CE4449093EB2C88DCADDE1E70E2"},
+        {"path": "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-Week5\\data\\manifests\\week5_exp6_qualification_population.json", "sha256": "FE26CC308448461DDDA5EC799081F7754728D084240D9A73CE8B5C9BDF6C0336"}
+      ],
+      "records": [],
+      "gap": "Qualification manifests are isolated in another worktree and do not provide a complete case-level lineage universe in this branch."
+    },
+    {
+      "set_id": "PHASE3T_PARTIALEDIT_E1",
+      "status": "INCOMPLETE_HASH_ONLY",
+      "role": "LEVEL1_EXTERNAL_FUNCTIONAL_VALIDATION",
+      "known_case_or_source_count": 42471,
+      "known_audio_manifest_sha256": "E30914242156A9383E0B71755FCE85CEDE01DB5CA91165ADCDB3EBF33F315FEE",
+      "manifest_sha256": "B5587C1D7777B638BBB2E240679254C7F8D9F35EBD0971F729CEC47C0AA70736",
+      "source_artifacts": [
+        {"path": "results/topconf_phase3t/case_manifest.tsv", "sha256": "E30914242156A9383E0B71755FCE85CEDE01DB5CA91165ADCDB3EBF33F315FEE"},
+        {"path": "research_assurance/topconf/PHASE3T_RAW_OUTPUT_MANIFEST_V1.json", "sha256": "B5587C1D7777B638BBB2E240679254C7F8D9F35EBD0971F729CEC47C0AA70736"}
+      ],
+      "records": [],
+      "gap": "Case IDs are countable, but the full cross-dimensional exclusion projection is intentionally not copied into a Level-2 population artifact."
+    },
+    {
+      "set_id": "MODEL_SELECTION_SETS",
+      "status": "INCOMPLETE_NOT_CONSOLIDATED",
+      "role": "PROHIBITED_LEVEL1_SELECTION_UNIVERSE",
+      "known_case_or_source_count": null,
+      "manifest_sha256": null,
+      "source_artifacts": [],
+      "records": [],
+      "gap": "No complete, hashed model-selection identity universe is available for a PASS claim."
+    },
+    {
+      "set_id": "METRIC_SELECTION_SETS",
+      "status": "INCOMPLETE_NOT_CONSOLIDATED",
+      "role": "PROHIBITED_LEVEL1_SELECTION_UNIVERSE",
+      "known_case_or_source_count": null,
+      "manifest_sha256": null,
+      "source_artifacts": [],
+      "records": [],
+      "gap": "No complete, hashed metric-selection identity universe is available for a PASS claim."
+    },
+    {
+      "set_id": "THRESHOLD_SELECTION_SETS",
+      "status": "INCOMPLETE_NOT_CONSOLIDATED",
+      "role": "PROHIBITED_LEVEL1_SELECTION_UNIVERSE",
+      "known_case_or_source_count": null,
+      "manifest_sha256": null,
+      "source_artifacts": [],
+      "records": [],
+      "gap": "No complete Level-1 calibration/test identity manifest is available for a PASS claim."
+    },
+    {
+      "set_id": "WHETHER_A_DECISION_SET",
+      "status": "INCOMPLETE_DECISION_ONLY",
+      "role": "PROHIBITED_SELECTION_OR_DEBUGGING_UNIVERSE",
+      "known_case_or_source_count": null,
+      "manifest_sha256": null,
+      "source_artifacts": [],
+      "records": [],
+      "gap": "Whether-A freeze is documented, but a complete identity projection for every decision/debugging case is not materialized."
+    },
+    {
+      "set_id": "WHETHER_B_CAPABILITY_SMOKE",
+      "status": "COMPLETE_EXCLUSION_EMPTY",
+      "role": "TECHNICAL_SYNTHETIC_SMOKE_ONLY",
+      "known_case_or_source_count": 0,
+      "manifest_sha256": "E79D3E91816039DE73F0A1FB62FDEA91E2A239AAE41B0CE5A30791A2AEFDA927",
+      "source_artifacts": [{"path": "research_assurance/topconf/WHETHER_B_AASIST_CAPABILITY_SMOKE_V1.json", "sha256": "E79D3E91816039DE73F0A1FB62FDEA91E2A239AAE41B0CE5A30791A2AEFDA927"}],
+      "identity_dimensions": ["case_id", "pair_id", "source_id", "speaker_id", "session_id", "utterance_id", "reference_audio_id", "text_sha256", "parent_asset_id", "source_audio_sha256", "generator_input_identity"],
+      "records": [],
+      "source_ids": [],
+      "gap": "Smoke used a deterministic synthetic sinusoid and loaded no dataset source; zero source IDs are recorded explicitly."
+    }
+  ],
+  "freshness_verdict": "INSUFFICIENT_EVIDENCE",
+  "authorization": "NO_GO",
+  "real_level2_outcomes_accessed": false,
+  "model_inference_runs": 0,
+  "result_based_design_changes": 0
+}

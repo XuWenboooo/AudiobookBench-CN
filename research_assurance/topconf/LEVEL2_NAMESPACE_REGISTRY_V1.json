@@ -1,0 +1,28 @@
+{
+  "schema_version": "topconf.level2.namespace-registry.v1",
+  "registry_id": "TOPCONF_RQ1_LEVEL2_NAMESPACE_REGISTRY_V1",
+  "status": "PROPOSED_NOT_AUTHORIZED",
+  "output_namespace": "results/topconf_level2_rq1_v1/",
+  "overwrite_policy": "PROHIBITED",
+  "historical_namespaces": [
+    "results/topconf_phase3t/",
+    "results/week4_adaptive_redteam_runs/",
+    "results/week1/"
+  ],
+  "invocations": [
+    {"invocation_id": "RQ1_CFPRF_001", "model_id": "CFPRF", "status": "NOT_STARTED"},
+    {"invocation_id": "RQ1_MULTIRESO_001", "model_id": "MultiResoModel-Simple", "status": "NOT_STARTED"},
+    {"invocation_id": "RQ1_AASIST_001", "model_id": "AASIST", "status": "NOT_STARTED"}
+  ],
+  "ownership": {
+    "owner": null,
+    "authorization_hash": null,
+    "protocol_hash": "91BB6BE78BFBFF948C7B2559AFDC7ED6F3A87BA116BDC59807D1194B15BB115C",
+    "dataset_hash": null
+  },
+  "firewall": {
+    "real_level2_outcomes_accessed": false,
+    "model_inference_runs": 0,
+    "authorization": "NO_GO"
+  }
+}

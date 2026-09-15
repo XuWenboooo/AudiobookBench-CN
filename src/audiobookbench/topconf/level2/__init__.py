@@ -20,6 +20,17 @@ from .governance import (
     validate_retry_ledger,
     validate_threshold_policy,
 )
+from .materialization import (
+    FRESHNESS_DIMENSIONS,
+    FROZEN_LEVEL2_PLAN,
+    FreshnessInsufficientEvidence,
+    FreshnessValidationError,
+    MaterializationValidationError,
+    validate_evaluation_manifest,
+    validate_inference_manifest,
+    validate_level2_freshness,
+    validate_level2_population,
+)
 
 __all__ = [
     "FAILURE_CATEGORIES", "Level2GroundTruth", "Level2ManipulationVariant",
@@ -30,4 +41,9 @@ __all__ = [
     "validate_level2_manifest", "validate_metric_registration",
     "validate_namespace", "validate_reveal_gate", "validate_retry_ledger",
     "validate_threshold_policy",
+    "FRESHNESS_DIMENSIONS", "FROZEN_LEVEL2_PLAN",
+    "FreshnessInsufficientEvidence", "FreshnessValidationError",
+    "MaterializationValidationError", "validate_evaluation_manifest",
+    "validate_inference_manifest", "validate_level2_freshness",
+    "validate_level2_population",
 ]

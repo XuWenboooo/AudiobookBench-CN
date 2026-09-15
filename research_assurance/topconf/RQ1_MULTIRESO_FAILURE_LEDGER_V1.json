@@ -1,0 +1,10 @@
+{
+  "schema_version": "topconf.level2.failure-ledger.v1",
+  "model_id": "MultiResoModel-Simple",
+  "status": "NOT_STARTED",
+  "population_manifest_sha256": "E270B21842ECF0A1A287B51B3984CEB56A95C0C06DEB011060BDAAA3D2B3F516",
+  "invocation_id": "RQ1_MULTIRESO_001",
+  "terminal_rows": [],
+  "retry_rows": [],
+  "note": "Template only; no execution record exists."
+}

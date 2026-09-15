@@ -1,0 +1,104 @@
+{
+  "schema_version": "topconf.level2.rq1.population.v1",
+  "manifest_id": "TOPCONF_RQ1_LEVEL2_POPULATION_V1",
+  "status": "BLOCKED_INSUFFICIENT_MATERIALIZATION_EVIDENCE",
+  "materialized": false,
+  "population_claim": false,
+  "real_level2_outcomes_accessed": false,
+  "result_based_selection": false,
+  "protocol_id": "P4-RQ1-DESIGN-20260914-01",
+  "protocol_sha256": "8B7BAE31F52B8F9E940B2F88FD5D1D855C393B4ED0EC9423D40FD87328255217",
+  "preregistration_sha256": "91BB6BE78BFBFF948C7B2559AFDC7ED6F3A87BA116BDC59807D1194B15BB115C",
+  "frozen_plan": {
+    "independent_source_pools": 2,
+    "primary_sources": 400,
+    "speakers": 120,
+    "sources_per_pool": 200,
+    "speakers_per_pool": 60,
+    "mechanisms_per_source": 4,
+    "predeclared_source_reserve": 40,
+    "target_duration_sec": [8, 30]
+  },
+  "counts": {
+    "population_size": 0,
+    "source_count": 0,
+    "speaker_count": 0,
+    "pair_count": 0,
+    "case_count": 0,
+    "mechanism_counts": {},
+    "transform_counts": {}
+  },
+  "source_pools": [],
+  "sources": [],
+  "reserve_records": [],
+  "case_records": [],
+  "case_order": [],
+  "audio_materialized": false,
+  "resource_inventory": [
+    {
+      "resource_id": "AISHELL3_LOCAL",
+      "root": "F:\\项目\\申请实验室  TTS项目\\datasets\\AISHELL-3",
+      "role": "HISTORICAL_PILOT_SOURCE_ONLY_UNRECONCILED_FOR_LEVEL2",
+      "rights_metadata": "Apache 2.0 in local dataset metadata; Level-2 pool independence and historical lineage separation are not established",
+      "raw_wav_files": 88035,
+      "raw_speakers": 218,
+      "window_8_30_wav_files": 532,
+      "window_8_30_speakers": 112,
+      "train_wav_files": 63262,
+      "test_wav_files": 24773,
+      "train_speakers": 174,
+      "test_speakers": 214,
+      "train_only_speakers": 4,
+      "test_only_speakers": 44,
+      "shared_train_test_speakers": 170,
+      "duration_audit": "RIFF PCM header duration; 44-byte header, 44.1 kHz, mono, 16-bit metadata; no model or outcome computation",
+      "audit_script": "tools/topconf/audit_level2_resource_capacity.py",
+      "metadata_files": [
+        "raw/train/content.txt",
+        "raw/test/content.txt",
+        "raw/spk-info.txt"
+      ]
+    },
+    {
+      "resource_id": "WORKTREE_LEVEL2_MANIFESTS",
+      "root": "data/manifests",
+      "role": "NO_FRESH_LEVEL2_MANIFEST_PRESENT",
+      "materialized_case_records": 0,
+      "note": "Only example/template and historical Week-4 manifest files are present."
+    },
+    {
+      "resource_id": "PARTIALEDIT_E1_LOCAL",
+      "root": "F:\\项目\\申请实验室  TTS项目\\topconf_phase3_cache\\PartialEdit_v1.1\\materialized\\E1",
+      "role": "EXCLUDED_PHASE3T_LEVEL1_POPULATION",
+      "case_records": 42471,
+      "note": "Historical Level-1 external reproduction; cannot be promoted or reused."
+    }
+  ],
+  "blocking_reasons": [
+    "NO_TWO_INDEPENDENT_RIGHTS_CLEARED_SOURCE_POOLS",
+    "AISHELL3_8_30_SECOND_ELIGIBLE_SPEAKERS_112_LT_FROZEN_120",
+    "AISHELL3_TRAIN_TEST_SPEAKER_PARTITIONS_ARE_NOT_DISJOINT",
+    "NO_CASE_LEVEL_LEVEL2_SOURCE_REFERENCE_GENERATOR_BINDING",
+    "HISTORICAL_PILOT_AND_SELECTION_EXCLUSION_UNIVERSE_NOT_COMPLETE"
+  ],
+  "excluded_lineages": [
+    "WEEK1_5_HISTORICAL_PILOT",
+    "PHASE3T_PARTIALEDIT_V1.1_E1",
+    "ANY_LEVEL1_MODEL_SELECTION_SET",
+    "ANY_LEVEL1_METRIC_SELECTION_SET",
+    "ANY_LEVEL1_THRESHOLD_CALIBRATION_TEST_SET",
+    "WHETHER_B_CAPABILITY_SMOKE_SOURCE_IDS"
+  ],
+  "creation": {
+    "created_at": "2026-09-15",
+    "created_from_commit": "6e7a0957809472a8189514781414b47cc4f494f8",
+    "operator_action": "READ_ONLY_RESOURCE_AUDIT_AND_FAIL_CLOSED_MATERIALIZATION_ATTEMPT"
+  },
+  "firewall": {
+    "model_inference_runs": 0,
+    "scientific_scores_computed": false,
+    "real_level2_outcomes_accessed": false,
+    "result_based_design_changes": 0,
+    "authorization": "NO_GO"
+  }
+}

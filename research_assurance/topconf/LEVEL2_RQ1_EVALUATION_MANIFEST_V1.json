@@ -1,0 +1,14 @@
+{
+  "schema_version": "topconf.level2.rq1.evaluation.v1",
+  "manifest_id": "TOPCONF_RQ1_LEVEL2_EVALUATION_V1",
+  "status": "NOT_MATERIALIZED",
+  "materialized": false,
+  "population_manifest_sha256": "E270B21842ECF0A1A287B51B3984CEB56A95C0C06DEB011060BDAAA3D2B3F516",
+  "model_runner_access": false,
+  "reveal_gate": "NOT_OPEN",
+  "cases": [],
+  "contains_private_ground_truth": false,
+  "scientific_outcomes": [],
+  "real_level2_outcomes_accessed": false,
+  "model_inference_runs": 0
+}
