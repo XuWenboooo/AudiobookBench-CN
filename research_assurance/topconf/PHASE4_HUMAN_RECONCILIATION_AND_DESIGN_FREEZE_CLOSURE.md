@@ -92,6 +92,8 @@ NAMESPACE_POLICY = one invocation/owner/namespace; new
   results/topconf_level2_rq1_v1/ namespace; never overwrite Phase3T
 
 CONFIRMATORY_PREREGISTRATION = TOPCONF_RQ1_CONFIRMATORY_PREREGISTRATION_V1.md
+RQ1_AUTHORIZATION_ARTIFACT = RQ1_CONFIRMATORY_EXECUTION_AUTHORIZATION_V1.md
+AUTHORIZATION_STATUS = READY_FOR_FINAL_REVIEW / NOT_AUTHORIZED
 LEVEL2_SYNTHETIC_DRY_RUN = PASS
 FAIL_CLOSED_TESTS = PASS; 11 governance tests including all requested cases
 REAL_LEVEL2_OUTCOMES_ACCESSED = NO
@@ -125,8 +127,33 @@ PUSH_STATUS = PUSHED to origin/topconf-dl-robustness
 | Failure / retry / namespace | PASS | strict code gates and tests |
 | Synthetic Level-2 dry run | PASS | `PHASE4_SYNTHETIC_DRY_RUN_RESULT_V1.json` |
 | Real Level-2 outcomes accessed | PASS | none accessed |
+| RQ1 authorization readiness artifact | PASS AS READINESS | `RQ1_CONFIRMATORY_EXECUTION_AUTHORIZATION_V1.md`; all remaining preflight fields are explicit |
 | Phase4 closure | PASS | all design-freeze gates pass; authorization remains separate |
 
 This is the safe stopping point. The design is ready for a separate human
 authorization review, but no confirmatory execution may start from this
 closure and no automatic action converts readiness into authorization.
+
+## Historical blocker resolution
+
+The earlier Phase4 record was intentionally preserved as a historical state:
+
+```text
+PREVIOUS_PHASE4_CLOSURE = BLOCKED
+PREVIOUS_BLOCKER = WHETHER_B_CHECKPOINT_LICENSE_RUNTIME_PROVENANCE
+PREVIOUS_CANDIDATE = Codecfake W2V2+AASIST; checkpoint not locally hashed,
+  explicit root license chain incomplete, and runtime capability smoke absent
+NEW_EVIDENCE = official AASIST repository commit
+  a04c9863f63d44471dde8a6abcb3b082b07cd1d1; MIT LICENSE hash
+  B7290F12E8346F663833EC1C4F9964A84C74CD091DB042B3CD680548BDD18A3F;
+  AASIST.pth hash
+  51D2D9CF0738172F61E2A384EC50A54A55363240F67C971ED55A92435BC1A1C0;
+  strict load and deterministic finite synthetic forward PASS
+RESOLUTION_COMMIT = 69dca0964c5b6865289420dae8cfb8bc15b153d9
+RESOLUTION_DATE = 2026-09-14
+CURRENT_PHASE4_CLOSURE = PASS
+```
+
+The resolution is a provenance/capability result only. It does not imply
+Whether-B performance, Mandarin transfer performance, a positive gap claim,
+or authorization to execute Level 2.
