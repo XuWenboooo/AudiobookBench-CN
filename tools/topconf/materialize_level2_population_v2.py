@@ -294,7 +294,7 @@ def _historical_freshness(
         status = "COMPLETE_EXCLUSION_EMPTY" if set_id == "WHETHER_B_CAPABILITY_SMOKE" and completeness == "COMPLETE" else (
             "COMPLETE" if completeness == "COMPLETE" else "INCOMPLETE_NOT_RECONSTRUCTED"
         )
-        manifest_hash = _canonical_sha256({"set_id": set_id, "stage": stage})
+        manifest_hash = _canonical_sha256({"set_id": set_id, "records": records})
         set_hashes[set_id] = manifest_hash
         exclusion_sets.append(
             {
