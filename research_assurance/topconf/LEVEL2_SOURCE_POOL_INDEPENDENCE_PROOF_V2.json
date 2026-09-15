@@ -1,0 +1,65 @@
+{
+  "schema_version": "topconf.level2.source_pool_independence.v2",
+  "status": "PASS_CORPUS_LEVEL_INDEPENDENCE_PENDING_V3_SEGMENT_HASH_AUDIT",
+  "protocol_id": "P4-RQ1-DESIGN-20260914-01",
+  "pool_a": {
+    "pool_id": "SOURCE_POOL_A_ALIMEETING_SLR119",
+    "corpus": "ALIMEETING_SLR119",
+    "official_resource_id": "SLR119",
+    "official_page": "https://www.openslr.org/119/",
+    "provider": "Alibaba Group",
+    "license": "CC BY-SA 4.0",
+    "identity_basis": "AliMeeting meeting/session IDs and near-field SPK IDs from Test/Eval archives",
+    "archive_sha256s": [
+      "42407625B774A44FE34F2F25CA99116F090BEC901F5AB81196B89F683A8B7BFA",
+      "DC47343B2474B5EBCF458927E878155F6DDEB59C85E685B3645C32A1F9578D92"
+    ]
+  },
+  "pool_b": {
+    "pool_id": "SOURCE_POOL_B_AISHELL1",
+    "corpus": "AISHELL1",
+    "official_resource_id": "SLR33",
+    "official_page": "https://www.openslr.org/33/",
+    "provider": "Beijing Shell Shell Technology Co.,Ltd",
+    "license": "Apache License 2.0",
+    "identity_basis": "AISHELL-1 official speaker.info, AISHELL-1 archive SHA, and retained V2 source rows",
+    "archive_sha256": "A4A0313CDE0A933E0E01A451F77DE0A23D6C942F4694AF5BB7F40B9DC38143FE"
+  },
+  "independence_checks": [
+    {
+      "check": "official_resource_identity",
+      "result": "PASS",
+      "evidence": "SLR119 vs SLR33; distinct providers and official archive identities"
+    },
+    {
+      "check": "speaker_namespace",
+      "result": "PASS",
+      "evidence": "ALIMEETING_SLR119_SPK* vs AISHELL1_S* namespaces; no namespace collision"
+    },
+    {
+      "check": "parent_lineage",
+      "result": "PASS",
+      "evidence": "Pool A parent meeting/audio hashes are from AliMeeting Test/Eval; Pool B parent assets are AISHELL-1 archive identities"
+    },
+    {
+      "check": "cross_corpus_audio_hash_overlap",
+      "result": "PENDING_V3",
+      "evidence": "Will compare all 220 selected Pool-A segment hashes against the complete AISHELL-1 audit before any authorization review"
+    },
+    {
+      "check": "prior_project_usage",
+      "result": "NONE_FOUND",
+      "evidence": "LEVEL2_NEW_POOL_A_PROJECT_ENTRY_PROOF_V1.json"
+    }
+  ],
+  "limitations": [
+    "Corpus-level provenance does not constitute a biometric proof that no human participant appears in both corpora.",
+    "No raw AISHELL-3 identity is retained in Pool A; the entire AISHELL-3 Pool A is retired."
+  ],
+  "firewall": {
+    "model_inference_runs": 0,
+    "scientific_outcomes_accessed": false,
+    "result_based_selection": false,
+    "scientific_scores_computed": false
+  }
+}

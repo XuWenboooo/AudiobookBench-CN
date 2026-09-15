@@ -1,0 +1,91 @@
+{
+  "schema_version": "topconf.level2.new_pool_a.project_entry_proof.v1",
+  "status": "SELECTED_PRE_OUTCOME_POST_FREEZE_ACQUISITION",
+  "NEW_POOL_A_PRIOR_PROJECT_USAGE": "NONE_FOUND",
+  "selected_corpus": "ALIMEETING_SLR119",
+  "corpus_name": "AliMeeting Mandarin Multi-channel Multi-party Meeting Speech Corpus",
+  "official_source": {
+    "resource_id": "SLR119",
+    "official_page": "https://www.openslr.org/119/",
+    "provider": "Alibaba Group",
+    "license": "CC BY-SA 4.0",
+    "language": "Mandarin Chinese"
+  },
+  "protocol_freeze": {
+    "protocol_id": "P4-RQ1-DESIGN-20260914-01",
+    "freeze_date": "2026-09-14",
+    "pre_selection_head": "110e2b91c04625898b955c0d0dfcfccfe04515cb"
+  },
+  "acquisition": {
+    "subsets": [
+      {
+        "name": "Test_Ali",
+        "url": "https://speech-lab-share-data.oss-cn-shanghai.aliyuncs.com/AliMeeting/openlr/Test_Ali.tar.gz",
+        "bytes": 9555497666,
+        "sha256": "42407625B774A44FE34F2F25CA99116F090BEC901F5AB81196B89F683A8B7BFA",
+        "acquired_after_freeze": true
+      },
+      {
+        "name": "Eval_Ali",
+        "url": "https://speech-lab-share-data.oss-cn-shanghai.aliyuncs.com/AliMeeting/openlr/Eval_Ali.tar.gz",
+        "bytes": 3673718355,
+        "sha256": "DC47343B2474B5EBCF458927E878155F6DDEB59C85E685B3645C32A1F9578D92",
+        "acquired_after_freeze": true
+      }
+    ],
+    "selection_snapshot_sha256": "C749F4A8BAA9B1EF5BC70D6D028E58B825FADFA30E6657B1DAE5AA38CECC4C2E"
+  },
+  "capacity_proof": {
+    "eligible_intervals": 1721,
+    "eligible_speakers": 76,
+    "top_60_eligible_intervals": 1679,
+    "minimum_top_60_speaker_intervals": 6,
+    "primary_required": 200,
+    "reserve_required": 20,
+    "capacity_status": "PASS"
+  },
+  "provenance_and_lineage": {
+    "near_field_speaker_recordings": 60,
+    "meetings": 20,
+    "selection_inputs": "matching non-empty TextGrid intervals in the near-field speaker tier",
+    "derived_source_lineage": "parent recording path, parent recording SHA-256, meeting ID, speaker ID, start/end seconds and rounded 16 kHz frame offsets are retained"
+  },
+  "search_scope": {
+    "repositories_and_worktrees": [
+      "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN",
+      "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-Week5",
+      "F:\\项目\\申请实验室  TTS项目\\AudiobookBench-CN-topconf-dl-robustness",
+      "F:\\项目\\申请实验室  TTS项目\\topconf_phase3t_integrity_prep",
+      "F:\\项目\\申请实验室  TTS项目\\topconf_phase3t_multireso_worker",
+      "F:\\项目\\申请实验室  TTS项目\\topconf_phase3t_multireso_worker_r2",
+      "F:\\项目\\申请实验室  TTS项目\\topconf_phase4_reconcile_prep",
+      "F:\\项目\\申请实验室  TTS项目\\topconf_rq1_prefreeze"
+    ],
+    "aliases": [
+      "AliMeeting",
+      "M2MeT",
+      "SLR119",
+      "Train_Ali",
+      "Eval_Ali",
+      "Test_Ali",
+      "alimeeting",
+      "speech-lab-share-data.oss-cn-shanghai.aliyuncs.com/AliMeeting"
+    ],
+    "current_tree_matches_before_phase4_9_entry": [],
+    "all_ref_history_matches_before_phase4_9_entry": [],
+    "deleted_history_checked": true,
+    "scan_result": "NONE_FOUND_ACROSS_PROJECT_HISTORY_AND_WORKTREES"
+  },
+  "local_existence_is_not_usage": {
+    "statement": "The Test/Eval archives and extracted segments were acquired after the 2026-09-14 protocol freeze; filesystem presence is not treated as evidence of prior scientific use.",
+    "prior_scientific_usage": "NONE_FOUND"
+  },
+  "firewall": {
+    "model_inference_runs": 0,
+    "scientific_outcomes_accessed": false,
+    "result_based_selection": false,
+    "rq2_invoked": false,
+    "rq3_invoked": false
+  }
+}
+
