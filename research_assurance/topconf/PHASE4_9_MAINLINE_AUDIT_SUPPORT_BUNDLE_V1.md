@@ -102,6 +102,10 @@ cherry-picked.
 - `research_assurance/topconf/PHASE4_9_FRESHNESS_VALIDATOR_DECISION_TRACE_V1.md`
 - `research_assurance/topconf/PHASE4_9_INDEPENDENT_AUDIT_HANDOFF_V1.md`
 - `research_assurance/topconf/PHASE4_9_AUDIT_SUPPORT_SHA256SUMS_V1.txt`
+- `research_assurance/topconf/PHASE4_9_INDEPENDENT_FRESHNESS_SEMANTICS_AUDIT_V1.md`
+- `research_assurance/topconf/PHASE4_9_HISTORICAL_UNIVERSE_RELEVANCE_MATRIX_V1.md`
+- `research_assurance/topconf/PHASE4_9_POLICY_AMBIGUITY_RECORD_V1.md`
+- `tests/topconf/test_phase4_9_freshness_semantics_audit.py`
 
 ## Historical stage status snapshot
 
@@ -142,3 +146,8 @@ The mainline records, but does not answer, the distinction between:
 The auditor must return exactly one of:
 `TRUE_EVIDENCE_GAP`, `VALIDATOR_OVERCONSTRAINT`,
 `FROZEN_POLICY_AMBIGUITY`, or `ADDITIONAL_NON_FRESHNESS_BLOCKER`.
+
+The independent auditor returned `FROZEN_POLICY_AMBIGUITY` in
+`PHASE4_9_INDEPENDENT_FRESHNESS_SEMANTICS_AUDIT_V1.md`. The mainline integrated
+only that report, its relevance matrix, and its diagnostic tests; it created
+`PHASE4_9_POLICY_AMBIGUITY_RECORD_V1.md` and remains `NO_GO`.

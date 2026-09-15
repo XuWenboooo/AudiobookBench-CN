@@ -298,3 +298,36 @@ universes; all observed overlap counts were zero, but all four universes remain
 `PARTIAL`. Under the frozen fail-closed rule, that evidence is insufficient for
 authorization. The workflow therefore stops with `NO_GO`, with zero inference,
 zero scientific outcomes, and no RQ2/RQ3 execution.
+
+## 10. Independent Phase 4.9 audit reconciliation
+
+```text
+INDEPENDENT_AUDIT_BRANCH = topconf-phase4-9-freshness-audit
+INDEPENDENT_AUDIT_HEAD = 58e036d
+INDEPENDENT_AUDIT_BASE_COMMIT = 110e2b91c04625898b955c0d0dfcfccfe04515cb
+INDEPENDENT_AUDIT_VERDICT = FROZEN_POLICY_AMBIGUITY
+INDEPENDENT_AUDIT_INTEGRATED_COMMIT = 19bfaeb6062ba4417975b1215fa0b5395b17e0ff
+INDEPENDENT_AUDIT_REPORT = PHASE4_9_INDEPENDENT_FRESHNESS_SEMANTICS_AUDIT_V1.md
+INDEPENDENT_AUDIT_RELEVANCE_MATRIX = PHASE4_9_HISTORICAL_UNIVERSE_RELEVANCE_MATRIX_V1.md
+POLICY_AMBIGUITY_RECORD = PHASE4_9_POLICY_AMBIGUITY_RECORD_V1.md
+MAINLINE_ACTION_TAKEN = INTEGRATED_AUDIT_EVIDENCE_AND_CREATED_AMBIGUITY_RECORD
+SCIENTIFIC_PROTOCOL_CHANGED = NO
+POPULATION_CHANGED = NO
+PRODUCTION_VALIDATOR_MODIFIED = NO
+FRESHNESS_RERUN = NO
+FRESHNESS_NEW_VERSION = NONE
+READY_FOR_RQ1_FINAL_AUTHORIZATION_REVIEW = NO
+RQ1_CONFIRMATORY_EXECUTION_AUTHORIZED = NO
+RQ1_CONFIRMATORY_EXECUTION_STARTED = NO
+REAL_LEVEL2_OUTCOMES_ACCESSED = NO
+MODEL_INFERENCE_RUNS = 0
+RQ2_STARTED = NO
+RQ3_STARTED = NO
+```
+
+The independent audit found that the frozen text does not decide whether a
+post-freeze project-entry proof may replace an incomplete historical exclusion
+universe, and it identified a related prior-use failure handling risk. This is
+recorded as `FROZEN_POLICY_AMBIGUITY`; it is not a validator-overconstraint
+finding and does not authorize a V5 rerun. A separate prospective governance
+amendment is required before any validator or authorization change.
