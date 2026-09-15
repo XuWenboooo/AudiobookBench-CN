@@ -1,0 +1,159 @@
+{
+  "schema_version": "topconf.level2.freshness.v3",
+  "manifest_id": "TOPCONF_RQ1_LEVEL2_FRESH_V4",
+  "status": "INSUFFICIENT_EVIDENCE",
+  "freshness_verdict": "INSUFFICIENT_EVIDENCE",
+  "materialized": true,
+  "result_based_selection": false,
+  "level2_population_manifest": "LEVEL2_RQ1_POPULATION_MANIFEST_V3.json",
+  "level2_population_manifest_sha256": "89834D9F85603727EE5E6F482C9BAC9832283EAF1902976FD31975AF61FCE78B",
+  "selection_record": "LEVEL2_NEW_POOL_A_SELECTION_RECORD_V1.md",
+  "selection_record_sha256": "3F3BE07DD837DCC718771C672015A676FD2ACBBC9539717833D91620DBD5DACB",
+  "source_pool_independence_proof": "LEVEL2_SOURCE_POOL_INDEPENDENCE_PROOF_V2.json",
+  "universe_references": {
+    "CASE_EXCLUSION": {
+      "path": "HISTORICAL_CASE_EXCLUSION_UNIVERSE_V3.json",
+      "sha256": "C1B94DDD99A691EA19509A3424D24801526A55635688F90DC69635C0D0C3D9E6",
+      "status": "PARTIAL",
+      "source_status": "PARTIAL_RECONSTRUCTION_WITH_PHASE3T_CASE_COMPLETENESS",
+      "evidence_sources": [
+        "HISTORICAL_CASE_EXCLUSION_UNIVERSE_V3.json",
+        "PHASE4_7_HISTORICAL_FRESHNESS_PROOF_V1.md",
+        "PHASE4_7_HISTORICAL_EXCLUSION_AND_FRESHNESS_CLOSURE.md"
+      ]
+    },
+    "SOURCE_EXCLUSION": {
+      "path": "HISTORICAL_SOURCE_EXCLUSION_UNIVERSE_V3.json",
+      "sha256": "91919B1DF4DDF47EE0D65DEEAB7E7BB9822725C8CF6FA0C46BF48B0339ACC58C",
+      "status": "PARTIAL",
+      "source_status": "PARTIAL_RECONSTRUCTION_WITH_DIRECT_HASHED_SOURCES",
+      "evidence_sources": [
+        "HISTORICAL_SOURCE_EXCLUSION_UNIVERSE_V3.json",
+        "PHASE4_7_HISTORICAL_FRESHNESS_PROOF_V1.md",
+        "PHASE4_7_HISTORICAL_EXCLUSION_AND_FRESHNESS_CLOSURE.md"
+      ]
+    },
+    "SPEAKER_USAGE": {
+      "path": "HISTORICAL_SPEAKER_USAGE_UNIVERSE_V1.json",
+      "sha256": "E04D35848465CD2BDE3E20704413D388D327DA798F907421197C5D2BF22747FC",
+      "status": "PARTIAL",
+      "source_status": "PARTIAL_RECONSTRUCTION",
+      "evidence_sources": [
+        "HISTORICAL_SPEAKER_USAGE_UNIVERSE_V1.json",
+        "PHASE4_7_HISTORICAL_FRESHNESS_PROOF_V1.md",
+        "PHASE4_7_HISTORICAL_EXCLUSION_AND_FRESHNESS_CLOSURE.md"
+      ]
+    },
+    "LINEAGE_EXCLUSION": {
+      "path": "HISTORICAL_LINEAGE_EXCLUSION_UNIVERSE_V1.json",
+      "sha256": "410D8436A2FB369E76399DA4DA4FC8BEA6A29212071CDFE9559EE4D0698A761F",
+      "status": "PARTIAL",
+      "source_status": "PARTIAL_RECONSTRUCTION_WITH_SOURCE_AUDIO_HASH_LINEAGE",
+      "evidence_sources": [
+        "HISTORICAL_LINEAGE_EXCLUSION_UNIVERSE_V1.json",
+        "PHASE4_7_HISTORICAL_FRESHNESS_PROOF_V1.md",
+        "PHASE4_7_HISTORICAL_EXCLUSION_AND_FRESHNESS_CLOSURE.md"
+      ]
+    }
+  },
+  "speaker_overlap_policy": "ALLOW_HISTORICAL_SPEAKER_REUSE_ONLY_WITH_LINEAGE_DISJOINT",
+  "comparison_counts": {
+    "case_id_overlap_count": 0,
+    "case_lineage_overlap_count": 0,
+    "source_overlap_count": 0,
+    "lineage_overlap_count": 0,
+    "speaker_overlap_count": 0,
+    "prohibited_speaker_overlap_count": 0,
+    "unknown_case_comparisons": 0,
+    "unknown_source_comparisons": 0,
+    "unknown_lineage_comparisons": 0
+  },
+  "comparison_scope": {
+    "population_cases_compared": 1600,
+    "population_sources_compared": 400,
+    "population_speakers_compared": 120,
+    "population_lineages_compared": 260,
+    "dimensions": [
+      "case_id",
+      "case_lineage",
+      "source_audio_sha256",
+      "parent_asset_id",
+      "speaker_key"
+    ],
+    "method": "exact identity comparison against all records present in the four Phase4.7 universes; no overlap observed"
+  },
+  "overlap_details": {
+    "case_id_overlap_ids": [],
+    "source_overlap_details": [],
+    "lineage_overlap_details": [],
+    "speaker_overlap_ids": []
+  },
+  "corpus_isolation": [
+    {
+      "corpus": "ALIMEETING_SLR119",
+      "pool_id": "SOURCE_POOL_A_ALIMEETING_SLR119",
+      "status": "PASS_POST_FREEZE_ACQUISITION",
+      "evidence_sources": [
+        "LEVEL2_NEW_POOL_A_PROJECT_ENTRY_PROOF_V1.json",
+        "LEVEL2_NEW_POOL_A_SELECTION_RECORD_V1.md",
+        "LEVEL2_SOURCE_POOL_INDEPENDENCE_PROOF_V2.json"
+      ],
+      "population_primary_sources": 200,
+      "population_speakers": 60,
+      "unknown_source_comparisons": 0,
+      "historical_note": "No AliMeeting identity was observed in the partial historical records; post-freeze acquisition is the project-use boundary evidence."
+    },
+    {
+      "corpus": "AISHELL1",
+      "pool_id": "SOURCE_POOL_B_AISHELL1",
+      "status": "PASS_POST_FREEZE_ACQUISITION",
+      "evidence_sources": [
+        "AISHELL1_PROJECT_ENTRY_PROOF_V1.json",
+        "LEVEL2_SOURCE_POOL_INDEPENDENCE_PROOF_V2.json"
+      ],
+      "population_primary_sources": 200,
+      "population_speakers": 60,
+      "unknown_source_comparisons": 0,
+      "historical_note": "Pool B is intentionally retained from V2 and is not claimed as a new corpus."
+    }
+  ],
+  "new_pool_a_historical_comparison": {
+    "source_id_overlap_count": 0,
+    "source_audio_sha256_overlap_count": 0,
+    "parent_lineage_overlap_count": 0,
+    "case_id_overlap_count": 0,
+    "speaker_overlap_count": 0,
+    "prohibited_speaker_overlap_count": 0,
+    "result": "NO_OVERLAP_OBSERVED_IN_AVAILABLE_UNIVERSES"
+  },
+  "prior_v2_population_comparison": {
+    "prior_manifest": "LEVEL2_RQ1_POPULATION_MANIFEST_V2.json",
+    "prior_manifest_sha256": "ED6FE30A4F9B7AEFA4C36821E04CB7E5F9B1780B20EE7ED9A0AA84F52B3955D0",
+    "case_id_overlap_count": 0,
+    "source_id_overlap_count": 200,
+    "source_audio_sha256_overlap_count": 200,
+    "parent_asset_overlap_count": 200,
+    "speaker_overlap_count": 60,
+    "retained_pool_b_overlap_expected": true,
+    "retained_pool_b_source_count": 200,
+    "retired_pool_a_source_overlap_count": 0,
+    "retired_pool_a_speaker_overlap_count": 0,
+    "retained_pool_b_hashes_checked": 200
+  },
+  "decision": {
+    "reason": "All four historical exclusion universes remain PARTIAL; exact comparison found no overlap, but absence from incomplete universes cannot authorize a PASS.",
+    "stop_rule": "STOP_AFTER_ONE_V3_AND_ONE_V4_AUDIT",
+    "closure": "BLOCKED_INSUFFICIENT_HISTORICAL_EXCLUSION_EVIDENCE",
+    "authorization": "NO_GO",
+    "real_level2_outcomes_accessed": false
+  },
+  "firewall": {
+    "model_inference_runs": 0,
+    "scientific_scores_computed": false,
+    "real_level2_outcomes_accessed": false,
+    "result_based_selection": false,
+    "rq2_invoked": false,
+    "rq3_invoked": false
+  },
+  "manifest_sha256": "973002F7112B1A51F803C24817321BC2CF23BD814B1DBD673F6BFA85DA6FC4C6"
+}

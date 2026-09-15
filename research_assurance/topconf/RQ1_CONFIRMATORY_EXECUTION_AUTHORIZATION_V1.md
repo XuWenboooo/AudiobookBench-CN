@@ -261,3 +261,41 @@ decision, not permission to begin work. This artifact must not be converted to
 `AUTHORIZED = YES` until the materialized freshness proof and all other
 preflight gates pass through a new human review. No authorization commit is
 created for this `NO_GO` decision.
+
+## 9. Phase 4.9 fresh Pool-A replacement closure
+
+```text
+PHASE4_9_STATUS = BLOCKED
+PHASE4_9_CLOSURE = BLOCKED_INSUFFICIENT_HISTORICAL_EXCLUSION_EVIDENCE
+PHASE4_9_SELECTION_COMMIT = 3fa5ce5984c01f1feb75f931c0c00c57c0f00872
+PHASE4_9_IMPLEMENTATION_COMMIT = TO_BE_RECORDED_AFTER_ARTIFACT_COMMIT
+PHASE4_9_FINAL_CLOSURE_COMMIT = TO_BE_RECORDED_AFTER_CLOSURE_COMMIT
+AISHELL3_POOL_A_STATUS = RETIRED_ENTIRELY
+NEW_POOL_A = ALIMEETING_SLR119 / SLR119 / CC BY-SA 4.0
+POOL_B = AISHELL1 / SLR33 / RETAINED_FROM_V2
+LEVEL2_RQ1_POPULATION_MANIFEST_V3_STATUS = MATERIALIZED_STRUCTURAL_PASS
+LEVEL2_RQ1_POPULATION_MANIFEST_V3_SHA256 = 89834D9F85603727EE5E6F482C9BAC9832283EAF1902976FD31975AF61FCE78B
+LEVEL2_RQ1_INFERENCE_MANIFEST_V3 = CREATED_NO_OUTCOMES
+LEVEL2_RQ1_EVALUATION_MANIFEST_V3 = CREATED_NO_OUTCOMES
+LEVEL2_FRESHNESS_MANIFEST_V4_STATUS = INSUFFICIENT_EVIDENCE
+LEVEL2_FRESHNESS_MANIFEST_V4_SHA256 = 973002F7112B1A51F803C24817321BC2CF23BD814B1DBD673F6BFA85DA6FC4C6
+RQ1_CONFIRMATORY_EXECUTION_AUTHORIZED = NO
+RQ1_CONFIRMATORY_EXECUTION_STARTED = NO
+MODEL_INFERENCE_RUNS = 0
+REAL_LEVEL2_OUTCOMES_ACCESSED = NO
+SCIENTIFIC_SCORES_COMPUTED = NO
+RQ2_STARTED = NO
+RQ3_STARTED = NO
+PHASE4_9_STOP_RULE = STOP_AFTER_ONE_V3_AND_ONE_V4_AUDIT
+PHASE4_9_FINAL_AUTHORIZATION = NO_GO
+```
+
+Phase 4.9 retired the complete AISHELL-3 Pool A and retained the exact V2
+AISHELL-1 Pool B. AliMeeting SLR119 was selected before V3 materialization
+after the MAGICDATA SLR68 license rejection and WenetSpeech acquisition/capacity
+deferral. V3 is a structural, model-free population artifact. V4 compared the
+materialized identities against the four Phase 4.7 historical exclusion
+universes; all observed overlap counts were zero, but all four universes remain
+`PARTIAL`. Under the frozen fail-closed rule, that evidence is insufficient for
+authorization. The workflow therefore stops with `NO_GO`, with zero inference,
+zero scientific outcomes, and no RQ2/RQ3 execution.

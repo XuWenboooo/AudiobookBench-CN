@@ -183,7 +183,7 @@ def make_source(row: dict[str, Any], source_id: str, pool_id: str, split: str, p
     return {
         "source_id": source_id,
         "speaker_id": f"{prefix}_{row['speaker_id']}",
-        "session_id": f"{prefix}_MEETING_{row['meeting_id']}_SPEAKER_{row['speaker_id']}",
+        "session_id": f"{prefix}_MEETING_{row['meeting_id']}",
         "utterance_id": utterance_id,
         "text_sha256": str(row["text_sha256"]),
         "parent_asset_id": parent_asset,

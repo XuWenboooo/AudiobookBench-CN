@@ -1,6 +1,6 @@
 {
   "schema_version": "topconf.level2.source_pool_independence.v2",
-  "status": "PASS_CORPUS_LEVEL_INDEPENDENCE_PENDING_V3_SEGMENT_HASH_AUDIT",
+  "status": "PASS_CORPUS_LEVEL_INDEPENDENCE",
   "protocol_id": "P4-RQ1-DESIGN-20260914-01",
   "pool_a": {
     "pool_id": "SOURCE_POOL_A_ALIMEETING_SLR119",
@@ -10,6 +10,9 @@
     "provider": "Alibaba Group",
     "license": "CC BY-SA 4.0",
     "identity_basis": "AliMeeting meeting/session IDs and near-field SPK IDs from Test/Eval archives",
+    "materialized_primary_sources": 200,
+    "unique_segment_audio_sha256": 200,
+    "unique_parent_lineages": 200,
     "archive_sha256s": [
       "42407625B774A44FE34F2F25CA99116F090BEC901F5AB81196B89F683A8B7BFA",
       "DC47343B2474B5EBCF458927E878155F6DDEB59C85E685B3645C32A1F9578D92"
@@ -43,8 +46,13 @@
     },
     {
       "check": "cross_corpus_audio_hash_overlap",
-      "result": "PENDING_V3",
-      "evidence": "Will compare all 220 selected Pool-A segment hashes against the complete AISHELL-1 audit before any authorization review"
+      "result": "PASS",
+      "evidence": "All 200 materialized Pool-A primary segment hashes compared with the complete AISHELL-1 audit and the retained Pool-B hashes; overlap count = 0"
+    },
+    {
+      "check": "primary_reserve_audio_hash_overlap",
+      "result": "PASS",
+      "evidence": "All 20 Pool-A reserve segment hashes are distinct from the 200 Pool-A primary segment hashes; overlap count = 0"
     },
     {
       "check": "prior_project_usage",
