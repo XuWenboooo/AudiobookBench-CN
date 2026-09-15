@@ -1,0 +1,104 @@
+{
+  "schema_version": "topconf.phase4_9.alimeeting.provenance.v1",
+  "status": "AUDITED_PROVENANCE_NO_PERFORMANCE",
+  "corpus": {
+    "name": "AliMeeting Mandarin Multi-channel Multi-party Meeting Speech Corpus",
+    "resource_id": "SLR119",
+    "official_page": "https://www.openslr.org/119/",
+    "provider": "Alibaba Group",
+    "license": "CC BY-SA 4.0",
+    "language": "Mandarin Chinese"
+  },
+  "protocol_and_project_references": {
+    "protocol_id": "P4-RQ1-DESIGN-20260914-01",
+    "protocol_freeze_date": "2026-09-14",
+    "pre_selection_head": "110e2b91c04625898b955c0d0dfcfccfe04515cb",
+    "selection_commit": "3fa5ce5984c01f1feb75f931c0c00c57c0f00872",
+    "first_git_project_reference": "3fa5ce5984c01f1feb75f931c0c00c57c0f00872",
+    "first_manifest_reference": "a242295444e1f2cdf78c1d8d3a2a662a111d6fd0",
+    "first_project_scientific_use_reference": null,
+    "first_project_scientific_use_status": "NONE_FOUND; NO_LEVEL2_INFERENCE_OR_SCIENTIFIC_OUTCOME"
+  },
+  "acquisition": {
+    "acquired_after_protocol_freeze": true,
+    "subsets": [
+      {
+        "name": "Test_Ali",
+        "url": "https://speech-lab-share-data.oss-cn-shanghai.aliyuncs.com/AliMeeting/openlr/Test_Ali.tar.gz",
+        "bytes": 9555497666,
+        "sha256": "42407625B774A44FE34F2F25CA99116F090BEC901F5AB81196B89F683A8B7BFA",
+        "local_audit_json": "datasets/AliMeeting-SLR119/test_audit.json",
+        "local_audit_json_bytes": 14234836,
+        "local_audit_json_sha256": "9B3B8951004D17F368BDD0E13E231397F09F18159A0FF9A5607A9263441C712D"
+      },
+      {
+        "name": "Eval_Ali",
+        "url": "https://speech-lab-share-data.oss-cn-shanghai.aliyuncs.com/AliMeeting/openlr/Eval_Ali.tar.gz",
+        "bytes": 3673718355,
+        "sha256": "DC47343B2474B5EBCF458927E878155F6DDEB59C85E685B3645C32A1F9578D92",
+        "local_audit_json": "datasets/AliMeeting-SLR119/eval_audit.json",
+        "local_audit_json_bytes": 5609098,
+        "local_audit_json_sha256": "08DA9AFE2F82DFFFA92A6298A717951B83B45CCEC22EAF4FAC25C2EB6C174084"
+      }
+    ],
+    "selection_snapshot": {
+      "path": "datasets/AliMeeting-SLR119/selection_snapshot_v1.json",
+      "bytes": 155398,
+      "sha256": "C749F4A8BAA9B1EF5BC70D6D028E58B825FADFA30E6657B1DAE5AA38CECC4C2E"
+    }
+  },
+  "project_usage_search": {
+    "result": "NONE_FOUND_ACROSS_PROJECT_HISTORY_AND_WORKTREES",
+    "proof_reference": "research_assurance/topconf/LEVEL2_NEW_POOL_A_PROJECT_ENTRY_PROOF_V1.json",
+    "aliases_checked": ["AliMeeting", "M2MeT", "SLR119", "Train_Ali", "Eval_Ali", "Test_Ali", "alimeeting"],
+    "worktrees_and_repositories_checked": 8,
+    "deleted_history_checked": true,
+    "scientific_outcomes_consulted": false
+  },
+  "selected_subset": {
+    "primary_sources": 200,
+    "reserve_sources": 20,
+    "selected_speakers": 60,
+    "meetings": 20,
+    "eligible_intervals": 1721,
+    "eligible_speakers": 76,
+    "top_60_eligible_intervals": 1679,
+    "minimum_selected_speaker_intervals": 6,
+    "selection_rule": "top 60 eligible speakers by count descending then speaker ID ascending; deterministic speaker-block round-robin for primary; speaker/meeting/interval order for reserve",
+    "selection_model_free": true
+  },
+  "source_mode_audit": {
+    "ALIMEETING_SOURCE_MODE": "NEAR_FIELD_SPEAKER_RECORDING; MONO CHANNEL; TEXTGRID SPEAKER-TIER BOUNDARY",
+    "near_field_audio_used": true,
+    "far_field_audio_used": false,
+    "far_package_used_for": "TextGrid annotation files only",
+    "channel_policy": "one near-field audio channel; 16000 Hz; PCM16; mono",
+    "single_speaker_recording": true,
+    "single_speaker_exclusive_speech_proven": false,
+    "meeting_segment": true,
+    "source_unit": "one contiguous segment extracted from one near-field speaker recording using one non-empty matching TextGrid speaker-tier interval",
+    "session_unit": "meeting ID; V3 session_id is ALIMEETING_SLR119_MEETING_<meeting_id>",
+    "speaker_unit": "namespaced near-field speaker ID ALIMEETING_SLR119_<SPKID>",
+    "source_id_unit": "one derived segment; parent recording hash, meeting, speaker, and rounded 16 kHz frame offsets retained",
+    "overlapping_speech_check": {
+      "method": "read-only comparison of selected primary/reserve intervals against non-target non-empty TextGrid speaker tiers in the same meeting",
+      "rows_checked": 220,
+      "primary_rows_checked": 200,
+      "reserve_rows_checked": 20,
+      "rows_with_other_speaker_overlap": 175,
+      "rows_without_other_speaker_overlap": 45,
+      "other_speaker_overlap_interval_count": 709,
+      "result": "OVERLAP_PRESENT_NOT_FILTERED"
+    },
+    "ALIMEETING_SOURCE_MODE_FROZEN": "YES",
+    "ALIMEETING_DISTRIBUTION_COMPATIBILITY": "AMBIGUOUS_PENDING_INDEPENDENT_AUDIT"
+  },
+  "firewall": {
+    "model_inference_runs": 0,
+    "scientific_outcomes_accessed": false,
+    "scientific_performance_used": false,
+    "result_based_selection": false,
+    "rq2_invoked": false,
+    "rq3_invoked": false
+  }
+}

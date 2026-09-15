@@ -1,0 +1,53 @@
+{
+  "schema_version": "topconf.phase4_9.aishell1.provenance.v1",
+  "status": "RETAINED_POOL_B_PROVENANCE_NO_PERFORMANCE",
+  "corpus": {
+    "name": "AISHELL-1",
+    "resource_id": "SLR33",
+    "official_page": "https://www.openslr.org/33/",
+    "provider": "Beijing Shell Shell Technology Co.,Ltd",
+    "license": "Apache License 2.0",
+    "language": "Mandarin Chinese"
+  },
+  "project_references": {
+    "protocol_freeze_commit": "2797bf0",
+    "first_project_reference": "ad58622667098f02b119192e1d5a7c93e0aef77d",
+    "first_project_reference_role": "Phase4.6 recovered and entered AISHELL-1 as retained Pool B",
+    "first_population_manifest_reference": "ad58622667098f02b119192e1d5a7c93e0aef77d",
+    "first_project_scientific_use_reference": null,
+    "first_project_scientific_use_status": "NONE_FOUND; NO_LEVEL2_INFERENCE_OR_SCIENTIFIC_OUTCOME"
+  },
+  "archive_identity": {
+    "official_archive_sha256_from_audit": "A4A0313CDE0A933E0E01A451F77DE0A23D6C942F4694AF5BB7F40B9DC38143FE",
+    "speaker_metadata_sha256": "569CEF88F7FB1C3173CF3A45B00B4659B427D90AF120AF91513A2C6F151F7E08",
+    "transcript_sha256": "B5F33B9E0B47548E20A5EA4E504297F80DF41D559133924C4E5B7B544C15B5C4"
+  },
+  "post_freeze_and_usage_evidence": {
+    "entry_proof": "research_assurance/topconf/AISHELL1_PROJECT_ENTRY_PROOF_V1.json",
+    "search_result": "NO_PRIOR_PROJECT_USAGE_FOUND",
+    "prior_project_usage_search_scope": "topconf all refs, main all refs, Week5 all refs, external text scan paths, eight worktrees, deleted history",
+    "filesystem_timestamp_interpretation": "local archive/filesystem timestamps are not treated as prior scientific project use",
+    "historical_completeness_limitation": "absence from incomplete logs is not treated as non-use"
+  },
+  "retained_pool_b": {
+    "primary_sources": 200,
+    "speakers": 60,
+    "reserve_sources": 20,
+    "source_pool_id": "SOURCE_POOL_B_AISHELL1",
+    "retained_from": "LEVEL2_RQ1_POPULATION_MANIFEST_V2.json",
+    "v3_change": "none; exact Pool-B rows retained"
+  },
+  "independence_context": {
+    "independence_proof": "research_assurance/topconf/LEVEL2_SOURCE_POOL_INDEPENDENCE_PROOF_V2.json",
+    "cross_corpus_audio_hash_overlap": 0,
+    "prior_v2_pool_b_source_hash_overlap": 200,
+    "corpus_role": "retained Pool B, not the new corpus"
+  },
+  "firewall": {
+    "model_inference_runs": 0,
+    "scientific_outcomes_accessed": false,
+    "performance_used_for_selection": false,
+    "rq2_invoked": false,
+    "rq3_invoked": false
+  }
+}
