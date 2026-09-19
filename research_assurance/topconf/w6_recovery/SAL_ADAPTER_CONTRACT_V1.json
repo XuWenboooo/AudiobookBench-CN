@@ -1,0 +1,34 @@
+{
+  "artifact": "SAL_ADAPTER_CONTRACT_V1",
+  "audit_date": "2026-09-19",
+  "source_repository": "https://github.com/SentryMao/SAL",
+  "source_commit": "b4e80d1d2fd98f3d8b9a85a47837ab3a73e12485",
+  "source_license": "MIT",
+  "checkpoint_source": "https://huggingface.co/MaoYC/SAL",
+  "checkpoint_revision": "d9ab313d86a8b00a6345419721389d8b4eabe992",
+  "checkpoint_file": "SAL_WavLM.ckpt",
+  "checkpoint_size_bytes": 4037013806,
+  "checkpoint_sha256": "FDE76030DF782E140658AA5A2726D18EBFFA9FA359E11CE2B237F6EC46114D2F",
+  "derived_loader_wrapper": {
+    "purpose": "deterministic reserialization of the embedded WavLM weights into the fairseq structure expected by the official s3prl loader",
+    "not_a_new_checkpoint": true,
+    "weights_changed": false,
+    "architecture": "WavLM-Large; official embedded state_dict strict-matched against the s3prl WavLM implementation"
+  },
+  "temporal_contract": {
+    "sample_rate_hz": 16000,
+    "resolution_seconds": 0.16,
+    "position_head": {"shape": "B,T,8", "semantics": "official segment-position logits"},
+    "binary_head": {"shape": "B,T,2", "semantics": "official binary segment logits"},
+    "adapter_output": "frame/segment temporal logits with explicit resolution; no utterance-only reduction"
+  },
+  "strict_load": "PASS",
+  "synthetic_smoke": {
+    "input": "zeros(B=1, samples=16000)",
+    "output_shapes": ["1,6,8", "1,6,2"],
+    "finite": true,
+    "scientific_inference": false
+  },
+  "adapter_decision": "READY_FOR_W7_PREFLIGHT",
+  "outcome_guided_selection": false
+}

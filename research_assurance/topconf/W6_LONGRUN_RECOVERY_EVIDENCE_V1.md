@@ -33,9 +33,9 @@ inference, metric, or result table was accessed or computed in this audit.
 | Candidate | Official identity | Materialized evidence | Integrity / load status | Decision |
 |---|---|---|---|---|
 | PartialEdit v1.1 E1 | Zenodo `18829689` | 42,471 WAV; official temporal GT and split binding | no missing/extra/duplicate; adapter/evaluator previously PASS | READY external distribution |
-| PartialSpoof v1.2 eval | Zenodo `5766198`; official MD5 `79c7c834d0d9979ecd374a98a059ea19` | resumable `.part` transfer in progress; smaller official protocol/VAD/segment-label/README files MD5-verified | full archive not yet closed; no extraction or promotion | NOT_READY |
-| SAL | GitHub `SentryMao/SAL`, commit `b4e80d1d2fd98f3d8b9a85a47837ab3a73e12485`; HF `MaoYC/SAL`, revision `d9ab313d86a8b00a6345419721389d8b4eabe992` | official source SHA256 `30504CF6B3B95C5062FE2DD1D6DDC0F605376E744E25B42E201F752D4033B22A`; WavLM and W2V2 files are present at official byte sizes; WavLM Lightning container reads | official source contract is temporal; strict construction stops because the source expects an external s3prl/fairseq base checkpoint, while the HF file is a Lightning checkpoint; W2V2 container verification remains pending after re-download closure | NOT_READY localizer |
-| BAM | GitHub `media-sec-lab/BAM`, commit `55f3fb9e3b4dd6281597b86d7712fb23454179f6`; official Drive checkpoint `1eL3Ca27hEruI20lkoqkQEnZlb2GzTyHT` | source SHA256 `86E3B131017AB711489B452B24A6F7CB1D4A4418450644147BD032A2E2FB13D6`; checkpoint ZIP SHA256 `5C7379D23028606D3BEEB8B1AA5C340395FCC403CE70A2CA559EA322AB2994D1`; extracted `model.ckpt` and hparams | checkpoint container reads; official strict load stops at the source-required external `wavlm_local` base checkpoint path; repository rights remain unresolved | NOT_READY localizer |
+| PartialSpoof v1.2 eval | Zenodo `5766198`; official MD5 `79c7c834d0d9979ecd374a98a059ea19` | full archive size `5,803,817,500` and MD5 PASS; isolated extraction; 71,237 WAV all decode at 16 kHz mono | official `eval.lst` has 71,239 IDs; `CON_E_0034982` and `CON_E_0058039` have no audio or matching GT; adapter fail-closed | NOT_READY |
+| SAL | GitHub `SentryMao/SAL`, commit `b4e80d1d2fd98f3d8b9a85a47837ab3a73e12485`; HF `MaoYC/SAL`, revision `d9ab313d86a8b00a6345419721389d8b4eabe992` | official source SHA256 `30504CF6B3B95C5062FE2DD1D6DDC0F605376E744E25B42E201F752D4033B22A`; official WavLM file size/hash closed; deterministic wrapper preserves embedded tensors | official WavLM state strict-matched, complete SAL state strict-matched, synthetic temporal smoke and adapter PASS | READY localizer / P5 |
+| BAM | GitHub `media-sec-lab/BAM`, commit `55f3fb9e3b4dd6281597b86d7712fb23454179f6`; official Drive checkpoint `1eL3Ca27hEruI20lkoqkQEnZlb2GzTyHT`; Zenodo `12747417` | source SHA256 `86E3B131017AB711489B452B24A6F7CB1D4A4418450644147BD032A2E2FB13D6`; checkpoint ZIP SHA256 `5C7379D23028606D3BEEB8B1AA5C340395FCC403CE70A2CA559EA322AB2994D1`; CC BY 4.0 | complete official BAM strict load, synthetic temporal smoke, and adapter PASS after deterministic wrapper | READY localizer / P4 |
 | TRACE | paper/source inventory | no verified official implementation/checkpoint/output contract | provenance gate fails | BLOCKED |
 | HAD | Zenodo `10377492` | official record known; archive not materialized | rights/GT/adapter closure absent | BLOCKED fallback |
 | HQ-MPSD | Zenodo `17929533` | official record identified; language archive not materialized | audio/GT/schema adapter closure absent | BLOCKED fallback |
@@ -45,18 +45,28 @@ inference, metric, or result table was accessed or computed in this audit.
 The recovery did not select a source or model using performance, validation
 metrics, or any scientific outcome.
 
+### B1b promotion audit
+
+The historical B1b control remains `PILOT_ONLY`. Its project-local ECAPA
+artifact and historical runtime are not an externally bound localizer
+checkpoint, and no arbitrary external-distribution adapter is frozen. No new
+training was run or authorized. Promotion would require a new adapter and
+authorization, so B1b is not counted as a fourth paradigm.
+
 ## 3. Localizer and paradigm accounting
 
 ```text
-READY_LOCALIZERS = 2 (CFPRF, MultiResoModel-Simple)
+READY_LOCALIZERS = 4 (CFPRF, MultiResoModel-Simple, SAL-WavLM, BAM)
 PILOT_ONLY_LOCALIZERS = 1 (B1b; no replacement training or promotion)
-NEW_STRICTLY_READY_LOCALIZERS = 0 (SAL and BAM blocked at reproducibility gates)
-DISTINCT_LOCALIZATION_PARADIGMS = 2
-READY_EXTERNAL_DISTRIBUTIONS = 1
+NEW_STRICTLY_READY_LOCALIZERS = 2 (SAL-WavLM, BAM)
+DISTINCT_LOCALIZATION_PARADIGMS = 4
+READY_EXTERNAL_DISTRIBUTIONS = 1; PartialSpoof blocked by two official list/audio identity mismatches
 ```
 
-The two ready paradigms remain `P2_FRAME_PLUS_PROPOSAL_REFINEMENT` and
-`P3_MULTI_RESOLUTION_FRAME`. SAL and BAM are not counted merely because their
+The three ready paradigms are `P2_FRAME_PLUS_PROPOSAL_REFINEMENT`,
+`P3_MULTI_RESOLUTION_FRAME`, and `P5_SEGMENT_AWARE_SEQUENCE`. SAL is counted
+because its source/checkpoint/strict-load/temporal-adapter evidence is closed;
+BAM is not counted merely because its
 papers, source repositories, or checkpoint files exist. A checkpoint is not a
 ready paradigm without official source identity, strict load, synthetic smoke,
 temporal output contract, and the frozen adapter.
@@ -68,7 +78,7 @@ WHETHER_A = existing bounded capability smoke; no new scientific inference
 WHETHER_B = capability-only; no outcome-based comparison
 TEMPORAL_OUTPUT_CONTRACT = PASS for the two existing ready localizers only
 EVALUATOR_NAMESPACE = frozen; no metric definition changed
-MODEL_PREFLIGHT = PASS for existing ready localizers; NOT_RUN/PENDING for SAL/BAM
+MODEL_PREFLIGHT = PASS for all four ready localizers (CFPRF, MultiResoModel-Simple, SAL-WavLM, BAM)
 GT_BINDING = PASS for PartialEdit E1; PENDING for PartialSpoof until archive closure
 TESTS = pending final closure rerun
 GIT_SYNC = NOT_SYNCED (local ahead of remote by 2 commits)
@@ -106,4 +116,3 @@ scientific failure. Required final validation before commit/push is:
 3. preserve the Phase4.9R hashes and no-outcome firewall;
 4. commit the evidence and recovery artifacts separately; and
 5. push or explicitly report `READY_BUT_UNSYNCED` if the remote remains behind.
-

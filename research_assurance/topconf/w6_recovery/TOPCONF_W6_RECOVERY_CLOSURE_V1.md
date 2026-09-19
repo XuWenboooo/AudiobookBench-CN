@@ -7,8 +7,8 @@ BASELINE_HEAD = 5f4cc4393e76b019a2506a45f55c41323d4a3ab0
 RECOVERY_MODE = ALL_REGISTERED_CANDIDATES_PARALLEL_RECOVERY
 TOTAL_LOCALIZER_CANDIDATES = 7
 SUCCESSFULLY_REPRODUCED = 2
-READY_LOCALIZERS = 2
-DISTINCT_LOCALIZATION_PARADIGMS = 2
+READY_LOCALIZERS = 4
+DISTINCT_LOCALIZATION_PARADIGMS = 4
 TOTAL_EXTERNAL_CANDIDATES = 6
 READY_EXTERNAL_DISTRIBUTIONS = 1
 BLOCKED_EXTERNAL_DISTRIBUTIONS = 5
@@ -36,13 +36,13 @@ guided selection.
 
 ## Failed candidates / exact remaining blockers
 
-- BAM: official source and Drive checkpoint are now materialized and hashed;
-  strict construction stops at the source-required external `wavlm_local`
-  base checkpoint, and repository rights remain unresolved.
-- SAL: official source and HF checkpoint files are now materialized; the
-  Lightning checkpoint is readable, but the official source expects an
-  external s3prl/fairseq base-checkpoint format, so strict construction is
-  not promoted.
+- BAM: official source and Drive checkpoint are materialized and hashed;
+  Zenodo `12747417` records CC BY 4.0. Strict load, temporal smoke, and
+  adapter contract all pass.
+- SAL: official source and HF WavLM checkpoint are materialized; embedded
+  WavLM state was deterministically wrapped without changing tensors, then
+  strict-loaded through the official SAL model and passed temporal smoke and
+  adapter checks. W2V2 is not needed for the WavLM qualification.
 - TRACE: no verified official audio-localization implementation, checkpoint, or
   output contract.
 - LlamaPartialSpoof: official clone failed to connect; local audio absent and

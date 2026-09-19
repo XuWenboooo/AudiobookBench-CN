@@ -1,0 +1,27 @@
+{
+  "artifact": "BAM_ADAPTER_CONTRACT_V1",
+  "audit_date": "2026-09-19",
+  "source_repository": "https://github.com/media-sec-lab/BAM/tree/version1.0.0",
+  "source_commit": "55f3fb9e3b4dd6281597b86d7712fb23454179f6",
+  "source_license": "CC BY 4.0",
+  "license_record": "https://zenodo.org/records/12747417",
+  "checkpoint_source": "https://drive.google.com/file/d/1eL3Ca27hEruI20lkoqkQEnZlb2GzTyHT/view",
+  "checkpoint_zip_sha256": "5C7379D23028606D3BEEB8B1AA5C340395FCC403CE70A2CA559EA322AB2994D1",
+  "checkpoint_state": "official model.ckpt; embedded WavLM state strict-matched through official BAM class",
+  "temporal_contract": {
+    "sample_rate_hz": 16000,
+    "resolution_seconds": 0.16,
+    "spoof_logits": {"shape": "B,T,2", "semantics": "official temporal authenticity logits"},
+    "boundary_output": {"shape": "B,T", "semantics": "official boundary probability output"},
+    "adapter_output": "temporal authenticity logits plus boundary output with explicit resolution"
+  },
+  "strict_load": "PASS",
+  "synthetic_smoke": {
+    "input": "zeros(B=1, samples=33280), chosen to provide complete 8-frame pooling groups",
+    "output_shapes": ["1,13,2", "1,13"],
+    "finite": true,
+    "scientific_inference": false
+  },
+  "adapter_decision": "READY_FOR_W7_PREFLIGHT",
+  "outcome_guided_selection": false
+}

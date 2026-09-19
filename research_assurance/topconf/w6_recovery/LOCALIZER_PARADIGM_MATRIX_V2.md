@@ -17,8 +17,8 @@ read or computed in this recovery.
 | MultiResoModel-Simple | `hieuthi/MultiResoModel-Simple` | `0f69db3a2d654de47822d951fe6ad256bbaac9ba` | root MIT; submodule terms tracked | `baseline-ps-e55.tgz` | archive `0C394F...0E32`; inner `5B7537...FDD1`; SSL `4E1B...5F75` | PASS | frozen Python 3.10 / Torch 1.13.1+cu117 path | six native temporal scales plus utterance head | six-scale canonical adapter PASS | shared multi-resolution temporal inference | `P3_MULTI_RESOLUTION_FRAME` | native multi-resolution inference is distinct from proposal refinement | YES |
 | B1b | repository-local historical implementation | internal provenance; no current external commit | project-local | historical ECAPA local artifact | not externally bound | historical PASS | historical CPU SpeechBrain path | fixed-window/window-frame anomaly score | no frozen arbitrary-dataset adapter | sequence-local embedding deviation | `P1_SEQ_LOCAL_EMBEDDING` | distinct formulation, but historical-only and not externally reproducible here | PILOT_ONLY |
 | B4 | repository-local historical implementation | internal | project-local | none | N/A | historical PASS | historical CPU feature path | energy-transition diagnostic, not a validated localizer contract | none | engineering diagnostic | `NOT_A_LOCALIZER` | diagnostic output is not a temporal deepfake localizer | NO |
-| BAM | `media-sec-lab/BAM` | `55f3fb9e3b4dd6281597b86d7712fb23454179f6` | repository license unresolved; fail-closed | official Drive `bam_checkpoint.zip`; ZIP SHA256 `5C7379...2994D1` | extracted checkpoint materialized | BLOCKED at external `wavlm_local` base-checkpoint construction | not qualified | boundary-aware frame output described by source | none | boundary-aware temporal representation | `P4_BOUNDARY_AWARE_FRAME` | source/checkpoint identity exists, but strict load and rights gates fail | NO |
-| SAL | `SentryMao/SAL` | `b4e80d1d2fd98f3d8b9a85a47837ab3a73e12485` | MIT repository; checkpoint/data rights separate | official HF revision `d9ab313d86a8b00a6345419721389d8b4eabe992`; files materialized | WavLM container readable; W2V2 re-verification pending | BLOCKED at external s3prl/fairseq base-checkpoint construction | not qualified | fixed-resolution frame/segment output | none | segment-aware sequence modeling | `P5_SEGMENT_AWARE_SEQUENCE` | source/checkpoint identity exists, but strict load and adapter gates fail | NO |
+| BAM | `media-sec-lab/BAM` | `55f3fb9e3b4dd6281597b86d7712fb23454179f6` | CC BY 4.0 via official Zenodo `12747417` | official Drive `bam_checkpoint.zip`; ZIP SHA256 `5C7379...2994D1` | PASS; embedded WavLM state strict-matched through official BAM | PASS; synthetic output `(B,13,2)` + `(B,13)` | frozen BAM temporal adapter PASS | boundary-aware temporal output | boundary-aware temporal representation | `P4_BOUNDARY_AWARE_FRAME` | source, license, checkpoint, strict load, smoke, and temporal adapter are closed | YES |
+| SAL | `SentryMao/SAL` | `b4e80d1d2fd98f3d8b9a85a47837ab3a73e12485` | MIT repository; checkpoint/data rights separate | official HF revision `d9ab313d86a8b00a6345419721389d8b4eabe992`; WavLM SHA256 `FDE760...14D2F` | PASS; official SAL state dict strict-matched after deterministic wrapper of unchanged embedded WavLM state | PASS; synthetic output `(B,T,8)` + `(B,T,2)` at 160 ms | frozen SAL temporal adapter PASS | fixed-resolution frame/segment output | no separate external data rights claim made | segment-aware sequence modeling | `P5_SEGMENT_AWARE_SEQUENCE` | segment-aware sequence formulation is distinct and source/checkpoint/temporal contract are closed | YES |
 | TRACE | official paper `arXiv:2604.01083` | no verified official audio-localization repository commit | unresolved for matching implementation | no verified checkpoint | unavailable | NOT_RUN | not qualified | trajectory-derived temporal anomaly/interval output not contract-bound | none | first-order frozen embedding trajectory dynamics | `P6_TRAJECTORY_DERIVATIVE` | training-free trajectory dynamics would be distinct, but official implementation/output provenance is absent | NO |
 
 AASIST remains recorded in the W7 Whether-B capability smoke but is not a
@@ -29,8 +29,8 @@ increase the paradigm count.
 
 | CANDIDATE | RECOVERY ACTION | RESULT | EXACT BLOCKER |
 |---|---|---|---|
-| BAM | official source plus README-linked Drive checkpoint; source/checkpoint hashes recorded | PARTIAL_RECOVERY / NOT_READY | external `wavlm_local` base-checkpoint path required for strict construction; rights unresolved |
-| SAL | official source plus official HF model revision; source/checkpoint identities recorded | PARTIAL_RECOVERY / NOT_READY | official loader expects external s3prl/fairseq base-checkpoint format; W2V2 container re-verification pending |
+| BAM | official source plus README-linked Drive checkpoint; Zenodo license record and source/checkpoint hashes recorded | READY | CC BY 4.0, strict load, synthetic smoke, and temporal adapter contract all PASS |
+| SAL | official source plus official HF model revision; source/checkpoint identities recorded | READY (WavLM instance) | WavLM official checkpoint, strict load, temporal smoke, and adapter contract all PASS; W2V2 is not needed |
 | LlamaPartialSpoof-related source | official repository clone attempt on 2026-09-18 | NOT_RECOVERED; not a verified localizer checkpoint in current inventory | GitHub clone failed to connect to port 443; source metadata alone does not provide a ready localizer |
 | TRACE | official paper/source discovery | NOT_RECOVERED | no verified official audio-localization implementation, checkpoint, or output contract |
 | CFPRF | reuse closed bounded reproduction and preflight | SUCCESSFULLY_REPRODUCED / READY | 16 explicit model-inference failures in prior terminal ledger; no missing/orphan records |
@@ -41,15 +41,15 @@ increase the paradigm count.
 
 ```text
 TOTAL_LOCALIZER_CANDIDATES = 7
-SUCCESSFULLY_REPRODUCED = 2 current external localizers (CFPRF, MultiResoModel-Simple)
-READY_LOCALIZERS = 2
-DISTINCT_LOCALIZATION_PARADIGMS = 2
-READY_PARADIGMS = P2_FRAME_PLUS_PROPOSAL_REFINEMENT, P3_MULTI_RESOLUTION_FRAME
+SUCCESSFULLY_REPRODUCED = 4 current external localizers (CFPRF, MultiResoModel-Simple, SAL-WavLM, BAM)
+READY_LOCALIZERS = 4
+DISTINCT_LOCALIZATION_PARADIGMS = 4
+READY_PARADIGMS = P2_FRAME_PLUS_PROPOSAL_REFINEMENT, P3_MULTI_RESOLUTION_FRAME, P4_BOUNDARY_AWARE_FRAME, P5_SEGMENT_AWARE_SEQUENCE
 W7_SCIENTIFIC_INFERENCES = 0
 LEVEL2_OUTCOMES_ACCESSED = NO
 RESULT_BASED_MODEL_SELECTIONS = 0
 ```
 
 The count is formulation-based: checkpoints, heads, scales, and architecture
-variants are not separate paradigms. `DISTINCT_LOCALIZATION_PARADIGMS < 4`,
-so the W6 gate remains blocked.
+variants are not separate paradigms. The paradigm-count gate is now met;
+the distribution-count gate remains independently unresolved.

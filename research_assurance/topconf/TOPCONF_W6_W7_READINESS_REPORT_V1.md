@@ -1,13 +1,13 @@
 # TOPCONF W6 / W7 Readiness Report v1
 
-Audit date: `2026-09-18`
+Audit date: `2026-09-19`
 Decision: `W6 BLOCKED; W7 FORMAL PILOT NOT AUTHORIZED; STOP WITHOUT SCIENTIFIC INFERENCE`
 
 ```text
 AUTHORITATIVE_PLAN = TOPCONF_19_WEEK_PLAN
 BRANCH = topconf-dl-robustness
-LOCAL_HEAD = 764e9f9650ffcf948d4d98534122ed3f7e2f116
-REMOTE_HEAD = 764e9f9650ffcf948d4d98534122ed3f7e2f116
+LOCAL_HEAD = pending recovery evidence commit
+REMOTE_HEAD = pending recovery evidence push
 WORKTREE = F:/项目/申请实验室  TTS项目/AudiobookBench-CN-topconf-dl-robustness
 PUSH_STATUS = PUSHED_AFTER_FINAL_REPORT_FINALIZATION
 ```
@@ -39,10 +39,10 @@ The detailed evidence ledger is `TOPCONF_19W_PLAN_PROGRESS_LEDGER_V1.md`.
 ## Distributions
 
 ```text
-READY_EXTERNAL_DISTRIBUTIONS = 1 confirmed (PartialEdit_v1.1_E1)
+READY_EXTERNAL_DISTRIBUTIONS = 1 confirmed (PartialEdit_v1.1_E1); PartialSpoof blocked by two official list/audio mismatches
 W7_DISTRIBUTION_MATRIX = W7_DISTRIBUTION_MATRIX_V1.md
 PARTIALEDIT_STATUS = READY_FOR_W7_INPUT; 42471 WAV + official temporal GT; no outcomes used
-PARTIALSPOOF_STATUS = OFFICIAL_EVAL_RECOVERY_INCOMPLETE_TRANSIENT_ERROR; final suspended counter 2775598164/5803817500 bytes; no completed file; not ready
+PARTIALSPOOF_STATUS = OFFICIAL_ARCHIVE_MD5_AND_AUDIO_SCAN_PASS; 71237 WAV; 2 eval.lst IDs lack audio/GT; not ready
 OTHER_EXTERNAL_DISTRIBUTIONS = LlamaPartialSpoof/HAD/MIST/HQ-MPSD BLOCKED by audio, rights, GT, adapter or integrity gates
 ```
 
@@ -52,11 +52,11 @@ OTHER_EXTERNAL_DISTRIBUTIONS = LlamaPartialSpoof/HAD/MIST/HQ-MPSD BLOCKED by aud
 CFPRF_STATUS = W7_LOCALIZER_ELIGIBLE; 42471 terminal / 42455 valid / 16 failed; no missing/orphan
 MULTIRESO_STATUS = W7_LOCALIZER_ELIGIBLE; 42471 terminal / 42438 valid / 33 failed; 6/6 scales
 B1B_B4_STATUS = B1b PILOT_ONLY; B4 ENGINEERING_ONLY
-BAM_STATUS = BLOCKED_RIGHTS_AND_CHECKPOINT
-SAL_STATUS = BLOCKED_CHECKPOINT_UNAVAILABLE
+BAM_STATUS = W7_LOCALIZER_ELIGIBLE; official Zenodo CC BY 4.0; strict load/smoke/adapter PASS
+SAL_STATUS = W7_LOCALIZER_ELIGIBLE; official HF WavLM; strict load/smoke/adapter PASS
 TRACE_STATUS = BLOCKED_REIMPLEMENTATION_REQUIRED
-READY_LOCALIZATION_MODELS = 2
-DISTINCT_LOCALIZATION_PARADIGMS = 2
+READY_LOCALIZATION_MODELS = 4
+DISTINCT_LOCALIZATION_PARADIGMS = 4
 LOCALIZER_PARADIGM_MATRIX = LOCALIZER_PARADIGM_MATRIX_V1.md
 ```
 
@@ -71,10 +71,10 @@ UNIFIED_EVALUATOR_READY = YES; detection/frame/event/RangeEER/time-alignment/fai
 ## Execution readiness
 
 ```text
-MODEL_PREFLIGHT = NO overall; two verified records pass, four-paradigm set incomplete
+MODEL_PREFLIGHT = PASS for all four ready localizers; overall W7 remains blocked by distribution count
 NAMESPACE_PLAN = YES; W7_EXECUTION_NAMESPACE_PLAN_V1.md
 GT_IDENTITY_BINDING = YES; W7_GT_AND_IDENTITY_BINDING_V1.json; zero cases materialized
-W6_GATE = BLOCKED; 2 distinct ready paradigms < required 4
+W6_GATE = BLOCKED; paradigm target met, but 1 ready external distribution < required 2
 W7_PROTOCOL_FROZEN = NO; protocol is not frozen before authorization
 W7_FORMAL_PILOT_AUTHORIZED = NO
 FINAL_CONFIRMATORY_AUTHORIZATION = NO_GO / NOT_AUTHORIZED

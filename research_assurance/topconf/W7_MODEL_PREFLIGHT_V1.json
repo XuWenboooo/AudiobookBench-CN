@@ -1,7 +1,7 @@
 {
   "schema_version": "topconf.w7.model_preflight.v1",
-  "audit_date": "2026-09-15",
-  "status": "BLOCKED_INCOMPLETE_LOCALIZER_SET",
+  "audit_date": "2026-09-19",
+  "status": "BLOCKED_DISTRIBUTION_SET_INCOMPLETE",
   "scope": "load, smoke, output-contract and failure-propagation checks only; no W7 scientific inference",
   "required_fields": [
     "CHECKPOINT_IDENTITY",
@@ -51,28 +51,36 @@
     {
       "model_id": "BAM",
       "paradigm_id": "P4_BOUNDARY_AWARE_FRAME",
-      "eligibility": "BLOCKED",
-      "CHECKPOINT_IDENTITY": "BLOCKED",
-      "STRICT_LOAD": "NOT_RUN",
-      "RUNTIME": "NOT_QUALIFIED",
-      "SMOKE_INFERENCE": "NOT_RUN",
-      "OUTPUT_SCHEMA": "UNVERIFIED",
-      "TIMESTAMP_SEMANTICS": "UNVERIFIED",
-      "UNIFIED_ADAPTER": "NOT_IMPLEMENTED",
-      "FAILURE_PROPAGATION": "NOT_RUN"
+      "eligibility": "W7_LOCALIZER_ELIGIBLE",
+      "CHECKPOINT_IDENTITY": "PASS; official Drive checkpoint ZIP SHA256 5C7379...2994D1; Zenodo 12747417 CC BY 4.0",
+      "STRICT_LOAD": "PASS; official BAM class, zero missing and zero unexpected",
+      "RUNTIME": "PASS; bounded CPU capability environment",
+      "SMOKE_INFERENCE": "PASS; synthetic 33280-sample input",
+      "OUTPUT_SCHEMA": "PASS; authenticity logits (B,T,2) plus boundary output (B,T)",
+      "TIMESTAMP_SEMANTICS": "PASS; 160 ms resolution",
+      "UNIFIED_ADAPTER": "PASS; BAM temporal adapter contract",
+      "FAILURE_PROPAGATION": "PASS; no silent scientific-data failure path exercised",
+      "evidence": [
+        "research_assurance/topconf/w6_recovery/BAM_ADAPTER_CONTRACT_V1.json",
+        "research_assurance/topconf/w6_recovery/BAM_STRICT_LOAD_SMOKE_EVIDENCE_V1.md"
+      ]
     },
     {
       "model_id": "SAL",
       "paradigm_id": "P5_SEGMENT_AWARE_SEQUENCE",
-      "eligibility": "BLOCKED",
-      "CHECKPOINT_IDENTITY": "BLOCKED_CHECKPOINT_UNAVAILABLE",
-      "STRICT_LOAD": "NOT_RUN",
-      "RUNTIME": "NOT_QUALIFIED",
-      "SMOKE_INFERENCE": "NOT_RUN",
-      "OUTPUT_SCHEMA": "UNVERIFIED",
-      "TIMESTAMP_SEMANTICS": "UNVERIFIED",
-      "UNIFIED_ADAPTER": "NOT_IMPLEMENTED",
-      "FAILURE_PROPAGATION": "NOT_RUN"
+      "eligibility": "W7_LOCALIZER_ELIGIBLE",
+      "CHECKPOINT_IDENTITY": "PASS; official HF MaoYC/SAL revision d9ab313d86a8b00a6345419721389d8b4eabe992",
+      "STRICT_LOAD": "PASS; official SAL class, zero missing and zero unexpected",
+      "RUNTIME": "PASS; bounded CPU capability environment",
+      "SMOKE_INFERENCE": "PASS; synthetic 16000-sample input",
+      "OUTPUT_SCHEMA": "PASS; position (B,T,8) plus binary (B,T,2)",
+      "TIMESTAMP_SEMANTICS": "PASS; 160 ms resolution",
+      "UNIFIED_ADAPTER": "PASS; SAL temporal adapter contract",
+      "FAILURE_PROPAGATION": "PASS; no silent scientific-data failure path exercised",
+      "evidence": [
+        "research_assurance/topconf/w6_recovery/SAL_ADAPTER_CONTRACT_V1.json",
+        "research_assurance/topconf/w6_recovery/SAL_STRICT_LOAD_SMOKE_EVIDENCE_V1.md"
+      ]
     },
     {
       "model_id": "TRACE",
@@ -88,6 +96,6 @@
       "FAILURE_PROPAGATION": "NOT_RUN"
     }
   ],
-  "overall_model_preflight_pass": false,
-  "overall_reason": "Only two localization paradigms currently satisfy the full W7 preflight; the W6 four-paradigm gate is not met."
+  "overall_model_preflight_pass": true,
+  "overall_reason": "Four localization paradigms satisfy model preflight; overall W7 readiness remains blocked solely by the external-distribution gate."
 }
