@@ -49,7 +49,7 @@ guided selection.
   no W7 adapter/integrity proof.
 - PartialSpoof: official 5.8 GB eval archive is under resumable official-URL
   recovery; the required MD5 is not yet verified locally.
-- HAD: archive, rights, temporal-GT binding, and adapter remain unresolved.
+- HAD: official-size archive transfer completed, but official MD5 mismatched (`6fd23321b03abef5dac6ba7c26c3196d` vs `4daef62a7cf20c71b052635c968ece1c`) and ZIP streaming integrity failed; rights/GT/adapter remain unresolved.
 - MIST: rights, local integrity, and adapter remain unresolved.
 - HQ-MPSD: not an authoritative official distribution.
 

@@ -13,7 +13,7 @@ localization outcome was used.
 | PartialEdit v1.1 E1 | Zenodo `18829689`; project page | CC BY 4.0; local research use recorded | 42,471 WAV materialized | edited-region start/end seconds; E1 | official train/dev/eval and speaker metadata | PASS | PASS; official CSV/WAV binding, no missing/extra/duplicate | PASS | READY | none |
 | PartialSpoof v1.2 eval | Zenodo `5766198`; official repository | CC BY 4.0 / acknowledgement chain | official archive closed: 71,237 WAV; 16 kHz mono; all headers decode | archive `eval.lst` has 71,239 IDs; two IDs have no WAV and no matching materialized GT entry | official eval protocol and speaker metadata | parser/schema evidence present, frozen adapter blocked by two official list/audio mismatches | MD5 `79c7c834d0d9979ecd374a98a059ea19` PASS; size `5,803,817,500` PASS | GT binding incomplete | NOT_READY | `CON_E_0034982` and `CON_E_0058039` are absent from the official archive audio |
 | LlamaPartialSpoof v1.0.b | official HF dataset / project repository | CC BY 4.0 as recorded | only `.utt/.spk` metadata cached locally; audio absent | segment intervals in labels, not audio-bound locally | split metadata present | NOT_IMPLEMENTED | NOT_RUN | NOT_READY | NOT_READY | no local audio archive; GitHub recovery attempt failed to connect |
-| HAD | Zenodo `10377492`; Interspeech 2021 source | rights decision incomplete | 8.1 GB archive not materialized | paper describes localization; local field binding not audited | official protocol not frozen locally | NOT_IMPLEMENTED | NOT_RUN | NOT_READY | NOT_READY | archive unavailable; license/GT/adapter unresolved |
+| HAD | Zenodo `10377492`; Interspeech 2021 source | CC BY 4.0 (Zenodo record) | official `HAD.zip` materialized at `8,073,665,280` bytes, but MD5 `6fd23321b03abef5dac6ba7c26c3196d` mismatches official `4daef62a7cf20c71b052635c968ece1c`; ZIP central directory reads but streaming CRC/decompression fails | paper/repository describe localization; local archive integrity is not closed | official protocol not frozen locally | NOT_IMPLEMENTED | NOT_RUN | NOT_READY | NOT_READY | fail-closed after official-size download: checksum and ZIP content integrity failure |
 | MIST | official paper and HF dataset card | Research Only / rights not cleared | source advertised; no local materialization | multi-region claim; exact local schema not audited | split not frozen | NOT_IMPLEMENTED | NOT_RUN | NOT_READY | NOT_READY | rights and integrity/adapter evidence incomplete |
 | HQ-MPSD | third-party derivative audit artifact | not adopted | unknown | unknown | unknown | NOT_ACCEPTED | NOT_RUN | NO | NOT_READY | not an authoritative official dataset release |
 
@@ -33,6 +33,7 @@ RESULT_BASED_DATASET_SELECTIONS = 0
 
 ```text
 2026-09-19 PartialSpoof official recovery: official archive size and MD5 closed; isolated extraction and full WAV-header scan passed; two entries in the archive's own eval.lst have no corresponding audio/GT and therefore block READY promotion.
+2026-09-19 HAD fallback recovery: official-size range download completed, but MD5 mismatched the Zenodo record and ZIP streaming integrity failed; HAD remains NOT_READY.
 2026-09-18 LlamaPartialSpoof official repository clone: failed to connect to github.com:443.
 No dataset was promoted to READY because of a model score, metric, threshold, aggregation, or expected performance.
 ```
