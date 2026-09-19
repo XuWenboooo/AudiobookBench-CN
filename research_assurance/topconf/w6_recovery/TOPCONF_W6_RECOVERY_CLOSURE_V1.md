@@ -1,10 +1,10 @@
 # TOPCONF-W6_RECOVERY Closure v1
 
-Audit date: `2026-09-18`
+Audit date: `2026-09-19` (long-run evidence supersedes the 2026-09-18 transfer-attempt notes)
 
 ```text
-BASELINE_HEAD = 09f06a8dba5717e46a9d5a7084ac61834db85b34
-RECOVERY_MODE = ALL_REGISTERED_CANDIDATES_ATTEMPTED
+BASELINE_HEAD = 5f4cc4393e76b019a2506a45f55c41323d4a3ab0
+RECOVERY_MODE = ALL_REGISTERED_CANDIDATES_PARALLEL_RECOVERY
 TOTAL_LOCALIZER_CANDIDATES = 7
 SUCCESSFULLY_REPRODUCED = 2
 READY_LOCALIZERS = 2
@@ -36,16 +36,19 @@ guided selection.
 
 ## Failed candidates / exact remaining blockers
 
-- BAM: official clone failed with an HTTP/2 framing error; checkpoint rights and
-  hash remain unresolved.
-- SAL: official clone failed with a connection reset; checkpoint unavailable.
+- BAM: official source and Drive checkpoint are now materialized and hashed;
+  strict construction stops at the source-required external `wavlm_local`
+  base checkpoint, and repository rights remain unresolved.
+- SAL: official source and HF checkpoint files are now materialized; the
+  Lightning checkpoint is readable, but the official source expects an
+  external s3prl/fairseq base-checkpoint format, so strict construction is
+  not promoted.
 - TRACE: no verified official audio-localization implementation, checkpoint, or
   output contract.
 - LlamaPartialSpoof: official clone failed to connect; local audio absent and
   no W7 adapter/integrity proof.
-- PartialSpoof: official 5.8 GB eval archive is not locally materialized; the
-  current session could not query the existing system BITS job because of
-  `E_ACCESSDENIED`.
+- PartialSpoof: official 5.8 GB eval archive is under resumable official-URL
+  recovery; the required MD5 is not yet verified locally.
 - HAD: archive, rights, temporal-GT binding, and adapter remain unresolved.
 - MIST: rights, local integrity, and adapter remain unresolved.
 - HQ-MPSD: not an authoritative official distribution.
