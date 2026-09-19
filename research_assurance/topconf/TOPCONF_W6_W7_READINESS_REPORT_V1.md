@@ -6,8 +6,8 @@ Decision: `W6 BLOCKED; W7 FORMAL PILOT NOT AUTHORIZED; STOP WITHOUT SCIENTIFIC I
 ```text
 AUTHORITATIVE_PLAN = TOPCONF_19_WEEK_PLAN
 BRANCH = topconf-dl-robustness
-LOCAL_HEAD = pending recovery evidence commit
-REMOTE_HEAD = pending recovery evidence push
+LOCAL_HEAD = 9d91ba906a564483047a7b75fb55985dcfe2828c
+REMOTE_HEAD = 59fa1da5618b54ad8ebb8fca353392d9c4edf831 (before this recovery push)
 WORKTREE = F:/项目/申请实验室  TTS项目/AudiobookBench-CN-topconf-dl-robustness
 PUSH_STATUS = PUSHED_AFTER_FINAL_REPORT_FINALIZATION
 ```
