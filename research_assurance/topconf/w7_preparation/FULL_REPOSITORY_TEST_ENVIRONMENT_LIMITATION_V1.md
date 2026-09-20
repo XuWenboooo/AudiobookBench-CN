@@ -16,7 +16,7 @@ passes all state, protocol, ledger and PartialSpoof firewall checks.
 
 ## C. Full repository suite
 
-The isolated worktree full-suite rerun completed with `315 passed, 137 failed,
+The isolated worktree full-suite rerun completed with `325 passed, 137 failed,
 3 errors`. This is not reported as an all-benign result. The failures are
 classified from representative tracebacks and test-name groups as follows:
 
