@@ -1,15 +1,15 @@
 # TOPCONF W6 / W7 Readiness Report v1
 
-Audit date: `2026-09-19`
+Audit date: `2026-09-20`
 Decision: `W6 BLOCKED; W7 FORMAL PILOT NOT AUTHORIZED; STOP WITHOUT SCIENTIFIC INFERENCE`
 
 ```text
 AUTHORITATIVE_PLAN = TOPCONF_19_WEEK_PLAN
 BRANCH = topconf-dl-robustness
-LOCAL_HEAD = 9d91ba906a564483047a7b75fb55985dcfe2828c
-REMOTE_HEAD = 59fa1da5618b54ad8ebb8fca353392d9c4edf831 (before this recovery push)
+LOCAL_HEAD = 384e6e4d25c0abaabdb6829e06cd95beb76dce32
+REMOTE_HEAD = 384e6e4d25c0abaabdb6829e06cd95beb76dce32
 WORKTREE = F:/项目/申请实验室  TTS项目/AudiobookBench-CN-topconf-dl-robustness
-PUSH_STATUS = PUSHED_AFTER_FINAL_REPORT_FINALIZATION
+PUSH_STATUS = PUSHED; LOCAL_REMOTE_SYNC = YES
 ```
 
 ## Phase4.9R preservation
@@ -40,10 +40,10 @@ The detailed evidence ledger is `TOPCONF_19W_PLAN_PROGRESS_LEDGER_V1.md`.
 
 ```text
 READY_EXTERNAL_DISTRIBUTIONS = 1 confirmed (PartialEdit_v1.1_E1); PartialSpoof blocked by two official list/audio mismatches
-W7_DISTRIBUTION_MATRIX = W7_DISTRIBUTION_MATRIX_V1.md
+W7_DISTRIBUTION_MATRIX = w6_recovery/W7_DISTRIBUTION_MATRIX_V2.md
 PARTIALEDIT_STATUS = READY_FOR_W7_INPUT; 42471 WAV + official temporal GT; no outcomes used
 PARTIALSPOOF_STATUS = OFFICIAL_ARCHIVE_MD5_AND_AUDIO_SCAN_PASS; 71237 WAV; 2 eval.lst IDs lack audio/GT; not ready
-OTHER_EXTERNAL_DISTRIBUTIONS = LlamaPartialSpoof/HAD/MIST/HQ-MPSD BLOCKED by audio, rights, GT, adapter or integrity gates
+OTHER_EXTERNAL_DISTRIBUTIONS = LlamaPartialSpoof/HAD/MIST/HQ-MPSD BLOCKED by audio, rights, GT, adapter or integrity gates; HAD and HQ official transfers were attempted and fail-closed
 ```
 
 ## Localizers
@@ -119,8 +119,8 @@ RESULT_BASED_METRIC_CHANGES = 0
 ## Next
 
 ```text
-NEXT_AUTHORIZED_STAGE = bounded official-source recovery of missing legal localizer paradigms, then W6 re-audit
-REMAINING_BLOCKERS = (1) two additional distinct localizer paradigms; (2) second ready external distribution; (3) overall model-preflight PASS after recovery
+NEXT_AUTHORIZED_STAGE = only further bounded official-source recovery if a new predeclared legal distribution route becomes available; otherwise honest W6 blocked closure
+REMAINING_BLOCKERS = (1) second ready external distribution; HAD and HQ-MPSD transfers are not integrity-valid, PartialSpoof GT identity remains incomplete, and Llama/MIST are blocked by audio/rights gates
 ```
 
 The minimum recovery action is frozen in `W6_RESOURCE_GAP_ANALYSIS_V1.md`.
