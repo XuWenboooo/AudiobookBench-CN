@@ -1,0 +1,27 @@
+{
+  "audit_date": "2026-09-20",
+  "url": "https://zenodo.org/records/17929533/files/English.zip",
+  "transport_path": "SMALL_RANGE_VERIFIED_BUT_LARGE_TRANSFER_UNRELIABLE",
+  "range_test": {
+    "status": 206,
+    "accept_ranges": "bytes",
+    "content_length": 65536,
+    "content_range": "bytes 0-65535/3204831988",
+    "repeat_same_bytes": true,
+    "sha256": "E6959E13EDDD5C7C3FBC6F20BD6DC364BA40B5AF48EA3C209A91127CC1B9828A",
+    "adjacent_concat_equals_full": true
+  },
+  "synthetic_parallel_writer_test": {
+    "fixture_bytes": 2097152,
+    "ranges": 32,
+    "workers": 4,
+    "out_of_order": true,
+    "simulated_interruption_and_retry": true,
+    "source_sha256": "A095CB3EC83A81EE83E4F38668EB366AEFEF7E5F70160A044994CEC435295F4C",
+    "reconstructed_sha256": "A095CB3EC83A81EE83E4F38668EB366AEFEF7E5F70160A044994CEC435295F4C",
+    "hash_match": true
+  },
+  "python_requests_tls_failure_observed": "SSL_UNEXPECTED_EOF",
+  "filesystem": "NTFS",
+  "free_bytes_at_audit": 27278213120
+}

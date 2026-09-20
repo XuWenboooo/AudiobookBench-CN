@@ -31,5 +31,9 @@ third_party/
 
 # Archives and local audit scratch files
 *.zip
+*.part
+*.zip.part
+*.tar.gz
+research_assurance/topconf/w6_recovery/artifacts/**
 _audit_data.json
 _gt_figure_check.json
