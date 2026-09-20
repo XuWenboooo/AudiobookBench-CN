@@ -1,0 +1,104 @@
+{
+  "schema_version": "topconf.scientific_evidence_ledger.v1",
+  "status": "PRE-W7_NON-OUTCOME_PREPARATION",
+  "w7_scientific_inferences": 0,
+  "level2_outcomes_accessed": false,
+  "entries": [
+    {
+      "evidence_id": "HISTORICAL_PILOT_WEEK1_LOCALIZATION",
+      "stage": "HISTORICAL_PILOT",
+      "source_artifact": "WEEK1_FREEZE.md; archive/PILOT_EVIDENCE_REGISTER.md",
+      "date": "2026-09-19",
+      "model": "historical Week1 baselines",
+      "distribution": "historical constructed pilot",
+      "condition": "historical pilot only",
+      "metric": "historical localization metrics",
+      "value": "REFER_TO_SOURCE_ARTIFACT; NOT_W7_EVIDENCE",
+      "scientific_status": "HISTORICAL_PILOT"
+    },
+    {
+      "evidence_id": "HISTORICAL_PILOT_WEEK2_A2",
+      "stage": "HISTORICAL_PILOT",
+      "source_artifact": "WEEK2_SCIENTIFIC_CLOSURE.md; WEEK2_A2_PROTOCOL_DESIGN.md",
+      "date": "2026-09-19",
+      "model": "historical A2 baseline",
+      "distribution": "historical constructed A2 pilot",
+      "condition": "historical pilot only",
+      "metric": "historical transfer/localization metrics",
+      "value": "REFER_TO_SOURCE_ARTIFACT; NOT_W7_EVIDENCE",
+      "scientific_status": "HISTORICAL_PILOT"
+    },
+    {
+      "evidence_id": "W6_READINESS_LOCALIZERS",
+      "stage": "READINESS_ONLY",
+      "source_artifact": "TOPCONF_W6_W7_READINESS_REPORT_V1.md; W7_MODEL_PREFLIGHT_V1.json",
+      "date": "2026-09-19",
+      "model": "CFPRF; MultiResoModel-Simple; BAM; SAL",
+      "distribution": "PartialEdit/level-1 readiness evidence",
+      "condition": "strict load and synthetic smoke only",
+      "metric": "preflight status",
+      "value": "PASS_FOR_PREPARATION_ONLY",
+      "scientific_status": "READINESS_ONLY"
+    },
+    {
+      "evidence_id": "W6_READINESS_PARTIALEDIT",
+      "stage": "READINESS_ONLY",
+      "source_artifact": "W7_DISTRIBUTION_MATRIX_V1.md",
+      "date": "2026-09-19",
+      "model": "not applicable",
+      "distribution": "PartialEdit_v1.1_E1",
+      "condition": "official audio/GT/provenance acceptance",
+      "metric": "distribution readiness",
+      "value": "READY_FOR_W7_INPUT; NO_OUTCOME",
+      "scientific_status": "READINESS_ONLY"
+    },
+    {
+      "evidence_id": "W6_READINESS_PARTIALSPOOF",
+      "stage": "READINESS_ONLY",
+      "source_artifact": "PARTIALSPOOF_IDENTITY_MISMATCH_V1.json",
+      "date": "2026-09-20",
+      "model": "not applicable",
+      "distribution": "PartialSpoof_v1.2_eval",
+      "condition": "official identity closure",
+      "metric": "distribution readiness",
+      "value": "NOT_READY; UNRESOLVED_OFFICIAL_MISMATCH",
+      "scientific_status": "READINESS_ONLY"
+    },
+    {
+      "evidence_id": "W7_FORMAL_DETECTION",
+      "stage": "W7_FORMAL",
+      "source_artifact": "W7_PILOT_PROTOCOL_DRAFT_V1.md",
+      "date": "2026-09-20",
+      "model": "four eligible localization paradigms",
+      "distribution": "no authorized distribution set",
+      "condition": "pre-freeze",
+      "metric": "Detection AUROC/AUPRC/EER",
+      "value": "NOT_MEASURED",
+      "scientific_status": "W7_FORMAL"
+    },
+    {
+      "evidence_id": "W7_FORMAL_LOCALIZATION",
+      "stage": "W7_FORMAL",
+      "source_artifact": "W7_PILOT_PROTOCOL_DRAFT_V1.md",
+      "date": "2026-09-20",
+      "model": "four eligible localization paradigms",
+      "distribution": "no authorized distribution set",
+      "condition": "pre-freeze",
+      "metric": "Where metrics and LD@DR95",
+      "value": "NOT_MEASURED",
+      "scientific_status": "W7_FORMAL"
+    },
+    {
+      "evidence_id": "CONFIRMATORY_GAP",
+      "stage": "CONFIRMATORY",
+      "source_artifact": "TOPCONF_RQ1_CONFIRMATORY_PREREGISTRATION_V1.md",
+      "date": "2026-09-20",
+      "model": "not authorized",
+      "distribution": "not authorized",
+      "condition": "not authorized",
+      "metric": "Detection–Localization Gap",
+      "value": "NOT_MEASURED",
+      "scientific_status": "CONFIRMATORY"
+    }
+  ]
+}

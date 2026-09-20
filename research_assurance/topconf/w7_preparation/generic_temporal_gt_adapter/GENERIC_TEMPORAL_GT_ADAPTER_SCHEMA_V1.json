@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "TopConf generic temporal GT adapter canonical case v1",
+  "type": "object",
+  "required": ["distribution_id", "split", "audio_id", "audio_path", "duration_sec", "sample_rate", "gt_representation_type", "manipulated_intervals", "source_identity", "manipulation_identity", "adapter_version"],
+  "properties": {
+    "distribution_id": {"type": "string", "minLength": 1},
+    "split": {"type": "string", "minLength": 1},
+    "audio_id": {"type": "string", "minLength": 1},
+    "audio_path": {"type": "string", "minLength": 1},
+    "duration_sec": {"type": "number", "exclusiveMinimum": 0},
+    "sample_rate": {"type": "integer", "exclusiveMinimum": 0},
+    "gt_representation_type": {"type": "string", "minLength": 1},
+    "manipulated_intervals": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["start_sec", "end_sec"],
+        "properties": {
+          "start_sec": {"type": "number", "minimum": 0},
+          "end_sec": {"type": "number", "exclusiveMinimum": 0}
+        }
+      }
+    },
+    "source_identity": {"type": "string", "minLength": 1},
+    "manipulation_identity": {"type": "string", "minLength": 1},
+    "metadata": {"type": "object"},
+    "adapter_version": {"const": "topconf.w7.generic_temporal_gt_adapter.v1"}
+  }
+}

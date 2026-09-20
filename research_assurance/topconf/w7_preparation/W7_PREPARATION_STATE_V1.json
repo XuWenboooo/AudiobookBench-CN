@@ -1,0 +1,26 @@
+{
+  "schema_version": "topconf.w7.preparation_state.v1",
+  "CURRENT_STAGE": "TOPCONF-W7-PREPARATION-SIDEBRANCH",
+  "READY_LOCALIZERS": 4,
+  "DISTINCT_LOCALIZATION_PARADIGMS": 4,
+  "READY_EXTERNAL_DISTRIBUTIONS": 1,
+  "REQUIRED_EXTERNAL_DISTRIBUTIONS": 2,
+  "W6_GATE": "BLOCKED",
+  "PARTIALSPOOF_READY": "NO",
+  "W7_PROTOCOL_FROZEN": "NO",
+  "W7_SCIENTIFIC_INFERENCES": 0,
+  "LEVEL2_OUTCOMES_ACCESSED": "NO",
+  "W7_DETECTION_AUROC": "NOT_MEASURED",
+  "W7_LOCALIZATION_AUROC": "NOT_MEASURED",
+  "CONFIRMATORY_AUROC": "NOT_MEASURED",
+  "RESULT_BASED_MODEL_SELECTIONS": 0,
+  "RESULT_BASED_DATASET_SELECTIONS": 0,
+  "RESULT_BASED_METRIC_CHANGES": 0,
+  "UNRESOLVED_PRE_FREEZE_ITEMS": [
+    "final case manifest and source-pool identity binding",
+    "exact mechanism parameterization where the frozen design is not yet operationalized",
+    "exact anti-aliasing implementation identity for the resampling branch",
+    "license/provenance/adapter acceptance for any second external distribution",
+    "final human protocol freeze and execution authorization"
+  ]
+}

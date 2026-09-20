@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "TopConf W7 distribution acceptance result v1",
+  "type": "object",
+  "required": [
+    "schema_version", "distribution_identity", "validator_version",
+    "audio_count", "gt_count", "matched_count", "missing_audio_ids",
+    "missing_gt_ids", "duplicate_audio_ids", "duplicate_gt_ids",
+    "invalid_intervals", "duration_mismatches", "identity_ambiguities",
+    "split_conflicts", "manifest_errors", "audio_identity_pass",
+    "gt_identity_pass", "gt_integrity_pass", "duration_integrity_pass",
+    "split_integrity_pass", "license_status", "provenance_status",
+    "ready_candidate", "failure_reasons"
+  ],
+  "properties": {
+    "schema_version": {"const": "topconf.w7.distribution_acceptance_result.v1"},
+    "distribution_identity": {
+      "type": "object",
+      "required": ["distribution_id", "split"],
+      "properties": {"distribution_id": {"type": "string"}, "split": {"type": "string"}}
+    },
+    "validator_version": {"const": "topconf.w7.distribution_acceptance.v1"},
+    "audio_count": {"type": "integer", "minimum": 0},
+    "gt_count": {"type": "integer", "minimum": 0},
+    "matched_count": {"type": "integer", "minimum": 0},
+    "missing_audio_ids": {"type": "array", "items": {"type": "string"}},
+    "missing_gt_ids": {"type": "array", "items": {"type": "string"}},
+    "duplicate_audio_ids": {"type": "array", "items": {"type": "string"}},
+    "duplicate_gt_ids": {"type": "array", "items": {"type": "string"}},
+    "invalid_intervals": {"type": "array"},
+    "duration_mismatches": {"type": "array"},
+    "identity_ambiguities": {"type": "array"},
+    "split_conflicts": {"type": "array"},
+    "manifest_errors": {"type": "array"},
+    "audio_identity_pass": {"type": "boolean"},
+    "gt_identity_pass": {"type": "boolean"},
+    "gt_integrity_pass": {"type": "boolean"},
+    "duration_integrity_pass": {"type": "boolean"},
+    "split_integrity_pass": {"type": "boolean"},
+    "license_status": {"type": "string"},
+    "provenance_status": {"type": "string"},
+    "ready_candidate": {"type": "boolean"},
+    "failure_reasons": {"type": "array", "items": {"type": "string"}}
+  }
+}
