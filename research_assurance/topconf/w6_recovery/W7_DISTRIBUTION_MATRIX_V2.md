@@ -15,7 +15,7 @@ localization outcome was used.
 | LlamaPartialSpoof v1.0.b | official HF dataset / project repository | CC BY 4.0 as recorded | only `.utt/.spk` metadata cached locally; audio absent | segment intervals in labels, not audio-bound locally | split metadata present | NOT_IMPLEMENTED | NOT_RUN | NOT_READY | NOT_READY | no local audio archive; GitHub recovery attempt failed to connect |
 | HAD | Zenodo `10377492`; Interspeech 2021 source | CC BY 4.0 (Zenodo record) | official `HAD.zip` materialized at `8,073,665,280` bytes, but MD5 `6fd23321b03abef5dac6ba7c26c3196d` mismatches official `4daef62a7cf20c71b052635c968ece1c`; ZIP central directory reads but streaming CRC/decompression fails | paper/repository describe localization; local archive integrity is not closed | official protocol not frozen locally | NOT_IMPLEMENTED | NOT_RUN | NOT_READY | NOT_READY | fail-closed after official-size download: checksum and ZIP content integrity failure |
 | MIST | official paper and HF dataset card | Research Only / rights not cleared | source advertised; no local materialization | multi-region claim; exact local schema not audited | split not frozen | NOT_IMPLEMENTED | NOT_RUN | NOT_READY | NOT_READY | rights and integrity/adapter evidence incomplete |
-| HQ-MPSD | third-party derivative audit artifact | not adopted | unknown | unknown | unknown | NOT_ACCEPTED | NOT_RUN | NO | NOT_READY | not an authoritative official dataset release |
+| HQ-MPSD English | Zenodo `17929533`, official `English.zip` | CC BY 4.0 | official-size local transfer `3,204,831,988` bytes; MD5 `0d007ce820e7a7d3300f72662447668b` mismatches official `c89346355d9afb0ba8dca4247c35dbe6`; ZIP central directory unreadable | official record describes 30 ms frame labels, but local archive integrity is not closed | language pack identity is official; audio/GT binding not audited after integrity failure | NOT_IMPLEMENTED | FAIL | NOT_READY | NOT_READY | repeated incomplete/reset Range transfers; fail-closed |
 
 ## Counts
 
@@ -34,6 +34,7 @@ RESULT_BASED_DATASET_SELECTIONS = 0
 ```text
 2026-09-19 PartialSpoof official recovery: official archive size and MD5 closed; isolated extraction and full WAV-header scan passed; two entries in the archive's own eval.lst have no corresponding audio/GT and therefore block READY promotion.
 2026-09-19 HAD fallback recovery: official-size range download completed, but MD5 mismatched the Zenodo record and ZIP streaming integrity failed; HAD remains NOT_READY.
+2026-09-20 HQ-MPSD fallback recovery: official English pack reached the advertised size, but MD5 mismatched and the ZIP central directory was unreadable after repeated incomplete/reset Range transfers; HQ-MPSD remains NOT_READY.
 2026-09-18 LlamaPartialSpoof official repository clone: failed to connect to github.com:443.
 No dataset was promoted to READY because of a model score, metric, threshold, aggregation, or expected performance.
 ```

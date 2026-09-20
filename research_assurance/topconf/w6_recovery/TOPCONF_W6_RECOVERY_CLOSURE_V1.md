@@ -1,12 +1,12 @@
 # TOPCONF-W6_RECOVERY Closure v1
 
-Audit date: `2026-09-19` (long-run evidence supersedes the 2026-09-18 transfer-attempt notes)
+Audit date: `2026-09-20` (long-run evidence supersedes the 2026-09-18 transfer-attempt notes)
 
 ```text
-BASELINE_HEAD = 5f4cc4393e76b019a2506a45f55c41323d4a3ab0
+BASELINE_HEAD = 4af8088b1673174c0b1af195171806b4b2e26d0f
 RECOVERY_MODE = ALL_REGISTERED_CANDIDATES_PARALLEL_RECOVERY
 TOTAL_LOCALIZER_CANDIDATES = 7
-SUCCESSFULLY_REPRODUCED = 2
+SUCCESSFULLY_REPRODUCED = 4
 READY_LOCALIZERS = 4
 DISTINCT_LOCALIZATION_PARADIGMS = 4
 TOTAL_EXTERNAL_CANDIDATES = 6
@@ -28,9 +28,9 @@ RESULT_BASED_METRIC_CHANGES = 0
 
 ## Decision
 
-W6 remains blocked because the formulation-based paradigm count is 2, below
-the frozen target of 4, and only one external distribution is fully ready,
-below the target of 2. The recovery run attempted every registered candidate;
+W6 remains blocked because only one external distribution is fully ready,
+below the target of 2. The recovery run reached four distinct ready
+localization paradigms and attempted every registered distribution candidate;
 it did not stop after the first two ready paradigms and did not use outcome
 guided selection.
 
@@ -47,11 +47,15 @@ guided selection.
   output contract.
 - LlamaPartialSpoof: official clone failed to connect; local audio absent and
   no W7 adapter/integrity proof.
-- PartialSpoof: official 5.8 GB eval archive is under resumable official-URL
-  recovery; the required MD5 is not yet verified locally.
+- PartialSpoof: official 5.8 GB eval archive size and MD5 pass, but two IDs in
+  the official eval list have no audio or matching GT; adapter remains
+  fail-closed.
 - HAD: official-size archive transfer completed, but official MD5 mismatched (`6fd23321b03abef5dac6ba7c26c3196d` vs `4daef62a7cf20c71b052635c968ece1c`) and ZIP streaming integrity failed; rights/GT/adapter remain unresolved.
 - MIST: rights, local integrity, and adapter remain unresolved.
-- HQ-MPSD: not an authoritative official distribution.
+- HQ-MPSD: official Zenodo `17929533` English pack reached the advertised
+  `3,204,831,988` bytes, but local MD5 `0d007ce820e7a7d3300f72662447668b`
+  mismatched official `c89346355d9afb0ba8dca4247c35dbe6`; ZIP central
+  directory was unreadable after incomplete/reset Range transfers.
 
 ## Next authorized action
 

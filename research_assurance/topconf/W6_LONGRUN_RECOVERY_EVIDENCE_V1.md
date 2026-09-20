@@ -9,8 +9,8 @@ Mode: `FULL-CANDIDATE-PARALLEL-RECOVERY / NO-W7-SCIENTIFIC-INFERENCE`
 CURRENT_STAGE = TOPCONF-W6
 W7_SCIENTIFIC_PILOT_STARTED = NO
 RECOVERY_WORKTREE = topconf-dl-robustness
-RECOVERY_HEAD = 5f4cc4393e76b019a2506a45f55c41323d4a3ab0
-REMOTE_HEAD_AT_AUDIT = 764e9f9650ffcf948d4d98534122ed3f7e2f116
+RECOVERY_HEAD_AT_EVIDENCE_UPDATE = 4af8088b1673174c0b1af195171806b4b2e26d0f
+REMOTE_HEAD_AT_EVIDENCE_UPDATE = 4af8088b1673174c0b1af195171806b4b2e26d0f
 WORKTREE_STATE = AHEAD_BY_2; RECOVERY_ARTIFACTS_UNTRACKED
 ```
 
@@ -38,7 +38,7 @@ inference, metric, or result table was accessed or computed in this audit.
 | BAM | GitHub `media-sec-lab/BAM`, commit `55f3fb9e3b4dd6281597b86d7712fb23454179f6`; official Drive checkpoint `1eL3Ca27hEruI20lkoqkQEnZlb2GzTyHT`; Zenodo `12747417` | source SHA256 `86E3B131017AB711489B452B24A6F7CB1D4A4418450644147BD032A2E2FB13D6`; checkpoint ZIP SHA256 `5C7379D23028606D3BEEB8B1AA5C340395FCC403CE70A2CA559EA322AB2994D1`; CC BY 4.0 | complete official BAM strict load, synthetic temporal smoke, and adapter PASS after deterministic wrapper | READY localizer / P4 |
 | TRACE | paper/source inventory | no verified official implementation/checkpoint/output contract | provenance gate fails | BLOCKED |
 | HAD | Zenodo `10377492` | official-size `HAD.zip` download completed (`8,073,665,280` bytes), but MD5 `6fd23321b03abef5dac6ba7c26c3196d` mismatches official `4daef62a7cf20c71b052635c968ece1c`; ZIP central directory opens but streaming CRC/decompression fails | archive integrity, GT binding, and adapter closure absent; fail-closed | BLOCKED fallback |
-| HQ-MPSD | Zenodo `17929533` | official record identified; language archive not materialized | audio/GT/schema adapter closure absent | BLOCKED fallback |
+| HQ-MPSD English | Zenodo `17929533`, official `English.zip` | official-size `3,204,831,988` bytes reached, but MD5 `0d007ce820e7a7d3300f72662447668b` mismatches official `c89346355d9afb0ba8dca4247c35dbe6`; ZIP central directory unreadable | audio/GT/schema adapter closure absent; repeated incomplete/reset Range transfers | BLOCKED fallback |
 | MIST | HF `tung2308/MIST_SpeechInpaintingDataset`, fixed revision `b1abbd16329bf1421d204af01c7b5939f128cd8a` | official metadata/card only; no full download | Research-Only rights gate and local integrity/adapter gate fail closed | BLOCKED fallback |
 | LlamaPartialSpoof | official HF/project metadata | labels and license metadata cached; audio not materialized | no local audio/adapter closure | BLOCKED fallback |
 
@@ -80,8 +80,8 @@ TEMPORAL_OUTPUT_CONTRACT = PASS for the two existing ready localizers only
 EVALUATOR_NAMESPACE = frozen; no metric definition changed
 MODEL_PREFLIGHT = PASS for all four ready localizers (CFPRF, MultiResoModel-Simple, SAL-WavLM, BAM)
 GT_BINDING = PASS for PartialEdit E1; PENDING for PartialSpoof until archive closure
-TESTS = pending final closure rerun
-GIT_SYNC = NOT_SYNCED (local ahead of remote by 2 commits)
+TESTS = last verified 91 passed; rerun after this evidence patch
+GIT_SYNC = synchronized at evidence-update baseline; verify after commit/push
 ```
 
 ## 5. Gate decision
