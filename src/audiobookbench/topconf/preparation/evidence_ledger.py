@@ -23,6 +23,10 @@ def validate_evidence_ledger(ledger: Mapping[str, Any]) -> list[str]:
         errors.append("W7_SCIENTIFIC_INFERENCES must be 0")
     if ledger.get("level2_outcomes_accessed") is not False:
         errors.append("LEVEL2_OUTCOMES_ACCESSED must be false")
+    if ledger.get("w7_formal_pilot_status") != "NOT_STARTED":
+        errors.append("W7 formal pilot must remain NOT_STARTED")
+    if ledger.get("confirmatory_status") != "NOT_STARTED":
+        errors.append("confirmatory status must remain NOT_STARTED")
     entries = ledger.get("entries")
     if not isinstance(entries, list):
         return errors + ["entries must be a list"]

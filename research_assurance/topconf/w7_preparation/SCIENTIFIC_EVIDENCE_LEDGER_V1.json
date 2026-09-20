@@ -3,6 +3,8 @@
   "status": "PRE-W7_NON-OUTCOME_PREPARATION",
   "w7_scientific_inferences": 0,
   "level2_outcomes_accessed": false,
+  "w7_formal_pilot_status": "NOT_STARTED",
+  "confirmatory_status": "NOT_STARTED",
   "entries": [
     {
       "evidence_id": "HISTORICAL_PILOT_WEEK1_LOCALIZATION",
@@ -49,7 +51,7 @@
       "distribution": "PartialEdit_v1.1_E1",
       "condition": "official audio/GT/provenance acceptance",
       "metric": "distribution readiness",
-      "value": "READY_FOR_W7_INPUT; NO_OUTCOME",
+      "value": "POTENTIAL_INPUT_ONLY; NO_OUTCOME",
       "scientific_status": "READINESS_ONLY"
     },
     {

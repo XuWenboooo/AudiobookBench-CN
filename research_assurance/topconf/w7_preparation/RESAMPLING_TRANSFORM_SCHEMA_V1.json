@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://audiobookbench.local/topconf/resampling-transform-v1",
+  "title": "TopConf W7 resampling transform identity",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["transform_id", "transform_name", "implementation", "implementation_version", "input_sr", "intermediate_sr", "output_sr", "algorithm_backend", "anti_aliasing", "filter_config", "length_policy", "rounding_behavior", "dtype_policy", "channel_policy", "normalization_policy"],
+  "properties": {
+    "transform_id": {"type": "string", "const": "topconf.w7.resampling.16k_8k_16k.scipy-resample-poly.v1"},
+    "transform_name": {"type": "string", "minLength": 1},
+    "implementation": {"type": "string", "const": "scipy.signal.resample_poly"},
+    "implementation_version": {"type": "string", "const": "1.18.0"},
+    "input_sr": {"type": "integer", "const": 16000},
+    "intermediate_sr": {"type": "integer", "const": 8000},
+    "output_sr": {"type": "integer", "const": 16000},
+    "algorithm_backend": {"type": "string", "const": "polyphase_fir"},
+    "anti_aliasing": {"type": "boolean", "const": true},
+    "filter_config": {"type": "object", "required": ["window", "padtype", "cval"], "properties": {"window": {"type": "array", "prefixItems": [{"const": "kaiser"}, {"const": 5.0}], "minItems": 2, "maxItems": 2}, "padtype": {"const": "constant"}, "cval": {"const": 0.0}}, "additionalProperties": false},
+    "length_policy": {"type": "string", "minLength": 1},
+    "rounding_behavior": {"type": "string", "minLength": 1},
+    "dtype_policy": {"type": "string", "const": "float32_after_each_leg"},
+    "channel_policy": {"type": "string", "const": "mono_only"},
+    "normalization_policy": {"type": "string", "const": "none_in_transform"}
+  }
+}

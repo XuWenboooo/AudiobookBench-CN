@@ -20,7 +20,7 @@ removed after observing a metric.
 
 | Distribution | clean | mechanism_shift | codec | resampling | readiness |
 |---|---|---|---|---|---|
-| PartialEdit_v1.1_E1 | reserved | reserved | reserved | reserved | READY_FOR_W7_INPUT |
+| PartialEdit_v1.1_E1 | reserved | reserved | reserved | reserved | ACCEPTED_AS_POTENTIAL_INPUT_ONLY |
 | PartialSpoof_v1.2_eval | reserved | reserved | reserved | reserved | NO; unresolved two-ID identity mismatch |
 | second external distribution | reserved | reserved | reserved | reserved | UNRESOLVED_PRE_FREEZE_ITEM |
 

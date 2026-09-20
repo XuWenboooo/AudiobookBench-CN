@@ -1,10 +1,12 @@
 # W7 Pilot Protocol Draft v1
 
 ```text
-STATUS = DRAFT_NOT_FROZEN
+STATUS = DRAFT_READY_TO_FREEZE
 CURRENT_STAGE = TOPCONF-W7-PREPARATION-SIDEBRANCH
 W7_PROTOCOL_FROZEN = NO
 W7_FORMAL_PILOT_AUTHORIZED = NO
+W7_EXECUTION_AUTHORIZED = NO
+W7_EXECUTED = NO
 W7_SCIENTIFIC_INFERENCES = 0
 LEVEL2_OUTCOMES_ACCESSED = NO
 W7_DETECTION_AUROC = NOT_MEASURED
@@ -12,11 +14,11 @@ W7_LOCALIZATION_AUROC = NOT_MEASURED
 CONFIRMATORY_AUROC = NOT_MEASURED
 ```
 
-This is an outcome-blind preparation draft. It brings the W7 scientific
-definitions to a final-review shape but does not authorize generation,
-inference, evaluation or bootstrap. The current W6 gate remains blocked until
-at least two independent external distributions pass the same acceptance
-harness and a human authorization decision is recorded.
+This is an outcome-blind preparation draft ready for human freeze review. It
+does not authorize generation, inference, evaluation or bootstrap. The current
+W6 gate remains blocked until at least two independent external distributions
+pass the same acceptance harness and a human authorization decision is
+recorded. `W7_PROTOCOL_FROZEN` remains `NO`.
 
 The inherited definitions are taken from
 `TOPCONF_RQ1_CONFIRMATORY_PREREGISTRATION_V1.md`,
@@ -63,9 +65,10 @@ evaluated under the fixed model, localizer, distribution and case contract.
   the declared `manipulation_id`.
 - Failure handling: the declared terminal failure taxonomy applies.
 
-`UNRESOLVED_PRE_FREEZE_ITEM`: the exact operational parameter values for any
-mechanism cell not already present in the materialized W7 case manifest must be
-written into that manifest before the first scientific inference.
+Each mechanism cell must carry one complete configuration object and hash from
+the mechanism contract before the first scientific inference. The final case
+manifest is still a human-freeze input; missing fields fail closed rather than
+receiving a default.
 
 ### `codec`
 
@@ -96,8 +99,10 @@ written into that manifest before the first scientific inference.
 - Failure handling: sample-count, duration, timestamp or decode mismatch is a
   terminal integrity failure.
 
-`UNRESOLVED_PRE_FREEZE_ITEM`: the exact anti-aliasing implementation identity
-and hash must be recorded before inference; this draft does not invent one.
+The exact anti-aliasing identity is defined in
+`RESAMPLING_TRANSFORM_CONTRACT_V1.md` and serialized in every transform
+record. Runtime version mismatch is an infrastructure failure, not a reason
+to substitute another library.
 
 ## 2. Whether-A
 
@@ -178,13 +183,17 @@ ground_truth_identity
 audio_identity
 ```
 
-The opaque `case_id` is derived from this predeclared identity record. A case
-cannot be joined on filename proximity, score order or array position. The
-inference view excludes GT payload and outcome fields; the evaluation view
-joins GT only after terminal raw output.
+The complete manifest record additionally carries distribution version/split,
+source audio hash, optional speaker and utterance IDs, manipulation family and
+mechanism, transform version, audio artifact hash, GT version/hash, and the
+checkpoint/adapter identities defined by `CASE_IDENTITY_SCHEMA_V1.json`.
 
-`UNRESOLVED_PRE_FREEZE_ITEM`: the final case-manifest hash and source-pool
-identity binding must be materialized before human freeze.
+The opaque `case_id` is derived from this predeclared identity record as
+specified in `CASE_IDENTITY_CONTRACT_V1.md`. A case cannot be joined on
+filename proximity, score order or array position. The inference view excludes
+GT payload and outcome fields; the evaluation view joins GT only after terminal
+raw output. The final case-manifest hash and source-pool identity binding are
+the remaining case-specific human-freeze inputs.
 
 ## 6. Namespace ownership
 
@@ -222,9 +231,9 @@ The declared interface includes AUROC, AUPRC, EER, TPR at the frozen fixed-FPR
 point, and decision retention. Whether-A uses the inherited Level-1 target FPR
 `0.05` rule. No W7 test-set threshold optimization is allowed.
 
-`UNRESOLVED_PRE_FREEZE_ITEM`: any metric-specific minimum-valid-case threshold
-not already present in the frozen design must be explicitly recorded before
-authorization; no favorable threshold is inferred here.
+No additional metric-specific minimum-valid-case threshold is introduced.
+The complete frozen source population and terminal ledger are required; an
+empty or infeasible estimand is `NOT_ESTIMABLE`, never a favorable threshold.
 
 ## 9. Localization metrics
 
@@ -243,8 +252,9 @@ descriptive unless explicitly promoted before freeze.
 - invalid-case rule: `NOT_ESTIMABLE` on missing/empty/nonfinite/incompatible
   support, never zero-filled.
 
-`UNRESOLVED_PRE_FREEZE_ITEM`: final report labels for any unsupported native
-  event/boundary output must be fixed in the model adapter manifest.
+Unsupported native event/boundary output is reported as
+`NOT_ESTIMABLE` with terminal reason `UNSUPPORTED_NATIVE_OUTPUT`; it is not
+zero-filled, silently omitted or relabeled after outcome observation.
 
 ## 10. Statistical analysis
 
@@ -257,8 +267,7 @@ descriptive unless explicitly promoted before freeze.
 - CI target: two-sided percentile 95% CI for the declared estimand.
 - Seed policy: primary seed `20260914`, with the frozen child-seed derivation.
 - Minimum valid cases: the frozen source/population and terminal ledger must be
-  complete; any additional minimum not already frozen is
-  `UNRESOLVED_PRE_FREEZE_ITEM`.
+  complete; there is no additional outcome-chosen minimum.
 - Failure condition: empty feasible `F_0.95`, nonfinite/nonpositive paired
   references, one-class support, incompatible pairing or unresolved quality
   gate yields `NOT_ESTIMABLE`, not an inferred zero.
@@ -292,6 +301,7 @@ are software tests only.
 
 The final human decision must separately verify the second external
 distribution, final case/provenance hashes, model preflight, namespace,
-license and adapter evidence. Until then this document remains
-`DRAFT_NOT_FROZEN`; it creates no W7 run, no Level-2 access and no scientific
-outcome.
+license and adapter evidence. Until then this document remains a pre-freeze
+draft; it creates no W7 run, no Level-2 access and no scientific outcome. The
+only remaining pre-freeze items are second external distribution acceptance
+and final human freeze/authorization.
