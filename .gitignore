@@ -35,5 +35,6 @@ third_party/
 *.zip.part
 *.tar.gz
 research_assurance/topconf/w6_recovery/artifacts/**
+research_assurance/topconf/w6_recovery/recovery_cache/**
 _audit_data.json
 _gt_figure_check.json

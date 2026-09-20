@@ -1,13 +1,13 @@
 # TOPCONF W6 / W7 Readiness Report v1
 
-Audit date: `2026-09-20`
-Decision: `W6 BLOCKED; W7 FORMAL PILOT NOT AUTHORIZED; STOP WITHOUT SCIENTIFIC INFERENCE`
+Audit date: `2026-09-21`
+Decision: `W6 PASS; W7 FORMAL PILOT READY FOR HUMAN REVIEW; STOP BEFORE SCIENTIFIC INFERENCE`
 
 ```text
 AUTHORITATIVE_PLAN = TOPCONF_19_WEEK_PLAN
 BRANCH = topconf-dl-robustness
-LOCAL_HEAD = 384e6e4d25c0abaabdb6829e06cd95beb76dce32
-REMOTE_HEAD = 384e6e4d25c0abaabdb6829e06cd95beb76dce32
+LOCAL_HEAD = see final git state in closure audit
+REMOTE_HEAD = see final git state in closure audit
 WORKTREE = F:/项目/申请实验室  TTS项目/AudiobookBench-CN-topconf-dl-robustness
 PUSH_STATUS = PUSHED; LOCAL_REMOTE_SYNC = YES
 ```
@@ -31,7 +31,7 @@ W2_STATUS = SUPERSEDED_WITH_JUSTIFICATION
 W3_STATUS = PARTIAL
 W4_STATUS = PARTIAL; distribution recovery/integrity closure pending
 W5_STATUS = PARTIAL
-W6_STATUS = BLOCKED
+W6_STATUS = PASS
 ```
 
 The detailed evidence ledger is `TOPCONF_19W_PLAN_PROGRESS_LEDGER_V1.md`.
@@ -39,11 +39,12 @@ The detailed evidence ledger is `TOPCONF_19W_PLAN_PROGRESS_LEDGER_V1.md`.
 ## Distributions
 
 ```text
-READY_EXTERNAL_DISTRIBUTIONS = 1 confirmed (PartialEdit_v1.1_E1); PartialSpoof blocked by two official list/audio mismatches
+READY_EXTERNAL_DISTRIBUTIONS = 2 confirmed (PartialEdit_v1.1_E1; LlamaPartialSpoof_1.0.b_R01TTS.0.b)
 W7_DISTRIBUTION_MATRIX = w6_recovery/W7_DISTRIBUTION_MATRIX_V2.md
 PARTIALEDIT_STATUS = READY_FOR_W7_INPUT; 42471 WAV + official temporal GT; no outcomes used
 PARTIALSPOOF_STATUS = OFFICIAL_ARCHIVE_MD5_AND_AUDIO_SCAN_PASS; 71237 WAV; 2 eval.lst IDs lack audio/GT; not ready
-OTHER_EXTERNAL_DISTRIBUTIONS = LlamaPartialSpoof/HAD/MIST/HQ-MPSD BLOCKED by audio, rights, GT, adapter or integrity gates; HAD and HQ official transfers were attempted and fail-closed
+LLAMAPARTIALSPOOF_STATUS = OFFICIAL_ZENODO_1.0.b_MD5_TAR_AUDIO_GT_IDENTITY_AND_ADAPTER_PASS; READY
+OTHER_EXTERNAL_DISTRIBUTIONS = HAD/MIST/HQ-MPSD remain blocked by integrity, rights or transport gates; PartialSpoof remains blocked by two official list/audio mismatches
 ```
 
 ## Localizers
@@ -74,9 +75,9 @@ UNIFIED_EVALUATOR_READY = YES; detection/frame/event/RangeEER/time-alignment/fai
 MODEL_PREFLIGHT = PASS for all four ready localizers; overall W7 remains blocked by distribution count
 NAMESPACE_PLAN = YES; W7_EXECUTION_NAMESPACE_PLAN_V1.md
 GT_IDENTITY_BINDING = YES; W7_GT_AND_IDENTITY_BINDING_V1.json; zero cases materialized
-W6_GATE = BLOCKED; paradigm target met, but 1 ready external distribution < required 2
-W7_PROTOCOL_FROZEN = NO; protocol is not frozen before authorization
-W7_FORMAL_PILOT_AUTHORIZED = NO
+W6_GATE = PASS; two ready external distributions and all readiness gates pass
+W7_PROTOCOL_FROZEN = YES; W7_PILOT_PROTOCOL_V1.md
+W7_FORMAL_PILOT_READY_FOR_HUMAN_REVIEW = YES
 FINAL_CONFIRMATORY_AUTHORIZATION = NO_GO / NOT_AUTHORIZED
 ```
 
@@ -119,8 +120,8 @@ RESULT_BASED_METRIC_CHANGES = 0
 ## Next
 
 ```text
-NEXT_AUTHORIZED_STAGE = only further bounded official-source recovery if a new predeclared legal distribution route becomes available; otherwise honest W6 blocked closure
-REMAINING_BLOCKERS = (1) second ready external distribution; HAD and HQ-MPSD transfers are not integrity-valid, PartialSpoof GT identity remains incomplete, and Llama/MIST are blocked by audio/rights gates
+NEXT_AUTHORIZED_STAGE = human review of frozen W7 pilot protocol; no W7 execution is authorized by this closure
+REMAINING_BLOCKERS = none for W6 distribution closure; later Gate-B/final-confirmatory authorization remains separate
 ```
 
 The minimum recovery action is frozen in `W6_RESOURCE_GAP_ANALYSIS_V1.md`.

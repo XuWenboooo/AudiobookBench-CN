@@ -1,0 +1,25 @@
+{
+  "stage": "TOPCONF-W6-SECOND-DISTRIBUTION-CLOSURE",
+  "audit_date": "2026-09-21",
+  "baseline_head": "137644fddb85af29861b4ab692f2ba08a7002d41",
+  "candidate_order": ["LlamaPartialSpoof", "HQ-MPSD", "HAD", "PartialSpoof", "MIST"],
+  "ready_external_distributions": 2,
+  "ready_external_distribution_names": ["PartialEdit", "LlamaPartialSpoof R01TTS.0.b"],
+  "successful_candidate": "LlamaPartialSpoof",
+  "successful_evidence": "LLAMA_PARTIALSPOOF_DISTRIBUTION_READINESS_V1.json",
+  "candidates": {
+    "PartialEdit": {"final_readiness": "READY", "source": "existing W6 evidence"},
+    "LlamaPartialSpoof": {"final_readiness": "READY", "source": "Zenodo 14214149", "version": "1.0.b", "official_split": "R01TTS.0.b", "rights": "PASS_WITH_ATTRIBUTION", "expected_size": 12791859200, "actual_size": 12791859200, "expected_md5": "a4de860a845816fa65785dddd7849700", "actual_md5": "a4de860a845816fa65785dddd7849700", "transport": "PASS", "archive_integrity": "PASS; uncompressed tar inventory", "gt_integrity": "PASS", "audio_gt_identity": "PASS; 64388-to-64388", "adapter": "PASS", "unified_evaluator": "PASS"},
+    "HQ-MPSD": {"final_readiness": "NOT_READY", "failure_class": "INTEGRITY_FAILURE / TRANSPORT_NOT_YET_VERIFIED", "expected_md5": "c89346355d9afb0ba8dca4247c35dbe6", "actual_md5": "0d007ce820e7a7d3300f72662447668b"},
+    "HAD": {"final_readiness": "NOT_READY", "failure_class": "INTEGRITY_FAILURE / TRANSPORT_NOT_YET_VERIFIED", "expected_md5": "4daef62a7cf20c71b052635c968ece1c", "actual_md5": "6fd23321b03abef5dac6ba7c26c3196d"},
+    "PartialSpoof": {"final_readiness": "NOT_READY", "failure_class": "UPSTREAM_DATASET_INCONSISTENCY / IDENTITY_FAILURE", "bad_ids": ["CON_E_0034982", "CON_E_0058039"]},
+    "MIST": {"final_readiness": "NOT_READY", "failure_class": "RIGHTS_FAILURE"}
+  },
+  "w6_gate": "PASS",
+  "w7_protocol_frozen": "YES",
+  "w7_formal_pilot_ready_for_human_review": "YES",
+  "w7_executed": "NO",
+  "w7_scientific_inferences": 0,
+  "level2_outcomes_accessed": "NO",
+  "outcome_guided_selection": "NO"
+}
