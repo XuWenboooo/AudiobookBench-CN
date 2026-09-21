@@ -1,0 +1,33 @@
+{
+  "approval_record_sha256": "A1EA1778A46F05F4D1857A8B9EB9D3F0F3746B5EB7CFD6B182CCAF786A07FEF2",
+  "approved_package_sha256": "512929394F7ACAFE417EC5018CA922DE73E8F56A7488D601E427ACC5F4A23117",
+  "authorized_for_reexecution": false,
+  "current_stage": "W7_P4_CANDIDATE_ASSET_MATERIALIZATION_AND_RUNTIME_CLOSURE",
+  "exact_remaining_blockers": [
+    "M1 official pretrained_ljs.pth absent locally and official retrieval incomplete.",
+    "M3 official giga830M.pth/EnCodec assets absent locally; audiocraft and xformers unavailable; Windows-compatible isolated runtime not established.",
+    "M5 frozen YourTTS package absent locally; TTS==0.7.0 runtime not established."
+  ],
+  "execution_config_sha256": "009CAEDD67EA2CA7C6AA8C4DEF32F87465754A0E3C37E1D95D9403D48E9875C2",
+  "execution_config_status": "HUMAN_APPROVED_PREINFERENCE_NOT_EXECUTION_AUTHORIZED",
+  "human_approval_recorded": true,
+  "level2_outcomes_accessed": false,
+  "m1_determinism": "NOT_RUN",
+  "m1_model_load": "BLOCKED_MISSING_CHECKPOINT",
+  "m1_synthetic_execution": "NOT_RUN",
+  "m2_synthetic_regression": "PASS",
+  "m3_determinism": "NOT_RUN",
+  "m3_model_load": "BLOCKED_MISSING_CHECKPOINT_AND_RUNTIME_DEPENDENCIES",
+  "m3_synthetic_execution": "NOT_RUN",
+  "m4_synthetic_regression": "PASS",
+  "m5_determinism": "NOT_RUN",
+  "m5_model_load": "BLOCKED_MISSING_CHECKPOINT_AND_TTS_PACKAGE",
+  "m5_synthetic_execution": "NOT_RUN",
+  "mechanism_case_map_sha256": "8449E9ABFA7FF5E359F00BB9CBEA7D3E6889DF3474F411D7D7E6E4338F9528C9",
+  "p4_package_executability": "FAIL_MISSING_APPROVED_ASSETS_OR_RUNTIMES",
+  "package_unchanged": true,
+  "real_w7_cases_used": 0,
+  "schema_version": "topconf.w7.p4.final_execution_readiness_audit.v1",
+  "scientific_inferences": 0,
+  "w7_executed": false
+}

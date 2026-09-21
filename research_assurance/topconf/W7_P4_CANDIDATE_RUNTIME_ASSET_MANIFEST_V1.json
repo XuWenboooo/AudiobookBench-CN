@@ -1,0 +1,69 @@
+{
+  "assets": [
+    {
+      "actual_sha256": "NOT_MATERIALIZED",
+      "actual_size": "NOT_MATERIALIZED",
+      "expected_sha256": "NOT_ESTABLISHED",
+      "expected_size": "NOT_ESTABLISHED",
+      "family": "conventional_tts_replacement",
+      "filename": "pretrained_ljs.pth",
+      "local_logical_path": "runtime_assets/w7_p4/vits/pretrained_ljs.pth",
+      "physical_storage_identity": "NOT_MATERIALIZED",
+      "redistribution": "NOT_ESTABLISHED",
+      "rights": "RESTRICTED_LOCAL_RESEARCH; REDISTRIBUTION_NOT_ESTABLISHED",
+      "role": "official VITS LJS checkpoint",
+      "source": "https://drive.google.com/drive/folders/1ksarh-cJf3F5eKJjLVWY0X1j1qsQqiS2",
+      "source_revision": "2e561ba58618d021b5b8323d3765880f7e0ecfdb"
+    },
+    {
+      "actual_sha256": "NOT_MATERIALIZED",
+      "actual_size": "NOT_MATERIALIZED",
+      "expected_sha256": "2454b51575822a04d24a00f8ba78f201f916439ffa62a3c1ac0ffa5220f429e3",
+      "expected_size": 3358342977,
+      "family": "neural_speech_editing_infilling",
+      "filename": "giga830M.pth",
+      "local_logical_path": "runtime_assets/w7_p4/voicecraft/giga830M.pth",
+      "physical_storage_identity": "NOT_MATERIALIZED",
+      "redistribution": "NOT_ESTABLISHED",
+      "rights": "RESTRICTED_LOCAL_RESEARCH; REDISTRIBUTION_NOT_ESTABLISHED",
+      "role": "VoiceCraft giga830M checkpoint",
+      "source": "https://huggingface.co/pyp1/VoiceCraft_giga830M",
+      "source_revision": "f0a7a971363905883a21c466a3aa4ea2d4c0b690"
+    },
+    {
+      "actual_sha256": "NOT_MATERIALIZED",
+      "actual_size": "NOT_MATERIALIZED",
+      "expected_sha256": "NOT_ESTABLISHED",
+      "expected_size": "NOT_ESTABLISHED",
+      "family": "neural_speech_editing_infilling",
+      "filename": "encodec_4cb2048_giga.th",
+      "local_logical_path": "runtime_assets/w7_p4/voicecraft/encodec_4cb2048_giga.th",
+      "physical_storage_identity": "NOT_MATERIALIZED",
+      "redistribution": "NOT_ESTABLISHED",
+      "rights": "RESTRICTED_LOCAL_RESEARCH; REDISTRIBUTION_NOT_ESTABLISHED",
+      "role": "official VoiceCraft EnCodec asset",
+      "source": "https://huggingface.co/pyp1/VoiceCraft",
+      "source_revision": "f0a7a971363905883a21c466a3aa4ea2d4c0b690"
+    },
+    {
+      "actual_sha256": "NOT_MATERIALIZED",
+      "actual_size": "NOT_MATERIALIZED",
+      "expected_sha256": "NOT_ESTABLISHED",
+      "expected_size": "NOT_ESTABLISHED",
+      "family": "voice_conditioned_tts_vc_replacement",
+      "filename": "tts_models--multilingual--multi-dataset--your_tts.zip",
+      "local_logical_path": "runtime_assets/w7_p4/yourtts/tts_models--multilingual--multi-dataset--your_tts.zip",
+      "physical_storage_identity": "NOT_MATERIALIZED",
+      "redistribution": "NO",
+      "rights": "RESTRICTED_LOCAL_RESEARCH; CC BY-NC-ND 4.0 checkpoint; DO_NOT_REDISTRIBUTE",
+      "role": "official YourTTS released model package",
+      "source": "https://github.com/Edresson/YourTTS/releases/download/MOS/Audios_MOS.zip; https://github.com/coqui-ai/TTS/releases/download/v0.5.0_models/tts_models--multilingual--multi-dataset--your_tts.zip",
+      "source_revision": "23904e6b7158d42cacf2a94dba0791ef69f1e2a9; c7cca4135db0c108a30ba8fd6a437fb63a5ecc12"
+    }
+  ],
+  "checkpoint_bytes_committed": false,
+  "level2_outcomes_accessed": false,
+  "schema_version": "topconf.w7.p4.candidate_runtime_asset_manifest.v1",
+  "scientific_inferences": 0,
+  "status": "PARTIAL_IDENTITY_ONLY_ASSETS_NOT_MATERIALIZED"
+}

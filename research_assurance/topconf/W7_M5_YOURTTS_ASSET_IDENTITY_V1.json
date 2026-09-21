@@ -1,0 +1,15 @@
+{
+  "actual_sha256": "NOT_MATERIALIZED",
+  "actual_size": "NOT_MATERIALIZED",
+  "expected_sha256": "NOT_ESTABLISHED",
+  "expected_size": "NOT_ESTABLISHED",
+  "family": "voice_conditioned_tts_vc_replacement",
+  "filename": "tts_models--multilingual--multi-dataset--your_tts.zip",
+  "local_logical_path": "runtime_assets/w7_p4/yourtts/tts_models--multilingual--multi-dataset--your_tts.zip",
+  "physical_storage_identity": "NOT_MATERIALIZED",
+  "redistribution": "NO",
+  "rights": "RESTRICTED_LOCAL_RESEARCH; CC BY-NC-ND 4.0 checkpoint; DO_NOT_REDISTRIBUTE",
+  "role": "official YourTTS released model package",
+  "source": "https://github.com/Edresson/YourTTS/releases/download/MOS/Audios_MOS.zip; https://github.com/coqui-ai/TTS/releases/download/v0.5.0_models/tts_models--multilingual--multi-dataset--your_tts.zip",
+  "source_revision": "23904e6b7158d42cacf2a94dba0791ef69f1e2a9; c7cca4135db0c108a30ba8fd6a437fb63a5ecc12"
+}

@@ -1,0 +1,42 @@
+{
+  "approval_date": "2026-09-21",
+  "approval_record_sha256": "A1EA1778A46F05F4D1857A8B9EB9D3F0F3746B5EB7CFD6B182CCAF786A07FEF2",
+  "approval_scope": "final outcome-blind pre-inference mechanism specification only",
+  "approval_status": "RECORDED_PREINFERENCE_ONLY",
+  "approved_case_map_sha256": "8449E9ABFA7FF5E359F00BB9CBEA7D3E6889DF3474F411D7D7E6E4338F9528C9",
+  "approved_families": {
+    "conventional_tts_replacement": {
+      "bundle_hash": "B20CB1B8D4B428C3BDD420041ABA3A2231D3D99C51CF31FFD9D010DCE3E02C03",
+      "candidate": "A",
+      "implementation": "VITS official single-speaker TTS"
+    },
+    "cross_speaker_boundary_control": {
+      "bundle_hash": "331F4A484A79E2C19FE856A954576F8C68FBE3CECEBB2C31EC8C85ED00CB8CDF",
+      "candidate": "A",
+      "implementation": "AudiobookBench deterministic waveform control adapter"
+    },
+    "neural_speech_editing_infilling": {
+      "bundle_hash": "121656A1688F5A4DBBFCBE6B1575DA44E9BA962FAF510E6846CA9D818B5EA803",
+      "candidate": "A",
+      "implementation": "VoiceCraft official neural codec language model"
+    },
+    "same_speaker_splice_crossfade_control": {
+      "bundle_hash": "ABBAC07B1B9721C906BE148FE086D381624B011581A3EB3CEEADE1892474EE6D",
+      "candidate": "A",
+      "implementation": "AudiobookBench deterministic waveform control adapter"
+    },
+    "voice_conditioned_tts_vc_replacement": {
+      "bundle_hash": "2E609C86419FF923519D90809240BFB2BE315D790DC2E23E96619D92360FEB5C",
+      "candidate": "A",
+      "implementation": "YourTTS official zero-shot TTS/voice-conversion implementation"
+    }
+  },
+  "approved_package": "W7_P4_PROPOSED_FREEZE_PACKAGE_A_V1",
+  "approved_package_sha256": "512929394F7ACAFE417EC5018CA922DE73E8F56A7488D601E427ACC5F4A23117",
+  "confirmatory_outcomes_accessed": false,
+  "execution_authorized": false,
+  "level2_outcomes_accessed": false,
+  "p4_fields_resolved": 35,
+  "schema_version": "topconf.w7.p4.human_approval_record.v1",
+  "w7_scientific_inferences": 0
+}

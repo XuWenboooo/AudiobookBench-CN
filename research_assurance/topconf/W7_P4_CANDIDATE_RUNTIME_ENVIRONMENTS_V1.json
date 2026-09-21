@@ -1,0 +1,59 @@
+{
+  "environments": {
+    "runtime_m1_vits": {
+      "dependencies_observed": {
+        "TTS": false,
+        "audiocraft": false,
+        "numpy": true,
+        "scipy": true,
+        "torch": true,
+        "torchaudio": true,
+        "xformers": false
+      },
+      "implementation_revision": "2e561ba58618d021b5b8323d3765880f7e0ecfdb",
+      "status": "NOT_CREATED_MISSING_CHECKPOINT",
+      "target_python": "3.9_or_3.10_pinned_by_official_requirements"
+    },
+    "runtime_m3_voicecraft": {
+      "audiocraft_revision": "c5157b5bf14bf83449c17ea1eeb66c19fb4bc7f0",
+      "dependencies_observed": {
+        "TTS": false,
+        "audiocraft": false,
+        "numpy": true,
+        "scipy": true,
+        "torch": true,
+        "torchaudio": true,
+        "xformers": false
+      },
+      "implementation_revision": "f0a7a971363905883a21c466a3aa4ea2d4c0b690",
+      "status": "NOT_CREATED_MISSING_CHECKPOINT_AND_DEPENDENCIES",
+      "target_python": "3.9.16",
+      "torch": "2.0.1",
+      "torchaudio": "2.0.2",
+      "xformers": "0.0.22"
+    },
+    "runtime_m5_yourtts": {
+      "coqui_tts": "0.7.0",
+      "dependencies_observed": {
+        "TTS": false,
+        "audiocraft": false,
+        "numpy": true,
+        "scipy": true,
+        "torch": true,
+        "torchaudio": true,
+        "xformers": false
+      },
+      "implementation_revision": "23904e6b7158d42cacf2a94dba0791ef69f1e2a9",
+      "status": "NOT_CREATED_MISSING_CHECKPOINT_AND_PACKAGE",
+      "target_python": "3.10"
+    }
+  },
+  "host": {
+    "architecture": "AMD64",
+    "os": "Windows-11-10.0.26200-SP0",
+    "python": "3.12.9"
+  },
+  "main_environment_modified": false,
+  "schema_version": "topconf.w7.p4.candidate_runtime_environments.v1",
+  "status": "NOT_CREATED_ASSET_OR_DEPENDENCY_GATED"
+}

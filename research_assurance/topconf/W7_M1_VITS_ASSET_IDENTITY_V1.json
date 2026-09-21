@@ -1,0 +1,15 @@
+{
+  "actual_sha256": "NOT_MATERIALIZED",
+  "actual_size": "NOT_MATERIALIZED",
+  "expected_sha256": "NOT_ESTABLISHED",
+  "expected_size": "NOT_ESTABLISHED",
+  "family": "conventional_tts_replacement",
+  "filename": "pretrained_ljs.pth",
+  "local_logical_path": "runtime_assets/w7_p4/vits/pretrained_ljs.pth",
+  "physical_storage_identity": "NOT_MATERIALIZED",
+  "redistribution": "NOT_ESTABLISHED",
+  "rights": "RESTRICTED_LOCAL_RESEARCH; REDISTRIBUTION_NOT_ESTABLISHED",
+  "role": "official VITS LJS checkpoint",
+  "source": "https://drive.google.com/drive/folders/1ksarh-cJf3F5eKJjLVWY0X1j1qsQqiS2",
+  "source_revision": "2e561ba58618d021b5b8323d3765880f7e0ecfdb"
+}

@@ -1,0 +1,30 @@
+{
+  "attempt_date": "2026-09-21",
+  "checkpoint_bytes_committed": false,
+  "records": [
+    {
+      "attempt": "NOT_STARTED_AFTER_LOCAL_MISS; official network retrieval not completed",
+      "expected_identity": "pretrained_ljs.pth; hash not previously frozen",
+      "fallback": "NONE",
+      "family": "conventional_tts_replacement",
+      "source": "official VITS README-linked Google Drive"
+    },
+    {
+      "attempt": "NOT_STARTED_AFTER_LOCAL_MISS; official network retrieval not completed",
+      "expected_identity": "giga830M.pth; size/hash recorded above",
+      "fallback": "NONE",
+      "family": "neural_speech_editing_infilling",
+      "source": "official VoiceCraft/Hugging Face source"
+    },
+    {
+      "attempt": "NOT_STARTED_AFTER_LOCAL_MISS; official network retrieval not completed",
+      "expected_identity": "frozen YourTTS v0.7.0 model path",
+      "fallback": "NONE",
+      "family": "voice_conditioned_tts_vc_replacement",
+      "source": "official Coqui/YourTTS release source"
+    }
+  ],
+  "schema_version": "topconf.w7.p4.candidate_download_audit.v1",
+  "silent_mirror_fallback": false,
+  "status": "NO_DOWNLOAD_COMPLETED_OFFICIAL_NETWORK_UNAVAILABLE"
+}
