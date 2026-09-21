@@ -1,0 +1,28 @@
+{
+  "schema_version": "topconf.w7.preparation.merge_manifest.v1",
+  "status": "COMPLETE",
+  "safe_to_merge": [
+    "research_assurance/topconf/w7_preparation/**",
+    "src/audiobookbench/topconf/preparation/**",
+    "tools/topconf/build_partialspoof_identity_mismatch.py",
+    "tools/topconf/check_w7_preregistration.py",
+    "tests/topconf/fixtures/w7_preparation_fixtures.py",
+    "tests/topconf/test_w7_preparation_acceptance.py",
+    "tests/topconf/test_w7_preregistration.py",
+    "tests/topconf/test_w7_identity_contracts.py"
+  ],
+  "manual_review_required": [
+    "research_assurance/topconf/w6_recovery/W7_DISTRIBUTION_MATRIX_V2.md",
+    "research_assurance/topconf/w6_recovery/TOPCONF_W6_RECOVERY_CLOSURE_V1.md",
+    "existing W7 evaluator or namespace implementation",
+    "Level-2 interfaces, population definitions or scientific manifest code",
+    "downloaders, locks or recovery state"
+  ],
+  "do_not_merge": [
+    "real data, archives, checkpoints, .part files and file locks",
+    "temporary output, caches and runtime logs not required as evidence",
+    "absolute machine-specific paths and secrets",
+    "W7 result, metric, bootstrap output or outcome-derived selection"
+  ],
+  "prohibited_artifacts_present": false
+}

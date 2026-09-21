@@ -1,0 +1,30 @@
+{
+  "schema_version": "topconf.readiness_report_consistency_audit.v1",
+  "audit_date": "2026-09-21",
+  "status": "PASS",
+  "readiness_report": "TOPCONF_W6_W7_READINESS_REPORT_V1.md",
+  "stale_statements_found": 3,
+  "stale_statements_corrected": 3,
+  "corrections": [
+    {
+      "field": "MODEL_PREFLIGHT",
+      "old": "PASS for all four ready localizers; overall W7 remains blocked by distribution count",
+      "new": "PASS for all four ready localizers; no W7 scientific run is authorized by this report",
+      "evidence": ["w6_recovery/W7_DISTRIBUTION_MATRIX_V2.md", "w7_preparation/W7_PREPARATION_STATE_RECONCILED_V2.json"]
+    },
+    {
+      "field": "W6_READINESS_NARRATIVE",
+      "old": "explicit W6 paradigm/distribution readiness failure",
+      "new": "W6 distribution/paradigm readiness is closed; remaining confirmatory items are separate Gate-B/human-authorization items",
+      "evidence": ["w6_recovery/W7_DISTRIBUTION_MATRIX_V2.md", "TOPCONF_W6_W7_READINESS_REPORT_V1.md"]
+    },
+    {
+      "field": "SCOPED_TEST_BASELINE",
+      "old": "91 passed",
+      "new": "134 passed in the reconciled scoped suite; full repository remains environment-limited",
+      "evidence": ["W7_UNIFIED_EVALUATOR_READINESS_V1.md", "w7_preparation/FULL_REPOSITORY_TEST_ENVIRONMENT_LIMITATION_V1.md"]
+    }
+  ],
+  "w7_scientific_inferences": 0,
+  "metrics": "NOT_MEASURED"
+}

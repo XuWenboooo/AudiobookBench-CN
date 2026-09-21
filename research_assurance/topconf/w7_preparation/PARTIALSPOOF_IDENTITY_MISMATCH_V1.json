@@ -1,0 +1,56 @@
+{
+  "schema_version": "topconf.partialspoof.identity_mismatch.v1",
+  "status": "COMPLETE_READ_ONLY_EVIDENCE",
+  "source_artifacts": {
+    "eval_lst": "partialspoof_eval_extracted/database/eval/eval.lst",
+    "eval_lst_sha256": "A283A0FF1054AF457FD477317A57E074707DFB2EEF5F513D93FC3BEC9F21E50A",
+    "audio_root": "partialspoof_eval_extracted/database/eval/con_wav",
+    "gt_root": "partialspoof_metadata",
+    "archive": "PartialSpoof_database_eval.tar.gz"
+  },
+  "official_archive_modified": false,
+  "total_eval_count": 71239,
+  "affected_count": 2,
+  "affected_fraction": 2.807450974887351e-05,
+  "records": [
+    {
+      "id": "CON_E_0034982",
+      "listed_in_eval_lst": true,
+      "listed_in_other_official_split": false,
+      "audio_file_found": false,
+      "audio_candidate_aliases": [],
+      "GT_found": false,
+      "GT_candidate_aliases": [],
+      "archive_member_found": false,
+      "archive_member_candidates": [],
+      "normalization_candidate": false,
+      "case_sensitive_candidate": false,
+      "extension_mismatch_candidate": false,
+      "directory_mismatch_candidate": false,
+      "unambiguous_official_mapping": false,
+      "identity_status": "UNRESOLVED_OFFICIAL_MISMATCH",
+      "all_candidate_paths": []
+    },
+    {
+      "id": "CON_E_0058039",
+      "listed_in_eval_lst": true,
+      "listed_in_other_official_split": false,
+      "audio_file_found": false,
+      "audio_candidate_aliases": [],
+      "GT_found": false,
+      "GT_candidate_aliases": [],
+      "archive_member_found": false,
+      "archive_member_candidates": [],
+      "normalization_candidate": false,
+      "case_sensitive_candidate": false,
+      "extension_mismatch_candidate": false,
+      "directory_mismatch_candidate": false,
+      "unambiguous_official_mapping": false,
+      "identity_status": "UNRESOLVED_OFFICIAL_MISMATCH",
+      "all_candidate_paths": []
+    }
+  ],
+  "identity_status": "UNRESOLVED_OFFICIAL_MISMATCH",
+  "PARTIALSPOOF_READY": "NO",
+  "prohibited_actions_taken": []
+}

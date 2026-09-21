@@ -72,7 +72,7 @@ UNIFIED_EVALUATOR_READY = YES; detection/frame/event/RangeEER/time-alignment/fai
 ## Execution readiness
 
 ```text
-MODEL_PREFLIGHT = PASS for all four ready localizers; overall W7 remains blocked by distribution count
+MODEL_PREFLIGHT = PASS for all four ready localizers; no W7 scientific run is authorized by this report
 NAMESPACE_PLAN = YES; W7_EXECUTION_NAMESPACE_PLAN_V1.md
 GT_IDENTITY_BINDING = YES; W7_GT_AND_IDENTITY_BINDING_V1.json; zero cases materialized
 W6_GATE = PASS; two ready external distributions and all readiness gates pass
@@ -82,8 +82,9 @@ FINAL_CONFIRMATORY_AUTHORIZATION = NO_GO / NOT_AUTHORIZED
 ```
 
 Final confirmatory manifest/calibration/namespace blockers remain Gate-B items
-and are not converted into an unconditional W7 blocker. The W7 blocker here is
-the explicit W6 paradigm/distribution readiness failure.
+and are not converted into an unconditional W7 blocker. W6 distribution and
+paradigm readiness are closed; W7 remains at the human-review boundary until
+the separate authorization record is changed by a human.
 
 ## W7 science
 
@@ -110,7 +111,7 @@ FINAL_CONFIRMATORY_RUNS = 0
 ## Validation
 
 ```text
-TESTS = `python -m pytest tests/topconf -q` -> 91 passed; JSON parse -> PASS
+TESTS = `python -m pytest tests/topconf -q` -> 134 passed; JSON parse -> PASS
 GIT_DIFF_CHECK = PASS
 RESULT_BASED_MODEL_SELECTIONS = 0
 RESULT_BASED_DATASET_SELECTIONS = 0

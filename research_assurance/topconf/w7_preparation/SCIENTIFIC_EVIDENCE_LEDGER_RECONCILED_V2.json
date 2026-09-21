@@ -1,0 +1,19 @@
+{
+  "schema_version": "topconf.scientific_evidence_ledger.reconciled.v2",
+  "status": "RECONCILED_PRE_W7_NON_OUTCOME",
+  "current_stage": "TOPCONF-W6_TO_W7_RECONCILIATION",
+  "w6_status": "COMPLETE",
+  "w7_formal_pilot_status": "NOT_STARTED",
+  "confirmatory_status": "NOT_STARTED",
+  "w7_scientific_inferences": 0,
+  "level2_outcomes_accessed": false,
+  "metrics": "NOT_MEASURED",
+  "result_based_selections": 0,
+  "entries": [
+    {"evidence_id": "HISTORICAL_PILOT_ONLY", "stage": "HISTORICAL_PILOT", "scientific_status": "HISTORICAL_ONLY", "value": "REFER_TO_HISTORICAL_ARTIFACTS; NOT_W7_EVIDENCE"},
+    {"evidence_id": "W6_CLOSED_READINESS", "stage": "W6_READINESS", "scientific_status": "READINESS_ONLY", "value": "4_LOCALIZERS_4_PARADIGMS_2_READY_DISTRIBUTIONS_W6_PASS"},
+    {"evidence_id": "W7_PROTOCOL_RECONCILIATION", "stage": "W7_PREPARATION", "scientific_status": "PREPARATION_ONLY", "value": "PROTOCOL_CONSISTENT; NO_SCIENTIFIC_CONFLICT"},
+    {"evidence_id": "W7_FORMAL_NOT_STARTED", "stage": "W7_FORMAL", "scientific_status": "NOT_STARTED", "value": "METRICS_NOT_MEASURED"},
+    {"evidence_id": "CONFIRMATORY_NOT_STARTED", "stage": "CONFIRMATORY", "scientific_status": "NOT_STARTED", "value": "LEVEL2_OUTCOMES_NOT_ACCESSED"}
+  ]
+}

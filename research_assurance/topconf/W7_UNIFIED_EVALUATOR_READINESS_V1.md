@@ -16,6 +16,7 @@ METRIC_REDESIGN = NO
 
 Evidence is the existing package under
 `src/audiobookbench/topconf/evaluation/`, schemas and external parsers, plus
-`python -m pytest tests/topconf -q` (`91 passed` at audit). Synthetic fixtures
+`python -m pytest tests/topconf -q` (`134 passed` in the reconciled scoped
+baseline). Synthetic fixtures
 and contract tests are preparation evidence only. No external W7 score vector
 or gap result was generated.

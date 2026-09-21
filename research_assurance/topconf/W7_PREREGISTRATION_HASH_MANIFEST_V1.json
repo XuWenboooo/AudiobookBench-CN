@@ -1,0 +1,31 @@
+{
+  "audit_date": "2026-09-21",
+  "case_manifest_sha256": "b5e926c8f07303414ab4535d12e47af8e902c127fe58cfc9f7e6599a5c817e9a",
+  "contract_hashes": {
+    "W7_EXECUTION_NAMESPACE_PLAN_V1.md": "2293d293f3cde123dbc897484228d250835ed266e9901653cdb84d31edd39132",
+    "W7_FINAL_CASE_MANIFEST_V1.json": "b5e926c8f07303414ab4535d12e47af8e902c127fe58cfc9f7e6599a5c817e9a",
+    "W7_FINAL_EXECUTION_MANIFEST_V1.json": "15579b62447c074c4daae33184a4054fb23ccc72b205c263504f4d0f944039ac",
+    "W7_GT_AND_IDENTITY_BINDING_V1.json": "066f9dea14ed34aab445a9fddda8b9873da42bb1810b3d399d753d15c5cfb250",
+    "W7_PILOT_PROTOCOL_V1.md": "0d386e3461afeaa5a2dce361a8d7ebca58f5816f111827322576297774a51d3c",
+    "W7_PROTOCOL_CONSISTENCY_AUDIT_V2.json": "d4dad5bef17ecd745de7f706e9b2255c80584565e725111c5a7cf2ad82c701dc",
+    "W7_UNIFIED_EVALUATOR_READINESS_V1.md": "0fc2d824945b400eab95df52038d7b7ad9bf87793c9bb35c4323596e09935dd0",
+    "W7_WHETHER_READINESS_V1.md": "727d02dbe5e9decf2e5fd7d5860174abba85e282c1ab35c41f19a51efd78c93d",
+    "w7_preparation/CASE_IDENTITY_CONTRACT_V1.md": "d2b65d711556671af0880c00ac20ec0853082700a41791de078a236d1f4674bc",
+    "w7_preparation/CASE_IDENTITY_SCHEMA_V1.json": "f21c94a5d0ead52426cd282b3a0741feae69238280aefe3fce224becdb3917d1",
+    "w7_preparation/MECHANISM_CONFIG_CONTRACT_V1.md": "17ee61cfa52912ad122fddf52bf1d113a3c12daef8ac7e5de2c66431fe7d084d",
+    "w7_preparation/MECHANISM_CONFIG_SCHEMA_V1.json": "4443affe475e4339e7e20e43e3c10dc8eea7ae578ad7e51c9c79adedcdfd8c35",
+    "w7_preparation/RESAMPLING_TRANSFORM_CONTRACT_V1.md": "2d6011604bd8b7cb65309ee7d16bc4c5cc260a69def3951163629da0956067cc",
+    "w7_preparation/RESAMPLING_TRANSFORM_SCHEMA_V1.json": "2aadbf1c7f30fd0e500723ba31bc4db593201afbf18b49e7dcf5635768d597d0",
+    "w7_preparation/W7_PREPARATION_STATE_RECONCILED_V2.json": "340fd12183ec5c9fc035c9867c5c1e0a0fe33ca029ddb8e310b011557d322323"
+  },
+  "execution_manifest_self_field_basis_sha256": "c57c7937582d6afdfcd5f341560343865f637f77bae974bd5fa51bc5ec8d7108",
+  "execution_manifest_sha256": "15579b62447c074c4daae33184a4054fb23ccc72b205c263504f4d0f944039ac",
+  "hash_algorithm": "SHA-256",
+  "immutability_rule": "No listed file may change after first W7 inference; any change invalidates authorization and requires a new human review.",
+  "metrics": "NOT_MEASURED",
+  "protocol_sha256": "0d386e3461afeaa5a2dce361a8d7ebca58f5816f111827322576297774a51d3c",
+  "schema_version": "topconf.w7.preregistration_hash_manifest.v1",
+  "scientific_inferences": 0,
+  "status": "PASS_IMMUTABLE_BEFORE_FIRST_INFERENCE",
+  "w7_executed": false
+}

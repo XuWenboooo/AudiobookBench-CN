@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "TopConf W7 canonical distribution acceptance input v1",
+  "type": "object",
+  "required": ["distribution_id", "split", "records"],
+  "properties": {
+    "distribution_id": {"type": "string", "minLength": 1},
+    "split": {"type": "string", "minLength": 1},
+    "declared_audio_ids": {"type": "array", "items": {"type": "string"}},
+    "declared_gt_ids": {"type": "array", "items": {"type": "string"}},
+    "license_status": {"type": "string"},
+    "provenance_status": {"type": "string"},
+    "records": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["audio_id", "audio_path", "gt_id", "gt_representation_type", "gt_payload", "duration", "sample_rate", "source_identity"],
+        "properties": {
+          "audio_id": {"type": "string", "minLength": 1},
+          "audio_path": {"type": "string", "minLength": 1},
+          "gt_id": {"type": "string", "minLength": 1},
+          "gt_representation_type": {"type": "string", "minLength": 1},
+          "gt_payload": {"type": "object"},
+          "duration": {"type": "number"},
+          "sample_rate": {"type": "number"},
+          "source_identity": {},
+          "manipulation_identity": {},
+          "audio_metadata": {"type": "object"},
+          "license_provenance": {"type": "object"}
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,129 @@
+{
+  "audit_date": "2026-09-21",
+  "authorization": {
+    "authorized": false,
+    "record": "W7_HUMAN_AUTHORIZATION_RECORD_V1.md"
+  },
+  "bootstrap": {
+    "ci": "two_sided_percentile_95",
+    "replicates": 2000,
+    "seed": 20260914,
+    "sensitivity": "hierarchical_speaker_to_source",
+    "unit": "paired_source"
+  },
+  "case_manifest": "W7_FINAL_CASE_MANIFEST_V1.json",
+  "case_manifest_sha256": "b5e926c8f07303414ab4535d12e47af8e902c127fe58cfc9f7e6599a5c817e9a",
+  "conditions": [
+    "clean",
+    "mechanism_shift",
+    "codec",
+    "resampling"
+  ],
+  "distributions": [
+    {
+      "acceptance": "READY",
+      "accepted_count": 42471,
+      "distribution_id": "PartialEdit",
+      "gt_identity": "PartialEdit_E1E2.csv_v1.1",
+      "split": "E1",
+      "version": "1.1"
+    },
+    {
+      "acceptance": "READY",
+      "accepted_count": 64388,
+      "distribution_id": "LlamaPartialSpoof",
+      "gt_identity": "label_R01TTS.0.b.txt_official",
+      "split": "R01TTS.0.b",
+      "version": "1.0.b"
+    }
+  ],
+  "environment": {
+    "no_inference_started": true,
+    "runtime_identity": "per W7_MODEL_PREFLIGHT_V1.json and W7_WHETHER_READINESS_V1.md",
+    "status": "FROZEN_READINESS_EVIDENCE_ONLY"
+  },
+  "execution_manifest_sha256": "c57c7937582d6afdfcd5f341560343865f637f77bae974bd5fa51bc5ec8d7108",
+  "execution_manifest_sha256_basis": "canonical JSON with execution_manifest_sha256 field set to TO_BE_FILLED_BY_HASH_AUDIT",
+  "gt_separation": {
+    "binding": "W7_GT_AND_IDENTITY_BINDING_V1.json",
+    "level2_outcomes_accessed": false,
+    "model_inference_may_read_ground_truth": false
+  },
+  "manifest_status": "FROZEN_NO_RUN_AUTHORIZATION",
+  "metrics": {
+    "detection": [
+      "AUROC",
+      "AUPRC",
+      "EER",
+      "fixed_FPR_0.05",
+      "decision_retention"
+    ],
+    "localization": [
+      "frame_AUROC",
+      "frame_AUPRC",
+      "RangeEER",
+      "event_AP",
+      "event_F1",
+      "boundary_error"
+    ],
+    "primary_gap": "LD@DR95"
+  },
+  "metrics_status": "NOT_MEASURED",
+  "models": [
+    {
+      "adapter_version": "phase3t_adapter_v1",
+      "checkpoint_hashes": {
+        "FDN": "5FCBBC725761F99F7CA22A6BD095242B7D4FCBB2B285A766047941766D496267",
+        "PRN": "88B605BA432B978D481264266F3DE5BC434B4C1E74A1ABAAA1BDADC3313FAC36",
+        "XLSR": "B08927597F2C9EB2EBD7DCC3AC78EE4B5F6021CBAC4B3A6C5A9DEEC445D80ED9"
+      },
+      "model_id": "CFPRF",
+      "paradigm_id": "P2_FRAME_PLUS_PROPOSAL_REFINEMENT",
+      "preflight": "PASS"
+    },
+    {
+      "adapter_version": "six_scale_canonical_adapter_v1",
+      "checkpoint_hashes": {
+        "archive": "0C394F03558ECDD7A6B81BF6C0FD8EE642C5937BA22CC852F58AE4E7DC480E32",
+        "inner": "5B753752F7C25370C6ABF973F69F58E100DAD4B5D3EA0358723358A876FDD1"
+      },
+      "model_id": "MultiResoModel-Simple",
+      "paradigm_id": "P3_MULTI_RESOLUTION_FRAME",
+      "preflight": "PASS"
+    },
+    {
+      "adapter_version": "bam_temporal_adapter_v1",
+      "checkpoint_hashes": {
+        "official_zip": "5C7379D23028606D3BEEB8B1AA5C340395FCC403CE70A2CA559EA322AB2994D1"
+      },
+      "model_id": "BAM",
+      "paradigm_id": "P4_BOUNDARY_AWARE_FRAME",
+      "preflight": "PASS"
+    },
+    {
+      "adapter_version": "sal_temporal_adapter_v1",
+      "checkpoint_hashes": {
+        "wavlm": "FDE76030DF782E140658AA5A2726D18EBFFA9FA359E11CE2B237F6EC46114D2F"
+      },
+      "model_id": "SAL",
+      "paradigm_id": "P5_SEGMENT_AWARE_SEQUENCE",
+      "preflight": "PASS"
+    },
+    {
+      "adapter_version": "official_aasist_input_adapter_v1",
+      "checkpoint_hashes": {
+        "official_checkpoint": "51D2D9CF0738172F61E2A384EC50A54A55363240F67C971ED55A92435BC1A1C0"
+      },
+      "model_id": "AASIST",
+      "paradigm_id": "WHETHER_ONLY",
+      "preflight": "PASS"
+    }
+  ],
+  "output_namespace": "results/topconf/w7_pilot/",
+  "protocol_manifest": "W7_PILOT_PROTOCOL_V1.md",
+  "protocol_sha256": "0d386e3461afeaa5a2dce361a8d7ebca58f5816f111827322576297774a51d3c",
+  "result_based_selection_count": 0,
+  "schema_version": "topconf.w7.final_execution_manifest.v1",
+  "w7_executed": false,
+  "w7_scientific_inferences": 0
+}

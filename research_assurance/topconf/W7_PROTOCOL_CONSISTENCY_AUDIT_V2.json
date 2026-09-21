@@ -1,0 +1,31 @@
+{
+  "schema_version": "topconf.w7.protocol_consistency_audit.v2",
+  "audit_date": "2026-09-21",
+  "mainline_protocol": "W7_PILOT_PROTOCOL_V1.md",
+  "preparation_protocol": "w7_preparation/W7_PILOT_PROTOCOL_DRAFT_V1.md",
+  "status": "PASS_NO_SCIENTIFIC_CONFLICT",
+  "protocol_conflicts": [],
+  "fields": [
+    {"field": "Whether-A", "status": "SEMANTICALLY_EQUIVALENT", "mainline": "duration-weighted mean of finite native higher-is-better spoof scores on native 20 ms support; fixed Level-1 FPR 0.05", "preparation": "same pooling, common support, fixed FPR and fail-closed rules"},
+    {"field": "Whether-B", "status": "SEMANTICALLY_EQUIVALENT", "mainline": "official frozen AASIST utterance detector, class 0 spoof", "preparation": "same detector, input length, mapping and identity rules"},
+    {"field": "Where", "status": "PREPARATION_MORE_EXPLICIT", "mainline": "frozen detection/frame/event/RangeEER/time-alignment evaluator", "preparation": "adds common 20 ms half-open support, native-scale retention and event conversion detail"},
+    {"field": "conditions", "status": "SEMANTICALLY_EQUIVALENT", "mainline": "clean, mechanism_shift, codec, resampling", "preparation": "same four condition IDs"},
+    {"field": "identity/source binding", "status": "PREPARATION_MORE_EXPLICIT", "mainline": "W7_GT_AND_IDENTITY_BINDING_V1.json and namespace plan", "preparation": "canonical identity tuple, parent-child binding and opaque case-id derivation"},
+    {"field": "mechanism", "status": "MAINLINE_MORE_EXPLICIT", "mainline": "frozen mechanism grid and paired-source design in confirmatory preregistration", "preparation": "contract schema restates required fields without changing the inherited grid"},
+    {"field": "resampling", "status": "PREPARATION_MORE_EXPLICIT", "mainline": "resampling condition is authorized and inherited transform contract applies", "preparation": "16k->8k->16k, scipy resample_poly, fixed Kaiser/pad/dtype/channel policies"},
+    {"field": "codec", "status": "SEMANTICALLY_EQUIVALENT", "mainline": "codec condition is authorized; no post-hoc changes", "preparation": "Opus 64 kbps at 16 kHz, explicit transform identity and fail-closed decode"},
+    {"field": "failure", "status": "SEMANTICALLY_EQUIVALENT", "mainline": "invalid/failure rows retained and handled fail-closed", "preparation": "explicit terminal taxonomy and no drop/impute/reclassify rule"},
+    {"field": "metrics", "status": "SEMANTICALLY_EQUIVALENT", "mainline": "detection, frame, event, RangeEER and time-alignment evaluator", "preparation": "same metrics plus explicit NOT_ESTIMABLE conditions"},
+    {"field": "fixed FPR", "status": "SEMANTICALLY_EQUIVALENT", "mainline": "Level-1 target FPR 0.05 empirical quantile and tie rule", "preparation": "same fixed target and no test-set optimization"},
+    {"field": "macro/micro/case/dataset aggregation", "status": "MAINLINE_MORE_EXPLICIT", "mainline": "paired-source design and predeclared mechanism/transformation/distribution grid", "preparation": "source/case statistical unit, frame rows not independent, paired-source then equal-weight grid"},
+    {"field": "model aggregation", "status": "SEMANTICALLY_EQUIVALENT", "mainline": "model x dataset x condition x owner namespaces", "preparation": "same model/localizer/distribution/condition identity joins"},
+    {"field": "bootstrap", "status": "SEMANTICALLY_EQUIVALENT", "mainline": "2,000 paired-source bootstrap; hierarchical speaker->source sensitivity", "preparation": "same paired unit and deterministic child-seed derivation"},
+    {"field": "seed", "status": "SEMANTICALLY_EQUIVALENT", "mainline": "primary seed 20260914", "preparation": "same seed and identity-derived child seeds"},
+    {"field": "CI", "status": "SEMANTICALLY_EQUIVALENT", "mainline": "two-sided percentile 95% CI", "preparation": "same CI target and NOT_ESTIMABLE fail-closed conditions"},
+    {"field": "Gate 1", "status": "SEMANTICALLY_EQUIVALENT", "mainline": ">=3 distinct localization paradigms AND >=2 external distributions", "preparation": "same threshold; stale branch snapshot said blocked, which is superseded by reconciled W6 evidence"}
+  ],
+  "resampling_protocol_incomplete": "NO",
+  "scientific_conflicts": 0,
+  "w7_execution": "NOT_EXECUTED",
+  "metrics": "NOT_MEASURED"
+}

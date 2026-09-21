@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://audiobookbench.local/topconf/mechanism-config-v1",
+  "title": "TopConf W7 mechanism configuration",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["mechanism_id", "mechanism_config_hash", "mechanism_family", "implementation", "version", "parameter_set_id", "reference_rule", "target_span_rule", "sample_rate", "codec_path", "seed_policy", "quality_gate_policy", "parameters"],
+  "properties": {
+    "mechanism_id": {"type": "string", "pattern": "^w7mech_[0-9a-f]{24}$"},
+    "mechanism_config_hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "mechanism_family": {"type": "string", "enum": ["same_speaker_splice_crossfade_control", "cross_speaker_boundary_control", "conventional_tts_replacement", "voice_conditioned_tts_vc_replacement", "neural_speech_editing_infilling"]},
+    "implementation": {"type": "string", "minLength": 1},
+    "version": {"type": "string", "minLength": 1},
+    "parameter_set_id": {"type": "string", "minLength": 1},
+    "reference_rule": {"type": "string", "minLength": 1},
+    "target_span_rule": {"type": "string", "minLength": 1},
+    "sample_rate": {"type": "integer", "minimum": 1},
+    "codec_path": {"type": "string", "minLength": 1},
+    "seed_policy": {"type": "string", "minLength": 1},
+    "quality_gate_policy": {"type": "string", "minLength": 1},
+    "parameters": {"type": "object"}
+  }
+}
