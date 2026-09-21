@@ -54,7 +54,7 @@
     "cross_speaker_boundary_control": {
       "alternatives": [],
       "candidate": {
-        "bundle_hash": "C7C663BF9C8F306931AF9C3D1F754E87BDA119B35FC6B2CC3EA5CAFA66FBA786",
+        "bundle_hash": "331F4A484A79E2C19FE856A954576F8C68FBE3CECEBB2C31EC8C85ED00CB8CDF",
         "candidate": "A",
         "channel_policy": "downmix channel-last input by arithmetic mean before transform; output mono",
         "codec_path": "NOT_APPLICABLE",
@@ -83,7 +83,7 @@
         "scientific_effect": "cross-speaker waveform replacement at the frozen target interval with deterministic boundary crossfades",
         "seed_policy": "No stochastic operation; existing case seed is not consumed",
         "source_file": "src/audiobookbench/topconf/w7_candidate_transforms.py",
-        "source_revision": "70c4141dea66738a1129b5eb8446dc18fb39a972",
+        "source_revision": "1955c8e4637c9cd00625809fda0adfa1d8f0f28b",
         "target_span_rule": "target span is the frozen GT interval [start_sample, end_sample) at 16000 Hz; no per-case manual selection",
         "version": "w7_candidate_transforms_v1"
       },
@@ -149,7 +149,7 @@
     "same_speaker_splice_crossfade_control": {
       "alternatives": [],
       "candidate": {
-        "bundle_hash": "7C482C2D40E90C2E81274C5275B87665EA4768C22BB54EDFCF015E4CA23C36D2",
+        "bundle_hash": "ABBAC07B1B9721C906BE148FE086D381624B011581A3EB3CEEADE1892474EE6D",
         "candidate": "A",
         "channel_policy": "downmix channel-last input by arithmetic mean before transform; output mono",
         "codec_path": "NOT_APPLICABLE",
@@ -181,7 +181,7 @@
         "scientific_effect": "same-speaker waveform substitution using a deterministic context window and 400-sample boundary crossfades",
         "seed_policy": "No stochastic operation; existing case seed is not consumed",
         "source_file": "src/audiobookbench/topconf/w7_candidate_transforms.py",
-        "source_revision": "70c4141dea66738a1129b5eb8446dc18fb39a972",
+        "source_revision": "1955c8e4637c9cd00625809fda0adfa1d8f0f28b",
         "target_span_rule": "target span is the frozen GT interval [start_sample, end_sample) at 16000 Hz; no per-case manual selection",
         "version": "w7_candidate_transforms_v1"
       },
@@ -238,7 +238,7 @@
   "level2_outcomes_accessed": false,
   "mechanism_case_map_sha256": "8449E9ABFA7FF5E359F00BB9CBEA7D3E6889DF3474F411D7D7E6E4338F9528C9",
   "outcome_guided_selection": false,
-  "proposed_package_sha256": "B6C6675429C85EA627A8F48E3C6CAB28F8F4B9E872ECE08FC7ECB0155E42F947",
+  "proposed_package_sha256": "512929394F7ACAFE417EC5018CA922DE73E8F56A7488D601E427ACC5F4A23117",
   "raw_p4_fields": 35,
   "real_w7_cases_used": 0,
   "recommendation_basis": "CANONICALITY_AND_REPRODUCIBILITY_ONLY",

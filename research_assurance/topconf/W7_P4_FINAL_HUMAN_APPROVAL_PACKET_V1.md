@@ -2,7 +2,7 @@
 
 Status: `PROPOSED_NOT_HUMAN_APPROVED`. This packet is pre-inference and outcome-blind. It does not authorize W7.
 
-Proposed package SHA256: `B6C6675429C85EA627A8F48E3C6CAB28F8F4B9E872ECE08FC7ECB0155E42F947`
+Proposed package SHA256: `512929394F7ACAFE417EC5018CA922DE73E8F56A7488D601E427ACC5F4A23117`
 Existing deterministic case-map SHA256: `8449E9ABFA7FF5E359F00BB9CBEA7D3E6889DF3474F411D7D7E6E4338F9528C9`
 
 Each family has exactly one recommended Candidate A. Recommendation basis is canonicality, reproducibility, source fidelity, and minimal discretionary choice only. No metric, detector, localizer, gap expectation, or Level-2 outcome was used.
@@ -19,7 +19,7 @@ Each family has exactly one recommended Candidate A. Recommendation basis is can
 - Candidate: A
 - Implementation: `AudiobookBench deterministic waveform control adapter`
 - Parameter set: `CROSS_SPEAKER_BOUNDARY_CANONICAL_V1`
-- Bundle hash: `C7C663BF9C8F306931AF9C3D1F754E87BDA119B35FC6B2CC3EA5CAFA66FBA786`
+- Bundle hash: `331F4A484A79E2C19FE856A954576F8C68FBE3CECEBB2C31EC8C85ED00CB8CDF`
 - Scientific effect: cross-speaker waveform replacement at the frozen target interval with deterministic boundary crossfades
 - Human choice: `APPROVE_A` or `REJECT_AND_STOP`
 
@@ -35,7 +35,7 @@ Each family has exactly one recommended Candidate A. Recommendation basis is can
 - Candidate: A
 - Implementation: `AudiobookBench deterministic waveform control adapter`
 - Parameter set: `SAME_SPEAKER_SPLICE_CROSSFADE_CANONICAL_V1`
-- Bundle hash: `7C482C2D40E90C2E81274C5275B87665EA4768C22BB54EDFCF015E4CA23C36D2`
+- Bundle hash: `ABBAC07B1B9721C906BE148FE086D381624B011581A3EB3CEEADE1892474EE6D`
 - Scientific effect: same-speaker waveform substitution using a deterministic context window and 400-sample boundary crossfades
 - Human choice: `APPROVE_A` or `REJECT_AND_STOP`
 
