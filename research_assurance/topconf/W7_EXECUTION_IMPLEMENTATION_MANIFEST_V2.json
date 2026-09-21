@@ -1,0 +1,20 @@
+{
+  "schema_version": "topconf.w7.execution_implementation_manifest.v2",
+  "status": "PREINFERENCE_SPECIFICATION_COMPLETION_INCOMPLETE_P4",
+  "base_protocol": "W7_PILOT_PROTOCOL_V1_1",
+  "base_protocol_sha256": "AD2C318085E66796F822134259E207C74A1A01A691ADF7E1D77D4FB1242B1C80",
+  "frozen_scientific_execution_manifest": "W7_FINAL_EXECUTION_MANIFEST_V2.json",
+  "mechanism_addendum": "W7_MECHANISM_PREINFERENCE_FREEZE_ADDENDUM_V1.json",
+  "mechanism_config": "W7_MECHANISM_EXECUTION_CONFIG_V1_PENDING_P4.json",
+  "mechanism_map": "W7_MECHANISM_CASE_MAP_DETERMINISTIC_ASSIGNMENT_V1.json",
+  "mechanism_generator": "tools/topconf/build_w7_mechanism_specification_v1.py",
+  "mechanism_case_count": 106859,
+  "scientific_population_changed": false,
+  "post_outcome_scientific_change": false,
+  "outcome_guided_change": false,
+  "w7_executed": false,
+  "scientific_inferences": 0,
+  "level2_outcomes_accessed": false,
+  "runner_status": "NOT_RUN_P4_CONFIG_INCOMPLETE",
+  "note": "This manifest records pre-inference specification completion and cannot authorize W7 inference."
+}

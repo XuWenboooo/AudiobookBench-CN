@@ -1,0 +1,15 @@
+{
+  "schema_version": "topconf.bam.rights_final_adjudication.v3",
+  "supersedes_by_addition_only": "BAM_RIGHTS_FINAL_ADJUDICATION_V2.json",
+  "checkpoint_identity": "PASS_EXACT_PINNED_OFFICIAL_SOURCE",
+  "checkpoint_officially_provided_for_evaluation": true,
+  "local_research_evaluation_supported": true,
+  "explicit_weight_redistribution_license": "NOT_ESTABLISHED",
+  "rights_gate": "PASS_FOR_LOCAL_RESEARCH_EVALUATION_WITH_RESTRICTIONS",
+  "do_not_redistribute_checkpoint": true,
+  "scientific_scope": "No W7 inference, prediction, metric, or Level-2 outcome was performed or changed.",
+  "evidence_artifact": "BAM_CHECKPOINT_OFFICIAL_USE_EVIDENCE_V1.json",
+  "source_revision": "55f3fb9e3b4dd6281597b86d7712fb23454179f6",
+  "source_readme_sha256": "D47FA2CD3AE6A00186DCFE824F63163A3C39F1D25AE0A79880BF71340DAFBAE1",
+  "decision": "The official checkpoint provenance and test-only evaluation path are sufficient for restricted local research evaluation; they do not establish redistribution rights."
+}

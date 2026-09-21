@@ -1,0 +1,22 @@
+{
+  "schema_version": "topconf.bam.checkpoint_official_use_evidence.v1",
+  "audit_date": "2026-09-21",
+  "source_repository": "https://github.com/media-sec-lab/BAM",
+  "source_revision": "55f3fb9e3b4dd6281597b86d7712fb23454179f6",
+  "readme_path": "research_assurance/topconf/w6_recovery/sources/BAM-55f3fb9e3b4dd6281597b86d7712fb23454179f6/README.md",
+  "readme_sha256": "D47FA2CD3AE6A00186DCFE824F63163A3C39F1D25AE0A79880BF71340DAFBAE1",
+  "checkpoint_source": "https://drive.google.com/file/d/1eL3Ca27hEruI20lkoqkQEnZlb2GzTyHT/view?usp=sharing",
+  "checkpoint_sha256": "5C7379D23028606D3BEEB8B1AA5C340395FCC403CE70A2CA559EA322AB2994D1",
+  "checkpoint_officially_provided_for_evaluation": true,
+  "local_research_evaluation_supported_by_official_source": true,
+  "publication_attribution_requested": true,
+  "explicit_weight_redistribution_license": "NOT_ESTABLISHED",
+  "do_not_redistribute_checkpoint": true,
+  "evidence_lines": [
+    {"line": 59, "claim": "authors provide checkpoint and link the official Drive object"},
+    {"line": 62, "claim": "authors provide test-only evaluation command using checkpoint"},
+    {"line": 68, "claim": "authors request citation for code and results in a paper"}
+  ],
+  "scientific_inferences": 0,
+  "level2_outcomes_accessed": false
+}

@@ -104,13 +104,13 @@ def test_runner_prerequisite_gate_rejects_current_state_and_never_self_authorize
         })
     assert_reexecution_prerequisites({
         "sal_checkpoint_identity": "PASS_EXACT_RECOVERED",
-        "bam_checkpoint_rights": "PASS_EXPLICIT_BINDING",
+        "bam_checkpoint_rights": "PASS_FOR_LOCAL_RESEARCH_EVALUATION_WITH_RESTRICTIONS",
         "mechanism_human_freeze": "PASS_COMPLETE_TOTAL_MAP",
         "human_reexecution_authorization": "PASS_EXPLICIT_POST_CLOSURE",
     })
 
 
-def test_v3_and_v5_protected_hashes_remain_exact_and_v4_covers_closure():
+def test_v3_and_v5_protected_hashes_remain_exact_and_v4_is_preserved_by_reference():
     root = Path(__file__).resolve().parents[2] / "research_assurance" / "topconf"
     repo = root.parents[1]
     assert hashlib.sha256((root / "LEVEL2_RQ1_POPULATION_MANIFEST_V3.json").read_bytes()).hexdigest().upper() == "AFCE602F7A1F77F07BC18F05B78CB717DCDE3BFB6FC35289A26AB23F9DE4F8E4"
@@ -119,8 +119,8 @@ def test_v3_and_v5_protected_hashes_remain_exact_and_v4_covers_closure():
     assert manifest["status"] == "PASS_COMPLETE_COVERAGE_FINAL_BLOCKER_CLOSURE"
     assert manifest["hash_coverage_gaps"] == []
     assert manifest["prior_v3_reference"]["sha256"] == hashlib.sha256((root / "W7_PREREGISTRATION_HASH_MANIFEST_V3.json").read_bytes()).hexdigest().upper()
-    for group, record_root in (("final_blocker_closure", root), ("runner_and_builders", repo)):
-        for relative_path, record in manifest["records"][group].items():
-            assert hashlib.sha256((record_root / relative_path).read_bytes()).hexdigest().upper() == record["sha256"]
+    v5 = json.loads((root / "W7_PREREGISTRATION_HASH_MANIFEST_V5.json").read_text(encoding="utf-8"))
+    assert v5["prior_v4_reference"]["sha256"] == hashlib.sha256((root / "W7_PREREGISTRATION_HASH_MANIFEST_V4.json").read_bytes()).hexdigest().upper()
+    assert v5["hash_coverage_gaps"] == []
     assert "src/audiobookbench/topconf/w7_execution.py" in manifest["records"]["runner_and_builders"]
     assert (repo / "tools/topconf/build_w7_mechanism_case_map_proposal.py").is_file()

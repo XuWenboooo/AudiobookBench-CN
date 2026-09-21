@@ -1,0 +1,106 @@
+{
+  "coverage_scope": "pre-inference rights and mechanism specification closure; V4 and frozen scientific artifacts preserved by reference",
+  "hash_algorithm": "SHA-256",
+  "hash_coverage_gaps": [],
+  "level2_outcomes_accessed": false,
+  "mechanism_config_complete": false,
+  "mechanism_p4_count": 35,
+  "metrics": "NOT_MEASURED",
+  "outcome_guided_change": false,
+  "post_outcome_scientific_change": false,
+  "prior_v4_reference": {
+    "sha256": "9EA36D70E41361AA509063BA18EA5CFC5104AC01CACB42FD97536D7CD995ECC7",
+    "size": 3034
+  },
+  "records": {
+    "closure": {
+      "BAM_CHECKPOINT_OFFICIAL_USE_EVIDENCE_V1.json": {
+        "sha256": "B9801D6F3F84A87414CF2B4E4A6B5EDE5953F72C65311E6C7406C5675BC240A4",
+        "size": 1278
+      },
+      "BAM_CHECKPOINT_OFFICIAL_USE_EVIDENCE_V1.md": {
+        "sha256": "7057423FD2A5BF74932800DFE761ED0013DED1A7BD5B5C49DCBEC48A9A2D5FEB",
+        "size": 1674
+      },
+      "BAM_RIGHTS_FINAL_ADJUDICATION_V2.json": {
+        "sha256": "B49C9BEC2621AE9282CACC7FF4B87FDD55E621D203CC7D8BC0DF9B2DF84E261F",
+        "size": 1022
+      },
+      "BAM_RIGHTS_FINAL_ADJUDICATION_V2.md": {
+        "sha256": "67163E5663FE54B76002BDE20A94A7677740785576F58C87978D207F30462A30",
+        "size": 1504
+      },
+      "BAM_RIGHTS_FINAL_ADJUDICATION_V3.json": {
+        "sha256": "622977782026D138E998FEADD62928B67AAA38A617346F1D3CDFA3EB8059C813",
+        "size": 1006
+      },
+      "W7_EXECUTION_IMPLEMENTATION_MANIFEST_V2.json": {
+        "sha256": "7EFDF2C20461353460AA9BA00DF81B879C3EDFCD4DE93C44A3BBA5E52EF10B65",
+        "size": 1074
+      },
+      "W7_EXECUTION_READINESS_REAUDIT_V3.json": {
+        "sha256": "B2C820F06B22B1C386E821FD34FAABA9356C4F20F87C7C14DBAA20711EE6EE6A",
+        "size": 2515
+      },
+      "W7_EXECUTION_READINESS_REAUDIT_V3.md": {
+        "sha256": "AB523B7EA8D6E3BC6B6831A5817FDBFEE122072884F08B788C39CAD896403559",
+        "size": 1198
+      },
+      "W7_MECHANISM_CASE_MAP_DETERMINISTIC_ASSIGNMENT_V1.json": {
+        "sha256": "27D650D41A8FEFFD5D76D5479A1E6E7CC0D3B40F6DBFD777C1FF03BF3436CC88",
+        "size": 2441
+      },
+      "W7_MECHANISM_CASE_MAP_DETERMINISTIC_ASSIGNMENT_V1.jsonl.gz": {
+        "sha256": "8449E9ABFA7FF5E359F00BB9CBEA7D3E6889DF3474F411D7D7E6E4338F9528C9",
+        "size": 24905322
+      },
+      "W7_MECHANISM_EXECUTION_CONFIG_V1_PENDING_P4.json": {
+        "sha256": "26AB96585A73E7EE9A9DC42F264056E1428B283ABB32E9309AC71DBEFB124573",
+        "size": 6044
+      },
+      "W7_MECHANISM_P4_HUMAN_DECISION_TEMPLATE_V1.md": {
+        "sha256": "54777F1261F6463BA7EF75EA24BBCBCD58AD0BFBE37D8FFD3F6097621D1BBB2E",
+        "size": 1205
+      },
+      "W7_MECHANISM_PREINFERENCE_FREEZE_ADDENDUM_V1.json": {
+        "sha256": "380B8DA2CD1306FE1AC9E1160F59147AEFE596E6E00156C9F68CE52A2665B0B6",
+        "size": 1766
+      },
+      "W7_MECHANISM_PREINFERENCE_FREEZE_ADDENDUM_V1.md": {
+        "sha256": "9D4CFFDA37C53E91BAF24B5E50876508F64C14E48039347EAEC2A6C12A18E613",
+        "size": 1538
+      },
+      "W7_MECHANISM_SPECIFICATION_AUDIT_V1.json": {
+        "sha256": "CC5C851F60B588FB1C8307788A63BE0DEEC2BCF09A24A9EC304784F9FC095626",
+        "size": 1408
+      }
+    },
+    "code": {
+      "src/audiobookbench/topconf/w7_execution.py": {
+        "sha256": "500D0F5DB633975C07471D0F772E70884A375A8DB539A86DE7EA178AE82D6FCE",
+        "size": 6404
+      },
+      "src/audiobookbench/topconf/w7_mechanism_spec.py": {
+        "sha256": "6BE66167CACD5DF03F64947D95AEB0979E3A7ACB328C54A878DB05E4027EC86B",
+        "size": 3536
+      },
+      "tests/topconf/test_w7_execution_recovery.py": {
+        "sha256": "A7821603879D278CF1072AA58DA75F62EE3427BD8178B306439405FC2D6C766E",
+        "size": 7418
+      },
+      "tools/topconf/build_w7_mechanism_specification_v1.py": {
+        "sha256": "9AA81B895177AE8AA01B1EEE39C0B068794C2770781E89B43A5455E851A02841",
+        "size": 9454
+      },
+      "tools/topconf/build_w7_preregistration_hash_manifest_v5.py": {
+        "sha256": "2A69C7C8BFF14A8CA9EFD844FDAEB48774B164A974EBB2DA30EB4176DCF899F9",
+        "size": 3732
+      }
+    }
+  },
+  "schema_version": "topconf.w7.preregistration_hash_manifest.v5",
+  "scientific_inferences": 0,
+  "scientific_population_changed": false,
+  "status": "INCOMPLETE_P4_FAIL_CLOSED",
+  "w7_executed": false
+}

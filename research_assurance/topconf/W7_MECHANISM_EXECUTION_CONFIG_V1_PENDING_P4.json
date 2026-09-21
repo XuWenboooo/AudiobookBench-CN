@@ -1,0 +1,137 @@
+{
+  "assignment_rule": "SHA256(protocol_id||distribution_id||case_id||W7_MECHANISM_ASSIGNMENT_V1)[:64bits] mod len(lexicographically_sorted_eligible_families)",
+  "assignment_salt": "W7_MECHANISM_ASSIGNMENT_V1",
+  "eligible_family_registry": [
+    "conventional_tts_replacement",
+    "cross_speaker_boundary_control",
+    "neural_speech_editing_infilling",
+    "same_speaker_splice_crossfade_control",
+    "voice_conditioned_tts_vc_replacement"
+  ],
+  "family_config_status": {
+    "conventional_tts_replacement": {
+      "configuration_status": "INCOMPLETE_P4_HUMAN_DECISION_REQUIRED",
+      "fixed_fields": {
+        "failure_policy": "terminal_generation_or_quality_failure; no_drop; no_impute; no_outcome_retry",
+        "quality_gate_policy": "finite_waveform; valid_duration; valid_sample_rate; no_corruption; contract_structural_validity_only",
+        "sample_rate": 16000,
+        "seed_policy": "SHA256(protocol_id||distribution_id||case_id||mechanism_family||W7_MECHANISM_SEED_V1)[:64bits]"
+      },
+      "mechanism_config_hash": "NOT_AVAILABLE",
+      "mechanism_family": "conventional_tts_replacement",
+      "p4_fields": [
+        "implementation",
+        "version",
+        "parameter_set_id",
+        "reference_rule",
+        "target_span_rule",
+        "codec_path",
+        "parameters"
+      ]
+    },
+    "cross_speaker_boundary_control": {
+      "configuration_status": "INCOMPLETE_P4_HUMAN_DECISION_REQUIRED",
+      "fixed_fields": {
+        "failure_policy": "terminal_generation_or_quality_failure; no_drop; no_impute; no_outcome_retry",
+        "quality_gate_policy": "finite_waveform; valid_duration; valid_sample_rate; no_corruption; contract_structural_validity_only",
+        "sample_rate": 16000,
+        "seed_policy": "SHA256(protocol_id||distribution_id||case_id||mechanism_family||W7_MECHANISM_SEED_V1)[:64bits]"
+      },
+      "mechanism_config_hash": "NOT_AVAILABLE",
+      "mechanism_family": "cross_speaker_boundary_control",
+      "p4_fields": [
+        "implementation",
+        "version",
+        "parameter_set_id",
+        "reference_rule",
+        "target_span_rule",
+        "codec_path",
+        "parameters"
+      ]
+    },
+    "neural_speech_editing_infilling": {
+      "configuration_status": "INCOMPLETE_P4_HUMAN_DECISION_REQUIRED",
+      "fixed_fields": {
+        "failure_policy": "terminal_generation_or_quality_failure; no_drop; no_impute; no_outcome_retry",
+        "quality_gate_policy": "finite_waveform; valid_duration; valid_sample_rate; no_corruption; contract_structural_validity_only",
+        "sample_rate": 16000,
+        "seed_policy": "SHA256(protocol_id||distribution_id||case_id||mechanism_family||W7_MECHANISM_SEED_V1)[:64bits]"
+      },
+      "mechanism_config_hash": "NOT_AVAILABLE",
+      "mechanism_family": "neural_speech_editing_infilling",
+      "p4_fields": [
+        "implementation",
+        "version",
+        "parameter_set_id",
+        "reference_rule",
+        "target_span_rule",
+        "codec_path",
+        "parameters"
+      ]
+    },
+    "same_speaker_splice_crossfade_control": {
+      "configuration_status": "INCOMPLETE_P4_HUMAN_DECISION_REQUIRED",
+      "fixed_fields": {
+        "failure_policy": "terminal_generation_or_quality_failure; no_drop; no_impute; no_outcome_retry",
+        "quality_gate_policy": "finite_waveform; valid_duration; valid_sample_rate; no_corruption; contract_structural_validity_only",
+        "sample_rate": 16000,
+        "seed_policy": "SHA256(protocol_id||distribution_id||case_id||mechanism_family||W7_MECHANISM_SEED_V1)[:64bits]"
+      },
+      "mechanism_config_hash": "NOT_AVAILABLE",
+      "mechanism_family": "same_speaker_splice_crossfade_control",
+      "p4_fields": [
+        "implementation",
+        "version",
+        "parameter_set_id",
+        "reference_rule",
+        "target_span_rule",
+        "codec_path",
+        "parameters"
+      ]
+    },
+    "voice_conditioned_tts_vc_replacement": {
+      "configuration_status": "INCOMPLETE_P4_HUMAN_DECISION_REQUIRED",
+      "fixed_fields": {
+        "failure_policy": "terminal_generation_or_quality_failure; no_drop; no_impute; no_outcome_retry",
+        "quality_gate_policy": "finite_waveform; valid_duration; valid_sample_rate; no_corruption; contract_structural_validity_only",
+        "sample_rate": 16000,
+        "seed_policy": "SHA256(protocol_id||distribution_id||case_id||mechanism_family||W7_MECHANISM_SEED_V1)[:64bits]"
+      },
+      "mechanism_config_hash": "NOT_AVAILABLE",
+      "mechanism_family": "voice_conditioned_tts_vc_replacement",
+      "p4_fields": [
+        "implementation",
+        "version",
+        "parameter_set_id",
+        "reference_rule",
+        "target_span_rule",
+        "codec_path",
+        "parameters"
+      ]
+    }
+  },
+  "fixed_fields": {
+    "failure_policy": "terminal_generation_or_quality_failure; no_drop; no_impute; no_outcome_retry",
+    "quality_gate_policy": "finite_waveform; valid_duration; valid_sample_rate; no_corruption; contract_structural_validity_only",
+    "sample_rate": 16000,
+    "seed_policy": "SHA256(protocol_id||distribution_id||case_id||mechanism_family||W7_MECHANISM_SEED_V1)[:64bits]"
+  },
+  "level2_outcomes_accessed": false,
+  "mechanism_config_sha256": "NOT_AVAILABLE",
+  "p4_fields": [
+    "implementation",
+    "version",
+    "parameter_set_id",
+    "reference_rule",
+    "target_span_rule",
+    "codec_path",
+    "parameters"
+  ],
+  "protocol_id": "W7_PILOT_PROTOCOL_V1_1",
+  "reason": "Pinned pre-W7 evidence does not uniquely provide implementation, version, parameter set, reference/span, codec path, or parameter values for any permitted family.",
+  "schema_version": "topconf.w7.mechanism_execution_config.v1",
+  "scientific_inferences": 0,
+  "seed_rule": "SHA256(protocol_id||distribution_id||case_id||mechanism_family||W7_MECHANISM_SEED_V1)[:64bits]",
+  "seed_salt": "W7_MECHANISM_SEED_V1",
+  "status": "INCOMPLETE_P4_FAIL_CLOSED"
+}

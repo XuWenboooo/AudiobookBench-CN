@@ -1,0 +1,58 @@
+{
+  "assignment_rule": "SHA256(protocol_id||distribution_id||case_id||W7_MECHANISM_ASSIGNMENT_V1)[:64bits] mod len(lexicographically_sorted_eligible_families)",
+  "assignment_salt": "W7_MECHANISM_ASSIGNMENT_V1",
+  "detailed_records": "W7_MECHANISM_CASE_MAP_DETERMINISTIC_ASSIGNMENT_V1.jsonl.gz",
+  "detailed_records_sha256": "8449E9ABFA7FF5E359F00BB9CBEA7D3E6889DF3474F411D7D7E6E4338F9528C9",
+  "distribution_counts": {
+    "LlamaPartialSpoof": 64388,
+    "PartialEdit": 42471
+  },
+  "distribution_family_counts": {
+    "LlamaPartialSpoof": {
+      "conventional_tts_replacement": 12888,
+      "cross_speaker_boundary_control": 12770,
+      "neural_speech_editing_infilling": 12834,
+      "same_speaker_splice_crossfade_control": 12884,
+      "voice_conditioned_tts_vc_replacement": 13012
+    },
+    "PartialEdit": {
+      "conventional_tts_replacement": 8456,
+      "cross_speaker_boundary_control": 8568,
+      "neural_speech_editing_infilling": 8648,
+      "same_speaker_splice_crossfade_control": 8405,
+      "voice_conditioned_tts_vc_replacement": 8394
+    }
+  },
+  "eligible_family_exclusions": {},
+  "family_counts": {
+    "conventional_tts_replacement": 21344,
+    "cross_speaker_boundary_control": 21338,
+    "neural_speech_editing_infilling": 21482,
+    "same_speaker_splice_crossfade_control": 21289,
+    "voice_conditioned_tts_vc_replacement": 21406
+  },
+  "level2_outcomes_accessed": false,
+  "map_determinism": "PASS_GENERATOR_CANONICAL_BYTES",
+  "mechanism_config": "W7_MECHANISM_EXECUTION_CONFIG_V1_PENDING_P4.json",
+  "mechanism_config_sha256": "26AB96585A73E7EE9A9DC42F264056E1428B283ABB32E9309AC71DBEFB124573",
+  "outcome_guided_change": false,
+  "p4_count": 35,
+  "p4_fields": [
+    "implementation",
+    "version",
+    "parameter_set_id",
+    "reference_rule",
+    "target_span_rule",
+    "codec_path",
+    "parameters"
+  ],
+  "post_outcome_scientific_change": false,
+  "records": 106859,
+  "schema_version": "topconf.w7.mechanism_case_map_deterministic_assignment.v1",
+  "scientific_inferences": 0,
+  "scientific_population_changed": false,
+  "seed_rule": "SHA256(protocol_id||distribution_id||case_id||mechanism_family||W7_MECHANISM_SEED_V1)[:64bits]",
+  "source_case_manifest": "W7_FINAL_CASE_MANIFEST_V2.jsonl.gz",
+  "source_case_manifest_sha256": "BEA3EB3E31F1A81219617D6994ACD3381C99B972300020C4B781B8FB878DE572",
+  "status": "INCOMPLETE_P4_FAIL_CLOSED"
+}

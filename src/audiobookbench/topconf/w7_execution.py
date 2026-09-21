@@ -79,12 +79,12 @@ def assert_reexecution_prerequisites(prerequisites: Mapping[str, str]) -> None:
     authorization.
     """
     required = {
-        "sal_checkpoint_identity": "PASS_EXACT_RECOVERED",
-        "bam_checkpoint_rights": "PASS_EXPLICIT_BINDING",
-        "mechanism_human_freeze": "PASS_COMPLETE_TOTAL_MAP",
-        "human_reexecution_authorization": "PASS_EXPLICIT_POST_CLOSURE",
+        "sal_checkpoint_identity": {"PASS_EXACT_RECOVERED"},
+        "bam_checkpoint_rights": {"PASS_EXPLICIT_BINDING", "PASS_FOR_LOCAL_RESEARCH_EVALUATION_WITH_RESTRICTIONS"},
+        "mechanism_human_freeze": {"PASS_COMPLETE_TOTAL_MAP"},
+        "human_reexecution_authorization": {"PASS_EXPLICIT_POST_CLOSURE"},
     }
-    missing = [name for name, expected in required.items() if prerequisites.get(name) != expected]
+    missing = [name for name, expected in required.items() if prerequisites.get(name) not in expected]
     if missing:
         raise W7ExecutionContractError("W7 re-execution prerequisites are not closed: " + ", ".join(missing))
 
