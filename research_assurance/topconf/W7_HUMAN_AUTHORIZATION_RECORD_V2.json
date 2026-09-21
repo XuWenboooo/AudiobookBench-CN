@@ -1,0 +1,36 @@
+{
+  "record_version": "V2",
+  "authorized": true,
+  "w7_formal_pilot_authorized": true,
+  "w7_execution_authorized": true,
+  "authorized_stage": "W7_FORMAL_PILOT_ONLY",
+  "authorization_date": "2026-09-21",
+  "authorization_actor": "HUMAN_USER_IN_CURRENT_TASK",
+  "expected_pre_authorization_head": "5cf016098d519c76da1d82f70f8a792d27aac077",
+  "protocol": {
+    "path": "research_assurance/topconf/W7_PILOT_PROTOCOL_V1_1.md",
+    "sha256": "AD2C318085E66796F822134259E207C74A1A01A691ADF7E1D77D4FB1242B1C80"
+  },
+  "final_case_manifest": {
+    "path": "research_assurance/topconf/W7_FINAL_CASE_MANIFEST_V2.jsonl.gz",
+    "sha256": "BEA3EB3E31F1A81219617D6994ACD3381C99B972300020C4B781B8FB878DE572"
+  },
+  "preregistration_hash_manifest": {
+    "path": "research_assurance/topconf/W7_PREREGISTRATION_HASH_MANIFEST_V2.json",
+    "sha256": "ce15af549e121679d5eba2374c544e3ce82f355053984b3e56c939a3a573d963"
+  },
+  "final_execution_manifest_sha256": "35a2324c70f1bf3d0770d55382032027ec0c61e19123e6999437fdef829c4ecb",
+  "authorized_localizers": ["CFPRF", "MultiReso", "SAL", "BAM"],
+  "authorized_distributions": ["PartialEdit", "LlamaPartialSpoof R01TTS.0.b"],
+  "prohibited_scopes": [
+    "LEVEL2",
+    "CONFIRMATORY",
+    "RQ2",
+    "RQ3",
+    "ADAPTIVE_ATTACK",
+    "POST_RESULT_SEARCH",
+    "OUTCOME_GUIDED_SELECTION"
+  ],
+  "preserved_records": ["research_assurance/topconf/W7_HUMAN_AUTHORIZATION_RECORD_V1.md"],
+  "pre_inference_action": "REQUIRE_FRESH_HASH_GATE; FAIL_CLOSED_ON_MISMATCH"
+}
