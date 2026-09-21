@@ -1,0 +1,114 @@
+{
+  "schema_version": "topconf.w7.human_authorization_precheck.v1",
+  "audit_date": "2026-09-21",
+  "current_stage": "W7_HUMAN_AUTHORIZATION_PRECHECK",
+  "ready_for_human_authorization": "NO",
+  "authorized": "NO",
+  "w7_formal_pilot_authorized": "NO",
+  "w7_execution_authorized": "NO",
+  "w7_executed": false,
+  "w7_scientific_inferences": 0,
+  "level2_outcomes_accessed": "NO",
+  "metrics": "NOT_MEASURED",
+  "remote_verification": "PASS",
+  "git": {
+    "branch": "topconf-w7-reconciliation",
+    "local_head": "ae1796d85fd0a71370073ae32fd9f8a1688d092f",
+    "worktree_clean_before_audit_artifacts": true,
+    "remote_mismatch": false
+  },
+  "protected_identity": {
+    "v3_sha256": "AFCE602F7A1F77F07BC18F05B78CB717DCDE3BFB6FC35289A26AB23F9DE4F8E4",
+    "v3_recomputed_match": true,
+    "v5_sha256": "6F77CAE912CFF9D9AFD7C75C4EA0910298FC11454D7B8104DBF0551B0AFE821E",
+    "v5_recomputed_match": true,
+    "phase4_9r_reopened": false,
+    "confirmatory_outcomes_accessed": false
+  },
+  "preregistration_hashes": {
+    "listed_artifact_count": 15,
+    "listed_artifacts_all_match": true,
+    "coverage_status": "FAIL_COVERAGE_INCOMPLETE",
+    "missing_required_coverage": [
+      "W7_MODEL_PREFLIGHT_V1.json",
+      "PHASE3V_CHECKPOINT_MANIFEST_V1.json",
+      "W7_DISTRIBUTION_ACCEPTANCE_FINAL_V2.md",
+      "distribution acceptance schemas",
+      "generic temporal GT adapter contract and schema",
+      "bootstrap/statistical configuration",
+      "W7_ENVIRONMENT_MANIFEST_V1"
+    ]
+  },
+  "gate1": {
+    "required_exact_criterion": "GAP_OBSERVED_IN >= 3 DISTINCT localization paradigms AND >= 2 external distributions",
+    "frozen_protocol_contains_exact_criterion": false,
+    "status": "FAIL"
+  },
+  "localizers": {
+    "eligible": ["CFPRF", "MultiResoModel-Simple", "SAL", "BAM"],
+    "preflight_status": "PASS_FOR_FOUR_ELIGIBLE_LOCALIZERS",
+    "strict_load_and_synthetic_smoke": "PASS",
+    "formal_w7_inference": "NOT_RUN"
+  },
+  "distributions": {
+    "PartialEdit": {
+      "split": "E1",
+      "count": 42471,
+      "migrated_integrity": "PASS",
+      "archive_md5": "1F489D2FF488DDD6C9B655127725AF2F",
+      "archive_sha256": "F4BB1A632EED8DDC66BB9285DE8B4BC07192D0539385EFE9AFC9EA04AEF3DDCB",
+      "metadata_sha256": "ADEECB0A7DD39A982223C07970E02E41CA5395EA3D484FCC6CE03174EBDF6CBC"
+    },
+    "LlamaPartialSpoof": {
+      "split": "R01TTS.0.b",
+      "count": 64388,
+      "official_zenodo_record": "14214149",
+      "rights": "PASS_WITH_ATTRIBUTION",
+      "record_acceptance": "PASS_FOR_PREPARATION_ONLY",
+      "migrated_integrity": "FAIL_NOT_MIGRATED_FULL_ARCHIVE"
+    }
+  },
+  "case_manifest": {
+    "records": 106859,
+    "planned_condition_rows": 427436,
+    "unique_case_ids": 106859,
+    "duplicate_case_ids": 0,
+    "distributions": ["PartialEdit", "LlamaPartialSpoof"],
+    "null_source_or_condition_audio_hash_records": 106859,
+    "bad_case_id_format_records": 106859,
+    "status": "FAIL_METADATA_ONLY_UNBOUND_AUDIO"
+  },
+  "junction_alias_audit": {
+    "status": "PASS_FOR_MIGRATED_TARGETS",
+    "f_drive_entries_are_junctions": true,
+    "same_target_as_g_drive": true,
+    "same_file_hash_samples": [
+      "PartialEdit_v1.1/PartialEdit_E1E2.csv",
+      "checkpoints/CFPRF/1FDN_PS.pth",
+      "LlamaPartialSpoof_v1.0.b/split/train.utt"
+    ],
+    "canonical_scan_partialedit_wav_count": 42471
+  },
+  "execution_manifest": {
+    "status": "FROZEN_NO_RUN_AUTHORIZATION",
+    "conditions": ["clean", "mechanism_shift", "codec", "resampling"],
+    "output_namespace": "results/topconf/w7_pilot/",
+    "bootstrap_seed": 20260914,
+    "bootstrap_replicates": 2000,
+    "metrics_status": "NOT_MEASURED"
+  },
+  "scoped_tests": {
+    "pytest": "134 passed in 9.29s",
+    "preregistration_checker": "PASS",
+    "reconciliation_checker": "PASS",
+    "git_diff_check": "PASS"
+  },
+  "blockers": [
+    "GATE1_INTEGRITY_FAIL_FROZEN_PROTOCOL_LACKS_EXACT_THRESHOLD",
+    "LLAMA_MIGRATED_ASSET_INTEGRITY_FAIL_NOT_MIGRATED_FULL_ARCHIVE",
+    "CASE_MANIFEST_INTEGRITY_FAIL_METADATA_ONLY_UNBOUND_AUDIO",
+    "PREREGISTRATION_HASH_COVERAGE_FAIL_COVERAGE_INCOMPLETE"
+  ],
+  "human_action_required": "Resolve blockers, rerun the complete read-only precheck, and provide explicit human authorization before any first W7 inference.",
+  "stop_after_precheck": true
+}
