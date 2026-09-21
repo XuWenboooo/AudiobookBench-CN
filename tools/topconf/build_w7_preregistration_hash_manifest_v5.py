@@ -23,6 +23,8 @@ FILES = [
     "W7_P4_PROPOSED_FREEZE_PACKAGE_A_V1.json",
     "W7_P4_FINAL_HUMAN_DECISION_TABLE_V1.md",
     "W7_P4_FINAL_HUMAN_APPROVAL_PACKET_V1.md",
+    "W7_P4_CANDIDATE_EXECUTABILITY_AUDIT_V1.json",
+    "W7_P4_HUMAN_DECISION_SUMMARY_V2.md",
     "W7_MECHANISM_CASE_MAP_DETERMINISTIC_ASSIGNMENT_V1.json",
     "W7_MECHANISM_CASE_MAP_DETERMINISTIC_ASSIGNMENT_V1.jsonl.gz",
     "W7_MECHANISM_EXECUTION_CONFIG_V1_PENDING_P4.json",
@@ -43,7 +45,9 @@ CODE = [
     "tools/topconf/build_w7_p4_decision_compression_v1.py",
     "tests/topconf/test_w7_p4_decision_compression.py",
     "tests/topconf/test_w7_final_human_decision_packet.py",
+    "tests/topconf/test_w7_candidate_executability_precheck.py",
     "tools/topconf/build_w7_final_human_decision_packet_v1.py",
+    "tools/topconf/build_w7_candidate_executability_precheck_v1.py",
 ]
 
 

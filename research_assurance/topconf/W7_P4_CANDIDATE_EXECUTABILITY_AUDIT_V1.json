@@ -1,0 +1,142 @@
+{
+  "dependency_state": {
+    "TTS": false,
+    "audiocraft": false,
+    "numpy": true,
+    "scipy": true,
+    "torch": true,
+    "torchaudio": true,
+    "xformers": false
+  },
+  "exact_blockers": [
+    "M1 VITS checkpoint is not present locally; model load and synthetic inference were not run.",
+    "M3 VoiceCraft checkpoint is not present locally and audiocraft/xformers are unavailable; model load and synthetic inference were not run.",
+    "M5 YourTTS checkpoint is not present locally and the TTS package is unavailable; model load and synthetic inference were not run."
+  ],
+  "families": {
+    "conventional_tts_replacement": {
+      "bundle_hash": "B20CB1B8D4B428C3BDD420041ABA3A2231D3D99C51CF31FFD9D010DCE3E02C03",
+      "determinism": "NOT_RUN",
+      "executability_blocker": true,
+      "implementation": "VITS official single-speaker TTS",
+      "implementation_ambiguity": false,
+      "missing_dependency": false,
+      "missing_local_asset": true,
+      "model_or_adapter_load": "NOT_EXECUTABLE_MISSING_LOCAL_ASSET_OR_DEPENDENCY",
+      "output_validity": "NOT_RUN",
+      "parameter_set_id": "VITS_LJS_CANONICAL_V1",
+      "ready_for_human_approval": false,
+      "rights": {
+        "local_research_use_allowed": "RESTRICTED",
+        "redistribution": "NOT_ESTABLISHED",
+        "rights_blocker": false
+      },
+      "scientific_ambiguity": false,
+      "synthetic_execution": "NOT_RUN_MODEL_ASSET_GATE",
+      "version": "commit 2e561ba58618d021b5b8323d3765880f7e0ecfdb"
+    },
+    "cross_speaker_boundary_control": {
+      "bundle_hash": "331F4A484A79E2C19FE856A954576F8C68FBE3CECEBB2C31EC8C85ED00CB8CDF",
+      "determinism": "PASS",
+      "executability_blocker": false,
+      "implementation": "AudiobookBench deterministic waveform control adapter",
+      "implementation_ambiguity": false,
+      "model_or_adapter_load": "PASS",
+      "output_validity": "PASS",
+      "parameter_set_id": "CROSS_SPEAKER_BOUNDARY_CANONICAL_V1",
+      "ready_for_human_approval": true,
+      "rights": {
+        "local_research_use_allowed": "RESTRICTED",
+        "redistribution": "NOT_ESTABLISHED",
+        "rights_blocker": false
+      },
+      "scientific_ambiguity": false,
+      "synthetic_execution": "PASS",
+      "version": "w7_candidate_transforms_v1"
+    },
+    "neural_speech_editing_infilling": {
+      "bundle_hash": "121656A1688F5A4DBBFCBE6B1575DA44E9BA962FAF510E6846CA9D818B5EA803",
+      "determinism": "NOT_RUN",
+      "executability_blocker": true,
+      "implementation": "VoiceCraft official neural codec language model",
+      "implementation_ambiguity": false,
+      "missing_dependency": true,
+      "missing_local_asset": true,
+      "model_or_adapter_load": "NOT_EXECUTABLE_MISSING_LOCAL_ASSET_OR_DEPENDENCY",
+      "output_validity": "NOT_RUN",
+      "parameter_set_id": "VOICECRAFT_GIGA830M_CANONICAL_V1",
+      "ready_for_human_approval": false,
+      "rights": {
+        "local_research_use_allowed": "RESTRICTED",
+        "redistribution": "NOT_ESTABLISHED",
+        "rights_blocker": false
+      },
+      "scientific_ambiguity": false,
+      "synthetic_execution": "NOT_RUN_MODEL_ASSET_GATE",
+      "version": "commit f0a7a971363905883a21c466a3aa4ea2d4c0b690"
+    },
+    "same_speaker_splice_crossfade_control": {
+      "bundle_hash": "ABBAC07B1B9721C906BE148FE086D381624B011581A3EB3CEEADE1892474EE6D",
+      "determinism": "PASS",
+      "executability_blocker": false,
+      "implementation": "AudiobookBench deterministic waveform control adapter",
+      "implementation_ambiguity": false,
+      "model_or_adapter_load": "PASS",
+      "output_validity": "PASS",
+      "parameter_set_id": "SAME_SPEAKER_SPLICE_CROSSFADE_CANONICAL_V1",
+      "ready_for_human_approval": true,
+      "rights": {
+        "local_research_use_allowed": "RESTRICTED",
+        "redistribution": "NOT_ESTABLISHED",
+        "rights_blocker": false
+      },
+      "scientific_ambiguity": false,
+      "synthetic_execution": "PASS",
+      "version": "w7_candidate_transforms_v1"
+    },
+    "voice_conditioned_tts_vc_replacement": {
+      "bundle_hash": "2E609C86419FF923519D90809240BFB2BE315D790DC2E23E96619D92360FEB5C",
+      "determinism": "NOT_RUN",
+      "executability_blocker": true,
+      "implementation": "YourTTS official zero-shot TTS/voice-conversion implementation",
+      "implementation_ambiguity": false,
+      "missing_dependency": true,
+      "missing_local_asset": true,
+      "model_or_adapter_load": "NOT_EXECUTABLE_MISSING_LOCAL_ASSET_OR_DEPENDENCY",
+      "output_validity": "NOT_RUN",
+      "parameter_set_id": "YOURTTS_CANONICAL_V1",
+      "ready_for_human_approval": false,
+      "rights": {
+        "local_research_use_allowed": "RESTRICTED",
+        "redistribution": "NOT_ESTABLISHED",
+        "rights_blocker": false
+      },
+      "scientific_ambiguity": false,
+      "synthetic_execution": "NOT_RUN_MODEL_ASSET_GATE",
+      "version": "YourTTS commit 23904e6b7158d42cacf2a94dba0791ef69f1e2a9; Coqui TTS tag v0.7.0 commit c7cca4135db0c108a30ba8fd6a437fb63a5ecc12"
+    }
+  },
+  "level2_outcomes_accessed": false,
+  "local_assets": {
+    "vits_ljs_checkpoint": false,
+    "voicecraft_checkpoint": false,
+    "yourtts_checkpoint": false
+  },
+  "mechanism_case_map_sha256": "8449E9ABFA7FF5E359F00BB9CBEA7D3E6889DF3474F411D7D7E6E4338F9528C9",
+  "p4_package_ready_for_human_approval": false,
+  "proposed_package_sha256": "512929394F7ACAFE417EC5018CA922DE73E8F56A7488D601E427ACC5F4A23117",
+  "proposed_package_unchanged": true,
+  "real_w7_cases_used": 0,
+  "schema_version": "topconf.w7.candidate_executability_precheck.v1",
+  "scientific_inferences": 0,
+  "status": "FAIL_CLOSED_CANDIDATE_EXECUTABILITY_BLOCKER",
+  "synthetic_adapter_validation": {
+    "cross_speaker_execution": true,
+    "determinism": true,
+    "finite": true,
+    "load": true,
+    "same_speaker_execution": true,
+    "sample_rate_valid": true,
+    "shape_valid": true
+  }
+}
