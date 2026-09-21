@@ -1,0 +1,75 @@
+{
+  "coverage_scope": "pure pre-inference final-blocker closure only; V3 and all frozen scientific artifacts remain preserved by reference",
+  "hash_algorithm": "SHA-256",
+  "hash_coverage_gaps": [],
+  "level2_outcomes_accessed": false,
+  "metrics": "NOT_MEASURED",
+  "prior_v3_reference": {
+    "sha256": "B8DA325543912F515CCF1FEF81C8101D08EA1633E8ACC8CE1ECB9EB321BCD66F",
+    "size": 2659
+  },
+  "records": {
+    "final_blocker_closure": {
+      "BAM_CHECKPOINT_RIGHTS_BINDING_V1.md": {
+        "sha256": "667C56B7414AA9092DA46179AFEB1F9F45A9ABE1825064A40FC47506D020E1FA",
+        "size": 2465
+      },
+      "MECHANISM_PARAMETER_EVIDENCE_MATRIX_V1.md": {
+        "sha256": "BBA15261C3E134ED6F0683B0033E9C26A7062509E4C807AFD74A3F6D37FBE186",
+        "size": 3908
+      },
+      "SAL_FROZEN_CHECKPOINT_IDENTITY_V1.md": {
+        "sha256": "35C69D34650FFB0F8159744B750608BA8BDBEBD3DDC42F49979601BAF677EA39",
+        "size": 2285
+      },
+      "W7_EXECUTION_READINESS_REAUDIT_V2.json": {
+        "sha256": "910165C0555DB9DF44ECD1D6164E3FBE7AD55CC928F90BA2D97721AC21DB911F",
+        "size": 2055
+      },
+      "W7_EXECUTION_READINESS_REAUDIT_V2.md": {
+        "sha256": "E42D2A69CED6284081685341134EC9EB5C6E8C127EA05A71439C1A6668422B2D",
+        "size": 1229
+      },
+      "W7_MECHANISM_CASE_MAP_PROPOSAL_V1.json": {
+        "sha256": "CD6CE7717D0513344EEA4F0A351ECC1F51AC07BB79DF23D47AD482ABC046DD4E",
+        "size": 1623
+      },
+      "W7_MECHANISM_CASE_MAP_PROPOSAL_V1.jsonl.gz": {
+        "sha256": "E9A895F4D31BB5FE4D89874858A083E3D62FB01FB52250681CF2BD5D02FEB44E",
+        "size": 13561666
+      },
+      "W7_MECHANISM_HUMAN_FREEZE_TEMPLATE_V1.md": {
+        "sha256": "EB81DB29C94CED4BE53FA781DE6663036B848FFA2DDB3D502355DE9981C54E34",
+        "size": 4894
+      },
+      "W7_MODEL_AND_RIGHTS_ADJUDICATION_V2.json": {
+        "sha256": "ACD6F4B2F507761B0A27B0B86DCD49C1F55680C1670EA1B6036DBD11A8AFDFFE",
+        "size": 2910
+      }
+    },
+    "runner_and_builders": {
+      "src/audiobookbench/topconf/w7_execution.py": {
+        "sha256": "38B8C6BEDCE6F791CFCB563400809B8BF2164B5B280338C76F684348A4C1CE91",
+        "size": 6336
+      },
+      "tests/topconf/test_w7_execution_recovery.py": {
+        "sha256": "00E50453B840EBDF5F6D9BBDDB38935E9CA79531E83897E586F8AB1278B60248",
+        "size": 7370
+      },
+      "tools/topconf/build_w7_mechanism_case_map_proposal.py": {
+        "sha256": "F82C7188CF07E4D7F1941652084C78AD68C2EF53AD9E99BFC492CDBE53826829",
+        "size": 4564
+      },
+      "tools/topconf/build_w7_preregistration_hash_manifest_v4.py": {
+        "sha256": "D72544F2504B8C4C78BA6B809A6D4C40F08458E99ACB5B26C800A26CAA630F9A",
+        "size": 3292
+      }
+    }
+  },
+  "schema_version": "topconf.w7.preregistration_hash_manifest.v4",
+  "scientific_config_changed": false,
+  "scientific_inferences": 0,
+  "scientific_population_changed": false,
+  "status": "PASS_COMPLETE_COVERAGE_FINAL_BLOCKER_CLOSURE",
+  "w7_executed": false
+}

@@ -1,0 +1,51 @@
+{
+  "schema_version": "topconf.w7.model_and_rights_adjudication.v2",
+  "audit_date": "2026-09-21",
+  "supersedes_by_addition_only": "W7_MODEL_AND_RIGHTS_ADJUDICATION_V1.json",
+  "scientific_inferences": 0,
+  "level2_outcomes_accessed": false,
+  "sal_checkpoint_adjudication": "HISTORICAL_EXACT_ARTIFACT_RECOVERED_COPY_ONLY",
+  "sal_checkpoint": {
+    "official_source": "https://huggingface.co/MaoYC/SAL/resolve/d9ab313d86a8b00a6345419721389d8b4eabe992/SAL_WavLM.ckpt",
+    "expected_bytes": 4037013806,
+    "expected_sha256": "FDE76030DF782E140658AA5A2726D18EBFFA9FA359E11CE2B237F6EC46114D2F",
+    "historical_source_path": "F:/项目/申请实验室  TTS项目/AudiobookBench-CN-topconf-dl-robustness/research_assurance/topconf/w6_recovery/artifacts/SAL_WavLM.ckpt.part",
+    "current_path": "G:/AudiobookBench-CN/external_data/topconf_phase3_cache/checkpoints/SAL/SAL_WavLM.ckpt",
+    "current_bytes": 4037013806,
+    "actual_sha256": "FDE76030DF782E140658AA5A2726D18EBFFA9FA359E11CE2B237F6EC46114D2F",
+    "identity": "PASS",
+    "recovery_action": "copy-only recovery from a historical full-size artifact whose SHA-256 exactly equals the frozen value; no download, conversion, or overwrite",
+    "strict_load_evidence": "PASS_HISTORICAL_SAME_SHA256; the source-required s3prl runtime is not installed for a duplicate complete local revalidation"
+  },
+  "bam_checkpoint_adjudication": "HISTORICALLY_VALID_BUT_PATH_BROKEN",
+  "bam_checkpoint": {
+    "official_source": "https://drive.google.com/file/d/1eL3Ca27hEruI20lkoqkQEnZlb2GzTyHT/view",
+    "current_path": "G:/AudiobookBench-CN/external_data/topconf_phase3_cache/checkpoints/BAM/bam_checkpoint.zip",
+    "expected_bytes": 1353631994,
+    "current_bytes": 1353631994,
+    "expected_sha256": "5C7379D23028606D3BEEB8B1AA5C340395FCC403CE70A2CA559EA322AB2994D1",
+    "actual_sha256": "5C7379D23028606D3BEEB8B1AA5C340395FCC403CE70A2CA559EA322AB2994D1",
+    "identity": "PASS"
+  },
+  "bam_rights_adjudication": "FAIL_UNRESOLVED",
+  "bam_rights": {
+    "status": "FAIL",
+    "zenodo_record": "https://zenodo.org/records/12747417",
+    "zenodo_license": "CC-BY-4.0",
+    "zenodo_file": "media-sec-lab/BAM-version1.0.0.zip",
+    "zenodo_file_bytes": 527740,
+    "checkpoint_artifact": "README-linked Google Drive bam_checkpoint.zip",
+    "checkpoint_bytes": 1353631994,
+    "checkpoint_sha256": "5C7379D23028606D3BEEB8B1AA5C340395FCC403CE70A2CA559EA322AB2994D1",
+    "binding_decision": "No located official text binds the Zenodo CC-BY source archive or another permission grant to this exact Drive checkpoint.",
+    "public_research_evaluation_permission": "NOT_ESTABLISHED",
+    "redistribution_permission": "NOT_ESTABLISHED",
+    "do_not_redistribute": true
+  },
+  "current_rights": {
+    "CFPRF": "PASS_MIT",
+    "MultiReso": "PASS_RECORDED_PUBLIC_ARTIFACT",
+    "SAL": "PASS_EXACT_ARTIFACT_RECOVERED",
+    "BAM": "FAIL_CHECKPOINT_RIGHTS_UNRESOLVED"
+  }
+}

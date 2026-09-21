@@ -71,6 +71,24 @@ def assert_frozen_input_hashes(expected: Mapping[Path, str]) -> None:
             raise W7ExecutionContractError(f"frozen hash mismatch: {path}")
 
 
+def assert_reexecution_prerequisites(prerequisites: Mapping[str, str]) -> None:
+    """Reject a W7 invocation unless every post-closure prerequisite is explicit.
+
+    This is intentionally a pure contract check.  It neither loads a model nor
+    reads a case, and it cannot convert an audit or a template into a human
+    authorization.
+    """
+    required = {
+        "sal_checkpoint_identity": "PASS_EXACT_RECOVERED",
+        "bam_checkpoint_rights": "PASS_EXPLICIT_BINDING",
+        "mechanism_human_freeze": "PASS_COMPLETE_TOTAL_MAP",
+        "human_reexecution_authorization": "PASS_EXPLICIT_POST_CLOSURE",
+    }
+    missing = [name for name, expected in required.items() if prerequisites.get(name) != expected]
+    if missing:
+        raise W7ExecutionContractError("W7 re-execution prerequisites are not closed: " + ", ".join(missing))
+
+
 def build_terminal_row(*, run_id: str, case_id: str, distribution: str, condition: str, model_id: str, status: str, runtime_metadata: Mapping[str, Any], whether_a: Any = None, whether_b: Any = None, where: Any = None, failure_code: str | None = None) -> dict[str, Any]:
     """Build the append-only raw-row contract without evaluating a sample."""
     if distribution not in FROZEN_DISTRIBUTIONS:

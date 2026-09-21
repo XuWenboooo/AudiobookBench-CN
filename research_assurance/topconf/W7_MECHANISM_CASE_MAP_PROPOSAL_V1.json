@@ -1,0 +1,50 @@
+{
+  "condition_id": "mechanism_shift",
+  "detailed_records": "W7_MECHANISM_CASE_MAP_PROPOSAL_V1.jsonl.gz",
+  "detailed_records_format": "deterministic JSON Lines compressed with gzip mtime=0",
+  "detailed_records_sha256": "E9A895F4D31BB5FE4D89874858A083E3D62FB01FB52250681CF2BD5D02FEB44E",
+  "distribution_counts": {
+    "LlamaPartialSpoof": 64388,
+    "PartialEdit": 42471
+  },
+  "level2_outcomes_accessed": false,
+  "record_fields": [
+    "case_id",
+    "distribution_id",
+    "distribution_version",
+    "split_id",
+    "source_id",
+    "source_audio_hash",
+    "gt_id",
+    "gt_hash",
+    "source_manipulation_family",
+    "source_manipulation_mechanism",
+    "condition_id",
+    "mechanism_family",
+    "parameter_fields",
+    "evidence_sources",
+    "parameter_status",
+    "required_configuration_fields",
+    "configuration_hash"
+  ],
+  "records": 106859,
+  "schema_version": "topconf.w7.mechanism_case_map_proposal.v1",
+  "scientific_inferences": 0,
+  "semantic_guard": "The source manipulation label is copied as provenance, not interpreted as a selected W7 mechanism family.",
+  "source_case_manifest": "W7_FINAL_CASE_MANIFEST_V2.jsonl.gz",
+  "source_case_manifest_sha256": "BEA3EB3E31F1A81219617D6994ACD3381C99B972300020C4B781B8FB878DE572",
+  "status": "PENDING_HUMAN_MECHANISM_FREEZE",
+  "unfrozen_configuration_fields": [
+    "mechanism_family",
+    "implementation",
+    "version",
+    "parameter_set_id",
+    "reference_rule",
+    "target_span_rule",
+    "sample_rate",
+    "codec_path",
+    "seed_policy",
+    "quality_gate_policy",
+    "parameters"
+  ]
+}
