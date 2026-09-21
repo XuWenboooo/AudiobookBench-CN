@@ -1,0 +1,34 @@
+{
+  "schema_version": "topconf.w7.failure_ledger.v1",
+  "run_id": "W7_FORMAL_PILOT_20260921_FAIL_CLOSED_PREINFERENCE",
+  "authorization_record": "W7_HUMAN_AUTHORIZATION_RECORD_V2.json",
+  "scientific_inferences": 0,
+  "level2_outcomes_accessed": false,
+  "metrics": "NOT_MEASURED",
+  "entries": [
+    {
+      "failure_id": "W7-PRE-001",
+      "scope": "all_conditions",
+      "failure_type": "INFRASTRUCTURE_FAILURE",
+      "status": "TERMINAL_PRE_INFERENCE",
+      "reason": "mechanism_shift has no complete frozen executable mechanism configuration and only a draft-ready schema; frozen contract requires fail-closed handling",
+      "policy_action": "ABORT_BEFORE_INFERENCE"
+    },
+    {
+      "failure_id": "W7-PRE-002",
+      "scope": "SAL,BAM",
+      "failure_type": "MODEL_LOAD_FAILURE",
+      "status": "TERMINAL_PRE_INFERENCE",
+      "reason": "required checkpoint bytes are not present in the accessible external cache; BAM evidence also retains unresolved rights gate",
+      "policy_action": "ABORT_BEFORE_INFERENCE"
+    },
+    {
+      "failure_id": "W7-PRE-003",
+      "scope": "all_models_and_conditions",
+      "failure_type": "INFRASTRUCTURE_FAILURE",
+      "status": "TERMINAL_PRE_INFERENCE",
+      "reason": "no frozen four-localizer formal runner exists; available Phase3T runners cover only CFPRF and MultiReso and point to legacy machine-specific paths",
+      "policy_action": "ABORT_BEFORE_INFERENCE"
+    }
+  ]
+}

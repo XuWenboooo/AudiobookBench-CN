@@ -1,0 +1,14 @@
+{
+  "schema_version": "topconf.scientific_evidence_ledger.w7_formal_pilot.v1",
+  "stage": "W7_FORMAL_PILOT",
+  "status": "FAIL_CLOSED_BEFORE_INFERENCE",
+  "run_id": "W7_FORMAL_PILOT_20260921_FAIL_CLOSED_PREINFERENCE",
+  "scientific_status": "NO_W7_RESULT",
+  "w7_scientific_inferences": 0,
+  "level2_outcomes_accessed": false,
+  "metrics": "NOT_MEASURED",
+  "gate1": "NOT_EVALUATED",
+  "result_based_selections": 0,
+  "closure": "W7_FORMAL_PILOT_CLOSURE_V1.json",
+  "failure_ledger": "W7_FAILURE_LEDGER_V1.json"
+}

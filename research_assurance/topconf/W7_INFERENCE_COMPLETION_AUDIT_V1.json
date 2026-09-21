@@ -1,0 +1,21 @@
+{
+  "schema_version": "topconf.w7.inference_completion_audit.v1",
+  "run_id": "W7_FORMAL_PILOT_20260921_FAIL_CLOSED_PREINFERENCE",
+  "status": "FAIL_CLOSED_BEFORE_INFERENCE",
+  "authorization": "YES",
+  "fresh_hash_gate": "PASS",
+  "protected_v3_v5_hashes": "PASS",
+  "case_population": 106859,
+  "case_condition_rows": 427436,
+  "required_localizers": ["CFPRF", "MultiReso", "SAL", "BAM"],
+  "required_distributions": ["PartialEdit", "LlamaPartialSpoof R01TTS.0.b"],
+  "terminal_rows": 0,
+  "valid_inference_rows": 0,
+  "failure_rows": 0,
+  "scientific_inferences": 0,
+  "raw_evidence_manifest": "NOT_CREATED_NO_RAW_OUTPUTS",
+  "metrics": "NOT_MEASURED",
+  "gate1": "NOT_EVALUATED",
+  "level2_outcomes_accessed": false,
+  "completion_decision": "W7_NOT_COMPLETED"
+}
