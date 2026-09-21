@@ -1,0 +1,38 @@
+{
+  "approved_execution_config_sha256": "009CAEDD67EA2CA7C6AA8C4DEF32F87465754A0E3C37E1D95D9403D48E9875C2",
+  "approved_package_sha256": "512929394F7ACAFE417EC5018CA922DE73E8F56A7488D601E427ACC5F4A23117",
+  "current_stage": "W7_FINAL_APPROVED_ASSET_MATERIALIZATION",
+  "exact_blockers": [
+    "M1 official pretrained_ljs.pth is not materialized.",
+    "M3 exact giga830M.pth and encodec_4cb2048_giga.th are not materialized; official Hugging Face retrieval was unavailable and the isolated runtime is not created.",
+    "M5 registry-bound YourTTS archive is not materialized; the incomplete official download is quarantined and the isolated Coqui TTS 0.7.0 runtime is not created."
+  ],
+  "execution_readiness": {
+    "M1": "BLOCKED_ASSET",
+    "M2": "PASS",
+    "M3": "BLOCKED_ASSET_RUNTIME",
+    "M4": "PASS",
+    "M5": "BLOCKED_ASSET_RUNTIME"
+  },
+  "human_approval_invalidated": "NO",
+  "level2_outcomes_accessed": false,
+  "mechanism_case_map_sha256": "8449E9ABFA7FF5E359F00BB9CBEA7D3E6889DF3474F411D7D7E6E4338F9528C9",
+  "p4_human_approval": "COMPLETE",
+  "p4_scientific_specification": "FROZEN",
+  "preregistration_manifest_v6": "NOT_GENERATED_UNTIL_ALL_ASSET_RUNTIME_GATES_PASS",
+  "real_w7_cases_used": 0,
+  "schema_version": "topconf.w7.final_approved_asset_materialization_audit.v1",
+  "scientific_approval": {
+    "M1": "APPROVED",
+    "M2": "APPROVED",
+    "M3": "APPROVED",
+    "M4": "APPROVED",
+    "M5": "APPROVED"
+  },
+  "scientific_config_changed": false,
+  "strict_load_smoke_determinism": "NOT_RUN_ASSET_RUNTIME_GATES_BLOCKED",
+  "w7_executed": false,
+  "w7_execution_authorized": false,
+  "w7_execution_readiness": "FAIL_BLOCKED_ASSET_RUNTIME",
+  "w7_scientific_inferences": 0
+}
