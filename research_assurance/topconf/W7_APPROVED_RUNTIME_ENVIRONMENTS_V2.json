@@ -1,0 +1,39 @@
+{
+  "approved_execution_config_sha256": "009CAEDD67EA2CA7C6AA8C4DEF32F87465754A0E3C37E1D95D9403D48E9875C2",
+  "approved_package_sha256": "512929394F7ACAFE417EC5018CA922DE73E8F56A7488D601E427ACC5F4A23117",
+  "host": {
+    "architecture": "AMD64",
+    "cuda": "NOT_USED",
+    "os": "Windows-11-10.0.26200-SP0",
+    "python": "3.12.9"
+  },
+  "human_approval_invalidated": false,
+  "main_environment_modified": false,
+  "runtimes": {
+    "runtime_m1_vits": {
+      "implementation_revision": "2e561ba58618d021b5b8323d3765880f7e0ecfdb",
+      "python": "3.9_or_3.10_official_requirements_target",
+      "status": "BLOCKED_MISSING_CHECKPOINT",
+      "torch": "NOT_ESTABLISHED"
+    },
+    "runtime_m3_voicecraft": {
+      "audiocraft_revision": "c5157b5bf14bf83449c17ea1eeb66c19fb4bc7f0",
+      "implementation_revision": "f0a7a971363905883a21c466a3aa4ea2d4c0b690",
+      "python": "3.9.16",
+      "status": "BLOCKED_MISSING_CHECKPOINT_AND_RUNTIME_DEPENDENCIES",
+      "torch": "2.0.1",
+      "torchaudio": "2.0.2",
+      "xformers": "0.0.22"
+    },
+    "runtime_m5_yourtts": {
+      "coqui_tts": "0.7.0",
+      "implementation_revision": "23904e6b7158d42cacf2a94dba0791ef69f1e2a9",
+      "model_registry_commit": "e9a1953e",
+      "python": "3.10",
+      "status": "BLOCKED_MISSING_MODEL_ARTIFACT_AND_TTS_PACKAGE"
+    }
+  },
+  "schema_version": "topconf.w7.approved_runtime_environments.v2",
+  "scientific_config_changed": false,
+  "status": "NOT_READY_ASSET_AND_RUNTIME_GATED"
+}

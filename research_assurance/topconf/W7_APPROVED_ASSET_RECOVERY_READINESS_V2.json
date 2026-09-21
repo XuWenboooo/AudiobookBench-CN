@@ -1,0 +1,38 @@
+{
+  "approved_execution_config_sha256": "009CAEDD67EA2CA7C6AA8C4DEF32F87465754A0E3C37E1D95D9403D48E9875C2",
+  "approved_package_sha256": "512929394F7ACAFE417EC5018CA922DE73E8F56A7488D601E427ACC5F4A23117",
+  "current_stage": "W7_APPROVED_ASSET_RECOVERY_AND_RUNTIME_CLOSURE",
+  "exact_remaining_blockers": [
+    "M1 official pretrained_ljs.pth not materialized.",
+    "M3 exact giga830M.pth and EnCodec assets not materialized; isolated Python 3.9.16/audiocraft/xformers runtime not established.",
+    "M5 v0.7.0 registry-bound YourTTS archive not materialized; isolated Python 3.10/TTS 0.7.0 runtime not established."
+  ],
+  "execution_readiness": {
+    "M1": "BLOCKED_ASSET",
+    "M2": "PASS",
+    "M3": "BLOCKED_ASSET_RUNTIME",
+    "M4": "PASS",
+    "M5": "BLOCKED_ASSET_RUNTIME"
+  },
+  "human_approval_invalidated": false,
+  "level2_outcomes_accessed": false,
+  "m5_provenance_correction": "YES",
+  "mechanism_case_map_sha256": "8449E9ABFA7FF5E359F00BB9CBEA7D3E6889DF3474F411D7D7E6E4338F9528C9",
+  "p4_human_approval": "COMPLETE",
+  "p4_package_executability": "FAIL_MISSING_APPROVED_ASSETS_OR_RUNTIMES",
+  "p4_scientific_specification": "FROZEN",
+  "real_w7_cases_used": 0,
+  "schema_version": "topconf.w7.approved_asset_recovery_readiness.v2",
+  "scientific_approval": {
+    "M1": "APPROVED",
+    "M2": "APPROVED",
+    "M3": "APPROVED",
+    "M4": "APPROVED",
+    "M5": "APPROVED"
+  },
+  "scientific_config_changed": false,
+  "w7_executed": false,
+  "w7_execution_authorized": false,
+  "w7_execution_readiness": "FAIL_BLOCKED_ASSET_RUNTIME",
+  "w7_scientific_inferences": 0
+}
