@@ -1,0 +1,77 @@
+{
+  "schema_version": "topconf.w7.wsl2_runtime_recovery_audit.v1",
+  "current_stage": "W7_WSL2_RUNTIME_RECOVERY_AND_ASSET_MATERIALIZATION",
+  "observed_at": "2026-09-21T22:56:09+08:00",
+  "system_level_wsl2_installation_authorized": true,
+  "p4_scientific_specification": "FROZEN",
+  "p4_human_approval": "COMPLETE",
+  "human_approval_invalidated": false,
+  "approved_execution_config_sha256": "009CAEDD67EA2CA7C6AA8C4DEF32F87465754A0E3C37E1D95D9403D48E9875C2",
+  "approved_package_sha256": "512929394F7ACAFE417EC5018CA922DE73E8F56A7488D601E427ACC5F4A23117",
+  "mechanism_case_map_sha256": "8449E9ABFA7FF5E359F00BB9CBEA7D3E6889DF3474F411D7D7E6E4338F9528C9",
+  "windows_build": "Windows 11 build 26200",
+  "windows_features": {
+    "Microsoft-Windows-Subsystem-Linux": "Enabled",
+    "VirtualMachinePlatform": "Enabled"
+  },
+  "wsl_reboot_required": true,
+  "wsl_reboot_occurred": true,
+  "wsl2_status": "RUNTIME_NOT_INSTALLED_OFFICIAL_BOOTSTRAP_BLOCKED",
+  "wsl2_distro": "NOT_INSTALLED",
+  "wsl2_version": "NOT_AVAILABLE",
+  "wsl2_kernel": "NOT_AVAILABLE",
+  "wsl_commands": {
+    "wsl_version_exit_code": 1,
+    "wsl_status_exit_code": 50,
+    "wsl_list_exit_code": 1,
+    "install_attempts": [
+      "wsl --install -d Ubuntu-22.04 --no-launch",
+      "wsl --install --no-distribution",
+      "wsl --update --web-download",
+      "wsl --install --web-download -d Ubuntu-22.04 --no-launch"
+    ],
+    "official_bootstrap_error": "HTTP 403 / remote bootstrap failure; console encoding was unavailable but the repeated exit status was nonzero."
+  },
+  "official_wsl_msi_attempt": {
+    "source": "https://github.com/microsoft/WSL/releases/download/2.7.14/wsl.2.7.14.0.x64.msi",
+    "expected_size": 258990080,
+    "expected_sha256": "db084e536279a59e90a26ec598d8aa8a4dff8309f41d078fd06242953ac1ebcd",
+    "windows_physical_path": "G:\\AudiobookBench-CN\\wsl_runtime\\wsl.2.7.14.0.x64.msi",
+    "actual_size": "NOT_MATERIALIZED",
+    "actual_sha256": "NOT_MATERIALIZED",
+    "transfer_result": "OFFICIAL_GITHUB_CONNECTION_TIMEOUT",
+    "accepted": false
+  },
+  "host_gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+  "host_driver": "616.92",
+  "wsl_gpu_visible": "NOT_APPLICABLE_RUNTIME_NOT_INSTALLED",
+  "wsl_gpu_gate": "BLOCKED_RUNTIME_NOT_INSTALLED",
+  "main_windows_python_modified": false,
+  "runtime_environments": {
+    "runtime_m1_vits": "NOT_CREATED",
+    "runtime_m3_voicecraft": "NOT_CREATED",
+    "runtime_m5_yourtts": "NOT_CREATED"
+  },
+  "asset_materialization": "BLOCKED",
+  "asset_manifest_v4": "NOT_GENERATED_UNTIL_ACTUAL_ASSETS_EXIST",
+  "environment_manifest_v4": "NOT_GENERATED_UNTIL_ACTUAL_RUNTIMES_EXIST",
+  "prereg_manifest_v6": "NOT_GENERATED_UNTIL_M1_M2_M3_M4_M5_PASS",
+  "final_readiness_audit": "NOT_GENERATED; EXECUTION_DEPENDENCIES_BLOCKED",
+  "m1_execution_readiness": "BLOCKED_ASSET",
+  "m3_execution_readiness": "BLOCKED_ASSET_RUNTIME",
+  "m5_execution_readiness": "BLOCKED_ASSET_RUNTIME",
+  "m2_execution_readiness": "PASS",
+  "m4_execution_readiness": "PASS",
+  "w7_scientific_inferences": 0,
+  "level2_outcomes_accessed": false,
+  "real_w7_cases_used": 0,
+  "w7_execution_readiness": "FAIL_BLOCKED_ASSET_RUNTIME",
+  "w7_execution_authorized": false,
+  "w7_executed": false,
+  "exact_remaining_blockers": [
+    "WSL runtime package cannot be retrieved from the official GitHub release because the connection times out.",
+    "Ubuntu-22.04 is not installed and no WSL2 kernel/runtime is available.",
+    "M1, M3, and M5 approved assets remain unmaterialized; the 540672-byte YourTTS partial remains rejected.",
+    "M1/M3/M5 isolated runtimes, strict loads, synthetic smoke tests, and determinism tests cannot start before WSL runtime and official assets exist."
+  ]
+}
