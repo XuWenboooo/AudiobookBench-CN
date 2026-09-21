@@ -1,0 +1,44 @@
+{
+  "schema_version": "topconf.w7.wsl2_runtime_recovery_preflight.v1",
+  "current_stage": "W7_WSL2_RUNTIME_RECOVERY_AND_ASSET_MATERIALIZATION",
+  "observed_at": "2026-09-21T22:34:56.8880716+08:00",
+  "scientific_config_changed": false,
+  "human_approval_invalidated": false,
+  "wsl2_status": "NOT_INSTALLED",
+  "wsl2_distro": "NOT_AVAILABLE",
+  "wsl2_kernel": "NOT_AVAILABLE",
+  "wsl_preflight": {
+    "wsl_status_exit_code": 50,
+    "wsl_version_exit_code": 1,
+    "wsl_list_exit_code": 1,
+    "interpretation": "wsl.exe exposed the installation-help path; no WSL2 distribution or kernel was available. No Windows feature or distribution was installed in this task."
+  },
+  "host_gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+  "host_driver": "616.92",
+  "wsl2_gpu_visible": "NOT_APPLICABLE_WSL2_NOT_INSTALLED",
+  "windows_main_environment_modified": false,
+  "runtime_platform_decision": {
+    "m1": "WSL2_UBUNTU_PENDING_INSTALLATION",
+    "m3": "WSL2_UBUNTU_PENDING_INSTALLATION",
+    "m5": "WSL2_UBUNTU_PENDING_INSTALLATION"
+  },
+  "authorized_cache_search": {
+    "pretrained_ljs.pth": "NOT_FOUND",
+    "giga830M.pth": "NOT_FOUND",
+    "encodec_4cb2048_giga.th": "NOT_FOUND",
+    "tts_models--multilingual--multi-dataset--your_tts.zip": "NOT_FOUND_AS_COMPLETE_ARCHIVE"
+  },
+  "quarantined_partial_download": {
+    "windows_physical_path": "G:\\AudiobookBench-CN\\w7_approved_runtime_assets\\m5_yourtts\\tts_models--multilingual--multi-dataset--your_tts.zip.partial-download",
+    "size_bytes": 540672,
+    "accepted_as_asset": false
+  },
+  "asset_materialization": "BLOCKED",
+  "environment_materialization": "BLOCKED",
+  "w7_execution_authorized": false,
+  "w7_executed": false,
+  "scientific_inferences": 0,
+  "level2_outcomes_accessed": false,
+  "real_w7_cases_used": 0,
+  "next_required_action": "Install or otherwise provide an explicitly authorized WSL2 Ubuntu runtime, then retrieve and hash only the approved official assets."
+}
