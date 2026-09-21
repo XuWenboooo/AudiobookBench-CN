@@ -1,0 +1,9 @@
+{
+  "schema_version": "topconf.w7.mechanism_execution_config.v1",
+  "status": "NOT_GENERATED_FAIL_CLOSED",
+  "scientific_inferences": 0,
+  "mechanism_config_sha256": "NOT_AVAILABLE",
+  "reason": "The frozen protocol permits multiple existing mechanism relations but does not bind each W7 case to one relation, generator implementation/version, parameter set, reference rule, target-span rule, seed, or quality gate. The final case manifest records only a derivation identity based on the schema hash, not a concrete configuration object.",
+  "prohibited_recovery_action": "Selecting one permitted family or filling the missing parameters would be a new scientific choice.",
+  "required_before_reexecution": "A human-frozen case-to-mechanism configuration map that is demonstrably part of the original scientific specification."
+}

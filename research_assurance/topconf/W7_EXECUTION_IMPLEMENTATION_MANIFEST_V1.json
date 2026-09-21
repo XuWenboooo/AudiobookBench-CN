@@ -1,0 +1,23 @@
+{
+  "schema_version": "topconf.w7.execution_implementation_manifest.v1",
+  "status": "PREINFERENCE_IMPLEMENTATION_ONLY",
+  "frozen_scientific_execution_manifest": "W7_FINAL_EXECUTION_MANIFEST_V2.json",
+  "scientific_population_changed": false,
+  "scientific_config_changed": false,
+  "w7_executed": false,
+  "scientific_inferences": 0,
+  "runner": {
+    "source": "src/audiobookbench/topconf/w7_execution.py",
+    "sha256": "D4F6EF82A73B4E5B862863902C04527BBAA8B3AD3513E2F797C48D4EC9C4851B",
+    "registry": ["CFPRF", "MultiReso", "SAL", "BAM"],
+    "input_policy": "explicit frozen paths and hashes only; no model, dataset, checkpoint, or latest-artifact discovery",
+    "output_policy": "append-only terminal row schema with Whether-A, Whether-B, Where, status, failure code, and runtime metadata",
+    "gt_policy": "model-facing runner contract accepts no ground-truth payload"
+  },
+  "test": {
+    "source": "tests/topconf/test_w7_execution_recovery.py",
+    "sha256": "FEECEFAE186A33C55DE2585075D052E542E113F3D660877341970C1FBBF256CF",
+    "scope": "synthetic-only registry, hash-gate, output, failure-propagation, adjudication, mechanism-blocker, and V3 coverage tests"
+  },
+  "note": "This implementation manifest supplements rather than modifies frozen V2. It cannot authorize inference."
+}

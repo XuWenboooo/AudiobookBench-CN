@@ -1,0 +1,47 @@
+{
+  "schema_version": "topconf.w7.model_and_rights_adjudication.v1",
+  "audit_date": "2026-09-21",
+  "scientific_inferences": 0,
+  "level2_outcomes_accessed": false,
+  "sal_checkpoint_adjudication": "HISTORICALLY_VALID_BUT_ASSET_NOT_MATERIALIZED_AFTER_MIGRATION",
+  "sal_checkpoint": {
+    "official_source": "https://huggingface.co/MaoYC/SAL/resolve/d9ab313d86a8b00a6345419721389d8b4eabe992/SAL_WavLM.ckpt",
+    "expected_bytes": 4037013806,
+    "expected_sha256": "FDE76030DF782E140658AA5A2726D18EBFFA9FA359E11CE2B237F6EC46114D2F",
+    "current_path": null,
+    "current_bytes": null,
+    "actual_sha256": "NOT_AVAILABLE",
+    "identity": "FAIL",
+    "evidence": "Historical strict-load evidence records an exact file identity, but the selected F-to-G migration did not include w6_recovery artifacts; no local SAL checkpoint exists in current cache, backup, or historical recovery worktree. The pinned host was DNS-unreachable during this audit."
+  },
+  "bam_checkpoint_adjudication": "HISTORICALLY_VALID_BUT_PATH_BROKEN",
+  "bam_checkpoint": {
+    "official_source": "https://drive.google.com/file/d/1eL3Ca27hEruI20lkoqkQEnZlb2GzTyHT/view",
+    "historical_path": "F:/项目/申请实验室  TTS项目/AudiobookBench-CN-topconf-dl-robustness/research_assurance/topconf/w6_recovery/artifacts/bam_checkpoint.zip",
+    "current_path": "G:/AudiobookBench-CN/external_data/topconf_phase3_cache/checkpoints/BAM/bam_checkpoint.zip",
+    "expected_bytes": 1353631994,
+    "current_bytes": 1353631994,
+    "expected_sha256": "5C7379D23028606D3BEEB8B1AA5C340395FCC403CE70A2CA559EA322AB2994D1",
+    "actual_sha256": "5C7379D23028606D3BEEB8B1AA5C340395FCC403CE70A2CA559EA322AB2994D1",
+    "identity": "PASS",
+    "recovery_action": "copy-only recovery from the historical exact-hash artifact; no replacement or download"
+  },
+  "bam_rights_adjudication": "HISTORICAL_EVIDENCE_REFERENCED_DIFFERENT_ASSET",
+  "bam_rights": {
+    "status": "FAIL",
+    "zenodo_record": "https://zenodo.org/records/12747417",
+    "zenodo_record_version": "version1.0.0",
+    "zenodo_license": "CC-BY-4.0",
+    "zenodo_file": "media-sec-lab/BAM-version1.0.0.zip",
+    "zenodo_file_bytes": 527740,
+    "checkpoint_artifact": "README-linked Google Drive bam_checkpoint.zip",
+    "checkpoint_bytes": 1353631994,
+    "binding_decision": "The Zenodo record licenses the released software ZIP and identifies the repository source, but does not contain or identify the Drive checkpoint. No checkpoint-specific license or authorization was found in the recovered evidence."
+  },
+  "current_rights": {
+    "CFPRF": "PASS_MIT",
+    "MultiReso": "PASS_RECORDED_PUBLIC_ARTIFACT",
+    "SAL": "PASS_REPOSITORY_MIT_CHECKPOINT_ASSET_MISSING",
+    "BAM": "FAIL_CHECKPOINT_RIGHTS_UNRESOLVED"
+  }
+}

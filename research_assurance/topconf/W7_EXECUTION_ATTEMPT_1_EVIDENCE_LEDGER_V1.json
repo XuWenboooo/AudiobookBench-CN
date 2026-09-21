@@ -1,0 +1,17 @@
+{
+  "schema_version": "topconf.w7.execution_attempt_evidence_ledger.v1",
+  "attempt_id": "W7_EXECUTION_ATTEMPT_1",
+  "stage": "W7_FORMAL_PILOT",
+  "status": "AUTHORIZED_BUT_ZERO_SCIENTIFIC_INFERENCE",
+  "result_status": "NO_W7_RESULT",
+  "gate1": "NOT_EVALUATED",
+  "w7_executed": false,
+  "scientific_inferences": 0,
+  "detection_auroc": "NOT_MEASURED",
+  "localization_auroc": "NOT_MEASURED",
+  "level2_outcomes_accessed": false,
+  "result_based_model_selections": 0,
+  "result_based_dataset_selections": 0,
+  "result_based_metric_changes": 0,
+  "source_closure": "W7_FORMAL_PILOT_CLOSURE_V1.json"
+}
