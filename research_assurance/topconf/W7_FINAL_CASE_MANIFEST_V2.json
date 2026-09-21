@@ -1,0 +1,30 @@
+{
+  "artifact_hash_semantics": "clean rows use materialized source bytes; non-clean rows use DERIVATION_IDENTITY_HASH and have no materialized transformed bytes",
+  "condition_rows": 427436,
+  "conditions": [
+    "clean",
+    "mechanism_shift",
+    "codec",
+    "resampling"
+  ],
+  "derivation_identity_coverage": 320577,
+  "distribution_counts": {
+    "LlamaPartialSpoof": 64388,
+    "PartialEdit": 42471
+  },
+  "level2_outcomes_accessed": false,
+  "logical_cases": 106859,
+  "manifest_sha256": "bea3eb3e31f1a81219617d6994acd3381c99b972300020c4b781b8fb878de572",
+  "manifest_status": "FROZEN_PRE_INFERENCE_NO_PREDICTIONS",
+  "materialized_asset_hash_coverage": 106859,
+  "metrics": "NOT_MEASURED",
+  "new_case_count": 106859,
+  "not_yet_materialized_condition_rows": 320577,
+  "old_case_count": 106859,
+  "population_semantic_equivalence": "PASS",
+  "records": 427436,
+  "schema_version": "topconf.w7.case_identity.v1.jsonl.gz",
+  "scientific_inferences": 0,
+  "source_audio_hash_coverage": 106859,
+  "w7_executed": false
+}

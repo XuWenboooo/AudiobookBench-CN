@@ -1,0 +1,9 @@
+{
+  "schema_version": "topconf.w7.failure_propagation.v1",
+  "status": "FROZEN_PRE_INFERENCE",
+  "terminal_categories": ["SOURCE_INVALID", "REFERENCE_INVALID", "GENERATION_FAILURE", "QUALITY_GATE_FAILURE", "MODEL_LOAD_FAILURE", "INFERENCE_FAILURE", "INVALID_OUTPUT", "GT_INVALID", "INFRASTRUCTURE_FAILURE"],
+  "fail_closed": ["missing_audio", "missing_gt", "adapter_failure", "nonfinite_output", "empty_output", "timestamp_mismatch", "duration_mismatch", "identity_ambiguity"],
+  "silent_case_dropping": false,
+  "outcome_guided_retry": false,
+  "metrics": "NOT_MEASURED"
+}

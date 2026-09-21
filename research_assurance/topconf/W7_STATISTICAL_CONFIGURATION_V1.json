@@ -1,0 +1,15 @@
+{
+  "schema_version": "topconf.w7.statistical_configuration.v1",
+  "status": "FROZEN_PRE_INFERENCE",
+  "metrics": {
+    "detection": ["AUROC", "AUPRC", "EER", "fixed_FPR_0.05", "decision_retention"],
+    "localization": ["frame_AUROC", "frame_AUPRC", "RangeEER", "event_AP", "event_F1", "boundary_error"],
+    "primary_gap": "LD@DR95"
+  },
+  "bootstrap": {"unit": "paired_source", "replicates": 2000, "seed": 20260914, "ci": "two_sided_percentile_95", "sensitivity": "hierarchical_speaker_to_source"},
+  "gate1": "GAP_OBSERVED_IN >= 3 DISTINCT localization paradigms AND >= 2 external distributions",
+  "whether_a_threshold": "fixed Level-1 target FPR 0.05 empirical quantile with frozen tie rule",
+  "result_based_selection": false,
+  "scientific_inferences": 0,
+  "metrics_status": "NOT_MEASURED"
+}

@@ -1,0 +1,25 @@
+{
+  "schema_version": "topconf.w7.environment.v1",
+  "audit_date": "2026-09-21",
+  "status": "FROZEN_READINESS_EVIDENCE_ONLY",
+  "scientific_inference": false,
+  "localizer_runtimes": {
+    "CFPRF": "Python 3.10.11; torch 2.2.2+cu121; fairseq 1.0.0a0; RTX 4060",
+    "MultiResoModel-Simple": "Python 3.10.11; torch 1.13.1+cu117; fairseq 0.12.2; RTX 4060",
+    "BAM": "bounded CPU capability environment; strict load and synthetic smoke PASS",
+    "SAL": "bounded CPU capability environment; strict load and synthetic smoke PASS"
+  },
+  "whether_runtime": "official AASIST readiness environment recorded in W7_WHETHER_READINESS_V1.md",
+  "resampling_backend": "scipy resample_poly; frozen RESAMPLING_TRANSFORM_CONTRACT_V1",
+  "codec_identity": "Opus 64 kbps at 16 kHz; frozen protocol identity",
+  "critical_contracts": [
+    "CASE_IDENTITY_SCHEMA_V1.json",
+    "MECHANISM_CONFIG_SCHEMA_V1.json",
+    "RESAMPLING_TRANSFORM_SCHEMA_V1.json",
+    "GENERIC_TEMPORAL_GT_ADAPTER_SCHEMA_V1.json"
+  ],
+  "output_namespace": "results/topconf/w7_pilot/",
+  "predictions_present": false,
+  "metrics": "NOT_MEASURED",
+  "level2_outcomes_accessed": false
+}
