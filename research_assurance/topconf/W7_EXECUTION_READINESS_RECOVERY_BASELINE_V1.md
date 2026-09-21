@@ -1,6 +1,6 @@
 # W7 execution-readiness recovery baseline v1
 
-Audit date: 2026-09-21  
+Audit date: 2026-09-21
 Baseline head: d7f2fc3905e6fdd312b0b7232e8de79ede121c78
 
 This recovery begins after the authorized W7 attempt closed before inference.
