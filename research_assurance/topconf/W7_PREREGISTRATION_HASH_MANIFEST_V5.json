@@ -93,9 +93,25 @@
       "W7_P4_EXACT_INVENTORY_V1.json": {
         "sha256": "037C8B80872C0E038A29B4EBD3B06266FE86147D391A674B98932A61F11FF6CD",
         "size": 31840
+      },
+      "W7_P4_FINAL_HUMAN_APPROVAL_PACKET_V1.md": {
+        "sha256": "25C0DD485BDC75668FFEF20C41B9DCD4B66C3AB48FE58C7AEFEDB0AD66DF44DC",
+        "size": 3263
+      },
+      "W7_P4_FINAL_HUMAN_DECISION_TABLE_V1.md": {
+        "sha256": "FAF600DA3FB6E7E6A5743EA1D371A6B6F2F8CA17DD9B7ACD697973F4542E560F",
+        "size": 1444
+      },
+      "W7_P4_PROPOSED_FREEZE_PACKAGE_A_V1.json": {
+        "sha256": "24B61FBC517D3B259251A38894AB4560C8E2D606D13E007E05CE8AEEBB1C915D",
+        "size": 16948
       }
     },
     "code": {
+      "src/audiobookbench/topconf/w7_candidate_transforms.py": {
+        "sha256": "486B43BE7811980882F2004C6F5B42CC6938409ACD39E440BD5DA7A378E5FED6",
+        "size": 2784
+      },
       "src/audiobookbench/topconf/w7_execution.py": {
         "sha256": "500D0F5DB633975C07471D0F772E70884A375A8DB539A86DE7EA178AE82D6FCE",
         "size": 6404
@@ -108,9 +124,17 @@
         "sha256": "A7821603879D278CF1072AA58DA75F62EE3427BD8178B306439405FC2D6C766E",
         "size": 7418
       },
+      "tests/topconf/test_w7_final_human_decision_packet.py": {
+        "sha256": "2B16EAAFF3EF52E2FD0D439D2745796211633AE103708974DBD4C4E8CA9F5D32",
+        "size": 3318
+      },
       "tests/topconf/test_w7_p4_decision_compression.py": {
         "sha256": "E8BA9C58D9211B28F894C695DF623C074F93EF4B47063031858E20020E185D24",
         "size": 2051
+      },
+      "tools/topconf/build_w7_final_human_decision_packet_v1.py": {
+        "sha256": "A6B0DF262C1BEC9487AC392EF4FAF113EA497988766D09AA561AC398B15D4BB6",
+        "size": 19162
       },
       "tools/topconf/build_w7_mechanism_specification_v1.py": {
         "sha256": "9AA81B895177AE8AA01B1EEE39C0B068794C2770781E89B43A5455E851A02841",
@@ -121,8 +145,8 @@
         "size": 9207
       },
       "tools/topconf/build_w7_preregistration_hash_manifest_v5.py": {
-        "sha256": "360ED1EDD7A296CC3322687AC5BD514161BD1BB38760C35B99694BD399A94EE2",
-        "size": 4085
+        "sha256": "91BE0D3753A78C2FAC3A31DB721267658814B2E979F28A74730D1913E5D11EF3",
+        "size": 4410
       }
     }
   },

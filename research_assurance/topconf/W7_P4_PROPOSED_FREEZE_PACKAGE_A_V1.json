@@ -1,0 +1,256 @@
+{
+  "candidate_execution_authorization": "NO",
+  "families": {
+    "conventional_tts_replacement": {
+      "alternatives": [],
+      "candidate": {
+        "bundle_hash": "B20CB1B8D4B428C3BDD420041ABA3A2231D3D99C51CF31FFD9D010DCE3E02C03",
+        "candidate": "A",
+        "channel_policy": "model output is mono; any input is downmixed by the project adapter",
+        "codec_path": "NOT_APPLICABLE",
+        "dependency_backend_version": "official requirements.txt at the pinned commit; PyTorch runtime is environment-bound and must be recorded at execution",
+        "entrypoint": "SynthesizerTrn.infer",
+        "failure_policy": "terminal_generation_or_quality_failure; no_drop; no_impute; no_outcome_retry",
+        "implementation": "jaywalnut310/vits",
+        "implementation_name": "VITS official single-speaker TTS",
+        "model_checkpoint": "official VITS pretrained LJS checkpoint named pretrained_ljs.pth from the repository README-linked release folder",
+        "model_source": "https://drive.google.com/drive/folders/1ksarh-cJf3F5eKJjLVWY0X1j1qsQqiS2",
+        "normalization_policy": "no loudness normalization; preserve model waveform scale and clip only to [-1,1] at the adapter boundary",
+        "official_provenance": [
+          "https://github.com/jaywalnut310/vits/tree/2e561ba58618d021b5b8323d3765880f7e0ecfdb",
+          "https://raw.githubusercontent.com/jaywalnut310/vits/2e561ba58618d021b5b8323d3765880f7e0ecfdb/configs/ljs_base.json",
+          "https://raw.githubusercontent.com/jaywalnut310/vits/2e561ba58618d021b5b8323d3765880f7e0ecfdb/inference.ipynb",
+          "https://arxiv.org/abs/2106.06103"
+        ],
+        "output_sample_rate_policy": "VITS official LJS config sampling_rate=22050; resample 22050→16000 with scipy.signal.resample_poly(up=320, down=441), SciPy 1.11.4",
+        "parameter_set_id": "VITS_LJS_CANONICAL_V1",
+        "parameters": {
+          "config_file": "configs/ljs_base.json",
+          "filter_length": 1024,
+          "hop_length": 256,
+          "length_scale": 1.0,
+          "n_mel_channels": 80,
+          "noise_scale": 0.667,
+          "noise_scale_w": 0.8,
+          "sampling_rate_native": 22050,
+          "text_cleaners": [
+            "english_cleaners2"
+          ],
+          "win_length": 1024
+        },
+        "quality_gate_policy": "finite waveform; mono; exact target-span insertion; output 16000 Hz; no corruption; contract structural checks",
+        "reference_rule": "No external waveform reference; synthesize the frozen case target transcript with the pinned single-speaker LJS checkpoint.",
+        "repository": "https://github.com/jaywalnut310/vits",
+        "sample_rate": 16000,
+        "scientific_effect": "text-conditioned waveform generation replacing the frozen target span",
+        "seed_policy": "SHA256(protocol_id||distribution_id||case_id||mechanism_family||W7_MECHANISM_SEED_V1)[:64bits], converted to unsigned 64-bit and applied to Python/NumPy/PyTorch before inference",
+        "source_file": "configs/ljs_base.json; inference.ipynb",
+        "source_revision": "2e561ba58618d021b5b8323d3765880f7e0ecfdb",
+        "target_span_rule": "Replace exactly the frozen case target span [gt.start_sec, gt.end_sec); generated audio is linearly resampled to the target duration before deterministic boundary insertion.",
+        "version": "commit 2e561ba58618d021b5b8323d3765880f7e0ecfdb"
+      },
+      "recommended_candidate": "A"
+    },
+    "cross_speaker_boundary_control": {
+      "alternatives": [],
+      "candidate": {
+        "bundle_hash": "C7C663BF9C8F306931AF9C3D1F754E87BDA119B35FC6B2CC3EA5CAFA66FBA786",
+        "candidate": "A",
+        "channel_policy": "downmix channel-last input by arithmetic mean before transform; output mono",
+        "codec_path": "NOT_APPLICABLE",
+        "dependency_backend_version": "numpy==2.5.2; linear interpolation and float32 NumPy path; source version w7_candidate_transforms_v1",
+        "entrypoint": "cross_speaker_boundary",
+        "failure_policy": "terminal_generation_or_quality_failure; no_drop; no_impute; no_outcome_retry",
+        "implementation": "audiobookbench.topconf.w7_candidate_transforms::cross_speaker_boundary",
+        "implementation_name": "AudiobookBench deterministic waveform control adapter",
+        "normalization_policy": "no loudness normalization; finite float32 samples are clipped to [-1,1]",
+        "official_provenance": {
+          "source": "project source file and pinned repository revision; no performance evidence used",
+          "type": "project_owned_deterministic_adapter"
+        },
+        "output_sample_rate_policy": "output is 16000 Hz",
+        "parameter_set_id": "CROSS_SPEAKER_BOUNDARY_CANONICAL_V1",
+        "parameters": {
+          "boundary_fallback": "terminal failure if no distinct-speaker reference exists",
+          "crossfade_samples": 400,
+          "interpolation": "linear",
+          "reference_window": "first available reference waveform window"
+        },
+        "quality_gate_policy": "finite waveform; mono; valid duration; sample rate 16000; clip only to [-1,1]; structural contract checks",
+        "reference_rule": "reference is the next lexicographically ordered case in the same distribution with a different source_id; take its first available mono waveform window and resample it to target duration",
+        "repository": "AudiobookBench-CN",
+        "sample_rate": 16000,
+        "scientific_effect": "cross-speaker waveform replacement at the frozen target interval with deterministic boundary crossfades",
+        "seed_policy": "No stochastic operation; existing case seed is not consumed",
+        "source_file": "src/audiobookbench/topconf/w7_candidate_transforms.py",
+        "source_revision": "70c4141dea66738a1129b5eb8446dc18fb39a972",
+        "target_span_rule": "target span is the frozen GT interval [start_sample, end_sample) at 16000 Hz; no per-case manual selection",
+        "version": "w7_candidate_transforms_v1"
+      },
+      "recommended_candidate": "A"
+    },
+    "neural_speech_editing_infilling": {
+      "alternatives": [],
+      "candidate": {
+        "bundle_hash": "121656A1688F5A4DBBFCBE6B1575DA44E9BA962FAF510E6846CA9D818B5EA803",
+        "candidate": "A",
+        "channel_policy": "torchaudio output is one-channel; no channel expansion",
+        "codec_checkpoint": "pyp1/VoiceCraft/encodec_4cb2048_giga.th",
+        "codec_path": "Encodec 4-codebook 2048-entry model at 16000 Hz from official VoiceCraft source",
+        "dependency_backend_version": "official README environment: Python 3.9.16, torch 2.0.1, torchaudio 2.0.2, audiocraft commit c5157b5bf14bf83449c17ea1eeb66c19fb4bc7f0, xformers 0.0.22, MFA 2.2.17",
+        "entrypoint": "inference_tts_scale.inference_one_sample",
+        "failure_policy": "terminal_generation_or_quality_failure; no_drop; no_impute; no_outcome_retry",
+        "implementation": "jasonppy/VoiceCraft",
+        "implementation_name": "VoiceCraft official neural codec language model",
+        "model_checkpoint": "pyp1/VoiceCraft_VoiceCraft_giga830M",
+        "model_source": "https://huggingface.co/pyp1/VoiceCraft_giga830M",
+        "normalization_policy": "no loudness normalization; preserve official decoder scale and clip only at contract boundary",
+        "official_provenance": [
+          "https://github.com/jasonppy/VoiceCraft/tree/f0a7a971363905883a21c466a3aa4ea2d4c0b690",
+          "https://raw.githubusercontent.com/jasonppy/VoiceCraft/f0a7a971363905883a21c466a3aa4ea2d4c0b690/README.md",
+          "https://raw.githubusercontent.com/jasonppy/VoiceCraft/f0a7a971363905883a21c466a3aa4ea2d4c0b690/tts_demo.py",
+          "https://arxiv.org/abs/2403.16973"
+        ],
+        "output_sample_rate_policy": "official codec_audio_sr=16000",
+        "parameter_set_id": "VOICECRAFT_GIGA830M_CANONICAL_V1",
+        "parameters": {
+          "codec_audio_sr": 16000,
+          "codec_sr": 50,
+          "cutoff_tolerance_sec": 1.0,
+          "kvcache": 0,
+          "margin_sec": 0.04,
+          "mfa_beam": 50,
+          "mfa_retry_beam": 200,
+          "model_name": "giga830M",
+          "sample_batch_size": 3,
+          "silence_tokens": [
+            1388,
+            1898,
+            131
+          ],
+          "stop_repetition": -1,
+          "temperature": 1.0,
+          "top_k": 0,
+          "top_p": 0.8
+        },
+        "quality_gate_policy": "finite waveform; mono; output 16000 Hz; valid alignment; no corruption; structural contract checks",
+        "reference_rule": "Use the same-case source waveform and frozen source transcript; forced alignment identifies the deterministic boundary around the frozen target interval.",
+        "repository": "https://github.com/jasonppy/VoiceCraft",
+        "sample_rate": 16000,
+        "scientific_effect": "neural codec-token infilling/editing of the frozen target span conditioned on surrounding speech and transcript",
+        "seed_policy": "SHA256(protocol_id||distribution_id||case_id||mechanism_family||W7_MECHANISM_SEED_V1)[:64bits], converted to unsigned 64-bit and applied to Python/NumPy/PyTorch/CUDA deterministic settings",
+        "source_file": "tts_demo.py; inference_tts_scale.py; models/voicecraft.py",
+        "source_revision": "f0a7a971363905883a21c466a3aa4ea2d4c0b690",
+        "target_span_rule": "MFA english_us_arpa alignment at beam=50 and retry_beam=200; choose the first word boundary at or after frozen gt.start_sec and the first boundary at or after frozen gt.end_sec; terminal failure if either boundary is absent.",
+        "version": "commit f0a7a971363905883a21c466a3aa4ea2d4c0b690"
+      },
+      "recommended_candidate": "A"
+    },
+    "same_speaker_splice_crossfade_control": {
+      "alternatives": [],
+      "candidate": {
+        "bundle_hash": "7C482C2D40E90C2E81274C5275B87665EA4768C22BB54EDFCF015E4CA23C36D2",
+        "candidate": "A",
+        "channel_policy": "downmix channel-last input by arithmetic mean before transform; output mono",
+        "codec_path": "NOT_APPLICABLE",
+        "dependency_backend_version": "numpy==2.5.2; linear interpolation and float32 NumPy path; source version w7_candidate_transforms_v1",
+        "entrypoint": "same_speaker_splice_crossfade",
+        "failure_policy": "terminal_generation_or_quality_failure; no_drop; no_impute; no_outcome_retry",
+        "implementation": "audiobookbench.topconf.w7_candidate_transforms::same_speaker_splice_crossfade",
+        "implementation_name": "AudiobookBench deterministic waveform control adapter",
+        "normalization_policy": "no loudness normalization; finite float32 samples are clipped to [-1,1]",
+        "official_provenance": {
+          "source": "project source file and pinned repository revision; no performance evidence used",
+          "type": "project_owned_deterministic_adapter"
+        },
+        "output_sample_rate_policy": "output is 16000 Hz",
+        "parameter_set_id": "SAME_SPEAKER_SPLICE_CROSSFADE_CANONICAL_V1",
+        "parameters": {
+          "boundary_fallback": "terminal failure if no complete same-case window exists",
+          "crossfade_samples": 400,
+          "interpolation": "linear",
+          "reference_preference": [
+            "left",
+            "right"
+          ]
+        },
+        "quality_gate_policy": "finite waveform; mono; valid duration; sample rate 16000; clip only to [-1,1]; structural contract checks",
+        "reference_rule": "reference is the nearest complete non-target context window from the same case, preferring the immediately preceding window and then the immediately following window",
+        "repository": "AudiobookBench-CN",
+        "sample_rate": 16000,
+        "scientific_effect": "same-speaker waveform substitution using a deterministic context window and 400-sample boundary crossfades",
+        "seed_policy": "No stochastic operation; existing case seed is not consumed",
+        "source_file": "src/audiobookbench/topconf/w7_candidate_transforms.py",
+        "source_revision": "70c4141dea66738a1129b5eb8446dc18fb39a972",
+        "target_span_rule": "target span is the frozen GT interval [start_sample, end_sample) at 16000 Hz; no per-case manual selection",
+        "version": "w7_candidate_transforms_v1"
+      },
+      "recommended_candidate": "A"
+    },
+    "voice_conditioned_tts_vc_replacement": {
+      "alternatives": [],
+      "candidate": {
+        "bundle_hash": "2E609C86419FF923519D90809240BFB2BE315D790DC2E23E96619D92360FEB5C",
+        "candidate": "A",
+        "channel_policy": "downmix reference and generated audio to mono before target-span insertion",
+        "codec_path": "NOT_APPLICABLE",
+        "dependency_backend_version": "Coqui TTS v0.7.0 official release path",
+        "entrypoint": "tts CLI with model_name tts_models/multilingual/multi-dataset/your_tts",
+        "failure_policy": "terminal_generation_or_quality_failure; no_drop; no_impute; no_outcome_retry",
+        "implementation": "Edresson/YourTTS with official Coqui TTS released model",
+        "implementation_name": "YourTTS official zero-shot TTS/voice-conversion implementation",
+        "model_checkpoint": "official Coqui released YourTTS model package v0.5.0_models",
+        "model_source": "https://github.com/Edresson/YourTTS/releases/download/MOS/Audios_MOS.zip and the README-linked Coqui model release package",
+        "normalization_policy": "no loudness normalization; preserve official model waveform scale and clip only at adapter boundary",
+        "official_provenance": [
+          "https://github.com/Edresson/YourTTS/tree/23904e6b7158d42cacf2a94dba0791ef69f1e2a9",
+          "https://raw.githubusercontent.com/Edresson/YourTTS/23904e6b7158d42cacf2a94dba0791ef69f1e2a9/README.md",
+          "https://arxiv.org/abs/2112.02418",
+          "https://github.com/coqui-ai/TTS/tree/v0.7.0"
+        ],
+        "output_sample_rate_policy": "official model output is resampled to 16000 Hz with scipy.signal.resample_poly(up=320, down=441), SciPy 1.11.4",
+        "parameter_set_id": "YOURTTS_CANONICAL_V1",
+        "parameters": {
+          "language_idx": "en",
+          "model_name": "tts_models/multilingual/multi-dataset/your_tts",
+          "native_model_rate": 22050,
+          "reference_wav_role": "current case content reference",
+          "resample_down": 441,
+          "resample_up": 320,
+          "speaker_wav_role": "target speaker reference"
+        },
+        "quality_gate_policy": "finite waveform; mono; valid target duration; output 16000 Hz; no corruption; structural contract checks",
+        "reference_rule": "Use the next lexicographically ordered case in the same distribution with a different source_id as the target-speaker reference; use the current case waveform as content/reference_wav.",
+        "repository": "https://github.com/Edresson/YourTTS",
+        "sample_rate": 16000,
+        "scientific_effect": "voice-conditioned waveform generation replacing the frozen target span while conditioning on a distinct deterministic speaker reference",
+        "seed_policy": "SHA256(protocol_id||distribution_id||case_id||mechanism_family||W7_MECHANISM_SEED_V1)[:64bits], converted to unsigned 64-bit and applied to Python/NumPy/PyTorch before CLI invocation",
+        "source_file": "YourTTS README; Coqui TTS CLI tts",
+        "source_revision": "23904e6b7158d42cacf2a94dba0791ef69f1e2a9; c7cca4135db0c108a30ba8fd6a437fb63a5ecc12",
+        "target_span_rule": "Generate the frozen case target transcript with the target speaker reference, resample generated audio to the frozen target duration, then replace exactly [gt.start_sec, gt.end_sec) at 16000 Hz.",
+        "version": "YourTTS commit 23904e6b7158d42cacf2a94dba0791ef69f1e2a9; Coqui TTS tag v0.7.0 commit c7cca4135db0c108a30ba8fd6a437fb63a5ecc12"
+      },
+      "recommended_candidate": "A"
+    }
+  },
+  "fields_covered_by_each_family": 7,
+  "implementation_bindings_complete": true,
+  "level2_outcomes_accessed": false,
+  "mechanism_case_map_sha256": "8449E9ABFA7FF5E359F00BB9CBEA7D3E6889DF3474F411D7D7E6E4338F9528C9",
+  "outcome_guided_selection": false,
+  "proposed_package_sha256": "B6C6675429C85EA627A8F48E3C6CAB28F8F4B9E872ECE08FC7ECB0155E42F947",
+  "raw_p4_fields": 35,
+  "real_w7_cases_used": 0,
+  "recommendation_basis": "CANONICALITY_AND_REPRODUCIBILITY_ONLY",
+  "schema_version": "topconf.w7.p4.proposed_freeze_package_a.v1",
+  "scientific_inferences": 0,
+  "shared_policies": {
+    "failure_policy": "existing W7 terminal failure policy",
+    "quality_gate": "existing W7 structural quality policy",
+    "sample_rate": 16000,
+    "seed_policy": "existing W7 frozen seed policy"
+  },
+  "status": "PROPOSED_NOT_HUMAN_APPROVED",
+  "total_covered_fields": 35,
+  "unaccounted_fields": 0
+}

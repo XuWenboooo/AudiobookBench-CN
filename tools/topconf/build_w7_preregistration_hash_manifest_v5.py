@@ -20,6 +20,9 @@ FILES = [
     "W7_MECHANISM_SHARED_POLICIES_V1.json",
     "W7_MECHANISM_P4_RESOLUTION_PROVENANCE_V1.md",
     "W7_MECHANISM_P4_MINIMAL_HUMAN_DECISIONS_V1.md",
+    "W7_P4_PROPOSED_FREEZE_PACKAGE_A_V1.json",
+    "W7_P4_FINAL_HUMAN_DECISION_TABLE_V1.md",
+    "W7_P4_FINAL_HUMAN_APPROVAL_PACKET_V1.md",
     "W7_MECHANISM_CASE_MAP_DETERMINISTIC_ASSIGNMENT_V1.json",
     "W7_MECHANISM_CASE_MAP_DETERMINISTIC_ASSIGNMENT_V1.jsonl.gz",
     "W7_MECHANISM_EXECUTION_CONFIG_V1_PENDING_P4.json",
@@ -33,11 +36,14 @@ FILES = [
 CODE = [
     "src/audiobookbench/topconf/w7_execution.py",
     "src/audiobookbench/topconf/w7_mechanism_spec.py",
+    "src/audiobookbench/topconf/w7_candidate_transforms.py",
     "tests/topconf/test_w7_execution_recovery.py",
     "tools/topconf/build_w7_mechanism_specification_v1.py",
     "tools/topconf/build_w7_preregistration_hash_manifest_v5.py",
     "tools/topconf/build_w7_p4_decision_compression_v1.py",
     "tests/topconf/test_w7_p4_decision_compression.py",
+    "tests/topconf/test_w7_final_human_decision_packet.py",
+    "tools/topconf/build_w7_final_human_decision_packet_v1.py",
 ]
 
 
