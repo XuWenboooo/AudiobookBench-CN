@@ -15,6 +15,11 @@ FILES = [
     "BAM_RIGHTS_FINAL_ADJUDICATION_V2.json",
     "BAM_RIGHTS_FINAL_ADJUDICATION_V3.json",
     "W7_MECHANISM_P4_HUMAN_DECISION_TEMPLATE_V1.md",
+    "W7_P4_EXACT_INVENTORY_V1.json",
+    "W7_P4_CLASSIFICATION_AND_COMPRESSION_V1.json",
+    "W7_MECHANISM_SHARED_POLICIES_V1.json",
+    "W7_MECHANISM_P4_RESOLUTION_PROVENANCE_V1.md",
+    "W7_MECHANISM_P4_MINIMAL_HUMAN_DECISIONS_V1.md",
     "W7_MECHANISM_CASE_MAP_DETERMINISTIC_ASSIGNMENT_V1.json",
     "W7_MECHANISM_CASE_MAP_DETERMINISTIC_ASSIGNMENT_V1.jsonl.gz",
     "W7_MECHANISM_EXECUTION_CONFIG_V1_PENDING_P4.json",
@@ -31,6 +36,8 @@ CODE = [
     "tests/topconf/test_w7_execution_recovery.py",
     "tools/topconf/build_w7_mechanism_specification_v1.py",
     "tools/topconf/build_w7_preregistration_hash_manifest_v5.py",
+    "tools/topconf/build_w7_p4_decision_compression_v1.py",
+    "tests/topconf/test_w7_p4_decision_compression.py",
 ]
 
 

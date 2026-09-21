@@ -1,0 +1,41 @@
+{
+  "candidate_complete": false,
+  "candidate_status": "NOT_CREATED_P5_REMAINS",
+  "classification_counts": {
+    "DERIVED": 0,
+    "DUPLICATED_SHARED_POLICY": 0,
+    "IMPLEMENTATION_BINDING": 20,
+    "SCIENTIFIC_CHOICE": 15,
+    "UNCLASSIFIED": 0,
+    "VALIDATION_POLICY": 0
+  },
+  "classification_rule": {
+    "derived": [],
+    "duplicated_shared_policy": [],
+    "implementation_binding": [
+      "codec_path",
+      "implementation",
+      "parameter_set_id",
+      "version"
+    ],
+    "scientific": [
+      "parameters",
+      "reference_rule",
+      "target_span_rule"
+    ],
+    "validation_policy": []
+  },
+  "decision_compression": "one complete, documented implementation/configuration bundle per mechanism family; each bundle resolves that family's seven P4 cells",
+  "minimal_independent_scientific_decisions": 5,
+  "outcome_information_used": false,
+  "p5_decision_ids": [
+    "DECISION-01",
+    "DECISION-02",
+    "DECISION-03",
+    "DECISION-04",
+    "DECISION-05"
+  ],
+  "p5_field_count": 35,
+  "raw_p4_fields": 35,
+  "schema_version": "topconf.w7.p4.classification_and_compression.v1"
+}

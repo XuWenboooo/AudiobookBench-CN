@@ -1,0 +1,30 @@
+{
+  "not_assumed": [
+    "channel_policy",
+    "normalization",
+    "duration_policy",
+    "codec_backend"
+  ],
+  "outcome_information_used": false,
+  "policies": {
+    "failure_policy": {
+      "source": "W7_MECHANISM_EXECUTION_CONFIG_V1_PENDING_P4.json",
+      "value": "terminal_generation_or_quality_failure; no_drop; no_impute; no_outcome_retry"
+    },
+    "quality_gate_policy": {
+      "source": "W7_MECHANISM_EXECUTION_CONFIG_V1_PENDING_P4.json",
+      "value": "finite_waveform; valid_duration; valid_sample_rate; no_corruption; contract_structural_validity_only"
+    },
+    "sample_rate_policy": {
+      "source": "W7_MECHANISM_EXECUTION_CONFIG_V1_PENDING_P4.json",
+      "value": 16000
+    },
+    "seed_policy": {
+      "source": "W7_MECHANISM_EXECUTION_CONFIG_V1_PENDING_P4.json",
+      "value": "SHA256(protocol_id||distribution_id||case_id||mechanism_family||W7_MECHANISM_SEED_V1)[:64bits]"
+    }
+  },
+  "raw_p4_fields_collapsed": 0,
+  "schema_version": "topconf.w7.mechanism_shared_policies.v1",
+  "status": "FROZEN_PREEXISTING_POLICIES_ONLY"
+}

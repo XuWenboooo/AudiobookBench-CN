@@ -1,0 +1,690 @@
+{
+  "families": [
+    "conventional_tts_replacement",
+    "cross_speaker_boundary_control",
+    "neural_speech_editing_infilling",
+    "same_speaker_splice_crossfade_control",
+    "voice_conditioned_tts_vc_replacement"
+  ],
+  "outcome_information_used": false,
+  "p4_fields": [
+    "implementation",
+    "version",
+    "parameter_set_id",
+    "reference_rule",
+    "target_span_rule",
+    "codec_path",
+    "parameters"
+  ],
+  "raw_p4_fields": 35,
+  "records": [
+    {
+      "allowed_domain": "documented official implementation/configuration value; no outcome-guided selection",
+      "classification": "IMPLEMENTATION_BINDING",
+      "current_status": "P5_HUMAN_DECISION_REQUIRED",
+      "existing_sources": [
+        "MECHANISM_PARAMETER_EVIDENCE_MATRIX_V1.md",
+        "w7_preparation/MECHANISM_CONFIG_CONTRACT_V1.md",
+        "w7_preparation/MECHANISM_CONFIG_SCHEMA_V1.json",
+        "w7_preparation/W7_PILOT_PROTOCOL_DRAFT_V1.md"
+      ],
+      "family": "conventional_tts_replacement",
+      "field_name": "implementation",
+      "field_type": "string",
+      "implementation_dependency": "required before executable config hash and runner",
+      "outcome_information_used": false,
+      "p4_id": "P4-001",
+      "resolution_level": "P5",
+      "scientific_effect": "binds frozen semantics to an implementation/API/version"
+    },
+    {
+      "allowed_domain": "documented official implementation/configuration value; no outcome-guided selection",
+      "classification": "IMPLEMENTATION_BINDING",
+      "current_status": "P5_HUMAN_DECISION_REQUIRED",
+      "existing_sources": [
+        "MECHANISM_PARAMETER_EVIDENCE_MATRIX_V1.md",
+        "w7_preparation/MECHANISM_CONFIG_CONTRACT_V1.md",
+        "w7_preparation/MECHANISM_CONFIG_SCHEMA_V1.json",
+        "w7_preparation/W7_PILOT_PROTOCOL_DRAFT_V1.md"
+      ],
+      "family": "conventional_tts_replacement",
+      "field_name": "version",
+      "field_type": "string",
+      "implementation_dependency": "required before executable config hash and runner",
+      "outcome_information_used": false,
+      "p4_id": "P4-002",
+      "resolution_level": "P5",
+      "scientific_effect": "binds frozen semantics to an implementation/API/version"
+    },
+    {
+      "allowed_domain": "documented official implementation/configuration value; no outcome-guided selection",
+      "classification": "IMPLEMENTATION_BINDING",
+      "current_status": "P5_HUMAN_DECISION_REQUIRED",
+      "existing_sources": [
+        "MECHANISM_PARAMETER_EVIDENCE_MATRIX_V1.md",
+        "w7_preparation/MECHANISM_CONFIG_CONTRACT_V1.md",
+        "w7_preparation/MECHANISM_CONFIG_SCHEMA_V1.json",
+        "w7_preparation/W7_PILOT_PROTOCOL_DRAFT_V1.md"
+      ],
+      "family": "conventional_tts_replacement",
+      "field_name": "parameter_set_id",
+      "field_type": "string",
+      "implementation_dependency": "required before executable config hash and runner",
+      "outcome_information_used": false,
+      "p4_id": "P4-003",
+      "resolution_level": "P5",
+      "scientific_effect": "binds frozen semantics to an implementation/API/version"
+    },
+    {
+      "allowed_domain": "documented official implementation/configuration value; no outcome-guided selection",
+      "classification": "SCIENTIFIC_CHOICE",
+      "current_status": "P5_HUMAN_DECISION_REQUIRED",
+      "existing_sources": [
+        "MECHANISM_PARAMETER_EVIDENCE_MATRIX_V1.md",
+        "w7_preparation/MECHANISM_CONFIG_CONTRACT_V1.md",
+        "w7_preparation/MECHANISM_CONFIG_SCHEMA_V1.json",
+        "w7_preparation/W7_PILOT_PROTOCOL_DRAFT_V1.md"
+      ],
+      "family": "conventional_tts_replacement",
+      "field_name": "reference_rule",
+      "field_type": "string",
+      "implementation_dependency": "required before executable config hash and runner",
+      "outcome_information_used": false,
+      "p4_id": "P4-004",
+      "resolution_level": "P5",
+      "scientific_effect": "mechanism semantics or treatment binding"
+    },
+    {
+      "allowed_domain": "documented official implementation/configuration value; no outcome-guided selection",
+      "classification": "SCIENTIFIC_CHOICE",
+      "current_status": "P5_HUMAN_DECISION_REQUIRED",
+      "existing_sources": [
+        "MECHANISM_PARAMETER_EVIDENCE_MATRIX_V1.md",
+        "w7_preparation/MECHANISM_CONFIG_CONTRACT_V1.md",
+        "w7_preparation/MECHANISM_CONFIG_SCHEMA_V1.json",
+        "w7_preparation/W7_PILOT_PROTOCOL_DRAFT_V1.md"
+      ],
+      "family": "conventional_tts_replacement",
+      "field_name": "target_span_rule",
+      "field_type": "string",
+      "implementation_dependency": "required before executable config hash and runner",
+      "outcome_information_used": false,
+      "p4_id": "P4-005",
+      "resolution_level": "P5",
+      "scientific_effect": "mechanism semantics or treatment binding"
+    },
+    {
+      "allowed_domain": "documented official implementation/configuration value; no outcome-guided selection",
+      "classification": "IMPLEMENTATION_BINDING",
+      "current_status": "P5_HUMAN_DECISION_REQUIRED",
+      "existing_sources": [
+        "MECHANISM_PARAMETER_EVIDENCE_MATRIX_V1.md",
+        "w7_preparation/MECHANISM_CONFIG_CONTRACT_V1.md",
+        "w7_preparation/MECHANISM_CONFIG_SCHEMA_V1.json",
+        "w7_preparation/W7_PILOT_PROTOCOL_DRAFT_V1.md"
+      ],
+      "family": "conventional_tts_replacement",
+      "field_name": "codec_path",
+      "field_type": "string",
+      "implementation_dependency": "required before executable config hash and runner",
+      "outcome_information_used": false,
+      "p4_id": "P4-006",
+      "resolution_level": "P5",
+      "scientific_effect": "binds frozen semantics to an implementation/API/version"
+    },
+    {
+      "allowed_domain": "documented official implementation/configuration value; no outcome-guided selection",
+      "classification": "SCIENTIFIC_CHOICE",
+      "current_status": "P5_HUMAN_DECISION_REQUIRED",
+      "existing_sources": [
+        "MECHANISM_PARAMETER_EVIDENCE_MATRIX_V1.md",
+        "w7_preparation/MECHANISM_CONFIG_CONTRACT_V1.md",
+        "w7_preparation/MECHANISM_CONFIG_SCHEMA_V1.json",
+        "w7_preparation/W7_PILOT_PROTOCOL_DRAFT_V1.md"
+      ],
+      "family": "conventional_tts_replacement",
+      "field_name": "parameters",
+      "field_type": "object",
+      "implementation_dependency": "required before executable config hash and runner",
+      "outcome_information_used": false,
+      "p4_id": "P4-007",
+      "resolution_level": "P5",
+      "scientific_effect": "mechanism semantics or treatment binding"
+    },
+    {
+      "allowed_domain": "documented official implementation/configuration value; no outcome-guided selection",
+      "classification": "IMPLEMENTATION_BINDING",
+      "current_status": "P5_HUMAN_DECISION_REQUIRED",
+      "existing_sources": [
+        "MECHANISM_PARAMETER_EVIDENCE_MATRIX_V1.md",
+        "w7_preparation/MECHANISM_CONFIG_CONTRACT_V1.md",
+        "w7_preparation/MECHANISM_CONFIG_SCHEMA_V1.json",
+        "w7_preparation/W7_PILOT_PROTOCOL_DRAFT_V1.md"
+      ],
+      "family": "cross_speaker_boundary_control",
+      "field_name": "implementation",
+      "field_type": "string",
+      "implementation_dependency": "required before executable config hash and runner",
+      "outcome_information_used": false,
+      "p4_id": "P4-008",
+      "resolution_level": "P5",
+      "scientific_effect": "binds frozen semantics to an implementation/API/version"
+    },
+    {
+      "allowed_domain": "documented official implementation/configuration value; no outcome-guided selection",
+      "classification": "IMPLEMENTATION_BINDING",
+      "current_status": "P5_HUMAN_DECISION_REQUIRED",
+      "existing_sources": [
+        "MECHANISM_PARAMETER_EVIDENCE_MATRIX_V1.md",
+        "w7_preparation/MECHANISM_CONFIG_CONTRACT_V1.md",
+        "w7_preparation/MECHANISM_CONFIG_SCHEMA_V1.json",
+        "w7_preparation/W7_PILOT_PROTOCOL_DRAFT_V1.md"
+      ],
+      "family": "cross_speaker_boundary_control",
+      "field_name": "version",
+      "field_type": "string",
+      "implementation_dependency": "required before executable config hash and runner",
+      "outcome_information_used": false,
+      "p4_id": "P4-009",
+      "resolution_level": "P5",
+      "scientific_effect": "binds frozen semantics to an implementation/API/version"
+    },
+    {
+      "allowed_domain": "documented official implementation/configuration value; no outcome-guided selection",
+      "classification": "IMPLEMENTATION_BINDING",
+      "current_status": "P5_HUMAN_DECISION_REQUIRED",
+      "existing_sources": [
+        "MECHANISM_PARAMETER_EVIDENCE_MATRIX_V1.md",
+        "w7_preparation/MECHANISM_CONFIG_CONTRACT_V1.md",
+        "w7_preparation/MECHANISM_CONFIG_SCHEMA_V1.json",
+        "w7_preparation/W7_PILOT_PROTOCOL_DRAFT_V1.md"
+      ],
+      "family": "cross_speaker_boundary_control",
+      "field_name": "parameter_set_id",
+      "field_type": "string",
+      "implementation_dependency": "required before executable config hash and runner",
+      "outcome_information_used": false,
+      "p4_id": "P4-010",
+      "resolution_level": "P5",
+      "scientific_effect": "binds frozen semantics to an implementation/API/version"
+    },
+    {
+      "allowed_domain": "documented official implementation/configuration value; no outcome-guided selection",
+      "classification": "SCIENTIFIC_CHOICE",
+      "current_status": "P5_HUMAN_DECISION_REQUIRED",
+      "existing_sources": [
+        "MECHANISM_PARAMETER_EVIDENCE_MATRIX_V1.md",
+        "w7_preparation/MECHANISM_CONFIG_CONTRACT_V1.md",
+        "w7_preparation/MECHANISM_CONFIG_SCHEMA_V1.json",
+        "w7_preparation/W7_PILOT_PROTOCOL_DRAFT_V1.md"
+      ],
+      "family": "cross_speaker_boundary_control",
+      "field_name": "reference_rule",
+      "field_type": "string",
+      "implementation_dependency": "required before executable config hash and runner",
+      "outcome_information_used": false,
+      "p4_id": "P4-011",
+      "resolution_level": "P5",
+      "scientific_effect": "mechanism semantics or treatment binding"
+    },
+    {
+      "allowed_domain": "documented official implementation/configuration value; no outcome-guided selection",
+      "classification": "SCIENTIFIC_CHOICE",
+      "current_status": "P5_HUMAN_DECISION_REQUIRED",
+      "existing_sources": [
+        "MECHANISM_PARAMETER_EVIDENCE_MATRIX_V1.md",
+        "w7_preparation/MECHANISM_CONFIG_CONTRACT_V1.md",
+        "w7_preparation/MECHANISM_CONFIG_SCHEMA_V1.json",
+        "w7_preparation/W7_PILOT_PROTOCOL_DRAFT_V1.md"
+      ],
+      "family": "cross_speaker_boundary_control",
+      "field_name": "target_span_rule",
+      "field_type": "string",
+      "implementation_dependency": "required before executable config hash and runner",
+      "outcome_information_used": false,
+      "p4_id": "P4-012",
+      "resolution_level": "P5",
+      "scientific_effect": "mechanism semantics or treatment binding"
+    },
+    {
+      "allowed_domain": "documented official implementation/configuration value; no outcome-guided selection",
+      "classification": "IMPLEMENTATION_BINDING",
+      "current_status": "P5_HUMAN_DECISION_REQUIRED",
+      "existing_sources": [
+        "MECHANISM_PARAMETER_EVIDENCE_MATRIX_V1.md",
+        "w7_preparation/MECHANISM_CONFIG_CONTRACT_V1.md",
+        "w7_preparation/MECHANISM_CONFIG_SCHEMA_V1.json",
+        "w7_preparation/W7_PILOT_PROTOCOL_DRAFT_V1.md"
+      ],
+      "family": "cross_speaker_boundary_control",
+      "field_name": "codec_path",
+      "field_type": "string",
+      "implementation_dependency": "required before executable config hash and runner",
+      "outcome_information_used": false,
+      "p4_id": "P4-013",
+      "resolution_level": "P5",
+      "scientific_effect": "binds frozen semantics to an implementation/API/version"
+    },
+    {
+      "allowed_domain": "documented official implementation/configuration value; no outcome-guided selection",
+      "classification": "SCIENTIFIC_CHOICE",
+      "current_status": "P5_HUMAN_DECISION_REQUIRED",
+      "existing_sources": [
+        "MECHANISM_PARAMETER_EVIDENCE_MATRIX_V1.md",
+        "w7_preparation/MECHANISM_CONFIG_CONTRACT_V1.md",
+        "w7_preparation/MECHANISM_CONFIG_SCHEMA_V1.json",
+        "w7_preparation/W7_PILOT_PROTOCOL_DRAFT_V1.md"
+      ],
+      "family": "cross_speaker_boundary_control",
+      "field_name": "parameters",
+      "field_type": "object",
+      "implementation_dependency": "required before executable config hash and runner",
+      "outcome_information_used": false,
+      "p4_id": "P4-014",
+      "resolution_level": "P5",
+      "scientific_effect": "mechanism semantics or treatment binding"
+    },
+    {
+      "allowed_domain": "documented official implementation/configuration value; no outcome-guided selection",
+      "classification": "IMPLEMENTATION_BINDING",
+      "current_status": "P5_HUMAN_DECISION_REQUIRED",
+      "existing_sources": [
+        "MECHANISM_PARAMETER_EVIDENCE_MATRIX_V1.md",
+        "w7_preparation/MECHANISM_CONFIG_CONTRACT_V1.md",
+        "w7_preparation/MECHANISM_CONFIG_SCHEMA_V1.json",
+        "w7_preparation/W7_PILOT_PROTOCOL_DRAFT_V1.md"
+      ],
+      "family": "neural_speech_editing_infilling",
+      "field_name": "implementation",
+      "field_type": "string",
+      "implementation_dependency": "required before executable config hash and runner",
+      "outcome_information_used": false,
+      "p4_id": "P4-015",
+      "resolution_level": "P5",
+      "scientific_effect": "binds frozen semantics to an implementation/API/version"
+    },
+    {
+      "allowed_domain": "documented official implementation/configuration value; no outcome-guided selection",
+      "classification": "IMPLEMENTATION_BINDING",
+      "current_status": "P5_HUMAN_DECISION_REQUIRED",
+      "existing_sources": [
+        "MECHANISM_PARAMETER_EVIDENCE_MATRIX_V1.md",
+        "w7_preparation/MECHANISM_CONFIG_CONTRACT_V1.md",
+        "w7_preparation/MECHANISM_CONFIG_SCHEMA_V1.json",
+        "w7_preparation/W7_PILOT_PROTOCOL_DRAFT_V1.md"
+      ],
+      "family": "neural_speech_editing_infilling",
+      "field_name": "version",
+      "field_type": "string",
+      "implementation_dependency": "required before executable config hash and runner",
+      "outcome_information_used": false,
+      "p4_id": "P4-016",
+      "resolution_level": "P5",
+      "scientific_effect": "binds frozen semantics to an implementation/API/version"
+    },
+    {
+      "allowed_domain": "documented official implementation/configuration value; no outcome-guided selection",
+      "classification": "IMPLEMENTATION_BINDING",
+      "current_status": "P5_HUMAN_DECISION_REQUIRED",
+      "existing_sources": [
+        "MECHANISM_PARAMETER_EVIDENCE_MATRIX_V1.md",
+        "w7_preparation/MECHANISM_CONFIG_CONTRACT_V1.md",
+        "w7_preparation/MECHANISM_CONFIG_SCHEMA_V1.json",
+        "w7_preparation/W7_PILOT_PROTOCOL_DRAFT_V1.md"
+      ],
+      "family": "neural_speech_editing_infilling",
+      "field_name": "parameter_set_id",
+      "field_type": "string",
+      "implementation_dependency": "required before executable config hash and runner",
+      "outcome_information_used": false,
+      "p4_id": "P4-017",
+      "resolution_level": "P5",
+      "scientific_effect": "binds frozen semantics to an implementation/API/version"
+    },
+    {
+      "allowed_domain": "documented official implementation/configuration value; no outcome-guided selection",
+      "classification": "SCIENTIFIC_CHOICE",
+      "current_status": "P5_HUMAN_DECISION_REQUIRED",
+      "existing_sources": [
+        "MECHANISM_PARAMETER_EVIDENCE_MATRIX_V1.md",
+        "w7_preparation/MECHANISM_CONFIG_CONTRACT_V1.md",
+        "w7_preparation/MECHANISM_CONFIG_SCHEMA_V1.json",
+        "w7_preparation/W7_PILOT_PROTOCOL_DRAFT_V1.md"
+      ],
+      "family": "neural_speech_editing_infilling",
+      "field_name": "reference_rule",
+      "field_type": "string",
+      "implementation_dependency": "required before executable config hash and runner",
+      "outcome_information_used": false,
+      "p4_id": "P4-018",
+      "resolution_level": "P5",
+      "scientific_effect": "mechanism semantics or treatment binding"
+    },
+    {
+      "allowed_domain": "documented official implementation/configuration value; no outcome-guided selection",
+      "classification": "SCIENTIFIC_CHOICE",
+      "current_status": "P5_HUMAN_DECISION_REQUIRED",
+      "existing_sources": [
+        "MECHANISM_PARAMETER_EVIDENCE_MATRIX_V1.md",
+        "w7_preparation/MECHANISM_CONFIG_CONTRACT_V1.md",
+        "w7_preparation/MECHANISM_CONFIG_SCHEMA_V1.json",
+        "w7_preparation/W7_PILOT_PROTOCOL_DRAFT_V1.md"
+      ],
+      "family": "neural_speech_editing_infilling",
+      "field_name": "target_span_rule",
+      "field_type": "string",
+      "implementation_dependency": "required before executable config hash and runner",
+      "outcome_information_used": false,
+      "p4_id": "P4-019",
+      "resolution_level": "P5",
+      "scientific_effect": "mechanism semantics or treatment binding"
+    },
+    {
+      "allowed_domain": "documented official implementation/configuration value; no outcome-guided selection",
+      "classification": "IMPLEMENTATION_BINDING",
+      "current_status": "P5_HUMAN_DECISION_REQUIRED",
+      "existing_sources": [
+        "MECHANISM_PARAMETER_EVIDENCE_MATRIX_V1.md",
+        "w7_preparation/MECHANISM_CONFIG_CONTRACT_V1.md",
+        "w7_preparation/MECHANISM_CONFIG_SCHEMA_V1.json",
+        "w7_preparation/W7_PILOT_PROTOCOL_DRAFT_V1.md"
+      ],
+      "family": "neural_speech_editing_infilling",
+      "field_name": "codec_path",
+      "field_type": "string",
+      "implementation_dependency": "required before executable config hash and runner",
+      "outcome_information_used": false,
+      "p4_id": "P4-020",
+      "resolution_level": "P5",
+      "scientific_effect": "binds frozen semantics to an implementation/API/version"
+    },
+    {
+      "allowed_domain": "documented official implementation/configuration value; no outcome-guided selection",
+      "classification": "SCIENTIFIC_CHOICE",
+      "current_status": "P5_HUMAN_DECISION_REQUIRED",
+      "existing_sources": [
+        "MECHANISM_PARAMETER_EVIDENCE_MATRIX_V1.md",
+        "w7_preparation/MECHANISM_CONFIG_CONTRACT_V1.md",
+        "w7_preparation/MECHANISM_CONFIG_SCHEMA_V1.json",
+        "w7_preparation/W7_PILOT_PROTOCOL_DRAFT_V1.md"
+      ],
+      "family": "neural_speech_editing_infilling",
+      "field_name": "parameters",
+      "field_type": "object",
+      "implementation_dependency": "required before executable config hash and runner",
+      "outcome_information_used": false,
+      "p4_id": "P4-021",
+      "resolution_level": "P5",
+      "scientific_effect": "mechanism semantics or treatment binding"
+    },
+    {
+      "allowed_domain": "documented official implementation/configuration value; no outcome-guided selection",
+      "classification": "IMPLEMENTATION_BINDING",
+      "current_status": "P5_HUMAN_DECISION_REQUIRED",
+      "existing_sources": [
+        "MECHANISM_PARAMETER_EVIDENCE_MATRIX_V1.md",
+        "w7_preparation/MECHANISM_CONFIG_CONTRACT_V1.md",
+        "w7_preparation/MECHANISM_CONFIG_SCHEMA_V1.json",
+        "w7_preparation/W7_PILOT_PROTOCOL_DRAFT_V1.md"
+      ],
+      "family": "same_speaker_splice_crossfade_control",
+      "field_name": "implementation",
+      "field_type": "string",
+      "implementation_dependency": "required before executable config hash and runner",
+      "outcome_information_used": false,
+      "p4_id": "P4-022",
+      "resolution_level": "P5",
+      "scientific_effect": "binds frozen semantics to an implementation/API/version"
+    },
+    {
+      "allowed_domain": "documented official implementation/configuration value; no outcome-guided selection",
+      "classification": "IMPLEMENTATION_BINDING",
+      "current_status": "P5_HUMAN_DECISION_REQUIRED",
+      "existing_sources": [
+        "MECHANISM_PARAMETER_EVIDENCE_MATRIX_V1.md",
+        "w7_preparation/MECHANISM_CONFIG_CONTRACT_V1.md",
+        "w7_preparation/MECHANISM_CONFIG_SCHEMA_V1.json",
+        "w7_preparation/W7_PILOT_PROTOCOL_DRAFT_V1.md"
+      ],
+      "family": "same_speaker_splice_crossfade_control",
+      "field_name": "version",
+      "field_type": "string",
+      "implementation_dependency": "required before executable config hash and runner",
+      "outcome_information_used": false,
+      "p4_id": "P4-023",
+      "resolution_level": "P5",
+      "scientific_effect": "binds frozen semantics to an implementation/API/version"
+    },
+    {
+      "allowed_domain": "documented official implementation/configuration value; no outcome-guided selection",
+      "classification": "IMPLEMENTATION_BINDING",
+      "current_status": "P5_HUMAN_DECISION_REQUIRED",
+      "existing_sources": [
+        "MECHANISM_PARAMETER_EVIDENCE_MATRIX_V1.md",
+        "w7_preparation/MECHANISM_CONFIG_CONTRACT_V1.md",
+        "w7_preparation/MECHANISM_CONFIG_SCHEMA_V1.json",
+        "w7_preparation/W7_PILOT_PROTOCOL_DRAFT_V1.md"
+      ],
+      "family": "same_speaker_splice_crossfade_control",
+      "field_name": "parameter_set_id",
+      "field_type": "string",
+      "implementation_dependency": "required before executable config hash and runner",
+      "outcome_information_used": false,
+      "p4_id": "P4-024",
+      "resolution_level": "P5",
+      "scientific_effect": "binds frozen semantics to an implementation/API/version"
+    },
+    {
+      "allowed_domain": "documented official implementation/configuration value; no outcome-guided selection",
+      "classification": "SCIENTIFIC_CHOICE",
+      "current_status": "P5_HUMAN_DECISION_REQUIRED",
+      "existing_sources": [
+        "MECHANISM_PARAMETER_EVIDENCE_MATRIX_V1.md",
+        "w7_preparation/MECHANISM_CONFIG_CONTRACT_V1.md",
+        "w7_preparation/MECHANISM_CONFIG_SCHEMA_V1.json",
+        "w7_preparation/W7_PILOT_PROTOCOL_DRAFT_V1.md"
+      ],
+      "family": "same_speaker_splice_crossfade_control",
+      "field_name": "reference_rule",
+      "field_type": "string",
+      "implementation_dependency": "required before executable config hash and runner",
+      "outcome_information_used": false,
+      "p4_id": "P4-025",
+      "resolution_level": "P5",
+      "scientific_effect": "mechanism semantics or treatment binding"
+    },
+    {
+      "allowed_domain": "documented official implementation/configuration value; no outcome-guided selection",
+      "classification": "SCIENTIFIC_CHOICE",
+      "current_status": "P5_HUMAN_DECISION_REQUIRED",
+      "existing_sources": [
+        "MECHANISM_PARAMETER_EVIDENCE_MATRIX_V1.md",
+        "w7_preparation/MECHANISM_CONFIG_CONTRACT_V1.md",
+        "w7_preparation/MECHANISM_CONFIG_SCHEMA_V1.json",
+        "w7_preparation/W7_PILOT_PROTOCOL_DRAFT_V1.md"
+      ],
+      "family": "same_speaker_splice_crossfade_control",
+      "field_name": "target_span_rule",
+      "field_type": "string",
+      "implementation_dependency": "required before executable config hash and runner",
+      "outcome_information_used": false,
+      "p4_id": "P4-026",
+      "resolution_level": "P5",
+      "scientific_effect": "mechanism semantics or treatment binding"
+    },
+    {
+      "allowed_domain": "documented official implementation/configuration value; no outcome-guided selection",
+      "classification": "IMPLEMENTATION_BINDING",
+      "current_status": "P5_HUMAN_DECISION_REQUIRED",
+      "existing_sources": [
+        "MECHANISM_PARAMETER_EVIDENCE_MATRIX_V1.md",
+        "w7_preparation/MECHANISM_CONFIG_CONTRACT_V1.md",
+        "w7_preparation/MECHANISM_CONFIG_SCHEMA_V1.json",
+        "w7_preparation/W7_PILOT_PROTOCOL_DRAFT_V1.md"
+      ],
+      "family": "same_speaker_splice_crossfade_control",
+      "field_name": "codec_path",
+      "field_type": "string",
+      "implementation_dependency": "required before executable config hash and runner",
+      "outcome_information_used": false,
+      "p4_id": "P4-027",
+      "resolution_level": "P5",
+      "scientific_effect": "binds frozen semantics to an implementation/API/version"
+    },
+    {
+      "allowed_domain": "documented official implementation/configuration value; no outcome-guided selection",
+      "classification": "SCIENTIFIC_CHOICE",
+      "current_status": "P5_HUMAN_DECISION_REQUIRED",
+      "existing_sources": [
+        "MECHANISM_PARAMETER_EVIDENCE_MATRIX_V1.md",
+        "w7_preparation/MECHANISM_CONFIG_CONTRACT_V1.md",
+        "w7_preparation/MECHANISM_CONFIG_SCHEMA_V1.json",
+        "w7_preparation/W7_PILOT_PROTOCOL_DRAFT_V1.md"
+      ],
+      "family": "same_speaker_splice_crossfade_control",
+      "field_name": "parameters",
+      "field_type": "object",
+      "implementation_dependency": "required before executable config hash and runner",
+      "outcome_information_used": false,
+      "p4_id": "P4-028",
+      "resolution_level": "P5",
+      "scientific_effect": "mechanism semantics or treatment binding"
+    },
+    {
+      "allowed_domain": "documented official implementation/configuration value; no outcome-guided selection",
+      "classification": "IMPLEMENTATION_BINDING",
+      "current_status": "P5_HUMAN_DECISION_REQUIRED",
+      "existing_sources": [
+        "MECHANISM_PARAMETER_EVIDENCE_MATRIX_V1.md",
+        "w7_preparation/MECHANISM_CONFIG_CONTRACT_V1.md",
+        "w7_preparation/MECHANISM_CONFIG_SCHEMA_V1.json",
+        "w7_preparation/W7_PILOT_PROTOCOL_DRAFT_V1.md"
+      ],
+      "family": "voice_conditioned_tts_vc_replacement",
+      "field_name": "implementation",
+      "field_type": "string",
+      "implementation_dependency": "required before executable config hash and runner",
+      "outcome_information_used": false,
+      "p4_id": "P4-029",
+      "resolution_level": "P5",
+      "scientific_effect": "binds frozen semantics to an implementation/API/version"
+    },
+    {
+      "allowed_domain": "documented official implementation/configuration value; no outcome-guided selection",
+      "classification": "IMPLEMENTATION_BINDING",
+      "current_status": "P5_HUMAN_DECISION_REQUIRED",
+      "existing_sources": [
+        "MECHANISM_PARAMETER_EVIDENCE_MATRIX_V1.md",
+        "w7_preparation/MECHANISM_CONFIG_CONTRACT_V1.md",
+        "w7_preparation/MECHANISM_CONFIG_SCHEMA_V1.json",
+        "w7_preparation/W7_PILOT_PROTOCOL_DRAFT_V1.md"
+      ],
+      "family": "voice_conditioned_tts_vc_replacement",
+      "field_name": "version",
+      "field_type": "string",
+      "implementation_dependency": "required before executable config hash and runner",
+      "outcome_information_used": false,
+      "p4_id": "P4-030",
+      "resolution_level": "P5",
+      "scientific_effect": "binds frozen semantics to an implementation/API/version"
+    },
+    {
+      "allowed_domain": "documented official implementation/configuration value; no outcome-guided selection",
+      "classification": "IMPLEMENTATION_BINDING",
+      "current_status": "P5_HUMAN_DECISION_REQUIRED",
+      "existing_sources": [
+        "MECHANISM_PARAMETER_EVIDENCE_MATRIX_V1.md",
+        "w7_preparation/MECHANISM_CONFIG_CONTRACT_V1.md",
+        "w7_preparation/MECHANISM_CONFIG_SCHEMA_V1.json",
+        "w7_preparation/W7_PILOT_PROTOCOL_DRAFT_V1.md"
+      ],
+      "family": "voice_conditioned_tts_vc_replacement",
+      "field_name": "parameter_set_id",
+      "field_type": "string",
+      "implementation_dependency": "required before executable config hash and runner",
+      "outcome_information_used": false,
+      "p4_id": "P4-031",
+      "resolution_level": "P5",
+      "scientific_effect": "binds frozen semantics to an implementation/API/version"
+    },
+    {
+      "allowed_domain": "documented official implementation/configuration value; no outcome-guided selection",
+      "classification": "SCIENTIFIC_CHOICE",
+      "current_status": "P5_HUMAN_DECISION_REQUIRED",
+      "existing_sources": [
+        "MECHANISM_PARAMETER_EVIDENCE_MATRIX_V1.md",
+        "w7_preparation/MECHANISM_CONFIG_CONTRACT_V1.md",
+        "w7_preparation/MECHANISM_CONFIG_SCHEMA_V1.json",
+        "w7_preparation/W7_PILOT_PROTOCOL_DRAFT_V1.md"
+      ],
+      "family": "voice_conditioned_tts_vc_replacement",
+      "field_name": "reference_rule",
+      "field_type": "string",
+      "implementation_dependency": "required before executable config hash and runner",
+      "outcome_information_used": false,
+      "p4_id": "P4-032",
+      "resolution_level": "P5",
+      "scientific_effect": "mechanism semantics or treatment binding"
+    },
+    {
+      "allowed_domain": "documented official implementation/configuration value; no outcome-guided selection",
+      "classification": "SCIENTIFIC_CHOICE",
+      "current_status": "P5_HUMAN_DECISION_REQUIRED",
+      "existing_sources": [
+        "MECHANISM_PARAMETER_EVIDENCE_MATRIX_V1.md",
+        "w7_preparation/MECHANISM_CONFIG_CONTRACT_V1.md",
+        "w7_preparation/MECHANISM_CONFIG_SCHEMA_V1.json",
+        "w7_preparation/W7_PILOT_PROTOCOL_DRAFT_V1.md"
+      ],
+      "family": "voice_conditioned_tts_vc_replacement",
+      "field_name": "target_span_rule",
+      "field_type": "string",
+      "implementation_dependency": "required before executable config hash and runner",
+      "outcome_information_used": false,
+      "p4_id": "P4-033",
+      "resolution_level": "P5",
+      "scientific_effect": "mechanism semantics or treatment binding"
+    },
+    {
+      "allowed_domain": "documented official implementation/configuration value; no outcome-guided selection",
+      "classification": "IMPLEMENTATION_BINDING",
+      "current_status": "P5_HUMAN_DECISION_REQUIRED",
+      "existing_sources": [
+        "MECHANISM_PARAMETER_EVIDENCE_MATRIX_V1.md",
+        "w7_preparation/MECHANISM_CONFIG_CONTRACT_V1.md",
+        "w7_preparation/MECHANISM_CONFIG_SCHEMA_V1.json",
+        "w7_preparation/W7_PILOT_PROTOCOL_DRAFT_V1.md"
+      ],
+      "family": "voice_conditioned_tts_vc_replacement",
+      "field_name": "codec_path",
+      "field_type": "string",
+      "implementation_dependency": "required before executable config hash and runner",
+      "outcome_information_used": false,
+      "p4_id": "P4-034",
+      "resolution_level": "P5",
+      "scientific_effect": "binds frozen semantics to an implementation/API/version"
+    },
+    {
+      "allowed_domain": "documented official implementation/configuration value; no outcome-guided selection",
+      "classification": "SCIENTIFIC_CHOICE",
+      "current_status": "P5_HUMAN_DECISION_REQUIRED",
+      "existing_sources": [
+        "MECHANISM_PARAMETER_EVIDENCE_MATRIX_V1.md",
+        "w7_preparation/MECHANISM_CONFIG_CONTRACT_V1.md",
+        "w7_preparation/MECHANISM_CONFIG_SCHEMA_V1.json",
+        "w7_preparation/W7_PILOT_PROTOCOL_DRAFT_V1.md"
+      ],
+      "family": "voice_conditioned_tts_vc_replacement",
+      "field_name": "parameters",
+      "field_type": "object",
+      "implementation_dependency": "required before executable config hash and runner",
+      "outcome_information_used": false,
+      "p4_id": "P4-035",
+      "resolution_level": "P5",
+      "scientific_effect": "mechanism semantics or treatment binding"
+    }
+  ],
+  "schema_version": "topconf.w7.p4.exact_inventory.v1",
+  "source_case_map_sha256": "8449E9ABFA7FF5E359F00BB9CBEA7D3E6889DF3474F411D7D7E6E4338F9528C9",
+  "source_config": "W7_MECHANISM_EXECUTION_CONFIG_V1_PENDING_P4.json"
+}
