@@ -7,9 +7,9 @@
   "w7_git": {
     "branch": "topconf-w7-reconciliation",
     "baseline_head": "6203ba7996c5d82d9bfe05726bf5cd1a67c47621",
-    "head": "f729787e4cb71712cb35b6a3cc8edc39ba9059a6",
-    "bundle": "G:\\W7-RECOVERY-KIT\\01_git\\topconf-w7-reconciliation_f729787e4cb7.bundle",
-    "bundle_sha256": "70cb8e856355fec28478de29fca8c5ae5d7ca1a40acd1f7f9b9d8f27678721e0",
+    "audit_snapshot_head": "8545fc74835a5cbf0d2ce20e360977f2f62aa05c",
+    "bundle": "G:\\W7-RECOVERY-KIT\\01_git\\topconf-w7-reconciliation_8545fc74835a.bundle",
+    "bundle_sha256": "b823f6d4dbbc907b85aa7eb1cbad88d6d57e9e673d19a65517cbd755e4d63524",
     "bundle_verify": "PASS"
   },
   "main_git": {
