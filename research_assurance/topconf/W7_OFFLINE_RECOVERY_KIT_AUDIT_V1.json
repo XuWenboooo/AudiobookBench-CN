@@ -6,9 +6,10 @@
   "recovery_root": "G:\\W7-RECOVERY-KIT",
   "w7_git": {
     "branch": "topconf-w7-reconciliation",
-    "head": "6203ba7996c5d82d9bfe05726bf5cd1a67c47621",
-    "bundle": "G:\\W7-RECOVERY-KIT\\01_git\\topconf-w7-reconciliation_6203ba7996c5.bundle",
-    "bundle_sha256": "7967506d0dfe093e2a0f2b11f5d2e1bf50c9f3e4b722844b87de08ecbbed6b37",
+    "baseline_head": "6203ba7996c5d82d9bfe05726bf5cd1a67c47621",
+    "head": "f729787e4cb71712cb35b6a3cc8edc39ba9059a6",
+    "bundle": "G:\\W7-RECOVERY-KIT\\01_git\\topconf-w7-reconciliation_f729787e4cb7.bundle",
+    "bundle_sha256": "70cb8e856355fec28478de29fca8c5ae5d7ca1a40acd1f7f9b9d8f27678721e0",
     "bundle_verify": "PASS"
   },
   "main_git": {

@@ -11,14 +11,15 @@ configuration, installing packages, modifying checkpoints, or stopping WSL.
 ```text
 AUTHORITATIVE_W7_WORKTREE = G:\项目\申请实验室  TTS项目\worktrees\topconf-w7-reconciliation\AudiobookBench-CN
 W7_BRANCH = topconf-w7-reconciliation
-W7_HEAD = 6203ba7996c5d82d9bfe05726bf5cd1a67c47621
+W7_BASELINE_HEAD = 6203ba7996c5d82d9bfe05726bf5cd1a67c47621
+W7_FINAL_HEAD = f729787e4cb71712cb35b6a3cc8edc39ba9059a6
 MAIN_HEAD = 9d3a033c192f61c1dd6134e8aff451a791e2ebf6
 RECOVERY_ROOT = G:\W7-RECOVERY-KIT
 ```
 
 The authoritative W7 worktree and main worktree were clean at snapshot time.
-Both bundles passed `git bundle verify` and were hashed. The W7 bundle SHA-256
-is `7967506d0dfe093e2a0f2b11f5d2e1bf50c9f3e4b722844b87de08ecbbed6b37`.
+Both bundles passed `git bundle verify` and were hashed. The final W7 bundle
+SHA-256 is `70cb8e856355fec28478de29fca8c5ae5d7ca1a40acd1f7f9b9d8f27678721e0`.
 The main bundle SHA-256 is
 `cae13a68cbaef4e92d5e1ebc1dfc0c2bda05a5496557ba27ce3440ac30d41561`.
 
