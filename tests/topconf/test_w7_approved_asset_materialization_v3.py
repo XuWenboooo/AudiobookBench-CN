@@ -24,7 +24,7 @@ def test_v3_records_approved_science_and_blocked_execution_separately():
     assert audit["w7_executed"] is False
 
 
-def test_v3_preserves_immutable_scientific_hashes_and_no_v6():
+def test_v3_preserves_immutable_scientific_hashes_while_v6_is_separate():
     manifest = read("W7_APPROVED_RUNTIME_ASSET_MANIFEST_V3.json")
     environments = read("W7_APPROVED_RUNTIME_ENVIRONMENTS_V3.json")
     for value in (manifest, environments):
@@ -33,7 +33,9 @@ def test_v3_preserves_immutable_scientific_hashes_and_no_v6():
         assert value["scientific_config_changed"] is False
         assert value["human_approval_invalidated"] is False
     assert manifest["mechanism_case_map_sha256"] == MAP_SHA
-    assert not (ROOT / "W7_PREREGISTRATION_HASH_MANIFEST_V6.json").exists()
+    v6 = read("W7_PREREGISTRATION_HASH_MANIFEST_V6.json")
+    assert v6["schema_version"] == "topconf.w7.preregistration_hash_manifest.v6"
+    assert v6["protected_hash_integrity"]["integrity"] == "PASS"
 
 
 def test_v3_has_exact_m3_expected_identity_but_no_bytes():

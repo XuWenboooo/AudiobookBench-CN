@@ -1,0 +1,164 @@
+{
+  "schema_version": "topconf.w7.approved_runtime_asset_manifest.v4",
+  "manifest_status": "PASS_ALL_RUNTIME_ASSETS_VERIFIED",
+  "generated_on": "2026-09-22",
+  "hash_algorithm": "SHA-256",
+  "approved_execution_config_sha256": "009CAEDD67EA2CA7C6AA8C4DEF32F87465754A0E3C37E1D95D9403D48E9875C2",
+  "approved_package_sha256": "512929394F7ACAFE417EC5018CA922DE73E8F56A7488D601E427ACC5F4A23117",
+  "mechanism_case_map_sha256": "8449E9ABFA7FF5E359F00BB9CBEA7D3E6889DF3474F411D7D7E6E4338F9528C9",
+  "protected_population_manifest_v3_sha256": "AFCE602F7A1F77F07BC18F05B78CB717DCDE3BFB6FC35289A26AB23F9DE4F8E4",
+  "protected_freshness_manifest_v5_sha256": "6F77CAE912CFF9D9AFD7C75C4EA0910298FC11454D7B8104DBF0551B0AFE821E",
+  "assets": [
+    {
+      "asset_id": "M1_VITS_LJS_OFFICIAL_CHECKPOINT",
+      "role": "official VITS LJS checkpoint",
+      "family": "conventional_tts_replacement",
+      "filename": "pretrained_ljs.pth",
+      "source": {
+        "official_url": "https://drive.google.com/drive/folders/1ksarh-cJf3F5eKJjLVWY0X1j1qsQqiS2?usp=sharing",
+        "provider": "official VITS README-linked Google Drive folder",
+        "file_id": "1q86w74Ygw2hNzYP9cWkeClGT5X25PvBT",
+        "code_revision": "2e561ba58618d021b5b8323d3765880f7e0ecfdb"
+      },
+      "physical_paths": [
+        "G:\\W7-OFFLINE\\models\\vits\\pretrained_ljs.pth",
+        "/mnt/g/W7-OFFLINE/models/vits/pretrained_ljs.pth"
+      ],
+      "size_bytes": 145599717,
+      "sha256": "C94FB49D08BA90C598DE16E7D5DEC8D26BF225C1CF193A4FBA05EB2DBDA5A561",
+      "license": "CHECKPOINT_LICENSE_NOT_SEPARATELY_ESTABLISHED",
+      "redistribution": "NOT_ESTABLISHED; LOCAL_RESEARCH_USE_ONLY",
+      "materialization_status": "MATERIALIZED_AND_HASH_VERIFIED"
+    },
+    {
+      "asset_id": "M3_VOICECRAFT_GIGA830M_CHECKPOINT",
+      "role": "VoiceCraft giga830M checkpoint",
+      "family": "neural_speech_editing_infilling",
+      "filename": "giga830M.pth",
+      "source": {
+        "official_url": "https://huggingface.co/pyp1/VoiceCraft/resolve/1d1a389224b70b18278cff5a42d9dd6160df1ace/giga830M.pth?download=true",
+        "provider": "pyp1/VoiceCraft pinned Hugging Face revision",
+        "code_revision": "f0a7a971363905883a21c466a3aa4ea2d4c0b690"
+      },
+      "physical_paths": [
+        "G:\\W7-OFFLINE\\models\\voicecraft\\giga830M.pth",
+        "/mnt/g/W7-OFFLINE/models/voicecraft/giga830M.pth"
+      ],
+      "size_bytes": 3358342977,
+      "sha256": "2454B51575822A04D24A00F8BA78F201F916439FFA62A3C1AC0FFA5220F429E3",
+      "license": "VOICECRAFT_PINNED_MODEL_TERMS; REVIEW_BEFORE_REDISTRIBUTION",
+      "redistribution": "NOT_ESTABLISHED; LOCAL_RESEARCH_USE_ONLY",
+      "materialization_status": "MATERIALIZED_AND_HASH_VERIFIED"
+    },
+    {
+      "asset_id": "M3_VOICECRAFT_ENCODEC_GIGA",
+      "role": "VoiceCraft EnCodec asset",
+      "family": "neural_speech_editing_infilling",
+      "filename": "encodec_4cb2048_giga.th",
+      "source": {
+        "official_url": "https://huggingface.co/pyp1/VoiceCraft/resolve/1d1a389224b70b18278cff5a42d9dd6160df1ace/encodec_4cb2048_giga.th?download=true",
+        "provider": "pyp1/VoiceCraft pinned Hugging Face revision",
+        "code_revision": "f0a7a971363905883a21c466a3aa4ea2d4c0b690"
+      },
+      "physical_paths": [
+        "G:\\W7-OFFLINE\\models\\voicecraft\\encodec_4cb2048_giga.th",
+        "/mnt/g/W7-OFFLINE/models/voicecraft/encodec_4cb2048_giga.th"
+      ],
+      "size_bytes": 1167842971,
+      "sha256": "CAA0C595D4919527A9728D627150AA2A0B15B6D117B21855165851333DC63378",
+      "license": "FOLLOW_PINNED_VOICECRAFT_MODEL_AND_CODE_TERMS",
+      "redistribution": "NOT_ESTABLISHED; LOCAL_RESEARCH_USE_ONLY",
+      "materialization_status": "MATERIALIZED_AND_HASH_VERIFIED"
+    },
+    {
+      "asset_id": "M3_MFA_ENGLISH_US_ARPA_ACOUSTIC",
+      "role": "Montreal Forced Aligner official English ARPA acoustic model",
+      "family": "forced_alignment",
+      "filename": "english_us_arpa-v2.0.0.zip",
+      "source": {
+        "official_url": "https://github.com/MontrealCorpusTools/mfa-models/releases/download/acoustic-english_us_arpa-v2.0.0/english_us_arpa.zip",
+        "provider": "MontrealCorpusTools official MFA model release",
+        "release": "english_us_arpa v2.0.0"
+      },
+      "physical_paths": [
+        "G:\\W7-OFFLINE\\models\\mfa\\english_us_arpa-v2.0.0.zip",
+        "/mnt/g/W7-OFFLINE/models/mfa/english_us_arpa-v2.0.0.zip"
+      ],
+      "size_bytes": 92003114,
+      "sha256": "71B288AC60A4F8DF6630D72A1FF1A83BF246ADC02D8BA7AA4C0364D56BA60A48",
+      "model_metadata": {
+        "architecture": "gmm-hmm",
+        "phone_set_type": "ARPA",
+        "model_version": "2.0.0rc4.dev0+gd5230fd.d20220126"
+      },
+      "license": "FOLLOW_OFFICIAL_MFA_MODEL_TERMS",
+      "redistribution": "NOT_ESTABLISHED; LOCAL_RESEARCH_USE_ONLY",
+      "materialization_status": "MATERIALIZED_AND_HASH_VERIFIED"
+    },
+    {
+      "asset_id": "M3_MFA_ENGLISH_US_ARPA_DICTIONARY",
+      "role": "Montreal Forced Aligner official English ARPA pronunciation dictionary",
+      "family": "forced_alignment",
+      "filename": "english_us_arpa.dict",
+      "source": {
+        "official_url": "https://github.com/MontrealCorpusTools/mfa-models/releases/download/dictionary-english_us_arpa-v3.0.0/english_us_arpa.dict",
+        "provider": "MontrealCorpusTools official MFA dictionary release",
+        "release": "english_us_arpa v3.0.0"
+      },
+      "physical_paths": [
+        "/root/Documents/MFA/pretrained_models/dictionary/english_us_arpa.dict",
+        "G:\\TTS-Migration-Audit\\english_us_arpa-v3.0.0.dict"
+      ],
+      "size_bytes": 7186498,
+      "sha256": "E8C6C7B036AE2B7C78D2768B8DC6B1F9359175B842956D00B48C53C9C332E6B0",
+      "compatibility": {
+        "phone_set_type": "ARPA",
+        "used_phone_count": 70,
+        "unknown_tokens": 0,
+        "phone_set_subset_verified": true
+      },
+      "license": "FOLLOW_OFFICIAL_MFA_MODEL_TERMS",
+      "redistribution": "NOT_ESTABLISHED; LOCAL_RESEARCH_USE_ONLY",
+      "materialization_status": "MATERIALIZED_AND_BYTE_IDENTICAL_TO_OFFICIAL_RELEASE"
+    },
+    {
+      "asset_id": "M5_YOURTTS_RELEASED_MODEL",
+      "role": "Coqui v0.7.0 registry-bound YourTTS model artifact",
+      "family": "voice_conditioned_tts_vc_replacement",
+      "filename": "tts_models--multilingual--multi-dataset--your_tts.zip",
+      "source": {
+        "official_url": "https://coqui.gateway.scarf.sh/v0.6.1_models/tts_models--multilingual--multi-dataset--your_tts.zip",
+        "provider": "Coqui official model gateway",
+        "model_artifact_release": "v0.6.1_models",
+        "model_commit": "e9a1953e",
+        "code_revision": "c7cca4135db0c108a30ba8fd6a437fb63a5ecc12"
+      },
+      "physical_paths": [
+        "G:\\W7-OFFLINE\\models\\yourtts\\tts_models--multilingual--multi-dataset--your_tts.zip",
+        "/mnt/g/W7-OFFLINE/models/yourtts/tts_models--multilingual--multi-dataset--your_tts.zip"
+      ],
+      "size_bytes": 425257290,
+      "sha256": "0E397047B6CB5121B840D8E16D0ACDAB35AB865CF0A0B72C32E1C58E8006B6A1",
+      "license": "CC BY-NC-ND 4.0",
+      "redistribution": "NO",
+      "materialization_status": "MATERIALIZED_AND_HASH_VERIFIED"
+    }
+  ],
+  "checkpoint_bytes_committed": false,
+  "scientific_config_changed": false,
+  "scientific_asset_bytes_changed": false,
+  "scientific_population_changed": false,
+  "human_approval_invalidated": false,
+  "real_w7_cases_used": 0,
+  "level2_outcomes_accessed": false,
+  "scientific_inferences": 0,
+  "w7_executed": false,
+  "freeze_status": "P4_APPROVAL_AND_SCIENTIFIC_ARTIFACTS_FROZEN",
+  "verification": {
+    "asset_hash_recheck": "PASS",
+    "strict_loads": "PASS",
+    "synthetic_smokes": "PASS",
+    "determinism_checks": "PASS",
+    "real_w7_audio_or_cases": "NOT_USED"
+  }
+}

@@ -33,8 +33,10 @@ def test_m5_registry_identity_is_corrected_without_scientific_change():
     assert manifest["human_approval_invalidated"] is False
 
 
-def test_v2_assets_are_not_materialized_and_no_v6_is_claimed():
+def test_v2_assets_remain_immutable_while_v6_is_claimed_separately():
     manifest = read("W7_APPROVED_RUNTIME_ASSET_MANIFEST_V2.json")
     assert all(item["sha256"] == "NOT_MATERIALIZED" or item.get("actual_sha256") == "NOT_MATERIALIZED" for item in manifest["assets"])
     assert manifest["checkpoint_bytes_committed"] is False
-    assert not (ROOT / "W7_PREREGISTRATION_HASH_MANIFEST_V6.json").exists()
+    v6 = read("W7_PREREGISTRATION_HASH_MANIFEST_V6.json")
+    assert v6["schema_version"] == "topconf.w7.preregistration_hash_manifest.v6"
+    assert v6["readiness_state"]["w7_executed"] is False

@@ -1,0 +1,104 @@
+{
+  "schema_version": "topconf.w7.preregistration_hash_manifest.v6",
+  "manifest_status": "PASS_COMPLETE_COVERAGE_PRE_INFERENCE",
+  "generated_on": "2026-09-22",
+  "hash_algorithm": "SHA-256",
+  "coverage_scope": "frozen W7 scientific artifacts, approved runtime bytes, runtime environments, and pre-inference audit evidence",
+  "records": {
+    "protected_scientific_artifacts": {
+      "W7_MECHANISM_EXECUTION_CONFIG_APPROVED_PREINFERENCE_V1.json": {
+        "sha256": "32CF871DC28F11DF2EABEE7C38E6B22168290750AA17E9F426FC681F8E0BA249",
+        "size": 10336
+      },
+      "W7_P4_PROPOSED_FREEZE_PACKAGE_A_V1.json": {
+        "sha256": "E2E1CF95DD6C66E54B5CEAC6CF2D460201D8591755A5C6C1F3D6E35FFE7253BD",
+        "size": 16948
+      },
+      "W7_MECHANISM_CASE_MAP_DETERMINISTIC_ASSIGNMENT_V1.jsonl.gz": {
+        "sha256": "8449E9ABFA7FF5E359F00BB9CBEA7D3E6889DF3474F411D7D7E6E4338F9528C9",
+        "size": 24905322
+      },
+      "LEVEL2_RQ1_POPULATION_MANIFEST_V3.json": {
+        "sha256": "AFCE602F7A1F77F07BC18F05B78CB717DCDE3BFB6FC35289A26AB23F9DE4F8E4",
+        "size": 2514259
+      },
+      "LEVEL2_FRESHNESS_MANIFEST_V5.json": {
+        "sha256": "6F77CAE912CFF9D9AFD7C75C4EA0910298FC11454D7B8104DBF0551B0AFE821E",
+        "size": 10914
+      },
+      "W7_P4_HUMAN_APPROVAL_RECORD_V1.json": {
+        "sha256": "FD626B0E5E4AE7A984F9368DABACBD57DE17AD38356FD4F41A6C14530A0191F1",
+        "size": 2025
+      }
+    },
+    "runtime_closure_artifacts": {
+      "W7_APPROVED_RUNTIME_ASSET_MANIFEST_V4.json": {
+        "sha256": "A32D0D4025E3C9EA68BCEAAA210D563E6CDF1948223E607EF26677F8CFC0E639",
+        "size": 7754
+      },
+      "W7_APPROVED_RUNTIME_ENVIRONMENTS_V4.json": {
+        "sha256": "93F79B68F84DAEEC63EA32F57864C4EBEBB8BC42A6DCAD48F66751A026559AC3",
+        "size": 3945
+      }
+    },
+    "protocol_and_prior_preregistration": {
+      "W7_PILOT_PROTOCOL_V1.md": {
+        "sha256": "0D386E3461AFEAA5A2DCE361A8D7EBCA58F5816F111827322576297774A51D3C",
+        "size": 2669
+      },
+      "W7_PILOT_PROTOCOL_V1_1.md": {
+        "sha256": "AD2C318085E66796F822134259E207C74A1A01A691ADF7E1D77D4FB1242B1C80",
+        "size": 3307
+      },
+      "W7_PREREGISTRATION_HASH_MANIFEST_V5.json": {
+        "sha256": "EE1F2C6A3DEADB0F4069195275C866B442E6BB6FA992511FE0A3E7AD2974B069",
+        "size": 10180
+      },
+      "W7_PREREGISTRATION_HASH_MANIFEST_V4.json": {
+        "sha256": "9EA36D70E41361AA509063BA18EA5CFC5104AC01CACB42FD97536D7CD995ECC7",
+        "size": 3034
+      },
+      "W7_PROTOCOL_CONSISTENCY_AUDIT_V2.json": {
+        "sha256": "D4DAD5BEF17ECD745DE7F706E9B2255C80584565E725111C5A7CF2AD82C701DC",
+        "size": 4270
+      }
+    }
+  },
+  "protected_hash_integrity": {
+    "classification": "PROMPT_TRANSCRIPTION_ERROR",
+    "repository_v3_sha256": "AFCE602F7A1F77F07BC18F05B78CB717DCDE3BFB6FC35289A26AB23F9DE4F8E4",
+    "checker_literal_match": true,
+    "integrity": "PASS",
+    "scientific_config_changed": false,
+    "scientific_asset_bytes_changed": false,
+    "scientific_population_changed": false,
+    "human_approval_invalidated": false
+  },
+  "mechanism_gates": {
+    "M1": "PASS",
+    "M2": "PASS",
+    "M3": "PASS",
+    "M4": "PASS",
+    "M5": "PASS",
+    "FIVE_MECHANISM_GATE": "PASS"
+  },
+  "readiness_state": {
+    "mechanism_config_complete": true,
+    "runtime_assets_complete": true,
+    "runtime_environments_complete": true,
+    "hash_coverage_gaps": [],
+    "metrics": "NOT_MEASURED",
+    "outcome_guided_change": false,
+    "post_outcome_scientific_change": false,
+    "scientific_inferences": 0,
+    "real_w7_cases_used": 0,
+    "level2_outcomes_accessed": false,
+    "w7_executed": false,
+    "formal_pilot_authorized": false
+  },
+  "prior_manifest_preservation": {
+    "W7_PREREGISTRATION_HASH_MANIFEST_V5.json": "PRESERVED_UNMODIFIED",
+    "W7_APPROVED_RUNTIME_ASSET_MANIFEST_V3.json": "PRESERVED_UNMODIFIED",
+    "W7_APPROVED_RUNTIME_ENVIRONMENTS_V3.json": "PRESERVED_UNMODIFIED"
+  }
+}
