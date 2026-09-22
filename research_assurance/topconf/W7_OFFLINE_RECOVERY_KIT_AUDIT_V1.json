@@ -1,0 +1,64 @@
+{
+  "schema_version": "topconf.w7.offline_recovery_kit_audit.v1",
+  "status": "COMPLETE_OFFLINE_INFRASTRUCTURE_AUDIT",
+  "side_task": "SIDE-W7-OFFLINE-RECOVERY-KIT",
+  "authoritative_w7_worktree": "G:\\项目\\申请实验室  TTS项目\\worktrees\\topconf-w7-reconciliation\\AudiobookBench-CN",
+  "recovery_root": "G:\\W7-RECOVERY-KIT",
+  "w7_git": {
+    "branch": "topconf-w7-reconciliation",
+    "head": "6203ba7996c5d82d9bfe05726bf5cd1a67c47621",
+    "bundle": "G:\\W7-RECOVERY-KIT\\01_git\\topconf-w7-reconciliation_6203ba7996c5.bundle",
+    "bundle_sha256": "7967506d0dfe093e2a0f2b11f5d2e1bf50c9f3e4b722844b87de08ecbbed6b37",
+    "bundle_verify": "PASS"
+  },
+  "main_git": {
+    "branch": "main",
+    "head": "9d3a033c192f61c1dd6134e8aff451a791e2ebf6",
+    "bundle": "G:\\W7-RECOVERY-KIT\\01_git\\main_9d3a033c192f.bundle",
+    "bundle_sha256": "cae13a68cbaef4e92d5e1ebc1dfc0c2bda05a5496557ba27ce3440ac30d41561",
+    "bundle_verify": "PASS"
+  },
+  "source_archives_indexed": {"present_stable": 5, "index": "G:\\W7-RECOVERY-KIT\\02_source_archives\\SOURCE_ARCHIVES_INDEX.json"},
+  "model_assets_indexed": {"present_stable": 4, "absent_mfa_assets": 2, "index": "G:\\W7-RECOVERY-KIT\\03_model_inventory\\MODEL_ASSET_INVENTORY.json"},
+  "runtime_snapshot": {
+    "runtime_m1_vits": "RUNTIME_NOT_CREATED; model reference present offline",
+    "runtime_m3_voicecraft": "RUNTIME_NOT_CREATED; model references present offline; MFA absent",
+    "runtime_m5_yourtts": "RUNTIME_NOT_CREATED; model archive present offline"
+  },
+  "package_coverage": {
+    "conda": "NOT_COMPUTABLE_RUNTIME_ABSENT",
+    "pip": "NOT_COMPUTABLE_RUNTIME_ABSENT",
+    "coverage_file": "G:\\W7-RECOVERY-KIT\\05_python_packages\\OFFLINE_PACKAGE_COVERAGE.json"
+  },
+  "wsl": {
+    "export": "DEFERRED_MAINLINE_ACTIVE",
+    "export_sha256": "NOT_CREATED_DEFERRED",
+    "decision": "G:\\W7-RECOVERY-KIT\\08_wsl\\WSL_EXPORT_DECISION.json"
+  },
+  "network_matrix": "G:\\W7-RECOVERY-KIT\\11_audit\\NETWORK_DEPENDENCY_MATRIX.json",
+  "single_point_of_failure_audit": "G:\\W7-RECOVERY-KIT\\11_audit\\SINGLE_POINT_OF_FAILURE_AUDIT_V1.md",
+  "recovery_kit_manifest": "G:\\W7-RECOVERY-KIT\\W7_OFFLINE_RECOVERY_KIT_MANIFEST_V1.json",
+  "master_sha256sums": "G:\\W7-RECOVERY-KIT\\09_checksums\\SHA256SUMS.txt",
+  "recovery_kit_self_check": "PASS",
+  "scoped_tests": "179 passed",
+  "preregistration_checker": "PASS",
+  "w7_reconciliation_checker": "PASS",
+  "git_diff_check": "PASS",
+  "scientific_config_changed": false,
+  "scientific_asset_bytes_changed": false,
+  "scientific_population_changed": false,
+  "w7_scientific_inferences": 0,
+  "level2_outcomes_accessed": false,
+  "real_w7_cases_used": 0,
+  "w7_execution_authorized": false,
+  "w7_executed": false,
+  "exact_offline_recovery_gaps": [
+    "planned idle-window WSL export",
+    "isolated M1/M3/M5 runtime creation",
+    "exact offline package closure",
+    "MFA dictionary/acoustic model availability",
+    "restricted-license handling",
+    "independent second copy of recovery-critical artifacts"
+  ],
+  "next_recovery_hardening_action": "When WSL is confirmed idle, perform a planned export and independently hash it; otherwise keep WSL export deferred. Do not enter M1/M3 mainline closure or W7 execution from this side task."
+}
