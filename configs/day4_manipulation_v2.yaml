@@ -6,7 +6,7 @@ longform_type: constructed
 inputs:
   clean_longform_manifest: data/manifests/day35_longform_manifest.csv
   source_catalog: data/manifests/day35_source_audio_portable.csv
-  dataset_root: 'F:\项目\申请实验室  TTS项目\datasets\AISHELL-3'
+  dataset_root: 'G:\项目\申请实验室  TTS项目\datasets\AISHELL-3'
 
 eligibility:
   allowed_splits:

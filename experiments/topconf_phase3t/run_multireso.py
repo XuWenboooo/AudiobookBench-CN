@@ -28,7 +28,7 @@ from common import (
 
 
 MODEL_ID = "MultiResoModel-Simple"
-MODEL_ROOT = Path(r"F:/项目/申请实验室  TTS项目/topconf_phase3_cache/repos/MultiResoModel-Simple-schannel")
+MODEL_ROOT = Path(r"G:/项目/申请实验室  TTS项目/topconf_phase3_cache/repos/MultiResoModel-Simple-schannel")
 SSL_PATH = MODEL_ROOT / "pretrained" / "w2v_large_lv_fsh_swbd_cv_fixed.pt"
 MODEL_CHECKPOINT = MODEL_ROOT / "materialized" / "baseline-ps-e55" / "exp" / "baseline" / "55.pth"
 CHECKPOINT_SHA256 = "5B753752F7C25370C6ABF973F69F58E100DAD4B5D3EA035872335358A876FDD1"

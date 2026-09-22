@@ -1,5 +1,5 @@
 protocol_version: "4.5"
-dataset_root: 'F:\项目\申请实验室  TTS项目\datasets\AISHELL-3'
+dataset_root: 'G:\项目\申请实验室  TTS项目\datasets\AISHELL-3'
 source_type: natural
 longform_type: constructed
 

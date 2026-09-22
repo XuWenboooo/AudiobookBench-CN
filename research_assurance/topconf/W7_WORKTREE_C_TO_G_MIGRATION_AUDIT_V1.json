@@ -1,0 +1,62 @@
+{
+  "schema_version": "topconf.w7.worktree_c_to_g_migration_audit.v1",
+  "authoritative_project_root": "G:/项目/申请实验室  TTS项目",
+  "source_worktree": "C:/Users/ZhuanZ（无密码）/.codex/worktrees/topconf-w7-reconciliation/AudiobookBench-CN",
+  "destination_worktree": "G:/项目/申请实验室  TTS项目/worktrees/topconf-w7-reconciliation/AudiobookBench-CN",
+  "branch": "topconf-w7-reconciliation",
+  "source_head_before_migration": "32ed968f12338bef31cf259d2e0fe85f65e5c8e0",
+  "destination_head_before_migration": "32ed968f12338bef31cf259d2e0fe85f65e5c8e0",
+  "remote_head_observed_before_push": "29d5605bf7e00932016c225a1bd8e26a19911a4a",
+  "remote_stale_before_push": true,
+  "local_w7_authoritative": true,
+  "bundle": {
+    "path": "G:/TTS-Migration-Audit/baseline/topconf-w7-reconciliation-pre-worktree-migration.bundle",
+    "sha256": "3377363DCEC289B292D2BF6F6AE94B4B4D0E2A3D62194FF206192E2453DA9160",
+    "verify": "PASS",
+    "contains_ref": "refs/heads/topconf-w7-reconciliation",
+    "contains_head": "32ed968f12338bef31cf259d2e0fe85f65e5c8e0"
+  },
+  "worktree_move_method": "git worktree move attempted and rejected safely; exact-commit temporary-branch fallback used",
+  "metadata_repair": "W7 repaired to G common Git directory; unrelated external pointers restored to original F common Git directory",
+  "c_rollback_present": true,
+  "c_rollback_head": "32ed968f12338bef31cf259d2e0fe85f65e5c8e0",
+  "c_rollback_detached_clean": true,
+  "tracked_comparison": {
+    "pre_rebinding": {"source": 1299, "destination": 1299, "missing": 0, "unexpected": 0, "hash_mismatches": 0, "pass": true},
+    "post_rebinding": {"source": 1299, "destination": 1299, "missing": 0, "unexpected": 0, "path_only_differences": 7, "scientific_file_mismatches": 0, "pass": true}
+  },
+  "active_path_rebindings": [
+    "configs/day3_aishell3_pilot.yaml",
+    "configs/day35_constructed_longform.yaml",
+    "configs/day4_manipulation_v2.yaml",
+    "configs/day45_expanded_paired.yaml",
+    "configs/week2a_a2_protocol_draft.yaml",
+    "experiments/topconf_phase3t/run_cfprf.py",
+    "experiments/topconf_phase3t/run_multireso.py"
+  ],
+  "active_f_path_references": 0,
+  "active_c_worktree_path_references": 0,
+  "historical_path_references_preserved": true,
+  "protected_hashes": {
+    "approved_execution_config_sha256": "009CAEDD67EA2CA7C6AA8C4DEF32F87465754A0E3C37E1D95D9403D48E9875C2",
+    "approved_package_sha256": "512929394F7ACAFE417EC5018CA922DE73E8F56A7488D601E427ACC5F4A23117",
+    "mechanism_case_map_sha256": "8449E9ABFA7FF5E359F00BB9CBEA7D3E6889DF3474F411D7D7E6E4338F9528C9",
+    "v3_sha256": "AFCE602F7A1F77F07BC18F05B78CB717DCDE3BFB6FC35289A26AB23F9DE4F8E4",
+    "v5_sha256": "6F77CAE912CFF9D9AFD7C75C4EA0910298FC11454D7B8104DBF0551B0AFE821E",
+    "integrity": "PASS"
+  },
+  "scientific_config_changed": "NO",
+  "scientific_asset_bytes_changed": "NO",
+  "scientific_population_changed": "NO",
+  "human_approval_invalidated": "NO",
+  "scoped_tests": "179 passed in 46.14s",
+  "preregistration_checker": "PASS",
+  "w7_reconciliation_checker": "PASS",
+  "git_diff_check": "PASS",
+  "w7_scientific_inferences": 0,
+  "level2_outcomes_accessed": "NO",
+  "real_w7_cases_used": 0,
+  "w7_execution_authorized": "NO",
+  "w7_executed": "NO",
+  "other_worktree_deletion_authorized": "NO"
+}

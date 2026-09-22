@@ -29,10 +29,10 @@ from common import (
 
 
 MODEL_ID = "CFPRF"
-CFPRF_ROOT = Path(r"F:/项目/申请实验室  TTS项目/topconf_phase3_cache/repos/CFPRF")
-XLSR_PATH = Path(r"F:/项目/申请实验室  TTS项目/topconf_phase3_cache/checkpoints/CFPRF/pretrain_models/xlsr2_300m.pt")
-FDN_PATH = Path(r"F:/项目/申请实验室  TTS项目/topconf_phase3_cache/checkpoints/CFPRF/1FDN_PS.pth")
-PRN_PATH = Path(r"F:/项目/申请实验室  TTS项目/topconf_phase3_cache/checkpoints/CFPRF/2PRN_PS.pth")
+CFPRF_ROOT = Path(r"G:/项目/申请实验室  TTS项目/topconf_phase3_cache/repos/CFPRF")
+XLSR_PATH = Path(r"G:/项目/申请实验室  TTS项目/topconf_phase3_cache/checkpoints/CFPRF/pretrain_models/xlsr2_300m.pt")
+FDN_PATH = Path(r"G:/项目/申请实验室  TTS项目/topconf_phase3_cache/checkpoints/CFPRF/1FDN_PS.pth")
+PRN_PATH = Path(r"G:/项目/申请实验室  TTS项目/topconf_phase3_cache/checkpoints/CFPRF/2PRN_PS.pth")
 CHECKPOINT_HASHES = {
     "fdn": "5FCBBC725761F99F7CA22A6BD095242B7D4FCBB2B285A766047941766D496267",
     "prn": "88B605BA432B978D481264266F3DE5BC434B4C1E74A1ABAAA1BDADC3313FAC36",

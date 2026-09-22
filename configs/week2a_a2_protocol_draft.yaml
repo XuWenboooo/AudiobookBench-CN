@@ -66,7 +66,7 @@ source:
   source_catalog: data/manifests/day45_source_audio.csv
   clean_longform_manifest: data/manifests/day45_longform_manifest.csv
   frozen_attack_manifest: data/manifests/day45_attack_manifest.csv
-  dataset_root: 'F:\项目\申请实验室  TTS项目\datasets\AISHELL-3'
+  dataset_root: 'G:\项目\申请实验室  TTS项目\datasets\AISHELL-3'
   dataset_access: strict_read_only
   longform_type: constructed
 

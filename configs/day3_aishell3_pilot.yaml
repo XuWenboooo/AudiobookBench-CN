@@ -1,5 +1,5 @@
 # Deterministic Day 3 real-data gate pilot. This is clean natural speech only.
-dataset_root: 'F:\项目\申请实验室  TTS项目\datasets\AISHELL-3'
+dataset_root: 'G:\项目\申请实验室  TTS项目\datasets\AISHELL-3'
 utterances_per_speaker: 40
 selection:
   method: sorted_utterance_id
