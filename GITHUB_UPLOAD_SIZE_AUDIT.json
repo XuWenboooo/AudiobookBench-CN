@@ -1,0 +1,10 @@
+{
+  "TOTAL_FILES": 0,
+  "TOTAL_BYTES": 0,
+  "LARGEST_FILE": null,
+  "FILES_GT_10MB": [],
+  "FILES_GT_50MB": [],
+  "FILES_GT_100MB": [],
+  "status": "PENDING_CANDIDATE_ENUMERATION",
+  "note": "No upload candidate was added or staged in this offline continuation."
+}

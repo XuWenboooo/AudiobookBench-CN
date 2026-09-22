@@ -1,0 +1,18 @@
+{
+  "status": "DRAFT_ONLY",
+  "delete_performed": false,
+  "safe_delete_candidate": [],
+  "safe_to_delete_now": [],
+  "remote_sync_required": true,
+  "local_head": "d320045dd2a8f5f8501d8ca5233bba69abbbe199",
+  "remote_head": "be7c3bca207a5c17117e5acf3070bc8e22340b97",
+  "remote_sync": "BLOCKED_NETWORK",
+  "bundle_verify": "PASS",
+  "scoped_tests": "179 passed",
+  "git_diff_check": "PASS",
+  "active_f_references": [
+    "F:\\项目\\申请实验室  TTS项目\\datasets\\AISHELL-3"
+  ],
+  "active_c_references": [],
+  "notes": "No non-G path is promoted for deletion until complete path-level hash pairing and remote/local equality verification."
+}
