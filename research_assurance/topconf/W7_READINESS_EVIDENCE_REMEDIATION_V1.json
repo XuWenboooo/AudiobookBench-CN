@@ -1,0 +1,37 @@
+{
+  "schema_version": "topconf.w7.readiness_evidence_remediation.v1",
+  "side_task": "W7 readiness evidence remediation",
+  "baseline_head": "472827a76ea68c4fb46bf0c6b700dacaf53f3bc1",
+  "remediation_status": "FAIL_CLOSED_REMAINING_EVIDENCE_BLOCKERS",
+  "scope": {
+    "real_w7_executed": false,
+    "level2_outcomes_accessed": false,
+    "real_w7_cases_used": 0,
+    "scientific_config_changed": false,
+    "scientific_asset_bytes_changed": false,
+    "approved_case_map_changed": false
+  },
+  "input_audit": "W7_INDEPENDENT_READINESS_AUDIT_V1.json",
+  "original_contradictions": 4,
+  "remediation_actions": [
+    {"id":"M1_EXECUTOR_BINDING","status":"DOCUMENTED_NOT_CLEARED","result":"M1 was replayed through the explicitly declared shared M3 Python 3.9 stack; standalone runtime_m1_vits still cannot import torch."},
+    {"id":"M1_FIRST_MATERIALIZATION","status":"PARTIAL_NOT_CLEARED","result":"Current bytes and official source are pinned; preserved download.log still records the earlier missing-file failure and the successful first-write timestamp/chain is not recoverable."},
+    {"id":"AUDIT_SUPERSESSION","status":"CLEARED_AS_GRAPH_CONTRADICTION","result":"Current and historical records are explicitly classified in W7_READINESS_AUDIT_SUPERSESSION_INDEX_V1."},
+    {"id":"RAW_RUNTIME_EVIDENCE","status":"PARTIAL_NOT_CLEARED","result":"M1 raw CPU evidence is strict-load/smoke PASS but determinism FAIL and GPU unavailable; M3 is blocked by missing best_bundle.pth/args.pkl; M5 strict-load/smokes PASS but determinism FAIL."}
+  ],
+  "manifest_decision": {
+    "V4": "REMAINS_VALID_FOR_ASSET_BYTES_AND_DECLARED_IDENTITIES; NOT_SUFFICIENT_FOR_RUNTIME_READINESS",
+    "V6": "REMAINS_VALID_FOR_PROTECTED_HASHES_AND_PRE-INFERENCE_FREEZE",
+    "runtime_manifest_regeneration_required": false,
+    "reason": "No approved scientific object or asset byte changed; new records qualify runtime evidence without rewriting frozen manifests."
+  },
+  "evidence_records": [
+    "w7_evidence/W7_M1_SYNTHETIC_RUNTIME_EVIDENCE_V1.json",
+    "w7_evidence/W7_M3_SYNTHETIC_RUNTIME_EVIDENCE_V1.json",
+    "w7_evidence/W7_M5_SYNTHETIC_RUNTIME_EVIDENCE_V1.json",
+    "W7_M1_VITS_FIRST_MATERIALIZATION_PROVENANCE_V1.json",
+    "W7_READINESS_AUDIT_SUPERSESSION_INDEX_V1.json"
+  ],
+  "w7_authorization": "NO",
+  "next_action": "Do not run W7. Obtain a reproducible M1 deterministic/runtime decision, recover the pinned VoiceCraft best_bundle.pth plus args.pkl, and complete M1 provenance before any new authorization review."
+}

@@ -1,0 +1,41 @@
+{
+  "schema_version": "topconf.w7.m5.synthetic_runtime_evidence.v1",
+  "evidence_status": "PARTIAL_FAIL_CLOSED",
+  "runtime_name": "runtime_m5_yourtts",
+  "environment_path": "/opt/audiobookbench/envs/runtime_m5_yourtts",
+  "python": "3.10.13",
+  "packages": {
+    "TTS": "0.7.0",
+    "torch": "2.0.1+cu117",
+    "torchaudio": "2.0.2+cu117",
+    "numpy": "1.23.5",
+    "pyworld": "0.3.4"
+  },
+  "loader_note": "CPU rerun used LD_LIBRARY_PATH=/opt/audiobookbench/envs/runtime_m5_yourtts/lib to select the runtime libstdc++ carrying CXXABI_1.3.15; no scientific code or configuration was changed.",
+  "model": {
+    "zip_sha256": "0E397047B6CB5121B840D8E16D0ACDAB35AB865CF0A0B72C32E1C58E8006B6A1",
+    "model_file_sha256": "017BFD8907C80BB5857D65D0223F0E4E4B9D699EF52E2A853D9CC7EB7E308CF0",
+    "model_registry_commit": "e9a1953e",
+    "coqui_revision": "c7cca4135db0c108a30ba8fd6a437fb63a5ecc12",
+    "yourtts_revision": "23904e6b7158d42cacf2a94dba0791ef69f1e2a9"
+  },
+  "synthetic_run": {
+    "device": "CPU",
+    "seed": 20260922,
+    "text": "This is a synthetic YourTTS readiness smoke.",
+    "strict_load": "PASS",
+    "speaker_conditioning_smoke": "PASS",
+    "tts_vc_smoke": "PASS",
+    "determinism": "FAIL",
+    "first_output_sha256": "F8DF55ADED9E97643787B69B4CBA0DA518A89CE0DBC92C5C96C2D1AEC4AC8129",
+    "repeat_output_sha256": "00F6101110648411A3F4EC700D2B05E466164E30208E6151121E1FFF10EA2D45",
+    "output_shape": [45328],
+    "output_dtype": "float32"
+  },
+  "pyworld_compatibility_classification": "NON_SCIENTIFIC_RUNTIME_COMPATIBILITY_ONLY",
+  "raw_stdout_log": "G:\\TTS-Migration-Audit\\verification\\w7-readiness-remediation\\m5_synthetic.stdout.log",
+  "raw_stderr_log": "G:\\TTS-Migration-Audit\\verification\\w7-readiness-remediation\\m5_synthetic.stderr.log",
+  "real_w7_cases_used": 0,
+  "level2_outcomes_accessed": false,
+  "scientific_config_changed": false
+}

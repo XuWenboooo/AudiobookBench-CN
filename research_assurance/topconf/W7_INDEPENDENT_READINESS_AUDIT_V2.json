@@ -1,0 +1,86 @@
+{
+  "schema_version": "topconf.w7.independent_readiness_audit.v2",
+  "audit_status": "FAIL_CLOSED",
+  "audit_method": "FRESH_REPLAY_FROM_CURRENT_REPOSITORY_AND_RAW_EVIDENCE; NO_PRIOR_PASS_INHERITED",
+  "baseline_head": "472827a76ea68c4fb46bf0c6b700dacaf53f3bc1",
+  "authoritative_worktree": "G:\\项目\\申请实验室  TTS项目\\worktrees\\topconf-w7-reconciliation\\AudiobookBench-CN",
+  "scientific_state": {
+    "scientific_config_changed": false,
+    "scientific_asset_bytes_changed": false,
+    "human_approval_invalidated": false,
+    "w7_execution_authorized": false,
+    "w7_executed": false,
+    "w7_scientific_inferences": 0,
+    "level2_outcomes_accessed": false,
+    "real_w7_cases_used": 0
+  },
+  "mechanisms": {
+    "M1": {
+      "evidence_status": "FAIL_CLOSED",
+      "runtime_self_consistency": "FAIL_STANDALONE_M1_TORCH_IMPORT_MISSING",
+      "executor_binding": "PASS_EXPLICIT_SHARED_M3_EXECUTOR",
+      "checkpoint_provenance": "PARTIAL_FIRST_MATERIALIZATION_CHAIN_NOT_RECOVERABLE",
+      "strict_load": "PASS_CPU_SHARED_EXECUTOR",
+      "synthetic_smoke": "PASS_CPU_SHARED_EXECUTOR",
+      "determinism": "FAIL",
+      "gpu": "BLOCKED_MISSING_LIBCUDA",
+      "raw_record": "w7_evidence/W7_M1_SYNTHETIC_RUNTIME_EVIDENCE_V1.json"
+    },
+    "M2": {
+      "evidence_status": "PASS_EVIDENCED",
+      "strict_load": "NOT_APPLICABLE",
+      "synthetic_smoke": "PASS",
+      "determinism": "PASS"
+    },
+    "M3": {
+      "evidence_status": "FAIL_CLOSED",
+      "runtime_identity": "PASS_VERSION_PROBE",
+      "asset_identity": "PASS_HASH_AND_SIZE",
+      "strict_load": "BLOCKED_MISSING_BEST_BUNDLE_AND_ARGS",
+      "synthetic_smoke": "NOT_RUN",
+      "determinism": "NOT_RUN",
+      "raw_record": "w7_evidence/W7_M3_SYNTHETIC_RUNTIME_EVIDENCE_V1.json"
+    },
+    "M4": {
+      "evidence_status": "PASS_EVIDENCED",
+      "strict_load": "NOT_APPLICABLE",
+      "synthetic_smoke": "PASS",
+      "determinism": "PASS"
+    },
+    "M5": {
+      "evidence_status": "PASS_BUT_EVIDENCE_INCOMPLETE",
+      "runtime_identity": "PASS_VERSION_PROBE",
+      "asset_identity": "PASS_HASH_AND_SIZE",
+      "strict_load": "PASS",
+      "synthetic_smoke": "PASS",
+      "determinism": "FAIL",
+      "pyworld": "NON_SCIENTIFIC_RUNTIME_COMPATIBILITY_ONLY",
+      "raw_record": "w7_evidence/W7_M5_SYNTHETIC_RUNTIME_EVIDENCE_V1.json"
+    }
+  },
+  "manifest_rechecks": {
+    "V4_path": "research_assurance/topconf/W7_APPROVED_RUNTIME_ASSET_MANIFEST_V4.json",
+    "V4_sha256": "A32D0D4025E3C9EA68BCEAAA210D563E6CDF1948223E607EF26677F8CFC0E639",
+    "V4_asset_hash_recheck": "6_OF_6_PASS",
+    "V6_path": "research_assurance/topconf/W7_PREREGISTRATION_HASH_MANIFEST_V6.json",
+    "V6_sha256": "AA98B34DBE1C51241119EF27C0DAA48FE1D98AEE390EE7F4A089AA3196075029",
+    "V6_referenced_hash_recheck": "13_OF_13_PASS",
+    "protected_hash_integrity": "PASS",
+    "runtime_manifest_regeneration_required": false
+  },
+  "supersession": {
+    "index": "W7_READINESS_AUDIT_SUPERSESSION_INDEX_V1.json",
+    "historical_records_explicitly_superseded": true,
+    "old_records_deleted": false
+  },
+  "contradictions": [
+    "V4 names runtime_m1_vits as VERIFIED while the standalone interpreter lacks torch; the actual evidence uses the explicitly declared shared M3 executor.",
+    "The preserved M1 download log records VITS_LJS_NOT_FOUND and the first successful materialization timestamp/chain remains unrecoverable.",
+    "V4 declares M3 strict-load/smoke/determinism readiness but the pinned best_bundle.pth and args.pkl are absent, so independent strict load is blocked.",
+    "V4 declares M1/M5 determinism PASS while the raw CPU replays produce different output hashes under the same seed."
+  ],
+  "readiness_contradictions_found": 4,
+  "independent_readiness_audit": "FAIL_CLOSED",
+  "w7_execution_readiness": "NO",
+  "next_human_action": "Resolve the four evidence blockers above; do not authorize or execute W7 from this audit."
+}

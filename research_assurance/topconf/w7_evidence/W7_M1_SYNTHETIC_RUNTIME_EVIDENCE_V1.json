@@ -1,0 +1,43 @@
+{
+  "schema_version": "topconf.w7.m1.synthetic_runtime_evidence.v1",
+  "evidence_status": "PARTIAL_FAIL_CLOSED",
+  "runtime_name": "runtime_m1_vits",
+  "declared_environment": "/opt/audiobookbench/envs/runtime_m1_vits",
+  "validation_executor": "/opt/audiobookbench/envs/runtime_m3_voicecraft",
+  "executor_binding": "EXPLICIT_SHARED_M3_PYTHON39_CUDA_STACK; V4 DECLARES THIS BINDING",
+  "standalone_runtime_self_consistency": "FAIL_TORCH_IMPORT_MISSING_IN_RUNTIME_M1_VITS",
+  "python": "3.9.16",
+  "torch": "2.0.1+cu117",
+  "torchaudio": "2.0.2+cu117",
+  "vits_revision": "2e561ba58618d021b5b8323d3765880f7e0ecfdb",
+  "checkpoint": {
+    "path": "G:\\W7-OFFLINE\\models\\vits\\pretrained_ljs.pth",
+    "wsl_path": "/mnt/g/W7-OFFLINE/models/vits/pretrained_ljs.pth",
+    "size_bytes": 145599717,
+    "sha256": "C94FB49D08BA90C598DE16E7D5DEC8D26BF225C1CF193A4FBA05EB2DBDA5A561"
+  },
+  "synthetic_run": {
+    "device": "CPU",
+    "seed": 20260922,
+    "text": "This is a synthetic VITS readiness smoke.",
+    "strict_load": "PASS",
+    "synthetic_smoke": "PASS",
+    "determinism": "FAIL",
+    "first_output_sha256": "81C7FDE6D56EC2FFAC7DC3BD14441000ECC7C586481758E0AA3BB8D3B7A02C07",
+    "repeat_output_sha256": "65C1DEA882B4454E58AA25B129BFB30D8F9A055FC388D503DC30FF8CAB12B314",
+    "output_shape": [60672],
+    "output_dtype": "float32",
+    "rng_state_reproduced": true
+  },
+  "gpu_attempt": {
+    "status": "BLOCKED_RUNTIME_CUDA_LIBRARY",
+    "host_gpu": "NVIDIA GeForce RTX 4060 Laptop GPU, 616.92, 8188 MiB",
+    "error": "Could not load library libcudnn_cnn_infer.so.8. Error: libcuda.so: cannot open shared object file"
+  },
+  "raw_stdout_log": "G:\\TTS-Migration-Audit\\verification\\w7-readiness-remediation\\m1_synthetic_cpu.stdout.log",
+  "raw_stderr_log": "G:\\TTS-Migration-Audit\\verification\\w7-readiness-remediation\\m1_synthetic_cpu.stderr.log",
+  "gpu_raw_stderr_log": "G:\\TTS-Migration-Audit\\verification\\w7-readiness-remediation\\m1_synthetic.stderr.log",
+  "real_w7_cases_used": 0,
+  "level2_outcomes_accessed": false,
+  "scientific_config_changed": false
+}

@@ -1,0 +1,35 @@
+{
+  "schema_version": "topconf.w7.readiness_audit_supersession_index.v1",
+  "index_status": "EXPLICIT_CURRENT_AND_HISTORICAL_GRAPH",
+  "generated_on": "2026-09-22",
+  "scientific_config_changed": false,
+  "current_records": [
+    "W7_APPROVED_RUNTIME_ASSET_MANIFEST_V4.json",
+    "W7_APPROVED_RUNTIME_ENVIRONMENTS_V4.json",
+    "W7_PREREGISTRATION_HASH_MANIFEST_V6.json",
+    "w7_evidence/W7_M1_SYNTHETIC_RUNTIME_EVIDENCE_V1.json",
+    "w7_evidence/W7_M3_SYNTHETIC_RUNTIME_EVIDENCE_V1.json",
+    "w7_evidence/W7_M5_SYNTHETIC_RUNTIME_EVIDENCE_V1.json",
+    "W7_READINESS_EVIDENCE_REMEDIATION_V1.json",
+    "W7_INDEPENDENT_READINESS_AUDIT_V2.json"
+  ],
+  "records": [
+    {"path":"W7_APPROVED_RUNTIME_ASSET_MANIFEST_V2.json","classification":"SUPERSEDED","superseded_by":"W7_APPROVED_RUNTIME_ASSET_MANIFEST_V4.json","reason":"V4 is the current byte-verified materialization manifest."},
+    {"path":"W7_APPROVED_RUNTIME_ASSET_MANIFEST_V3.json","classification":"SUPERSEDED","superseded_by":"W7_APPROVED_RUNTIME_ASSET_MANIFEST_V4.json","reason":"V4 is the current byte-verified materialization manifest."},
+    {"path":"W7_APPROVED_RUNTIME_ENVIRONMENTS_V2.json","classification":"SUPERSEDED","superseded_by":"W7_APPROVED_RUNTIME_ENVIRONMENTS_V4.json","reason":"V4 is the current environment declaration."},
+    {"path":"W7_APPROVED_RUNTIME_ENVIRONMENTS_V3.json","classification":"SUPERSEDED","superseded_by":"W7_APPROVED_RUNTIME_ENVIRONMENTS_V4.json","reason":"V4 is the current environment declaration."},
+    {"path":"W7_P4_CANDIDATE_RUNTIME_ASSET_MANIFEST_V1.json","classification":"HISTORICAL_PRE_MATERIALIZATION","superseded_by":"W7_APPROVED_RUNTIME_ASSET_MANIFEST_V4.json","reason":"Candidate-stage inventory predates approved materialization."},
+    {"path":"W7_P4_CANDIDATE_RUNTIME_ENVIRONMENTS_V1.json","classification":"HISTORICAL_PRE_MATERIALIZATION","superseded_by":"W7_APPROVED_RUNTIME_ENVIRONMENTS_V4.json","reason":"Candidate-stage environment record predates approved runtime declaration."},
+    {"path":"W7_P4_CANDIDATE_EXECUTABILITY_AUDIT_V1.json","classification":"HISTORICAL_PRE_MATERIALIZATION","superseded_by":"W7_READINESS_EVIDENCE_REMEDIATION_V1.json","reason":"Candidate audit predates current evidence capture."},
+    {"path":"W7_P4_FINAL_EXECUTION_READINESS_AUDIT_V1.json","classification":"SUPERSEDED","superseded_by":"W7_FINAL_EXECUTION_READINESS_AUDIT_V2.json","reason":"V2 is the later pre-execution readiness record; this remediation audit qualifies its runtime evidence."},
+    {"path":"W7_FINAL_APPROVED_ASSET_MATERIALIZATION_AUDIT_V1.json","classification":"HISTORICAL_PRE_MATERIALIZATION","superseded_by":"W7_APPROVED_RUNTIME_ASSET_MANIFEST_V4.json","reason":"Old materialization snapshot is retained as history only."},
+    {"path":"W7_APPROVED_ASSET_RECOVERY_READINESS_V2.json","classification":"HISTORICAL_PRE_MATERIALIZATION","superseded_by":"W7_READINESS_EVIDENCE_REMEDIATION_V1.json","reason":"Recovery-readiness snapshot predates current materialization and raw evidence."},
+    {"path":"W7_M1_VITS_ASSET_IDENTITY_V1.json","classification":"HISTORICAL_PRE_MATERIALIZATION","superseded_by":"W7_M1_VITS_FIRST_MATERIALIZATION_PROVENANCE_V1.json","reason":"Old identity record says the current artifact was not materialized."},
+    {"path":"W7_M3_VOICECRAFT_ASSET_IDENTITY_V1.json","classification":"HISTORICAL_PRE_MATERIALIZATION","superseded_by":"W7_APPROVED_RUNTIME_ASSET_MANIFEST_V4.json","reason":"Old identity record predates current hash-verified assets."},
+    {"path":"W7_M5_YOURTTS_ASSET_IDENTITY_V1.json","classification":"HISTORICAL_PRE_MATERIALIZATION","superseded_by":"W7_APPROVED_RUNTIME_ASSET_MANIFEST_V4.json","reason":"Old identity record predates current hash-verified assets."},
+    {"path":"W7_OFFLINE_RECOVERY_KIT_AUDIT_V1.json","classification":"HISTORICAL_PRE_MATERIALIZATION","superseded_by":"W7_READINESS_EVIDENCE_REMEDIATION_V1.json","reason":"Old recovery snapshot is retained as historical context only."},
+    {"path":"W7_INDEPENDENT_READINESS_AUDIT_V1.json","classification":"SUPERSEDED","superseded_by":"W7_INDEPENDENT_READINESS_AUDIT_V2.json","reason":"V2 is the fresh audit after evidence remediation; V1 is retained as the baseline finding."}
+  ],
+  "old_records_deleted": false,
+  "old_records_retained_for_traceability": true
+}

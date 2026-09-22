@@ -1,0 +1,37 @@
+{
+  "schema_version": "topconf.w7.m3.synthetic_runtime_evidence.v1",
+  "evidence_status": "BLOCKED_FAIL_CLOSED",
+  "runtime_name": "runtime_m3_voicecraft",
+  "environment_path": "/opt/audiobookbench/envs/runtime_m3_voicecraft",
+  "python": "3.9.16",
+  "packages": {
+    "torch": "2.0.1+cu117",
+    "torchaudio": "2.0.2+cu117",
+    "xformers": "0.0.22",
+    "audiocraft": "1.0.0",
+    "montreal-forced-aligner": "2.2.17",
+    "praatio": "6.0.0"
+  },
+  "asset_identity": {
+    "giga830M_sha256": "2454B51575822A04D24A00F8BA78F201F916439FFA62A3C1AC0FFA5220F429E3",
+    "encodec_4cb2048_giga_sha256": "CAA0C595D4919527A9728D627150AA2A0B15B6D117B21855165851333DC63378",
+    "mfa_acoustic_sha256": "71B288AC60A4F8DF6630D72A1FF1A83BF246ADC02D8BA7AA4C0364D56BA60A48",
+    "mfa_dictionary_sha256": "E8C6C7B036AE2B7C78D2768B8DC6B1F9359175B842956D00B48C53C9C332E6B0",
+    "mfa_phone_set": "ARPA; used_phone_count=70; unknown_tokens=0"
+  },
+  "strict_load": "BLOCKED_MISSING_BEST_BUNDLE_AND_ARGS",
+  "synthetic_smoke": "NOT_RUN",
+  "determinism": "NOT_RUN",
+  "missing_required_files": [
+    "/opt/audiobookbench/runtime/voicecraft/exp/best_bundle.pth",
+    "/opt/audiobookbench/runtime/voicecraft/exp/args.pkl"
+  ],
+  "probe_output": {
+    "best_bundle_exists": false,
+    "args_exists": false,
+    "real_w7_cases_used": 0,
+    "level2_outcomes_accessed": false
+  },
+  "scientific_config_changed": false,
+  "note": "Raw package/version and asset evidence is captured, but VoiceCraft strict loading cannot be claimed without the pinned experiment bundle and args artifact. No substitute artifact was generated."
+}

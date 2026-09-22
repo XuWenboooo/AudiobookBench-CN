@@ -1,0 +1,19 @@
+{
+  "schema_version": "topconf.w7.m1.first_materialization_provenance.v1",
+  "provenance_status": "PARTIAL_FAIL_CLOSED",
+  "asset_id": "M1_VITS_LJS_OFFICIAL_CHECKPOINT",
+  "filename": "pretrained_ljs.pth",
+  "official_source": "https://drive.google.com/drive/folders/1ksarh-cJf3F5eKJjLVWY0X1j1qsQqiS2?usp=sharing",
+  "official_file_id": "1q86w74Ygw2hNzYP9cWkeClGT5X25PvBT",
+  "source_revision": "2e561ba58618d021b5b8323d3765880f7e0ecfdb",
+  "materialized_path": "G:\\W7-OFFLINE\\models\\vits\\pretrained_ljs.pth",
+  "materialized_size_bytes": 145599717,
+  "materialized_sha256": "C94FB49D08BA90C598DE16E7D5DEC8D26BF225C1CF193A4FBA05EB2DBDA5A561",
+  "previous_attempt_log": "G:\\W7-OFFLINE\\logs\\download.log",
+  "previous_attempt_result": "FAIL_VITS_LJS_NOT_FOUND",
+  "first_materialization_timestamp": "NOT_RECOVERABLE_FROM_AVAILABLE_LOGS",
+  "first_materialization_chain": "INCOMPLETE; current bytes are independently hash-verified and source identity is pinned, but the successful first-write event is not recorded.",
+  "scientific_asset_bytes_changed": false,
+  "real_w7_cases_used": 0,
+  "level2_outcomes_accessed": false
+}
