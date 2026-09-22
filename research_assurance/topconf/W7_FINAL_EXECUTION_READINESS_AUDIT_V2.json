@@ -1,0 +1,83 @@
+{
+  "schema_version": "topconf.w7.final_execution_readiness_audit.v2",
+  "audit_status": "PASS_PRE_EXECUTION_READINESS_CLOSED",
+  "generated_on": "2026-09-22",
+  "branch": "topconf-w7-reconciliation",
+  "baseline_head_before_readiness_commit": "f58148563ceaf465f7b7efd94b2fcc35b39f19c0",
+  "readiness_artifacts_commit": "9500a8270c24c485d968b1b964d9d0034cc055c8",
+  "remote_head_at_readiness_commit_sync": "9500a8270c24c485d968b1b964d9d0034cc055c8",
+  "authoritative_worktree": "G:\\项目\\申请实验室  TTS项目\\worktrees\\topconf-w7-reconciliation\\AudiobookBench-CN",
+  "hash_algorithm": "SHA-256",
+  "protected_hash_reconciliation": {
+    "classification": "PROMPT_TRANSCRIPTION_ERROR",
+    "repository_v3_sha256": "AFCE602F7A1F77F07BC18F05B78CB717DCDE3BFB6FC35289A26AB23F9DE4F8E4",
+    "repository_v5_sha256": "6F77CAE912CFF9D9AFD7C75C4EA0910298FC11454D7B8104DBF0551B0AFE821E",
+    "checker_literal_match": true,
+    "protected_hash_integrity": "PASS",
+    "approved_execution_config_sha256": "009CAEDD67EA2CA7C6AA8C4DEF32F87465754A0E3C37E1D95D9403D48E9875C2",
+    "approved_package_sha256": "512929394F7ACAFE417EC5018CA922DE73E8F56A7488D601E427ACC5F4A23117",
+    "mechanism_case_map_sha256": "8449E9ABFA7FF5E359F00BB9CBEA7D3E6889DF3474F411D7D7E6E4338F9528C9"
+  },
+  "scientific_freeze": {
+    "scientific_config_changed": false,
+    "scientific_asset_bytes_changed": false,
+    "scientific_population_changed": false,
+    "human_approval_invalidated": false,
+    "hypotheses_changed": false,
+    "gates_changed": false,
+    "case_map_changed": false,
+    "package_changed": false,
+    "real_w7_cases_used": 0,
+    "level2_outcomes_accessed": false,
+    "scientific_inferences": 0
+  },
+  "mechanism_gates": {
+    "M1": "PASS",
+    "M2": "PASS",
+    "M3": "PASS",
+    "M4": "PASS",
+    "M5": "PASS",
+    "FIVE_MECHANISM_GATE": "PASS"
+  },
+  "immutable_artifacts": {
+    "W7_APPROVED_RUNTIME_ASSET_MANIFEST_V4.json": {
+      "sha256": "A32D0D4025E3C9EA68BCEAAA210D563E6CDF1948223E607EF26677F8CFC0E639",
+      "status": "PASS"
+    },
+    "W7_APPROVED_RUNTIME_ENVIRONMENTS_V4.json": {
+      "sha256": "93F79B68F84DAEEC63EA32F57864C4EBEBB8BC42A6DCAD48F66751A026559AC3",
+      "status": "PASS"
+    },
+    "W7_PREREGISTRATION_HASH_MANIFEST_V6.json": {
+      "sha256": "AA98B34DBE1C51241119EF27C0DAA48FE1D98AEE390EE7F4A089AA3196075029",
+      "status": "PASS_COMPLETE_COVERAGE_PRE_INFERENCE"
+    }
+  },
+  "verification": {
+    "protected_hash_recheck": "PASS",
+    "pytest_command": "python -m pytest tests/topconf -q",
+    "pytest_result": "179 passed",
+    "reconciliation_checker": "PASS",
+    "preregistration_checker": "PASS",
+    "git_diff_check": "PASS",
+    "asset_size_and_sha256_recheck": "PASS",
+    "strict_loads_and_synthetic_smokes": "PASS",
+    "determinism_checks": "PASS",
+    "test_compatibility_update": "Two legacy no-V6 assertions now verify V2/V3 immutability while independently validating V6; no scientific artifact changed."
+  },
+  "runtime_gate_decision": {
+    "readiness": "PASS",
+    "formal_w7_pilot_authorized": false,
+    "w7_executed": false,
+    "metrics": "NOT_MEASURED",
+    "level2_access": "NOT_ACCESSED",
+    "next_authorization_required": "separate explicit human authorization before any real W7 inference"
+  },
+  "remote_and_recovery": {
+    "remote_push_mode": "ordinary_non_force",
+    "remote_push_result_for_readiness_commit": "SYNCED",
+    "remote_sync_pending_for_readiness_commit": false,
+    "local_bundle": "PENDING_FINAL_AUDIT_COMMIT",
+    "bundle_verification": "PENDING_FINAL_AUDIT_COMMIT"
+  }
+}
