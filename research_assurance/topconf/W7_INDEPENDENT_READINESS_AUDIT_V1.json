@@ -1,0 +1,146 @@
+{
+  "schema_version": "topconf.w7.independent_readiness_audit.v1",
+  "side_task": "SIDE-W7-INDEPENDENT-READINESS-AUDIT",
+  "audit_status": "FAIL_CLOSED",
+  "authoritative_worktree": "G:\\项目\\申请实验室  TTS项目\\worktrees\\topconf-w7-reconciliation\\AudiobookBench-CN",
+  "baseline_head": "be7c3bca207a5c17117e5acf3070bc8e22340b97",
+  "scientific_state": {
+    "p4_scientific_specification": "FROZEN",
+    "p4_human_approval": "COMPLETE",
+    "human_approval_invalidated": false,
+    "w7_execution_authorized": false,
+    "w7_executed": false,
+    "w7_scientific_inferences": 0,
+    "level2_outcomes_accessed": false,
+    "real_w7_cases_used": 0
+  },
+  "mechanisms": {
+    "M1": {
+      "status": "FAIL",
+      "scientific_mechanism_identity": "PASS",
+      "runtime_identity": "FAIL_RUNTIME_M1_TORCH_MISSING",
+      "asset_identity": "PASS_HASH_AND_SIZE_CURRENT_PATH",
+      "source_provenance": "OFFICIAL_GOOGLE_DRIVE_DECLARED; FIRST_MATERIALIZATION_NOT_RECORDED",
+      "strict_load": "NOT_INDEPENDENTLY_REPLAYED",
+      "synthetic_smoke": "NOT_INDEPENDENTLY_REPLAYED",
+      "determinism": "NOT_INDEPENDENTLY_REPLAYED",
+      "caveat": "download.log records VITS_LJS_NOT_FOUND; V4 relies on shared M3 validation executor"
+    },
+    "M2": {
+      "status": "PASS_EVIDENCED",
+      "scientific_mechanism_identity": "PASS",
+      "runtime_identity": "REPOSITORY_CONTROL_ADAPTER",
+      "asset_identity": "NOT_APPLICABLE_EXTERNAL_ASSET",
+      "source_provenance": "PASS",
+      "strict_load": "NOT_APPLICABLE",
+      "synthetic_smoke": "PASS",
+      "determinism": "PASS",
+      "caveat": "synthetic/control mechanism only"
+    },
+    "M3": {
+      "status": "PASS_BUT_EVIDENCE_INCOMPLETE",
+      "scientific_mechanism_identity": "PASS",
+      "runtime_identity": "PASS_VERSION_PROBE",
+      "asset_identity": "PASS_HASH_AND_SIZE",
+      "source_provenance": "PASS_PINNED_VOICECRAFT_AND_AUDIOCRAFT_REVISIONS",
+      "strict_load": "DECLARED_PASS_RAW_LOG_NOT_FOUND",
+      "synthetic_smoke": "DECLARED_PASS_RAW_LOG_NOT_FOUND",
+      "determinism": "DECLARED_PASS_RAW_LOG_NOT_FOUND",
+      "caveat": "MFA acoustic v2.0.0 with ARPA-compatible dictionary v3.0.0; zero unknown tokens declared"
+    },
+    "M4": {
+      "status": "PASS_EVIDENCED",
+      "scientific_mechanism_identity": "PASS",
+      "runtime_identity": "REPOSITORY_CONTROL_ADAPTER",
+      "asset_identity": "NOT_APPLICABLE_EXTERNAL_ASSET",
+      "source_provenance": "PASS",
+      "strict_load": "NOT_APPLICABLE",
+      "synthetic_smoke": "PASS",
+      "determinism": "PASS",
+      "caveat": "synthetic/control mechanism only"
+    },
+    "M5": {
+      "status": "PASS_BUT_EVIDENCE_INCOMPLETE",
+      "scientific_mechanism_identity": "PASS",
+      "runtime_identity": "PASS_VERSION_PROBE",
+      "asset_identity": "PASS_HASH_AND_SIZE",
+      "source_provenance": "PASS_PINNED_COQUI_GATEWAY_AND_MODEL_COMMIT",
+      "strict_load": "DECLARED_PASS_RAW_LOG_NOT_FOUND",
+      "synthetic_smoke": "DECLARED_PASS_RAW_LOG_NOT_FOUND",
+      "determinism": "NOT_DECLARED_FOR_M5_IN_RUNTIME_MANIFEST",
+      "caveat": "pyworld 0.3.4 is explicitly compatibility-only and non-scientific"
+    }
+  },
+  "manifests": {
+    "V4": {
+      "status": "PRESENT",
+      "path": "research_assurance/topconf/W7_APPROVED_RUNTIME_ASSET_MANIFEST_V4.json",
+      "file_sha256": "A32D0D4025E3C9EA68BCEAAA210D563E6CDF1948223E607EF26677F8CFC0E639",
+      "asset_records": 6,
+      "windows_path_recheck": "6_OF_6_PASS",
+      "wsl_mapped_path_recheck": "6_OF_6_PASS",
+      "hash_recheck": "PASS"
+    },
+    "V6": {
+      "status": "PRESENT",
+      "path": "research_assurance/topconf/W7_PREREGISTRATION_HASH_MANIFEST_V6.json",
+      "file_sha256": "AA98B34DBE1C51241119EF27C0DAA48FE1D98AEE390EE7F4A089AA3196075029",
+      "referenced_records": 13,
+      "hash_recheck": "13_OF_13_PASS"
+    }
+  },
+  "protected_hash_integrity": {
+    "status": "PASS",
+    "approved_execution_config_sha256": "009CAEDD67EA2CA7C6AA8C4DEF32F87465754A0E3C37E1D95D9403D48E9875C2",
+    "approved_package_sha256": "512929394F7ACAFE417EC5018CA922DE73E8F56A7488D601E427ACC5F4A23117",
+    "mechanism_case_map_sha256": "8449E9ABFA7FF5E359F00BB9CBEA7D3E6889DF3474F411D7D7E6E4338F9528C9",
+    "v3_sha256": "AFCE602F7A1F77F07BC18F05B78CB717DCDE3BFB6FC35289A26AB23F9DE4F8E4",
+    "v5_sha256": "6F77CAE912CFF9D9AFD7C75C4EA0910298FC11454D7B8104DBF0551B0AFE821E"
+  },
+  "leakage_and_real_case_audit": {
+    "current_w7_outcome_access": "NO",
+    "real_w7_cases_used": 0,
+    "level2_outcomes_accessed": "NO",
+    "metrics": "NOT_MEASURED",
+    "historical_or_pilot_artifacts": "DISTINGUISHED_FROM_CURRENT_W7"
+  },
+  "git_audit": {
+    "branch": "topconf-w7-reconciliation",
+    "remote_head_matches_baseline": true,
+    "merge_commits_found": false,
+    "force_push_evidence": "NONE_FOUND",
+    "large_model_assets_committed": false,
+    "large_non_model_manifests_committed": 5,
+    "secret_scan": "PASS"
+  },
+  "storage_audit": {
+    "active_f_path_references": "NO; historical-only references found",
+    "active_c_path_references": "NO; historical-only references found",
+    "active_targets": ["G:\\项目\\申请实验室  TTS项目", "G:\\W7-OFFLINE", "G:\\WSL", "G:\\AudiobookBench-Data", "/mnt/g", "/opt"]
+  },
+  "recovery_audit": {
+    "recovery_root": "G:\\W7-RECOVERY-KIT",
+    "recovery_kit_self_check": "PASS",
+    "asset_verification": "PASS",
+    "w7_git_bundle": "EXISTS_AND_VALIDATES; snapshot before this audit commit",
+    "main_git_bundle": "EXISTS_AND_VALIDATES",
+    "wsl_export": "DEFERRED_MAINLINE_ACTIVE"
+  },
+  "tests": {
+    "scoped_tests": "179 passed",
+    "preregistration_checker": "PASS",
+    "w7_reconciliation_checker": "PASS",
+    "protected_hash_checker": "PASS via checker and direct record recheck",
+    "git_diff_check": "PASS"
+  },
+  "contradictions": [
+    "V4 marks runtime_m1_vits VERIFIED with torch 2.0.1, but the actual runtime_m1_vits interpreter cannot import torch; V4 cites a shared M3 validation executor.",
+    "Offline download.log records VITS_LJS_NOT_FOUND and no first-materialization provenance log for the current pretrained_ljs.pth was found.",
+    "Older committed audits say M1/M3/M5 runtimes/assets were not created or MFA was absent, while current V4/V6 say runtime assets and environments are verified; supersession is not explicit.",
+    "V4/V6 declare strict-load, synthetic-smoke, and determinism PASS for M1/M3/M5, but raw reproducible execution logs were not found for independent replay under this read-only audit."
+  ],
+  "readiness_contradictions_found": true,
+  "independent_readiness_audit": "FAIL_CLOSED",
+  "scientific_config_changed": false,
+  "next_recommended_action": "Repair and explicitly supersede stale readiness records; make M1 runtime self-consistent or explicitly bind the shared executor; record first materialization provenance and immutable raw strict-load/synthetic/determinism evidence; then rerun this audit before any W7 authorization."
+}
