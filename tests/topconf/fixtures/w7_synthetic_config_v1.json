@@ -1,0 +1,18 @@
+{
+  "schema_version": "topconf.w7.synthetic_orchestration_config.v1",
+  "data_origin": "synthetic",
+  "approval_state": "CANDIDATE_NOT_APPROVED",
+  "candidate_semantics": "ENGINEERING_CONTRACT_ONLY",
+  "master_seed": 20260923,
+  "namespace_policy": {
+    "CASE": "synthetic-case-v1",
+    "MECHANISM": "synthetic-mechanism-v1",
+    "INTERVAL": "synthetic-interval-v1",
+    "MASK_GROUP": "synthetic-mask-group-v1",
+    "CANDIDATE": "synthetic-candidate-v1",
+    "TRANSFORM": "synthetic-transform-v1"
+  },
+  "formal_metrics": "BLOCKED",
+  "formal_gate": "BLOCKED",
+  "w7_execution_authorized": false
+}

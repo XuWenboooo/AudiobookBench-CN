@@ -18,6 +18,7 @@ data/manifests/*
 !data/manifests/source_audio_template.csv
 pretrained/
 results/
+artifacts/w7_synthetic_harness/
 third_party/
 *.wav
 *.flac
