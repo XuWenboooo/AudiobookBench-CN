@@ -29,6 +29,7 @@ FAILURES = (
 )
 NAMESPACES = ("CASE", "MECHANISM", "INTERVAL", "MASK_GROUP", "CANDIDATE", "TRANSFORM")
 MECHANISMS = ("M1", "M2", "M3", "M4", "M5")
+REAL_CONTROL_FAMILIES = ("cross_speaker_boundary_control", "same_speaker_splice_crossfade_control")
 MOCK_RUNTIME = "synthetic-mock-runtime-v1"
 MOCK_ASSET = "synthetic-mock-assets-v1"
 _SAFE_ID = re.compile(r"^SYNTH_[A-Za-z0-9_]+$")
@@ -347,10 +348,12 @@ class SyntheticW7Harness:
         self.gate_stage: GateStage = DummyGateStage()
 
     def _guard(self, case: Mapping[str, Any], *, request_level2: bool, execution_authorized: bool,
-               runtime_identity: str, asset_identity: str) -> None:
+               runtime_identity: str, asset_identity: str, adapter_mode: str = "synthetic_mock") -> None:
         if request_level2:
             raise HarnessError("INPUT_NOT_SYNTHETIC", "Level-2 request blocked")
         if case.get("data_origin") != "synthetic" or not _SAFE_ID.fullmatch(str(case.get("case_id", ""))):
+            if adapter_mode == "real_adapter_synthetic_fixture":
+                raise HarnessError("W7_REAL_EXECUTION_BLOCKED", "real adapters are synthetic-fixture only")
             if self.config.get("approval_state") != "APPROVED":
                 raise HarnessError("W7_REAL_EXECUTION_BLOCKED_UNAPPROVED_CONFIG")
             raise HarnessError("INPUT_NOT_SYNTHETIC")
@@ -358,8 +361,17 @@ class SyntheticW7Harness:
             raise HarnessError("INPUT_NOT_SYNTHETIC", "external input field is forbidden")
         if execution_authorized:
             raise HarnessError("CONFIG_NOT_APPROVED", "synthetic harness cannot authorize W7")
-        if runtime_identity != MOCK_RUNTIME or asset_identity != MOCK_ASSET:
-            raise HarnessError("CONFIG_NOT_APPROVED", "unknown or unfrozen runtime/asset identity")
+        if adapter_mode == "synthetic_mock":
+            if runtime_identity != MOCK_RUNTIME or asset_identity != MOCK_ASSET:
+                raise HarnessError("CONFIG_NOT_APPROVED", "unknown or unfrozen runtime/asset identity")
+        elif adapter_mode == "real_adapter_synthetic_fixture":
+            from .w7_m2_m4_adapters import current_runtime_identity, SYNTHETIC_ASSET_IDENTITY
+            if case.get("mechanism_family") not in REAL_CONTROL_FAMILIES:
+                raise HarnessError("CONFIG_NOT_APPROVED", "real fixture mode is limited to frozen M2/M4")
+            if runtime_identity != current_runtime_identity() or asset_identity != SYNTHETIC_ASSET_IDENTITY:
+                raise HarnessError("CONFIG_NOT_APPROVED", "unknown runtime or fixture asset identity")
+        else:
+            raise HarnessError("CONFIG_NOT_APPROVED", "unknown adapter mode")
 
     def _artifact_path(self, relative: str) -> Path:
         path = (self.output_root / relative).resolve()
@@ -369,11 +381,11 @@ class SyntheticW7Harness:
 
     def dry_run(self, cases: tuple[Mapping[str, Any], ...], *, request_level2: bool = False,
                 execution_authorized: bool = False, runtime_identity: str = MOCK_RUNTIME,
-                asset_identity: str = MOCK_ASSET) -> Mapping[str, Any]:
+                asset_identity: str = MOCK_ASSET, adapter_mode: str = "synthetic_mock") -> Mapping[str, Any]:
         schedule = []
         for case in sorted(cases, key=lambda item: str(item.get("case_id", ""))):
             self._guard(case, request_level2=request_level2, execution_authorized=execution_authorized,
-                        runtime_identity=runtime_identity, asset_identity=asset_identity)
+                        runtime_identity=runtime_identity, asset_identity=asset_identity, adapter_mode=adapter_mode)
             raw_intervals = _case_intervals(case)
             try:
                 intervals = validate_intervals(raw_intervals, int(case["sample_count"]))
@@ -382,7 +394,7 @@ class SyntheticW7Harness:
                 intervals = raw_intervals
                 interval_validation = "MASK_MAPPING_FAILURE"
             mechanism = str(case["mechanism_family"])
-            if mechanism not in MECHANISMS:
+            if mechanism not in MECHANISMS and mechanism not in REAL_CONTROL_FAMILIES:
                 raise HarnessError("CONFIG_NOT_APPROVED", "unknown mechanism")
             seed = derive_subseed(self.config["master_seed"], self.config["namespace_policy"],
                                   "CASE", str(case["case_id"]), 0)
@@ -409,13 +421,29 @@ class SyntheticW7Harness:
     def run(self, case: Mapping[str, Any], *, crash_after: str | None = None,
             audio_loader: Callable[[Mapping[str, Any]], np.ndarray] | None = None,
             request_level2: bool = False, execution_authorized: bool = False,
-            runtime_identity: str = MOCK_RUNTIME, asset_identity: str = MOCK_ASSET) -> Mapping[str, Any]:
+            runtime_identity: str | None = None, asset_identity: str | None = None,
+            adapter_mode: str = "synthetic_mock", real_adapter: MechanismAdapter | None = None) -> Mapping[str, Any]:
         # This guard precedes LOAD_CASE and every possible audio loader call.
+        if adapter_mode == "real_adapter_synthetic_fixture":
+            if real_adapter is None:
+                from .w7_m2_m4_adapters import current_runtime_identity, SYNTHETIC_ASSET_IDENTITY
+                runtime_identity = runtime_identity or current_runtime_identity()
+                asset_identity = asset_identity or SYNTHETIC_ASSET_IDENTITY
+            else:
+                runtime_identity = runtime_identity or str(getattr(real_adapter, "runtime_identity", ""))
+                asset_identity = asset_identity or str(getattr(real_adapter, "asset_identity", ""))
+        else:
+            runtime_identity = runtime_identity or MOCK_RUNTIME
+            asset_identity = asset_identity or MOCK_ASSET
         self._guard(case, request_level2=request_level2, execution_authorized=execution_authorized,
-                    runtime_identity=runtime_identity, asset_identity=asset_identity)
+                    runtime_identity=runtime_identity, asset_identity=asset_identity, adapter_mode=adapter_mode)
+        if adapter_mode == "real_adapter_synthetic_fixture" and (
+                real_adapter is None or real_adapter.family != case.get("mechanism_family")):
+            raise HarnessError("CONFIG_NOT_APPROVED", "matching M2/M4 real adapter required")
         if audio_loader is not None:
             raise HarnessError("INPUT_NOT_SYNTHETIC", "external audio loaders are disabled")
-        plan = self.dry_run((case,), runtime_identity=runtime_identity, asset_identity=asset_identity)
+        plan = self.dry_run((case,), runtime_identity=runtime_identity, asset_identity=asset_identity,
+                            adapter_mode=adapter_mode)
         case_id = str(case["case_id"])
         base = self.output_root / case_id
         ledger = AppendOnlyLedger(base / "ledger")
@@ -459,6 +487,11 @@ class SyntheticW7Harness:
                 status, failure = "PASS", None
             except HarnessError as exc:
                 value, status, failure = {"error": str(exc)}, "FAIL", exc.code
+                if name == "MATERIALIZE_MECHANISM" and adapter_mode == "real_adapter_synthetic_fixture" and real_adapter:
+                    real_adapter.failure_code = exc.code
+                    provenance = real_adapter.emit_provenance(contract(name, status, failure), "")
+                    value["adapter_provenance"] = provenance
+                    _safe_write(base / "adapter_provenance" / f"{case['mechanism_family']}.json", canonical(provenance))
             entry = StageResult(name, contract(name, status, failure), value)
             encoded = canonical(asdict(entry))
             _safe_write(artifact, encoded)
@@ -496,15 +529,22 @@ class SyntheticW7Harness:
         stage("RESOLVE_TRANSCRIPT", lambda: _transcript_result(case, transcript, transcript_hash))
         stage("RESOLVE_INTERVALS", lambda: _interval_result(case, intervals))
         intervals = validate_intervals(intervals, int(case["sample_count"]))
-        adapter = SyntheticMechanismAdapter(str(case["mechanism_family"]), self.config["namespace_policy"])
+        adapter = (SyntheticMechanismAdapter(str(case["mechanism_family"]), self.config["namespace_policy"])
+                   if adapter_mode == "synthetic_mock" else real_adapter)
+        if adapter is None:
+            raise HarnessError("CONFIG_NOT_APPROVED", "mechanism adapter missing")
 
         def materialize() -> Mapping[str, Any]:
-            nonlocal output, output_hash
+            nonlocal output, output_hash, intervals
             if case.get("fail_at") == "generation":
                 raise HarnessError("GENERATION_FAILURE")
             if not adapter.validate_runtime(runtime_identity) or not adapter.validate_assets(asset_identity):
                 raise HarnessError("CONFIG_NOT_APPROVED")
-            adapter.prepare_case(contract("MATERIALIZE_MECHANISM"))
+            prepared = adapter.prepare_case(contract("MATERIALIZE_MECHANISM"))
+            if adapter_mode == "real_adapter_synthetic_fixture":
+                intervals = tuple(Interval(item["output_start"], item["output_end"], item["ordinal"],
+                                           item.get("mask_group", item["ordinal"]))
+                                  for item in prepared["mapped_intervals"])
             try:
                 output = adapter.execute(source, intervals, seed)
             except HarnessError:
@@ -525,9 +565,12 @@ class SyntheticW7Harness:
                                (x.start, x.end),
                                f"mock-codec-segment:{x.ordinal}", f"mock-resampled:{x.ordinal}", x))
                                for x in intervals]
+            provenance = adapter.emit_provenance(contract("MATERIALIZE_MECHANISM"), output_hash)
+            if adapter_mode == "real_adapter_synthetic_fixture":
+                _safe_write(base / "adapter_provenance" / f"{case['mechanism_family']}.json", canonical(provenance))
             return {"output_audio_hash": output_hash, "media_path": str(media_path.relative_to(self.output_root)),
                     "composition_ledger": [asdict(x) for x in intervals], "m3_observations": observation,
-                    "provenance": adapter.emit_provenance(contract("MATERIALIZE_MECHANISM"), output_hash)}
+                    "provenance": provenance}
 
         materialized = stage("MATERIALIZE_MECHANISM", materialize)
         if output is None:

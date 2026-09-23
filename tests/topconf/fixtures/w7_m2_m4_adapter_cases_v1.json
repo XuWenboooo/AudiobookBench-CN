@@ -1,0 +1,42 @@
+{
+  "data_origin": "synthetic",
+  "fixture_suite": "purpose-built-waveform-controls-v1",
+  "m2": [
+    {"case_id":"SYNTH_M2_DISTINCT","scenario":"valid_distinct_source_reference","sample_rate":16000,"sample_count":4096,"intervals":[[1600,2400]],"references":[{"case_id":"SYNTH_M2_DISTINCT_REF","source_suffix":"B","sample_count":2048,"sample_rate":16000}],"expected_reference":"SYNTH_M2_DISTINCT_REF"},
+    {"case_id":"SYNTH_M2_MULTIREF","scenario":"multiple_candidates_lexicographic_and_same_source_skip","source_suffix":"A","sample_rate":16000,"sample_count":4096,"intervals":[[1300,2100]],"references":[{"case_id":"SYNTH_M2_MULTIREE_00","source_suffix":"Z","sample_count":2048,"sample_rate":16000},{"case_id":"SYNTH_M2_MULTIREF_A","source_suffix":"A","sample_count":2048,"sample_rate":16000},{"case_id":"SYNTH_M2_MULTIREF_B","source_suffix":"B","sample_count":2048,"sample_rate":16000},{"case_id":"SYNTH_M2_MULTIREF_C","source_suffix":"C","sample_count":2048,"sample_rate":16000},{"case_id":"SYNTH_M2_MULTIREF_D","source_suffix":"D","distribution_id":"SYNTH_DIST_OTHER","sample_count":2048,"sample_rate":16000}],"expected_reference":"SYNTH_M2_MULTIREF_B"},
+    {"case_id":"SYNTH_M2_SINGLE","scenario":"single_interval","sample_rate":16000,"sample_count":4096,"intervals":[[1400,2200]],"references":[{"case_id":"SYNTH_M2_SINGLE_REF","source_suffix":"B","sample_count":2048,"sample_rate":16000}]},
+    {"case_id":"SYNTH_M2_MULTI","scenario":"three_intervals_ordered","sample_rate":16000,"sample_count":8192,"intervals":[[800,1200],[3000,3400],[6000,6400]],"references":[{"case_id":"SYNTH_M2_MULTI_REF","source_suffix":"B","sample_count":2048,"sample_rate":16000}]},
+    {"case_id":"SYNTH_M2_MULTI2","scenario":"two_intervals","sample_rate":16000,"sample_count":4096,"intervals":[[600,900],[2300,2600]],"references":[{"case_id":"SYNTH_M2_MULTI2_REF","source_suffix":"B","sample_count":2048,"sample_rate":16000}]},
+    {"case_id":"SYNTH_M2_START","scenario":"target_at_waveform_start","sample_rate":16000,"sample_count":4096,"intervals":[[0,800]],"references":[{"case_id":"SYNTH_M2_START_REF","source_suffix":"B","sample_count":2048,"sample_rate":16000}]},
+    {"case_id":"SYNTH_M2_END","scenario":"target_at_waveform_end","sample_rate":16000,"sample_count":4096,"intervals":[[3296,4096]],"references":[{"case_id":"SYNTH_M2_END_REF","source_suffix":"B","sample_count":2048,"sample_rate":16000}]},
+    {"case_id":"SYNTH_M2_SHORTREF","scenario":"short_nonempty_reference_is_duration_fit","sample_rate":16000,"sample_count":4096,"intervals":[[1500,2300]],"references":[{"case_id":"SYNTH_M2_SHORTREF_REF","source_suffix":"B","sample_count":80,"sample_rate":16000}]},
+    {"case_id":"SYNTH_M2_INVALIDREF","scenario":"empty_invalid_reference_terminal","sample_rate":16000,"sample_count":4096,"intervals":[[1500,2300]],"references":[{"case_id":"SYNTH_M2_INVALIDREF_REF","source_suffix":"B","sample_count":0,"sample_rate":16000}],"expected_failure":"TRANSFORM_FAILURE"},
+    {"case_id":"SYNTH_M2_NOREF","scenario":"no_distinct_source_terminal","source_suffix":"A","sample_rate":16000,"sample_count":4096,"intervals":[[1500,2300]],"references":[{"case_id":"SYNTH_M2_NOREF_SAME","source_suffix":"A","sample_count":2048,"sample_rate":16000}],"expected_failure":"GENERATION_FAILURE"},
+    {"case_id":"SYNTH_M2_8K","scenario":"sample_rate_normalization","sample_rate":8000,"sample_count":2048,"intervals":[[512,1024]],"references":[{"case_id":"SYNTH_M2_8K_REF","source_suffix":"B","sample_count":1024,"sample_rate":8000}]},
+    {"case_id":"SYNTH_M2_CLIP","scenario":"finite_clip_to_unit_range","sample_rate":16000,"sample_count":4096,"intervals":[[1500,2300]],"references":[{"case_id":"SYNTH_M2_CLIP_REF","source_suffix":"B","sample_count":2048,"sample_rate":16000}],"source_clip":true,"reference_clip":true},
+    {"case_id":"SYNTH_M2_SAMEID","scenario":"same_source_reference_rejected","source_suffix":"A","sample_rate":16000,"sample_count":4096,"intervals":[[1500,2300]],"references":[{"case_id":"SYNTH_M2_SAMEID_REF","source_suffix":"A","sample_count":2048,"sample_rate":16000}],"expected_failure":"GENERATION_FAILURE"},
+    {"case_id":"SYNTH_M2_MULTI4","scenario":"four_intervals","sample_rate":16000,"sample_count":8192,"intervals":[[300,500],[1800,2000],[4200,4400],[7000,7200]],"references":[{"case_id":"SYNTH_M2_MULTI4_REF","source_suffix":"B","sample_count":2048,"sample_rate":16000}]},
+    {"case_id":"SYNTH_M2_MULTI20","scenario":"twenty_intervals","sample_rate":16000,"sample_count":16000,"intervals":[[100,200],[800,900],[1500,1600],[2200,2300],[2900,3000],[3600,3700],[4300,4400],[5000,5100],[5700,5800],[6400,6500],[7100,7200],[7800,7900],[8500,8600],[9200,9300],[9900,10000],[10600,10700],[11300,11400],[12000,12100],[12700,12800],[13400,13500]],"references":[{"case_id":"SYNTH_M2_MULTI20_REF","source_suffix":"B","sample_count":2048,"sample_rate":16000}]}
+  ],
+  "m4": [
+    {"case_id":"SYNTH_M4_LEFT","scenario":"valid_left_context","sample_rate":16000,"sample_count":4096,"intervals":[[1600,2200]]},
+    {"case_id":"SYNTH_M4_RIGHT","scenario":"valid_right_context","sample_rate":16000,"sample_count":4096,"intervals":[[200,800]]},
+    {"case_id":"SYNTH_M4_PREFERLEFT","scenario":"left_preferred_when_both_exist","sample_rate":16000,"sample_count":4096,"intervals":[[1500,2100]]},
+    {"case_id":"SYNTH_M4_FALLBACK","scenario":"left_unavailable_right_fallback","sample_rate":16000,"sample_count":4096,"intervals":[[0,600]]},
+    {"case_id":"SYNTH_M4_NEITHER","scenario":"neither_context_complete_terminal","sample_rate":16000,"sample_count":450,"intervals":[[100,300]],"expected_failure":"GENERATION_FAILURE"},
+    {"case_id":"SYNTH_M4_SINGLE","scenario":"single_interval","sample_rate":16000,"sample_count":4096,"intervals":[[1500,2100]]},
+    {"case_id":"SYNTH_M4_MULTI2","scenario":"two_intervals","sample_rate":16000,"sample_count":4096,"intervals":[[600,900],[2300,2600]]},
+    {"case_id":"SYNTH_M4_MULTI3","scenario":"three_intervals","sample_rate":16000,"sample_count":6000,"intervals":[[500,700],[2500,2700],[4800,5000]]},
+    {"case_id":"SYNTH_M4_MULTI4","scenario":"four_intervals","sample_rate":16000,"sample_count":8192,"intervals":[[300,500],[1800,2000],[4200,4400],[7000,7200]]},
+    {"case_id":"SYNTH_M4_MULTI20","scenario":"twenty_intervals","sample_rate":16000,"sample_count":16000,"intervals":[[100,200],[800,900],[1500,1600],[2200,2300],[2900,3000],[3600,3700],[4300,4400],[5000,5100],[5700,5800],[6400,6500],[7100,7200],[7800,7900],[8500,8600],[9200,9300],[9900,10000],[10600,10700],[11300,11400],[12000,12100],[12700,12800],[13400,13500]]},
+    {"case_id":"SYNTH_M4_START","scenario":"target_at_waveform_start","sample_rate":16000,"sample_count":4096,"intervals":[[0,600]]},
+    {"case_id":"SYNTH_M4_END","scenario":"target_at_waveform_end","sample_rate":16000,"sample_count":4096,"intervals":[[3496,4096]]},
+    {"case_id":"SYNTH_M4_EXACT","scenario":"context_exactly_target_duration","sample_rate":16000,"sample_count":1000,"intervals":[[200,400]]},
+    {"case_id":"SYNTH_M4_LONG","scenario":"context_longer_than_target","sample_rate":16000,"sample_count":4096,"intervals":[[1200,1600]]},
+    {"case_id":"SYNTH_M4_SHORT","scenario":"context_shorter_than_target_terminal","sample_rate":16000,"sample_count":450,"intervals":[[100,300]],"expected_failure":"GENERATION_FAILURE"},
+    {"case_id":"SYNTH_M4_8K","scenario":"sample_rate_normalization","sample_rate":8000,"sample_count":2048,"intervals":[[512,1024]]},
+    {"case_id":"SYNTH_M4_CLIP","scenario":"finite_clip_to_unit_range","sample_rate":16000,"sample_count":4096,"intervals":[[1500,2100]],"source_clip":true},
+    {"case_id":"SYNTH_M4_CROSSFADE400","scenario":"full_400_sample_fade_support","sample_rate":16000,"sample_count":2400,"intervals":[[600,1400]]},
+    {"case_id":"SYNTH_M4_CROSSFADEEDGE","scenario":"fade_capped_by_target_and_edges","sample_rate":16000,"sample_count":1600,"intervals":[[100,500]]}
+  ]
+}

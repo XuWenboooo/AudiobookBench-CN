@@ -19,7 +19,7 @@ from audiobookbench.topconf.w7_synthetic_harness import (
 FIXTURE_ROOT = Path(__file__).parent / "fixtures"
 CONFIG = FIXTURE_ROOT / "w7_synthetic_config_v1.json"
 CASES = json.loads((FIXTURE_ROOT / "w7_synthetic_cases_v1.json").read_text(encoding="utf-8"))
-CONFIG_HASH = "90950eaa38eea4479de97f4d412305cf3ed2182bbdffb82a8abca0667d7d2e7e"
+CONFIG_HASH = "4981ca7c24d197ffe31566e9b805cc19ae7e884b03c3a207d5d6d1ac82694552"
 
 
 def make_harness(tmp_path: Path) -> SyntheticW7Harness:
