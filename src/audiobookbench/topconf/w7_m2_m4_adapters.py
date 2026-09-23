@@ -269,7 +269,9 @@ class M2RealAdapter(_AdapterBase):
                 "lexicographic_candidate_order": self._candidate_order,
                 "different_source_id_check": "PASS" if self.reference else "FAIL",
                 "reference_case_id": self.reference.get("case_id") if self.reference else None,
-                "effective_crossfade_samples": self._details.get("effective_crossfade_samples", [])
+                "effective_crossfade_samples": self._details.get("effective_crossfade_samples", [])}
+
+
 class M4RealAdapter(_AdapterBase):
     """Same-case left-then-right reference selection plus the frozen M4 function."""
     family = "same_speaker_splice_crossfade_control"
@@ -341,4 +343,4 @@ class M4RealAdapter(_AdapterBase):
                 "reference_sides": self.reference_sides,
                 "reference_windows": self.reference_windows,
                 "effective_crossfade_samples": self._details.get("effective_crossfade_samples", [])}
-# End of the synthetic M2/M4 adapter definitions.
+

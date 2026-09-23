@@ -1,7 +1,9 @@
 """Engineering-only synthetic W7 orchestration checks."""
 from __future__ import annotations
 
+import hashlib
 import json
+import subprocess
 from pathlib import Path
 
 import numpy as np
@@ -18,8 +20,11 @@ from audiobookbench.topconf.w7_synthetic_harness import (
 
 FIXTURE_ROOT = Path(__file__).parent / "fixtures"
 CONFIG = FIXTURE_ROOT / "w7_synthetic_config_v1.json"
-CASES = json.loads((FIXTURE_ROOT / "w7_synthetic_cases_v1.json").read_text(encoding="utf-8"))
-CONFIG_HASH = "4981ca7c24d197ffe31566e9b805cc19ae7e884b03c3a207d5d6d1ac82694552"
+CASES_PATH = FIXTURE_ROOT / "w7_synthetic_cases_v1.json"
+CASES = json.loads(CASES_PATH.read_text(encoding="utf-8"))
+CONFIG_HASH = "90950eaa38eea4479de97f4d412305cf3ed2182bbdffb82a8abca0667d7d2e7e"
+REPO_ROOT = Path(__file__).resolve().parents[2]
+CANONICAL_TEXT_FIXTURES = (CONFIG, CASES_PATH)
 
 
 def make_harness(tmp_path: Path) -> SyntheticW7Harness:
@@ -42,6 +47,35 @@ def test_fixture_scope_and_config_identity(tmp_path):
     assert all(item["data_origin"] == "synthetic" and item["case_id"].startswith("SYNTH_") for item in CASES)
     assert digest(CONFIG.read_bytes()) == CONFIG_HASH
     assert make_harness(tmp_path).config["approval_state"] == "CANDIDATE_NOT_APPROVED"
+
+
+def test_synthetic_text_fixture_eol_is_canonical_lf():
+    for path in CANONICAL_TEXT_FIXTURES:
+        relative_path = path.relative_to(REPO_ROOT).as_posix()
+        lf_bytes = path.read_bytes()
+        assert b"\r" not in lf_bytes
+
+        crlf_bytes = lf_bytes.replace(b"\n", b"\r\n")
+        assert json.loads(crlf_bytes) == json.loads(lf_bytes)
+        assert crlf_bytes.replace(b"\r\n", b"\n").replace(b"\r", b"\n") == lf_bytes
+
+        blob_bytes = subprocess.check_output(
+            ["git", "show", f"HEAD:{relative_path}"], cwd=REPO_ROOT
+        )
+        assert blob_bytes == lf_bytes
+
+        attr = subprocess.check_output(
+            ["git", "check-attr", "eol", "--", relative_path],
+            cwd=REPO_ROOT, text=True,
+        )
+        assert attr.strip().endswith(": eol: lf")
+
+    assert hashlib.sha256(CONFIG.read_bytes()).hexdigest() == CONFIG_HASH
+    crlf_config = CONFIG.read_bytes().replace(b"\n", b"\r\n")
+    assert hashlib.sha256(crlf_config).hexdigest() != CONFIG_HASH
+    canonical_config = crlf_config.replace(b"\r\n", b"\n").replace(b"\r", b"\n")
+    assert canonical_config == CONFIG.read_bytes()
+    assert hashlib.sha256(canonical_config).hexdigest() == CONFIG_HASH
 
 
 def test_dry_run_is_deterministic_and_does_not_write_or_load(tmp_path):
